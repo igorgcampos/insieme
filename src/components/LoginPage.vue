@@ -16,13 +16,14 @@
               src="../assets/satelites.jpg"
               gradient="324deg, rgba(2,0,36,1) 0%, rgba(245,3,3,1) 0%, rgba(233,13,16,0.8547794117647058) 100%"
             >
-              <div class="text-center  ma-3 mt-12 pt-12">
+              <div class="text-center ma-3 mt-12 pt-12">
                 <div class="pa-12">
                   <v-img
                     src="../assets/telespazio-logo.png"
                     max-height="200"
                     max-width="300"
                     aspect-ratio="5.9"
+                    class="mx-auto"
                   ></v-img>
                 </div>
                 <div class="display-1 text-xs-center font-weight-black mb-3 white--text">Bem Vindo ao Insieme!</div>
