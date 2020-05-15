@@ -1,34 +1,40 @@
 const axios = require('axios').default;
 const httpService = {}
-const keyCloakToken = {}
+var keyCloakToken = {}
+const serverUrl = 'http://localhost:8083'
 
-httpService.install = function (Vue, options) {
+httpService.install = function (Vue) {
 
-    Vue.prototype.$connectToKeycloak = (username, password) => {
+    Vue.prototype.$connectToKeycloak = async (username, password) => {
         const response =
-            await axios.post('https://auth.telespazio.com.br/auth/realms/telespazio-br/protocol/openid-connect/token', {
-                grant_type: 'password',
-                client_id: 'insieme-app',
-                username: username,
-                password: password
-            })
+            await axios.post(
+                serverUrl.concat('/login'),
+                {
+                    username: username,
+                    password: password
+                })
 
-        if (response.access_token) {
-            keyCloakToken = access_token;
+        if (response.data.length > 0) {
+            keyCloakToken = response.data;
             return true;
         }
         return false;
     }
 
     Vue.prototype.$get = (url, params) => {
-        return axios.get(url, params, { headers: { Authorization: 'Bearer '.concat(keyCloakToken) } })
+        return axios.get(serverUrl.concat(url), params,
+            { headers: { Authorization: 'Bearer '.concat(keyCloakToken) } })
     }
 
     Vue.prototype.$post = (url, body) => {
-        return axios.post(url, body, { headers: { Authorization: 'Bearer '.concat(keyCloakToken) } })
+        return axios.post(serverUrl.concat(url), body,
+            { headers: { Authorization: 'Bearer '.concat(keyCloakToken) } })
     }
 
     Vue.prototype.$put = (url, body) => {
-        return axios.put(url, body, { headers: { Authorization: 'Bearer '.concat(keyCloakToken) } })
+        return axios.put(serverUrl.concat(url), body,
+            { headers: { Authorization: 'Bearer '.concat(keyCloakToken) } })
     }
 }
+
+export default httpService;

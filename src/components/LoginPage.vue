@@ -84,6 +84,7 @@
                 prepend-inner-icon="mdi-lock"
                 :type="show ? 'text' : 'password'"
                 @click:append="show = !show"
+                @keydown.enter="login()"
               ></v-text-field>
 
             </v-flex>
@@ -95,7 +96,7 @@
               color="red darken-4"
               id="sign-up"
               :loading="loading"
-              @click="loading = true"
+              @click="login()"
             >Entrar</v-btn>
           </v-layout>
         </v-flex>
@@ -112,12 +113,30 @@ export default {
       image: '../assets/satelites.jpg',
       loading: false,
       show: false,
-      password: 'Password',
+      password: '',
       rules: {
         min: v => v.length >= 6 || 'Mínimo de 6 caracteres',
         emailMatch: () => ('Usuário e/ou senha incorretos.'),
       },
     }
   },
+  methods: {
+    login () {
+
+      this.loading = true;
+      this.$connectToKeycloak(this.username, this.password).then(success => {
+
+        if (success) {
+          this.$parent.$emit('loginSuccess')
+        } else {
+          this.rules.emailMatch()
+        }
+
+        this.loading = false;
+      }).catch(() => {
+        this.loading = false;
+      })
+    }
+  }
 }
 </script>
