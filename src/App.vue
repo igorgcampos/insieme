@@ -1,7 +1,7 @@
 <template>
   <v-app
-    v-on:loginSuccess="hideLoginPage(true)"
-    v-on:logoutSuccess="hideLoginPage(false)"
+    @login-success="hideLoginPage(true)"
+    @logout-success="hideLoginPage(false)"
   >
     <LoginPage v-if="!showMainPage" />
     <MainPage v-if="showMainPage" />

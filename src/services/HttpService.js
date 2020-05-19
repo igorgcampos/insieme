@@ -1,6 +1,7 @@
 const axios = require('axios').default;
 const httpService = {}
 var keyCloakToken = {}
+var user;
 const serverUrl = 'http://localhost:8083'
 
 httpService.install = function (Vue) {
@@ -16,9 +17,25 @@ httpService.install = function (Vue) {
 
         if (response.data.length > 0) {
             keyCloakToken = response.data;
+            getUser()
             return true;
         }
         return false;
+    }
+
+    const getUser = async () => {
+
+        if (user) {
+            return user;
+        }
+        user = await axios.get(serverUrl.concat("/usuario"),
+            { headers: { Authorization: 'Bearer '.concat(keyCloakToken) } })
+
+        console.log("user: " + user)
+    }
+
+    Vue.prototype.$getUser = () => {
+        return user;
     }
 
     Vue.prototype.$get = (url, params) => {

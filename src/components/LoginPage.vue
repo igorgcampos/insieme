@@ -62,7 +62,7 @@
             </v-flex>
             <v-flex>
               <v-text-field
-                v-model="username"
+                v-model.trim="username"
                 label="Regular"
                 full-width
                 placeholder="Usuário"
@@ -73,13 +73,14 @@
               ></v-text-field>
 
               <v-text-field
-                v-model="password"
+                v-model.trim="password"
                 label="Regular"
                 full-width
                 placeholder="Senha"
                 single-line
                 solo
-                :rules="[rules.min]"
+                ref="password"
+                :rules="[rules.min, rules.emailMatch]"
                 :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
                 prepend-inner-icon="mdi-lock"
                 :type="show ? 'text' : 'password'"
@@ -114,9 +115,10 @@ export default {
       loading: false,
       show: false,
       password: '',
+      success: true,
       rules: {
         min: v => v.length >= 6 || 'Mínimo de 6 caracteres',
-        emailMatch: () => ('Usuário e/ou senha incorretos.'),
+        emailMatch: () => !!this.success || 'Usuário e/ou senha incorretos.',
       },
     }
   },
@@ -124,12 +126,13 @@ export default {
     login () {
 
       this.loading = true;
-      this.$connectToKeycloak(this.username, this.password).then(success => {
+      this.$connectToKeycloak(this.username, this.password).then(response => {
 
-        if (success) {
-          this.$parent.$emit('loginSuccess')
+        this.success = response
+        if (this.success) {
+          this.$parent.$emit('login-success')
         } else {
-          this.rules.emailMatch()
+          this.$refs["password"].validate(true)
         }
 
         this.loading = false;
