@@ -17,7 +17,7 @@ httpService.install = function (Vue) {
 
         if (response.data.length > 0) {
             keyCloakToken = response.data;
-            getUser()
+            await getUser()
             return true;
         }
         return false;
@@ -31,7 +31,7 @@ httpService.install = function (Vue) {
         user = await axios.get(serverUrl.concat("/usuario"),
             { headers: { Authorization: 'Bearer '.concat(keyCloakToken) } })
 
-        console.log("user: " + user)
+        user = user.data;
     }
 
     Vue.prototype.$getUser = () => {
