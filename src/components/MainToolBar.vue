@@ -72,6 +72,8 @@
           <v-btn
             icon
             color="white"
+            class="ml-3"
+            @click="logout()"
           >
             <v-icon v-on="on">mdi-logout</v-icon>
           </v-btn>
@@ -92,7 +94,15 @@ export default {
     user: {}
   }),
   methods: {
+    logout () {
 
+      this.$logout().then(() => {
+        this.$root.$emit('logout-success')
+      }).catch(function (error) {
+        console.log(error)
+      })
+
+    }
   }
 };
 </script>

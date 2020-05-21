@@ -5,6 +5,7 @@ import vuetify from './plugins/vuetify';
 import httpService from './services/HttpService.js'
 
 Vue.config.productionTip = false
+document.title = "Insieme"
 
 Vue.use(httpService)
 

@@ -126,11 +126,11 @@ export default {
     login () {
 
       this.loading = true;
-      this.$connectToKeycloak(this.username, this.password).then(response => {
+      this.$login(this.username, this.password).then(response => {
 
         this.success = response
         if (this.success) {
-          this.$parent.$emit('login-success')
+          this.$root.$emit('login-success')
         } else {
           this.$refs["password"].validate(true)
         }

@@ -1,32 +1,25 @@
 <template>
-  <v-app
-    @login-success="hideLoginPage(true)"
-    @logout-success="hideLoginPage(false)"
-  >
-    <LoginPage v-if="!showMainPage" />
-    <MainPage v-if="showMainPage" />
+  <v-app>
+    <router-view></router-view>
   </v-app>
 </template>
 
 <script>
-import LoginPage from './components/LoginPage';
-import MainPage from './components/MainPage';
 
 export default {
   name: 'App',
 
-  components: {
-    LoginPage,
-    MainPage
-  },
+  created: function () {
 
-  data: () => ({
-    showMainPage: false
-  }),
-  methods: {
-    hideLoginPage (hide) {
-      this.showMainPage = hide;
-    }
+    this.$router.beforeEach((to, from, next) => {
+      if (to.name !== 'Login' && !this.$isAuthenticated()) next({ name: 'Login' })
+      else if (to.name == 'Login' && this.$isAuthenticated()) next({ name: 'Main' })
+      else next()
+    })
+
+    this.$router.push('/login')
+    this.$root.$on('login-success', () => this.$router.push('/'))
+    this.$root.$on('logout-success', () => this.$router.push('/login'))
   }
 };
 </script>
