@@ -3,11 +3,12 @@ const httpService = {}
 var keyCloakToken;
 var keyCloakRefreshToken = {}
 var user;
-const serverUrl = 'http://localhost:8083'
+const serverUrl = process.env.VUE_APP_SERVER_URL
 
 httpService.install = function (Vue) {
 
     Vue.prototype.$login = async (username, password) => {
+        console.log(process.env)
         const response =
             await axios.post(
                 serverUrl.concat('/login'),
