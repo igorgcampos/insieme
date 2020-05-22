@@ -3,11 +3,13 @@ import App from './App.vue'
 import router from './router'
 import vuetify from './plugins/vuetify';
 import httpService from './services/HttpService.js'
+import authService from './services/AuthService.js'
 
 Vue.config.productionTip = false
 document.title = "Insieme"
 
 Vue.use(httpService)
+Vue.use(authService)
 
 new Vue({
   router,
