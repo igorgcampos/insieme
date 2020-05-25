@@ -5,23 +5,38 @@ const serverUrl = process.env.VUE_APP_SERVER_URL
 httpService.install = function (Vue) {
 
     Vue.prototype.$get = async (url) => {
-        return axios.get(serverUrl.concat(url),
-            { headers: { Authorization: 'Bearer '.concat(window.sessionStorage.getItem('keyCloakToken')) } })
+        try {
+            return await axios.get(serverUrl.concat(url),
+                { headers: { Authorization: 'Bearer '.concat(window.sessionStorage.getItem('keyCloakToken')) } })
+        } catch (error) {
+            console.log(error)
+        }
+
     }
 
     Vue.prototype.$post = async (url, body, noBearer) => {
+        try {
 
-        if (noBearer) {
-            return axios.post(serverUrl.concat(url), body)
+            if (noBearer) {
+                return await axios.post(serverUrl.concat(url), body)
+            }
+
+            return await axios.post(serverUrl.concat(url), body,
+                { headers: { Authorization: 'Bearer '.concat(window.sessionStorage.getItem('keyCloakToken')) } })
+
+        } catch (error) {
+            console.log(error)
         }
-
-        return axios.post(serverUrl.concat(url), body,
-            { headers: { Authorization: 'Bearer '.concat(window.sessionStorage.getItem('keyCloakToken')) } })
     }
 
     Vue.prototype.$put = async (url, body) => {
-        return axios.put(serverUrl.concat(url), body,
-            { headers: { Authorization: 'Bearer '.concat(window.sessionStorage.getItem('keyCloakToken')) } })
+        try {
+            return await axios.put(serverUrl.concat(url), body,
+                { headers: { Authorization: 'Bearer '.concat(window.sessionStorage.getItem('keyCloakToken')) } })
+
+        } catch (error) {
+            console.log(error)
+        }
     }
 }
 

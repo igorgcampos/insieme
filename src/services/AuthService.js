@@ -9,6 +9,10 @@ authService.install = function (Vue) {
             password: password
         }, true)
 
+        if (!response) {
+            return false;
+        }
+
         if (response.data.access_token) {
             window.sessionStorage.setItem('keyCloakToken', response.data.access_token);
             window.sessionStorage.setItem('keyCloakRefreshToken', response.data.refresh_token);
@@ -24,7 +28,9 @@ authService.install = function (Vue) {
             concat(window.sessionStorage.getItem('keyCloakRefreshToken')))
 
         window.sessionStorage.removeItem('keyCloakToken');
+        window.sessionStorage.removeItem('keyCloakRefreshToken');
         window.sessionStorage.removeItem('user');
+
         return response;
     }
 

@@ -7,27 +7,29 @@ const routes = [
   {
     path: '/',
     name: 'Main',
-    component: () => import('../views/MainPage.vue')
+    component: () => import('../views/MainPage.vue'),
+    children: [
+      {
+        path: 'clientes',
+        name: 'Clients',
+        component: () => import('../views/ClientsPage.vue')
+      },
+      {
+        path: 'contratos',
+        name: 'Contracts',
+        component: () => import('../views/ContractsPage.vue')
+      },
+      {
+        path: 'dashboard',
+        name: 'Dashboard',
+        component: () => import('../views/DashboardPage.vue')
+      }
+    ]
   },
   {
     path: '/login',
     name: 'Login',
     component: () => import('../views/LoginPage.vue')
-  },
-  {
-    path: '/clientes',
-    name: 'Clients',
-    component: () => import('../views/ClientsPage.vue')
-  },
-  {
-    path: '/contratos',
-    name: 'Contracts',
-    component: () => import('../views/ContractsPage.vue')
-  },
-  {
-    path: '/dashboard',
-    name: 'Dashboard',
-    component: () => import('../views/DashboardPage.vue')
   }
 ]
 
