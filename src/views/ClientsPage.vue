@@ -3,60 +3,70 @@
   <v-layout
     column
     align-center
-    style="height:100vh;"
+    style="height:100%;"
   >
 
     <v-col
-      md="7"
+      md="9"
       class="mt-5"
     >
       <div>
 
-        <v-row>
+        <v-row class="ml-n1">
           <span class="mb-7 text-right display-1 font-weight-bold grey--text text--darken-1">Clientes</span>
         </v-row>
 
-        <v-row class="pl-1">
-          <v-col>
+        <v-row class="pl-0 ml-0">
+          <v-col cols="4">
             <v-row>
               <span class=" text-right subtitle-2 font-weight-bold grey--text text--lighten-1">Buscar por:</span>
             </v-row>
-            <v-row full-width>
+            <v-row md="2">
               <v-text-field
                 v-model.trim="searchText"
                 dense
                 label="Regular"
-                full-width
                 placeholder="Nome ou CNPJ"
                 single-line
                 solo
                 autofocus
+                max-width="200"
                 append-icon="mdi-magnify"
+                @keypress.enter="search()"
               ></v-text-field>
             </v-row>
           </v-col>
 
-          <v-col class="ml-5">
+          <v-col
+            class="ml-5"
+            cols="4"
+          >
             <v-row>
               <span class=" text-right subtitle-2 font-weight-bold grey--text text--lighten-1">Tipo:</span>
             </v-row>
-            <v-row full-width>
+            <v-row>
               <v-select
                 :items="types"
+                v-model="type"
                 label="Principal ou associado"
                 solo
                 dense
+                @change="search()"
               ></v-select>
             </v-row>
           </v-col>
         </v-row>
 
-        <v-row>
+        <v-row v-scroll="searchMore">
           <v-col
-            v-for="client in clients"
-            :key="client"
+            class="flex-grow-0"
+            v-for="(client, i) in clients"
+            :key="i"
           >
-            <ClientCard></ClientCard>
+            <ClientCard :client="client"></ClientCard>
+          </v-col>
+          <v-col v-if="clients.length == 0">
+            <!--<EmptyPanel message="Nenhum cliente encontrado"> </EmptyPanel> -->
           </v-col>
         </v-row>
       </div>
@@ -75,14 +85,62 @@ export default {
     ClientCard
   },
   methods: {
+    searchMore () {
 
+      if (this.isLoding || this.noResult) {
+        return;
+      }
+
+      this.isLoading = true;
+      if (document.documentElement.scrollTop + window.innerHeight >= document.documentElement.scrollHeight) {
+
+        this.page++;
+        this.search(this.page);
+      }
+    },
+    search (page) {
+
+      if (!page) {
+        this.page = 0
+        this.clients = []
+      }
+
+      if (this.type == this.types[0]) {
+        this.type = 0;
+      } else if (this.type == this.types[1]) {
+        this.type = 1;
+      } else if (this.type == this.types[2]) {
+        this.type = 2;
+      }
+
+      this.$get('/cliente/busca', {
+        searchText: this.searchText, clientType: this.type, page: this.page
+      }).then((response) => {
+
+        if (response.data.length == 0) {
+          this.noResult = true;
+        }
+
+        this.clients = this.clients.concat(response.data);
+        this.isLoading = false;
+      });
+
+    }
   },
   data: () => ({
     types: ['Todos', 'Principal', 'Associados'],
+    type: 0,
+    page: 0,
+    isLoading: true,
+    noResult: false,
     searchText: '',
-    clients: [1, 2, 3, 4, 5, 6]
+    clients: []
   }),
   created: function () {
+    this.$get('/cliente/busca',
+      { searchText: '', clientType: 0, page: 0 }).then((response) => {
+        this.clients = response.data;
+      });
 
   }
 };

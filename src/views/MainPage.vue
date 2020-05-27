@@ -7,6 +7,7 @@
         fluid
         fill-height
         class="grey lighten-5"
+        min-height="100"
       >
 
         <router-view></router-view>
@@ -25,6 +26,11 @@ export default {
   created: function () {
     this.user = this.$getUser()
 
+    if (this.hasProfile('Administrador')) {
+      this.$router.push('/clientes')
+    }
+  },
+  updated: function () {
     if (this.hasProfile('Administrador')) {
       this.$router.push('/clientes')
     }

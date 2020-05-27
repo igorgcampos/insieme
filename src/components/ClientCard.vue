@@ -1,27 +1,40 @@
 <template>
   <v-card
     class="mx-auto"
-    max-width="344"
+    max-width="466"
+    min-width="300"
   >
     <v-list-item three-line>
       <v-list-item-content>
-        <div class="overline mb-4">OVERLINE</div>
-        <v-list-item-title class="headline mb-1">Headline 5</v-list-item-title>
-        <v-list-item-subtitle>Greyhound divisely hello coldly fonwderfully</v-list-item-subtitle>
+        <v-list-item-subtitle class="pr-4 subtitle-2 grey--text text--darken-3">
+          {{client.nome}}</v-list-item-subtitle>
       </v-list-item-content>
 
-      <v-list-item-avatar
-        tile
-        size="80"
-        color="grey"
-      ></v-list-item-avatar>
+      <v-chip
+        label
+        class="ma-0 mb-5 mt-1 caption"
+        :color="client.clientePai? 'blue': 'green'"
+        text-color="white"
+        float-right
+        small
+      >
+        {{client.clientePai?'Associado':'Principal'}}
+      </v-chip>
+
     </v-list-item>
 
     <v-card-actions>
-      <v-btn
-        text
-        color="blue"
-      >Contratos</v-btn>
+      <v-tooltip top>
+        <template v-slot:activator="{ on }">
+          <v-btn
+            text
+            color="blue"
+            @click="listarContratos()"
+            v-on="on"
+          >Contratos</v-btn>
+        </template>
+        <span>Ver os contratos deste cliente</span>
+      </v-tooltip>
     </v-card-actions>
   </v-card>
 
@@ -34,6 +47,9 @@ export default {
   }),
   methods: {
 
+  },
+  props: {
+    client: Object
   }
 };
 </script>

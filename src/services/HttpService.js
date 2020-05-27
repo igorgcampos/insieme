@@ -4,12 +4,19 @@ const serverUrl = process.env.VUE_APP_SERVER_URL
 
 httpService.install = function (Vue) {
 
-    Vue.prototype.$get = async (url) => {
+    Vue.prototype.$get = async (url, params) => {
         try {
             return await axios.get(serverUrl.concat(url),
-                { headers: { Authorization: 'Bearer '.concat(window.sessionStorage.getItem('keyCloakToken')) } })
+                {
+                    headers: {
+                        Authorization: 'Bearer '.concat(window.sessionStorage.getItem('keyCloakToken'))
+                    },
+                    params: params
+                }
+            )
         } catch (error) {
-            console.log(error)
+            console.log(error);
+            Vue.prototype.$logout()
         }
 
     }
@@ -26,6 +33,7 @@ httpService.install = function (Vue) {
 
         } catch (error) {
             console.log(error)
+            Vue.prototype.$logout()
         }
     }
 
@@ -36,6 +44,7 @@ httpService.install = function (Vue) {
 
         } catch (error) {
             console.log(error)
+            Vue.prototype.$logout()
         }
     }
 }
