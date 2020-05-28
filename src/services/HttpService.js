@@ -2,7 +2,7 @@ const axios = require('axios').default;
 const httpService = {}
 const serverUrl = process.env.VUE_APP_SERVER_URL
 
-httpService.install = function (Vue) {
+httpService.install = function (Vue, router) {
 
     Vue.prototype.$get = async (url, params) => {
         try {
@@ -15,8 +15,12 @@ httpService.install = function (Vue) {
                 }
             )
         } catch (error) {
-            console.log(error);
-            Vue.prototype.$logout()
+            console.log(error)
+
+            if (error.message == 'Network Error') {
+                Vue.prototype.$clearSessionStorage();
+                router.push('/login')
+            }
         }
 
     }
@@ -33,7 +37,11 @@ httpService.install = function (Vue) {
 
         } catch (error) {
             console.log(error)
-            Vue.prototype.$logout()
+
+            if (error.message == 'Network Error') {
+                Vue.prototype.$clearSessionStorage();
+                router.push('/login')
+            }
         }
     }
 
@@ -44,7 +52,11 @@ httpService.install = function (Vue) {
 
         } catch (error) {
             console.log(error)
-            Vue.prototype.$logout()
+
+            if (error.message == 'Network Error') {
+                Vue.prototype.$clearSessionStorage();
+                router.push('/login')
+            }
         }
     }
 }

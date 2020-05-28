@@ -9,6 +9,7 @@
       src="../assets/telespazio-logo.png"
       max-height="80"
       max-width="180"
+      min-width="50"
       aspect-ratio="5.9"
       class="mx-auto"
     ></v-img>

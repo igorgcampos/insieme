@@ -1,13 +1,11 @@
 <template>
 
   <div>
-    <MainToolBar></MainToolBar>
+    <MainToolBar style="z-index:1001;"></MainToolBar>
     <v-content>
       <v-container
         fluid
         fill-height
-        class="grey lighten-5"
-        min-height="100"
       >
 
         <router-view></router-view>

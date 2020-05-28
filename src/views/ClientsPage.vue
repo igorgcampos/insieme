@@ -3,7 +3,6 @@
   <v-layout
     column
     align-center
-    style="height:100%;"
   >
 
     <v-col
@@ -16,7 +15,10 @@
           <span class="mb-7 text-right display-1 font-weight-bold grey--text text--darken-1">Clientes</span>
         </v-row>
 
-        <v-row class="pl-0 ml-0">
+        <v-row
+          id="filtro"
+          class="pl-0 ml-0 grey lighten-5"
+        >
           <v-col cols="4">
             <v-row>
               <span class=" text-right subtitle-2 font-weight-bold grey--text text--lighten-1">Buscar por:</span>
@@ -57,7 +59,10 @@
           </v-col>
         </v-row>
 
-        <v-row v-scroll="searchMore">
+        <v-row
+          v-scroll="searchMore"
+          class="pl-1"
+        >
           <v-col
             class="flex-grow-0"
             v-for="(client, i) in clients"
@@ -87,6 +92,12 @@ export default {
   methods: {
     searchMore () {
 
+      if (document.documentElement.scrollTop > 95) {
+        document.getElementById('filtro').style = "position:sticky; z-index:100; top:55px; padding-top:10px;"
+      } else if (document.documentElement.scrollTop < 60) {
+        document.getElementById('filtro').style = ""
+      }
+
       if (this.isLoding || this.noResult) {
         return;
       }
@@ -103,21 +114,23 @@ export default {
       if (!page) {
         this.page = 0
         this.clients = []
+        this.noResult = false;
       }
 
+      var selectedType = 0
       if (this.type == this.types[0]) {
-        this.type = 0;
+        selectedType = 0;
       } else if (this.type == this.types[1]) {
-        this.type = 1;
+        selectedType = 1;
       } else if (this.type == this.types[2]) {
-        this.type = 2;
+        selectedType = 2;
       }
 
       this.$get('/cliente/busca', {
-        searchText: this.searchText, clientType: this.type, page: this.page
+        searchText: this.searchText, clientType: selectedType, page: this.page
       }).then((response) => {
 
-        if (response.data.length == 0) {
+        if (response && response.data.length == 0) {
           this.noResult = true;
         }
 

@@ -27,11 +27,15 @@ authService.install = function (Vue) {
         var response = await Vue.prototype.$get('/logout/'.
             concat(window.sessionStorage.getItem('keyCloakRefreshToken')))
 
+        Vue.prototype.$clearSessionStorage();
+
+        return response;
+    }
+
+    Vue.prototype.$clearSessionStorage = async () => {
         window.sessionStorage.removeItem('keyCloakToken');
         window.sessionStorage.removeItem('keyCloakRefreshToken');
         window.sessionStorage.removeItem('user');
-
-        return response;
     }
 
     const getUser = async () => {

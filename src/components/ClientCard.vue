@@ -23,12 +23,14 @@
 
     </v-list-item>
 
+    <v-divider class="mx-4"></v-divider>
+
     <v-card-actions>
       <v-tooltip top>
         <template v-slot:activator="{ on }">
           <v-btn
             text
-            color="blue"
+            color="blue darken-4"
             @click="listarContratos()"
             v-on="on"
           >Contratos</v-btn>

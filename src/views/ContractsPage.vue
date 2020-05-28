@@ -3,7 +3,6 @@
     <v-container
       fluid
       fill-height
-      class="grey lighten-5 pa-0"
     >
 
     </v-container>

@@ -8,7 +8,7 @@ import authService from './services/AuthService.js'
 Vue.config.productionTip = false
 document.title = "Insieme"
 
-Vue.use(httpService)
+Vue.use(httpService, router)
 Vue.use(authService)
 
 Vue.directive('scroll', {
