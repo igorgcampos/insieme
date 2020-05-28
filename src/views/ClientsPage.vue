@@ -71,7 +71,7 @@
             <ClientCard :client="client"></ClientCard>
           </v-col>
           <v-col v-if="clients.length == 0">
-            <!--<EmptyPanel message="Nenhum cliente encontrado"> </EmptyPanel> -->
+            <EmptyPanel message="Nenhum cliente encontrado"> </EmptyPanel>
           </v-col>
         </v-row>
       </div>
@@ -84,10 +84,12 @@
 <script>
 
 import ClientCard from '../components/ClientCard';
+import EmptyPanel from '../components/EmptyPanel';
 
 export default {
   components: {
-    ClientCard
+    ClientCard,
+    EmptyPanel
   },
   methods: {
     searchMore () {
