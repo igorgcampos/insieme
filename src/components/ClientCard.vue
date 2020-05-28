@@ -28,7 +28,6 @@
             class="caption"
             :color="client.clientePai? 'primary': 'success'"
             :text-color="client.clientePai? 'primary': 'success'"
-            float-right
             small
             outlined
           >
@@ -44,7 +43,7 @@
                 v-on="on"
               >{{client.clientePai?'Cliente Principal':'Cliente Associado'}}</v-btn>
             </template>
-            <span>{{client.clientePai?'Ir para cliente Principal':'Ir para cliente associado'}}</span>
+            <span>{{client.clientePai?'Ir para cliente principal':'Ir para cliente associado'}}</span>
           </v-tooltip>
         </row>
 
@@ -63,7 +62,7 @@
             ></LabelValue>
           </v-row>
 
-          <v-row>
+          <v-row class="mt-n1">
             <LabelValue
               label="Endereço"
               :value="client.endereco"
