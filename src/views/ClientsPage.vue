@@ -6,7 +6,7 @@
   >
 
     <v-col
-      md="9"
+      md="8"
       class="mt-5"
     >
       <div>
