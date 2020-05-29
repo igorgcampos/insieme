@@ -34,17 +34,26 @@
             {{client.clientePai?'Associado':'Principal'}}
           </v-chip>
 
-          <v-tooltip top>
-            <template v-slot:activator="{ on }">
-              <v-btn
-                x-small
-                :color="client.clientePai? 'success': 'primary'"
-                class="ml-4 text-white"
-                v-on="on"
-                @click="findMainClientOrAssociates()"
-              >{{client.clientePai?'Cliente Principal':'Clientes Associados'}}</v-btn>
+          <v-tooltip
+            top
+            v-model="noAssociates"
+            color="error"
+          >
+            <template v-slot:activator="{ on1 }">
+              <v-tooltip top>
+                <template v-slot:activator="{ on }">
+                  <v-btn
+                    x-small
+                    :color="client.clientePai? 'success': 'primary'"
+                    class="ml-4 text-white"
+                    v-on="on || on1"
+                    @click="findMainClientOrAssociates()"
+                  >{{client.clientePai?'Cliente Principal':'Clientes Associados'}}</v-btn>
+                </template>
+                <span>{{client.clientePai?'Buscar cliente principal':'Buscar clientes associados'}}</span>
+              </v-tooltip>
             </template>
-            <span>{{client.clientePai?'Buscar cliente principal':'Buscar clientes associados'}}</span>
+            <span>Nenhum cliente associado</span>
           </v-tooltip>
         </v-row>
 
@@ -117,6 +126,7 @@ export default {
         this.$get('/cliente/associados', { id: this.client.id }).then(response => {
           if (response.data.length == 0) {
             this.noAssociates = true;
+            setTimeout(() => { this.noAssociates = undefined }, 2000)
           }
           else {
             this.$root.$emit('search-clients', response.data)
