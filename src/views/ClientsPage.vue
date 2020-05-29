@@ -3,6 +3,7 @@
   <v-layout
     column
     align-center
+    v-scroll="searchMore"
   >
 
     <v-col
@@ -59,10 +60,7 @@
           </v-col>
         </v-row>
 
-        <v-row
-          v-scroll="searchMore"
-          class="pl-1"
-        >
+        <v-row class="pl-1">
           <v-col
             class="flex-grow-0"
             v-for="(client, i) in clients"
@@ -70,7 +68,7 @@
           >
             <ClientCard :client="client"></ClientCard>
           </v-col>
-          <v-col v-if="clients.length == 0">
+          <v-col v-if="clients.length == 0 && !isLoading">
             <EmptyPanel message="Nenhum cliente encontrado"> </EmptyPanel>
           </v-col>
         </v-row>
@@ -94,6 +92,11 @@ export default {
   methods: {
     searchMore () {
 
+      if (this.cameFromCard) {
+        this.cameFromCard = false;
+        return;
+      }
+
       if (document.documentElement.scrollTop > 95) {
         document.getElementById('filtro').style = "position:sticky; z-index:100; top:55px; padding-top:10px;"
       } else if (document.documentElement.scrollTop < 60) {
@@ -104,15 +107,14 @@ export default {
         return;
       }
 
-      this.isLoading = true;
-      if (document.documentElement.scrollTop + window.innerHeight >= document.documentElement.scrollHeight) {
-
+      if (document.documentElement.scrollTop + window.innerHeight + 1 >= document.documentElement.scrollHeight) {
         this.page++;
         this.search(this.page);
       }
     },
     search (page) {
 
+      this.isLoading = true;
       if (!page) {
         this.page = 0
         this.clients = []
@@ -140,6 +142,12 @@ export default {
         this.isLoading = false;
       });
 
+    },
+    updateClients (clients) {
+      this.clients = []
+      this.clients = this.clients.concat(clients);
+      this.searchText = '';
+      this.cameFromCard = true;
     }
   },
   data: () => ({
@@ -148,6 +156,7 @@ export default {
     page: 0,
     isLoading: true,
     noResult: false,
+    cameFromCard: true,
     searchText: '',
     clients: []
   }),
@@ -157,6 +166,8 @@ export default {
         this.clients = response.data;
       });
 
+    var vm = this;
+    this.$root.$on('search-clients', (clients) => vm.updateClients(clients))
   }
 };
 </script>

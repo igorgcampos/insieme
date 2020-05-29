@@ -22,7 +22,7 @@
         column
         align-center
       >
-        <row class="mb-3">
+        <v-row class="mb-3">
           <v-chip
             label
             class="caption"
@@ -41,11 +41,12 @@
                 :color="client.clientePai? 'success': 'primary'"
                 class="ml-4 text-white"
                 v-on="on"
-              >{{client.clientePai?'Cliente Principal':'Cliente Associado'}}</v-btn>
+                @click="findMainClientOrAssociates()"
+              >{{client.clientePai?'Cliente Principal':'Clientes Associados'}}</v-btn>
             </template>
-            <span>{{client.clientePai?'Ir para cliente principal':'Ir para cliente associado'}}</span>
+            <span>{{client.clientePai?'Buscar cliente principal':'Buscar clientes associados'}}</span>
           </v-tooltip>
-        </row>
+        </v-row>
 
         <div class="mr-2">
           <v-row>
@@ -67,6 +68,7 @@
               label="Endereço"
               :value="client.endereco"
               justify="center"
+              truncate
             ></LabelValue>
 
             <LabelValue
@@ -103,13 +105,29 @@ import LabelValue from '../components/LabelValue';
 export default {
 
   data: () => ({
-    user: {}
+    noAssociates: undefined
   }),
   components: {
     LabelValue
   },
   methods: {
+    findMainClientOrAssociates () {
 
+      if (!this.client.clientePai)
+        this.$get('/cliente/associados', { id: this.client.id }).then(response => {
+          if (response.data.length == 0) {
+            this.noAssociates = true;
+          }
+          else {
+            this.$root.$emit('search-clients', response.data)
+            this.noAssociates = undefined;
+          }
+        })
+      else
+        this.$get('/cliente', { id: this.client.clientePai.id }).then(response => {
+          this.$root.$emit('search-clients', response.data)
+        })
+    }
   },
   props: {
     client: Object
