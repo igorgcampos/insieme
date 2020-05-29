@@ -93,7 +93,6 @@ export default {
     searchMore () {
 
       if (this.cameFromCard) {
-        this.cameFromCard = false;
         return;
       }
 
@@ -119,6 +118,7 @@ export default {
         this.page = 0
         this.clients = []
         this.noResult = false;
+        this.cameFromCard = false;
       }
 
       var selectedType = 0
