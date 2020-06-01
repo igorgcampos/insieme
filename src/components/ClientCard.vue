@@ -22,39 +22,69 @@
         column
         align-center
       >
-        <v-row class="mb-3">
+        <v-row :class="{'mb-3':true, 'mt-3':client.clientePai && !client.clientePai.clientePai}">
           <v-chip
             label
             class="caption"
-            :color="client.clientePai? 'primary': 'success'"
-            :text-color="client.clientePai? 'primary': 'success'"
+            :color="(client.clientePai && client.clientePai.clientePai)?'warning':client.clientePai? 'primary': 'success'"
+            :text-color="(client.clientePai && client.clientePai.clientePai)?'warning':client.clientePai? 'primary': 'success'"
             small
             outlined
           >
-            {{client.clientePai?'Associado':'Principal'}}
+            {{(client.clientePai && client.clientePai.clientePai)?'Final':client.clientePai?'Associado':'Principal'}}
           </v-chip>
 
-          <v-tooltip
-            top
-            v-model="noAssociates"
-            color="error"
+          <v-layout
+            column
+            align-center
           >
-            <template v-slot:activator="{ on1 }">
-              <v-tooltip top>
-                <template v-slot:activator="{ on }">
-                  <v-btn
-                    x-small
-                    :color="client.clientePai? 'success': 'primary'"
-                    class="ml-4 text-white"
-                    v-on="on || on1"
-                    @click="findMainClientOrAssociates()"
-                  >{{client.clientePai?'Cliente Principal':'Clientes Associados'}}</v-btn>
-                </template>
-                <span>{{client.clientePai?'Buscar cliente principal':'Buscar clientes associados'}}</span>
-              </v-tooltip>
-            </template>
-            <span>Nenhum cliente associado</span>
-          </v-tooltip>
+            <v-tooltip
+              top
+              v-model="noFather"
+              color="error"
+              v-if="client.clientePai"
+            >
+              <template v-slot:activator="{ on1 }">
+                <v-tooltip top>
+                  <template v-slot:activator="{ on }">
+                    <v-btn
+                      x-small
+                      :color="(client.clientePai && client.clientePai.clientePai)?'primary':'success'"
+                      :class="{'ml-4':true, 'text-white':true, 'mt-n3':client.clientePai && !client.clientePai.clientePai}"
+                      v-on="on || on1"
+                      @click="findFatherClient()"
+                    >{{(client.clientePai && client.clientePai.clientePai)?'Cliente Associado':'Cliente Principal'}}</v-btn>
+                  </template>
+                  <span>{{(client.clientePai && client.clientePai.clientePai)?'Buscar cliente associado':'Buscar cliente principal'}}</span>
+                </v-tooltip>
+              </template>
+              <span>Nenhum cliente encontrado</span>
+            </v-tooltip>
+
+            <v-tooltip
+              top
+              v-model="noAssociates"
+              color="error"
+              v-if="!client.clientePai || (client.clientePai && !client.clientePai.clientePai)"
+            >
+              <template v-slot:activator="{ on1 }">
+                <v-tooltip top>
+                  <template v-slot:activator="{ on }">
+                    <v-btn
+                      x-small
+                      :color="client.clientePai? 'warning': 'primary'"
+                      :class="{'ml-4':true, 'text-white':true, 'mt-2':client.clientePai && !client.clientePai.clientePai}"
+                      v-on="on || on1"
+                      @click="findClientSons()"
+                    >{{client.clientePai?'Clientes Finais':'Clientes Associados'}}</v-btn>
+                  </template>
+                  <span>{{client.clientePai?'Buscar clientes finais':'Buscar clientes associados'}}</span>
+                </v-tooltip>
+              </template>
+              <span>Nenhum cliente encontrado</span>
+            </v-tooltip>
+
+          </v-layout>
         </v-row>
 
         <div class="mr-2">
@@ -114,29 +144,37 @@ import LabelValue from '../components/LabelValue';
 export default {
 
   data: () => ({
-    noAssociates: undefined
+    noAssociates: undefined,
+    noFather: undefined
   }),
   components: {
     LabelValue
   },
   methods: {
-    findMainClientOrAssociates () {
+    findClientSons () {
 
-      if (!this.client.clientePai)
-        this.$get('/cliente/associados', { id: this.client.id }).then(response => {
-          if (response.data.length == 0) {
-            this.noAssociates = true;
-            setTimeout(() => { this.noAssociates = undefined }, 2000)
-          }
-          else {
-            this.$root.$emit('search-clients', response.data)
-            this.noAssociates = undefined;
-          }
-        })
-      else
-        this.$get('/cliente', { id: this.client.clientePai.id }).then(response => {
+      this.$get('/cliente/filhos', { id: this.client.id }).then(response => {
+        if (response.data.length == 0) {
+          this.noAssociates = true;
+          setTimeout(() => { this.noAssociates = undefined }, 2000)
+        }
+        else {
           this.$root.$emit('search-clients', response.data)
-        })
+          this.noAssociates = undefined;
+        }
+      })
+    },
+    findFatherClient () {
+      this.$get('/cliente', { id: this.client.clientePai.id }).then(response => {
+        if (response.data.length == 0) {
+          this.noFather = true;
+          setTimeout(() => { this.noFather = undefined }, 2000)
+        }
+        else {
+          this.$root.$emit('search-clients', response.data)
+          this.noFather = undefined;
+        }
+      })
     }
   },
   props: {

@@ -51,7 +51,7 @@
               <v-select
                 :items="types"
                 v-model="type"
-                label="Principal ou associado"
+                label="Principal, associado ou final"
                 solo
                 dense
                 @change="search()"
@@ -128,6 +128,8 @@ export default {
         selectedType = 1;
       } else if (this.type == this.types[2]) {
         selectedType = 2;
+      } else if (this.type == this.types[3]) {
+        selectedType = 3;
       }
 
       this.$get('/cliente/busca', {
@@ -151,7 +153,7 @@ export default {
     }
   },
   data: () => ({
-    types: ['Todos', 'Principal', 'Associados'],
+    types: ['Todos', 'Principal', 'Associado', 'Final'],
     type: 0,
     page: 0,
     isLoading: true,
