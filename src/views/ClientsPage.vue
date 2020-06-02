@@ -96,11 +96,7 @@ export default {
         return;
       }
 
-      if (document.documentElement.scrollTop > 95) {
-        document.getElementById('filtro').style = "position:sticky; z-index:100; top:55px; padding-top:10px;"
-      } else if (document.documentElement.scrollTop < 60) {
-        document.getElementById('filtro').style = ""
-      }
+      this.stickFilters();
 
       if (this.isLoding || this.noResult) {
         return;
@@ -145,6 +141,13 @@ export default {
       });
 
     },
+    stickFilters () {
+      if (document.documentElement.scrollTop > 95) {
+        document.getElementById('filtro').style = "position:sticky; z-index:100; top:55px; padding-top:10px;"
+      } else if (document.documentElement.scrollTop < 60) {
+        document.getElementById('filtro').style = ""
+      }
+    },
     updateClients (clients) {
       this.clients = []
       this.clients = this.clients.concat(clients);
@@ -158,7 +161,7 @@ export default {
     page: 0,
     isLoading: true,
     noResult: false,
-    cameFromCard: true,
+    cameFromCard: false,
     searchText: '',
     clients: []
   }),
