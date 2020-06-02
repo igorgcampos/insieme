@@ -26,8 +26,9 @@
                     class="mx-auto"
                   ></v-img>
                 </div>
-                <div class="display-1 text-xs-center font-weight-black mb-3 white--text">Bem Vindo ao Insieme!</div>
-                <span class="subheading white--text">Gerencie seus contratos, circuitos, notas fiscais e muito mais!</span>
+                <div class="display-1 text-xs-center font-weight-black mb-3 white--text">
+                  {{$vuetify.lang.t('$vuetify.BEM_VINDO')}}</div>
+                <span class="subheading white--text">{{$vuetify.lang.t('$vuetify.MENSAGEM_INICIAL')}}</span>
               </div>
             </v-img>
 
@@ -58,14 +59,14 @@
             <v-flex
               xs24
               mb-4
-            > <span class="grey--text text--lighten-1">Entre com seu usuário e senha</span>
+            > <span class="grey--text text--lighten-1">{{$vuetify.lang.t('$vuetify.MENSAGEM_LOGIN')}}</span>
             </v-flex>
             <v-flex>
               <v-text-field
                 v-model.trim="username"
                 label="Regular"
                 full-width
-                placeholder="Usuário"
+                :placeholder="$vuetify.lang.t('$vuetify.USUARIO')"
                 single-line
                 solo
                 autofocus
@@ -76,7 +77,7 @@
                 v-model.trim="password"
                 label="Regular"
                 full-width
-                placeholder="Senha"
+                :placeholder="$vuetify.lang.t('$vuetify.SENHA')"
                 single-line
                 solo
                 ref="password"
@@ -98,7 +99,34 @@
               id="sign-up"
               :loading="loading"
               @click="login()"
-            >Entrar</v-btn>
+            >{{$vuetify.lang.t('$vuetify.ENTRAR')}}</v-btn>
+
+            <v-row class="ma-3">
+              <v-chip
+                @click="selectIdiom('brasil')"
+                class="ma-2"
+                label
+                :outlined="brazilUnselected"
+              >
+                <v-avatar left>
+                  <v-img src="../assets/brasil-flag.svg"></v-img>
+                </v-avatar>
+                Português
+              </v-chip>
+
+              <v-chip
+                @click="selectIdiom('usa')"
+                class="ma-2"
+                label
+                :outlined="usaUnselected"
+              >
+                <v-avatar left>
+                  <v-img src="../assets/usa-flag.svg"></v-img>
+                </v-avatar>
+                English
+              </v-chip>
+            </v-row>
+
           </v-layout>
         </v-flex>
       </v-layout>
@@ -107,9 +135,22 @@
 </template>
 
 <script>
+
 export default {
+  updated: function () {
+
+    if (this.$vuetify.lang.current == 'pt') {
+      this.brazilUnselected = false;
+      this.usaUnselected = true;
+    } else {
+      this.brazilUnselected = true;
+      this.usaUnselected = false;
+    }
+  },
   data () {
     return {
+      brazilUnselected: false,
+      usaUnselected: true,
       username: '',
       image: '../assets/satelites.jpg',
       loading: false,
@@ -117,12 +158,27 @@ export default {
       password: '',
       success: true,
       rules: {
-        min: v => v.length >= 6 || 'Mínimo de 6 caracteres',
-        emailMatch: () => !!this.success || 'Usuário e/ou senha incorretos.',
+        min: v => v.length >= 6 || this.$vuetify.lang.t('$vuetify.MINIMO_CARACTERES'),
+        emailMatch: () => !!this.success || this.$vuetify.lang.t('$vuetify.SENHA_INCORRETA'),
       },
     }
   },
   methods: {
+    selectIdiom (country) {
+      if (country == 'brasil') {
+
+        this.brazilUnselected = false;
+        this.usaUnselected = true;
+        this.$vuetify.lang.current = 'pt'
+
+      } else if (country == 'usa') {
+
+        this.brazilUnselected = true;
+        this.usaUnselected = false;
+        this.$vuetify.lang.current = 'en'
+
+      }
+    },
     login () {
 
       this.loading = true;

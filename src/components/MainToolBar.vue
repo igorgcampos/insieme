@@ -28,7 +28,7 @@
           v-on="on"
           color="red darken-3"
         >
-          Olá {{user.nome}}
+          {{$vuetify.lang.t('$vuetify.OLA')}}, {{user.nome}}
         </v-chip>
       </template>
       <v-card width="300">
@@ -57,7 +57,7 @@
             <v-list-item-action>
               <v-icon>mdi-account-multiple</v-icon>
             </v-list-item-action>
-            <v-list-item-title>Perfis</v-list-item-title>
+            <v-list-item-title>{{$vuetify.lang.t('$vuetify.PERFIS')}}</v-list-item-title>
           </v-list-item>
           <v-list-item
             v-for="perfil in user.perfis"
@@ -80,7 +80,7 @@
           <v-icon v-on="on">mdi-logout</v-icon>
         </v-btn>
       </template>
-      <span>Sair</span>
+      <span>{{$vuetify.lang.t('$vuetify.SAIR')}}</span>
     </v-tooltip>
   </v-app-bar>
 

@@ -13,7 +13,8 @@
       <div>
 
         <v-row class="ml-n1">
-          <span class="mb-7 text-right display-1 font-weight-bold grey--text text--darken-1">Clientes</span>
+          <span class="mb-7 text-right display-1 font-weight-bold grey--text text--darken-1">
+            {{$vuetify.lang.t('$vuetify.CLIENTES')}}</span>
         </v-row>
 
         <v-row
@@ -22,14 +23,15 @@
         >
           <v-col cols="4">
             <v-row>
-              <span class=" text-right subtitle-2 font-weight-bold grey--text text--lighten-1">Buscar por:</span>
+              <span class=" text-right subtitle-2 font-weight-bold grey--text text--lighten-1">
+                {{$vuetify.lang.t('$vuetify.BUSCAR')}}:</span>
             </v-row>
             <v-row md="2">
               <v-text-field
                 v-model.trim="searchText"
                 dense
                 label="Regular"
-                placeholder="Nome ou CNPJ"
+                :placeholder="$vuetify.lang.t('$vuetify.NOME_CNPJ')"
                 single-line
                 solo
                 autofocus
@@ -45,13 +47,14 @@
             cols="4"
           >
             <v-row>
-              <span class=" text-right subtitle-2 font-weight-bold grey--text text--lighten-1">Tipo:</span>
+              <span class=" text-right subtitle-2 font-weight-bold grey--text text--lighten-1">
+                {{$vuetify.lang.t('$vuetify.TIPO')}}:</span>
             </v-row>
             <v-row>
               <v-select
                 :items="types"
                 v-model="type"
-                label="Principal, associado ou final"
+                :label="$vuetify.lang.t('$vuetify.TIPOS')"
                 solo
                 dense
                 @change="search()"
@@ -69,7 +72,7 @@
             <ClientCard :client="client"></ClientCard>
           </v-col>
           <v-col v-if="clients.length == 0 && !isLoading">
-            <EmptyPanel message="Nenhum cliente encontrado"> </EmptyPanel>
+            <EmptyPanel :message="$vuetify.lang.t('$vuetify.NENHUM_CLIENTE')"> </EmptyPanel>
           </v-col>
         </v-row>
       </div>
@@ -156,7 +159,7 @@ export default {
     }
   },
   data: () => ({
-    types: ['Todos', 'Principal', 'Associado', 'Final'],
+    types: [],
     type: 0,
     page: 0,
     isLoading: true,
@@ -166,6 +169,12 @@ export default {
     clients: []
   }),
   created: function () {
+
+    this.types = [this.$vuetify.lang.t('$vuetify.TODOS'),
+    this.$vuetify.lang.t('$vuetify.PRINCIPAL'),
+    this.$vuetify.lang.t('$vuetify.ASSOCIADO'),
+    this.$vuetify.lang.t('$vuetify.FINAL')]
+
     this.$get('/cliente/busca',
       { searchText: '', clientType: 0, page: 0 }).then((response) => {
         this.clients = response.data;

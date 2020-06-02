@@ -31,7 +31,8 @@
             small
             outlined
           >
-            {{(client.clientePai && client.clientePai.clientePai)?'Final':client.clientePai?'Associado':'Principal'}}
+            {{(client.clientePai && client.clientePai.clientePai)?$vuetify.lang.t('$vuetify.FINAL'):
+            client.clientePai?$vuetify.lang.t('$vuetify.ASSOCIADO'):$vuetify.lang.t('$vuetify.PRINCIPAL')}}
           </v-chip>
 
           <v-layout
@@ -53,12 +54,15 @@
                       :class="{'ml-4':true, 'text-white':true, 'mt-n3':client.clientePai && !client.clientePai.clientePai}"
                       v-on="on || on1"
                       @click="findFatherClient()"
-                    >{{(client.clientePai && client.clientePai.clientePai)?'Cliente Associado':'Cliente Principal'}}</v-btn>
+                    >{{(client.clientePai && client.clientePai.clientePai)?
+                    $vuetify.lang.t('$vuetify.CLIENTE_ASSOCIADO'):$vuetify.lang.t('$vuetify.CLIENTE_PRINCIPAL')}}</v-btn>
                   </template>
-                  <span>{{(client.clientePai && client.clientePai.clientePai)?'Buscar cliente associado':'Buscar cliente principal'}}</span>
+                  <span>{{(client.clientePai && client.clientePai.clientePai)?
+                    $vuetify.lang.t('$vuetify.BUSCAR_CLIENTE_ASSOCIADO'):$vuetify.lang.t('$vuetify.BUSCAR_CLIENTE_PRINCIPAL')}}
+                  </span>
                 </v-tooltip>
               </template>
-              <span>Nenhum cliente encontrado</span>
+              <span>{{$vuetify.lang.t('$vuetify.NENHUM_CLIENTE')}}</span>
             </v-tooltip>
 
             <v-tooltip
@@ -76,12 +80,15 @@
                       :class="{'ml-4':true, 'text-white':true, 'mt-2':client.clientePai && !client.clientePai.clientePai}"
                       v-on="on || on1"
                       @click="findClientSons()"
-                    >{{client.clientePai?'Clientes Finais':'Clientes Associados'}}</v-btn>
+                    >{{client.clientePai?$vuetify.lang.t('$vuetify.CLIENTES_FINAIS'):
+                    $vuetify.lang.t('$vuetify.CLIENTES_ASSOCIADOS')}}</v-btn>
                   </template>
-                  <span>{{client.clientePai?'Buscar clientes finais':'Buscar clientes associados'}}</span>
+
+                  <span>{{client.clientePai?$vuetify.lang.t('$vuetify.BUSCAR_CLIENTES_FINAIS'):
+                    $vuetify.lang.t('$vuetify.BUSCAR_CLIENTES_ASSOCIADOS')}}</span>
                 </v-tooltip>
               </template>
-              <span>Nenhum cliente encontrado</span>
+              <span>{{$vuetify.lang.t('$vuetify.NENHUM_CLIENTE')}}</span>
             </v-tooltip>
 
           </v-layout>
@@ -90,13 +97,13 @@
         <div class="mr-2">
           <v-row>
             <LabelValue
-              label="Código SAP"
+              :label="$vuetify.lang.t('$vuetify.CODIGO_SAP')"
               :value="client.codClienteSap"
               justify="center"
             ></LabelValue>
 
             <LabelValue
-              label="Localização"
+              :label="$vuetify.lang.t('$vuetify.LOCALIZACAO')"
               :value="client.municipio+', '+client.estado"
               justify="center"
             ></LabelValue>
@@ -104,14 +111,14 @@
 
           <v-row class="mt-n1">
             <LabelValue
-              label="Endereço"
+              :label="$vuetify.lang.t('$vuetify.ENDERECO')"
               :value="client.endereco"
               justify="center"
               truncate
             ></LabelValue>
 
             <LabelValue
-              label="País"
+              :label="$vuetify.lang.t('$vuetify.PAIS')"
               :value="client.pais"
               justify="center"
             ></LabelValue>
@@ -129,9 +136,9 @@
               color="primary"
               @click="listarContratos()"
               v-on="on"
-            >Contratos</v-btn>
+            >{{$vuetify.lang.t('$vuetify.CONTRATOS')}}</v-btn>
           </template>
-          <span>Ver os contratos deste cliente</span>
+          <span>{{$vuetify.lang.t('$vuetify.VER_CONTRATOS')}}</span>
         </v-tooltip>
       </v-card-actions>
     </v-card>
