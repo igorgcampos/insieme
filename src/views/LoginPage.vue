@@ -137,6 +137,9 @@
 <script>
 
 export default {
+  created: function () {
+    this.$vuetify.lang.current == 'pt'
+  },
   updated: function () {
 
     if (this.$vuetify.lang.current == 'pt') {
@@ -178,6 +181,8 @@ export default {
         this.$vuetify.lang.current = 'en'
 
       }
+
+      this.$refs["password"].validate(false)
     },
     login () {
 

@@ -9,7 +9,7 @@ authService.install = function (Vue) {
             password: password
         }, true)
 
-        if (!response) {
+        if (!response || !response.data.access_token) {
             return false;
         }
 
