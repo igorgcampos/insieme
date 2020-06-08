@@ -158,6 +158,9 @@ export default {
     LabelValue
   },
   methods: {
+    listarContratos () {
+      this.$root.$emit('client-selected', this.client)
+    },
     findClientSons () {
 
       this.$get('/cliente/filhos', { id: this.client.id }).then(response => {

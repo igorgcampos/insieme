@@ -13,7 +13,7 @@ export default {
     CLIENTES: 'Clientes',
     BUSCAR: 'Buscar por',
     TIPO: 'Tipo',
-    TIPOS: 'Principal, associado ou final',
+    TIPOS_CLIENTE: 'Principal, associado ou final',
     NOME_CNPJ: 'Nome ou CNPJ',
     TODOS: 'Todos',
     PRINCIPAL: 'Principal',
@@ -33,5 +33,18 @@ export default {
     ENDERECO: 'Endereço',
     PAIS: 'País',
     LOCALIZACAO: 'Localização',
-    CODIGO_SAP: 'Código SAP'
+    CODIGO_SAP: 'Código SAP',
+    TIPOS_CONTRATOS: 'Locação ou Venda',
+    STATUS: 'Status',
+    STATUS_CONTRATO: 'Ativo ou Expirado',
+    NOME_CODIGO: 'Nome ou código do contrato',
+    LOCACAO: 'Locação',
+    ATIVO: 'Ativo',
+    VENDA: 'Venda',
+    EXPIRADO: 'Expirado',
+    ATIVO_EXPIRADO: 'Ativo ou expirado',
+    GERENCIAR: 'Gerenciar',
+    GERENCIAR_CONTRATOS: 'Gerenciar circuitos, notas fiscais e abertura de chamados',
+    BAIXAR: 'DOWNLOAD',
+    BAIXAR_CONTRATO: 'Fazer o download do contrato'
 }

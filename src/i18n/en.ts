@@ -33,5 +33,18 @@ export default {
     ENDERECO: 'Address',
     PAIS: 'Country',
     LOCALIZACAO: 'Location',
-    CODIGO_SAP: 'SAP Code'
+    CODIGO_SAP: 'SAP Code',
+    TIPOS_CONTRATOS: 'Lease or Sale',
+    STATUS: 'Status',
+    STATUS_CONTRATO: 'Active or Expired',
+    NOME_CODIGO: 'Name or contract code',
+    LOCACAO: 'Lease',
+    ATIVO: 'Active',
+    VENDA: 'Sale',
+    EXPIRADO: 'Expired',
+    ATIVO_EXPIRADO: 'Active or expired',
+    GERENCIAR: 'Manage',
+    GERENCIAR_CONTRATOS: 'Manage circuits, invoices and call openings',
+    BAIXAR: 'DOWNLOAD',
+    BAIXAR_CONTRATO: 'Download the contract'
 }

@@ -17,6 +17,7 @@ const routes = [
       {
         path: 'contratos',
         name: 'Contracts',
+        props: true,
         component: () => import('../views/ContractsPage.vue')
       },
       {

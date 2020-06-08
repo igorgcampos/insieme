@@ -137,10 +137,8 @@
 <script>
 
 export default {
+
   created: function () {
-    this.$vuetify.lang.current == 'pt'
-  },
-  updated: function () {
 
     if (this.$vuetify.lang.current == 'pt') {
       this.brazilUnselected = false;

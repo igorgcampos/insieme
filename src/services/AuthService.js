@@ -16,6 +16,7 @@ authService.install = function (Vue) {
         if (response.data.access_token) {
             window.sessionStorage.setItem('keyCloakToken', response.data.access_token);
             window.sessionStorage.setItem('keyCloakRefreshToken', response.data.refresh_token);
+            window.sessionStorage.setItem('actualPage', 'clients');
             await getUser()
             return true;
         }
@@ -36,6 +37,7 @@ authService.install = function (Vue) {
         window.sessionStorage.removeItem('keyCloakToken');
         window.sessionStorage.removeItem('keyCloakRefreshToken');
         window.sessionStorage.removeItem('user');
+        window.sessionStorage.removeItem('actualPage');
     }
 
     const getUser = async () => {

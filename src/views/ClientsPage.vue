@@ -54,7 +54,7 @@
               <v-select
                 :items="types"
                 v-model="type"
-                :label="$vuetify.lang.t('$vuetify.TIPOS')"
+                :label="$vuetify.lang.t('$vuetify.TIPOS_CLIENTE')"
                 solo
                 dense
                 @change="search()"
