@@ -16,6 +16,21 @@
 
     <v-spacer></v-spacer>
 
+    <v-tooltip bottom>
+      <template v-slot:activator="{ on }">
+        <v-chip
+          pill
+          v-on="on"
+          color="red darken-3"
+          v-show="canShowClientLink()"
+          class="mr-2"
+          @click="toClientsList()"
+        >
+          {{$vuetify.lang.t('$vuetify.CLIENTES')}}
+        </v-chip>
+      </template>
+      <span>{{$vuetify.lang.t('$vuetify.PAGINA_CLIENTES')}}</span>
+    </v-tooltip>
     <v-menu
       bottom
       right
@@ -92,15 +107,21 @@ export default {
     this.user = this.$getUser()
   },
   data: () => ({
-    user: {}
+    user: {},
   }),
   methods: {
+    toClientsList () {
+      this.$router.push('/clientes')
+    },
+    canShowClientLink () {
+      return this.$hasProfile('Administrador') && this.$route.path === '/contratos'
+    },
     logout () {
 
       this.$logout().then(() => {
         this.$root.$emit('logout-success')
       })
     }
-  }
+  },
 };
 </script>

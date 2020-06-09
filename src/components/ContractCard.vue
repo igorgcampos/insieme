@@ -15,9 +15,10 @@
       <v-card-title
         class="subtitle-2 grey--text text--darken-3"
         style=" word-break: normal; !important"
-      >CONTRATO DA BRASIL TELECOM</v-card-title>
+      >{{contract.nome}}</v-card-title>
 
-      <v-card-subtitle class="caption">Cód. SAP: C00012-345-4 | Cód. Tpz: ABCDEF</v-card-subtitle>
+      <v-card-subtitle class="caption">Cod. SAP: {{contract.numeroContratoSap}} |
+        Cod. Tpz: {{contract.numeroContratoTpz}}</v-card-subtitle>
 
       <v-divider class="mt-2"></v-divider>
 

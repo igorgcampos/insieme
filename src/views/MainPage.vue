@@ -26,7 +26,7 @@ export default {
   created: function () {
     this.user = this.$getUser()
 
-    if (this.hasProfile('Administrador') && window.sessionStorage.getItem('actualPage') == 'clients') {
+    if (this.$hasProfile('Administrador') && window.sessionStorage.getItem('actualPage') == 'clients') {
       this.$router.push('/clientes')
     } else {
       this.$router.push('/contratos')
@@ -39,23 +39,9 @@ export default {
       })
   },
   updated: function () {
-    if (this.hasProfile('Administrador') && window.sessionStorage.getItem('actualPage') == 'clients') {
-      this.$router.push('/clientes')
-    } else {
-      this.$router.push('/contratos')
-    }
   },
 
   methods: {
-    hasProfile (profile) {
-      for (var index in this.user.perfis) {
-        if (this.user.perfis[index] == profile) {
-          return true;
-        }
-      }
-
-      return false;
-    }
   }
 };
 </script>

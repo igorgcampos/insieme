@@ -86,13 +86,13 @@
         <v-row class="pl-1">
           <v-col
             class="flex-grow-0"
-            v-for="(client, i) in clients"
+            v-for="(contract, i) in contracts"
             :key="i"
           >
-            <ContractCard></ContractCard>
+            <ContractCard :contract="contract"></ContractCard>
           </v-col>
-          <v-col v-if="false">
-            <EmptyPanel :message="$vuetify.lang.t('$vuetify.NENHUM_CLIENTE')"> </EmptyPanel>
+          <v-col v-if="contracts.length == 0 && !isLoading">
+            <EmptyPanel :message="$vuetify.lang.t('$vuetify.NENHUM_CONTRATO')"> </EmptyPanel>
           </v-col>
         </v-row>
       </div>
@@ -132,10 +132,11 @@ export default {
     },
     search (page) {
 
+      this.$props.client.id = -1;
       this.isLoading = true;
       if (!page) {
         this.page = 0
-        this.clients = []
+        this.contracts = []
         this.noResult = false;
         this.cameFromCard = false;
       }
@@ -149,15 +150,25 @@ export default {
         selectedType = 2;
       }
 
-      this.$get('/cliente/busca', {
-        searchText: this.searchText, clientType: selectedType, page: this.page
+      var selectedStatus = 0
+      if (this.status == this.statuses[0]) {
+        selectedStatus = 0;
+      } else if (this.status == this.statuses[1]) {
+        selectedStatus = 1;
+      } else if (this.status == this.statuses[2]) {
+        selectedStatus = 2;
+      }
+
+      this.$get('/contrato/busca', {
+        searchText: this.searchText, clientId: this.$props.client.id, type: selectedType,
+        status: selectedStatus, page: this.page
       }).then((response) => {
 
         if (response && response.data.length == 0) {
           this.noResult = true;
         }
 
-        this.clients = this.clients.concat(response.data);
+        this.contracts = this.contracts.concat(response.data);
         this.isLoading = false;
       });
 
@@ -194,9 +205,9 @@ export default {
     this.$vuetify.lang.t('$vuetify.ATIVO'),
     this.$vuetify.lang.t('$vuetify.EXPIRADO')]
 
-    this.$get('/cliente/busca',
-      { searchText: '', clientType: 0, page: 0 }).then((response) => {
-        this.clients = response.data;
+    this.$get('/contrato/busca',
+      { searchText: '', clientId: this.$props.client.id, type: 0, status: 0, page: 0 }).then((response) => {
+        this.contracts = response.data;
       });
   }
 };

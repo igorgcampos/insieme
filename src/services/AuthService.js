@@ -53,6 +53,16 @@ authService.install = function (Vue) {
     Vue.prototype.$isAuthenticated = () => {
         return window.sessionStorage.getItem('keyCloakToken');
     }
+
+    Vue.prototype.$hasProfile = (profile) => {
+        for (var index in Vue.prototype.$getUser().perfis) {
+            if (Vue.prototype.$getUser().perfis[index] == profile) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }
 
 export default authService;

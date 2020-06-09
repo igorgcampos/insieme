@@ -46,5 +46,7 @@ export default {
     GERENCIAR: 'Gerenciar',
     GERENCIAR_CONTRATOS: 'Gerenciar circuitos, notas fiscais e abertura de chamados',
     BAIXAR: 'DOWNLOAD',
-    BAIXAR_CONTRATO: 'Fazer o download do contrato'
+    BAIXAR_CONTRATO: 'Fazer o download do contrato',
+    PAGINA_CLIENTES: 'Voltar para a lista de clientes',
+    NENHUM_CONTRATO: 'Nenhum contrato encontrado'
 }

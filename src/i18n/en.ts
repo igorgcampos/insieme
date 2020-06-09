@@ -46,5 +46,7 @@ export default {
     GERENCIAR: 'Manage',
     GERENCIAR_CONTRATOS: 'Manage circuits, invoices and call openings',
     BAIXAR: 'DOWNLOAD',
-    BAIXAR_CONTRATO: 'Download the contract'
+    BAIXAR_CONTRATO: 'Download the contract',
+    PAGINA_CLIENTES: 'Back to list of clients',
+    NENHUM_CONTRATO: 'No contract found'
 }
