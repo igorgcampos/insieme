@@ -7,7 +7,13 @@
   >
 
     <v-col
-      md="7"
+      cols="12"
+      md="9"
+      lg="7"
+      xl="8"
+      sm="12"
+      xs="2"
+      xm="2"
       class="mt-5"
     >
       <div>
@@ -209,8 +215,6 @@ export default {
     this.$vuetify.lang.t('$vuetify.ATIVO'),
     this.$vuetify.lang.t('$vuetify.EXPIRADO')]
 
-
-    console.log(this.$props.client)
     this.selectedClient = this.$props.client;
     if (!this.selectedClient) {
       if (!window.sessionStorage.getItem('selectedClientId'))

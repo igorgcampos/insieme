@@ -7,8 +7,7 @@
   >
     <v-card
       class="mx-auto"
-      max-width="466"
-      min-width="300"
+      width="340"
     >
 
       <v-card-title

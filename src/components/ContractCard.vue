@@ -7,8 +7,7 @@
   >
     <v-card
       class="mx-auto"
-      max-width="750"
-      min-width="750"
+      width="750"
     >
 
       <v-row>
@@ -55,7 +54,7 @@
             <LabelValue
               :label="$vuetify.lang.t('$vuetify.GERENTE_PRODUTO')"
               :value="contract.gerenteProduto"
-              justify="left"
+              justify="start"
               style="min-width:100px; max-width:150px;"
             ></LabelValue>
           </v-col>
@@ -63,7 +62,7 @@
             <LabelValue
               :label="$vuetify.lang.t('$vuetify.GERENTE_COMERCIAL')"
               :value="contract.gerenteComercial"
-              justify="left"
+              justify="start"
               style="min-width:100px; max-width:150px;"
             ></LabelValue>
           </v-col>
@@ -71,7 +70,7 @@
             <LabelValue
               :label="$vuetify.lang.t('$vuetify.CLIENTE')"
               :value="getClientName()"
-              justify="left"
+              justify="start"
               truncate
               style="min-width:100px; max-width:150px;"
             ></LabelValue>
@@ -83,7 +82,7 @@
             <LabelValue
               :label="$vuetify.lang.t('$vuetify.UNIDADE_NEGOCIO')"
               :value="contract.unidadeNegocio"
-              justify="left"
+              justify="start"
               style="min-width:100px; max-width:150px;"
             ></LabelValue>
           </v-col>
@@ -91,7 +90,7 @@
             <LabelValue
               :label="$vuetify.lang.t('$vuetify.FAMILIA')"
               :value="contract.familia"
-              justify="left"
+              justify="start"
               truncate
               style="min-width:100px; max-width:150px;"
             ></LabelValue>
@@ -100,7 +99,7 @@
             <LabelValue
               :label="$vuetify.lang.t('$vuetify.PRODUTO')"
               :value="contract.produto"
-              justify="left"
+              justify="start"
               truncate
               style="min-width:100px; max-width:150px;"
             ></LabelValue>
@@ -112,7 +111,7 @@
             <LabelValue
               :label="$vuetify.lang.t('$vuetify.DATA_ASSINATURA')"
               :value="formatDate(contract.dataAssinatura)"
-              justify="left"
+              justify="start"
               style="min-width:100px; max-width:150px;"
             ></LabelValue>
           </v-col>
@@ -120,8 +119,7 @@
             <LabelValue
               :label="$vuetify.lang.t('$vuetify.DATA_REAJUSTE')"
               :value="formatDate(contract.dataReajuste)"
-              justify="left"
-              truncate
+              justify="start"
               style="min-width:100px; max-width:150px;"
             ></LabelValue>
           </v-col>
@@ -129,8 +127,7 @@
             <LabelValue
               :label="$vuetify.lang.t('$vuetify.DATA_TERMINO')"
               :value="formatDate(contract.dataTermino)"
-              justify="left"
-              truncate
+              justify="start"
               style="min-width:100px; max-width:150px;"
             ></LabelValue>
           </v-col>

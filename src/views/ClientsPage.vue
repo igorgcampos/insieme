@@ -7,7 +7,12 @@
   >
 
     <v-col
+      cols="12"
       md="9"
+      lg="10"
+      xl="9"
+      sm="12"
+      xs="1"
       class="mt-5"
     >
       <div>
@@ -44,7 +49,7 @@
 
           <v-col
             class="ml-5"
-            cols="4"
+            cols="3"
           >
             <v-row>
               <span class=" text-right subtitle-2 font-weight-bold grey--text text--lighten-1">
