@@ -100,12 +100,14 @@
               :label="$vuetify.lang.t('$vuetify.CODIGO_SAP')"
               :value="client.codClienteSap"
               justify="center"
+              style="min-width:100px; max-width:100px;"
             ></LabelValue>
 
             <LabelValue
               :label="$vuetify.lang.t('$vuetify.LOCALIZACAO')"
               :value="client.municipio+', '+client.estado"
               justify="center"
+              style="min-width:100px; max-width:100px;"
             ></LabelValue>
           </v-row>
 
@@ -115,12 +117,14 @@
               :value="client.endereco"
               justify="center"
               truncate
+              style="min-width:100px; max-width:100px;"
             ></LabelValue>
 
             <LabelValue
               :label="$vuetify.lang.t('$vuetify.PAIS')"
               :value="client.pais"
               justify="center"
+              style="min-width:100px; max-width:100px;"
             ></LabelValue>
           </v-row>
         </div>
@@ -129,17 +133,11 @@
       <v-divider class="mt-2"></v-divider>
 
       <v-card-actions>
-        <v-tooltip top>
-          <template v-slot:activator="{ on }">
-            <v-btn
-              text
-              color="primary"
-              @click="listarContratos()"
-              v-on="on"
-            >{{$vuetify.lang.t('$vuetify.CONTRATOS')}}</v-btn>
-          </template>
-          <span>{{$vuetify.lang.t('$vuetify.VER_CONTRATOS')}}</span>
-        </v-tooltip>
+        <TooltipButton
+          :label="$vuetify.lang.t('$vuetify.CONTRATOS')"
+          :message="$vuetify.lang.t('$vuetify.VER_CONTRATOS')"
+          :event="listarContratos"
+        ></TooltipButton>
       </v-card-actions>
     </v-card>
   </v-lazy>
@@ -148,6 +146,8 @@
 <script>
 
 import LabelValue from '../components/LabelValue';
+import TooltipButton from '../components/TooltipButton';
+
 export default {
 
   data: () => ({
@@ -155,7 +155,8 @@ export default {
     noFather: undefined
   }),
   components: {
-    LabelValue
+    LabelValue,
+    TooltipButton
   },
   methods: {
     listarContratos () {

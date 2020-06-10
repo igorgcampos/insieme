@@ -7,7 +7,7 @@
   >
 
     <v-col
-      md="9"
+      md="7"
       class="mt-5"
     >
       <div>
@@ -132,7 +132,10 @@ export default {
     },
     search (page) {
 
-      this.$props.client.id = -1;
+      if (this.$hasProfile('Administrador')) {
+        this.selectedClient.id = -1;
+      }
+
       this.isLoading = true;
       if (!page) {
         this.page = 0
@@ -160,7 +163,7 @@ export default {
       }
 
       this.$get('/contrato/busca', {
-        searchText: this.searchText, clientId: this.$props.client.id, type: selectedType,
+        searchText: this.searchText, clientId: this.selectedClient.id, type: selectedType,
         status: selectedStatus, page: this.page
       }).then((response) => {
 
@@ -193,7 +196,8 @@ export default {
     isLoading: true,
     noResult: false,
     searchText: '',
-    contracts: []
+    contracts: [],
+    selectedClient: undefined
   }),
   created: function () {
 
@@ -205,8 +209,20 @@ export default {
     this.$vuetify.lang.t('$vuetify.ATIVO'),
     this.$vuetify.lang.t('$vuetify.EXPIRADO')]
 
+
+    console.log(this.$props.client)
+    this.selectedClient = this.$props.client;
+    if (!this.selectedClient) {
+      if (!window.sessionStorage.getItem('selectedClientId'))
+        this.selectedClient = { id: -1 }
+      else
+        this.selectedClient = { id: window.sessionStorage.getItem('selectedClientId') }
+    } else {
+      window.sessionStorage.setItem('selectedClientId', this.selectedClient.id);
+    }
+
     this.$get('/contrato/busca',
-      { searchText: '', clientId: this.$props.client.id, type: 0, status: 0, page: 0 }).then((response) => {
+      { searchText: '', clientId: this.selectedClient.id, type: 0, status: 0, page: 0 }).then((response) => {
         this.contracts = response.data;
       });
   }

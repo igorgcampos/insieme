@@ -37,7 +37,7 @@ export default {
     TIPOS_CONTRATOS: 'Locação ou Venda',
     STATUS: 'Status',
     STATUS_CONTRATO: 'Ativo ou Expirado',
-    NOME_CODIGO: 'Nome ou código do contrato',
+    NOME_CODIGO: 'Nome ou código SAP/Tpz',
     LOCACAO: 'Locação',
     ATIVO: 'Ativo',
     VENDA: 'Venda',
@@ -48,5 +48,17 @@ export default {
     BAIXAR: 'DOWNLOAD',
     BAIXAR_CONTRATO: 'Fazer o download do contrato',
     PAGINA_CLIENTES: 'Voltar para a lista de clientes',
-    NENHUM_CONTRATO: 'Nenhum contrato encontrado'
+    NENHUM_CONTRATO: 'Nenhum contrato encontrado',
+    COD_SAP: 'Cód. SAP',
+    COD_TPZ: 'Cód. Tpz',
+    PAGINA_CONTRATOS: 'Ir para a lista de contratos',
+    GERENTE_PRODUTO: 'Gerente do produto',
+    GERENTE_COMERCIAL: 'Gerente comercial',
+    UNIDADE_NEGOCIO: 'Unidade do negócio',
+    CLIENTE: 'Cliente',
+    FAMILIA: 'Familia',
+    PRODUTO: 'Produto',
+    DATA_ASSINATURA: 'Data da assinatura',
+    DATA_REAJUSTE: 'Data de reajuste',
+    DATA_TERMINO: 'Data de término'
 }

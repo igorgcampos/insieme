@@ -22,6 +22,22 @@
           pill
           v-on="on"
           color="red darken-3"
+          v-show="canShowContractLink()"
+          class="mr-2"
+          @click="toContractList()"
+        >
+          {{$vuetify.lang.t('$vuetify.CONTRATOS')}}
+        </v-chip>
+      </template>
+      <span>{{$vuetify.lang.t('$vuetify.PAGINA_CONTRATOS')}}</span>
+    </v-tooltip>
+
+    <v-tooltip bottom>
+      <template v-slot:activator="{ on }">
+        <v-chip
+          pill
+          v-on="on"
+          color="red darken-3"
           v-show="canShowClientLink()"
           class="mr-2"
           @click="toClientsList()"
@@ -110,8 +126,15 @@ export default {
     user: {},
   }),
   methods: {
+    toContractList () {
+      this.$router.push('/contratos')
+    },
     toClientsList () {
+      window.sessionStorage.setItem('selectedClientId', -1);
       this.$router.push('/clientes')
+    },
+    canShowContractLink () {
+      return this.$hasProfile('Administrador') && this.$route.path === '/clientes'
     },
     canShowClientLink () {
       return this.$hasProfile('Administrador') && this.$route.path === '/contratos'

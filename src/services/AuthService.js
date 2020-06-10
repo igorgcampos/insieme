@@ -38,6 +38,7 @@ authService.install = function (Vue) {
         window.sessionStorage.removeItem('keyCloakRefreshToken');
         window.sessionStorage.removeItem('user');
         window.sessionStorage.removeItem('actualPage');
+        window.sessionStorage.removeItem('selectedClientId');
     }
 
     const getUser = async () => {

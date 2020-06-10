@@ -1,5 +1,5 @@
 <template>
-  <v-col style="min-width:100px; max-width:100px;">
+  <v-col>
     <v-row :justify="justify">
       <span class="text-right caption font-weight-bold grey--text text--lighten-1">{{label}}</span>
     </v-row>
@@ -35,7 +35,7 @@ export default {
     label: String,
     value: String,
     justify: String,
-    truncate: Boolean
+    truncate: Boolean,
   }
 };
 </script>
