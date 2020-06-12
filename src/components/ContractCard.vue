@@ -55,7 +55,7 @@
               :label="$vuetify.lang.t('$vuetify.GERENTE_PRODUTO')"
               :value="contract.gerenteProduto"
               justify="start"
-              style="min-width:100px; max-width:150px;"
+              style="width:150px;"
             ></LabelValue>
           </v-col>
           <v-col class="pt-0 mt-n6">
@@ -63,7 +63,7 @@
               :label="$vuetify.lang.t('$vuetify.GERENTE_COMERCIAL')"
               :value="contract.gerenteComercial"
               justify="start"
-              style="min-width:100px; max-width:150px;"
+              style="width:150px;"
             ></LabelValue>
           </v-col>
           <v-col class="pt-0 mt-n6">
@@ -72,7 +72,7 @@
               :value="getClientName()"
               justify="start"
               truncate
-              style="min-width:100px; max-width:150px;"
+              style="width:150px;"
             ></LabelValue>
           </v-col>
         </v-col>
@@ -92,7 +92,7 @@
               :value="contract.familia"
               justify="start"
               truncate
-              style="min-width:100px; max-width:150px;"
+              style="width:150px;"
             ></LabelValue>
           </v-col>
           <v-col class="pt-0 mt-n6">
@@ -101,7 +101,7 @@
               :value="contract.produto"
               justify="start"
               truncate
-              style="min-width:100px; max-width:150px;"
+              style="width:150px;"
             ></LabelValue>
           </v-col>
         </v-col>
@@ -112,7 +112,6 @@
               :label="$vuetify.lang.t('$vuetify.DATA_ASSINATURA')"
               :value="formatDate(contract.dataAssinatura)"
               justify="start"
-              style="min-width:100px; max-width:150px;"
             ></LabelValue>
           </v-col>
           <v-col class="pt-0 mt-n6">
@@ -120,7 +119,6 @@
               :label="$vuetify.lang.t('$vuetify.DATA_REAJUSTE')"
               :value="formatDate(contract.dataReajuste)"
               justify="start"
-              style="min-width:100px; max-width:150px;"
             ></LabelValue>
           </v-col>
           <v-col class="pt-0 mt-n6">
@@ -128,7 +126,6 @@
               :label="$vuetify.lang.t('$vuetify.DATA_TERMINO')"
               :value="formatDate(contract.dataTermino)"
               justify="start"
-              style="min-width:100px; max-width:150px;"
             ></LabelValue>
           </v-col>
         </v-col>
