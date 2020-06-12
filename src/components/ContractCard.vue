@@ -7,7 +7,7 @@
   >
     <v-card
       class="mx-auto"
-      width="750"
+      width="720"
     >
 
       <v-row>
@@ -18,7 +18,7 @@
           >{{contract.nome}} <v-spacer> </v-spacer>
             <v-chip
               label
-              class="caption ml-3 mb-0 mt-2"
+              class="caption mb-0 mt-2"
               :color="isExpired(contract.dataTermino)?'error':'success'"
               :text-color="isExpired(contract.dataTermino)?'error':'success'"
               small
@@ -34,7 +34,7 @@
       </v-row>
 
       <v-row>
-        <v-col class="mt-n6">
+        <v-col class="mt-n6 mr-5">
           <v-col class="pa-0 pl-1">
             <v-chip
               label
