@@ -18,7 +18,7 @@
           >{{contract.nome}} <v-spacer> </v-spacer>
             <v-chip
               label
-              class="caption ml-3 mb-0 mt-1"
+              class="caption ml-3 mb-0 mt-2"
               :color="isExpired(contract.dataTermino)?'error':'success'"
               :text-color="isExpired(contract.dataTermino)?'error':'success'"
               small

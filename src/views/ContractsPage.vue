@@ -138,7 +138,7 @@ export default {
     },
     search (page) {
 
-      if (this.$hasProfile('Administrador')) {
+      if (this.$hasProfile('Administrador') && !page) {
         this.selectedClient.id = -1;
       }
 
