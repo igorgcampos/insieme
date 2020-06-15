@@ -134,10 +134,11 @@ export default {
       this.$router.push('/clientes')
     },
     canShowContractLink () {
-      return this.$hasProfile('Administrador') && this.$route.path === '/clientes'
+      return this.$route.path === '/clientes' || this.$route.path === '/dashboard'
     },
     canShowClientLink () {
-      return this.$hasProfile('Administrador') && this.$route.path === '/contratos'
+      return this.$hasProfile('Administrador') &&
+        (this.$route.path === '/contratos' || this.$route.path === '/dashboard')
     },
     logout () {
 

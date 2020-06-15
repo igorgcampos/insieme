@@ -60,5 +60,8 @@ export default {
     PRODUTO: 'Produto',
     DATA_ASSINATURA: 'Data da assinatura',
     DATA_REAJUSTE: 'Data de reajuste',
-    DATA_TERMINO: 'Data de término'
+    DATA_TERMINO: 'Data de término',
+    CIRCUITOS: 'Circuitos',
+    NOTAS_FISCAIS: 'Notas Fiscais',
+    CHAMADOS: 'Chamados'
 }

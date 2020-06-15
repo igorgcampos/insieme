@@ -19,6 +19,7 @@ export default {
 
     this.$router.push('/login')
     this.$root.$on('login-success', () => this.$router.push('/'))
+
     this.$root.$on('logout-success', () => this.$router.push('/login'))
   }
 };

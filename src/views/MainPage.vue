@@ -29,7 +29,11 @@ export default {
     if (this.$hasProfile('Administrador') && window.sessionStorage.getItem('actualPage') == 'clients') {
       this.$router.push('/clientes')
     } else {
-      this.$router.push('/contratos')
+
+      if (!this.user.cliente && (this.$hasProfile('Financeiro') || this.$hasProfile('Comercial'))) {
+        this.user.ciente = { id: -1 }
+      }
+      this.$router.push({ name: 'Contracts', params: { client: { id: this.user.cliente.id } } })
     }
 
     this.$root.$on('client-selected',
@@ -37,10 +41,13 @@ export default {
         window.sessionStorage.setItem('actualPage', 'contracts');
         this.$router.push({ name: 'Contracts', params: { client: client } })
       })
-  },
-  updated: function () {
-  },
 
+    this.$root.$on('contract-selected',
+      (contract) => {
+        window.sessionStorage.setItem('actualPage', 'dashboard');
+        this.$router.push({ name: 'Dashboard', params: { contract: contract } })
+      })
+  },
   methods: {
   }
 };

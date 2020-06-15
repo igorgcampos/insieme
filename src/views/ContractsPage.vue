@@ -5,7 +5,6 @@
     align-center
     v-scroll="searchMore"
   >
-
     <v-col
       cols="12"
       md="9"
@@ -226,7 +225,8 @@ export default {
     }
 
     this.$get('/contrato/busca',
-      { searchText: '', clientId: this.selectedClient.id, type: 0, status: 0, page: 0 }).then((response) => {
+      { searchText: '', clientId: this.selectedClient.id, type: 0, status: 0, page: 0 }).
+      then((response) => {
         this.contracts = response.data;
       });
   }

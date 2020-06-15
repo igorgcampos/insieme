@@ -23,6 +23,7 @@ const routes = [
       {
         path: 'dashboard',
         name: 'Dashboard',
+        props: true,
         component: () => import('../views/DashboardPage.vue')
       }
     ]

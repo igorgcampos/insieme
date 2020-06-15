@@ -5,7 +5,8 @@
         text
         color="primary"
         @click="event()"
-        v-on="on"
+        v-on="on || on1"
+        :loading="loading"
       >{{label}}</v-btn>
     </template>
     <span>{{message}}</span>
@@ -17,7 +18,9 @@ export default {
   props: {
     label: String,
     message: String,
-    event: Function
+    event: Function,
+    loading: Boolean,
+    on1: String
   }
 };
 </script>

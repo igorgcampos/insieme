@@ -83,7 +83,7 @@
               :label="$vuetify.lang.t('$vuetify.UNIDADE_NEGOCIO')"
               :value="contract.unidadeNegocio"
               justify="start"
-              style="min-width:100px; max-width:150px;"
+              style="max-width:150px;"
             ></LabelValue>
           </v-col>
           <v-col class="pt-0 mt-n6">
@@ -143,6 +143,7 @@
           :label="$vuetify.lang.t('$vuetify.BAIXAR')"
           :message="$vuetify.lang.t('$vuetify.BAIXAR_CONTRATO')"
           :event="baixarContrato"
+          :loading="isDownloading"
         ></TooltipButton>
       </v-card-actions>
     </v-card>
@@ -156,7 +157,7 @@ import TooltipButton from '../components/TooltipButton';
 export default {
 
   data: () => ({
-
+    isDownloading: false
   }),
   components: {
     LabelValue,
@@ -194,10 +195,10 @@ export default {
       return actualDate < currentDate;
     },
     gerenciarContratos () {
-
+      this.$root.$emit('contract-selected', this.$props.contract)
     },
     baixarContrato () {
-
+      this.isDownloading = true;
     }
   },
   props: {
