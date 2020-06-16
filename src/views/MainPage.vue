@@ -28,12 +28,14 @@ export default {
 
     if (this.$hasProfile('Administrador') && window.sessionStorage.getItem('actualPage') == 'clients') {
       this.$router.push('/clientes')
-    } else {
+    } else if (window.sessionStorage.getItem('actualPage') == 'contracts') {
 
       if (!this.user.cliente && (this.$hasProfile('Financeiro') || this.$hasProfile('Comercial'))) {
         this.user.ciente = { id: -1 }
       }
       this.$router.push({ name: 'Contracts', params: { client: { id: this.user.cliente.id } } })
+    } else {
+      this.$router.push({ name: 'Dashboard', params: { contract: undefined } })
     }
 
     this.$root.$on('client-selected',

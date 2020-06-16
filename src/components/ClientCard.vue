@@ -13,9 +13,9 @@
       <v-card-title
         class="subtitle-2 grey--text text--darken-3"
         style=" word-break: normal; !important"
-      >{{client.nome}}</v-card-title>
+      >{{client.nome || 'N/A'}}</v-card-title>
 
-      <v-card-subtitle class="caption">CNPJ: {{client.cnpj}}</v-card-subtitle>
+      <v-card-subtitle class="caption">CNPJ: {{client.cnpj || '--'}}</v-card-subtitle>
 
       <v-layout
         column

@@ -165,12 +165,7 @@ export default {
   },
   methods: {
     formatDate (date) {
-
-      if (this.$vuetify.lang.current == 'en') {
-        return date.month + '/' + date.day + '/' + date.year
-      }
-
-      return date.day + '/' + date.month + '/' + date.year
+      return this.$formatDate(date)
     },
     getClientName () {
 

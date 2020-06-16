@@ -1,15 +1,15 @@
 <template>
   <v-card
     class="mx-auto"
-    width="140"
-    height="110"
+    width="120"
+    height="90"
   >
     <v-col>
       <v-row
         justify="center"
-        class="mb-3 mt-1"
+        class="mb-1 mt-0"
       >
-        <span :class="[size, color]">{{count}}</span>
+        <span :class="['display-1', color]">{{count}}</span>
       </v-row>
       <v-row justify="center">
         <span class="text-center h6 font-weight-bold grey--text text--darken-3">
@@ -24,8 +24,7 @@ export default {
   props: {
     message: String,
     count: Number,
-    color: String,
-    size: String
+    color: String
   }
 };
 </script>

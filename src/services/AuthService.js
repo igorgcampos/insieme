@@ -39,6 +39,7 @@ authService.install = function (Vue) {
         window.sessionStorage.removeItem('user');
         window.sessionStorage.removeItem('actualPage');
         window.sessionStorage.removeItem('selectedClientId');
+        window.sessionStorage.removeItem('selectedContractId');
     }
 
     const getUser = async () => {
