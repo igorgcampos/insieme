@@ -4,6 +4,20 @@
   </v-app>
 </template>
 
+<style>
+::-webkit-scrollbar-track {
+  background-color: #fafafa;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(128, 128, 128, 0.5);
+}
+</style>
 <script>
 
 export default {
