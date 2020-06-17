@@ -194,6 +194,21 @@ export default {
     },
     baixarContrato () {
       this.isDownloading = true;
+
+      this.$get('/contrato/download',
+        { contractNumber: this.contract.numeroContratoSap }, 'arraybuffer').
+        then((response) => {
+
+          //Create a Blob from the PDF Stream
+          const file = new Blob(
+            [response.data],
+            { type: 'application/pdf' });
+          //Build a URL from the file
+          const fileURL = URL.createObjectURL(file);
+          //Open the URL on new Window
+          window.open(fileURL);
+          this.isDownloading = false;
+        });
     }
   },
   props: {

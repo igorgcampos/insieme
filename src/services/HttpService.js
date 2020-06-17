@@ -4,14 +4,15 @@ const serverUrl = process.env.VUE_APP_SERVER_URL
 
 httpService.install = function (Vue, router) {
 
-    Vue.prototype.$get = async (url, params) => {
+    Vue.prototype.$get = async (url, params, responseType) => {
         try {
             return await axios.get(serverUrl.concat(url),
                 {
                     headers: {
                         Authorization: 'Bearer '.concat(window.sessionStorage.getItem('keyCloakToken'))
                     },
-                    params: params
+                    params: params,
+                    responseType: responseType || ''
                 }
             )
         } catch (error) {
