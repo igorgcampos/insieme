@@ -81,5 +81,7 @@ export default {
     DATA_PAGAMENTO: 'Data de pagamento',
     A_RECEBER: 'A receber',
     RECEBIDO: 'Recebido',
-    TOTAL_NOTA: 'Total da nota'
+    TOTAL_NOTA: 'Total da nota',
+    VENCE_EM: 'Vence em',
+    PAGO_EM: 'Pago em'
 }

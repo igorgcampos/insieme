@@ -81,5 +81,7 @@ export default {
     DATA_PAGAMENTO: 'Paymento date',
     A_RECEBER: 'To receive',
     RECEBIDO: 'Received',
-    TOTAL_NOTA: 'Invoice total'
+    TOTAL_NOTA: 'Invoice total',
+    VENCE_EM: 'Due at',
+    PAGO_EM: 'Paid at'
 }
