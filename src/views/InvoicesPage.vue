@@ -113,8 +113,8 @@
 
                 <v-col v-if="!open">
                   <strong class="font-weight-bold grey--text text--lighten-1 mr-2">
-                    {{invoice.statusPagamento=='PENDENTE'?$vuetify.lang.t('$vuetify.VENCE_EM'):
-                    $vuetify.lang.t('$vuetify.PAGO_EM')}}</strong>
+                    {{invoice.statusPagamento=='PENDENTE'?$vuetify.lang.t('$vuetify.VENCE_EM')+":":
+                    $vuetify.lang.t('$vuetify.PAGO_EM')+":"}}</strong>
 
                   <strong>{{invoice.statusPagamento=='PENDENTE'?formatDate(invoice.dataVencimento):
                     formatDate(invoice.dataPagamento)}}</strong>
