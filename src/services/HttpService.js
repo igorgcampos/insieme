@@ -18,7 +18,7 @@ httpService.install = function (Vue, router) {
         } catch (error) {
             console.log(error)
 
-            if (error.message == 'Network Error') {
+            if (error.message == 'Network Error' || error.message.includes(401)) {
                 Vue.prototype.$clearSessionStorage();
                 router.push('/login')
             }
@@ -39,7 +39,7 @@ httpService.install = function (Vue, router) {
         } catch (error) {
             console.log(error)
 
-            if (error.message == 'Network Error') {
+            if (error.message == 'Network Error' || error.message.includes(401)) {
                 Vue.prototype.$clearSessionStorage();
                 router.push('/login')
             }
@@ -54,7 +54,7 @@ httpService.install = function (Vue, router) {
         } catch (error) {
             console.log(error)
 
-            if (error.message == 'Network Error') {
+            if (error.message == 'Network Error' || error.message.includes(401)) {
                 Vue.prototype.$clearSessionStorage();
                 router.push('/login')
             }

@@ -68,7 +68,7 @@
       </v-col>
     </v-row>
 
-    <v-row class="pl-2">
+    <v-row class="pl-2 mt-2">
       <div
         id="invoiceId"
         class="pr-2"
