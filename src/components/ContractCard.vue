@@ -155,10 +155,10 @@
       max-width="320"
     >
       <v-card class="mt-2">
-        <v-card-title class="headline">Contrato não encontrado</v-card-title>
+        <v-card-title class="headline">{{$vuetify.lang.t('$vuetify.CONTRATO_NAO_ENCONTRADO')}}</v-card-title>
 
         <v-card-text>
-          O contrato digitalizado ainda não está disponível.
+          {{$vuetify.lang.t('$vuetify.CONTRATO_NAO_DIGITALIZADO')}}
         </v-card-text>
 
         <v-divider></v-divider>
@@ -238,8 +238,9 @@ export default {
             { type: 'application/pdf' });
 
           const fileURL = URL.createObjectURL(file);
-
           window.open(fileURL);
+
+          this.isDownloading = false;
         });
     }
   },

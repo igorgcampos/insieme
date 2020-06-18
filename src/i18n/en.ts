@@ -83,5 +83,7 @@ export default {
     RECEBIDO: 'Received',
     TOTAL_NOTA: 'Invoice total',
     VENCE_EM: 'Due at',
-    PAGO_EM: 'Paid at'
+    PAGO_EM: 'Paid at',
+    CONTRATO_NAO_ENCONTRADO: 'Contract not found',
+    CONTRATO_NAO_DIGITALIZADO: 'The digitalized contract is not available yet'
 }

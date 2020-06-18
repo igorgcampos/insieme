@@ -83,5 +83,7 @@ export default {
     RECEBIDO: 'Recebido',
     TOTAL_NOTA: 'Total da nota',
     VENCE_EM: 'Vence em',
-    PAGO_EM: 'Pago em'
+    PAGO_EM: 'Pago em',
+    CONTRATO_NAO_ENCONTRADO: 'Contrato não encontrado',
+    CONTRATO_NAO_DIGITALIZADO: 'O contrato digitalizado ainda não está disponível.'
 }
