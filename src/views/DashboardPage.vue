@@ -46,6 +46,7 @@ export default {
 
     this.selectedContract = this.$props.contract;
 
+    window.scrollTo(0, 0);
     if (!this.selectedContract) {
       if (!window.sessionStorage.getItem('selectedContractId'))
         return;

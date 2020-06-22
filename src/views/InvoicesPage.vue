@@ -1,6 +1,6 @@
 <template>
   <div class="mb-10">
-    <v-row class="ml-n1">
+    <v-row class="ml-n12">
       <span class="mb-7 text-right display-1 font-weight-bold grey--text text--darken-1">
         {{$vuetify.lang.t('$vuetify.NOTAS_FISCAIS')}}</span>
     </v-row>
@@ -11,6 +11,7 @@
           :count="counts[0]"
           :message="$vuetify.lang.t('$vuetify.PAGOS')"
           color="success--text"
+          :func="getPaid"
         ></CountCard>
       </v-col>
       <v-col class="flex-grow-0">
@@ -18,6 +19,7 @@
           :count="counts[1]"
           :message="$vuetify.lang.t('$vuetify.EM_ABERTO')"
           color="warning--text"
+          :func="getOpened"
         ></CountCard>
       </v-col>
     </v-row>
@@ -71,9 +73,9 @@
     <v-row class="pl-2 mt-2">
       <div
         id="invoiceId"
-        class="pr-2"
+        class="pr-2 overflow-y-auto overflow-x-hidden"
         v-scroll:#invoiceId="searchMore"
-        style="overflow-x:hidden; overflow-y:auto; max-height:350px; width:100%;"
+        style="max-height:340px; width:100%;"
       >
         <v-expansion-panels class="ma-1">
           <v-expansion-panel
@@ -81,7 +83,10 @@
             :key="i"
             hide-actions
           >
-            <v-expansion-panel-header v-slot="{ open }">
+            <v-expansion-panel-header
+              v-slot="{ open }"
+              class="pt-0 pb-0"
+            >
               <v-row
                 align="center"
                 no-gutters
@@ -289,6 +294,54 @@ export default {
     LabelValue
   },
   methods: {
+    getPaid () {
+
+      if (this.isLoading) {
+        return
+      }
+
+      this.searchText = '';
+      this.page = 0;
+      this.isLoading = true;
+      this.status = this.statuses[1]
+
+      this.$get('/nota/busca', {
+        contractId: this.$props.contract.id, searchText: this.searchText,
+        paymentStatus: 1, page: this.page
+      }).then((response) => {
+
+        if (response && response.data.length == 0) {
+          this.noResult = true;
+        }
+
+        this.invoices = response.data;
+        this.isLoading = false;
+      });
+    },
+    getOpened () {
+
+      if (this.isLoading) {
+        return
+      }
+
+      this.searchText = '';
+      this.page = 0;
+      this.isLoading = true;
+      this.status = this.statuses[2]
+
+      this.$get('/nota/busca', {
+        contractId: this.$props.contract.id, searchText: this.searchText,
+        paymentStatus: 2, page: this.page
+      }).then((response) => {
+
+        if (response && response.data.length == 0) {
+          this.noResult = true;
+        }
+
+        this.invoices = response.data;
+        this.isLoading = false;
+      });
+    },
     abrirChamado () {
 
     },
@@ -301,7 +354,7 @@ export default {
         return;
       }
 
-      if (document.getElementById('invoiceId').scrollTop + 351 >=
+      if (document.getElementById('invoiceId').scrollTop + 341 >=
         document.getElementById('invoiceId').scrollHeight) {
         this.page++;
         this.search(this.page);
@@ -366,12 +419,14 @@ export default {
     this.$get('/nota/counts',
       { contractId: this.$props.contract.id }).then((response) => {
         this.counts = response.data;
+        this.isLoading = false;
       });
 
     this.$get('/nota/busca',
       { contractId: this.$props.contract.id, searchText: '', paymentStatus: 0, page: 0 })
       .then((response) => {
         this.invoices = response.data;
+        this.isLoading = false;
       });
   }
 };

@@ -1,18 +1,23 @@
 <template>
   <v-card
     class="mx-auto"
-    width="120"
-    height="90"
+    width="100"
+    height="80"
+    style="{cursor: pointer}"
+    @click="func"
   >
     <v-col>
       <v-row
         justify="center"
-        class="mb-1 mt-0"
+        class="mb-1 mt-n1"
       >
-        <span :class="['display-1', color]">{{count}}</span>
+        <span
+          :class="[color]"
+          style="font-size:x-large;"
+        >{{count}}</span>
       </v-row>
       <v-row justify="center">
-        <span class="text-center h6 font-weight-bold grey--text text--darken-3">
+        <span class="text-center subtitle-2 font-weight-bold grey--text text--darken-3">
           {{message}} </span>
       </v-row>
     </v-col>
@@ -24,7 +29,8 @@ export default {
   props: {
     message: String,
     count: Number,
-    color: String
+    color: String,
+    func: Function
   }
 };
 </script>
