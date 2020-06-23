@@ -41,7 +41,6 @@
             :placeholder="$vuetify.lang.t('$vuetify.NUMERO_NOTA')"
             single-line
             solo
-            autofocus
             max-width="200"
             append-icon="mdi-magnify"
             @keypress.enter="search()"

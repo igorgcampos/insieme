@@ -85,7 +85,6 @@
             :placeholder="$vuetify.lang.t('$vuetify.DESIGNACAO_CLIENTE')"
             single-line
             solo
-            autofocus
             max-width="200"
             append-icon="mdi-magnify"
             @keypress.enter="search()"
