@@ -215,6 +215,7 @@ export default {
     this.$vuetify.lang.t('$vuetify.EXPIRADO')]
 
     this.selectedClient = this.$props.client;
+
     if (!this.selectedClient) {
       if (!window.sessionStorage.getItem('selectedClientId'))
         this.selectedClient = { id: -1 }

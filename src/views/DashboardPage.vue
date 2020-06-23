@@ -14,7 +14,6 @@
         xm="12"
         class="mt-n11"
       >
-
         <CircuitsPage :contract="selectedContract"></CircuitsPage>
         <InvoicesPage :contract="selectedContract"></InvoicesPage>
         <IssuesPage :contract="selectedContract"></IssuesPage>
@@ -45,15 +44,15 @@ export default {
   created: function () {
 
     this.selectedContract = this.$props.contract;
-
-    window.scrollTo(0, 0);
     if (!this.selectedContract) {
       if (!window.sessionStorage.getItem('selectedContractId'))
         return;
       else
-        this.selectedContract = { id: window.sessionStorage.getItem('selectedContractId') }
+        this.selectedContract = {          id: window.sessionStorage.getItem('selectedContractId'),
+          numeroContratoTpz: window.sessionStorage.getItem('selectedContractTpz')        }
     } else {
       window.sessionStorage.setItem('selectedContractId', this.selectedContract.id);
+      window.sessionStorage.setItem('selectedContractTpz', this.selectedContract.numeroContratoTpz);
     }
   }
 };

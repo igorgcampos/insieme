@@ -86,6 +86,20 @@ export default {
     PAGO_EM: 'Paid at',
     CONTRATO_NAO_ENCONTRADO: 'Contract not found',
     CONTRATO_NAO_DIGITALIZADO: 'The digitalized contract is not available yet',
-    DESIGNACAO_CLIENTE: 'Client designation',
-    NENHUM_CIRCUITO: 'No circuits found'
+    DESIGNACAO_CLIENTE: 'Client desig.',
+    NENHUM_CIRCUITO: 'No circuits found',
+    CONTRATO_SELECIONADO: 'Selected contract',
+    ATIVADO: 'Activated',
+    DESATIVADO: 'Deactivated',
+    CANCELADO: 'Canceled',
+    DESINSTALADO: 'Uninstalled',
+    INSTALADO: 'Installed',
+    EM_IMPLANTACAO: 'In implantation',
+    EM_TRANSPORTE: 'In transit',
+    SEM_VIABILIDADE: 'No viability',
+    PENDENCIA_TPZ: 'Tpz pendency',
+    REINICIAR_CIRCUITO: 'Restart circuit',
+    DESIGNACAO_TPZ: 'Tpz Desig.',
+    LATITUDE: 'Latitude',
+    LONGITUDE: 'Longitude'
 }

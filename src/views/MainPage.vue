@@ -26,9 +26,14 @@ export default {
   created: function () {
     this.user = this.$getUser()
 
+    console.log(this.user)
     if (this.$hasProfile('Administrador') && window.sessionStorage.getItem('actualPage') == 'clients') {
       this.$router.push('/clientes')
-    } else if (window.sessionStorage.getItem('actualPage') == 'contracts') {
+    }
+    else if (this.$hasProfile('Cliente') && window.sessionStorage.getItem('actualPage') == 'contracts') {
+      this.$router.push({ name: 'Contracts', params: { client: { id: this.user.cliente.id } } })
+    }
+    else if (window.sessionStorage.getItem('actualPage') == 'contracts') {
 
       if (!this.user.cliente && (this.$hasProfile('Financeiro') || this.$hasProfile('Comercial'))) {
         this.user.ciente = { id: -1 }
