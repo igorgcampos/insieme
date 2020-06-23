@@ -26,11 +26,10 @@ export default {
   created: function () {
     this.user = this.$getUser()
 
-    console.log(this.user)
     if (this.$hasProfile('Administrador') && window.sessionStorage.getItem('actualPage') == 'clients') {
       this.$router.push('/clientes')
     }
-    else if (this.$hasProfile('Cliente') && window.sessionStorage.getItem('actualPage') == 'contracts') {
+    else if (this.$hasProfile('Cliente') && window.sessionStorage.getItem('actualPage') == 'clients') {
       this.$router.push({ name: 'Contracts', params: { client: { id: this.user.cliente.id } } })
     }
     else if (window.sessionStorage.getItem('actualPage') == 'contracts') {

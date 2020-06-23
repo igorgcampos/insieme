@@ -1,6 +1,6 @@
 <template>
   <div class="mb-10">
-    <v-row class="ml-n12">
+    <v-row :class="{'ml-n12':$vuetify.breakpoint.mdAndUp}">
       <span class="mb-7 text-right display-1 font-weight-bold grey--text text--darken-1">
         {{$vuetify.lang.t('$vuetify.NOTAS_FISCAIS')}}</span>
     </v-row>
@@ -70,7 +70,10 @@
       </v-col>
     </v-row>
 
-    <v-row class="pl-2 mt-2">
+    <v-row
+      class="pl-2 mt-2"
+      style="min-height:250px;"
+    >
       <div
         id="invoiceId"
         class="pr-2 overflow-y-auto overflow-x-hidden"

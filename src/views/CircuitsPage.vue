@@ -1,11 +1,14 @@
 <template>
   <div class="mb-10">
-    <v-row class="ml-n12 mt-n5 mb-n3">
+    <v-row
+      class="mt-n5 mb-n3"
+      :class="{'ml-n12':$vuetify.breakpoint.mdAndUp}"
+    >
       <span class="mb-7 text-right subtitle-1 font-weight-bold grey--text text--darken-1">
         {{$vuetify.lang.t('$vuetify.CONTRATO_SELECIONADO') + ': '+contract.numeroContratoTpz}} </span>
     </v-row>
 
-    <v-row class="ml-n12">
+    <v-row :class="{'ml-n12':$vuetify.breakpoint.mdAndUp}">
       <span class="mb-7 text-right display-1 font-weight-bold grey--text text--darken-1">
         {{$vuetify.lang.t('$vuetify.CIRCUITOS')}}</span>
     </v-row>
@@ -25,6 +28,42 @@
           message="Offline"
           color="error--text"
           :func="getOffline"
+        ></CountCard>
+      </v-col>
+
+      <v-col class="flex-grow-0">
+        <CountCard
+          :count="installCounts[0]"
+          :message="$vuetify.lang.t('$vuetify.ATIVADO')"
+          color="primary--text"
+          :func="getActive"
+        ></CountCard>
+      </v-col>
+
+      <v-col class="flex-grow-0">
+        <CountCard
+          :count="installCounts[1]"
+          :message="$vuetify.lang.t('$vuetify.DESATIVADO')"
+          color="primary--text"
+          :func="getDeactive"
+        ></CountCard>
+      </v-col>
+
+      <v-col class="flex-grow-0">
+        <CountCard
+          :count="installCounts[3]"
+          :message="$vuetify.lang.t('$vuetify.DESINSTALADO')"
+          color="primary--text"
+          :func="getUninstall"
+        ></CountCard>
+      </v-col>
+
+      <v-col class="flex-grow-0">
+        <CountCard
+          :count="installCounts[2]"
+          :message="$vuetify.lang.t('$vuetify.CANCELADO')"
+          color="primary--text"
+          :func="getCanceled"
         ></CountCard>
       </v-col>
     </v-row>
@@ -95,7 +134,10 @@
       </v-col>
     </v-row>
 
-    <v-row class="pl-2 mt-2">
+    <v-row
+      class="pl-2 mt-2"
+      style="min-height:250px;"
+    >
       <div
         id="circuitId"
         class="pr-2 overflow-y-auto overflow-x-hidden"
@@ -317,6 +359,48 @@ export default {
     LabelValue
   },
   methods: {
+    getActive () {
+      this.getFromStatusInstall(1)
+    },
+    getDeactive () {
+      this.getFromStatusInstall(2)
+    },
+    getUninstall () {
+      this.getFromStatusInstall(3)
+    },
+    getCanceled () {
+      this.getFromStatusInstall(4)
+    },
+    getFromStatusInstall (status) {
+
+      if (this.isLoading) {
+        return
+      }
+
+      this.searchText = '';
+      this.page = 0;
+      this.isLoading = true;
+      this.status = this.statuses[1]
+      this.circuits = [];
+      this.product = this.products[0]
+
+      this.$get('/circuito/busca', {
+        contractNumber: this.$props.contract.numeroContratoTpz,
+        searchText: this.searchText,
+        onlineStatus: 0,
+        installStatus: status,
+        productType: 0,
+        page: 0
+      }).then((response) => {
+
+        if (response && response.data.length == 0) {
+          this.noResult = true;
+        }
+
+        this.circuits = response.data;
+        this.isLoading = false;
+      });
+    },
     getAddress (circuit) {
       return circuit.endereco + ' ' + circuit.bairro + ' ' + circuit.cidade + ', ' + circuit.uf
     },
@@ -331,6 +415,7 @@ export default {
       this.isLoading = true;
       this.status = this.statuses[1]
       this.circuits = [];
+      this.product = this.products[0]
 
       this.$get('/circuito/busca', {
         contractNumber: this.$props.contract.numeroContratoTpz, searchText: this.searchText, onlineStatus: 1,
@@ -356,6 +441,7 @@ export default {
       this.isLoading = true;
       this.status = this.statuses[2]
       this.circuits = [];
+      this.product = this.products[0]
 
       this.$get('/circuito/busca', {
         contractNumber: this.$props.contract.numeroContratoTpz, searchText: this.searchText,
@@ -445,6 +531,7 @@ export default {
   },
   data: () => ({
     counts: [],
+    installCounts: [],
     circuits: [],
     statuses: [],
     products: [],
@@ -466,6 +553,12 @@ export default {
     this.$get('/circuito/status/counts',
       { contractNumber: this.$props.contract.numeroContratoTpz }).then((response) => {
         this.counts = response.data;
+        this.isLoading = false;
+      });
+
+    this.$get('/circuito/install/counts',
+      { contractNumber: this.$props.contract.numeroContratoTpz }).then((response) => {
+        this.installCounts = response.data;
         this.isLoading = false;
       });
 
