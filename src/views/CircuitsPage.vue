@@ -379,7 +379,7 @@ export default {
       this.searchText = '';
       this.page = 0;
       this.isLoading = true;
-      this.status = this.statuses[1]
+      this.status = this.statuses[0]
       this.circuits = [];
       this.product = this.products[0]
 

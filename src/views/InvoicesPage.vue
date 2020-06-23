@@ -296,8 +296,7 @@ export default {
     LabelValue
   },
   methods: {
-    getPaid () {
-
+    getByStatus (status) {
       if (this.isLoading) {
         return
       }
@@ -305,11 +304,11 @@ export default {
       this.searchText = '';
       this.page = 0;
       this.isLoading = true;
-      this.status = this.statuses[1]
+      this.status = this.statuses[status]
 
       this.$get('/nota/busca', {
         contractId: this.$props.contract.id, searchText: this.searchText,
-        paymentStatus: 1, page: this.page
+        paymentStatus: status, page: this.page
       }).then((response) => {
 
         if (response && response.data.length == 0) {
@@ -320,29 +319,11 @@ export default {
         this.isLoading = false;
       });
     },
+    getPaid () {
+      this.getByStatus(1);
+    },
     getOpened () {
-
-      if (this.isLoading) {
-        return
-      }
-
-      this.searchText = '';
-      this.page = 0;
-      this.isLoading = true;
-      this.status = this.statuses[2]
-
-      this.$get('/nota/busca', {
-        contractId: this.$props.contract.id, searchText: this.searchText,
-        paymentStatus: 2, page: this.page
-      }).then((response) => {
-
-        if (response && response.data.length == 0) {
-          this.noResult = true;
-        }
-
-        this.invoices = response.data;
-        this.isLoading = false;
-      });
+      this.getByStatus(2);
     },
     abrirChamado () {
 
