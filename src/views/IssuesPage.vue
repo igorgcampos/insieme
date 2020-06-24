@@ -342,7 +342,7 @@ export default {
         selectedStatus = 2;
       }
 
-      this.$get('/circuito/busca', {
+      this.$get('/chamado/busca', {
         contractId: this.$props.contract.id,
         searchText: this.searchText, status: selectedStatus,
         page: this.page
