@@ -63,7 +63,9 @@ export default {
     DATA_REAJUSTE: 'Readjustment date',
     DATA_TERMINO: 'End date',
     CIRCUITOS: 'Circuits',
+    CIRCUITO: 'Circuit',
     NOTAS_FISCAIS: 'Invoices',
+    NOTA_FISCAL: 'Invoice',
     CHAMADOS: 'Issues',
     NENHUMA_NOTA: 'No invoice found',
     EM_ABERTO: 'Opened',
@@ -101,5 +103,17 @@ export default {
     REINICIAR_CIRCUITO: 'Restart circuit',
     DESIGNACAO_TPZ: 'Tpz Desig.',
     LATITUDE: 'Latitude',
-    LONGITUDE: 'Longitude'
+    LONGITUDE: 'Longitude',
+    ENCERRADOS: 'Closed',
+    PROTOCOLO: 'Protocol',
+    EM_ABERTO_ENCERRADO: 'Opened or closed',
+    DATA_ABERTURA: 'Opening date',
+    DATA_ENCERRAMENTO: 'Closing date',
+    ORIGEM: 'Origin',
+    ENCERRAR_CHAMADO: 'Close issue',
+    NENHUM_CHAMADO: 'No issue found',
+    MOTIVO_ABERTURA: 'Opening reason',
+    MOTIVO_ENCERRAMENTO: 'Closing reason',
+    OBSERVACAO_ABERTURA: 'Opening observation',
+    OBSERVACAO_ENCERRAMENTO: 'Closing observation'
 }

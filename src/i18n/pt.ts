@@ -62,7 +62,9 @@ export default {
     DATA_REAJUSTE: 'Data de reajuste',
     DATA_TERMINO: 'Data de término',
     CIRCUITOS: 'Circuitos',
+    CIRCUITO: 'Circuito',
     NOTAS_FISCAIS: 'Notas Fiscais',
+    NOTA_FISCAL: 'Nota fiscal',
     CHAMADOS: 'Chamados',
     NENHUMA_NOTA: 'Nenhuma nota encontrada',
     EM_ABERTO: 'Em aberto',
@@ -103,5 +105,17 @@ export default {
     DATA_ATIVACAO: 'Data de ativação',
     DESIGNACAO_TPZ: 'Desig. Tpz',
     LATITUDE: 'Latitude',
-    LONGITUDE: 'Longitude'
+    LONGITUDE: 'Longitude',
+    ENCERRADOS: 'Encerrados',
+    PROTOCOLO: 'Protocolo',
+    EM_ABERTO_ENCERRADO: 'Em aberto ou encerrado',
+    DATA_ABERTURA: 'Data de abertura',
+    DATA_ENCERRAMENTO: 'Data de encerramento',
+    ORIGEM: 'Origem',
+    ENCERRAR_CHAMADO: 'Encerrar chamado',
+    NENHUM_CHAMADO: 'Nenhum chamado encontrado',
+    MOTIVO_ABERTURA: 'Motivo da abertura',
+    MOTIVO_ENCERRAMENTO: 'Motivo do encerramento',
+    OBSERVACAO_ABERTURA: 'Obs. sobre abertura',
+    OBSERVACAO_ENCERRAMENTO: 'Obs. sobre encerramento'
 }

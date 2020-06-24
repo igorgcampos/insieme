@@ -192,7 +192,7 @@
                   v-if="!open"
                 >
                   <strong class="font-weight-bold grey--text text--lighten-1 mr-2">
-                    Ip:</strong>
+                    IP:</strong>
                   <strong v-html="circuit.ip || '--'"></strong>
                 </v-col>
               </v-row>
@@ -246,7 +246,6 @@
                       label="IP"
                       :value="circuit.ip || '--'"
                       justify="start"
-                      truncate
                       style="width:150px;"
                     ></LabelValue>
                   </v-col>

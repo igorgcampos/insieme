@@ -60,6 +60,21 @@ httpService.install = function (Vue, router) {
             }
         }
     }
+
+    Vue.prototype.$delete = async (url, body) => {
+        try {
+            return await axios.delete(serverUrl.concat(url),
+                { data: body, headers: { Authorization: 'Bearer '.concat(window.sessionStorage.getItem('keyCloakToken')) } })
+
+        } catch (error) {
+            console.log(error)
+
+            if (error.message == 'Network Error' || error.message.includes(401)) {
+                Vue.prototype.$clearSessionStorage();
+                router.push('/login')
+            }
+        }
+    }
 }
 
 export default httpService;
