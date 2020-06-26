@@ -117,5 +117,20 @@ export default {
     MOTIVO_ABERTURA: 'Motivo da abertura',
     MOTIVO_ENCERRAMENTO: 'Motivo do encerramento',
     OBSERVACAO_ABERTURA: 'Obs. sobre abertura',
-    OBSERVACAO_ENCERRAMENTO: 'Obs. sobre encerramento'
+    OBSERVACAO_ENCERRAMENTO: 'Obs. sobre encerramento',
+    OBSERVACAO: 'Observação',
+    SELECIONE_MOTIVO: 'Selecione o motivo',
+    ABRINDO_CHAMADO_CIRCUITO: 'Abrindo chamado para o circuito ',
+    ABRINDO_CHAMADO_NOTA: 'Abrindo chamado para a nota fiscal ',
+    ENCERRANDO_CHAMADO: 'Encerrando chamado ',
+    SELECIONE_MOTIVO_OBSERVACAO: 'Selecione um motivo e adicione uma observação',
+    INOPERANCIA: 'Inoperância',
+    INTERMITENCIA: 'Intermitência',
+    LENTIDAO: 'Lentidão',
+    CONFIGURACAO: 'Configuração',
+    CANCELAR: 'Cancelar',
+    FECHAR: 'Fechar',
+    ENVIAR: 'Enviar',
+    CHAMADO_CRIADO: 'Chamado criado com sucesso!'
+
 }

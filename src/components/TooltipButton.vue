@@ -4,7 +4,7 @@
       <v-btn
         text
         color="primary"
-        @click="event()"
+        @click="event(object)"
         v-on="on || on1"
         :loading="loading"
       >{{label}}</v-btn>
@@ -20,7 +20,8 @@ export default {
     message: String,
     event: Function,
     loading: Boolean,
-    on1: String
+    on1: String,
+    object: Object
   }
 };
 </script>

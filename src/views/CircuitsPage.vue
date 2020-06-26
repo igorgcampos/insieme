@@ -177,6 +177,7 @@
                 <v-col
                   sm="5"
                   md="6"
+                  :class="{'col-sm-8':open, 'col-md-8':open}"
                 >
                   <strong class="font-weight-bold grey--text text--lighten-1 mr-2">
                     {{$vuetify.lang.t('$vuetify.DESIGNACAO_CLIENTE')}}:</strong>
@@ -323,12 +324,13 @@
                 <TooltipButton
                   :label="$vuetify.lang.t('$vuetify.REINICIAR_CIRCUITO')"
                   :message="$vuetify.lang.t('$vuetify.REINICIAR_CIRCUITO')"
-                  :event="abrirChamado"
+                  :event="restartCircuit"
                 ></TooltipButton>
                 <TooltipButton
                   :label="$vuetify.lang.t('$vuetify.ABRIR_CHAMADO')"
                   :message="$vuetify.lang.t('$vuetify.ABRIR_CHAMADO')"
                   :event="abrirChamado"
+                  :object="circuit"
                 ></TooltipButton>
               </v-card-actions>
             </v-expansion-panel-content>
@@ -339,6 +341,16 @@
         <EmptyPanel :message="$vuetify.lang.t('$vuetify.NENHUM_CIRCUITO')"> </EmptyPanel>
       </v-col>
     </v-row>
+
+    <IssueDialog
+      :showDialog="showDialog"
+      :showSuccess="showSuccess"
+      :showDialogLoading="showDialogLoading"
+      :close="closeDialog"
+      :send="sendIssue"
+      :getObject="getObject"
+      :itemList="reasonList"
+    ></IssueDialog>
   </div>
 </template>
 
@@ -348,15 +360,50 @@ import CountCard from '../components/CountCard'
 import EmptyPanel from '../components/EmptyPanel';
 import TooltipButton from '../components/TooltipButton';
 import LabelValue from '../components/LabelValue';
+import IssueDialog from '../components/IssueDialog';
 
 export default {
   components: {
     CountCard,
     EmptyPanel,
     TooltipButton,
-    LabelValue
+    LabelValue,
+    IssueDialog
   },
   methods: {
+    closeDialog () {
+      this.showDialog = false;
+      this.showDialogLoading = false;
+
+      setTimeout(() => {
+        this.showSuccess = false;
+      }, 1000);
+    },
+    sendIssue (issue, circuit) {
+
+      if (!issue.reason) {
+        return;
+      }
+
+      this.showDialogLoading = true;
+
+      issue = {
+        origem: 'CIRCUITO',
+        identificadorOrigem: circuit.nome,
+        motivoAbertura: issue.reason,
+        observacaoAbertura: issue.observation,
+        contrato: { id: this.$props.contract.id }
+      }
+      this.$post('/chamado/create', issue).then((response) => {
+
+        if (response.data) {
+
+          this.showSuccess = true;
+          this.showDialogLoading = false;
+          this.$root.$emit('new-issue', response.data)
+        }
+      });
+    },
     getActive () {
       this.getFromStatusInstall(1)
     },
@@ -457,7 +504,15 @@ export default {
         this.isLoading = false;
       });
     },
-    abrirChamado () {
+    abrirChamado (circuit) {
+      this.selectedCircuit = circuit;
+      this.selectedCircuit.type = 'circuit';
+      this.showDialog = true;
+    },
+    getObject () {
+      return this.selectedCircuit;
+    },
+    restartCircuit () {
 
     },
     formatDate (date) {
@@ -528,6 +583,10 @@ export default {
     contract: Object
   },
   data: () => ({
+    showDialogLoading: false,
+    reasonList: [],
+    showDialog: false,
+    showSuccess: false,
     counts: [],
     installCounts: [],
     circuits: [],
@@ -539,8 +598,14 @@ export default {
     isLoading: true,
     noResult: false,
     searchText: '',
+    selectedCircuit: undefined
   }),
   created: function () {
+
+    this.reasonList = [this.$vuetify.lang.t('$vuetify.INOPERANCIA'),
+    this.$vuetify.lang.t('$vuetify.INTERMITENCIA'),
+    this.$vuetify.lang.t('$vuetify.LENTIDAO'),
+    this.$vuetify.lang.t('$vuetify.CONFIGURACAO')]
 
     this.statuses = [this.$vuetify.lang.t('$vuetify.TODOS'),
       'Online',

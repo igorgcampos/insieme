@@ -112,7 +112,7 @@
 
                 <v-col
                   sm="5"
-                  md="6"
+                  md="4"
                 >
                   <strong class="font-weight-bold grey--text text--lighten-1 mr-2">
                     {{$vuetify.lang.t('$vuetify.PROTOCOLO')}}:</strong>
@@ -124,15 +124,15 @@
 
                 <v-col
                   sm="5"
-                  md="3"
+                  md="5"
                   v-if="!open"
                 >
                   <strong class="font-weight-bold grey--text text--lighten-1 mr-2">
-                    {{issue.status==1?$vuetify.lang.t('$vuetify.DATA_ABERTURA'):
-                    $vuetify.lang.t('$vuetify.DATA_ENCERRAMENTO')}}</strong>
+                    {{issue.status==1?$vuetify.lang.t('$vuetify.DATA_ABERTURA')+':':
+                    $vuetify.lang.t('$vuetify.DATA_ENCERRAMENTO')+':'}}</strong>
 
-                  <strong :v-html="issue.status==1?formatDate(issue.dataAbertura):
-                  formatDate(issue.dataEncerramento)"></strong>
+                  <strong>{{issue.status==1?formatDate(issue.dataAbertura):
+                  formatDate(issue.dataEncerramento)}}</strong>
                 </v-col>
               </v-row>
             </v-expansion-panel-header>
@@ -141,7 +141,7 @@
 
               <v-card-subtitle class="caption mt-n10 ml-n4 mb-2 grey--text text--lighten-1">
                 {{$vuetify.lang.t('$vuetify.ORIGEM')}}:
-                {{$vuetify.lang.t('$vuetify.'+issue.origem)}}
+                {{$vuetify.lang.t('$vuetify.'+issue.origem) + ' ('+issue.identificadorOrigem+')'}}
               </v-card-subtitle>
 
               <v-row>
@@ -164,7 +164,7 @@
                 </v-col>
 
                 <v-col
-                  class="mt-n12"
+                  class="mt-n3"
                   style="max-width:180px;"
                 >
                   <v-col class="pt-0 mt-n6">
@@ -191,7 +191,6 @@
                       :label="$vuetify.lang.t('$vuetify.MOTIVO_ABERTURA')"
                       :value="issue.motivoAbertura"
                       justify="start"
-                      truncate
                       style="width:150px;"
                     ></LabelValue>
                   </v-col>
@@ -200,7 +199,6 @@
                       :label="$vuetify.lang.t('$vuetify.MOTIVO_ENCERRAMENTO')"
                       :value="issue.motivoEncerramento || '--'"
                       justify="start"
-                      truncate
                       style="width:150px;"
                     ></LabelValue>
                   </v-col>
@@ -356,7 +354,7 @@ export default {
           this.issues = []
         }
 
-        this.issues = this.circuits.concat(response.data);
+        this.issues = this.issues.concat(response.data);
         this.isLoading = false;
       });
 
@@ -376,6 +374,14 @@ export default {
     searchText: '',
   }),
   created: function () {
+
+    this.$root.$on('new-issue', (issue) => {
+      if (!this.issues) {
+        return;
+      }
+      this.issues.unshift(issue)
+      this.counts[0] += 1;
+    })
 
     this.statuses = [this.$vuetify.lang.t('$vuetify.TODOS'),
     this.$vuetify.lang.t('$vuetify.EM_ABERTO'),

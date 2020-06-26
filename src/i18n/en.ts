@@ -115,5 +115,19 @@ export default {
     MOTIVO_ABERTURA: 'Opening reason',
     MOTIVO_ENCERRAMENTO: 'Closing reason',
     OBSERVACAO_ABERTURA: 'Opening observation',
-    OBSERVACAO_ENCERRAMENTO: 'Closing observation'
+    OBSERVACAO_ENCERRAMENTO: 'Closing observation',
+    OBSERVACAO: 'Observation',
+    SELECIONE_MOTIVO: 'Select the reason',
+    ABRINDO_CHAMADO_CIRCUITO: 'Opening issue for circuit ',
+    ABRINDO_CHAMADO_NOTA: 'Opening issue for invoice ',
+    ENCERRANDO_CHAMADO: 'Closing issue ',
+    SELECIONE_MOTIVO_OBSERVACAO: 'Select a reason and add an observation',
+    INOPERANCIA: 'Inoperability',
+    INTERMITENCIA: 'Flashing',
+    LENTIDAO: 'Slowness',
+    CONFIGURACAO: 'Configuration',
+    CANCELAR: 'Cancel',
+    FECHAR: 'Close',
+    ENVIAR: 'Send',
+    CHAMADO_CRIADO: 'Issue created successfully!'
 }
