@@ -90,7 +90,8 @@
           </v-row>
           <v-row justify="center">
             <span class="text-center headline font-weight-bold grey--text text--darken-3">
-              {{$vuetify.lang.t('$vuetify.CHAMADO_CRIADO')}} </span>
+              {{getObject().type!='closing'?$vuetify.lang.t('$vuetify.CHAMADO_CRIADO'):
+              $vuetify.lang.t('$vuetify.CHAMADO_ENCERRADO')}} </span>
           </v-row>
         </v-col>
         <v-divider class="mt-n6"></v-divider>

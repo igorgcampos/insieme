@@ -11,346 +11,374 @@
     <v-row :class="{'ml-n12':$vuetify.breakpoint.mdAndUp}">
       <span class="mb-7 text-right display-1 font-weight-bold grey--text text--darken-1">
         {{$vuetify.lang.t('$vuetify.CIRCUITOS')}}</span>
-    </v-row>
-
-    <v-row>
-      <v-col class="flex-grow-0">
-        <CountCard
-          :count="counts[0]"
-          message="Online"
-          color="success--text"
-          :func="getOnline"
-        ></CountCard>
-      </v-col>
-      <v-col class="flex-grow-0">
-        <CountCard
-          :count="counts[1]"
-          message="Offline"
-          color="error--text"
-          :func="getOffline"
-        ></CountCard>
-      </v-col>
-
-      <v-col class="flex-grow-0">
-        <CountCard
-          :count="installCounts[0]"
-          :message="$vuetify.lang.t('$vuetify.ATIVADO')"
-          color="primary--text"
-          :func="getActive"
-        ></CountCard>
-      </v-col>
-
-      <v-col class="flex-grow-0">
-        <CountCard
-          :count="installCounts[1]"
-          :message="$vuetify.lang.t('$vuetify.DESATIVADO')"
-          color="primary--text"
-          :func="getDeactive"
-        ></CountCard>
-      </v-col>
-
-      <v-col class="flex-grow-0">
-        <CountCard
-          :count="installCounts[3]"
-          :message="$vuetify.lang.t('$vuetify.DESINSTALADO')"
-          color="primary--text"
-          :func="getUninstall"
-        ></CountCard>
-      </v-col>
-
-      <v-col class="flex-grow-0">
-        <CountCard
-          :count="installCounts[2]"
-          :message="$vuetify.lang.t('$vuetify.CANCELADO')"
-          color="primary--text"
-          :func="getCanceled"
-        ></CountCard>
+      <v-col>
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on }">
+            <v-btn
+              icon
+              color="grey--text text--darken-1"
+              class="ml-1 mt-n2"
+              @click="expandPanel()"
+            >
+              <v-icon v-on="on">{{showPanel?'mdi-arrow-up-drop-circle-outline':
+            'mdi-arrow-down-drop-circle-outline'}}</v-icon>
+            </v-btn>
+          </template>
+          <span>{{showPanel?$vuetify.lang.t('$vuetify.ESCONDER'):$vuetify.lang.t('$vuetify.MOSTRAR')}}</span>
+        </v-tooltip>
       </v-col>
     </v-row>
 
-    <v-row
-      id="filtro"
-      class="pl-0 ml-0 grey lighten-5 mb-n5"
-    >
-      <v-col cols="4">
-        <v-row>
-          <span class=" text-right subtitle-2 font-weight-bold grey--text text--lighten-1">
-            {{$vuetify.lang.t('$vuetify.BUSCAR')}}:</span>
-        </v-row>
-        <v-row md="2">
-          <v-text-field
-            v-model.trim="searchText"
-            dense
-            label="Regular"
-            :placeholder="$vuetify.lang.t('$vuetify.DESIGNACAO_CLIENTE')"
-            single-line
-            solo
-            max-width="200"
-            append-icon="mdi-magnify"
-            @keypress.enter="search()"
-          ></v-text-field>
-        </v-row>
-      </v-col>
-
-      <v-col
-        class="ml-5"
-        cols="3"
-      >
-        <v-row>
-          <span class=" text-right subtitle-2 font-weight-bold grey--text text--lighten-1">
-            {{$vuetify.lang.t('$vuetify.STATUS')}}:</span>
-        </v-row>
-        <v-row>
-          <v-select
-            :items="statuses"
-            v-model="status"
-            label="Online/Offline"
-            solo
-            dense
-            @change="search()"
-          ></v-select>
-        </v-row>
-      </v-col>
-
-      <v-col
-        class="ml-5"
-        cols="3"
-      >
-        <v-row>
-          <span class=" text-right subtitle-2 font-weight-bold grey--text text--lighten-1">
-            {{$vuetify.lang.t('$vuetify.PRODUTO')}}:</span>
-        </v-row>
-        <v-row>
-          <v-select
-            :items="products"
-            v-model="product"
-            :label="$vuetify.lang.t('$vuetify.TODOS')"
-            solo
-            dense
-            @change="search()"
-          ></v-select>
-        </v-row>
-      </v-col>
-    </v-row>
-
-    <v-row
-      class="pl-2 mt-2"
-      style="min-height:250px;"
+    <v-lazy
+      :options="{
+          threshold: .6
+        }"
+      transition="slide-x-transition"
     >
       <div
-        id="circuitId"
-        class="pr-2 overflow-y-auto overflow-x-hidden"
-        v-scroll:#circuitId="searchMore"
-        style="max-height:340px; width:100%;"
+        class="ma-0 pa-0"
+        v-show="showPanel"
       >
-        <v-expansion-panels class="ma-1">
-          <v-expansion-panel
-            v-for="(circuit, i) in circuits"
-            :key="i"
-            hide-actions
+        <v-row>
+          <v-col class="flex-grow-0">
+            <CountCard
+              :count="counts[0]"
+              message="Online"
+              color="success--text"
+              :func="getOnline"
+            ></CountCard>
+          </v-col>
+          <v-col class="flex-grow-0">
+            <CountCard
+              :count="counts[1]"
+              message="Offline"
+              color="error--text"
+              :func="getOffline"
+            ></CountCard>
+          </v-col>
+
+          <v-col class="flex-grow-0">
+            <CountCard
+              :count="installCounts[0]"
+              :message="$vuetify.lang.t('$vuetify.ATIVADO')"
+              color="primary--text"
+              :func="getActive"
+            ></CountCard>
+          </v-col>
+
+          <v-col class="flex-grow-0">
+            <CountCard
+              :count="installCounts[1]"
+              :message="$vuetify.lang.t('$vuetify.DESATIVADO')"
+              color="primary--text"
+              :func="getDeactive"
+            ></CountCard>
+          </v-col>
+
+          <v-col class="flex-grow-0">
+            <CountCard
+              :count="installCounts[3]"
+              :message="$vuetify.lang.t('$vuetify.DESINSTALADO')"
+              color="primary--text"
+              :func="getUninstall"
+            ></CountCard>
+          </v-col>
+
+          <v-col class="flex-grow-0">
+            <CountCard
+              :count="installCounts[2]"
+              :message="$vuetify.lang.t('$vuetify.CANCELADO')"
+              color="primary--text"
+              :func="getCanceled"
+            ></CountCard>
+          </v-col>
+        </v-row>
+
+        <v-row
+          id="filtro"
+          class="pl-0 ml-0 grey lighten-5 mb-n5"
+        >
+          <v-col cols="4">
+            <v-row>
+              <span class=" text-right subtitle-2 font-weight-bold grey--text text--lighten-1">
+                {{$vuetify.lang.t('$vuetify.BUSCAR')}}:</span>
+            </v-row>
+            <v-row md="2">
+              <v-text-field
+                v-model.trim="searchText"
+                dense
+                label="Regular"
+                :placeholder="$vuetify.lang.t('$vuetify.DESIGNACAO_CLIENTE')"
+                single-line
+                solo
+                max-width="200"
+                append-icon="mdi-magnify"
+                @keypress.enter="search()"
+              ></v-text-field>
+            </v-row>
+          </v-col>
+
+          <v-col
+            class="ml-5"
+            cols="3"
           >
-            <v-expansion-panel-header
-              v-slot="{ open }"
-              class="pt-0 pb-0"
-            >
-              <v-row
-                align="center"
-                no-gutters
+            <v-row>
+              <span class=" text-right subtitle-2 font-weight-bold grey--text text--lighten-1">
+                {{$vuetify.lang.t('$vuetify.STATUS')}}:</span>
+            </v-row>
+            <v-row>
+              <v-select
+                :items="statuses"
+                v-model="status"
+                label="Online/Offline"
+                solo
+                dense
+                @change="search()"
+              ></v-select>
+            </v-row>
+          </v-col>
+
+          <v-col
+            class="ml-5"
+            cols="3"
+          >
+            <v-row>
+              <span class=" text-right subtitle-2 font-weight-bold grey--text text--lighten-1">
+                {{$vuetify.lang.t('$vuetify.PRODUTO')}}:</span>
+            </v-row>
+            <v-row>
+              <v-select
+                :items="products"
+                v-model="product"
+                :label="$vuetify.lang.t('$vuetify.TODOS')"
+                solo
+                dense
+                @change="search()"
+              ></v-select>
+            </v-row>
+          </v-col>
+        </v-row>
+
+        <v-row
+          class="pl-2 mt-2"
+          style="min-height:250px;"
+        >
+          <div
+            id="circuitId"
+            class="pr-2 overflow-y-auto overflow-x-hidden"
+            v-scroll:#circuitId="searchMore"
+            style="max-height:340px; width:100%;"
+          >
+            <v-expansion-panels class="ma-1">
+              <v-expansion-panel
+                v-for="(circuit, i) in circuits"
+                :key="i"
+                hide-actions
               >
-                <v-col
-                  v-if="!open"
-                  cols="2"
-                  sm="2"
+                <v-expansion-panel-header
+                  v-slot="{ open }"
+                  class="pt-0 pb-0"
                 >
-                  <v-chip
-                    :color="circuit.online==3?'success':'error'"
-                    class="ml-0 mr-2"
-                    label
-                    small
-                    outlined
+                  <v-row
+                    align="center"
+                    no-gutters
                   >
-                    {{ circuit.online==3?'Online':
+                    <v-col
+                      v-if="!open"
+                      cols="2"
+                      sm="2"
+                    >
+                      <v-chip
+                        :color="circuit.online==3?'success':'error'"
+                        class="ml-0 mr-2"
+                        label
+                        small
+                        outlined
+                      >
+                        {{ circuit.online==3?'Online':
                   'Offline' }}
-                  </v-chip>
-                </v-col>
+                      </v-chip>
+                    </v-col>
 
-                <v-col
-                  sm="5"
-                  md="6"
-                  :class="{'col-sm-8':open, 'col-md-8':open}"
-                >
-                  <strong class="font-weight-bold grey--text text--lighten-1 mr-2">
-                    {{$vuetify.lang.t('$vuetify.DESIGNACAO_CLIENTE')}}:</strong>
-                  <strong
-                    class="subtitle-2"
-                    v-html="circuit.designacaoCliente"
-                  ></strong>
-                </v-col>
-
-                <v-col
-                  sm="5"
-                  md="3"
-                  v-if="!open"
-                >
-                  <strong class="font-weight-bold grey--text text--lighten-1 mr-2">
-                    IP:</strong>
-                  <strong v-html="circuit.ip || '--'"></strong>
-                </v-col>
-              </v-row>
-            </v-expansion-panel-header>
-
-            <v-expansion-panel-content>
-
-              <v-card-subtitle class="caption mt-n10 ml-n4 mb-2 grey--text text--lighten-1">
-                {{$vuetify.lang.t('$vuetify.DESIGNACAO_TPZ')}}:
-                {{circuit.nome}}
-              </v-card-subtitle>
-              <v-row>
-                <v-col
-                  class="mt-n6 mr-5"
-                  style="max-width:150px;"
-                >
-                  <v-col class="pa-0">
-                    <v-chip
-                      :color="circuit.online==3?'success':'error'"
-                      class="ml-0 mr-2"
-                      label
-                      small
-                      outlined
+                    <v-col
+                      sm="5"
+                      md="6"
+                      :class="{'col-sm-8':open, 'col-md-8':open}"
                     >
-                      {{ circuit.online==3?'Online':'Offline' }}
-                    </v-chip>
-                  </v-col>
+                      <strong class="font-weight-bold grey--text text--lighten-1 mr-2">
+                        {{$vuetify.lang.t('$vuetify.DESIGNACAO_CLIENTE')}}:</strong>
+                      <strong
+                        class="subtitle-2"
+                        v-html="circuit.designacaoCliente"
+                      ></strong>
+                    </v-col>
 
-                  <v-col
-                    class="pa-0 mt-3"
-                    style="max-width:150px;"
-                  >
-                    <v-chip
-                      color="primary"
-                      class="ml-0 mr-2"
-                      label
-                      small
-                      outlined
+                    <v-col
+                      sm="5"
+                      md="3"
+                      v-if="!open"
                     >
-                      {{ $vuetify.lang.t('$vuetify.'+circuit.statusInstalacao) }}
-                    </v-chip>
-                  </v-col>
-                </v-col>
+                      <strong class="font-weight-bold grey--text text--lighten-1 mr-2">
+                        IP:</strong>
+                      <strong v-html="circuit.ip || '--'"></strong>
+                    </v-col>
+                  </v-row>
+                </v-expansion-panel-header>
 
-                <v-col
-                  class="mt-n12"
-                  style="max-width:180px;"
-                >
-                  <v-col>
-                    <LabelValue
-                      label="IP"
-                      :value="circuit.ip || '--'"
-                      justify="start"
-                      style="width:150px;"
-                    ></LabelValue>
-                  </v-col>
-                  <v-col class="pt-0 mt-n6">
-                    <LabelValue
-                      :label="$vuetify.lang.t('$vuetify.DATA_INSTALACAO')"
-                      :value="formatDate(circuit.dataInstalacao)"
-                      justify="start"
-                      style="width:150px;"
-                    ></LabelValue>
-                  </v-col>
-                  <v-col class="pt-0 mt-n6">
-                    <LabelValue
-                      :label="$vuetify.lang.t('$vuetify.DATA_ATIVACAO')"
-                      :value="formatDate(circuit.dataAtivacao)"
-                      justify="start"
-                      truncate
-                      style="width:150px;"
-                    ></LabelValue>
-                  </v-col>
-                </v-col>
+                <v-expansion-panel-content>
 
-                <v-col class="mt-n12">
-                  <v-col>
-                    <LabelValue
-                      :label="$vuetify.lang.t('$vuetify.ENDERECO')"
-                      :value="getAddress(circuit)"
-                      justify="start"
-                      truncate
-                      style="width:150px;"
-                    ></LabelValue>
-                  </v-col>
-                  <v-col class="pt-0 mt-n6">
-                    <LabelValue
-                      :label="$vuetify.lang.t('$vuetify.LATITUDE')"
-                      :value="circuit.latitude?circuit.latitude.toFixed(4):'--'"
-                      justify="start"
-                      style="width:150px;"
-                    ></LabelValue>
-                  </v-col>
-                  <v-col class="pt-0 mt-n6">
-                    <LabelValue
-                      :label="$vuetify.lang.t('$vuetify.LONGITUDE')"
-                      :value="circuit.longitude?circuit.longitude.toFixed(4): '--'"
-                      justify="start"
-                      style="width:150px;"
-                    ></LabelValue>
-                  </v-col>
-                </v-col>
+                  <v-card-subtitle class="caption mt-n10 ml-n4 mb-2 grey--text text--lighten-1">
+                    {{$vuetify.lang.t('$vuetify.DESIGNACAO_TPZ')}}:
+                    {{circuit.nome}}
+                  </v-card-subtitle>
+                  <v-row>
+                    <v-col
+                      class="mt-n6 mr-5"
+                      style="max-width:150px;"
+                    >
+                      <v-col class="pa-0">
+                        <v-chip
+                          :color="circuit.online==3?'success':'error'"
+                          class="ml-0 mr-2"
+                          label
+                          small
+                          outlined
+                        >
+                          {{ circuit.online==3?'Online':'Offline' }}
+                        </v-chip>
+                      </v-col>
 
-                <v-col class="mt-n12">
-                  <v-col>
-                    <LabelValue
-                      :label="$vuetify.lang.t('$vuetify.PRODUTO')"
-                      :value="circuit.plataformaSat || '--'"
-                      justify="start"
-                      truncate
-                      style="width:150px;"
-                    ></LabelValue>
-                  </v-col>
-                  <v-col class="pt-0 mt-n6">
-                    <LabelValue
-                      label="Esno"
-                      :value="circuit.esno || '--'"
-                      justify="start"
-                      style="width:150px;"
-                    ></LabelValue>
-                  </v-col>
-                </v-col>
-              </v-row>
+                      <v-col
+                        class="pa-0 mt-3"
+                        style="max-width:150px;"
+                      >
+                        <v-chip
+                          color="primary"
+                          class="ml-0 mr-2"
+                          label
+                          small
+                          outlined
+                        >
+                          {{ $vuetify.lang.t('$vuetify.'+circuit.statusInstalacao) }}
+                        </v-chip>
+                      </v-col>
+                    </v-col>
 
-              <v-divider class="mt-n3"></v-divider>
+                    <v-col
+                      class="mt-n12"
+                      style="max-width:180px;"
+                    >
+                      <v-col>
+                        <LabelValue
+                          label="IP"
+                          :value="circuit.ip || '--'"
+                          justify="start"
+                          style="width:150px;"
+                        ></LabelValue>
+                      </v-col>
+                      <v-col class="pt-0 mt-n6">
+                        <LabelValue
+                          :label="$vuetify.lang.t('$vuetify.DATA_INSTALACAO')"
+                          :value="formatDate(circuit.dataInstalacao)"
+                          justify="start"
+                          style="width:150px;"
+                        ></LabelValue>
+                      </v-col>
+                      <v-col class="pt-0 mt-n6">
+                        <LabelValue
+                          :label="$vuetify.lang.t('$vuetify.DATA_ATIVACAO')"
+                          :value="formatDate(circuit.dataAtivacao)"
+                          justify="start"
+                          truncate
+                          style="width:150px;"
+                        ></LabelValue>
+                      </v-col>
+                    </v-col>
 
-              <v-card-actions class="mb-n2 pb-0">
-                <TooltipButton
-                  :label="$vuetify.lang.t('$vuetify.REINICIAR_CIRCUITO')"
-                  :message="$vuetify.lang.t('$vuetify.REINICIAR_CIRCUITO')"
-                  :event="restartCircuit"
-                ></TooltipButton>
-                <TooltipButton
-                  :label="$vuetify.lang.t('$vuetify.ABRIR_CHAMADO')"
-                  :message="$vuetify.lang.t('$vuetify.ABRIR_CHAMADO')"
-                  :event="abrirChamado"
-                  :object="circuit"
-                ></TooltipButton>
-              </v-card-actions>
-            </v-expansion-panel-content>
-          </v-expansion-panel>
-        </v-expansion-panels>
+                    <v-col class="mt-n12">
+                      <v-col>
+                        <LabelValue
+                          :label="$vuetify.lang.t('$vuetify.ENDERECO')"
+                          :value="getAddress(circuit)"
+                          justify="start"
+                          truncate
+                          style="width:150px;"
+                        ></LabelValue>
+                      </v-col>
+                      <v-col class="pt-0 mt-n6">
+                        <LabelValue
+                          :label="$vuetify.lang.t('$vuetify.LATITUDE')"
+                          :value="circuit.latitude?circuit.latitude.toFixed(4):'--'"
+                          justify="start"
+                          style="width:150px;"
+                        ></LabelValue>
+                      </v-col>
+                      <v-col class="pt-0 mt-n6">
+                        <LabelValue
+                          :label="$vuetify.lang.t('$vuetify.LONGITUDE')"
+                          :value="circuit.longitude?circuit.longitude.toFixed(4): '--'"
+                          justify="start"
+                          style="width:150px;"
+                        ></LabelValue>
+                      </v-col>
+                    </v-col>
+
+                    <v-col class="mt-n12">
+                      <v-col>
+                        <LabelValue
+                          :label="$vuetify.lang.t('$vuetify.PRODUTO')"
+                          :value="circuit.plataformaSat || '--'"
+                          justify="start"
+                          truncate
+                          style="width:150px;"
+                        ></LabelValue>
+                      </v-col>
+                      <v-col class="pt-0 mt-n6">
+                        <LabelValue
+                          label="Esno"
+                          :value="circuit.esno || '--'"
+                          justify="start"
+                          style="width:150px;"
+                        ></LabelValue>
+                      </v-col>
+                    </v-col>
+                  </v-row>
+
+                  <v-divider class="mt-n3"></v-divider>
+
+                  <v-card-actions class="mb-n2 pb-0">
+                    <TooltipButton
+                      :label="$vuetify.lang.t('$vuetify.REINICIAR_CIRCUITO')"
+                      :message="$vuetify.lang.t('$vuetify.REINICIAR_CIRCUITO')"
+                      :event="restartCircuit"
+                    ></TooltipButton>
+                    <TooltipButton
+                      :label="$vuetify.lang.t('$vuetify.ABRIR_CHAMADO')"
+                      :message="$vuetify.lang.t('$vuetify.ABRIR_CHAMADO')"
+                      :event="abrirChamado"
+                      :object="circuit"
+                    ></TooltipButton>
+                  </v-card-actions>
+                </v-expansion-panel-content>
+              </v-expansion-panel>
+            </v-expansion-panels>
+          </div>
+          <v-col v-if="circuits.length == 0 && !isLoading">
+            <EmptyPanel :message="$vuetify.lang.t('$vuetify.NENHUM_CIRCUITO')"> </EmptyPanel>
+          </v-col>
+        </v-row>
+
+        <IssueDialog
+          :showDialog="showDialog"
+          :showSuccess="showSuccess"
+          :showDialogLoading="showDialogLoading"
+          :close="closeDialog"
+          :send="sendIssue"
+          :getObject="getObject"
+          :itemList="reasonList"
+        ></IssueDialog>
       </div>
-      <v-col v-if="circuits.length == 0 && !isLoading">
-        <EmptyPanel :message="$vuetify.lang.t('$vuetify.NENHUM_CIRCUITO')"> </EmptyPanel>
-      </v-col>
-    </v-row>
-
-    <IssueDialog
-      :showDialog="showDialog"
-      :showSuccess="showSuccess"
-      :showDialogLoading="showDialogLoading"
-      :close="closeDialog"
-      :send="sendIssue"
-      :getObject="getObject"
-      :itemList="reasonList"
-    ></IssueDialog>
+    </v-lazy>
   </div>
 </template>
 
@@ -578,11 +606,15 @@ export default {
       });
 
     },
+    expandPanel () {
+      this.showPanel = !this.showPanel;
+    }
   },
   props: {
     contract: Object
   },
   data: () => ({
+    showPanel: true,
     showDialogLoading: false,
     reasonList: [],
     showDialog: false,

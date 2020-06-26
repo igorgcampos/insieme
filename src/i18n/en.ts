@@ -105,6 +105,7 @@ export default {
     LATITUDE: 'Latitude',
     LONGITUDE: 'Longitude',
     ENCERRADOS: 'Closed',
+    ENCERRADO: 'Closed',
     PROTOCOLO: 'Protocol',
     EM_ABERTO_ENCERRADO: 'Opened or closed',
     DATA_ABERTURA: 'Opening date',
@@ -129,5 +130,11 @@ export default {
     CANCELAR: 'Cancel',
     FECHAR: 'Close',
     ENVIAR: 'Send',
-    CHAMADO_CRIADO: 'Issue created successfully!'
+    CHAMADO_CRIADO: 'Issue created successfully!',
+    SEGUNDA_VIA: 'Second copy',
+    BAIXA_BOLETO: 'Low ticket',
+    ALTERAR_VENCIMENTO: 'Change due',
+    CHAMADO_ENCERRADO: 'Issue closed successfully!',
+    ESCONDER: 'Hide',
+    MOSTRAR: 'Show'
 }

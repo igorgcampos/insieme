@@ -107,6 +107,7 @@ export default {
     LATITUDE: 'Latitude',
     LONGITUDE: 'Longitude',
     ENCERRADOS: 'Encerrados',
+    ENCERRADO: 'Encerrado',
     PROTOCOLO: 'Protocolo',
     EM_ABERTO_ENCERRADO: 'Em aberto ou encerrado',
     DATA_ABERTURA: 'Data de abertura',
@@ -131,6 +132,14 @@ export default {
     CANCELAR: 'Cancelar',
     FECHAR: 'Fechar',
     ENVIAR: 'Enviar',
-    CHAMADO_CRIADO: 'Chamado criado com sucesso!'
+    CHAMADO_CRIADO: 'Chamado criado com sucesso!',
+    SEGUNDA_VIA: 'Segunda via',
+    BAIXA_BOLETO: 'Baixa de boleto',
+    ALTERAR_VENCIMENTO: 'Alterar vencimento',
+    CHAMADO_ENCERRADO: 'Chamado encerrado com sucesso!',
+    DESISTI_CHAMADO: 'Desisti do chamado',
+    PROBLEMA_RESOLVIDO: 'Meu problema foi resolvido',
+    ESCONDER: 'Esconder',
+    MOSTRAR: 'Mostrar'
 
 }
