@@ -98,7 +98,7 @@
 
         <v-row
           class="pl-2 mt-2"
-          style="min-height:250px;"
+          style="min-height:150px;"
         >
           <div
             id="issueId"
@@ -273,7 +273,10 @@
               </v-expansion-panel>
             </v-expansion-panels>
           </div>
-          <v-col v-if="issues.length == 0 && !isLoading">
+          <v-col
+            v-if="issues.length == 0 && !isLoading"
+            class="mt-n2"
+          >
             <EmptyPanel :message="$vuetify.lang.t('$vuetify.NENHUM_CHAMADO')"> </EmptyPanel>
           </v-col>
         </v-row>
