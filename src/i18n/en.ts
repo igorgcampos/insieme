@@ -100,7 +100,6 @@ export default {
     EM_TRANSPORTE: 'In transit',
     SEM_VIABILIDADE: 'No viability',
     PENDENCIA_TPZ: 'Tpz pendency',
-    REINICIAR_CIRCUITO: 'Restart circuit',
     DESIGNACAO_TPZ: 'Tpz Desig.',
     LATITUDE: 'Latitude',
     LONGITUDE: 'Longitude',
@@ -136,5 +135,13 @@ export default {
     ALTERAR_VENCIMENTO: 'Change due',
     CHAMADO_ENCERRADO: 'Issue closed successfully!',
     ESCONDER: 'Hide',
-    MOSTRAR: 'Show'
+    MOSTRAR: 'Show',
+    RESOLVER_PROBLEMA: 'Problem solving',
+    SUPORTE_PROBLEM: 'Support for problem solving',
+    CANCELADO_DESCRICAO: 'Circuits that were canceled before the physical installation',
+    DESINSTALADO_DESCRICAO: 'Circuits whose equipment has been physically removed',
+    DESATIVADO_DESCRICAO: 'Circuits that are no longer activated but may still be installed',
+    ATIVADO_DESCRICAO: 'Circuits installed and that went through the activation process (testing with the customer)',
+    OFFLINE_DESCRICAO: 'Circuits activated but unavailable for use',
+    ONLINE_DESCRICAO: 'Circuits activated and available for use'
 }

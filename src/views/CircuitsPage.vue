@@ -46,14 +46,17 @@
               message="Online"
               color="success--text"
               :func="getOnline"
+              :toolTipMessage="$vuetify.lang.t('$vuetify.ONLINE_DESCRICAO')"
             ></CountCard>
           </v-col>
+
           <v-col class="flex-grow-0">
             <CountCard
               :count="counts[1]"
               message="Offline"
               color="error--text"
               :func="getOffline"
+              :toolTipMessage="$vuetify.lang.t('$vuetify.OFFLINE_DESCRICAO')"
             ></CountCard>
           </v-col>
 
@@ -63,6 +66,7 @@
               :message="$vuetify.lang.t('$vuetify.ATIVADO')"
               color="primary--text"
               :func="getActive"
+              :toolTipMessage="$vuetify.lang.t('$vuetify.ATIVADO_DESCRICAO')"
             ></CountCard>
           </v-col>
 
@@ -72,6 +76,7 @@
               :message="$vuetify.lang.t('$vuetify.DESATIVADO')"
               color="primary--text"
               :func="getDeactive"
+              :toolTipMessage="$vuetify.lang.t('$vuetify.DESATIVADO_DESCRICAO')"
             ></CountCard>
           </v-col>
 
@@ -81,6 +86,7 @@
               :message="$vuetify.lang.t('$vuetify.DESINSTALADO')"
               color="primary--text"
               :func="getUninstall"
+              :toolTipMessage="$vuetify.lang.t('$vuetify.DESINSTALADO_DESCRICAO')"
             ></CountCard>
           </v-col>
 
@@ -90,13 +96,14 @@
               :message="$vuetify.lang.t('$vuetify.CANCELADO')"
               color="primary--text"
               :func="getCanceled"
+              :toolTipMessage="$vuetify.lang.t('$vuetify.CANCELADO_DESCRICAO')"
             ></CountCard>
           </v-col>
         </v-row>
 
         <v-row
           id="filtro"
-          class="pl-0 ml-0 grey lighten-5 mb-n5"
+          class="pl-0 ml-0 grey lighten-5 mb-n5 mt-n4"
         >
           <v-col cols="4">
             <v-row>
@@ -348,16 +355,16 @@
 
                   <v-card-actions class="mb-n2 pb-0">
                     <TooltipButton
-                      :label="$vuetify.lang.t('$vuetify.REINICIAR_CIRCUITO')"
-                      :message="$vuetify.lang.t('$vuetify.REINICIAR_CIRCUITO')"
+                      :label="$vuetify.lang.t('$vuetify.RESOLVER_PROBLEMA')"
+                      :message="$vuetify.lang.t('$vuetify.SUPORTE_PROBLEM')"
                       :event="restartCircuit"
                     ></TooltipButton>
-                    <TooltipButton
+                    <!--<TooltipButton
                       :label="$vuetify.lang.t('$vuetify.ABRIR_CHAMADO')"
                       :message="$vuetify.lang.t('$vuetify.ABRIR_CHAMADO')"
                       :event="abrirChamado"
                       :object="circuit"
-                    ></TooltipButton>
+                    ></TooltipButton> -->
                   </v-card-actions>
                 </v-expansion-panel-content>
               </v-expansion-panel>
@@ -426,9 +433,9 @@ export default {
 
         if (response.data) {
 
-          this.showSuccess = true;
           this.showDialogLoading = false;
           this.$root.$emit('new-issue', response.data)
+          circuit.protocolo = response.data.protocolo
         }
       });
     },

@@ -20,12 +20,12 @@
               <v-chip
                 label
                 class="caption mb-0 mt-2"
-                :color="isExpired(contract.dataTermino)?'error':'success'"
-                :text-color="isExpired(contract.dataTermino)?'error':'success'"
+                :color="isExpired(contract)?'error':'success'"
+                :text-color="isExpired(contract)?'error':'success'"
                 small
                 outlined
               >
-                {{isExpired(contract.dataTermino)?$vuetify.lang.t('$vuetify.EXPIRADO'):$vuetify.lang.t('$vuetify.ATIVO')}}
+                {{isExpired(contract)?$vuetify.lang.t('$vuetify.EXPIRADO'):$vuetify.lang.t('$vuetify.ATIVO')}}
               </v-chip>
             </v-card-title>
 
@@ -209,13 +209,29 @@ export default {
         return this.contract.clientePrincipal.nome;
       }
     },
-    isExpired (date) {
+    isExpired (contract) {
 
-      if (!date) return;
+      if (!contract.dataTermino) return;
 
-      var actualDate = new Date(date.year, date.month, date.day, 0, 0, 0, 0)
-      var currentDate = new Date();
-      return actualDate < currentDate;
+      var currentDate
+      var renewDateExpired;
+      var endDateExpired;
+
+      if (contract.dataReajuste) {
+        var renewDate = new Date(contract.dataReajuste.year, contract.dataReajuste.month,
+          contract.dataReajuste.day, 0, 0, 0, 0)
+
+        currentDate = new Date();
+        renewDateExpired = renewDate < currentDate;
+      }
+
+      var endDate = new Date(contract.dataTermino.year, contract.dataTermino.month,
+        contract.dataTermino.day, 0, 0, 0, 0)
+
+      currentDate = new Date();
+      endDateExpired = endDate < currentDate;
+
+      return endDateExpired && renewDateExpired;
     },
     gerenciarContratos () {
       this.$root.$emit('contract-selected', this.$props.contract)

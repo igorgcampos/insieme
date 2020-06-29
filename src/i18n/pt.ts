@@ -100,7 +100,6 @@ export default {
     EM_TRANSPORTE: 'Em transporte',
     SEM_VIABILIDADE: 'Sem viabilidade',
     PENDENCIA_TPZ: 'Pendência Tpz',
-    REINICIAR_CIRCUITO: 'Reiniciar circuito',
     DATA_INSTALACAO: 'Data de instalação',
     DATA_ATIVACAO: 'Data de ativação',
     DESIGNACAO_TPZ: 'Desig. Tpz',
@@ -140,6 +139,14 @@ export default {
     DESISTI_CHAMADO: 'Desisti do chamado',
     PROBLEMA_RESOLVIDO: 'Meu problema foi resolvido',
     ESCONDER: 'Esconder',
-    MOSTRAR: 'Mostrar'
+    MOSTRAR: 'Mostrar',
+    RESOLVER_PROBLEMA: 'Resolver problema',
+    SUPORTE_PROBLEM: 'Suporte para solução de problemas',
+    CANCELADO_DESCRICAO: 'Circuitos que foram cancelados antes de ocorrer a instalação física',
+    DESINSTALADO_DESCRICAO: 'Circuitos cujos equipamentos foram fisicamente removidos',
+    DESATIVADO_DESCRICAO: 'Circuitos que não estão mais ativados mas ainda podem estar instalados',
+    ATIVADO_DESCRICAO: 'Circuitos instalados e que passaram pelo processo de ativação (realização de testes junto ao cliente)',
+    OFFLINE_DESCRICAO: 'Circuitos ativados mas indisponíveis para utilização',
+    ONLINE_DESCRICAO: 'Circuitos ativados e disponíveis para utilização'
 
 }

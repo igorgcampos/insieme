@@ -92,6 +92,12 @@
             <span class="text-center headline font-weight-bold grey--text text--darken-3">
               {{getObject().type!='closing'?$vuetify.lang.t('$vuetify.CHAMADO_CRIADO'):
               $vuetify.lang.t('$vuetify.CHAMADO_ENCERRADO')}} </span>
+
+            <span
+              v-show="getObject().type!='closing'"
+              class="text-center SUBTITLE-2 font-weight-bold grey--text text--darken-3"
+            >
+              {{$vuetify.lang.t('$vuetify.PROTOCOLO')+': '+getObject().protocolo}} </span>
           </v-row>
         </v-col>
         <v-divider class="mt-n6"></v-divider>
