@@ -370,6 +370,7 @@ export default {
 
           this.showSuccess = true;
           this.showDialogLoading = false;
+          invoice.protocolo = response.data.protocolo
           this.$root.$emit('new-issue', response.data)
         }
       });
