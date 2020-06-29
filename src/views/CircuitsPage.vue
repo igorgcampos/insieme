@@ -168,7 +168,7 @@
 
         <v-row
           class="pl-2 mt-2"
-          style="min-height:250px;"
+          style="min-height:150px;"
         >
           <div
             id="circuitId"
