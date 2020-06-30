@@ -83,7 +83,7 @@ export default {
     DATA_COMPETENCIA: 'Competency date',
     DATA_EMISSAO: 'Emit date',
     DATA_VENCIMENTO: 'Due date',
-    DATA_PAGAMENTO: 'Paymento date',
+    DATA_PAGAMENTO: 'Payment date',
     A_RECEBER: 'To receive',
     RECEBIDO: 'Received',
     TOTAL_NOTA: 'Invoice total',
