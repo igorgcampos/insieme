@@ -147,6 +147,11 @@ export default {
     DESATIVADO_DESCRICAO: 'Circuitos que não estão mais ativados mas ainda podem estar instalados',
     ATIVADO_DESCRICAO: 'Circuitos instalados e que passaram pelo processo de ativação (realização de testes junto ao cliente)',
     OFFLINE_DESCRICAO: 'Circuitos ativados mas indisponíveis para utilização',
-    ONLINE_DESCRICAO: 'Circuitos ativados e disponíveis para utilização'
+    ONLINE_DESCRICAO: 'Circuitos ativados e disponíveis para utilização',
+    VERIFICANDO_SINAL: 'Por favor aguarde enquanto estamos verificando o sinal do seu circuito...',
+    REINICIANDO_CIRCUITO: 'Reiniciando circuito. Por favor aguarde...',
+    SINAL_CIRCUITO_ONLINE: 'O sinal do seu circuito está online. Por favor verifique novamente se o circuito está respondendo.',
+    SINAL_CIRCUITO_OFFLINE: 'O sinal do seu circuito está offline. Gostaria de reinicia-lo agora?',
+    REINICIAR: 'Reiniciar'
 
 }

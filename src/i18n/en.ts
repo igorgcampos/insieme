@@ -67,9 +67,12 @@ export default {
     NOTAS_FISCAIS: 'Invoices',
     NOTA_FISCAL: 'Invoice',
     CHAMADOS: 'Issues',
+    DESISTI_CHAMADO: 'I gave up the call',
+    PROBLEMA_RESOLVIDO: 'My problem was solved',
     NENHUMA_NOTA: 'No invoice found',
     EM_ABERTO: 'Opened',
     PAGO: 'Paid',
+    PAGOS: 'Paid',
     NUMERO_NOTA: 'Invoice number',
     STATUS_PAGAMENTO: 'Payment status',
     PAGAMENTO: 'Payment',
@@ -143,5 +146,10 @@ export default {
     DESATIVADO_DESCRICAO: 'Circuits that are no longer activated but may still be installed',
     ATIVADO_DESCRICAO: 'Circuits installed and that went through the activation process (testing with the customer)',
     OFFLINE_DESCRICAO: 'Circuits activated but unavailable for use',
-    ONLINE_DESCRICAO: 'Circuits activated and available for use'
+    ONLINE_DESCRICAO: 'Circuits activated and available for use',
+    VERIFICANDO_SINAL: 'Please wait while we are verifying the circuit´s signal...',
+    REINICIANDO_CIRCUITO: 'Restarting circuit. Please wait...',
+    SINAL_CIRCUITO_ONLINE: 'Your circuit signal is online. Please double check that the circuit is responding.',
+    SINAL_CIRCUITO_OFFLINE: 'Your circuit signal is offline. Would you like to restart it now?',
+    REINICIAR: 'Restart'
 }
