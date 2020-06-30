@@ -169,7 +169,7 @@
             text
             @click="dialog = false"
           >
-            Ok
+            {{$vuetify.lang.t('$vuetify.FECHAR')}}
           </v-btn>
         </v-card-actions>
       </v-card>
