@@ -84,7 +84,7 @@
             class="mb-3"
           >
             <v-icon
-              x-large
+              size="62"
               color="success"
             >mdi-checkbox-marked-circle</v-icon>
           </v-row>

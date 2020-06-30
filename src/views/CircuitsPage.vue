@@ -357,12 +357,13 @@
                     <TooltipButton
                       :label="$vuetify.lang.t('$vuetify.RESOLVER_PROBLEMA')"
                       :message="$vuetify.lang.t('$vuetify.SUPORTE_PROBLEM')"
-                      :event="restartCircuit"
+                      :event="solveProblem"
+                      :object="circuit"
                     ></TooltipButton>
                     <!--<TooltipButton
                       :label="$vuetify.lang.t('$vuetify.ABRIR_CHAMADO')"
                       :message="$vuetify.lang.t('$vuetify.ABRIR_CHAMADO')"
-                      :event="abrirChamado"
+                      :event="openIssue"
                       :object="circuit"
                     ></TooltipButton> -->
                   </v-card-actions>
@@ -384,6 +385,13 @@
           :getObject="getObject"
           :itemList="reasonList"
         ></IssueDialog>
+
+        <SolveProblemDialog
+          :showDialog="showProblemSolveDialog"
+          :close="closeProblemSolveDialog"
+          :getObject="getObject"
+          :openIssue="openIssue"
+        ></SolveProblemDialog>
       </div>
     </v-lazy>
   </div>
@@ -396,6 +404,7 @@ import EmptyPanel from '../components/EmptyPanel';
 import TooltipButton from '../components/TooltipButton';
 import LabelValue from '../components/LabelValue';
 import IssueDialog from '../components/IssueDialog';
+import SolveProblemDialog from '../components/SolveProblemDialog';
 
 export default {
   components: {
@@ -403,9 +412,13 @@ export default {
     EmptyPanel,
     TooltipButton,
     LabelValue,
-    IssueDialog
+    IssueDialog,
+    SolveProblemDialog
   },
   methods: {
+    closeProblemSolveDialog () {
+      this.showProblemSolveDialog = false
+    },
     closeDialog () {
       this.showDialog = false;
       this.showDialogLoading = false;
@@ -433,6 +446,7 @@ export default {
 
         if (response.data) {
 
+          this.showSuccess = true;
           this.showDialogLoading = false;
           this.$root.$emit('new-issue', response.data)
           circuit.protocolo = response.data.protocolo
@@ -539,7 +553,7 @@ export default {
         this.isLoading = false;
       });
     },
-    abrirChamado (circuit) {
+    openIssue (circuit) {
       this.selectedCircuit = circuit;
       this.selectedCircuit.type = 'circuit';
       this.showDialog = true;
@@ -547,8 +561,9 @@ export default {
     getObject () {
       return this.selectedCircuit;
     },
-    restartCircuit () {
-
+    solveProblem (circuit) {
+      this.selectedCircuit = circuit;
+      this.showProblemSolveDialog = true;
     },
     formatDate (date) {
 
@@ -621,6 +636,7 @@ export default {
     contract: Object
   },
   data: () => ({
+    showProblemSolveDialog: false,
     showPanel: true,
     showDialogLoading: false,
     reasonList: [],

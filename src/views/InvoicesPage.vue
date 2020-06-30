@@ -294,7 +294,7 @@
                     <TooltipButton
                       :label="$vuetify.lang.t('$vuetify.ABRIR_CHAMADO')"
                       :message="$vuetify.lang.t('$vuetify.ABRIR_CHAMADO_NOTA')"
-                      :event="abrirChamado"
+                      :event="openIssue"
                       :object="invoice"
                     ></TooltipButton>
                   </v-card-actions>
@@ -404,7 +404,7 @@ export default {
     getOpened () {
       this.getByStatus(2);
     },
-    abrirChamado (invoice) {
+    openIssue (invoice) {
       this.selectedInvoice = invoice;
       this.selectedInvoice.type = 'invoice';
       this.showDialog = true;

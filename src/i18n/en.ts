@@ -148,8 +148,12 @@ export default {
     OFFLINE_DESCRICAO: 'Circuits activated but unavailable for use',
     ONLINE_DESCRICAO: 'Circuits activated and available for use',
     VERIFICANDO_SINAL: 'Please wait while we are verifying the circuit´s signal...',
-    REINICIANDO_CIRCUITO: 'Restarting circuit. Please wait...',
-    SINAL_CIRCUITO_ONLINE: 'Your circuit signal is online. Please double check that the circuit is responding.',
-    SINAL_CIRCUITO_OFFLINE: 'Your circuit signal is offline. Would you like to restart it now?',
-    REINICIAR: 'Restart'
+    REINICIANDO_CIRCUITO: 'We are restarting your circuit. Please wait...',
+    SINAL_CIRCUITO_ONLINE: 'Your circuit signal is online. Please check your circuit again. If you are still not responding you can open a ticket with us.',
+    SINAL_CIRCUITO_OFFLINE: 'We verify that your circuit is not responding. Would you like to restart it now?',
+    REINICIAR: 'Restart',
+    PRIMEIRA_PERGUNTA: 'We will try to help you. Did you check if the modem is turned on and the cables connected?',
+    SIM: 'Yes',
+    NAO: 'No',
+    RESTART_FALHOU: 'After restarting your circuit we verify that it still does not respond. Please open a call with us so that an expert can analyze your problem.'
 }
