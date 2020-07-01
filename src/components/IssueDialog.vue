@@ -66,7 +66,7 @@
           <v-btn
             color="primary"
             text
-            @click="close"
+            @click="close(); cleanFields()"
           >{{$vuetify.lang.t('$vuetify.CANCELAR')}}</v-btn>
           <v-btn
             color="primary"
@@ -106,7 +106,7 @@
           <v-btn
             color="primary"
             text
-            @click="close"
+            @click="close(); cleanFields()"
           >{{$vuetify.lang.t('$vuetify.FECHAR')}}</v-btn>
         </v-card-actions>
       </v-card>
