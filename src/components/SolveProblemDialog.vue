@@ -194,20 +194,18 @@ export default {
       this.showRestartingCircuitPanel = true
       this.showRestartResultPanel = false
 
-      setTimeout(() => {
-        this.$get('/circuito/restart',
-          { circuitId: this.getObject().id }).then((response) => {
+      this.$get('/circuito/restart',
+        { circuitId: this.getObject().id }).then((response) => {
 
-            this.showRestartResultPanel = true;
-            this.showRestartingCircuitPanel = false;
-            if (response && response.data == 'OK') {
-              this.restartOk = true;
-              this.getObject().online = 3 //Atualiza o circuito com o status online
-            } else {
-              this.restartOk = false;
-            }
-          });
-      }, 2000)
+          this.showRestartResultPanel = true;
+          this.showRestartingCircuitPanel = false;
+          if (response && response.data == 3) {
+            this.restartOk = true;
+            this.getObject().online = response.data //Atualiza o circuito com o status online
+          } else {
+            this.restartOk = false;
+          }
+        });
     },
     clean () {
       this.showFirstQuestionPanel = true

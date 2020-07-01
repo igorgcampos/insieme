@@ -71,7 +71,7 @@
           <v-btn
             color="primary"
             text
-            @click="send(issue, getObject())"
+            @click="send(issue, getObject()); cleanFields()"
             :loading="showDialogLoading"
           >{{$vuetify.lang.t('$vuetify.ENVIAR')}}</v-btn>
         </v-card-actions>
@@ -124,6 +124,12 @@ export default {
     close: Function,
     send: Function,
     itemList: Array
+  },
+  methods: {
+    cleanFields () {
+      this.issue.observation = '';
+      this.issue.reason = undefined;
+    }
   },
   data: () => ({
     issue: { reason: undefined, observation: '' }
