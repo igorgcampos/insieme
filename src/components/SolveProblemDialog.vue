@@ -163,9 +163,10 @@ export default {
 
           this.showVerifySignalPanel = true
 
-          this.$get('/circuito/find',
-            { circuitId: this.getObject().id }).then((response) => {
+          this.$get('/circuito/status',
+            { desigClient: this.getObject().designacaoCliente }).then((response) => {
 
+              console.log(response.data)
               this.showStatusResultPanel = true;
               this.showVerifySignalPanel = false;
               if (response.data == 3) {
@@ -195,7 +196,11 @@ export default {
       this.showRestartResultPanel = false
 
       this.$get('/circuito/restart',
-        { circuitId: this.getObject().id }).then((response) => {
+        {          desigClient: this.getObject().designacaoCliente,
+          hubFamily: this.getObject().plataformaSat || '',
+          hub: this.getObject().hub || '',
+          vsatIdModem: this.getObject().vsatId || ''
+        }).then((response) => {
 
           this.showRestartResultPanel = true;
           this.showRestartingCircuitPanel = false;
