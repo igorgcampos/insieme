@@ -21,7 +21,7 @@
                 size="62"
                 class="mb-4 mt-8"
                 color="primary"
-              >mdi-power-plug-off</v-icon>
+              >mdi-robot</v-icon>
 
               <v-row>
                 <span

@@ -153,9 +153,9 @@ export default {
     SINAL_CIRCUITO_ONLINE: 'O sinal do seu circuito está online. Por favor verifique novamente o seu circuito. Se ainda não estiver respondendo pode abrir um chamado conosco.',
     SINAL_CIRCUITO_OFFLINE: 'Verificamos que seu circuito não está respondendo. Gostaria de reinicia-lo agora?',
     REINICIAR: 'Reiniciar',
-    PRIMEIRA_PERGUNTA: 'Vamos tentar ajudá-lo. Você checou se o modem está ligado e os cabos conectados?',
+    PRIMEIRA_PERGUNTA: 'Olá, sou seu assistente virtual. Vou tentar ajudá-lo. Você checou se o modem está ligado e os cabos conectados?',
     SIM: 'Sim',
     NAO: 'Não',
-    RESTART_FALHOU: 'Após reiniciar seu circuito verificamos que o mesmo continua sem responder. Por favor abra um chamado conosco para que um especialista possa analisar seu problema.'
-
+    RESTART_FALHOU: 'Após reiniciar seu circuito verificamos que o mesmo continua sem responder. Por favor abra um chamado conosco para que um especialista possa analisar seu problema.',
+    EXPORTAR_CSV: 'Exportar para csv'
 }

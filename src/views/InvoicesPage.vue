@@ -94,6 +94,26 @@
               ></v-select>
             </v-row>
           </v-col>
+
+          <v-col
+            class="mt-5"
+            cols="1"
+          >
+            <v-tooltip top>
+              <template v-slot:activator="{ on }">
+                <v-btn
+                  class="ml-2 mt-1"
+                  dark
+                  color="primary"
+                  v-on="on"
+                  @click="exportCSV()"
+                >
+                  <v-icon dark>mdi-file-export</v-icon>
+                </v-btn>
+              </template>
+              <span>{{$vuetify.lang.t('$vuetify.EXPORTAR_CSV')}}</span>
+            </v-tooltip>
+          </v-col>
         </v-row>
 
         <v-row

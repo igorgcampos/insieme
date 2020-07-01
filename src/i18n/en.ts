@@ -152,8 +152,9 @@ export default {
     SINAL_CIRCUITO_ONLINE: 'Your circuit signal is online. Please check your circuit again. If you are still not responding you can open a ticket with us.',
     SINAL_CIRCUITO_OFFLINE: 'We verify that your circuit is not responding. Would you like to restart it now?',
     REINICIAR: 'Restart',
-    PRIMEIRA_PERGUNTA: 'We will try to help you. Did you check if the modem is turned on and the cables connected?',
+    PRIMEIRA_PERGUNTA: 'Hi, I am your virtual assistant. I will try to help you. Did you check that the modem is on and the cables are connected?',
     SIM: 'Yes',
     NAO: 'No',
-    RESTART_FALHOU: 'After restarting your circuit we verify that it still does not respond. Please open a call with us so that an expert can analyze your problem.'
+    RESTART_FALHOU: 'After restarting your circuit we verify that it still does not respond. Please open a call with us so that an expert can analyze your problem.',
+    EXPORTAR_CSV: 'Export to csv'
 }

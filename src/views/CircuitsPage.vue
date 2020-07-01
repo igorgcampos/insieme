@@ -105,7 +105,7 @@
           id="filtro"
           class="pl-0 ml-0 grey lighten-5 mb-n5 mt-n4"
         >
-          <v-col cols="4">
+          <v-col cols="3">
             <v-row>
               <span class=" text-right subtitle-2 font-weight-bold grey--text text--lighten-1">
                 {{$vuetify.lang.t('$vuetify.BUSCAR')}}:</span>
@@ -163,6 +163,26 @@
                 @change="search()"
               ></v-select>
             </v-row>
+          </v-col>
+
+          <v-col
+            class="mt-5"
+            cols="1"
+          >
+            <v-tooltip top>
+              <template v-slot:activator="{ on }">
+                <v-btn
+                  class="ml-2 mt-1"
+                  dark
+                  color="primary"
+                  v-on="on"
+                  @click="exportCSV()"
+                >
+                  <v-icon dark>mdi-file-export</v-icon>
+                </v-btn>
+              </template>
+              <span>{{$vuetify.lang.t('$vuetify.EXPORTAR_CSV')}}</span>
+            </v-tooltip>
           </v-col>
         </v-row>
 
