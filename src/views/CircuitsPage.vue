@@ -690,13 +690,25 @@ export default {
 
     this.$get('/circuito/status/counts',
       { contractNumber: this.$props.contract.numeroContratoTpz }).then((response) => {
-        this.counts = response.data;
+
+        if (response) {
+          this.counts = response.data;
+        } else {
+          this.counts = this.counts.map(x => 0)
+        }
+
         this.isLoading = false;
       });
 
     this.$get('/circuito/install/counts',
       { contractNumber: this.$props.contract.numeroContratoTpz }).then((response) => {
-        this.installCounts = response.data;
+
+        if (response) {
+          this.installCounts = response.data;
+        } else {
+          this.installCounts = this.installCounts.map(x => 0)
+        }
+
         this.isLoading = false;
       });
 
