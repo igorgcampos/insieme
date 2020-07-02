@@ -36,7 +36,7 @@
 
         <v-col
           class="text-center"
-          v-show="showVerifySignalPanel || showRestartingCircuitPanel"
+          v-show="showVerifyingSignalPanel || showRestartingCircuitPanel"
         >
           <v-lazy
             :options="{
@@ -53,13 +53,9 @@
                 class="mt-8 mb-4"
               ></v-progress-circular>
 
-              <v-row>
-                <span
-                  justify="center"
-                  class="ml-3 mr-3 mb-10 text-center SUBTITLE-2 font-weight-bold grey--text text--darken-3"
-                >
-                  {{showVerifySignalPanel?$vuetify.lang.t('$vuetify.VERIFICANDO_SINAL'):
-              $vuetify.lang.t('$vuetify.REINICIANDO_CIRCUITO')}} </span>
+              <v-row class="justify-center">
+                <span class="text-center ml-3 mr-3 mb-10 SUBTITLE-2 font-weight-bold grey--text text--darken-3">
+                  {{showVerifyingSignalPanel? verifyingSignalMessage:restartingCircuitMessage}} </span>
               </v-row>
             </div>
           </v-lazy>
@@ -82,7 +78,8 @@
                 :color="(showRestartResultPanel && restartOk) || (showStatusResultPanel && statusOk)?'success':'error'"
               >{{((showRestartResultPanel && restartOk) || (showStatusResultPanel && statusOk))?
               'mdi-checkbox-marked-circle':'mdi-alert-box'}}</v-icon>
-              <v-row>
+
+              <v-row class="justify-center">
                 <span class="ml-3 mr-3 mb-10 text-center SUBTITLE-2 font-weight-bold grey--text text--darken-3">
                   {{(showRestartResultPanel && restartOk) || (showStatusResultPanel && statusOk)?
                   $vuetify.lang.t('$vuetify.SINAL_CIRCUITO_ONLINE'):
@@ -144,31 +141,36 @@ export default {
     openIssue: Function
   },
   data: () => ({
-    showVerifySignalPanel: false,
+    showVerifyingSignalPanel: false,
     showStatusResultPanel: false,
     showRestartingCircuitPanel: false,
     showRestartResultPanel: false,
     showFirstQuestionPanel: true,
     statusOk: false,
-    restartOk: false
+    restartOk: false,
+    verifyingSignalMessage: '',
+    restartingCircuitMessage: ''
   }),
+  created: function () {
+    this.verifyingSignalMessage = this.$vuetify.lang.t('$vuetify.VERIFICANDO_SINAL')
+    this.restartingCircuitMessage = this.$vuetify.lang.t('$vuetify.COLETANDO_INFORMACOES')
+  },
   methods: {
     verifySignalPanel () {
       this.showFirstQuestionPanel = false
-      this.showVerifySignalPanel = true
+      this.showVerifyingSignalPanel = true
 
       setTimeout(() => {
 
         if (this.showDialog) {
 
-          this.showVerifySignalPanel = true
+          this.showVerifyingSignalPanel = true
 
           this.$get('/circuito/status',
             { desigClient: this.getObject().designacaoCliente }).then((response) => {
 
-              console.log(response.data)
               this.showStatusResultPanel = true;
-              this.showVerifySignalPanel = false;
+              this.showVerifyingSignalPanel = false;
               if (response.data == 3) {
                 this.statusOk = true;
                 this.getObject().online = response.data //Atualiza o circuito com o status online
@@ -181,16 +183,16 @@ export default {
       }, 20000);
     },
     openChatBot () {
-      this.clean();
       this.close();
+      this.clean();
     },
     openIssueDialog () {
-      this.clean();
       this.close();
+      this.clean();
       this.openIssue(this.getObject());
     },
     restart () {
-      this.showVerifySignalPanel = false
+      this.showVerifyingSignalPanel = false
       this.showStatusResultPanel = false
       this.showRestartingCircuitPanel = true
       this.showRestartResultPanel = false
@@ -214,12 +216,44 @@ export default {
     },
     clean () {
       this.showFirstQuestionPanel = true
-      this.showVerifySignalPanel = false
+      this.showVerifyingSignalPanel = false
       this.showStatusResultPanel = false
       this.showRestartingCircuitPanel = false
       this.showRestartResultPanel = false
       this.statusOk = false
       this.restartOk = false
+      this.verifyingSignalMessage = this.$vuetify.lang.t('$vuetify.VERIFICANDO_SINAL')
+      this.restartingCircuitMessage = this.$vuetify.lang.t('$vuetify.COLETANDO_INFORMACOES')
+    }
+  },
+  watch: {
+    showVerifyingSignalPanel: function () {
+
+      if (this.showVerifyingSignalPanel) {
+
+        setTimeout(() => {
+          this.verifyingSignalMessage = this.$vuetify.lang.t('$vuetify.MAIS_ALGUNS_INSTANTES')
+        }, 10000);
+      }
+    },
+    showRestartingCircuitPanel: function () {
+
+      if (this.showRestartingCircuitPanel) {
+
+        setTimeout(() => {
+          this.restartingCircuitMessage = this.$vuetify.lang.t('$vuetify.REINICIANDO_CIRCUITO')
+
+          setTimeout(() => {
+            this.restartingCircuitMessage = this.$vuetify.lang.t('$vuetify.VERIFICANDO_NOVAMENTE')
+
+            setTimeout(() => {
+              this.restartingCircuitMessage = this.$vuetify.lang.t('$vuetify.MAIS_ALGUNS_INSTANTES')
+            }, 15000);
+
+          }, 15000);
+
+        }, 15000);
+      }
     }
   }
 };
