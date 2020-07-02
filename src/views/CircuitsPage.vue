@@ -691,7 +691,7 @@ export default {
     this.$get('/circuito/status/counts',
       { contractNumber: this.$props.contract.numeroContratoTpz }).then((response) => {
 
-        if (response) {
+        if (response && response.data) {
           this.counts = response.data;
         } else {
           this.counts = this.counts.map(() => 0)
@@ -703,7 +703,7 @@ export default {
     this.$get('/circuito/install/counts',
       { contractNumber: this.$props.contract.numeroContratoTpz }).then((response) => {
 
-        if (response) {
+        if (response && response.data) {
           this.installCounts = response.data;
         } else {
           this.installCounts = this.installCounts.map(() => 0)
