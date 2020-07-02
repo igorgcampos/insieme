@@ -222,8 +222,7 @@
                         small
                         outlined
                       >
-                        {{ circuit.online==3?'Online':
-                  'Offline' }}
+                        {{ circuit.online==3?'Online':'Offline' }}
                       </v-chip>
                     </v-col>
 
@@ -436,6 +435,42 @@ export default {
     SolveProblemDialog
   },
   methods: {
+    exportCSV () {
+
+      if (!this.allCircuits) {
+        this.$get('/circuito/all', {
+          contractNumber: this.$props.contract.numeroContratoTpz
+        }).then(response => {
+          this.allCircuits = response.data
+          this.allCircuits.map((circuit) => {
+            circuit.dataInstalacao = this.formatDate(circuit.dataInstalacao)
+            circuit.endereco = this.getAddress(circuit);
+            delete circuit.bairro
+            delete circuit.cidade
+            delete circuit.uf
+            return circuit;
+          })
+          this.downloadCSV()
+        });
+      } else {
+        this.downloadCSV()
+      }
+    },
+    downloadCSV () {
+      let csvContent = "data:text/csv;charset=utf-8,";
+      csvContent += [
+        Object.keys(this.allCircuits[0]).join(";"),
+        ...this.allCircuits.map((item) => Object.values(item).join(";"))
+      ]
+        .join("\n")
+        .replace(/(^\[)|(\]$)/gm, "");
+
+      const data = encodeURI(csvContent);
+      const link = document.createElement("a");
+      link.setAttribute("href", data);
+      link.setAttribute("download", "export.csv");
+      link.click();
+    },
     closeProblemSolveDialog () {
       this.showProblemSolveDialog = false
     },
@@ -656,6 +691,7 @@ export default {
     contract: Object
   },
   data: () => ({
+    allCircuits: undefined,
     showProblemSolveDialog: false,
     showPanel: true,
     showDialogLoading: false,
