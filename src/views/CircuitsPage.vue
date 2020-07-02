@@ -694,7 +694,7 @@ export default {
         if (response) {
           this.counts = response.data;
         } else {
-          this.counts = this.counts.map(x => 0)
+          this.counts = this.counts.map(() => 0)
         }
 
         this.isLoading = false;
@@ -706,7 +706,7 @@ export default {
         if (response) {
           this.installCounts = response.data;
         } else {
-          this.installCounts = this.installCounts.map(x => 0)
+          this.installCounts = this.installCounts.map(() => 0)
         }
 
         this.isLoading = false;
