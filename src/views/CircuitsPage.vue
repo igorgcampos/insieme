@@ -230,7 +230,7 @@
                     <v-col
                       sm="5"
                       md="6"
-                      :class="{'col-sm-8':open, 'col-md-8':open}"
+                      :class="{'col-sm-10':open, 'col-md-10':open}"
                     >
                       <strong class="font-weight-bold grey--text text--lighten-1 mr-2">
                         {{$vuetify.lang.t('$vuetify.DESIGNACAO_CLIENTE')}}:</strong>

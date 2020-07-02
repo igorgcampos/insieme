@@ -151,7 +151,7 @@ export default {
     VERIFICANDO_SINAL: 'Por favor aguarde enquanto estamos verificando o sinal do seu circuito...',
     REINICIANDO_CIRCUITO: 'Estou reiniciando seu circuito. Por favor aguarde mais alguns instantes...',
     SINAL_CIRCUITO_ONLINE: 'O sinal do seu circuito está online. Por favor verifique novamente o seu circuito. Se ainda não estiver respondendo pode abrir um chamado conosco.',
-    SINAL_CIRCUITO_OFFLINE: 'Verificamos que seu circuito não está respondendo. Gostaria de reinicia-lo agora?',
+    SINAL_CIRCUITO_OFFLINE: 'Verifiquei que seu circuito não está respondendo. Gostaria de reinicia-lo agora?',
     REINICIAR: 'Reiniciar',
     PRIMEIRA_PERGUNTA: 'Olá, sou seu assistente virtual. Vou tentar ajudá-lo. Você checou se o circuito está ligado e os cabos conectados?',
     SIM: 'Sim',

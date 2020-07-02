@@ -150,7 +150,7 @@ export default {
     VERIFICANDO_SINAL: 'Please wait while we are verifying the circuit´s signal...',
     REINICIANDO_CIRCUITO: 'I am restarting your circuit. Please wait...',
     SINAL_CIRCUITO_ONLINE: 'Your circuit signal is online. Please check your circuit again. If you are still not responding you can open a ticket with us.',
-    SINAL_CIRCUITO_OFFLINE: 'We verify that your circuit is not responding. Would you like to restart it now?',
+    SINAL_CIRCUITO_OFFLINE: 'I verify that your circuit is not responding. Would you like to restart it now?',
     REINICIAR: 'Restart',
     PRIMEIRA_PERGUNTA: 'Hi, I am your virtual assistant. I will try to help you. Did you check that the circuit is on and the cables are connected?',
     SIM: 'Yes',
