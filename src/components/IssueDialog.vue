@@ -4,6 +4,7 @@
       v-model="showDialog"
       persistent
       max-width="360"
+      v-if="getObject()"
     >
       <v-card v-show="!showSuccess">
         <v-card-title

@@ -494,7 +494,7 @@ export default {
     reasonList: [],
     showDialog: false,
     showSuccess: false,
-    counts: [],
+    counts: [0, 0],
     invoices: [],
     statuses: [],
     status: 0,
@@ -515,7 +515,10 @@ export default {
 
     this.$get('/nota/counts',
       { contractId: this.$props.contract.id }).then((response) => {
-        this.counts = response.data;
+
+        if (response) {
+          this.counts = response.data;
+        }
         this.isLoading = false;
       });
 

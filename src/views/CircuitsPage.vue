@@ -662,8 +662,8 @@ export default {
     reasonList: [],
     showDialog: false,
     showSuccess: false,
-    counts: [],
-    installCounts: [],
+    counts: [0, 0],
+    installCounts: [0, 0, 0, 0],
     circuits: [],
     statuses: [],
     products: [],
@@ -690,25 +690,17 @@ export default {
 
     this.$get('/circuito/status/counts',
       { contractNumber: this.$props.contract.numeroContratoTpz }).then((response) => {
-
-        if (response && response.data) {
+        if (response) {
           this.counts = response.data;
-        } else {
-          this.counts = this.counts.map(() => 0)
         }
-
         this.isLoading = false;
       });
 
     this.$get('/circuito/install/counts',
       { contractNumber: this.$props.contract.numeroContratoTpz }).then((response) => {
-
-        if (response && response.data) {
+        if (response) {
           this.installCounts = response.data;
-        } else {
-          this.installCounts = this.installCounts.map(() => 0)
         }
-
         this.isLoading = false;
       });
 
