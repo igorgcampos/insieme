@@ -369,7 +369,7 @@ export default {
           invoice.tipo == 'VENDA' ? this.$vuetify.lang.t('$vuetify.VENDA') : invoice.tipo,
         statusPagamento: invoice.statusPagamento == 'PENDENTE' ? this.$vuetify.lang.t('$vuetify.EM_ABERTO') :
           this.$vuetify.lang.t('$vuetify.PAGO'),
-        descricaoServico: invoice.descricaoServico.substring(0, 28),
+        descricaoServico: invoice.descricaoServico.substring(0, 19),
         condicaoPagamento: invoice.condicaoPagamento,
         totalNF: invoice.totalNF.toLocaleString(),
         aReceber: invoice.aReceber.toLocaleString(),
