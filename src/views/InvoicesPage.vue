@@ -107,6 +107,7 @@
                   color="primary"
                   v-on="on"
                   @click="exportCSV()"
+                  :loading="loadingExport"
                 >
                   <v-icon dark>mdi-file-export</v-icon>
                 </v-btn>
@@ -207,7 +208,8 @@
                           small
                           outlined
                         >
-                          {{ invoice.tipo=='LOCAÇÃO'?$vuetify.lang.t('$vuetify.LOCACAO'):invoice.tipo }}
+                          {{ invoice.tipo=='LOCAÇÃO'?$vuetify.lang.t('$vuetify.LOCACAO'):
+                          invoice.tipo=='VENDA'?$vuetify.lang.t('$vuetify.VENDA'):invoice.tipo }}
                         </v-chip>
                       </v-col>
                     </v-col>
@@ -358,6 +360,44 @@ export default {
     IssueDialog
   },
   methods: {
+    formatInvoice (invoice) {
+
+      return {
+        numero: invoice.numero,
+        dataCompetencia: this.formatDate(invoice.dataCompetencia),
+        dataEmissao: this.formatDate(invoice.dataEmissao),
+        dataVencimento: this.formatDate(invoice.dataVencimento),
+        tipo: invoice.tipo == 'LOCAÇÃO' ? this.$vuetify.lang.t('$vuetify.LOCACAO') :
+          invoice.tipo == 'VENDA' ? this.$vuetify.lang.t('$vuetify.VENDA') : invoice.tipo,
+        statusPagamento: invoice.statusPagamento == 'PENDENTE' ? this.$vuetify.lang.t('$vuetify.EM_ABERTO') :
+          this.$vuetify.lang.t('$vuetify.PAGO'),
+        descricaoServico: invoice.descricaoServico,
+        condicaoPagamento: invoice.condicaoPagamento,
+        totalNF: invoice.totalNF.toLocaleString(),
+        aReceber: invoice.aReceber.toLocaleString(),
+        recebido: invoice.recebido.toLocaleString()
+      }
+    },
+    exportCSV () {
+
+      this.loadingExport = true
+      if (!this.allInvoices) {
+        this.$get('/nota/all', {
+          contractNumber: this.$props.contract.numeroContratoTpz
+        }).then(response => {
+
+          this.allInvoices = response.data.map((invoice) => {
+            return this.formatInvoice(invoice);
+          })
+
+          this.$downloadCSV(this.allInvoices, this.$vuetify.lang.t('$vuetify.NOTAS_FISCAIS'))
+          this.loadingExport = false
+        });
+      } else {
+        this.$downloadCSV(this.allInvoices, this.$vuetify.lang.t('$vuetify.NOTAS_FISCAIS'))
+        this.loadingExport = false
+      }
+    },
     expandPanel () {
       this.showPanel = !this.showPanel;
     },
@@ -488,6 +528,8 @@ export default {
     contract: Object
   },
   data: () => ({
+    allInvoices: undefined,
+    loadingExport: false,
     showPanel: true,
     selectedInvoice: undefined,
     showDialogLoading: false,

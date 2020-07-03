@@ -177,6 +177,7 @@
                   color="primary"
                   v-on="on"
                   @click="exportCSV()"
+                  :loading="loadingExport"
                 >
                   <v-icon dark>mdi-file-export</v-icon>
                 </v-btn>
@@ -379,12 +380,6 @@
                       :event="solveProblem"
                       :object="circuit"
                     ></TooltipButton>
-                    <!--<TooltipButton
-                      :label="$vuetify.lang.t('$vuetify.ABRIR_CHAMADO')"
-                      :message="$vuetify.lang.t('$vuetify.ABRIR_CHAMADO')"
-                      :event="openIssue"
-                      :object="circuit"
-                    ></TooltipButton> -->
                   </v-card-actions>
                 </v-expansion-panel-content>
               </v-expansion-panel>
@@ -435,41 +430,46 @@ export default {
     SolveProblemDialog
   },
   methods: {
+    formatCircuit (circuit) {
+
+      return {
+        designacaoTpz: circuit.nome,
+        numeroContratoTpz: circuit.numeroContratoTpz,
+        numeroContratoSap: circuit.numeroContratoSap,
+        designacaoCliente: circuit.designacaoCliente,
+        dataAtivacao: this.formatDate(circuit.dataAtivacao),
+        statusInstalacao: circuit.statusInstalacao ? this.$vuetify.lang.t('$vuetify.' + circuit.statusInstalacao) : '--',
+        dataInstalacao: this.formatDate(circuit.dataInstalacao),
+        endereco: this.getAddress(circuit),
+        ip: circuit.ip || '--',
+        online: circuit.online == 3 ? 'ONLINE' : 'OFFLINE',
+        latitude: circuit.latitude || '--',
+        longitude: circuit.longitude || '--',
+        esno: circuit.esno || '--',
+        plataformaSat: circuit.plataformaSat || '--',
+        vsatId: circuit.vsatId || '--',
+        hub: circuit.hub || '--',
+      };
+    },
     exportCSV () {
 
+      this.loadingExport = true
       if (!this.allCircuits) {
         this.$get('/circuito/all', {
           contractNumber: this.$props.contract.numeroContratoTpz
         }).then(response => {
-          this.allCircuits = response.data
-          this.allCircuits.map((circuit) => {
-            circuit.dataInstalacao = this.formatDate(circuit.dataInstalacao)
-            circuit.endereco = this.getAddress(circuit);
-            delete circuit.bairro
-            delete circuit.cidade
-            delete circuit.uf
-            return circuit;
+
+          this.allCircuits = response.data.map((circuit) => {
+            return this.formatCircuit(circuit);
           })
-          this.downloadCSV()
+
+          this.$downloadCSV(this.allCircuits, this.$vuetify.lang.t('$vuetify.CIRCUITOS'))
+          this.loadingExport = false
         });
       } else {
-        this.downloadCSV()
+        this.$downloadCSV(this.allCircuits, this.$vuetify.lang.t('$vuetify.CIRCUITOS'))
+        this.loadingExport = false
       }
-    },
-    downloadCSV () {
-      let csvContent = "data:text/csv;charset=utf-8,";
-      csvContent += [
-        Object.keys(this.allCircuits[0]).join(";"),
-        ...this.allCircuits.map((item) => Object.values(item).join(";"))
-      ]
-        .join("\n")
-        .replace(/(^\[)|(\]$)/gm, "");
-
-      const data = encodeURI(csvContent);
-      const link = document.createElement("a");
-      link.setAttribute("href", data);
-      link.setAttribute("download", "export.csv");
-      link.click();
     },
     closeProblemSolveDialog () {
       this.showProblemSolveDialog = false
@@ -691,6 +691,7 @@ export default {
     contract: Object
   },
   data: () => ({
+    loadingExport: false,
     allCircuits: undefined,
     showProblemSolveDialog: false,
     showPanel: true,
