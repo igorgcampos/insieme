@@ -218,7 +218,7 @@
                       <v-col>
                         <LabelValue
                           :label="$vuetify.lang.t('$vuetify.DESCRICAO_SERVICO')"
-                          :value="invoice.descricao || '--'"
+                          :value="invoice.descricaoServico || '--'"
                           justify="start"
                           truncate
                           style="width:150px;"
@@ -237,7 +237,6 @@
                           :label="$vuetify.lang.t('$vuetify.DATA_COMPETENCIA')"
                           :value="formatDate(invoice.dataCompetencia)"
                           justify="start"
-                          truncate
                           style="width:150px;"
                         ></LabelValue>
                       </v-col>
@@ -265,7 +264,6 @@
                           :label="$vuetify.lang.t('$vuetify.DATA_PAGAMENTO')"
                           :value="invoice.dataPagamento?formatDate(invoice.dataPagamento):'--'"
                           justify="start"
-                          truncate
                           style="width:150px;"
                         ></LabelValue>
                       </v-col>
@@ -371,7 +369,7 @@ export default {
           invoice.tipo == 'VENDA' ? this.$vuetify.lang.t('$vuetify.VENDA') : invoice.tipo,
         statusPagamento: invoice.statusPagamento == 'PENDENTE' ? this.$vuetify.lang.t('$vuetify.EM_ABERTO') :
           this.$vuetify.lang.t('$vuetify.PAGO'),
-        descricaoServico: invoice.descricaoServico,
+        descricaoServico: invoice.descricaoServico.substring(0, 28),
         condicaoPagamento: invoice.condicaoPagamento,
         totalNF: invoice.totalNF.toLocaleString(),
         aReceber: invoice.aReceber.toLocaleString(),

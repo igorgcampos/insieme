@@ -15,7 +15,10 @@
       :justify="justify"
       v-if="truncate"
     >
-      <v-tooltip top>
+      <v-tooltip
+        top
+        max-width="220"
+      >
         <template v-slot:activator="{ on }">
           <span
             v-on="on"
