@@ -171,7 +171,8 @@ export default {
 
               this.showStatusResultPanel = true;
               this.showVerifyingSignalPanel = false;
-              if (response.data == 3) {
+
+              if (response && response.data == 3) {
                 this.statusOk = true;
                 this.getObject().online = response.data //Atualiza o circuito com o status online
               } else {
@@ -202,16 +203,25 @@ export default {
           hubFamily: this.getObject().plataformaSat || '',
           hub: this.getObject().hub || '',
           vsatIdModem: this.getObject().vsatId || ''
-        }).then((response) => {
+        }).then(() => {
 
-          this.showRestartResultPanel = true;
-          this.showRestartingCircuitPanel = false;
-          if (response && response.data == 3) {
-            this.restartOk = true;
-            this.getObject().online = response.data //Atualiza o circuito com o status online
-          } else {
-            this.restartOk = false;
-          }
+          setInterval(() => {
+
+            this.$get('/circuito/status',
+              { desigClient: this.getObject().designacaoCliente }).then((response) => {
+
+                this.showRestartResultPanel = true;
+                this.showRestartingCircuitPanel = false;
+
+                if (response && response.data == 3) {
+                  this.restartOk = true;
+                  this.getObject().online = response.data //Atualiza o circuito com o status online
+                } else {
+                  this.restartOk = false;
+                }
+              });
+
+          }, 50000);
         });
     },
     clean () {
