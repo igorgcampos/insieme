@@ -90,6 +90,32 @@
           </v-lazy>
         </v-col>
 
+        <v-col
+          class="text-center"
+          v-show="showChatQuestions"
+        >
+          <v-lazy
+            :options="{
+            threshold: .6
+            }"
+            transition="slide-x-transition"
+          >
+            <div class="ma-0 pa-0">
+              <v-icon
+                size="62"
+                class="mb-4 mt-8"
+                color="primary"
+              >{{!showOpenIssuePanel?'mdi-robot':'mdi-emoticon-sad'}}</v-icon>
+
+              <v-row class="justify-center">
+                <span class="ml-3 mr-3 mb-10 text-center SUBTITLE-2 font-weight-bold grey--text text--darken-3">
+                  {{!showOpenIssuePanel?questions[questionIndex]:
+                  $vuetify.lang.t('$vuetify.ABRA_CHAMADO')}} </span>
+              </v-row>
+            </div>
+          </v-lazy>
+        </v-col>
+
         <v-divider class="mt-n6"></v-divider>
         <v-card-actions>
           <v-spacer></v-spacer>
@@ -110,21 +136,21 @@
             color="primary"
             text
             @click="openIssueDialog"
-            v-show="showRestartResultPanel || (showStatusResultPanel && statusOk)"
+            v-show="showOpenIssuePanel || showRestartResultPanel || (showStatusResultPanel && statusOk)"
           >{{$vuetify.lang.t('$vuetify.ABRIR_CHAMADO')}}</v-btn>
 
           <v-btn
             color="primary"
             text
-            @click="verifySignalPanel"
-            v-show="showFirstQuestionPanel"
+            @click="showFirstQuestionPanel?verifySignalPanel():nextQuestion()"
+            v-show="showFirstQuestionPanel || (showChatQuestions && !showOpenIssuePanel)"
           >{{$vuetify.lang.t('$vuetify.SIM')}}</v-btn>
 
           <v-btn
             color="primary"
             text
-            @click="openChatBot"
-            v-show="showFirstQuestionPanel"
+            @click="openOrCloseChatBot"
+            v-show="showFirstQuestionPanel || (showChatQuestions && !showOpenIssuePanel)"
           >{{$vuetify.lang.t('$vuetify.NAO')}}</v-btn>
         </v-card-actions>
       </v-card>
@@ -141,6 +167,10 @@ export default {
     openIssue: Function
   },
   data: () => ({
+    showOpenIssuePanel: false,
+    questionIndex: 0,
+    questions: [],
+    showChatQuestions: false,
     showVerifyingSignalPanel: false,
     showStatusResultPanel: false,
     showRestartingCircuitPanel: false,
@@ -152,11 +182,29 @@ export default {
     restartingCircuitMessage: ''
   }),
   created: function () {
+
     this.verifyingSignalMessage = this.$vuetify.lang.t('$vuetify.VERIFICANDO_SINAL')
-    this.restartingCircuitMessage = this.$vuetify.lang.t('$vuetify.COLETANDO_INFORMACOES')
+    this.restartingCircuitMessage = this.$vuetify.lang.t('$vuetify.COLETANDO_INFORMACOES');
+
+    this.questions.push(this.$vuetify.lang.t('$vuetify.Pergunta_1'))
+    this.questions.push(this.$vuetify.lang.t('$vuetify.Pergunta_2'))
+    this.questions.push(this.$vuetify.lang.t('$vuetify.Pergunta_3'))
+    this.questions.push(this.$vuetify.lang.t('$vuetify.Pergunta_4'))
+    this.questions.push(this.$vuetify.lang.t('$vuetify.Pergunta_5'))
+    this.questions.push(this.$vuetify.lang.t('$vuetify.Pergunta_6'));
+
+    //(function (i, s, o, g, r, a, m) { i[r] = { context: { id: '8551dbde3f168db249381597eea81c71' } }; a = o; o = s.createElement(o); o.async = 1; o.src = g; m = s.getElementsByTagName(a)[0]; m.parentNode.insertBefore(o, m); })(window, document, 'script', 'https://js.huggy.chat/widget.min.js?v=8.0.0', 'pwz')
   },
   methods: {
+    nextQuestion () {
+      this.questionIndex += 1;
+
+      if (this.questionIndex == this.questions.length) {
+        this.showOpenIssuePanel = true;
+      }
+    },
     verifySignalPanel () {
+
       this.showFirstQuestionPanel = false
       this.showVerifyingSignalPanel = true
 
@@ -183,9 +231,33 @@ export default {
 
       }, 20000);
     },
-    openChatBot () {
-      this.close();
-      this.clean();
+    openOrCloseChatBot () {
+
+      if (this.showChatQuestions) {
+        this.close();
+        this.clean();
+
+        /*window.Huggy.init({
+          defaultCountry: '+55',
+          widget_id: '25183',
+          company: "317802",
+          contextID: '8551dbde3f168db249381597eea81c71',
+          name: 'Julio',
+          beforeLoad: function () {
+            console.log('Código executado antes do carregamento do widget')
+          },
+          afterLoad: function () {
+            console.log('Huggy chat disponível', window.Huggy);
+          }
+        });
+
+        window.Huggy.openBox();*/
+
+        return
+      }
+
+      this.showFirstQuestionPanel = false
+      this.showChatQuestions = true;
     },
     openIssueDialog () {
       this.close();
@@ -225,6 +297,9 @@ export default {
         });
     },
     clean () {
+      this.showOpenIssuePanel = false
+      this.questionIndex = 0;
+      this.showChatQuestions = false
       this.showFirstQuestionPanel = true
       this.showVerifyingSignalPanel = false
       this.showStatusResultPanel = false

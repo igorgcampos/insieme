@@ -16,6 +16,11 @@
 
     <v-spacer></v-spacer>
 
+    <FaqDialog
+      :show="showFaq"
+      :close="closeFaq"
+    ></FaqDialog>
+
     <v-tooltip bottom>
       <template v-slot:activator="{ on }">
         <v-chip
@@ -106,6 +111,20 @@
           icon
           color="white"
           class="ml-3"
+          @click="faq()"
+        >
+          <v-icon v-on="on">mdi-help-box</v-icon>
+        </v-btn>
+      </template>
+      <span>{{$vuetify.lang.t('$vuetify.CENTRAL_AJUDA')}}</span>
+    </v-tooltip>
+
+    <v-tooltip bottom>
+      <template v-slot:activator="{ on }">
+        <v-btn
+          icon
+          color="white"
+          class="ml-2 mr-0"
           @click="logout()"
         >
           <v-icon v-on="on">mdi-logout</v-icon>
@@ -114,18 +133,30 @@
       <span>{{$vuetify.lang.t('$vuetify.SAIR')}}</span>
     </v-tooltip>
   </v-app-bar>
-
 </template>
 
 <script>
+
+import FaqDialog from '../components/dialogs/FaqDialog';
+
 export default {
+  components: {
+    FaqDialog
+  },
   created: function () {
     this.user = this.$getUser()
   },
   data: () => ({
     user: {},
+    showFaq: false
   }),
   methods: {
+    closeFaq () {
+      this.showFaq = false
+    },
+    faq () {
+      this.showFaq = true
+    },
     toContractList () {
       this.$router.push('/contratos')
     },
