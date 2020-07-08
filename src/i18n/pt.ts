@@ -162,6 +162,9 @@ export default {
     COLETANDO_INFORMACOES: 'Aguarde alguns instantes enquanto coleto as informações do satélite...',
     VERIFICANDO_NOVAMENTE: 'Estou verificando se o sinal do seu circuito normalizou. Por favor aguarde um momento...',
     ABRA_CHAMADO: 'Que pena que você não conseguiu resolver seu problema. Por favor, abra um chamado conosco para que um especialista possa analisar seu problema.',
+
+
+
     CENTRAL_AJUDA: 'Central de ajuda',
     RESPOSTAS_DUVIDAS: 'Respostas para as dúvidas mais frequentes',
     DUVIDAS_FINANCEIRAS: 'Dúvidas financeiras',

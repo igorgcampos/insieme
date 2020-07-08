@@ -167,6 +167,7 @@ export default {
     openIssue: Function
   },
   data: () => ({
+    isInitiated: false,
     showOpenIssuePanel: false,
     questionIndex: 0,
     questions: [],
@@ -186,14 +187,15 @@ export default {
     this.verifyingSignalMessage = this.$vuetify.lang.t('$vuetify.VERIFICANDO_SINAL')
     this.restartingCircuitMessage = this.$vuetify.lang.t('$vuetify.COLETANDO_INFORMACOES');
 
-    this.questions.push(this.$vuetify.lang.t('$vuetify.Pergunta_1'))
-    this.questions.push(this.$vuetify.lang.t('$vuetify.Pergunta_2'))
-    this.questions.push(this.$vuetify.lang.t('$vuetify.Pergunta_3'))
-    this.questions.push(this.$vuetify.lang.t('$vuetify.Pergunta_4'))
-    this.questions.push(this.$vuetify.lang.t('$vuetify.Pergunta_5'))
-    this.questions.push(this.$vuetify.lang.t('$vuetify.Pergunta_6'));
+    this.questions.push(this.$vuetify.lang.t('$vuetify.PERGUNTA_1'))
+    this.questions.push(this.$vuetify.lang.t('$vuetify.PERGUNTA_2'))
+    this.questions.push(this.$vuetify.lang.t('$vuetify.PERGUNTA_3'))
+    this.questions.push(this.$vuetify.lang.t('$vuetify.PERGUNTA_4'))
+    this.questions.push(this.$vuetify.lang.t('$vuetify.PERGUNTA_5'))
+    this.questions.push(this.$vuetify.lang.t('$vuetify.PERGUNTA_6'));
 
-    //(function (i, s, o, g, r, a, m) { i[r] = { context: { id: '8551dbde3f168db249381597eea81c71' } }; a = o; o = s.createElement(o); o.async = 1; o.src = g; m = s.getElementsByTagName(a)[0]; m.parentNode.insertBefore(o, m); })(window, document, 'script', 'https://js.huggy.chat/widget.min.js?v=8.0.0', 'pwz')
+    (function (i, s, o, g, r, a, m) { i[r] = { context: { id: '8551dbde3f168db249381597eea81c71' } }; a = o; o = s.createElement(o); o.async = 1; o.src = g; m = s.getElementsByTagName(a)[0]; m.parentNode.insertBefore(o, m); })(window, document, 'script', 'https://js.huggy.chat/widget.min.js?v=8.0.0', 'pwz')
+
   },
   methods: {
     nextQuestion () {
@@ -233,31 +235,26 @@ export default {
     },
     openOrCloseChatBot () {
 
-      if (this.showChatQuestions) {
-        this.close();
-        this.clean();
-
-        /*window.Huggy.init({
+      if (!this.isInitiated) {
+        window.Huggy.init({
           defaultCountry: '+55',
-          widget_id: '25183',
-          company: "317802",
-          contextID: '8551dbde3f168db249381597eea81c71',
-          name: 'Julio',
-          beforeLoad: function () {
-            console.log('Código executado antes do carregamento do widget')
-          },
+          widget_id: '24845',
+          company: "317521",
+          contextID: '4a40e11b97d6d86a057e48c12e629743',
           afterLoad: function () {
-            console.log('Huggy chat disponível', window.Huggy);
+            window.Huggy.openBox();
           }
         });
-
-        window.Huggy.openBox();*/
-
-        return
+        this.isInitiated = true;
+      } else {
+        window.Huggy.openBox();
       }
 
-      this.showFirstQuestionPanel = false
-      this.showChatQuestions = true;
+      this.close();
+      this.clean();
+
+      //this.showFirstQuestionPanel = false
+      //this.showChatQuestions = true;
     },
     openIssueDialog () {
       this.close();
