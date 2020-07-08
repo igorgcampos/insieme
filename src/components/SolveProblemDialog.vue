@@ -235,7 +235,7 @@ export default {
     },
     openOrCloseChatBot () {
 
-      if (!this.isInitiated) {
+      if (!this.isInitiated && window.Huggy.init) {
         window.Huggy.init({
           defaultCountry: '+55',
           widget_id: '24845',
