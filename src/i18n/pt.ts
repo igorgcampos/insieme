@@ -153,7 +153,7 @@ export default {
     SINAL_CIRCUITO_ONLINE: 'O sinal do seu circuito está online. Por favor verifique novamente o seu circuito. Se ainda não estiver respondendo pode abrir um chamado conosco.',
     SINAL_CIRCUITO_OFFLINE: 'Verifiquei que seu circuito não está respondendo. Gostaria de reinicia-lo agora?',
     REINICIAR: 'Reiniciar',
-    PRIMEIRA_PERGUNTA: 'Olá, sou seu assistente virtual. Vou tentar ajudá-lo. Você checou se o circuito está ligado e os cabos conectados?',
+    PRIMEIRA_PERGUNTA: 'Olá, sou seu assistente virtual. Vou tentar ajudá-lo. Você checou se o circuito está ligado e os cabos estão conectados?',
     SIM: 'Sim',
     NAO: 'Não',
     RESTART_FALHOU: 'Que pena! Após reiniciar seu circuito verifiquei que o mesmo continua sem responder. Por favor, abra um chamado conosco para que um especialista possa analisar seu problema.',
