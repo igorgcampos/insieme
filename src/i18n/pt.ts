@@ -72,6 +72,8 @@ export default {
     PAGOS: 'Pagos',
     NUMERO_NOTA: 'Número da nota',
     STATUS_PAGAMENTO: 'Status do pagamento',
+    STATUS_INSTALACAO: 'Status da instalação',
+    PLATAFORMA_SAT: 'Plataforma SAT',
     PAGAMENTO: 'Pagamento',
     ABRIR_CHAMADO: 'Abrir chamado',
     ABRIR_CHAMADO_NOTA: 'Abre um chamado para esta nota fiscal',
@@ -162,8 +164,6 @@ export default {
     COLETANDO_INFORMACOES: 'Aguarde alguns instantes enquanto coleto as informações do satélite...',
     VERIFICANDO_NOVAMENTE: 'Estou verificando se o sinal do seu circuito normalizou. Por favor aguarde um momento...',
     ABRA_CHAMADO: 'Que pena que você não conseguiu resolver seu problema. Por favor, abra um chamado conosco para que um especialista possa analisar seu problema.',
-
-
 
     CENTRAL_AJUDA: 'Central de ajuda',
     RESPOSTAS_DUVIDAS: 'Respostas para as dúvidas mais frequentes',

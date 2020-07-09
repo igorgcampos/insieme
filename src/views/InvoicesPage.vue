@@ -361,19 +361,19 @@ export default {
     formatInvoice (invoice) {
 
       return {
-        numero: invoice.numero,
-        dataCompetencia: this.formatDate(invoice.dataCompetencia),
-        dataEmissao: this.formatDate(invoice.dataEmissao),
-        dataVencimento: this.formatDate(invoice.dataVencimento),
-        tipo: invoice.tipo == 'LOCAÇÃO' ? this.$vuetify.lang.t('$vuetify.LOCACAO') :
+        [this.$vuetify.lang.t('$vuetify.NUMERO_NOTA')]: invoice.numero,
+        [this.$vuetify.lang.t('$vuetify.DATA_COMPETENCIA')]: this.formatDate(invoice.dataCompetencia),
+        [this.$vuetify.lang.t('$vuetify.DATA_EMISSAO')]: this.formatDate(invoice.dataEmissao),
+        [this.$vuetify.lang.t('$vuetify.DATA_VENCIMENTO')]: this.formatDate(invoice.dataVencimento),
+        [this.$vuetify.lang.t('$vuetify.TIPO')]: invoice.tipo == 'LOCAÇÃO' ? this.$vuetify.lang.t('$vuetify.LOCACAO') :
           invoice.tipo == 'VENDA' ? this.$vuetify.lang.t('$vuetify.VENDA') : invoice.tipo,
-        statusPagamento: invoice.statusPagamento == 'PENDENTE' ? this.$vuetify.lang.t('$vuetify.EM_ABERTO') :
+        [this.$vuetify.lang.t('$vuetify.STATUS_PAGAMENTO')]: invoice.statusPagamento == 'PENDENTE' ? this.$vuetify.lang.t('$vuetify.EM_ABERTO') :
           this.$vuetify.lang.t('$vuetify.PAGO'),
-        descricaoServico: invoice.descricaoServico.substring(0, 18),
-        condicaoPagamento: invoice.condicaoPagamento,
-        totalNF: invoice.totalNF.toLocaleString(),
-        aReceber: invoice.aReceber.toLocaleString(),
-        recebido: invoice.recebido.toLocaleString()
+        [this.$vuetify.lang.t('$vuetify.DESCRICAO_SERVICO')]: invoice.descricaoServico.substring(0, 18),
+        [this.$vuetify.lang.t('$vuetify.CONDICAO_PAGAMENTO')]: invoice.condicaoPagamento,
+        [this.$vuetify.lang.t('$vuetify.TOTAL_NOTA')]: invoice.totalNF.toLocaleString(),
+        [this.$vuetify.lang.t('$vuetify.A_RECEBER')]: invoice.aReceber.toLocaleString(),
+        [this.$vuetify.lang.t('$vuetify.RECEBIDO')]: invoice.recebido.toLocaleString()
       }
     },
     exportCSV () {

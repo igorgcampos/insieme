@@ -75,6 +75,8 @@ export default {
     PAGOS: 'Paid',
     NUMERO_NOTA: 'Invoice number',
     STATUS_PAGAMENTO: 'Payment status',
+    STATUS_INSTALACAO: 'Installation status',
+    PLATAFORMA_SAT: 'SAT platform',
     PAGAMENTO: 'Payment',
     ABRIR_CHAMADO: 'Open issue',
     ABRIR_CHAMADO_NOTA: 'Open an issue for this invoice',
@@ -161,6 +163,7 @@ export default {
     COLETANDO_INFORMACOES: 'Wait a few moments while I collect the satellite informations...',
     VERIFICANDO_NOVAMENTE: 'I am checking to see if your circuit signal has normalized. Please wait a moment...',
     ABRA_CHAMADO: 'Too bad you were unable to solve your problem. Please open a call with us so that a specialist can analyze your problem.',
+
     CENTRAL_AJUDA: 'Help central',
     RESPOSTAS_DUVIDAS: 'Answers to the most frequently asked questions',
     DUVIDAS_FINANCEIRAS: 'Financial doubts',

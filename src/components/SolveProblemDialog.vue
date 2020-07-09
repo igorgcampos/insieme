@@ -187,12 +187,12 @@ export default {
     this.verifyingSignalMessage = this.$vuetify.lang.t('$vuetify.VERIFICANDO_SINAL')
     this.restartingCircuitMessage = this.$vuetify.lang.t('$vuetify.COLETANDO_INFORMACOES');
 
-    this.questions.push(this.$vuetify.lang.t('$vuetify.PERGUNTA_1'))
+    /*this.questions.push(this.$vuetify.lang.t('$vuetify.PERGUNTA_1'))
     this.questions.push(this.$vuetify.lang.t('$vuetify.PERGUNTA_2'))
     this.questions.push(this.$vuetify.lang.t('$vuetify.PERGUNTA_3'))
     this.questions.push(this.$vuetify.lang.t('$vuetify.PERGUNTA_4'))
     this.questions.push(this.$vuetify.lang.t('$vuetify.PERGUNTA_5'))
-    this.questions.push(this.$vuetify.lang.t('$vuetify.PERGUNTA_6'));
+    this.questions.push(this.$vuetify.lang.t('$vuetify.PERGUNTA_6'));*/
 
     (function (i, s, o, g, r, a, m) { i[r] = { context: { id: '8551dbde3f168db249381597eea81c71' } }; a = o; o = s.createElement(o); o.async = 1; o.src = g; m = s.getElementsByTagName(a)[0]; m.parentNode.insertBefore(o, m); })(window, document, 'script', 'https://js.huggy.chat/widget.min.js?v=8.0.0', 'pwz')
 
