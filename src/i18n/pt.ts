@@ -184,4 +184,15 @@ export default {
     RESPOSTA_COMERCIAL_3: 'O reajuste é aplicado a cada 12 meses contados a partir da assinatura do contrato usando como base o índice de reajuste especifico no mesmo.',
     RESPOSTA_COMERCIAL_4: 'Aviso prévio é o período que a Contratante deve cumprir após uma solicitação de cancelamento (parcial ou total)',
 
+    DUVIDA_OPERACIONAL_1: 'Qual o site recomendado para realizar o teste de velocidade do link satélite?',
+    DUVIDA_OPERACIONAL_2: 'Estou com problemas técnicos no link, como resolver?',
+    DUVIDA_OPERACIONAL_3: 'A internet funciona mesmo durante a chuva intensa ou tempo nublado?',
+    DUVIDA_OPERACIONAL_4: 'Qual o contato disponível para suporte técnico?',
+    RESPOSTA_OPERACIONAL_1: 'Favor realizar o acesso aos seguintes sites e realizar os testes: https://www.speedtest.net/pt ou https://beta.simet.nic.br/',
+    RESPOSTA_OPERACIONAL_2: 'Acesse a gestão de contratos, selecione o circuito com problemas e clique na opção "Resolução de problema"',
+    RESPOSTA_OPERACIONAL_3: 'A Telespazio oferece a tecnologia mais moderna disponível no mercado. Tempo nublado ou mesmo chuvas não afetam a qualidade da conexão. Apenas intempéries extremas serão capazes de oferecer alguma instabilidade.',
+    RESPOSTA_OPERACIONAL_4: 'Se o seu problema for a conexão com algum de seus circuitos, accesse a gestão de contratos, selecione o circuito com problemas e clique na opção "Resolução de problema". Para qualquer outro problema, pode ligar para nós pelo telefone 0800 8888 722',
+
+    AINDA_COM_DUVIDAS: 'Ainda com dúvidas?',
+    CONVERSE_CONOSCO: 'Converse conosco no chat'
 }

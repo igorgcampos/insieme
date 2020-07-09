@@ -4,7 +4,7 @@ import router from './router'
 import vuetify from './plugins/vuetify';
 import httpService from './services/HttpService.js'
 import authService from './services/AuthService.js'
-import dateService from './services/DateService.js'
+import utilService from './services/UtilService.js'
 import exportService from './services/ExportService.js'
 
 Vue.config.productionTip = false
@@ -12,7 +12,7 @@ document.title = "Insieme"
 
 Vue.use(httpService, router)
 Vue.use(authService)
-Vue.use(dateService)
+Vue.use(utilService)
 Vue.use(exportService)
 
 Vue.directive('scroll', {

@@ -149,7 +149,7 @@
           <v-btn
             color="primary"
             text
-            @click="openOrCloseChatBot"
+            @click="openChatBot"
             v-show="showFirstQuestionPanel || (showChatQuestions && !showOpenIssuePanel)"
           >{{$vuetify.lang.t('$vuetify.NAO')}}</v-btn>
         </v-card-actions>
@@ -167,7 +167,6 @@ export default {
     openIssue: Function
   },
   data: () => ({
-    isInitiated: false,
     showOpenIssuePanel: false,
     questionIndex: 0,
     questions: [],
@@ -193,9 +192,6 @@ export default {
     this.questions.push(this.$vuetify.lang.t('$vuetify.PERGUNTA_4'))
     this.questions.push(this.$vuetify.lang.t('$vuetify.PERGUNTA_5'))
     this.questions.push(this.$vuetify.lang.t('$vuetify.PERGUNTA_6'));*/
-
-    (function (i, s, o, g, r, a, m) { i[r] = { context: { id: '8551dbde3f168db249381597eea81c71' } }; a = o; o = s.createElement(o); o.async = 1; o.src = g; m = s.getElementsByTagName(a)[0]; m.parentNode.insertBefore(o, m); })(window, document, 'script', 'https://js.huggy.chat/widget.min.js?v=8.0.0', 'pwz')
-
   },
   methods: {
     nextQuestion () {
@@ -233,23 +229,9 @@ export default {
 
       }, 20000);
     },
-    openOrCloseChatBot () {
+    openChatBot () {
 
-      if (!this.isInitiated && window.Huggy.init) {
-        window.Huggy.init({
-          defaultCountry: '+55',
-          widget_id: '24845',
-          company: "317521",
-          contextID: '4a40e11b97d6d86a057e48c12e629743',
-          afterLoad: function () {
-            window.Huggy.openBox();
-          }
-        });
-        this.isInitiated = true;
-      } else {
-        window.Huggy.openBox();
-      }
-
+      this.$showChat()
       this.close();
       this.clean();
 

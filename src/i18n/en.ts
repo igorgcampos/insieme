@@ -182,4 +182,16 @@ export default {
     RESPOSTA_COMERCIAL_2: 'The termination penalty is the guarantee of the provision of services for the contracted term. Any party that cancels the contract (total or partial), before the end of the contracted term, is subject to a termination fine of a compensatory nature. ',
     RESPOSTA_COMERCIAL_3: 'The readjustment is applied every 12 months from the signing of the contract using the specific readjustment index as the basis.',
     RESPOSTA_COMERCIAL_4: 'Prior notice is the period that the Contractor must comply with after a request for cancellation (partial or total)',
+
+    DUVIDA_OPERACIONAL_1: 'What site is recommended to perform the satellite link speed test?',
+    DUVIDA_OPERACIONAL_2: 'I have technical problems with the link, how to solve it?',
+    DUVIDA_OPERACIONAL_3: 'Does the internet work even during heavy rain or cloudy weather?',
+    DUVIDA_OPERACIONAL_4: 'What contact is available for technical support?',
+    RESPOSTA_OPERACIONAL_1: 'Please access the following sites and perform the tests: https://www.speedtest.net/pt or https://beta.simet.nic.br/',
+    RESPOSTA_OPERACIONAL_2: 'Access contract management, select the circuit with problems and click on the option "Problem solving"',
+    RESPOSTA_OPERACIONAL_3: 'Telespazio offers the most modern technology available on the market. Cloudy weather or even rain does not affect the quality of the connection. Only extreme weather will be able to offer some instability. ',
+    RESPOSTA_OPERACIONAL_4: 'If your problem is the connection with any of your circuits, access the contract management, select the circuit with problems and click on the option "Problem solving". For any other problem, you can call us on 0800 8888 722 ',
+
+    AINDA_COM_DUVIDAS: 'Still in doubt?',
+    CONVERSE_CONOSCO: 'Chat with us'
 }

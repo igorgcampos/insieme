@@ -144,7 +144,7 @@
                 <div
                   class="ma-0 pt-2 overflow-y-auto overflow-x-hidden"
                   v-show="showOperationalPanel"
-                  style="width:97%; max-height:250px;"
+                  style="width:97%; max-height:240px;"
                 >
                   <v-expansion-panels class="ma-1 mt-n1 ml-8 pr-12">
                     <v-expansion-panel
@@ -168,6 +168,11 @@
         </v-col>
         <v-divider class="mt-n6"></v-divider>
         <v-card-actions>
+          <v-btn
+            color="primary"
+            text
+            @click="openChat()"
+          >{{$vuetify.lang.t('$vuetify.AINDA_COM_DUVIDAS')}}</v-btn>
           <v-spacer></v-spacer>
           <v-btn
             color="primary"
@@ -181,12 +186,18 @@
 </template>
 
 <script>
+
 export default {
   props: {
     close: Function,
     show: Boolean
   },
   methods: {
+    openChat () {
+
+      this.$showChat()
+      this.close();
+    },
     expandFinancialPanel () {
       this.showFinancialPanel = !this.showFinancialPanel;
 
@@ -236,7 +247,14 @@ export default {
     this.commercialItems.push({      question: this.$vuetify.lang.t('$vuetify.DUVIDA_COMERCIAL_4'),
       awnser: this.$vuetify.lang.t('$vuetify.RESPOSTA_COMERCIAL_4')    })
 
-    this.operationalItems.push({})
+    this.operationalItems.push({      question: this.$vuetify.lang.t('$vuetify.DUVIDA_OPERACIONAL_1'),
+      awnser: this.$vuetify.lang.t('$vuetify.RESPOSTA_OPERACIONAL_1')    })
+    this.operationalItems.push({      question: this.$vuetify.lang.t('$vuetify.DUVIDA_OPERACIONAL_2'),
+      awnser: this.$vuetify.lang.t('$vuetify.RESPOSTA_OPERACIONAL_2')    })
+    this.operationalItems.push({      question: this.$vuetify.lang.t('$vuetify.DUVIDA_OPERACIONAL_3'),
+      awnser: this.$vuetify.lang.t('$vuetify.RESPOSTA_OPERACIONAL_3')    })
+    this.operationalItems.push({      question: this.$vuetify.lang.t('$vuetify.DUVIDA_OPERACIONAL_4'),
+      awnser: this.$vuetify.lang.t('$vuetify.RESPOSTA_OPERACIONAL_4')    })
   }
 };
 </script>
