@@ -380,6 +380,13 @@
                       :event="solveProblem"
                       :object="circuit"
                     ></TooltipButton>
+
+                    <TooltipButton
+                      :label="$vuetify.lang.t('$vuetify.MAIS_DETALHES')"
+                      :message="$vuetify.lang.t('$vuetify.VER_DETALHES_PRTG')"
+                      :event="solveProblem"
+                      :object="circuit"
+                    ></TooltipButton>
                   </v-card-actions>
                 </v-expansion-panel-content>
               </v-expansion-panel>

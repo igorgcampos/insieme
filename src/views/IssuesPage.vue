@@ -111,7 +111,6 @@
               class="ml-2 mt-1"
               dark
               color="primary"
-              v-on="on"
               @click="test()"
             >
               {{$vuetify.lang.t('$vuetify.ABRIR_CHAMADO')}}

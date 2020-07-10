@@ -122,8 +122,15 @@
           <v-btn
             color="primary"
             text
-            @click="clean(); close();"
+            @click="close(); clean();"
+            v-show="!showRestartingCircuitPanel"
           >{{$vuetify.lang.t('$vuetify.FECHAR')}}</v-btn>
+
+          <v-btn
+            color="primary"
+            text
+            v-show="showRestartingCircuitPanel"
+          ></v-btn>
 
           <v-btn
             color="primary"
@@ -167,6 +174,7 @@ export default {
     openIssue: Function
   },
   data: () => ({
+    signalPanelId: 0,
     showOpenIssuePanel: false,
     questionIndex: 0,
     questions: [],
@@ -206,7 +214,7 @@ export default {
       this.showFirstQuestionPanel = false
       this.showVerifyingSignalPanel = true
 
-      setTimeout(() => {
+      this.signalPanelId = setTimeout(() => {
 
         if (this.showDialog) {
 
@@ -256,7 +264,7 @@ export default {
           vsatIdModem: this.getObject().vsatId || ''
         }).then(() => {
 
-          setInterval(() => {
+          this.signalPanelId = setInterval(() => {
 
             this.$get('/circuito/status',
               { desigClient: this.getObject().designacaoCliente }).then((response) => {
@@ -272,7 +280,7 @@ export default {
                 }
               });
 
-          }, 50000);
+          }, 60000);
         });
     },
     clean () {
@@ -288,9 +296,12 @@ export default {
       this.restartOk = false
       this.verifyingSignalMessage = this.$vuetify.lang.t('$vuetify.VERIFICANDO_SINAL')
       this.restartingCircuitMessage = this.$vuetify.lang.t('$vuetify.COLETANDO_INFORMACOES')
+
+      clearInterval(this.signalPanelId);
     }
   },
   watch: {
+
     showVerifyingSignalPanel: function () {
 
       if (this.showVerifyingSignalPanel) {
@@ -312,7 +323,7 @@ export default {
 
             setTimeout(() => {
               this.restartingCircuitMessage = this.$vuetify.lang.t('$vuetify.MAIS_ALGUNS_INSTANTES')
-            }, 15000);
+            }, 20000);
 
           }, 15000);
 

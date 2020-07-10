@@ -77,6 +77,8 @@ export default {
     PAGAMENTO: 'Pagamento',
     ABRIR_CHAMADO: 'Abrir chamado',
     ABRIR_CHAMADO_NOTA: 'Abre um chamado para esta nota fiscal',
+    MAIS_DETALHES: 'Mais detalhes',
+    VER_DETALHES_PRTG: 'Ver mais detalhes no PRTG',
     DESCRICAO_SERVICO: 'Descrição do serviço',
     CONDICAO_PAGAMENTO: 'Condição de pagamento',
     DATA_COMPETENCIA: 'Data de competência',
