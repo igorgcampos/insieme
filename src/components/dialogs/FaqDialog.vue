@@ -19,38 +19,34 @@
           class="ma-n2 pa-0 overflow-y-hidden overflow-x-hidden"
           style="min-height:28rem; max-height:28rem;"
         >
-          <v-row class="mt-2 ml-2">
+          <v-row class="mt-n3 ml-2">
             <v-col>
-              <v-row class="ml-4">
-                <span class="text-right subtitle-1 font-weight-bold grey--text text--darken-1">
-                  {{$vuetify.lang.t('$vuetify.DUVIDAS_FINANCEIRAS')}}</span>
-                <v-col>
-                  <v-tooltip bottom>
-                    <template v-slot:activator="{ on }">
-                      <v-btn
-                        icon
-                        color="grey--text text--darken-1"
-                        class="ml-1 mt-n6"
-                        @click="expandFinancialPanel()"
-                      >
-                        <v-icon v-on="on">{{showFinancialPanel?'mdi-arrow-up-drop-circle-outline':
-            'mdi-arrow-down-drop-circle-outline'}}</v-icon>
-                      </v-btn>
-                    </template>
-                    <span>{{showFinancialPanel?$vuetify.lang.t('$vuetify.ESCONDER'):$vuetify.lang.t('$vuetify.MOSTRAR')}}</span>
-                  </v-tooltip>
-                </v-col>
-              </v-row>
-
+              <v-col
+                cols="8"
+                class="ml-4"
+              >
+                <v-row>
+                  <v-text-field
+                    v-model.trim="searchText"
+                    dense
+                    :placeholder="$vuetify.lang.t('$vuetify.BUSCAR_PERGUNTA')"
+                    single-line
+                    solo
+                    max-width="200"
+                    append-icon="mdi-magnify"
+                    @keypress="search()"
+                    @keyup.delete="search()"
+                  ></v-text-field>
+                </v-row>
+              </v-col>
               <v-row>
                 <div
-                  class="ma-0 pt-2 overflow-y-auto overflow-x-hidden"
-                  v-show="showFinancialPanel"
-                  style="width:97%; max-height:250px;"
+                  class="ma-0 pt-2 mt-n4 overflow-y-auto overflow-x-hidden"
+                  style="width:97%; max-height:335px;"
                 >
-                  <v-expansion-panels class="ma-1 mt-n1 ml-8 pr-12">
+                  <v-expansion-panels class="ma-1 ml-7 mt-0 pr-12">
                     <v-expansion-panel
-                      v-for="(item, i) in financialItems"
+                      v-for="(item, i) in selectedItems"
                       :key="i"
                       hide-actions
                     >
@@ -65,106 +61,10 @@
                   </v-expansion-panels>
                 </div>
               </v-row>
+
             </v-col>
           </v-row>
 
-          <v-row class="mt-n4 ml-2">
-            <v-col>
-              <v-row class="ml-4">
-                <span class="text-right subtitle-1 font-weight-bold grey--text text--darken-1">
-                  {{$vuetify.lang.t('$vuetify.DUVIDAS_COMERCIAIS')}}</span>
-                <v-col>
-                  <v-tooltip bottom>
-                    <template v-slot:activator="{ on }">
-                      <v-btn
-                        icon
-                        color="grey--text text--darken-1"
-                        class="ml-1 mt-n6"
-                        @click="expandCommercialPanel()"
-                      >
-                        <v-icon v-on="on">{{showCommercialPanel?'mdi-arrow-up-drop-circle-outline':
-            'mdi-arrow-down-drop-circle-outline'}}</v-icon>
-                      </v-btn>
-                    </template>
-                    <span>{{showCommercialPanel?$vuetify.lang.t('$vuetify.ESCONDER'):$vuetify.lang.t('$vuetify.MOSTRAR')}}</span>
-                  </v-tooltip>
-                </v-col>
-              </v-row>
-
-              <v-row>
-                <div
-                  class="ma-0 pt-2 overflow-y-auto overflow-x-hidden"
-                  v-show="showCommercialPanel"
-                  style="width:97%; max-height:250px;"
-                >
-                  <v-expansion-panels class="ma-1 mt-n1 ml-8 pr-12">
-                    <v-expansion-panel
-                      v-for="(item, i) in commercialItems"
-                      :key="i"
-                      hide-actions
-                    >
-                      <v-expansion-panel-header class="pt-0 pb-0 ma-0 mt-n1 mb-n1">
-                        <span>{{item.question}} </span>
-                      </v-expansion-panel-header>
-
-                      <v-expansion-panel-content>
-                        <span class="subtitle-3 font-weight-bold">{{item.awnser}}</span>
-                      </v-expansion-panel-content>
-                    </v-expansion-panel>
-                  </v-expansion-panels>
-                </div>
-              </v-row>
-            </v-col>
-          </v-row>
-
-          <v-row class="mt-n4 ml-2">
-            <v-col>
-              <v-row class="ml-4">
-                <span class="text-right subtitle-1 font-weight-bold grey--text text--darken-1">
-                  {{$vuetify.lang.t('$vuetify.DUVIDAS_OPERACIONAIS')}}</span>
-                <v-col>
-                  <v-tooltip bottom>
-                    <template v-slot:activator="{ on }">
-                      <v-btn
-                        icon
-                        color="grey--text text--darken-1"
-                        class="ml-1 mt-n6"
-                        @click="expandOperationalPanel()"
-                      >
-                        <v-icon v-on="on">{{showOperationalPanel?'mdi-arrow-up-drop-circle-outline':
-            'mdi-arrow-down-drop-circle-outline'}}</v-icon>
-                      </v-btn>
-                    </template>
-                    <span>{{showOperationalPanel?$vuetify.lang.t('$vuetify.ESCONDER'):$vuetify.lang.t('$vuetify.MOSTRAR')}}</span>
-                  </v-tooltip>
-                </v-col>
-              </v-row>
-
-              <v-row>
-                <div
-                  class="ma-0 pt-2 overflow-y-auto overflow-x-hidden"
-                  v-show="showOperationalPanel"
-                  style="width:97%; max-height:240px;"
-                >
-                  <v-expansion-panels class="ma-1 mt-n1 ml-8 pr-12">
-                    <v-expansion-panel
-                      v-for="(item, i) in operationalItems"
-                      :key="i"
-                      hide-actions
-                    >
-                      <v-expansion-panel-header class="pt-0 pb-0 ma-0 mt-n1 mb-n1">
-                        <span>{{item.question}} </span>
-                      </v-expansion-panel-header>
-
-                      <v-expansion-panel-content>
-                        <span class="subtitle-3 font-weight-bold">{{item.awnser}}</span>
-                      </v-expansion-panel-content>
-                    </v-expansion-panel>
-                  </v-expansion-panels>
-                </div>
-              </v-row>
-            </v-col>
-          </v-row>
         </v-col>
         <v-divider class="mt-n6"></v-divider>
         <v-card-actions>
@@ -193,68 +93,61 @@ export default {
     show: Boolean
   },
   methods: {
+    search () {
+
+      if (this.searchText.length == 0) {
+        this.selectedItems = this.items;
+        return
+      }
+
+      this.selectedItems = []
+      for (var index in this.items) {
+        if (this.items[index].question.includes(this.searchText) ||
+          this.items[index].awnser.includes(this.searchText)) {
+          this.selectedItems.push(this.items[index])
+        }
+      }
+    },
     openChat () {
 
       this.$showChat()
       this.close();
-    },
-    expandFinancialPanel () {
-      this.showFinancialPanel = !this.showFinancialPanel;
-
-      if (this.showFinancialPanel) {
-        this.showCommercialPanel = false;
-        this.showOperationalPanel = false;
-      }
-    },
-    expandCommercialPanel () {
-      this.showCommercialPanel = !this.showCommercialPanel;
-
-      if (this.showCommercialPanel) {
-        this.showFinancialPanel = false;
-        this.showOperationalPanel = false;
-      }
-    },
-    expandOperationalPanel () {
-      this.showOperationalPanel = !this.showOperationalPanel;
-
-      if (this.showOperationalPanel) {
-        this.showCommercialPanel = false;
-        this.showFinancialPanel = false;
-      }
-    },
+    }
   },
   data: () => ({
-    commercialItems: [],
-    financialItems: [],
-    operationalItems: [],
-    showFinancialPanel: false,
-    showCommercialPanel: false,
-    showOperationalPanel: false
+    items: [],
+    selectedItems: [],
+    searchText: ''
   }),
   created: function () {
+    this.items.push({      question: this.$vuetify.lang.t('$vuetify.DUVIDA_1'),
+      awnser: this.$vuetify.lang.t('$vuetify.RESPOSTA_1')    })
 
-    this.financialItems.push({      question: this.$vuetify.lang.t('$vuetify.DUVIDA_FINANCEIRO_1'),
-      awnser: this.$vuetify.lang.t('$vuetify.RESPOSTA_FINANCEIRO_1')    })
-    this.financialItems.push({      question: this.$vuetify.lang.t('$vuetify.DUVIDA_FINANCEIRO_2'),
-      awnser: this.$vuetify.lang.t('$vuetify.RESPOSTA_FINANCEIRO_2')    })
+    this.items.push({      question: this.$vuetify.lang.t('$vuetify.DUVIDA_2'),
+      awnser: this.$vuetify.lang.t('$vuetify.RESPOSTA_2')    })
 
-    this.commercialItems.push({      question: this.$vuetify.lang.t('$vuetify.DUVIDA_COMERCIAL_1'),
-      awnser: this.$vuetify.lang.t('$vuetify.RESPOSTA_COMERCIAL_1')    })
-    this.commercialItems.push({      question: this.$vuetify.lang.t('$vuetify.DUVIDA_COMERCIAL_2'),
-      awnser: this.$vuetify.lang.t('$vuetify.RESPOSTA_COMERCIAL_2')    })
-    this.commercialItems.push({      question: this.$vuetify.lang.t('$vuetify.DUVIDA_COMERCIAL_3'),
-      awnser: this.$vuetify.lang.t('$vuetify.RESPOSTA_COMERCIAL_3')    })
-    this.commercialItems.push({      question: this.$vuetify.lang.t('$vuetify.DUVIDA_COMERCIAL_4'),
-      awnser: this.$vuetify.lang.t('$vuetify.RESPOSTA_COMERCIAL_4')    })
+    this.items.push({      question: this.$vuetify.lang.t('$vuetify.DUVIDA_3'),
+      awnser: this.$vuetify.lang.t('$vuetify.RESPOSTA_3')    })
 
-    this.operationalItems.push({      question: this.$vuetify.lang.t('$vuetify.DUVIDA_OPERACIONAL_1'),
-      awnser: this.$vuetify.lang.t('$vuetify.RESPOSTA_OPERACIONAL_1')    })
-    this.operationalItems.push({      question: this.$vuetify.lang.t('$vuetify.DUVIDA_OPERACIONAL_2'),
-      awnser: this.$vuetify.lang.t('$vuetify.RESPOSTA_OPERACIONAL_2')    })
-    this.operationalItems.push({      question: this.$vuetify.lang.t('$vuetify.DUVIDA_OPERACIONAL_3'),
-      awnser: this.$vuetify.lang.t('$vuetify.RESPOSTA_OPERACIONAL_3')    })
-    this.operationalItems.push({      question: this.$vuetify.lang.t('$vuetify.DUVIDA_OPERACIONAL_4'),
-      awnser: this.$vuetify.lang.t('$vuetify.RESPOSTA_OPERACIONAL_4')    })
+    this.items.push({      question: this.$vuetify.lang.t('$vuetify.DUVIDA_4'),
+      awnser: this.$vuetify.lang.t('$vuetify.RESPOSTA_4')    })
+
+    this.items.push({      question: this.$vuetify.lang.t('$vuetify.DUVIDA_5'),
+      awnser: this.$vuetify.lang.t('$vuetify.RESPOSTA_5')    })
+
+    this.items.push({      question: this.$vuetify.lang.t('$vuetify.DUVIDA_6'),
+      awnser: this.$vuetify.lang.t('$vuetify.RESPOSTA_6')    })
+
+    this.items.push({      question: this.$vuetify.lang.t('$vuetify.DUVIDA_7'),
+      awnser: this.$vuetify.lang.t('$vuetify.RESPOSTA_7')    })
+
+    this.items.push({      question: this.$vuetify.lang.t('$vuetify.DUVIDA_8'),
+      awnser: this.$vuetify.lang.t('$vuetify.RESPOSTA_8')    })
+
+    this.items.push({      question: this.$vuetify.lang.t('$vuetify.DUVIDA_9'),
+      awnser: this.$vuetify.lang.t('$vuetify.RESPOSTA_9')    })
+
+    this.selectedItems = this.items
   }
 };
 </script>

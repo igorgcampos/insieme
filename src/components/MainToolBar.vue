@@ -29,6 +29,51 @@
           color="red darken-3"
           v-show="canShowContractLink()"
           class="mr-2"
+        >
+          {{$vuetify.lang.t('$vuetify.CIRCUITOS')}}
+        </v-chip>
+      </template>
+      <span>{{$vuetify.lang.t('$vuetify.CIRCUITOS')}}</span>
+    </v-tooltip>
+    <v-tooltip bottom>
+      <template v-slot:activator="{ on }">
+        <v-chip
+          pill
+          v-on="on"
+          color="red darken-3"
+          v-show="canShowContractLink()"
+          class="mr-2"
+        >
+          {{$vuetify.lang.t('$vuetify.NOTA_FISCAL')}}
+        </v-chip>
+      </template>
+      <span>{{$vuetify.lang.t('$vuetify.NOTA_FISCAL')}}</span>
+    </v-tooltip>
+    <v-tooltip bottom>
+      <template v-slot:activator="{ on }">
+        <v-chip
+          pill
+          v-on="on"
+          color="red darken-3"
+          v-show="canShowContractLink()"
+          class="mr-2"
+        >
+          {{$vuetify.lang.t('$vuetify.CHAMADOS')}}
+        </v-chip>
+      </template>
+      <span>{{$vuetify.lang.t('$vuetify.CHAMADOS')}}</span>
+    </v-tooltip>
+
+    <v-spacer></v-spacer>
+
+    <v-tooltip bottom>
+      <template v-slot:activator="{ on }">
+        <v-chip
+          pill
+          v-on="on"
+          color="red darken-3"
+          v-show="canShowContractLink()"
+          class="mr-2"
           @click="toContractList()"
         >
           {{$vuetify.lang.t('$vuetify.CONTRATOS')}}
