@@ -163,6 +163,7 @@ export default {
     COLETANDO_INFORMACOES: 'Wait a few moments while I collect the satellite informations...',
     VERIFICANDO_NOVAMENTE: 'I am checking to see if your circuit signal has normalized. Please wait a moment...',
     ABRA_CHAMADO: 'Too bad you were unable to solve your problem. Please open a call with us so that a specialist can analyze your problem.',
+    EM_ANDAMENTO: 'In progress',
 
     CENTRAL_AJUDA: 'Help central',
     RESPOSTAS_DUVIDAS: 'Answers to the most frequently asked questions',

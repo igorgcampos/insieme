@@ -43,6 +43,14 @@
           </v-col>
           <v-col class="flex-grow-0">
             <CountCard
+              :count="0"
+              :message="$vuetify.lang.t('$vuetify.EM_ANDAMENTO')"
+              color="warning--text"
+              :func="getClosed"
+            ></CountCard>
+          </v-col>
+          <v-col class="flex-grow-0">
+            <CountCard
               :count="counts[1]"
               :message="$vuetify.lang.t('$vuetify.ENCERRADOS')"
               color="primary--text"
@@ -93,6 +101,21 @@
                 @change="search()"
               ></v-select>
             </v-row>
+          </v-col>
+
+          <v-col
+            class="mt-5"
+            cols="1"
+          >
+            <v-btn
+              class="ml-2 mt-1"
+              dark
+              color="primary"
+              v-on="on"
+              @click="test()"
+            >
+              {{$vuetify.lang.t('$vuetify.ABRIR_CHAMADO')}}
+            </v-btn>
           </v-col>
         </v-row>
 

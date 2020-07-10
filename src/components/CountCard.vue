@@ -3,7 +3,7 @@
     <v-hover v-model="buttonHovering">
       <v-card
         class="mx-auto"
-        width="100"
+        width="105"
         height="80"
         style="{cursor: pointer}"
         @click="func"
@@ -19,7 +19,7 @@
             >{{count}}</span>
           </v-row>
           <v-row justify="center">
-            <span class="text-center subtitle-2 font-weight-bold grey--text text--darken-3">
+            <span class="text-center subtitle-2 font-weight-bold grey--text text--darken-3 ma-1">
               {{message}} </span>
           </v-row>
         </v-col>
