@@ -285,6 +285,7 @@
                           label
                           small
                           outlined
+                          v-if="circuit.statusInstalacao"
                         >
                           {{ $vuetify.lang.t('$vuetify.'+circuit.statusInstalacao) }}
                         </v-chip>

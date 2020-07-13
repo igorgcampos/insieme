@@ -105,6 +105,8 @@ export default {
     EM_TRANSPORTE: 'In transit',
     SEM_VIABILIDADE: 'No viability',
     PENDENCIA_TPZ: 'Tpz pendency',
+    PENDENCIA_CLIENTE: 'Client pendency',
+    PEDIDO: 'Request',
     DESIGNACAO_TPZ: 'Tpz Desig.',
     LATITUDE: 'Latitude',
     LONGITUDE: 'Longitude',

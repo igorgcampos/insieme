@@ -104,6 +104,8 @@ export default {
     EM_TRANSPORTE: 'Em transporte',
     SEM_VIABILIDADE: 'Sem viabilidade',
     PENDENCIA_TPZ: 'Pendência Tpz',
+    PENDENCIA_CLIENTE: 'Pendência cliente',
+    PEDIDO: 'Pedido',
     DATA_INSTALACAO: 'Data de instalação',
     DATA_ATIVACAO: 'Data de ativação',
     DESIGNACAO_TPZ: 'Desig. Tpz',
