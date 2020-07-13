@@ -1,6 +1,7 @@
 <template>
   <div class="mb-10">
     <v-row
+      id="circuits"
       class="mt-n5 mb-n3"
       :class="{'ml-n12':$vuetify.breakpoint.mdAndUp}"
     >

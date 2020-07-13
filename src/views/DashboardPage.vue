@@ -54,6 +54,17 @@ export default {
       window.sessionStorage.setItem('selectedContractId', this.selectedContract.id);
       window.sessionStorage.setItem('selectedContractTpz', this.selectedContract.numeroContratoTpz);
     }
+
+    this.$root.$on('go-to', (target) => {
+
+      var element = document.getElementById(target);
+
+      this.$vuetify.goTo(element, {
+        duration: 200,
+        offset: 40,
+        easing: 'linear',
+      })
+    })
   }
 };
 </script>

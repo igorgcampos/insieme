@@ -29,6 +29,7 @@
           color="red darken-3"
           v-show="canShowShortcut()"
           class="mr-2"
+          @click="goTo('circuits')"
         >
           {{$vuetify.lang.t('$vuetify.CIRCUITOS')}}
         </v-chip>
@@ -43,6 +44,7 @@
           color="red darken-3"
           v-show="canShowShortcut()"
           class="mr-2"
+          @click="goTo('invoices')"
         >
           {{$vuetify.lang.t('$vuetify.NOTA_FISCAL')}}
         </v-chip>
@@ -57,6 +59,7 @@
           color="red darken-3"
           v-show="canShowShortcut()"
           class="mr-2"
+          @click="goTo('issues')"
         >
           {{$vuetify.lang.t('$vuetify.CHAMADOS')}}
         </v-chip>
@@ -197,6 +200,9 @@ export default {
     showFaq: false
   }),
   methods: {
+    goTo (target) {
+      this.$root.$emit('go-to', target)
+    },
     canShowShortcut () {
       return this.$route.path === '/dashboard'
     },
