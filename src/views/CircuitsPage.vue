@@ -384,7 +384,7 @@
                     <TooltipButton
                       :label="$vuetify.lang.t('$vuetify.MAIS_DETALHES')"
                       :message="$vuetify.lang.t('$vuetify.VER_DETALHES_PRTG')"
-                      :event="solveProblem"
+                      :event="openPRTG"
                       :object="circuit"
                     ></TooltipButton>
                   </v-card-actions>
@@ -437,6 +437,9 @@ export default {
     SolveProblemDialog
   },
   methods: {
+    openPRTG () {
+      window.open('https://monitor.telespazio.com.br/device.htm?id=10665&tabid=1&username=gguimaraes.admin&passhash=4238791387')
+    },
     formatCircuit (circuit) {
 
       return {
