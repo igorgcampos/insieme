@@ -27,6 +27,23 @@ utilService.install = function (Vue) {
             window.Huggy.openBox();
         }
     }
+
+    Vue.prototype.$showChatButton = () => {
+
+        if (window.Huggy.init) {
+            window.Huggy.init({
+                defaultCountry: '+55',
+                widget_id: '24845',
+                company: "317521",
+                contextID: '4a40e11b97d6d86a057e48c12e629743',
+                afterLoad: function () {
+                    window.Huggy.showButton();
+                }
+            });
+        } else {
+            window.Huggy.showButton();
+        }
+    }
 }
 
 export default utilService;

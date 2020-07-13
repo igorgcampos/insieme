@@ -27,7 +27,7 @@
           pill
           v-on="on"
           color="red darken-3"
-          v-show="canShowContractLink()"
+          v-show="canShowShortcut()"
           class="mr-2"
         >
           {{$vuetify.lang.t('$vuetify.CIRCUITOS')}}
@@ -41,7 +41,7 @@
           pill
           v-on="on"
           color="red darken-3"
-          v-show="canShowContractLink()"
+          v-show="canShowShortcut()"
           class="mr-2"
         >
           {{$vuetify.lang.t('$vuetify.NOTA_FISCAL')}}
@@ -55,7 +55,7 @@
           pill
           v-on="on"
           color="red darken-3"
-          v-show="canShowContractLink()"
+          v-show="canShowShortcut()"
           class="mr-2"
         >
           {{$vuetify.lang.t('$vuetify.CHAMADOS')}}
@@ -190,12 +190,16 @@ export default {
   },
   created: function () {
     this.user = this.$getUser()
+    this.$showChatButton()
   },
   data: () => ({
     user: {},
     showFaq: false
   }),
   methods: {
+    canShowShortcut () {
+      return this.$route.path === '/dashboard'
+    },
     closeFaq () {
       this.showFaq = false
     },
