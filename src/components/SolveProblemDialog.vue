@@ -17,11 +17,12 @@
             transition="slide-x-transition"
           >
             <div class="ma-0 pa-0">
-              <v-icon
-                size="62"
-                class="mb-4 mt-8"
-                color="primary"
-              >mdi-robot</v-icon>
+              <v-img
+                src="../assets/robo.png"
+                max-height="100"
+                max-width="100"
+                class="mx-auto mt-6 mb-6"
+              ></v-img>
 
               <v-row>
                 <span
@@ -72,17 +73,19 @@
             transition="slide-x-transition"
           >
             <div class="ma-0 pa-0">
-              <v-icon
-                size="62"
-                class="mb-4 mt-8"
-                :color="(showRestartResultPanel && restartOk) || (showStatusResultPanel && statusOk)?'success':'error'"
-              >{{((showRestartResultPanel && restartOk) || (showStatusResultPanel && statusOk))?
-              'mdi-checkbox-marked-circle':'mdi-alert-box'}}</v-icon>
+              <v-img
+                src="../assets/robo.png"
+                max-height="100"
+                max-width="100"
+                class="mx-auto mt-6 mb-6"
+              ></v-img>
 
               <v-row class="justify-center">
                 <span class="ml-3 mr-3 mb-10 text-center SUBTITLE-2 font-weight-bold grey--text text--darken-3">
-                  {{(showRestartResultPanel && restartOk) || (showStatusResultPanel && statusOk)?
-                  $vuetify.lang.t('$vuetify.SINAL_CIRCUITO_ONLINE'):
+                  {{(showStatusResultPanel && statusOk)?
+                  $vuetify.lang.t('$vuetify.SINAL_CIRCUITO_ONLINE', getObject().designacaoCliente):
+                  (showRestartResultPanel && restartOk)?
+                  $vuetify.lang.t('$vuetify.SINAL_CIRCUITO_ONLINE_2'):
                   (showRestartResultPanel && !restartOk)?$vuetify.lang.t('$vuetify.RESTART_FALHOU'):
                   $vuetify.lang.t('$vuetify.SINAL_CIRCUITO_OFFLINE')}} </span>
               </v-row>
@@ -101,11 +104,12 @@
             transition="slide-x-transition"
           >
             <div class="ma-0 pa-0">
-              <v-icon
-                size="62"
-                class="mb-4 mt-8"
-                color="primary"
-              >{{!showOpenIssuePanel?'mdi-robot':'mdi-emoticon-sad'}}</v-icon>
+              <v-img
+                src="../assets/robo.png"
+                max-height="100"
+                max-width="100"
+                class="mx-auto mt-6 mb-6"
+              ></v-img>
 
               <v-row class="justify-center">
                 <span class="ml-3 mr-3 mb-10 text-center SUBTITLE-2 font-weight-bold grey--text text--darken-3">
@@ -123,7 +127,7 @@
             color="primary"
             text
             @click="close(); clean();"
-            v-show="!showRestartingCircuitPanel"
+            v-show="!showRestartingCircuitPanel && !(showRestartResultPanel && restartOk)"
           >{{$vuetify.lang.t('$vuetify.FECHAR')}}</v-btn>
 
           <v-btn
@@ -136,7 +140,7 @@
             color="primary"
             text
             @click="restart"
-            v-show="showStatusResultPanel && !statusOk"
+            v-show="showStatusResultPanel"
           >{{$vuetify.lang.t('$vuetify.REINICIAR')}}</v-btn>
 
           <v-btn
@@ -145,6 +149,13 @@
             @click="openIssueDialog"
             v-show="showOpenIssuePanel || showRestartResultPanel || (showStatusResultPanel && statusOk)"
           >{{$vuetify.lang.t('$vuetify.ABRIR_CHAMADO')}}</v-btn>
+
+          <v-btn
+            color="primary"
+            text
+            @click="close(); clean();"
+            v-show="showRestartResultPanel && restartOk"
+          >{{$vuetify.lang.t('$vuetify.ESTA_OK')}}</v-btn>
 
           <v-btn
             color="primary"

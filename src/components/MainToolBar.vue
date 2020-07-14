@@ -46,10 +46,10 @@
           class="mr-2"
           @click="goTo('invoices')"
         >
-          {{$vuetify.lang.t('$vuetify.NOTA_FISCAL')}}
+          {{$vuetify.lang.t('$vuetify.NOTAS_FISCAIS')}}
         </v-chip>
       </template>
-      <span>{{$vuetify.lang.t('$vuetify.NOTA_FISCAL')}}</span>
+      <span>{{$vuetify.lang.t('$vuetify.NOTAS_FISCAIS')}}</span>
     </v-tooltip>
     <v-tooltip bottom>
       <template v-slot:activator="{ on }">

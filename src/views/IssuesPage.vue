@@ -326,7 +326,7 @@ import CountCard from '../components/CountCard'
 import EmptyPanel from '../components/EmptyPanel';
 import TooltipButton from '../components/TooltipButton';
 import LabelValue from '../components/LabelValue';
-import IssueDialog from '../components/IssueDialog';
+import IssueDialog from '../components/dialogs/IssueDialog';
 
 export default {
   components: {
@@ -510,9 +510,11 @@ export default {
 
         this.counts = response.data;
         if (this.counts.length == 0)
-          this.counts = [0, 0]
+          this.counts = [0, 0, 0]
 
         this.isLoading = false;
+        this.counts.push(0)
+        this.$root.$emit('issue-data', this.counts)
       });
 
     this.$get('/chamado/busca', {

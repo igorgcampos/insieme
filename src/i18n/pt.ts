@@ -156,10 +156,13 @@ export default {
     ONLINE_DESCRICAO: 'Circuitos ativados e disponíveis para utilização',
     VERIFICANDO_SINAL: 'Por favor aguarde enquanto estamos verificando o sinal do seu circuito...',
     REINICIANDO_CIRCUITO: 'Estou reiniciando seu circuito. Por favor aguarde mais alguns instantes...',
-    SINAL_CIRCUITO_ONLINE: 'O sinal do seu circuito está online. Por favor verifique novamente o seu circuito. Se ainda não estiver respondendo pode abrir um chamado conosco.',
+    SINAL_CIRCUITO_ONLINE: 'Então, verifiquei aqui e o seu circuito está funcionando. O circuito que esta apresentando o problema é o {0} ? Se sim, vamos lá, clique em REINICIAR que vou executar o comando no seu circuito! Mas caso você queira trocar uma configuração ou abrir um chamado, por favor, clique em ABRIR CHAMADO.',
+    SINAL_CIRCUITO_ONLINE_2: 'Pronto reiniciei o seu circuito! Me diga se esta ok o seu circuito ou se mesmo assim precisa abrir um chamado.',
     SINAL_CIRCUITO_OFFLINE: 'Verifiquei que seu circuito não está respondendo. Gostaria de reinicia-lo agora?',
     REINICIAR: 'Reiniciar',
-    PRIMEIRA_PERGUNTA: 'Olá, sou seu assistente virtual. Vou tentar ajudá-lo. Você checou se o circuito está ligado e os cabos estão conectados?',
+    ESTA_OK: 'Está ok!',
+    DESIGNACAO_CLIENTE_TPZ: 'Desig. cliente/tpz',
+    PRIMEIRA_PERGUNTA: 'Olá, sou o AVO seu assistente virtual. Vou tentar te ajudar. Mas antes, me tira essa duvida, seu problema é lentidão ou intermitência?',
     SIM: 'Sim',
     NAO: 'Não',
     RESTART_FALHOU: 'Que pena! Após reiniciar seu circuito verifiquei que o mesmo continua sem responder. Por favor, abra um chamado conosco para que um especialista possa analisar seu problema.',
@@ -191,5 +194,7 @@ export default {
     RESPOSTA_9: 'A Telespazio oferece a tecnologia mais moderna disponível no mercado. Tempo nublado ou mesmo chuvas não afetam a qualidade da conexão. Apenas intempéries extremas serão capazes de oferecer alguma instabilidade.',
     AINDA_COM_DUVIDAS: 'Ainda com dúvidas?',
     CONVERSE_CONOSCO: 'Converse conosco no chat',
-    BUSCAR_PERGUNTA: 'Buscar por pergunta ou resposta'
+    BUSCAR_PERGUNTA: 'Buscar por pergunta ou resposta',
+    STATUS_OPERACIONAL: 'Status operacional',
+    STATUS_FISICO: 'Status físico'
 }

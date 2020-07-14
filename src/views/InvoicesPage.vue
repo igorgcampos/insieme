@@ -350,7 +350,7 @@ import CountCard from '../components/CountCard'
 import EmptyPanel from '../components/EmptyPanel';
 import TooltipButton from '../components/TooltipButton';
 import LabelValue from '../components/LabelValue';
-import IssueDialog from '../components/IssueDialog';
+import IssueDialog from '../components/dialogs/IssueDialog';
 
 export default {
   components: {
@@ -563,6 +563,7 @@ export default {
           this.counts = response.data;
         }
         this.isLoading = false;
+        this.$root.$emit('invoice-data', this.counts)
       });
 
     this.$get('/nota/busca',

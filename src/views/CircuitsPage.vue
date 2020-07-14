@@ -2,14 +2,8 @@
   <div class="mb-10">
     <v-row
       id="circuits"
-      class="mt-n5 mb-n3"
       :class="{'ml-n12':$vuetify.breakpoint.mdAndUp}"
     >
-      <span class="mb-7 text-right subtitle-1 font-weight-bold grey--text text--darken-1">
-        {{$vuetify.lang.t('$vuetify.CONTRATO_SELECIONADO') + ': '+contract.numeroContratoTpz}} </span>
-    </v-row>
-
-    <v-row :class="{'ml-n12':$vuetify.breakpoint.mdAndUp}">
       <span class="mb-7 text-right display-1 font-weight-bold grey--text text--darken-1">
         {{$vuetify.lang.t('$vuetify.CIRCUITOS')}}</span>
       <v-col>
@@ -40,71 +34,94 @@
         class="ma-0 pa-0"
         v-show="showPanel"
       >
-        <v-row>
-          <v-col class="flex-grow-0">
-            <CountCard
-              :count="counts[0]"
-              message="Online"
-              color="success--text"
-              :func="getOnline"
-              :toolTipMessage="$vuetify.lang.t('$vuetify.ONLINE_DESCRICAO')"
-            ></CountCard>
+
+        <v-row class="mt-3">
+          <v-col cols="4">
+            <v-row justify="center">
+              <span class="mt-n3 text-center subtitle-1 font-weight-bold grey--text text--darken-1">
+                {{$vuetify.lang.t('$vuetify.STATUS_OPERACIONAL')}}</span>
+            </v-row>
+
+            <v-row>
+              <v-col class="flex-grow-0">
+                <CountCard
+                  :count="counts[0]"
+                  message="Online"
+                  color="success--text"
+                  :func="getOnline"
+                  :toolTipMessage="$vuetify.lang.t('$vuetify.ONLINE_DESCRICAO')"
+                ></CountCard>
+              </v-col>
+
+              <v-col class="flex-grow-0">
+                <CountCard
+                  :count="counts[1]"
+                  message="Offline"
+                  color="error--text"
+                  :func="getOffline"
+                  :toolTipMessage="$vuetify.lang.t('$vuetify.OFFLINE_DESCRICAO')"
+                ></CountCard>
+              </v-col>
+            </v-row>
           </v-col>
 
-          <v-col class="flex-grow-0">
-            <CountCard
-              :count="counts[1]"
-              message="Offline"
-              color="error--text"
-              :func="getOffline"
-              :toolTipMessage="$vuetify.lang.t('$vuetify.OFFLINE_DESCRICAO')"
-            ></CountCard>
-          </v-col>
+          <v-divider
+            class="mb-5 mt-n2"
+            vertical="true"
+          ></v-divider>
 
-          <v-col class="flex-grow-0">
-            <CountCard
-              :count="installCounts[0]"
-              :message="$vuetify.lang.t('$vuetify.ATIVADO')"
-              color="primary--text"
-              :func="getActive"
-              :toolTipMessage="$vuetify.lang.t('$vuetify.ATIVADO_DESCRICAO')"
-            ></CountCard>
-          </v-col>
+          <v-col>
+            <v-row justify="center">
+              <span class="mt-n3 text-center subtitle-1 font-weight-bold grey--text text--darken-1">
+                {{$vuetify.lang.t('$vuetify.STATUS_FISICO')}}</span>
+            </v-row>
+            <v-row>
+              <v-col class="flex-grow-0">
+                <CountCard
+                  :count="installCounts[0]"
+                  :message="$vuetify.lang.t('$vuetify.ATIVADO')"
+                  color="primary--text"
+                  :func="getActive"
+                  :toolTipMessage="$vuetify.lang.t('$vuetify.ATIVADO_DESCRICAO')"
+                ></CountCard>
+              </v-col>
 
-          <v-col class="flex-grow-0">
-            <CountCard
-              :count="installCounts[1]"
-              :message="$vuetify.lang.t('$vuetify.DESATIVADO')"
-              color="primary--text"
-              :func="getDeactive"
-              :toolTipMessage="$vuetify.lang.t('$vuetify.DESATIVADO_DESCRICAO')"
-            ></CountCard>
-          </v-col>
+              <v-col class="flex-grow-0">
+                <CountCard
+                  :count="installCounts[1]"
+                  :message="$vuetify.lang.t('$vuetify.DESATIVADO')"
+                  color="primary--text"
+                  :func="getDeactive"
+                  :toolTipMessage="$vuetify.lang.t('$vuetify.DESATIVADO_DESCRICAO')"
+                ></CountCard>
+              </v-col>
 
-          <v-col class="flex-grow-0">
-            <CountCard
-              :count="installCounts[3]"
-              :message="$vuetify.lang.t('$vuetify.DESINSTALADO')"
-              color="primary--text"
-              :func="getUninstall"
-              :toolTipMessage="$vuetify.lang.t('$vuetify.DESINSTALADO_DESCRICAO')"
-            ></CountCard>
-          </v-col>
+              <v-col class="flex-grow-0">
+                <CountCard
+                  :count="installCounts[3]"
+                  :message="$vuetify.lang.t('$vuetify.DESINSTALADO')"
+                  color="primary--text"
+                  :func="getUninstall"
+                  :toolTipMessage="$vuetify.lang.t('$vuetify.DESINSTALADO_DESCRICAO')"
+                ></CountCard>
+              </v-col>
 
-          <v-col class="flex-grow-0">
-            <CountCard
-              :count="installCounts[2]"
-              :message="$vuetify.lang.t('$vuetify.CANCELADO')"
-              color="primary--text"
-              :func="getCanceled"
-              :toolTipMessage="$vuetify.lang.t('$vuetify.CANCELADO_DESCRICAO')"
-            ></CountCard>
+              <v-col class="flex-grow-0">
+                <CountCard
+                  :count="installCounts[2]"
+                  :message="$vuetify.lang.t('$vuetify.CANCELADO')"
+                  color="primary--text"
+                  :func="getCanceled"
+                  :toolTipMessage="$vuetify.lang.t('$vuetify.CANCELADO_DESCRICAO')"
+                ></CountCard>
+              </v-col>
+            </v-row>
           </v-col>
         </v-row>
 
         <v-row
           id="filtro"
-          class="pl-0 ml-0 grey lighten-5 mb-n5 mt-n4"
+          class="pl-0 ml-0 grey lighten-5 mb-n5 mt-0"
         >
           <v-col cols="3">
             <v-row>
@@ -116,7 +133,7 @@
                 v-model.trim="searchText"
                 dense
                 label="Regular"
-                :placeholder="$vuetify.lang.t('$vuetify.DESIGNACAO_CLIENTE')"
+                :placeholder="$vuetify.lang.t('$vuetify.DESIGNACAO_CLIENTE_TPZ')"
                 single-line
                 solo
                 max-width="200"
@@ -426,7 +443,7 @@ import CountCard from '../components/CountCard'
 import EmptyPanel from '../components/EmptyPanel';
 import TooltipButton from '../components/TooltipButton';
 import LabelValue from '../components/LabelValue';
-import IssueDialog from '../components/IssueDialog';
+import IssueDialog from '../components/dialogs/IssueDialog';
 import SolveProblemDialog from '../components/SolveProblemDialog';
 
 export default {
@@ -742,15 +759,20 @@ export default {
         if (response) {
           this.counts = response.data;
         }
-        this.isLoading = false;
-      });
 
-    this.$get('/circuito/install/counts',
-      { contractNumber: this.$props.contract.numeroContratoTpz }).then((response) => {
-        if (response) {
-          this.installCounts = response.data;
-        }
-        this.isLoading = false;
+        this.$get('/circuito/install/counts',
+          { contractNumber: this.$props.contract.numeroContratoTpz }).then((response) => {
+
+            if (response) {
+              this.installCounts = response.data;
+            }
+            this.isLoading = false;
+
+            var countsArray = this.installCounts.slice()
+            countsArray.unshift(this.counts[0])
+            countsArray.unshift(this.counts[1])
+            this.$root.$emit('circuit-data', countsArray)
+          });
       });
 
     this.$get('/circuito/busca', {
