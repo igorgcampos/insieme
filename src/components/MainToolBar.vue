@@ -195,6 +195,9 @@ export default {
     this.user = this.$getUser()
     this.$showChatButton()
   },
+  updated: function () {
+    this.$showChatButton()
+  },
   data: () => ({
     user: {},
     showFaq: false
@@ -228,6 +231,7 @@ export default {
     },
     logout () {
 
+      this.$hideChatButton()
       this.$logout().then(() => {
         this.$root.$emit('logout-success')
       })

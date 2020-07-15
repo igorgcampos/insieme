@@ -196,5 +196,5 @@ export default {
     CONVERSE_CONOSCO: 'Chat with us',
     BUSCAR_PERGUNTA: 'Search for question or answer',
     STATUS_OPERACIONAL: 'Operational status',
-    STATUS_EQUIPAMENTOS: 'Equipament Status'
+    STATUS_EQUIPAMENTOS: 'Deployment Status'
 }

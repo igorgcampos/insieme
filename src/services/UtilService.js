@@ -44,6 +44,13 @@ utilService.install = function (Vue) {
             window.Huggy.showButton();
         }
     }
+
+    Vue.prototype.$hideChatButton = () => {
+
+        if (window.Huggy) {
+            window.Huggy.hideButton();
+        }
+    }
 }
 
 export default utilService;
