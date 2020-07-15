@@ -196,5 +196,5 @@ export default {
     CONVERSE_CONOSCO: 'Converse conosco no chat',
     BUSCAR_PERGUNTA: 'Buscar por pergunta ou resposta',
     STATUS_OPERACIONAL: 'Status operacional',
-    STATUS_FISICO: 'Status físico'
+    STATUS_EQUIPAMENTOS: 'Status dos equipamentos'
 }

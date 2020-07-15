@@ -23,7 +23,7 @@
         class="mt-n11"
       >
 
-        <v-lazy
+        <!--<v-lazy
           :options="{
           threshold: .6
         }"
@@ -56,7 +56,7 @@
               ></BarChart>
             </v-col>
           </v-row>
-        </v-lazy>
+        </v-lazy>-->
 
         <CircuitsPage :contract="selectedContract"></CircuitsPage>
         <InvoicesPage :contract="selectedContract"></InvoicesPage>
@@ -72,8 +72,8 @@
 import CircuitsPage from './CircuitsPage';
 import InvoicesPage from './InvoicesPage';
 import IssuesPage from './IssuesPage';
-import BarChart from '../components/charts/BarChart.js'
-import PieChart from '../components/charts/PieChart.js'
+//import BarChart from '../components/charts/BarChart.js'
+//import PieChart from '../components/charts/PieChart.js'
 
 
 export default {
@@ -81,8 +81,6 @@ export default {
     CircuitsPage,
     InvoicesPage,
     IssuesPage,
-    BarChart,
-    PieChart
   },
   data: () => ({
     selectedContract: undefined,

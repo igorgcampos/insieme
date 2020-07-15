@@ -1,5 +1,5 @@
 <template>
-  <v-row justify="center">
+  <v-row>
     <v-dialog
       v-model="showDialog"
       persistent
@@ -7,7 +7,7 @@
     >
       <v-card>
         <v-col
-          class="text-center"
+          class="text-justify"
           v-show="showFirstQuestionPanel"
         >
           <v-lazy
@@ -25,11 +25,8 @@
               ></v-img>
 
               <v-row>
-                <span
-                  justify="center"
-                  class="ml-3 mr-3 mb-10 text-center SUBTITLE-2 font-weight-bold grey--text text--darken-3"
-                >
-                  {{$vuetify.lang.t('$vuetify.PRIMEIRA_PERGUNTA')}} </span>
+                <p class="ml-3 mr-3 mb-10 text-justify SUBTITLE-2 font-weight-bold grey--text text--darken-3">
+                  {{$vuetify.lang.t('$vuetify.PRIMEIRA_PERGUNTA')}} </p>
               </v-row>
             </div>
           </v-lazy>
@@ -54,9 +51,9 @@
                 class="mt-8 mb-4"
               ></v-progress-circular>
 
-              <v-row class="justify-center">
-                <span class="text-center ml-3 mr-3 mb-10 SUBTITLE-2 font-weight-bold grey--text text--darken-3">
-                  {{showVerifyingSignalPanel? verifyingSignalMessage:restartingCircuitMessage}} </span>
+              <v-row>
+                <p class="text-justify ml-3 mr-3 mb-10 SUBTITLE-2 font-weight-bold grey--text text--darken-3">
+                  {{showVerifyingSignalPanel? verifyingSignalMessage:restartingCircuitMessage}} </p>
               </v-row>
             </div>
           </v-lazy>
@@ -80,14 +77,14 @@
                 class="mx-auto mt-6 mb-6"
               ></v-img>
 
-              <v-row class="justify-center">
-                <span class="ml-3 mr-3 mb-10 text-center SUBTITLE-2 font-weight-bold grey--text text--darken-3">
+              <v-row>
+                <p class="ml-3 mr-3 mb-10 text-justify SUBTITLE-2 font-weight-bold grey--text text--darken-3">
                   {{(showStatusResultPanel && statusOk)?
                   $vuetify.lang.t('$vuetify.SINAL_CIRCUITO_ONLINE', getObject().designacaoCliente):
                   (showRestartResultPanel && restartOk)?
                   $vuetify.lang.t('$vuetify.SINAL_CIRCUITO_ONLINE_2'):
                   (showRestartResultPanel && !restartOk)?$vuetify.lang.t('$vuetify.RESTART_FALHOU'):
-                  $vuetify.lang.t('$vuetify.SINAL_CIRCUITO_OFFLINE')}} </span>
+                  $vuetify.lang.t('$vuetify.SINAL_CIRCUITO_OFFLINE')}} </p>
               </v-row>
             </div>
           </v-lazy>
@@ -111,10 +108,10 @@
                 class="mx-auto mt-6 mb-6"
               ></v-img>
 
-              <v-row class="justify-center">
-                <span class="ml-3 mr-3 mb-10 text-center SUBTITLE-2 font-weight-bold grey--text text--darken-3">
+              <v-row>
+                <p class="ml-3 mr-3 mb-10 text-justify SUBTITLE-2 font-weight-bold grey--text text--darken-3">
                   {{!showOpenIssuePanel?questions[questionIndex]:
-                  $vuetify.lang.t('$vuetify.ABRA_CHAMADO')}} </span>
+                  $vuetify.lang.t('$vuetify.ABRA_CHAMADO')}} </p>
               </v-row>
             </div>
           </v-lazy>

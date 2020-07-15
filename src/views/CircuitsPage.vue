@@ -73,7 +73,7 @@
           <v-col>
             <v-row justify="center">
               <span class="mt-n3 text-center subtitle-1 font-weight-bold grey--text text--darken-1">
-                {{$vuetify.lang.t('$vuetify.STATUS_FISICO')}}</span>
+                {{$vuetify.lang.t('$vuetify.STATUS_EQUIPAMENTOS')}}</span>
             </v-row>
             <v-row>
               <v-col class="flex-grow-0">
