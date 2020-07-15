@@ -67,7 +67,7 @@
 
           <v-divider
             class="mb-5 mt-n2"
-            vertical="true"
+            :vertical=true
           ></v-divider>
 
           <v-col>

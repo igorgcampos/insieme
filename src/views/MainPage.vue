@@ -24,6 +24,7 @@ export default {
     MainToolBar
   },
   created: function () {
+
     this.user = this.$getUser()
 
     if (this.$hasProfile('Administrador') && window.sessionStorage.getItem('actualPage') == 'clients') {
