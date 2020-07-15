@@ -113,6 +113,7 @@
                 :label="$vuetify.lang.t('$vuetify.DATA_ASSINATURA')"
                 :value="formatDate(contract.dataAssinatura)"
                 justify="start"
+                style="width:120px;"
               ></LabelValue>
             </v-col>
             <v-col class="pt-0 mt-n6">

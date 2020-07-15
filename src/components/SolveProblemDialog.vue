@@ -7,8 +7,8 @@
     >
       <v-card>
         <v-col
-          class="text-justify"
-          v-show="showFirstQuestionPanel"
+          class="text-center"
+          v-show="showFirstQuestionPanel || showCircuitQuestionPanel"
         >
           <v-lazy
             :options="{
@@ -26,7 +26,8 @@
 
               <v-row>
                 <p class="ml-3 mr-3 mb-10 text-justify SUBTITLE-2 font-weight-bold grey--text text--darken-3">
-                  {{$vuetify.lang.t('$vuetify.PRIMEIRA_PERGUNTA')}} </p>
+                  {{showFirstQuestionPanel?$vuetify.lang.t('$vuetify.PRIMEIRA_PERGUNTA')
+                  :$vuetify.lang.t('$vuetify.CONFIRMAR_SELECAO_CIRCUITO', getObject().designacaoCliente)}} </p>
               </v-row>
             </div>
           </v-lazy>
@@ -51,7 +52,7 @@
                 class="mt-8 mb-4"
               ></v-progress-circular>
 
-              <v-row>
+              <v-row justify="center">
                 <p class="text-justify ml-3 mr-3 mb-10 SUBTITLE-2 font-weight-bold grey--text text--darken-3">
                   {{showVerifyingSignalPanel? verifyingSignalMessage:restartingCircuitMessage}} </p>
               </v-row>
@@ -80,7 +81,7 @@
               <v-row>
                 <p class="ml-3 mr-3 mb-10 text-justify SUBTITLE-2 font-weight-bold grey--text text--darken-3">
                   {{(showStatusResultPanel && statusOk)?
-                  $vuetify.lang.t('$vuetify.SINAL_CIRCUITO_ONLINE', getObject().designacaoCliente):
+                  $vuetify.lang.t('$vuetify.SINAL_CIRCUITO_ONLINE'):
                   (showRestartResultPanel && restartOk)?
                   $vuetify.lang.t('$vuetify.SINAL_CIRCUITO_ONLINE_2'):
                   (showRestartResultPanel && !restartOk)?$vuetify.lang.t('$vuetify.RESTART_FALHOU'):
@@ -157,15 +158,15 @@
           <v-btn
             color="primary"
             text
-            @click="showFirstQuestionPanel?verifySignalPanel():nextQuestion()"
-            v-show="showFirstQuestionPanel || (showChatQuestions && !showOpenIssuePanel)"
+            @click="showFirstQuestionPanel?verifySignalPanel():showCircuitQuestionPanel?showOptionsPanel():nextQuestion()"
+            v-show="showCircuitQuestionPanel || showFirstQuestionPanel || (showChatQuestions && !showOpenIssuePanel)"
           >{{$vuetify.lang.t('$vuetify.SIM')}}</v-btn>
 
           <v-btn
             color="primary"
             text
             @click="openChatBot"
-            v-show="showFirstQuestionPanel || (showChatQuestions && !showOpenIssuePanel)"
+            v-show="showCircuitQuestionPanel || showFirstQuestionPanel || (showChatQuestions && !showOpenIssuePanel)"
           >{{$vuetify.lang.t('$vuetify.NAO')}}</v-btn>
         </v-card-actions>
       </v-card>
@@ -182,6 +183,7 @@ export default {
     openIssue: Function
   },
   data: () => ({
+    showCircuitQuestionPanel: false,
     signalPanelId: 0,
     showOpenIssuePanel: false,
     questionIndex: 0,
@@ -210,6 +212,10 @@ export default {
     this.questions.push(this.$vuetify.lang.t('$vuetify.PERGUNTA_6'));*/
   },
   methods: {
+    showOptionsPanel () {
+      this.showCircuitQuestionPanel = false;
+      this.showStatusResultPanel = true;
+    },
     nextQuestion () {
       this.questionIndex += 1;
 
@@ -237,6 +243,8 @@ export default {
               if (response && response.data == 3) {
                 this.statusOk = true;
                 this.getObject().online = response.data //Atualiza o circuito com o status online
+                this.showCircuitQuestionPanel = true;
+                this.showStatusResultPanel = false;
               } else {
                 this.statusOk = false;
               }
@@ -247,7 +255,9 @@ export default {
     },
     openChatBot () {
 
-      this.$showChat()
+      if (!this.showCircuitQuestionPanel) {
+        this.$showChat()
+      }
       this.close();
       this.clean();
 
