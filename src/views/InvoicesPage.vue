@@ -101,6 +101,7 @@
           <v-col
             class="mt-5"
             cols="1"
+            v-if="!$vuetify.breakpoint.xs"
           >
             <v-tooltip top>
               <template v-slot:activator="{ on }">
@@ -122,7 +123,7 @@
 
         <v-row
           class="pl-2 mt-2"
-          style="min-height:150px;"
+          style="min-height:120px;"
         >
           <div
             id="invoiceId"

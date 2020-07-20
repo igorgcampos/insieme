@@ -9,7 +9,7 @@
       src="../assets/telespazio-logo.png"
       max-height="80"
       max-width="180"
-      min-width="50"
+      min-width="80"
       aspect-ratio="5.9"
       class="mx-auto"
     ></v-img>
@@ -21,7 +21,10 @@
       :close="closeFaq"
     ></FaqDialog>
 
-    <v-tooltip bottom>
+    <v-tooltip
+      bottom
+      v-if="!$vuetify.breakpoint.xs"
+    >
       <template v-slot:activator="{ on }">
         <v-chip
           pill
@@ -36,7 +39,11 @@
       </template>
       <span>{{$vuetify.lang.t('$vuetify.CIRCUITOS')}}</span>
     </v-tooltip>
-    <v-tooltip bottom>
+
+    <v-tooltip
+      bottom
+      v-if="!$vuetify.breakpoint.xs"
+    >
       <template v-slot:activator="{ on }">
         <v-chip
           pill
@@ -51,7 +58,11 @@
       </template>
       <span>{{$vuetify.lang.t('$vuetify.NOTAS_FISCAIS')}}</span>
     </v-tooltip>
-    <v-tooltip bottom>
+
+    <v-tooltip
+      bottom
+      v-if="!$vuetify.breakpoint.xs"
+    >
       <template v-slot:activator="{ on }">
         <v-chip
           pill
@@ -69,7 +80,10 @@
 
     <v-spacer></v-spacer>
 
-    <v-tooltip bottom>
+    <v-tooltip
+      bottom
+      v-if="!$vuetify.breakpoint.xs"
+    >
       <template v-slot:activator="{ on }">
         <v-chip
           pill
@@ -85,7 +99,10 @@
       <span>{{$vuetify.lang.t('$vuetify.PAGINA_CONTRATOS')}}</span>
     </v-tooltip>
 
-    <v-tooltip bottom>
+    <v-tooltip
+      bottom
+      v-if="!$vuetify.breakpoint.xs"
+    >
       <template v-slot:activator="{ on }">
         <v-chip
           pill
@@ -153,6 +170,63 @@
       </v-card>
     </v-menu>
 
+    <v-menu
+      transition="slide-x-transition"
+      bottom
+      right
+      v-show="$vuetify.breakpoint.xs"
+    >
+      <template v-slot:activator="{ on, attrs }">
+        <v-btn
+          color="white"
+          v-bind="attrs"
+          v-on="on"
+          icon
+        >
+          <v-icon v-on="on">mdi-menu</v-icon>
+        </v-btn>
+      </template>
+
+      <v-list>
+        <v-list-item
+          v-show="canShowShortcut()"
+          @click="goTo('circuits')"
+        >
+          <v-list-item-title>{{$vuetify.lang.t('$vuetify.CIRCUITOS')}}</v-list-item-title>
+        </v-list-item>
+
+        <v-list-item
+          v-show="canShowShortcut()"
+          @click="goTo('invoices')"
+        >
+          <v-list-item-title>{{$vuetify.lang.t('$vuetify.NOTAS_FISCAIS')}}</v-list-item-title>
+        </v-list-item>
+
+        <v-list-item
+          v-show="canShowShortcut()"
+          @click="goTo('issues')"
+        >
+          <v-list-item-title>{{$vuetify.lang.t('$vuetify.CHAMADOS')}}</v-list-item-title>
+        </v-list-item>
+
+        <v-divider v-show="canShowShortcut()"></v-divider>
+
+        <v-list-item
+          v-show="canShowContractLink()"
+          @click="toContractList()"
+        >
+          <v-list-item-title>{{$vuetify.lang.t('$vuetify.CONTRATOS')}}</v-list-item-title>
+        </v-list-item>
+
+        <v-list-item
+          v-show="canShowClientLink()"
+          @click="toClientsList()"
+        >
+          <v-list-item-title>{{$vuetify.lang.t('$vuetify.CLIENTES')}}</v-list-item-title>
+        </v-list-item>
+      </v-list>
+    </v-menu>
+
     <v-tooltip bottom>
       <template v-slot:activator="{ on }">
         <v-btn
@@ -197,7 +271,7 @@ export default {
     (function (i, s, o, g, r, a, m) { i[r] = { context: { id: '8551dbde3f168db249381597eea81c71' } }; a = o; o = s.createElement(o); o.async = 1; o.src = g; m = s.getElementsByTagName(a)[0]; m.parentNode.insertBefore(o, m); })(window, document, 'script', 'https://js.huggy.chat/widget.min.js?v=8.0.0', 'pwz')
 
     var vm = this;
-    setTimeout(function () { vm.$showChatButton() }, 1000)
+    setTimeout(function () { vm.$showChatButton() }, 1500)
   },
   data: () => ({
     user: {},

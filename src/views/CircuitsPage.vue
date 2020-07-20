@@ -36,7 +36,73 @@
       >
 
         <v-row class="mt-3">
-          <v-col cols="4">
+          <v-row v-show="$vuetify.breakpoint.xs">
+
+            <v-col class="flex-grow-0">
+              <CountCard
+                :count="counts[0]"
+                message="Online"
+                color="success--text"
+                :func="getOnline"
+                :toolTipMessage="$vuetify.lang.t('$vuetify.ONLINE_DESCRICAO')"
+              ></CountCard>
+            </v-col>
+
+            <v-col class="flex-grow-0">
+              <CountCard
+                :count="counts[1]"
+                message="Offline"
+                color="error--text"
+                :func="getOffline"
+                :toolTipMessage="$vuetify.lang.t('$vuetify.OFFLINE_DESCRICAO')"
+              ></CountCard>
+
+            </v-col>
+            <v-col class="flex-grow-0">
+              <CountCard
+                :count="installCounts[0]"
+                :message="$vuetify.lang.t('$vuetify.ATIVADO')"
+                color="primary--text"
+                :func="getActive"
+                :toolTipMessage="$vuetify.lang.t('$vuetify.ATIVADO_DESCRICAO')"
+              ></CountCard>
+            </v-col>
+
+            <v-col class="flex-grow-0">
+              <CountCard
+                :count="installCounts[1]"
+                :message="$vuetify.lang.t('$vuetify.DESATIVADO')"
+                color="primary--text"
+                :func="getDeactive"
+                :toolTipMessage="$vuetify.lang.t('$vuetify.DESATIVADO_DESCRICAO')"
+              ></CountCard>
+            </v-col>
+
+            <v-col class="flex-grow-0">
+              <CountCard
+                :count="installCounts[3]"
+                :message="$vuetify.lang.t('$vuetify.DESINSTALADO')"
+                color="primary--text"
+                :func="getUninstall"
+                :toolTipMessage="$vuetify.lang.t('$vuetify.DESINSTALADO_DESCRICAO')"
+              ></CountCard>
+            </v-col>
+
+            <v-col class="flex-grow-0">
+              <CountCard
+                :count="installCounts[2]"
+                :message="$vuetify.lang.t('$vuetify.CANCELADO')"
+                color="primary--text"
+                :func="getCanceled"
+                :toolTipMessage="$vuetify.lang.t('$vuetify.CANCELADO_DESCRICAO')"
+              ></CountCard>
+            </v-col>
+          </v-row>
+
+          <v-col
+            cols="4"
+            v-show="!$vuetify.breakpoint.xs"
+          >
             <v-row justify="center">
               <span class="mt-n3 text-center subtitle-1 font-weight-bold grey--text text--darken-1">
                 {{$vuetify.lang.t('$vuetify.STATUS_OPERACIONAL')}}</span>
@@ -66,11 +132,12 @@
           </v-col>
 
           <v-divider
+            v-show="!$vuetify.breakpoint.xs"
             class="mb-5 mt-n2"
             :vertical=true
           ></v-divider>
 
-          <v-col>
+          <v-col v-show="!$vuetify.breakpoint.xs">
             <v-row justify="center">
               <span class="mt-n3 text-center subtitle-1 font-weight-bold grey--text text--darken-1">
                 {{$vuetify.lang.t('$vuetify.STATUS_EQUIPAMENTOS')}}</span>
@@ -186,6 +253,7 @@
           <v-col
             class="mt-5"
             cols="1"
+            v-if="!$vuetify.breakpoint.xs"
           >
             <v-tooltip top>
               <template v-slot:activator="{ on }">
@@ -207,7 +275,7 @@
 
         <v-row
           class="pl-2 mt-2"
-          style="min-height:150px;"
+          style="min-height:120px;"
         >
           <div
             id="circuitId"

@@ -35,7 +35,7 @@
         class="ma-0 pa-0"
         v-show="showPanel"
       >
-        <v-row>
+        <v-row :class="{'ml-n6':$vuetify.breakpoint.xs}">
           <v-col class="flex-grow-0">
             <CountCard
               :count="counts[0]"
@@ -110,20 +110,26 @@
             class="mt-5"
             cols="1"
           >
-            <v-btn
-              class="ml-2 mt-1"
-              dark
-              color="primary"
-              @click="test()"
-            >
-              {{$vuetify.lang.t('$vuetify.ABRIR_CHAMADO')}}
-            </v-btn>
+            <v-tooltip top>
+              <template v-slot:activator="{ on }">
+                <v-btn
+                  class="ml-2 mt-1"
+                  dark
+                  color="primary"
+                  v-on="on"
+                  @click="test()"
+                >
+                  <v-icon dark>mdi-sim-alert</v-icon>
+                </v-btn>
+              </template>
+              <span>{{$vuetify.lang.t('$vuetify.ABRIR_CHAMADO')}}</span>
+            </v-tooltip>
           </v-col>
         </v-row>
 
         <v-row
           class="pl-2 mt-2"
-          style="min-height:150px;"
+          style="min-height:120px;"
         >
           <div
             id="issueId"
