@@ -215,8 +215,8 @@
 
                   <v-row>
                     <v-col
-                      class="mt-n6 mr-5"
-                      style="max-width:150px;"
+                      class="mt-n6"
+                      :cols="$vuetify.breakpoint.xs?5:2"
                     >
                       <v-col class="pa-0">
                         <v-chip
@@ -248,14 +248,18 @@
                       </v-col>
                     </v-col>
 
-                    <v-col class="mt-n12">
+                    <v-col
+                      class="mt-n12"
+                      :cols="$vuetify.breakpoint.xs?7:4"
+                      :class="{'pl-0':$vuetify.breakpoint.xs}"
+                    >
                       <v-col>
                         <LabelValue
                           :label="$vuetify.lang.t('$vuetify.DESCRICAO_SERVICO')"
                           :value="invoice.descricaoServico || '--'"
                           justify="start"
                           truncate
-                          style="width:150px;"
+                          :class="{'pl-0':$vuetify.breakpoint.xs}"
                         ></LabelValue>
                       </v-col>
                       <v-col class="pt-0 mt-n6">
@@ -263,7 +267,7 @@
                           :label="$vuetify.lang.t('$vuetify.CONDICAO_PAGAMENTO')"
                           :value="invoice.condicaoPagamento"
                           justify="start"
-                          style="width:150px;"
+                          :class="{'pl-0':$vuetify.breakpoint.xs}"
                         ></LabelValue>
                       </v-col>
                       <v-col class="pt-0 mt-n6">
@@ -271,18 +275,21 @@
                           :label="$vuetify.lang.t('$vuetify.DATA_COMPETENCIA')"
                           :value="formatDate(invoice.dataCompetencia)"
                           justify="start"
-                          style="width:150px;"
+                          :class="{'pl-0':$vuetify.breakpoint.xs}"
                         ></LabelValue>
                       </v-col>
                     </v-col>
 
-                    <v-col class="mt-n12">
+                    <v-col
+                      class="mt-n12"
+                      :cols="$vuetify.breakpoint.xs?7:4"
+                    >
                       <v-col>
                         <LabelValue
                           :label="$vuetify.lang.t('$vuetify.DATA_EMISSAO')"
                           :value="formatDate(invoice.dataEmissao)"
                           justify="start"
-                          style="width:150px;"
+                          :class="{'pl-0':$vuetify.breakpoint.xs}"
                         ></LabelValue>
                       </v-col>
                       <v-col class="pt-0 mt-n6">
@@ -290,7 +297,7 @@
                           :label="$vuetify.lang.t('$vuetify.DATA_VENCIMENTO')"
                           :value="formatDate(invoice.dataVencimento)"
                           justify="start"
-                          style="width:150px;"
+                          :class="{'pl-0':$vuetify.breakpoint.xs}"
                         ></LabelValue>
                       </v-col>
                       <v-col class="pt-0 mt-n6">
@@ -298,12 +305,15 @@
                           :label="$vuetify.lang.t('$vuetify.DATA_PAGAMENTO')"
                           :value="invoice.dataPagamento?formatDate(invoice.dataPagamento):'--'"
                           justify="start"
-                          style="width:150px;"
+                          :class="{'pl-0':$vuetify.breakpoint.xs}"
                         ></LabelValue>
                       </v-col>
                     </v-col>
 
-                    <v-col class="mt-n9">
+                    <v-col
+                      class="mt-n9"
+                      :class="{'pl-0':$vuetify.breakpoint.xs, 'ml-n5':!$vuetify.breakpoint.xs}"
+                    >
                       <v-col>
                         <v-row justify="start">
                           <span class="text-right caption font-weight-bold grey--text text--lighten-1">
@@ -350,6 +360,7 @@
                       :message="$vuetify.lang.t('$vuetify.ABRIR_CHAMADO_NOTA')"
                       :event="openIssue"
                       :object="invoice"
+                      :mobile="$vuetify.breakpoint.xs"
                     ></TooltipButton>
                   </v-card-actions>
                 </v-expansion-panel-content>

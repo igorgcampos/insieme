@@ -206,7 +206,10 @@
                         sm="5"
                         md="4"
                       >
-                        <strong class="caption font-weight-bold grey--text text--lighten-1 mr-2 ml-3">
+                        <strong
+                          class="caption font-weight-bold grey--text text--lighten-1 mr-2"
+                          :class="{'ml-3':open}"
+                        >
                           {{$vuetify.lang.t('$vuetify.PROTOCOLO')}}:</strong>
                         <strong
                           class="caption font-weight-bold"
@@ -333,6 +336,7 @@
                       :message="$vuetify.lang.t('$vuetify.ENCERRAR_CHAMADO')"
                       :event="encerrarChamado"
                       :object="issue"
+                      :mobile="$vuetify.breakpoint.xs"
                     ></TooltipButton>
                   </v-card-actions>
                 </v-expansion-panel-content>

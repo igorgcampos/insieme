@@ -7,6 +7,7 @@
         @click="event(object)"
         v-on="on || on1"
         :loading="loading"
+        :x-small="mobile"
       >{{label}}</v-btn>
     </template>
     <span>{{message}}</span>
@@ -21,7 +22,8 @@ export default {
     event: Function,
     loading: Boolean,
     on1: String,
-    object: Object
+    object: Object,
+    mobile: Boolean
   }
 };
 </script>

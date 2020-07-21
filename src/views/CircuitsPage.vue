@@ -503,6 +503,7 @@
                       :message="$vuetify.lang.t('$vuetify.SUPORTE_PROBLEM')"
                       :event="solveProblem"
                       :object="circuit"
+                      :mobile="$vuetify.breakpoint.xs"
                     ></TooltipButton>
 
                     <TooltipButton
@@ -510,6 +511,7 @@
                       :message="$vuetify.lang.t('$vuetify.VER_DETALHES_PRTG')"
                       :event="openPRTG"
                       :object="circuit"
+                      :mobile="$vuetify.breakpoint.xs"
                     ></TooltipButton>
                   </v-card-actions>
                 </v-expansion-panel-content>

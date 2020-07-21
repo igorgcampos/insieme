@@ -108,6 +108,8 @@ export default {
     PENDENCIA_TPZ: 'Tpz pendency',
     PENDENCIA_CLIENTE: 'Client pendency',
     PEDIDO: 'Request',
+    DATA_INSTALACAO: 'Install date',
+    DATA_ATIVACAO: 'Activation date',
     DESIGNACAO_TPZ: 'Tpz Desig.',
     LATITUDE: 'Latitude',
     LONGITUDE: 'Longitude',
