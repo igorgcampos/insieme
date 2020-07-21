@@ -6,12 +6,21 @@
     dark
   >
     <v-img
+      v-show="!$vuetify.breakpoint.xs"
       src="../assets/telespazio-logo.png"
       max-height="80"
       max-width="180"
       min-width="80"
       aspect-ratio="5.9"
       class="mx-auto"
+    ></v-img>
+
+    <v-img
+      v-show="$vuetify.breakpoint.xs"
+      src="../assets/telespazio-simbolo.svg"
+      height="25"
+      width="20"
+      class="mx-auto mr-12"
     ></v-img>
 
     <v-spacer></v-spacer>
@@ -128,6 +137,7 @@
           pill
           v-on="on"
           color="red darken-3"
+          :class="{'caption':$vuetify.breakpoint.xs}"
         >
           {{$vuetify.lang.t('$vuetify.OLA')}}, {{user.nome}}
         </v-chip>
