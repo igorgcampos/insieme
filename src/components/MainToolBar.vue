@@ -18,9 +18,9 @@
     <v-img
       v-show="$vuetify.breakpoint.xs"
       src="../assets/telespazio-simbolo.svg"
-      height="25"
-      width="20"
-      class="mx-auto mr-12"
+      min-height="25"
+      max-width="20"
+      class="mr-7"
     ></v-img>
 
     <v-spacer></v-spacer>
