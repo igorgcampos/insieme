@@ -36,7 +36,7 @@
         v-show="showPanel"
       >
         <v-row :class="{'ml-n6':$vuetify.breakpoint.xs}">
-          <v-col :class="[{'flex-grow-0':!$vuetify.breakpoint.xs},{'ml-0':$vuetify.breakpoint.xs}]">
+          <v-col :class="[{'flex-grow-0':!$vuetify.breakpoint.xs},{'ml-0 pl-1 pr-0':$vuetify.breakpoint.xs}]">
             <CountCard
               :count="counts[0]"
               :message="$vuetify.lang.t('$vuetify.EM_ABERTO')"
@@ -44,7 +44,7 @@
               :func="getOpened"
             ></CountCard>
           </v-col>
-          <v-col :class="{'flex-grow-0':!$vuetify.breakpoint.xs}">
+          <v-col :class="[{'flex-grow-0':!$vuetify.breakpoint.xs},{'pl-1 pr-0':$vuetify.breakpoint.xs}]">
             <CountCard
               :count="0"
               :message="$vuetify.lang.t('$vuetify.EM_ANDAMENTO')"
@@ -53,7 +53,7 @@
             ></CountCard>
           </v-col>
           <v-col
-            :class="{'flex-grow-0':!$vuetify.breakpoint.xs}"
+            :class="[{'flex-grow-0':!$vuetify.breakpoint.xs}, {'pl-1 pr-0':$vuetify.breakpoint.xs}]"
             class="mr-n2"
           >
             <CountCard

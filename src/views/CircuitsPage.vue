@@ -38,7 +38,10 @@
         <v-row class="mt-3">
           <v-row v-show="$vuetify.breakpoint.xs">
 
-            <v-col class="ml-0">
+            <v-col
+              class="ml-0"
+              :class="{'pl-1 pr-0':$vuetify.breakpoint.xs}"
+            >
               <CountCard
                 :count="counts[0]"
                 message="Online"
@@ -48,7 +51,7 @@
               ></CountCard>
             </v-col>
 
-            <v-col>
+            <v-col :class="{'pl-1 pr-0':$vuetify.breakpoint.xs}">
               <CountCard
                 :count="counts[1]"
                 message="Offline"
@@ -58,7 +61,7 @@
               ></CountCard>
 
             </v-col>
-            <v-col>
+            <v-col :class="{'pl-1 pr-0':$vuetify.breakpoint.xs}">
               <CountCard
                 :count="installCounts[0]"
                 :message="$vuetify.lang.t('$vuetify.ATIVADO')"
@@ -68,7 +71,7 @@
               ></CountCard>
             </v-col>
 
-            <v-col>
+            <v-col :class="{'pl-1 pr-0':$vuetify.breakpoint.xs}">
               <CountCard
                 :count="installCounts[1]"
                 :message="$vuetify.lang.t('$vuetify.DESATIVADO')"
@@ -78,7 +81,7 @@
               ></CountCard>
             </v-col>
 
-            <v-col>
+            <v-col :class="{'pl-1 pr-0':$vuetify.breakpoint.xs}">
               <CountCard
                 :count="installCounts[3]"
                 :message="$vuetify.lang.t('$vuetify.DESINSTALADO')"
@@ -88,7 +91,7 @@
               ></CountCard>
             </v-col>
 
-            <v-col>
+            <v-col :class="{'pl-1 pr-0':$vuetify.breakpoint.xs}">
               <CountCard
                 :count="installCounts[2]"
                 :message="$vuetify.lang.t('$vuetify.CANCELADO')"
