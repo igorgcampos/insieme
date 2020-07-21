@@ -38,7 +38,7 @@
         <v-row class="mt-3">
           <v-row v-show="$vuetify.breakpoint.xs">
 
-            <v-col class="flex-grow-0">
+            <v-col class="ml-0">
               <CountCard
                 :count="counts[0]"
                 message="Online"
@@ -48,7 +48,7 @@
               ></CountCard>
             </v-col>
 
-            <v-col class="flex-grow-0">
+            <v-col>
               <CountCard
                 :count="counts[1]"
                 message="Offline"
@@ -58,7 +58,7 @@
               ></CountCard>
 
             </v-col>
-            <v-col class="flex-grow-0">
+            <v-col>
               <CountCard
                 :count="installCounts[0]"
                 :message="$vuetify.lang.t('$vuetify.ATIVADO')"
@@ -68,7 +68,7 @@
               ></CountCard>
             </v-col>
 
-            <v-col class="flex-grow-0">
+            <v-col>
               <CountCard
                 :count="installCounts[1]"
                 :message="$vuetify.lang.t('$vuetify.DESATIVADO')"
@@ -78,7 +78,7 @@
               ></CountCard>
             </v-col>
 
-            <v-col class="flex-grow-0">
+            <v-col>
               <CountCard
                 :count="installCounts[3]"
                 :message="$vuetify.lang.t('$vuetify.DESINSTALADO')"
@@ -88,7 +88,7 @@
               ></CountCard>
             </v-col>
 
-            <v-col class="flex-grow-0">
+            <v-col>
               <CountCard
                 :count="installCounts[2]"
                 :message="$vuetify.lang.t('$vuetify.CANCELADO')"
@@ -299,7 +299,7 @@
                   >
                     <v-col
                       v-if="!open"
-                      cols="2"
+                      cols="5"
                       sm="2"
                     >
                       <v-chip
@@ -314,6 +314,7 @@
                     </v-col>
 
                     <v-col
+                      v-show="!$vuetify.breakpoint.xs"
                       sm="5"
                       md="6"
                       :class="{'col-sm-10':open, 'col-md-10':open}"
@@ -321,20 +322,56 @@
                       <strong class="font-weight-bold grey--text text--lighten-1 mr-2">
                         {{$vuetify.lang.t('$vuetify.DESIGNACAO_CLIENTE')}}:</strong>
                       <strong
-                        class="subtitle-2"
+                        class="subtitle-2 font-weight-bold"
                         v-html="circuit.designacaoCliente"
                       ></strong>
                     </v-col>
 
                     <v-col
+                      v-show="!$vuetify.breakpoint.xs"
                       sm="5"
                       md="3"
                       v-if="!open"
                     >
                       <strong class="font-weight-bold grey--text text--lighten-1 mr-2">
                         IP:</strong>
-                      <strong v-html="circuit.ip || '--'"></strong>
+                      <strong
+                        class="font-weight-bold"
+                        v-html="circuit.ip || '--'"
+                      ></strong>
                     </v-col>
+
+                    <v-col
+                      v-show="$vuetify.breakpoint.xs"
+                      class="ml-3 mt-2 mb-2"
+                    >
+                      <v-row
+                        sm="5"
+                        md="6"
+                        :class="{'col-sm-10':open, 'col-md-10':open, 'ml-n6':open}"
+                      >
+                        <strong class="caption font-weight-bold grey--text text--lighten-1 mr-2">
+                          {{$vuetify.lang.t('$vuetify.DESIGNACAO_CLIENTE')}}:</strong>
+                        <strong
+                          class="caption font-weight-bold"
+                          v-html="circuit.designacaoCliente.toLowerCase()"
+                        ></strong>
+                      </v-row>
+
+                      <v-row
+                        sm="5"
+                        md="3"
+                        v-if="!open"
+                      >
+                        <strong class="caption font-weight-bold grey--text text--lighten-1 mr-2">
+                          IP:</strong>
+                        <strong
+                          class="caption font-weight-bold"
+                          v-html="circuit.ip || '--'"
+                        ></strong>
+                      </v-row>
+                    </v-col>
+
                   </v-row>
                 </v-expansion-panel-header>
 

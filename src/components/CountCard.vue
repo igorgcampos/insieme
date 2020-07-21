@@ -3,8 +3,8 @@
     <v-hover v-model="buttonHovering">
       <v-card
         class="mx-auto"
-        width="105"
-        height="80"
+        :width="$vuetify.breakpoint.xs?90:105"
+        :height="$vuetify.breakpoint.xs?80:80"
         style="{cursor: pointer}"
         @click="func"
       >
@@ -19,7 +19,10 @@
             >{{count}}</span>
           </v-row>
           <v-row justify="center">
-            <span class="text-center subtitle-2 font-weight-bold grey--text text--darken-3 ma-1">
+            <span
+              class="text-center subtitle-2 font-weight-bold grey--text text--darken-3 ma-1"
+              :class="{'button':$vuetify.breakpoint.xs}"
+            >
               {{message}} </span>
           </v-row>
         </v-col>

@@ -36,7 +36,7 @@
         v-show="showPanel"
       >
         <v-row :class="{'ml-n6':$vuetify.breakpoint.xs}">
-          <v-col class="flex-grow-0">
+          <v-col :class="[{'flex-grow-0':!$vuetify.breakpoint.xs},{'ml-0':$vuetify.breakpoint.xs}]">
             <CountCard
               :count="counts[0]"
               :message="$vuetify.lang.t('$vuetify.EM_ABERTO')"
@@ -44,7 +44,7 @@
               :func="getOpened"
             ></CountCard>
           </v-col>
-          <v-col class="flex-grow-0">
+          <v-col :class="{'flex-grow-0':!$vuetify.breakpoint.xs}">
             <CountCard
               :count="0"
               :message="$vuetify.lang.t('$vuetify.EM_ANDAMENTO')"
@@ -52,7 +52,10 @@
               :func="getClosed"
             ></CountCard>
           </v-col>
-          <v-col class="flex-grow-0">
+          <v-col
+            :class="{'flex-grow-0':!$vuetify.breakpoint.xs}"
+            class="mr-n2"
+          >
             <CountCard
               :count="counts[1]"
               :message="$vuetify.lang.t('$vuetify.ENCERRADOS')"
@@ -153,7 +156,7 @@
                   >
                     <v-col
                       v-if="!open"
-                      cols="2"
+                      cols="6"
                       sm="2"
                     >
                       <v-chip
@@ -171,6 +174,7 @@
                     <v-col
                       sm="5"
                       md="4"
+                      v-show="!$vuetify.breakpoint.xs"
                     >
                       <strong class="font-weight-bold grey--text text--lighten-1 mr-2">
                         {{$vuetify.lang.t('$vuetify.PROTOCOLO')}}:</strong>
@@ -184,6 +188,7 @@
                       sm="5"
                       md="5"
                       v-if="!open"
+                      v-show="!$vuetify.breakpoint.xs"
                     >
                       <strong class="font-weight-bold grey--text text--lighten-1 mr-2">
                         {{issue.status==1?$vuetify.lang.t('$vuetify.DATA_ABERTURA')+':':
@@ -191,6 +196,36 @@
 
                       <strong>{{issue.status==1?formatDate(issue.dataAbertura):
                   formatDate(issue.dataEncerramento)}}</strong>
+                    </v-col>
+
+                    <v-col
+                      v-show="$vuetify.breakpoint.xs"
+                      class="mt-2 mb-2 ml-0"
+                    >
+                      <v-row
+                        sm="5"
+                        md="4"
+                      >
+                        <strong class="caption font-weight-bold grey--text text--lighten-1 mr-2 ml-3">
+                          {{$vuetify.lang.t('$vuetify.PROTOCOLO')}}:</strong>
+                        <strong
+                          class="caption font-weight-bold"
+                          v-html="issue.protocolo"
+                        ></strong>
+                      </v-row>
+
+                      <v-row
+                        sm="5"
+                        md="5"
+                        v-if="!open"
+                      >
+                        <strong class="caption font-weight-bold grey--text text--lighten-1 mr-2">
+                          {{issue.status==1?$vuetify.lang.t('$vuetify.DATA_ABERTURA')+':':
+                    $vuetify.lang.t('$vuetify.DATA_ENCERRAMENTO')+':'}}</strong>
+
+                        <strong class="caption font-weight-bold">{{issue.status==1?formatDate(issue.dataAbertura):
+                  formatDate(issue.dataEncerramento)}}</strong>
+                      </v-row>
                     </v-col>
                   </v-row>
                 </v-expansion-panel-header>

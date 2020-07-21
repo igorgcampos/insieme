@@ -147,8 +147,8 @@
                   >
                     <v-col
                       v-if="!open"
-                      cols="5"
-                      sm="3"
+                      cols="6"
+                      sm="2"
                     >
                       <v-chip
                         :color="invoice.statusPagamento=='PENDENTE'?'warning':'success'"
@@ -165,18 +165,48 @@
                     <v-col
                       sm="5"
                       md="3"
+                      v-show="!$vuetify.breakpoint.xs"
                     >
                       <strong class="font-weight-bold grey--text text--lighten-1 mr-2">No.:</strong>
                       <strong v-html="invoice.numero"></strong>
                     </v-col>
 
-                    <v-col v-if="!open">
+                    <v-col
+                      v-if="!open"
+                      v-show="!$vuetify.breakpoint.xs"
+                    >
                       <strong class="font-weight-bold grey--text text--lighten-1 mr-2">
                         {{invoice.statusPagamento=='PENDENTE'?$vuetify.lang.t('$vuetify.VENCE_EM')+":":
                     $vuetify.lang.t('$vuetify.PAGO_EM')+":"}}</strong>
 
                       <strong>{{invoice.statusPagamento=='PENDENTE'?formatDate(invoice.dataVencimento):
                     formatDate(invoice.dataPagamento)}}</strong>
+                    </v-col>
+
+                    <v-col
+                      class="mt-2 mb-2"
+                      v-show="$vuetify.breakpoint.xs"
+                    >
+                      <v-row
+                        sm="5"
+                        md="3"
+                        :class="{'ml-0':open}"
+                      >
+                        <strong class="caption font-weight-bold grey--text text--lighten-1 mr-2">No.:</strong>
+                        <strong
+                          class="caption font-weight-bold"
+                          v-html="invoice.numero"
+                        ></strong>
+                      </v-row>
+
+                      <v-row v-if="!open">
+                        <strong class="caption font-weight-bold grey--text text--lighten-1 mr-2">
+                          {{invoice.statusPagamento=='PENDENTE'?$vuetify.lang.t('$vuetify.VENCE_EM')+":":
+                    $vuetify.lang.t('$vuetify.PAGO_EM')+":"}}</strong>
+
+                        <strong class="caption font-weight-bold">{{invoice.statusPagamento=='PENDENTE'?formatDate(invoice.dataVencimento):
+                    formatDate(invoice.dataPagamento)}}</strong>
+                      </v-row>
                     </v-col>
                   </v-row>
                 </v-expansion-panel-header>
