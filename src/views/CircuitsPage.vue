@@ -515,6 +515,7 @@
                       :event="openPRTG"
                       :object="circuit"
                       :mobile="$vuetify.breakpoint.xs"
+                      v-if="circuit.idPrtg & $getUser().prtgToken"
                     ></TooltipButton>
                   </v-card-actions>
                 </v-expansion-panel-content>
@@ -566,8 +567,9 @@ export default {
     SolveProblemDialog
   },
   methods: {
-    openPRTG () {
-      window.open('https://monitor.telespazio.com.br/device.htm?id=10665&tabid=1&username=gguimaraes.admin&passhash=4238791387')
+    openPRTG (circuit) {
+      window.open('https://monitor.telespazio.com.br/device.htm?id=' + circuit.idPrtg +
+        '&tabid=1&username=' + this.$getUser().apelido + '&passhash=' + this.$getUser().prtgToken)
     },
     formatCircuit (circuit) {
 
