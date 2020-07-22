@@ -78,7 +78,10 @@
             </v-col>
           </v-col>
 
-          <v-col class="mt-n12">
+          <v-col
+            class="mt-n12"
+            :class="{'col-6 pl-5':$vuetify.breakpoint.xs}"
+          >
             <v-col>
               <LabelValue
                 :label="$vuetify.lang.t('$vuetify.UNIDADE_NEGOCIO')"
@@ -107,7 +110,10 @@
             </v-col>
           </v-col>
 
-          <v-col class="mt-n12">
+          <v-col
+            class="mt-n12"
+            :class="{'pl-0':$vuetify.breakpoint.xs}"
+          >
             <v-col>
               <LabelValue
                 :label="$vuetify.lang.t('$vuetify.DATA_ASSINATURA')"

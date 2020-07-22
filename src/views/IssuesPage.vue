@@ -243,7 +243,7 @@
                   <v-row>
                     <v-col
                       class="mt-n6 mr-5"
-                      style="max-width:150px;"
+                      :class="{'col-5':$vuetify.breakpoint.xs, 'col-2':!$vuetify.breakpoint.xs}"
                     >
                       <v-col class="pa-0">
                         <v-chip
@@ -261,62 +261,68 @@
 
                     <v-col
                       class="mt-n3"
-                      style="max-width:180px;"
+                      :class="{'col-6 pl-5':$vuetify.breakpoint.xs}"
                     >
-                      <v-col class="pt-0 mt-n6">
+                      <v-col class="pt-0 pl-0 mt-n6">
                         <LabelValue
                           :label="$vuetify.lang.t('$vuetify.DATA_ABERTURA')"
                           :value="formatDate(issue.dataAbertura)"
                           justify="start"
-                          style="width:150px;"
+                          :class="{'pl-0':$vuetify.breakpoint.xs}"
                         ></LabelValue>
                       </v-col>
-                      <v-col class="pt-0 mt-n6">
+                      <v-col class="pt-0 pl-0 pr-0 mt-n6">
                         <LabelValue
                           :label="$vuetify.lang.t('$vuetify.DATA_ENCERRAMENTO')"
                           :value="formatDate(issue.dataEncerramento)"
                           justify="start"
-                          style="width:150px;"
+                          :class="{'pr-0 pl-0':$vuetify.breakpoint.xs}"
                         ></LabelValue>
                       </v-col>
                     </v-col>
 
-                    <v-col class="mt-n12">
-                      <v-col>
+                    <v-col
+                      class="mt-n12"
+                      :class="{'col-6':$vuetify.breakpoint.xs}"
+                    >
+                      <v-col class="pl-0">
                         <LabelValue
                           :label="$vuetify.lang.t('$vuetify.MOTIVO_ABERTURA')"
                           :value="issue.motivoAbertura"
                           justify="start"
-                          style="width:150px;"
+                          :class="{'pl-0':$vuetify.breakpoint.xs}"
                         ></LabelValue>
                       </v-col>
-                      <v-col class="pt-0 mt-n6">
+                      <v-col class="pt-0 pl-0 pr-0 mt-n6">
                         <LabelValue
                           :label="$vuetify.lang.t('$vuetify.MOTIVO_ENCERRAMENTO')"
                           :value="issue.motivoEncerramento || '--'"
                           justify="start"
-                          style="width:150px;"
+                          :class="{'pl-0 pr-0':$vuetify.breakpoint.xs}"
                         ></LabelValue>
                       </v-col>
                     </v-col>
 
-                    <v-col class="mt-n12">
-                      <v-col>
+                    <v-col
+                      class="mt-n12"
+                      :class="{'col-6 pr-0 pl-4':$vuetify.breakpoint.xs}"
+                    >
+                      <v-col class="pl-0">
                         <LabelValue
                           :label="$vuetify.lang.t('$vuetify.OBSERVACAO_ABERTURA')"
                           :value="issue.observacaoAbertura || '--'"
                           justify="start"
                           truncate
-                          style="width:150px;"
+                          :class="{'pl-0':$vuetify.breakpoint.xs}"
                         ></LabelValue>
                       </v-col>
-                      <v-col class="pt-0 mt-n6">
+                      <v-col class="pt-0 pl-0 pr-0 mt-n6">
                         <LabelValue
                           :label="$vuetify.lang.t('$vuetify.OBSERVACAO_ENCERRAMENTO')"
                           :value="issue.observacaoEncerramento || '--'"
                           justify="start"
                           truncate
-                          style="width:150px;"
+                          :class="{'pl-0 pr-0':$vuetify.breakpoint.xs}"
                         ></LabelValue>
                       </v-col>
                     </v-col>

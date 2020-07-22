@@ -10,14 +10,18 @@
         <v-card-title
           class="headline-6"
           style="word-break: normal; !important"
+          :class="{'subtitle-2':$vuetify.breakpoint.xs}"
         >
           {{$vuetify.lang.t('$vuetify.CENTRAL_AJUDA')}}
         </v-card-title>
-        <v-card-text class="mt-n2 headline-6">{{$vuetify.lang.t('$vuetify.RESPOSTAS_DUVIDAS')}}</v-card-text>
+        <v-card-text
+          class="mt-n2 headline-6"
+          :class="{'caption':$vuetify.breakpoint.xs}"
+        >{{$vuetify.lang.t('$vuetify.RESPOSTAS_DUVIDAS')}}</v-card-text>
 
         <v-col
           class="ma-n2 pa-0 overflow-y-hidden overflow-x-hidden"
-          style="min-height:28rem; max-height:28rem;"
+          style="min-height:22rem; max-height:28rem;"
         >
           <v-row class="mt-n3 ml-2">
             <v-col>
@@ -41,8 +45,8 @@
               </v-col>
               <v-row>
                 <div
-                  class="ma-0 pt-2 mt-n4 overflow-y-auto overflow-x-hidden"
-                  style="width:97%; max-height:335px;"
+                  class="ma-0 pt-2 mt-n4 mb-3 overflow-y-auto overflow-x-hidden"
+                  style="width:97%; min-height:10rem; max-height:16rem"
                 >
                   <v-expansion-panels class="ma-1 ml-7 mt-0 pr-12">
                     <v-expansion-panel
@@ -51,11 +55,14 @@
                       hide-actions
                     >
                       <v-expansion-panel-header class="pt-0 pb-0 ma-0 mb-n1">
-                        <span>{{item.question}} </span>
+                        <span :class="{'caption':$vuetify.breakpoint.xs}">{{item.question}} </span>
                       </v-expansion-panel-header>
 
                       <v-expansion-panel-content>
-                        <span class="subtitle-3 font-weight-bold">{{item.awnser}}</span>
+                        <span
+                          class="subtitle-3 font-weight-bold"
+                          :class="{'caption':$vuetify.breakpoint.xs}"
+                        >{{item.awnser}}</span>
                       </v-expansion-panel-content>
                     </v-expansion-panel>
                   </v-expansion-panels>
@@ -72,12 +79,14 @@
             color="primary"
             text
             @click="openChat()"
+            :x-small="$vuetify.breakpoint.xs"
           >{{$vuetify.lang.t('$vuetify.AINDA_COM_DUVIDAS')}}</v-btn>
           <v-spacer></v-spacer>
           <v-btn
             color="primary"
             text
             @click="close()"
+            :x-small="$vuetify.breakpoint.xs"
           >{{$vuetify.lang.t('$vuetify.FECHAR')}}</v-btn>
         </v-card-actions>
       </v-card>
@@ -151,3 +160,9 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.customHeight {
+  max-height: calc(100% - 400px) !important;
+}
+</style>

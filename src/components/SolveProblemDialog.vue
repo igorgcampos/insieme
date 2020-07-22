@@ -125,12 +125,14 @@
             color="primary"
             text
             @click="close(); clean();"
+            :x-small="$vuetify.breakpoint.xs"
             v-show="!showRestartingCircuitPanel && !(showRestartResultPanel && restartOk)"
           >{{$vuetify.lang.t('$vuetify.FECHAR')}}</v-btn>
 
           <v-btn
             color="primary"
             text
+            :x-small="$vuetify.breakpoint.xs"
             v-show="showRestartingCircuitPanel"
           ></v-btn>
 
@@ -138,6 +140,7 @@
             color="primary"
             text
             @click="restart"
+            :x-small="$vuetify.breakpoint.xs"
             v-show="showStatusResultPanel"
           >{{$vuetify.lang.t('$vuetify.REINICIAR')}}</v-btn>
 
@@ -145,6 +148,7 @@
             color="primary"
             text
             @click="openIssueDialog"
+            :x-small="$vuetify.breakpoint.xs"
             v-show="showOpenIssuePanel || showRestartResultPanel || (showStatusResultPanel && statusOk)"
           >{{$vuetify.lang.t('$vuetify.ABRIR_CHAMADO')}}</v-btn>
 
@@ -152,6 +156,7 @@
             color="primary"
             text
             @click="close(); clean();"
+            :x-small="$vuetify.breakpoint.xs"
             v-show="showRestartResultPanel && restartOk"
           >{{$vuetify.lang.t('$vuetify.ESTA_OK')}}</v-btn>
 
@@ -159,6 +164,7 @@
             color="primary"
             text
             @click="showFirstQuestionPanel?verifySignalPanel():showCircuitQuestionPanel?showOptionsPanel():nextQuestion()"
+            :x-small="$vuetify.breakpoint.xs"
             v-show="showCircuitQuestionPanel || showFirstQuestionPanel || (showChatQuestions && !showOpenIssuePanel)"
           >{{$vuetify.lang.t('$vuetify.SIM')}}</v-btn>
 
@@ -166,6 +172,7 @@
             color="primary"
             text
             @click="openChatBot"
+            :x-small="$vuetify.breakpoint.xs"
             v-show="showCircuitQuestionPanel || showFirstQuestionPanel || (showChatQuestions && !showOpenIssuePanel)"
           >{{$vuetify.lang.t('$vuetify.NAO')}}</v-btn>
         </v-card-actions>

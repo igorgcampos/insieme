@@ -73,6 +73,7 @@
             color="primary"
             text
             @click="send(issue, getObject()); cleanFields()"
+            :x-small="$vuetify.breakpoint.xs"
             :loading="showDialogLoading"
           >{{$vuetify.lang.t('$vuetify.ENVIAR')}}</v-btn>
         </v-card-actions>
@@ -108,6 +109,7 @@
             color="primary"
             text
             @click="close(); cleanFields()"
+            :x-small="$vuetify.breakpoint.xs"
           >{{$vuetify.lang.t('$vuetify.FECHAR')}}</v-btn>
         </v-card-actions>
       </v-card>

@@ -231,10 +231,7 @@
                         </v-chip>
                       </v-col>
 
-                      <v-col
-                        class="pa-0 mt-3"
-                        style="max-width:150px;"
-                      >
+                      <v-col class="pa-0 mt-3">
                         <v-chip
                           color="primary"
                           class="ml-0 mr-2"

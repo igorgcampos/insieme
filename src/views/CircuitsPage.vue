@@ -351,7 +351,7 @@
                       <v-row
                         sm="5"
                         md="6"
-                        :class="{'col-sm-10':open, 'col-md-10':open, 'ml-n6':open}"
+                        :class="{'ml-n3':open}"
                       >
                         <strong class="caption font-weight-bold grey--text text--lighten-1 mr-2">
                           {{$vuetify.lang.t('$vuetify.DESIGNACAO_CLIENTE')}}:</strong>
@@ -387,7 +387,7 @@
                   <v-row>
                     <v-col
                       class="mt-n6 mr-5"
-                      style="max-width:150px;"
+                      :cols="$vuetify.breakpoint.xs?5:2"
                     >
                       <v-col class="pa-0">
                         <v-chip
@@ -401,10 +401,7 @@
                         </v-chip>
                       </v-col>
 
-                      <v-col
-                        class="pa-0 mt-3"
-                        style="max-width:150px;"
-                      >
+                      <v-col class="pa-0 mt-3">
                         <v-chip
                           color="primary"
                           class="ml-0 mr-2"
@@ -420,43 +417,44 @@
 
                     <v-col
                       class="mt-n12"
-                      style="max-width:180px;"
+                      :class="{'col-6':$vuetify.breakpoint.xs}"
                     >
-                      <v-col>
+                      <v-col class="pl-0">
                         <LabelValue
                           label="IP"
                           :value="circuit.ip || '--'"
                           justify="start"
-                          style="width:150px;"
                         ></LabelValue>
                       </v-col>
-                      <v-col class="pt-0 mt-n6">
+                      <v-col class="pt-0 mt-n6 pl-0 pr-0">
                         <LabelValue
                           :label="$vuetify.lang.t('$vuetify.DATA_INSTALACAO')"
                           :value="formatDate(circuit.dataInstalacao)"
                           justify="start"
-                          style="width:150px;"
                         ></LabelValue>
                       </v-col>
-                      <v-col class="pt-0 mt-n6">
+                      <v-col class="pt-0 mt-n6 pl-0 pr-0">
                         <LabelValue
                           :label="$vuetify.lang.t('$vuetify.DATA_ATIVACAO')"
                           :value="formatDate(circuit.dataAtivacao)"
                           justify="start"
                           truncate
-                          style="width:150px;"
                         ></LabelValue>
                       </v-col>
                     </v-col>
 
-                    <v-col class="mt-n12">
+                    <v-col
+                      class="mt-n12"
+                      :class="{'col-6':$vuetify.breakpoint.xs, 'ml-n12':!$vuetify.breakpoint.xs}"
+                    >
                       <v-col>
                         <LabelValue
                           :label="$vuetify.lang.t('$vuetify.ENDERECO')"
                           :value="getAddress(circuit)"
                           justify="start"
                           truncate
-                          style="width:150px;"
+                          :class="{'col-2':$vuetify.breakpoint.xs}"
+                          style="max-width:150px"
                         ></LabelValue>
                       </v-col>
                       <v-col class="pt-0 mt-n6">
@@ -464,7 +462,6 @@
                           :label="$vuetify.lang.t('$vuetify.LATITUDE')"
                           :value="circuit.latitude?circuit.latitude.toFixed(4):'--'"
                           justify="start"
-                          style="width:150px;"
                         ></LabelValue>
                       </v-col>
                       <v-col class="pt-0 mt-n6">
@@ -472,12 +469,14 @@
                           :label="$vuetify.lang.t('$vuetify.LONGITUDE')"
                           :value="circuit.longitude?circuit.longitude.toFixed(4): '--'"
                           justify="start"
-                          style="width:150px;"
                         ></LabelValue>
                       </v-col>
                     </v-col>
 
-                    <v-col class="mt-n12">
+                    <v-col
+                      class="mt-n12"
+                      :class="{'col-6':$vuetify.breakpoint.xs}"
+                    >
                       <v-col>
                         <LabelValue
                           :label="$vuetify.lang.t('$vuetify.PRODUTO')"
