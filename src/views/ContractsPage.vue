@@ -41,6 +41,7 @@
                 solo
                 max-width="200"
                 append-icon="mdi-magnify"
+                @click:append="search()"
                 @keypress.enter="search()"
               ></v-text-field>
             </v-row>

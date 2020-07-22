@@ -84,6 +84,7 @@
                 solo
                 max-width="200"
                 append-icon="mdi-magnify"
+                @click:append="search()"
                 @keypress.enter="search()"
               ></v-text-field>
             </v-row>
@@ -261,7 +262,7 @@
 
                     <v-col
                       class="mt-n3"
-                      :class="{'col-6 pl-5':$vuetify.breakpoint.xs}"
+                      :class="{'col-6 pl-3':$vuetify.breakpoint.xs}"
                     >
                       <v-col class="pt-0 pl-0 mt-n6">
                         <LabelValue
@@ -295,7 +296,8 @@
                       </v-col>
                       <v-col class="pt-0 pl-0 pr-0 mt-n6">
                         <LabelValue
-                          :label="$vuetify.lang.t('$vuetify.MOTIVO_ENCERRAMENTO')"
+                          :label="$vuetify.breakpoint.xs?
+                          $vuetify.lang.t('$vuetify.MOTIVO_ENCERRAMENTO_ABREVIADO'):$vuetify.lang.t('$vuetify.MOTIVO_ENCERRAMENTO')"
                           :value="issue.motivoEncerramento || '--'"
                           justify="start"
                           :class="{'pl-0 pr-0':$vuetify.breakpoint.xs}"
@@ -305,7 +307,7 @@
 
                     <v-col
                       class="mt-n12"
-                      :class="{'col-6 pr-0 pl-4':$vuetify.breakpoint.xs}"
+                      :class="{'col-6 pr-0 pl-2':$vuetify.breakpoint.xs}"
                     >
                       <v-col class="pl-0">
                         <LabelValue
@@ -318,7 +320,8 @@
                       </v-col>
                       <v-col class="pt-0 pl-0 pr-0 mt-n6">
                         <LabelValue
-                          :label="$vuetify.lang.t('$vuetify.OBSERVACAO_ENCERRAMENTO')"
+                          :label="$vuetify.breakpoint.xs?
+                          $vuetify.lang.t('$vuetify.OBSERVACAO_ENCERRAMENTO_ABREVIADO'):$vuetify.lang.t('$vuetify.OBSERVACAO_ENCERRAMENTO')"
                           :value="issue.observacaoEncerramento || '--'"
                           justify="start"
                           truncate

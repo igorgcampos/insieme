@@ -68,6 +68,7 @@
             color="primary"
             text
             @click="close(); cleanFields()"
+            :x-small="$vuetify.breakpoint.xs"
           >{{$vuetify.lang.t('$vuetify.CANCELAR')}}</v-btn>
           <v-btn
             color="primary"

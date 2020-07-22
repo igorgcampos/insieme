@@ -35,7 +35,7 @@
         </v-row>
 
         <v-row>
-          <v-col class="mt-n6 mr-5">
+          <v-col class="mt-n6 mr-1">
             <v-col class="pa-0 pl-1">
               <v-chip
                 label
