@@ -35,8 +35,8 @@
         class="ma-0 pa-0"
         v-show="showPanel"
       >
-        <v-row>
-          <v-col class="flex-grow-0">
+        <v-row :class="{'ml-n6':$vuetify.breakpoint.xs}">
+          <v-col :class="[{'flex-grow-0':!$vuetify.breakpoint.xs},{'ml-0 pl-1 pr-0':$vuetify.breakpoint.xs}]">
             <CountCard
               :count="counts[0]"
               :message="$vuetify.lang.t('$vuetify.PAGOS')"
@@ -44,12 +44,23 @@
               :func="getPaid"
             ></CountCard>
           </v-col>
-          <v-col class="flex-grow-0">
+          <v-col :class="[{'flex-grow-0':!$vuetify.breakpoint.xs},{'pl-1 pr-0':$vuetify.breakpoint.xs}]">
             <CountCard
               :count="counts[1]"
               :message="$vuetify.lang.t('$vuetify.EM_ABERTO')"
               color="warning--text"
               :func="getOpened"
+            ></CountCard>
+          </v-col>
+          <v-col
+            :class="[{'flex-grow-0':!$vuetify.breakpoint.xs}, {'pl-1 pr-0':$vuetify.breakpoint.xs}]"
+            class="mr-n2"
+          >
+            <CountCard
+              :count="counts[2]"
+              :message="$vuetify.lang.t('$vuetify.VENCIDAS')"
+              color="error--text"
+              :func="getOverdue"
             ></CountCard>
           </v-col>
         </v-row>
@@ -152,13 +163,15 @@
                       sm="2"
                     >
                       <v-chip
-                        :color="invoice.statusPagamento=='PENDENTE'?'warning':'success'"
+                        :color="invoice.statusPagamento=='EM_ABERTO'?'warning':
+                        invoice.statusPagamento=='VENCIDA'?'error':'success'"
                         class="ml-0 mr-2"
                         label
                         small
                         outlined
                       >
-                        {{ invoice.statusPagamento=='PENDENTE'?$vuetify.lang.t('$vuetify.EM_ABERTO'):
+                        {{ invoice.statusPagamento=='EM_ABERTO'?$vuetify.lang.t('$vuetify.EM_ABERTO'):
+                        invoice.statusPagamento=='VENCIDA'?$vuetify.lang.t('$vuetify.VENCIDA'):
                   $vuetify.lang.t('$vuetify.PAGO') }}
                       </v-chip>
                     </v-col>
@@ -177,10 +190,10 @@
                       v-show="!$vuetify.breakpoint.xs"
                     >
                       <strong class="font-weight-bold grey--text text--lighten-1 mr-2">
-                        {{invoice.statusPagamento=='PENDENTE'?$vuetify.lang.t('$vuetify.VENCE_EM')+":":
+                        {{(invoice.statusPagamento=='EM_ABERTO' || invoice.statusPagamento=='VENCIDA')?$vuetify.lang.t('$vuetify.VENCE_EM')+":":
                     $vuetify.lang.t('$vuetify.PAGO_EM')+":"}}</strong>
 
-                      <strong>{{invoice.statusPagamento=='PENDENTE'?formatDate(invoice.dataVencimento):
+                      <strong>{{(invoice.statusPagamento=='EM_ABERTO' || invoice.statusPagamento=='VENCIDA')?formatDate(invoice.dataVencimento):
                     formatDate(invoice.dataPagamento)}}</strong>
                     </v-col>
 
@@ -202,10 +215,10 @@
 
                       <v-row v-if="!open">
                         <strong class="caption font-weight-bold grey--text text--lighten-1 mr-2">
-                          {{invoice.statusPagamento=='PENDENTE'?$vuetify.lang.t('$vuetify.VENCE_EM')+":":
+                          {{invoice.statusPagamento=='EM_ABERTO'?$vuetify.lang.t('$vuetify.VENCE_EM')+":":
                     $vuetify.lang.t('$vuetify.PAGO_EM')+":"}}</strong>
 
-                        <strong class="caption font-weight-bold">{{invoice.statusPagamento=='PENDENTE'?formatDate(invoice.dataVencimento):
+                        <strong class="caption font-weight-bold">{{invoice.statusPagamento=='EM_ABERTO'?formatDate(invoice.dataVencimento):
                     formatDate(invoice.dataPagamento)}}</strong>
                       </v-row>
                     </v-col>
@@ -221,14 +234,16 @@
                     >
                       <v-col class="pa-0">
                         <v-chip
-                          :color="invoice.statusPagamento=='PENDENTE'?'warning':'success'"
+                          :color="invoice.statusPagamento=='EM_ABERTO'?'warning':
+                          invoice.statusPagamento=='VENCIDA'?'error':'success'"
                           class="ml-0 mr-2"
                           label
                           small
                           outlined
                         >
-                          {{ invoice.statusPagamento=='PENDENTE'?$vuetify.lang.t('$vuetify.EM_ABERTO'):
-                  $vuetify.lang.t('$vuetify.PAGO') }}
+                          {{ invoice.statusPagamento=='EM_ABERTO'?$vuetify.lang.t('$vuetify.EM_ABERTO'):
+                          invoice.statusPagamento=='VENCIDA'?$vuetify.lang.t('$vuetify.VENCIDA'):
+                          $vuetify.lang.t('$vuetify.PAGO') }}
                         </v-chip>
                       </v-col>
 
@@ -410,7 +425,7 @@ export default {
         [this.$vuetify.lang.t('$vuetify.DATA_VENCIMENTO')]: this.formatDate(invoice.dataVencimento),
         [this.$vuetify.lang.t('$vuetify.TIPO')]: invoice.tipo == 'LOCAÇÃO' ? this.$vuetify.lang.t('$vuetify.LOCACAO') :
           invoice.tipo == 'VENDA' ? this.$vuetify.lang.t('$vuetify.VENDA') : invoice.tipo,
-        [this.$vuetify.lang.t('$vuetify.STATUS_PAGAMENTO')]: invoice.statusPagamento == 'PENDENTE' ? this.$vuetify.lang.t('$vuetify.EM_ABERTO') :
+        [this.$vuetify.lang.t('$vuetify.STATUS_PAGAMENTO')]: invoice.statusPagamento == 'EM_ABERTO' ? this.$vuetify.lang.t('$vuetify.EM_ABERTO') :
           this.$vuetify.lang.t('$vuetify.PAGO'),
         [this.$vuetify.lang.t('$vuetify.DESCRICAO_SERVICO')]: invoice.descricaoServico.substring(0, 18),
         [this.$vuetify.lang.t('$vuetify.CONDICAO_PAGAMENTO')]: invoice.condicaoPagamento,
@@ -505,6 +520,9 @@ export default {
     getOpened () {
       this.getByStatus(2);
     },
+    getOverdue () {
+      this.getByStatus(3);
+    },
     openIssue (invoice) {
       this.selectedInvoice = invoice;
       this.selectedInvoice.type = 'invoice';
@@ -544,6 +562,8 @@ export default {
         selectedStatus = 1;
       } else if (this.status == this.statuses[2]) {
         selectedStatus = 2;
+      } else if (this.status == this.statuses[3]) {
+        selectedStatus = 3;
       }
 
       this.$get('/nota/busca', {
@@ -577,7 +597,7 @@ export default {
     reasonList: [],
     showDialog: false,
     showSuccess: false,
-    counts: [0, 0],
+    counts: [0, 0, 0],
     invoices: [],
     statuses: [],
     status: 0,
@@ -593,8 +613,9 @@ export default {
     this.$vuetify.lang.t('$vuetify.ALTERAR_VENCIMENTO')]
 
     this.statuses = [this.$vuetify.lang.t('$vuetify.TODOS'),
-    this.$vuetify.lang.t('$vuetify.PAGO'),
-    this.$vuetify.lang.t('$vuetify.EM_ABERTO')]
+    this.$vuetify.lang.t('$vuetify.PAGOS'),
+    this.$vuetify.lang.t('$vuetify.EM_ABERTO'),
+    this.$vuetify.lang.t('$vuetify.VENCIDAS')]
 
     this.$get('/nota/counts',
       { contractId: this.$props.contract.id }).then((response) => {

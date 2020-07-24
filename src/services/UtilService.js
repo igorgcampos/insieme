@@ -4,6 +4,11 @@ const utilService = {}
 utilService.install = function (Vue) {
 
     Vue.prototype.$formatDate = (date) => {
+
+        if (!date) {
+            return '--'
+        }
+
         if (Vuetify.framework.lang.current == 'en') {
             return date.month + '/' + date.day + '/' + date.year
         }
