@@ -803,6 +803,10 @@ export default {
         selectedProduct = 0;
       } else if (this.product == this.products[1]) {
         selectedProduct = 1;
+      } else if (this.product == this.products[2]) {
+        selectedProduct = 2;
+      } else if (this.product == this.products[3]) {
+        selectedProduct = 3;
       }
 
       this.$get('/circuito/busca', {
@@ -858,13 +862,14 @@ export default {
     this.reasonList = [this.$vuetify.lang.t('$vuetify.INOPERANCIA'),
     this.$vuetify.lang.t('$vuetify.INTERMITENCIA'),
     this.$vuetify.lang.t('$vuetify.LENTIDAO'),
-    this.$vuetify.lang.t('$vuetify.CONFIGURACAO')]
+    this.$vuetify.lang.t('$vuetify.CONFIGURACAO'),
+      'Hardware']
 
     this.statuses = [this.$vuetify.lang.t('$vuetify.TODOS'),
       'Online',
       'Offline']
 
-    this.products = [this.$vuetify.lang.t('$vuetify.TODOS'), 'Gilat']
+    this.products = [this.$vuetify.lang.t('$vuetify.TODOS'), 'Gilat', 'Gilat2', 'Idirect']
 
     this.$get('/circuito/status/counts',
       { contractNumber: this.$props.contract.numeroContratoTpz }).then((response) => {

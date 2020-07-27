@@ -12,7 +12,7 @@
           style="word-break: normal; !important"
         >
           {{getObject().type=='circuit'?
-          $vuetify.lang.t('$vuetify.ABRINDO_CHAMADO_CIRCUITO')+getObject().designacaoCliente:
+          $vuetify.lang.t('$vuetify.ABRINDO_CHAMADO_CIRCUITO')+getObject().nome:
           getObject().type=='invoice'?
           $vuetify.lang.t('$vuetify.ABRINDO_CHAMADO_NOTA')+
           getObject().numero: $vuetify.lang.t('$vuetify.ENCERRANDO_CHAMADO')+getObject().protocolo}}

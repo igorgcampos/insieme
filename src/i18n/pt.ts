@@ -159,13 +159,13 @@ export default {
     VERIFICANDO_SINAL: 'Por favor aguarde enquanto estamos verificando o sinal do seu circuito...',
     REINICIANDO_CIRCUITO: 'Estou reiniciando seu circuito. Por favor aguarde mais alguns instantes...',
     SINAL_CIRCUITO_ONLINE: 'Ok, vamos lá! Clique em REINICIAR que vou executar o comando no seu circuito! Mas caso você queira trocar uma configuração ou abrir um chamado, por favor, clique em ABRIR CHAMADO.',
-    SINAL_CIRCUITO_ONLINE_2: 'Pronto reiniciei o seu circuito! Me diga se esta ok o seu circuito ou se mesmo assim precisa abrir um chamado.',
+    SINAL_CIRCUITO_ONLINE_2: 'Pronto, reiniciei o seu circuito e verifiquei que está online! Me diga se está ok, mas se infelizmente não resolveu, por favor, clique em ABRIR CHAMADO.',
     SINAL_CIRCUITO_OFFLINE: 'Verifiquei que seu circuito não está respondendo. Gostaria de reinicia-lo agora?',
     CONFIRMAR_SELECAO_CIRCUITO: 'Verifiquei aqui e o seu circuito está funcionando. O circuito que esta apresentando o problema é o {0} ?',
     REINICIAR: 'Reiniciar',
     ESTA_OK: 'Está ok!',
     DESIGNACAO_CLIENTE_TPZ: 'Desig. cliente/tpz',
-    PRIMEIRA_PERGUNTA: 'Olá, sou o AVO seu assistente virtual. Vou tentar te ajudar. Mas antes, me tire um duvida: Seu problema é lentidão ou intermitência?',
+    PRIMEIRA_PERGUNTA: 'Olá, sou Matteo seu assistente virtual. Vou tentar te ajudar. Mas antes, me tire um duvida: Seu problema é lentidão ou intermitência?',
     SIM: 'Sim',
     NAO: 'Não',
     RESTART_FALHOU: 'Que pena! Após reiniciar seu circuito verifiquei que o mesmo continua sem responder. Por favor, abra um chamado conosco para que um especialista possa analisar seu problema.',
@@ -203,5 +203,5 @@ export default {
     VENCIDA: 'Vencida',
     VENCIDAS: 'Vencidas',
     RELATORIO: 'Relatório e estatísticas',
-    RELATORIO_DESCRICAO: 'Gráficos relacionados a circuitos, notas fiscais e chamados'
+    RELATORIO_DESCRICAO: 'Gráficos relacionados a circuitos, notas fiscais e chamados',
 }
