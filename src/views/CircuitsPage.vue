@@ -881,8 +881,8 @@ export default {
             this.isLoading = false;
 
             var countsArray = this.installCounts.slice()
-            countsArray.unshift(this.counts[0])
             countsArray.unshift(this.counts[1])
+            countsArray.unshift(this.counts[0])
             this.$root.$emit('circuit-data', countsArray)
           });
       });
@@ -893,7 +893,8 @@ export default {
       onlineStatus: 0,
       installStatus: 0,
       productType: 0,
-      page: 0    })
+      page: 0
+    })
       .then((response) => {
         this.circuits = response.data;
         this.isLoading = false;
