@@ -201,5 +201,7 @@ export default {
     STATUS_OPERACIONAL: 'Status operacional',
     STATUS_EQUIPAMENTOS: 'Status da implantação',
     VENCIDA: 'Vencida',
-    VENCIDAS: 'Vencidas'
+    VENCIDAS: 'Vencidas',
+    RELATORIO: 'Relatório e estatísticas',
+    RELATORIO_DESCRICAO: 'Gráficos relacionados a circuitos, notas fiscais e chamados'
 }

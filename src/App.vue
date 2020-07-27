@@ -1,6 +1,8 @@
 <template>
   <v-app style="background:#FAFAFA">
     <router-view></router-view>
+    <ReportSideBar>
+    </ReportSideBar>
   </v-app>
 </template>
 
@@ -20,9 +22,15 @@
 </style>
 <script>
 
+import ReportSideBar from './components/ReportSideBar'
+
 export default {
   name: 'App',
-
+  components: {
+    ReportSideBar
+    //BarChart,
+    //DoughnutChart
+  },
   created: function () {
 
     this.$router.beforeEach((to, from, next) => {

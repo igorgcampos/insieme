@@ -258,6 +258,21 @@
           icon
           color="white"
           class="ml-2 mr-0"
+          @click="showReport()"
+          v-show="canShowReport()"
+        >
+          <v-icon v-on="on">mdi-chart-bar</v-icon>
+        </v-btn>
+      </template>
+      <span>{{$vuetify.lang.t('$vuetify.RELATORIO')}}</span>
+    </v-tooltip>
+
+    <v-tooltip bottom>
+      <template v-slot:activator="{ on }">
+        <v-btn
+          icon
+          color="white"
+          class="ml-2 mr-0"
           @click="logout()"
         >
           <v-icon v-on="on">mdi-logout</v-icon>
@@ -274,7 +289,7 @@ import FaqDialog from '../components/dialogs/FaqDialog';
 
 export default {
   components: {
-    FaqDialog
+    FaqDialog,
   },
   created: function () {
     this.user = this.$getUser();
@@ -289,6 +304,9 @@ export default {
     showFaq: false
   }),
   methods: {
+    showReport () {
+      this.$root.$emit('report')
+    },
     goTo (target) {
       this.$root.$emit('go-to', target)
     },
@@ -301,6 +319,7 @@ export default {
     faq () {
       this.showFaq = true
     },
+
     toContractList () {
       this.$router.push('/contratos')
     },
@@ -310,6 +329,9 @@ export default {
     },
     canShowContractLink () {
       return this.$route.path === '/clientes' || this.$route.path === '/dashboard'
+    },
+    canShowReport () {
+      return this.$route.path === '/dashboard'
     },
     canShowClientLink () {
       return this.$hasProfile('Administrador') &&

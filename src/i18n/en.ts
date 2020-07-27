@@ -202,5 +202,7 @@ export default {
     STATUS_OPERACIONAL: 'Operational status',
     STATUS_EQUIPAMENTOS: 'Deployment Status',
     VENCIDA: 'Overdue',
-    VENCIDAS: 'Overdue'
+    VENCIDAS: 'Overdue',
+    RELATORIO: 'Report and statistics',
+    RELATORIO_DESCRICAO: 'Graphics related to circuits, invoices and tickets'
 }
