@@ -25,7 +25,7 @@
         <v-btn
           icon
           color="white"
-          @click="show = false"
+          @click="show = false; $showChatButton();"
         >
           <v-icon>mdi-close-circle</v-icon>
         </v-btn>
@@ -140,6 +140,13 @@ export default {
           fontSize: 16
         }
       },
+    }
+  },
+  watch: {
+    show: function () {
+      if (!this.show) {
+        this.$showChatButton();
+      }
     }
   },
   created: function () {

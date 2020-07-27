@@ -306,6 +306,7 @@ export default {
   methods: {
     showReport () {
       this.$root.$emit('report')
+      this.$hideChatButton();
     },
     goTo (target) {
       this.$root.$emit('go-to', target)
