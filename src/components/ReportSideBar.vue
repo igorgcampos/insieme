@@ -33,8 +33,8 @@
     </div>
 
     <v-col
-      style="height:110%; background-color: #FFFFFF;"
-      class="mb-12"
+      style="height:120%; background-color: #FFFFFF;"
+      class="pt-5"
     >
       <v-row class="mb-5 ml-3">
         <BarChart
@@ -43,7 +43,11 @@
           :styles="circuitStyle"
         ></BarChart>
       </v-row>
-      <v-row class="mt-12 ml-12 pl-10">
+      <v-row
+        class="mt-12 pl-8"
+        justify-center
+        :class="{'ml-5':$vuetify.breakpoint.xs}"
+      >
         <DoughnutChart
           :chart-data="invoiceData"
           :options="invoiceOptions"
@@ -60,7 +64,6 @@
     </v-col>
 
   </v-navigation-drawer>
-
 </template>
 
 <script>
@@ -75,22 +78,18 @@ export default {
   },
   data () {
     return {
-      show2: null,
       show: null,
       circuitData: undefined,
       invoiceData: undefined,
       issueData: undefined,
       circuitStyle: {
-        height: '210px', width: '29rem',
-        position: 'relative'
+        height: '16rem',
       },
       invoiceStyle: {
-        height: '20rem', width: '20rem',
-        position: 'relative'
+        height: '20rem',
       },
       issueStyle: {
-        height: '210px', width: '29rem',
-        position: 'relative'
+        height: '16rem',
       },
       circuitOptions: {
         responsive: true,
@@ -144,6 +143,11 @@ export default {
     }
   },
   created: function () {
+
+    this.circuitStyle.width = this.$vuetify.breakpoint.xs ? '20rem' : '29rem';
+    this.invoiceStyle.width = this.$vuetify.breakpoint.xs ? '15rem' : '29rem';
+    this.issueStyle.width = this.$vuetify.breakpoint.xs ? '20rem' : '29rem';
+
     this.$root.$on('report', () => this.show = !this.show)
 
     this.$root.$on('circuit-data', (circuitData) => {
