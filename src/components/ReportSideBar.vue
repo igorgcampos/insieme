@@ -6,6 +6,7 @@
     right
     dark
     v-model="show"
+    v-show="show2"
     style="width:33rem; z-index:10000;"
   >
 
@@ -72,8 +73,12 @@ export default {
     BarChart,
     DoughnutChart
   },
+  mounted: function () {
+    this.show2 = !this.show2
+  },
   data () {
     return {
+      show2: null,
       show: null,
       circuitData: undefined,
       invoiceData: undefined,
