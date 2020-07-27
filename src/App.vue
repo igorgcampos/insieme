@@ -28,8 +28,6 @@ export default {
   name: 'App',
   components: {
     ReportSideBar
-    //BarChart,
-    //DoughnutChart
   },
   created: function () {
 

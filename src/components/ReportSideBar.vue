@@ -1,12 +1,12 @@
 <template>
 
   <v-navigation-drawer
-    absolute
+    :absolute="show"
+    :fixed="!show"
     temporary
     right
     dark
     v-model="show"
-    v-show="show2"
     style="width:33rem; z-index:10000;"
   >
 
@@ -72,9 +72,6 @@ export default {
   components: {
     BarChart,
     DoughnutChart
-  },
-  mounted: function () {
-    this.show2 = !this.show2
   },
   data () {
     return {
