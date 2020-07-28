@@ -50,7 +50,7 @@
                 </v-row>
 
                 <v-row>
-                  <v-col class="d-flex justify-center ml-1 mr-n7 pr-0">
+                  <v-col class="d-flex justify-center ml-0 mr-n7 pr-0">
                     <CountCard
                       :count="counts[0]"
                       message="Online"
