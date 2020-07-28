@@ -102,8 +102,11 @@ export default {
     CANCELADO: 'Canceled',
     DESINSTALADO: 'Uninstalled',
     INSTALADO: 'Installed',
-    EM_IMPLANTACAO: 'In implantation',
+    EM_IMPLANTACAO: 'Implantation',
     EM_TRANSPORTE: 'In transit',
+    EM_TRANSPORTE_MOBILE: 'In transit',
+    PROC_LOGISTICO: 'Logistic proc.',
+    PROC_LOGISTICO_MOBILE: 'Logistic p.',
     SEM_VIABILIDADE: 'No viability',
     PENDENCIA_TPZ: 'Tpz pendency',
     PENDENCIA_CLIENTE: 'Client pendency',
@@ -200,9 +203,13 @@ export default {
     CONVERSE_CONOSCO: 'Chat with us',
     BUSCAR_PERGUNTA: 'Search for question or answer',
     STATUS_OPERACIONAL: 'Operational status',
-    STATUS_EQUIPAMENTOS: 'Deployment Status',
+    STATUS_LOGISTICA: 'Logistic status',
     VENCIDA: 'Overdue',
     VENCIDAS: 'Overdue',
     RELATORIO: 'Report and statistics',
-    RELATORIO_DESCRICAO: 'Graphics related to circuits, invoices and tickets'
+    RELATORIO_DESCRICAO: 'Graphics related to circuits, invoices and tickets',
+    PROC_LOGISTICO_DESCRICAO: 'Newly hired circuit, in the logistics process',
+    EM_IMPLANTACAO_DESCRICAO: 'Newly hired circuit, being installed in the field by the technical team',
+    EM_TRANSPORTE_DESCRICAO: 'Newly contracted circuit in transport',
+    INSTALADO_DESCRICAO: 'Circuit installed, however, still pending the “acceptance” of the customer'
 }

@@ -27,7 +27,7 @@
               <v-row>
                 <p class="ml-3 mr-3 mb-10 text-justify SUBTITLE-2 font-weight-bold grey--text text--darken-3">
                   {{showFirstQuestionPanel?$vuetify.lang.t('$vuetify.PRIMEIRA_PERGUNTA')
-                  :$vuetify.lang.t('$vuetify.CONFIRMAR_SELECAO_CIRCUITO', getObject().designacaoCliente)}} </p>
+                  :$vuetify.lang.t('$vuetify.CONFIRMAR_SELECAO_CIRCUITO', getObject().nome)}} </p>
               </v-row>
             </div>
           </v-lazy>
