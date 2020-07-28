@@ -50,7 +50,7 @@
                 </v-row>
 
                 <v-row>
-                  <v-col class="d-flex justify-center ml-1 mr-n8 pr-0">
+                  <v-col class="d-flex justify-center ml-1 mr-n7 pr-0">
                     <CountCard
                       :count="counts[0]"
                       message="Online"
@@ -60,7 +60,7 @@
                     ></CountCard>
                   </v-col>
 
-                  <v-col class="d-flex justify-center ml-n8 pl-0">
+                  <v-col class="d-flex justify-center ml-n7 pl-0">
                     <CountCard
                       :count="counts[1]"
                       message="Offline"
@@ -75,7 +75,7 @@
 
             <v-row>
               <v-col
-                class="mr-0 ml-0 pr-0 pl-0"
+                class="mr-0 ml-n0 pr-0 pl-0"
                 cols="12"
               >
                 <v-row justify="center">
@@ -84,7 +84,7 @@
                 </v-row>
 
                 <v-sheet
-                  class="ma-0 pa-0"
+                  class="ma-0 pa-0 ml-n3 mr-n3"
                   style="background:#FAFAFA"
                 >
 
