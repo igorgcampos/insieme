@@ -43,17 +43,14 @@
           >
 
             <v-row>
-              <v-col
-                class="ml-2"
-                cols="12"
-              >
+              <v-col cols="12">
                 <v-row justify="center">
                   <span class="mt-n3 text-center subtitle-1 font-weight-bold grey--text text--darken-1">
                     {{$vuetify.lang.t('$vuetify.STATUS_OPERACIONAL')}}</span>
                 </v-row>
 
                 <v-row>
-                  <v-col class="flex-grow-0 ml-11">
+                  <v-col class="d-flex justify-center ml-1 mr-n8 pr-0">
                     <CountCard
                       :count="counts[0]"
                       message="Online"
@@ -63,7 +60,7 @@
                     ></CountCard>
                   </v-col>
 
-                  <v-col class="flex-grow-0">
+                  <v-col class="d-flex justify-center ml-n8 pl-0">
                     <CountCard
                       :count="counts[1]"
                       message="Offline"
