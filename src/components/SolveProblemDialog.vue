@@ -163,7 +163,7 @@
           <v-btn
             color="primary"
             text
-            @click="showFirstQuestionPanel?verifySignalPanel():showCircuitQuestionPanel?showOptionsPanel():nextQuestion()"
+            @click="showFirstQuestionPanel?openChatBot():showCircuitQuestionPanel?showOptionsPanel():nextQuestion()"
             :x-small="$vuetify.breakpoint.xs"
             v-show="showCircuitQuestionPanel || showFirstQuestionPanel || (showChatQuestions && !showOpenIssuePanel)"
           >{{$vuetify.lang.t('$vuetify.SIM')}}</v-btn>
@@ -171,7 +171,7 @@
           <v-btn
             color="primary"
             text
-            @click="openChatBot"
+            @click="showFirstQuestionPanel?verifySignalPanel():openChatBot()"
             :x-small="$vuetify.breakpoint.xs"
             v-show="showCircuitQuestionPanel || showFirstQuestionPanel || (showChatQuestions && !showOpenIssuePanel)"
           >{{$vuetify.lang.t('$vuetify.NAO')}}</v-btn>
@@ -283,7 +283,8 @@ export default {
       this.showRestartResultPanel = false
 
       this.$get('/circuito/restart',
-        {          desigClient: this.getObject().designacaoCliente,
+        {
+          desigClient: this.getObject().designacaoCliente,
           hubFamily: this.getObject().plataformaSat || '',
           hub: this.getObject().hub || '',
           vsatIdModem: this.getObject().vsatId || ''
@@ -350,9 +351,9 @@ export default {
               this.restartingCircuitMessage = this.$vuetify.lang.t('$vuetify.MAIS_ALGUNS_INSTANTES')
             }, 20000);
 
-          }, 15000);
+          }, 20000);
 
-        }, 15000);
+        }, 20000);
       }
     }
   }

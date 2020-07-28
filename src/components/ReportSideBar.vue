@@ -189,7 +189,8 @@ export default {
       this.invoiceOptions.title.text = this.$vuetify.lang.t('$vuetify.NOTAS_FISCAIS')
 
       this.invoiceData = {
-        labels: [this.$vuetify.lang.t('$vuetify.PAGO'), this.$vuetify.lang.t('$vuetify.EM_ABERTO')],
+        labels: [this.$vuetify.lang.t('$vuetify.PAGO'), this.$vuetify.lang.t('$vuetify.EM_ABERTO'),
+        this.$vuetify.lang.t('$vuetify.VENCIDAS')],
         datasets: [
           {
 
