@@ -131,7 +131,8 @@ export default {
     OBSERVACAO_ENCERRAMENTO_ABREVIADO: 'Obs. encerramento',
     OBSERVACAO: 'Observação',
     SELECIONE_MOTIVO: 'Selecione o motivo',
-    ABRINDO_CHAMADO_CIRCUITO: 'Abrindo chamado para o circuito ',
+    ABRINDO_CHAMADO_CIRCUITO: 'Abrindo chamado para o circuito {0}',
+    ABRINDO_CHAMADO_CIRCUITOS: 'Abrindo chamado para circuitos',
     ABRINDO_CHAMADO_NOTA: 'Abrindo chamado para a nota fiscal ',
     ENCERRANDO_CHAMADO: 'Encerrando chamado ',
     SELECIONE_MOTIVO_OBSERVACAO: 'Selecione um motivo e adicione uma observação',
@@ -210,5 +211,10 @@ export default {
     PROC_LOGISTICO_DESCRICAO: 'Circuito recém contratado, em processo de logístico',
     EM_IMPLANTACAO_DESCRICAO: 'Circuito recém contratado, sendo instalado em campo pela equipe técnica',
     EM_TRANSPORTE_DESCRICAO: 'Circuito recém contratado em transporte',
-    INSTALADO_DESCRICAO: 'Circuito instalado, porém, ainda pendente do “aceite” do cliente'
+    INSTALADO_DESCRICAO: 'Circuito instalado, porém, ainda pendente do “aceite” do cliente',
+    ABRIR_CHAMADO_CIRCUITOS: 'Abrir chamado para circuitos em lotes',
+    PROXIMO: 'Próximo',
+    ANTERIOR: 'Anterior',
+    SELECIONE_CIRCUITOS: 'Busque e selecione os circuitos do seu interesse',
+    NENHUM_CIRCUITO_SELECIONADO: 'Nenhum circuito selecionado',
 }

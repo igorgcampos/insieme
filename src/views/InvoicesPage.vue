@@ -401,7 +401,7 @@
 
 <script>
 
-import CountCard from '../components/CountCard'
+import CountCard from '../components/cards/CountCard'
 import EmptyPanel from '../components/EmptyPanel';
 import TooltipButton from '../components/TooltipButton';
 import LabelValue from '../components/LabelValue';

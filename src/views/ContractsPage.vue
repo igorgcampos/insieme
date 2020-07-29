@@ -109,7 +109,7 @@
 
 <script>
 
-import ContractCard from '../components/ContractCard';
+import ContractCard from '../components/cards/ContractCard';
 import EmptyPanel from '../components/EmptyPanel';
 
 export default {

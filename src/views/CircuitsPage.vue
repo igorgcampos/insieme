@@ -92,6 +92,8 @@
                     :v-model="null"
                     show-arrows
                     center-active
+                    next-icon="mdi-arrow-right-thick primary--text"
+                    prev-icon="mdi-arrow-left-thick primary--text"
                   >
                     <v-slide-item>
                       <v-col class="flex-grow-0">
@@ -250,6 +252,8 @@
                   :v-model="null"
                   show-arrows
                   center-active
+                  next-icon="mdi-arrow-right-thick primary--text"
+                  prev-icon="mdi-arrow-left-thick primary--text"
                 >
                   <v-slide-item>
                     <v-col class="flex-grow-0">
@@ -714,12 +718,12 @@
 
 <script>
 
-import CountCard from '../components/CountCard'
+import CountCard from '../components/cards/CountCard'
 import EmptyPanel from '../components/EmptyPanel';
 import TooltipButton from '../components/TooltipButton';
 import LabelValue from '../components/LabelValue';
 import IssueDialog from '../components/dialogs/IssueDialog';
-import SolveProblemDialog from '../components/SolveProblemDialog';
+import SolveProblemDialog from '../components/dialogs/SolveProblemDialog';
 
 export default {
   components: {

@@ -5,10 +5,13 @@
       justify="center"
       class="mb-3"
     >
-      <v-icon x-large>mdi-help-circle</v-icon>
+      <v-icon :x-large="!mobile">mdi-help-circle</v-icon>
     </v-row>
     <v-row justify="center">
-      <span class="text-center headline font-weight-bold grey--text text--darken-3">
+      <span
+        class="text-center headline font-weight-bold grey--text text--darken-3"
+        :class="{'caption':mobile}"
+      >
         {{message}} </span>
     </v-row>
   </v-col>
@@ -17,7 +20,8 @@
 <script>
 export default {
   props: {
-    message: String
+    message: String,
+    mobile: Boolean
   }
 };
 </script>

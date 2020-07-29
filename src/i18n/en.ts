@@ -133,7 +133,8 @@ export default {
     OBSERVACAO_ENCERRAMENTO_ABREVIADO: 'Closing observation',
     OBSERVACAO: 'Observation',
     SELECIONE_MOTIVO: 'Select the reason',
-    ABRINDO_CHAMADO_CIRCUITO: 'Opening issue for circuit ',
+    ABRINDO_CHAMADO_CIRCUITO: 'Opening issue for circuit {0}',
+    ABRINDO_CHAMADO_CIRCUITOS: 'Opening issue for circuits',
     ABRINDO_CHAMADO_NOTA: 'Opening issue for invoice ',
     ENCERRANDO_CHAMADO: 'Closing issue ',
     SELECIONE_MOTIVO_OBSERVACAO: 'Select a reason and add an observation',
@@ -211,5 +212,10 @@ export default {
     PROC_LOGISTICO_DESCRICAO: 'Newly hired circuit, in the logistics process',
     EM_IMPLANTACAO_DESCRICAO: 'Newly hired circuit, being installed in the field by the technical team',
     EM_TRANSPORTE_DESCRICAO: 'Newly contracted circuit in transport',
-    INSTALADO_DESCRICAO: 'Circuit installed, however, still pending the “acceptance” of the customer'
+    INSTALADO_DESCRICAO: 'Circuit installed, however, still pending the “acceptance” of the customer',
+    ABRIR_CHAMADO_CIRCUITOS: 'Open call for batch circuits',
+    PROXIMO: 'Next',
+    ANTERIOR: 'Previous',
+    SELECIONE_CIRCUITOS: 'Search and select the circuits of interest',
+    NENHUM_CIRCUITO_SELECIONADO: 'No circuit selected',
 }

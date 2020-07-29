@@ -89,7 +89,7 @@
 
 <script>
 
-import ClientCard from '../components/ClientCard';
+import ClientCard from '../components/cards/ClientCard';
 import EmptyPanel from '../components/EmptyPanel';
 
 export default {

@@ -18,7 +18,7 @@
           >
             <div class="ma-0 pa-0">
               <v-img
-                src="../assets/robo.png"
+                src="../../assets/robo.png"
                 max-height="100"
                 max-width="100"
                 class="mx-auto mt-6 mb-6"
@@ -72,7 +72,7 @@
           >
             <div class="ma-0 pa-0">
               <v-img
-                src="../assets/robo.png"
+                src="../../assets/robo.png"
                 max-height="100"
                 max-width="100"
                 class="mx-auto mt-6 mb-6"
@@ -103,7 +103,7 @@
           >
             <div class="ma-0 pa-0">
               <v-img
-                src="../assets/robo.png"
+                src="../../assets/robo.png"
                 max-height="100"
                 max-width="100"
                 class="mx-auto mt-6 mb-6"

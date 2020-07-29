@@ -3,7 +3,7 @@
     <v-dialog
       v-model="showDialog"
       persistent
-      max-width="360"
+      max-width="350"
       v-if="getObject()"
     >
       <v-card v-show="!showSuccess">
@@ -12,7 +12,7 @@
           style="word-break: normal; !important"
         >
           {{getObject().type=='circuit'?
-          $vuetify.lang.t('$vuetify.ABRINDO_CHAMADO_CIRCUITO')+getObject().nome:
+          $vuetify.lang.t('$vuetify.ABRINDO_CHAMADO_CIRCUITO',getObject().nome):
           getObject().type=='invoice'?
           $vuetify.lang.t('$vuetify.ABRINDO_CHAMADO_NOTA')+
           getObject().numero: $vuetify.lang.t('$vuetify.ENCERRANDO_CHAMADO')+getObject().protocolo}}
@@ -22,7 +22,7 @@
         <v-col class="mt-n3">
 
           <v-col
-            class="ml-6"
+            class="ml-7"
             cols="10"
           >
             <v-row>
@@ -42,7 +42,7 @@
           </v-col>
 
           <v-col
-            class="ml-6 mt-n6"
+            class="ml-7 mt-n6"
             cols="10"
           >
             <v-row>

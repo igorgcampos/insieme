@@ -188,8 +188,8 @@
 
 <script>
 
-import LabelValue from '../components/LabelValue';
-import TooltipButton from '../components/TooltipButton';
+import LabelValue from '../../components/LabelValue';
+import TooltipButton from '../../components/TooltipButton';
 export default {
 
   data: () => ({

@@ -121,12 +121,12 @@
                   dark
                   color="primary"
                   v-on="on"
-                  @click="test()"
+                  @click="showBatchIssueDialog()"
                 >
                   <v-icon dark>mdi-sim-alert</v-icon>
                 </v-btn>
               </template>
-              <span>{{$vuetify.lang.t('$vuetify.ABRIR_CHAMADO')}}</span>
+              <span>{{$vuetify.lang.t('$vuetify.ABRIR_CHAMADO_CIRCUITOS')}}</span>
             </v-tooltip>
           </v-col>
         </v-row>
@@ -369,6 +369,18 @@
           :getObject="getObject"
           :itemList="reasonList"
         ></IssueDialog>
+
+        <BatchIssueDialog
+          :showDialog="showBatchDialog"
+          :showSuccess="showSuccess"
+          :showDialogLoading="showDialogLoading"
+          :close="closeBatchDialog"
+          :send="sendIssue"
+          :search="searchCircuits"
+          :entity="{type: 'circuit'}"
+          :itemList="itemList"
+          :reasonList="reasonBatchList"
+        ></BatchIssueDialog>
       </div>
     </v-lazy>
   </div>
@@ -376,11 +388,12 @@
 
 <script>
 
-import CountCard from '../components/CountCard'
+import CountCard from '../components/cards/CountCard'
 import EmptyPanel from '../components/EmptyPanel';
 import TooltipButton from '../components/TooltipButton';
 import LabelValue from '../components/LabelValue';
 import IssueDialog from '../components/dialogs/IssueDialog';
+import BatchIssueDialog from '../components/dialogs/BatchIssueDialog';
 
 export default {
   components: {
@@ -388,11 +401,41 @@ export default {
     EmptyPanel,
     TooltipButton,
     LabelValue,
-    IssueDialog
+    IssueDialog,
+    BatchIssueDialog
   },
   methods: {
+    searchCircuits (text) {
+
+      if (!text || text.length == 0) {
+        return
+      }
+
+      this.$get('/circuito/busca', {
+        contractNumber: this.$props.contract.numeroContratoTpz,
+        searchText: text,
+        onlineStatus: 0,
+        installStatus: 0,
+        productType: 0,
+        page: -1
+      })
+        .then((response) => {
+          this.itemList = response.data;
+        });
+    },
+    showBatchIssueDialog () {
+      this.showBatchDialog = true;
+    },
     closeDialog () {
       this.showDialog = false;
+      this.showDialogLoading = false;
+
+      setTimeout(() => {
+        this.showSuccess = false;
+      }, 1000);
+    },
+    closeBatchDialog () {
+      this.showBatchDialog = false;
       this.showDialogLoading = false;
 
       setTimeout(() => {
@@ -527,6 +570,9 @@ export default {
     contract: Object
   },
   data: () => ({
+    reasonBatchList: [],
+    itemList: [],
+    showBatchDialog: false,
     showPanel: true,
     selectedIssue: undefined,
     showDialogLoading: false,
