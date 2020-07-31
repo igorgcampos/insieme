@@ -3,7 +3,7 @@
     <v-dialog
       v-model="showDialog"
       persistent
-      :max-width="selectReason?360:450"
+      :max-width="selectReason?360:470"
       v-if="showDialog"
     >
       <v-card v-show="!showSuccess">
@@ -70,18 +70,18 @@
 
           <v-row>
             <v-col
-              class="overflow-y-auto"
-              style="max-height:18rem;"
+              class="overflow-y-hidden"
+              style="max-height:20rem;"
             >
               <v-col
                 cols="11"
-                class="ml-4 mt-n4"
+                class="ml-4 mt-n4 pr-0 mr-0"
               >
                 <v-row>
                   <span class=" text-right subtitle-2 font-weight-bold grey--text text--lighten-1">
                     {{$vuetify.lang.t('$vuetify.BUSCAR')}}:</span>
                 </v-row>
-                <v-row md="2">
+                <v-row class="mr-1">
                   <v-text-field
                     v-model.trim="searchText"
                     dense
@@ -91,17 +91,71 @@
                     solo
                     max-width="200"
                     append-icon="mdi-magnify"
-                    @click:append="search(searchText)"
-                    @keypress.enter="search(searchText)"
+                    @click:append="search(searchText); selectedCheckList = []"
+                    @keypress.enter="search(searchText); selectedCheckList = []"
                   ></v-text-field>
                 </v-row>
 
                 <EmptyPanel
                   :mobile=true
                   :message="$vuetify.lang.t('$vuetify.NENHUM_CIRCUITO')"
-                  v-show="itemList.length == 0"
+                  v-show="itemList.length == 0 && !showDialogLoading"
+                ></EmptyPanel>
+
+                <v-row
+                  justify="center"
+                  v-show="showDialogLoading"
                 >
-                </EmptyPanel>
+                  <v-progress-circular
+                    class="d-flex justify-center mt-4"
+                    :width="3"
+                    color="red"
+                    indeterminate
+                  ></v-progress-circular>
+                </v-row>
+
+                <v-lazy
+                  :options="{threshold: .6}"
+                  transition="slide-x-transition"
+                >
+                  <v-list
+                    v-show="itemList.length > 0"
+                    two-line
+                    flat
+                    class="ml-n6 mt-n4 pt-3"
+                  >
+                    <v-list-item-group
+                      multiple
+                      class="overflow-y-auto"
+                      style="max-height:14.6rem;"
+                    >
+                      <v-list-item
+                        class="mt-n3"
+                        v-for="(item, i) in itemList"
+                        :key="i"
+                      >
+                        <template v-slot:default="{ active }">
+
+                          <v-list-item-action>
+                            <v-checkbox
+                              :input-value="active"
+                              v-model="selectedCheckList"
+                              color="primary"
+                              dense
+                              :value="item"
+                              @click.native="selectItem(item, true, active)"
+                            ></v-checkbox>
+                          </v-list-item-action>
+
+                          <v-list-item-content class="ml-n3">
+                            <v-list-item-title class="subtitle-2">{{item.nome}}</v-list-item-title>
+                            <v-list-item-subtitle class="caption">{{item.designacaoCliente.toLowerCase()}}</v-list-item-subtitle>
+                          </v-list-item-content>
+                        </template>
+                      </v-list-item>
+                    </v-list-item-group>
+                  </v-list>
+                </v-lazy>
               </v-col>
             </v-col>
 
@@ -113,16 +167,39 @@
 
             <v-col
               class="overflow-y-auto"
-              style="max-height:18rem;"
+              style="max-height:20rem;"
             >
 
-              <EmptyPanel
-                class="mt-12 pt-12"
-                :mobile=true
-                :message="$vuetify.lang.t('$vuetify.NENHUM_CIRCUITO_SELECIONADO')"
-                v-show="selectedItemList.length == 0"
+              <v-col
+                cols="11"
+                class="ml-4 mt-n4"
               >
-              </EmptyPanel>
+                <EmptyPanel
+                  class="mt-12 pt-12"
+                  :mobile=true
+                  :message="$vuetify.lang.t('$vuetify.NENHUM_CIRCUITO_SELECIONADO')"
+                  v-show="selectedItemList.length == 0"
+                >
+                </EmptyPanel>
+
+                <v-row class="ml-0 mt-4 d-flex justify-left">
+                  <transition-group name="slide-x-transition">
+                    <v-chip
+                      v-for="(item) in selectedItemList"
+                      :key="item.id"
+                      color="success"
+                      class="ml-0 mr-2 mt-2"
+                      label
+                      :small="$vuetify.breakpoint.xs"
+                      @click:close="selectItem(item, false)"
+                      close
+                    >
+                      {{ item.nome}}
+                    </v-chip>
+                  </transition-group>
+                </v-row>
+
+              </v-col>
             </v-col>
           </v-row>
         </v-col>
@@ -215,15 +292,47 @@ export default {
     reasonList: Array
   },
   methods: {
+    selectItem (item, checkList, checked) {
+
+      if (!this.containsItem(item)) {
+        this.selectedItemList.push(item)
+      } else {
+
+        if (checked) {
+          this.selectedItemList = this.selectedItemList.filter(function (value) {
+            return value.id != item.id
+          });
+        }
+
+        if (!checkList)
+          this.selectedCheckList = this.selectedCheckList.filter(function (value) {
+            return value.id != item.id
+          });
+      }
+
+    },
+    containsItem (item) {
+
+      for (var index in this.selectedItemList) {
+        if (this.selectedItemList[index].id == item.id)
+          return true;
+      }
+
+      return false
+    },
     cleanFields () {
       this.issue.observation = '';
       this.issue.reason = undefined;
       this.selectReason = false
+      this.selectedItemList = [];
+      this.searchText = '';
     }
   },
   data: () => ({
+    check: false,
     searchText: '',
     selectedItemList: [],
+    selectedCheckList: [],
     selectReason: false,
     issue: { reason: undefined, observation: '' }
   })

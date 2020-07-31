@@ -411,6 +411,8 @@ export default {
         return
       }
 
+      this.itemList = []
+      this.showDialogLoading = true
       this.$get('/circuito/busca', {
         contractNumber: this.$props.contract.numeroContratoTpz,
         searchText: text,
@@ -421,6 +423,7 @@ export default {
       })
         .then((response) => {
           this.itemList = response.data;
+          this.showDialogLoading = false
         });
     },
     showBatchIssueDialog () {
@@ -437,6 +440,7 @@ export default {
     closeBatchDialog () {
       this.showBatchDialog = false;
       this.showDialogLoading = false;
+      this.itemList = []
 
       setTimeout(() => {
         this.showSuccess = false;
