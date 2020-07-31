@@ -162,7 +162,7 @@
                     >
                       <v-chip
                         :color="issue.status==1?'success':'primary'"
-                        class="ml-0 mr-2"
+                        class="ml-0 mr-4"
                         label
                         small
                         outlined
@@ -380,6 +380,7 @@
           :entity="{type: 'circuit'}"
           :itemList="itemList"
           :reasonList="reasonBatchList"
+          :noResult="noBatchResult"
         ></BatchIssueDialog>
       </div>
     </v-lazy>
@@ -405,13 +406,16 @@ export default {
     BatchIssueDialog
   },
   methods: {
-    searchCircuits (text) {
+    searchCircuits (text, page) {
 
       if (!text || text.length == 0) {
         return
       }
 
-      this.itemList = []
+      if (page == 0) {
+        this.itemList = []
+      }
+
       this.showDialogLoading = true
       this.$get('/circuito/busca', {
         contractNumber: this.$props.contract.numeroContratoTpz,
@@ -419,10 +423,15 @@ export default {
         onlineStatus: 0,
         installStatus: 0,
         productType: 0,
-        page: -1
+        page: page
       })
         .then((response) => {
-          this.itemList = response.data;
+
+          if (response && response.data.length == 0) {
+            this.noBatchResult = true;
+          }
+
+          this.itemList = this.itemList.concat(response.data)
           this.showDialogLoading = false
         });
     },
@@ -441,6 +450,7 @@ export default {
       this.showBatchDialog = false;
       this.showDialogLoading = false;
       this.itemList = []
+      this.noBatchResult = false
 
       setTimeout(() => {
         this.showSuccess = false;
@@ -574,6 +584,7 @@ export default {
     contract: Object
   },
   data: () => ({
+    noBatchResult: false,
     reasonBatchList: [],
     itemList: [],
     showBatchDialog: false,

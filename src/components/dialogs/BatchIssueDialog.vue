@@ -71,7 +71,7 @@
           <v-row>
             <v-col
               class="overflow-y-hidden"
-              style="max-height:20rem;"
+              style="max-height:320px;"
             >
               <v-col
                 cols="11"
@@ -91,8 +91,8 @@
                     solo
                     max-width="200"
                     append-icon="mdi-magnify"
-                    @click:append="search(searchText); selectedCheckList = []"
-                    @keypress.enter="search(searchText); selectedCheckList = []"
+                    @click:append="search(searchText, 0); selectedCheckList = []; page = 0;"
+                    @keypress.enter="search(searchText, 0); selectedCheckList = []; page = 0;"
                   ></v-text-field>
                 </v-row>
 
@@ -102,7 +102,7 @@
                   v-show="itemList.length == 0 && !showDialogLoading"
                 ></EmptyPanel>
 
-                <v-row
+                <!--<v-row
                   justify="center"
                   v-show="showDialogLoading"
                 >
@@ -112,12 +112,13 @@
                     color="red"
                     indeterminate
                   ></v-progress-circular>
-                </v-row>
+                </v-row> -->
 
                 <v-lazy
                   :options="{threshold: .6}"
                   transition="slide-x-transition"
                 >
+
                   <v-list
                     v-show="itemList.length > 0"
                     two-line
@@ -125,9 +126,11 @@
                     class="ml-n6 mt-n4 pt-3"
                   >
                     <v-list-item-group
+                      id="listId"
+                      v-scroll:#listId="searchMore"
+                      style="max-height:234px;"
                       multiple
                       class="overflow-y-auto"
-                      style="max-height:14.6rem;"
                     >
                       <v-list-item
                         class="mt-n3"
@@ -285,6 +288,7 @@ export default {
     showDialog: Boolean,
     showSuccess: Boolean,
     showDialogLoading: Boolean,
+    noResult: Boolean,
     close: Function,
     send: Function,
     search: Function,
@@ -292,29 +296,40 @@ export default {
     reasonList: Array
   },
   methods: {
-    selectItem (item, checkList, checked) {
+    searchMore () {
 
-      if (!this.containsItem(item)) {
+      if (this.showDialogLoading || this.noResult) {
+        return;
+      }
+
+      if (document.getElementById('listId').scrollTop + 235 >=
+        document.getElementById('listId').scrollHeight) {
+        this.page++;
+        this.search(this.searchText, this.page)
+      }
+
+    },
+    selectItem (item, checkList) {
+
+      if (!this.containsItem(item, this.selectedItemList) && this.containsItem(item, this.selectedCheckList)) {
         this.selectedItemList.push(item)
       } else {
 
-        if (checked) {
+        if (!checkList || !this.containsItem(item, this.selectedCheckList))
           this.selectedItemList = this.selectedItemList.filter(function (value) {
             return value.id != item.id
           });
-        }
 
         if (!checkList)
           this.selectedCheckList = this.selectedCheckList.filter(function (value) {
             return value.id != item.id
           });
       }
-
     },
-    containsItem (item) {
+    containsItem (item, list) {
 
-      for (var index in this.selectedItemList) {
-        if (this.selectedItemList[index].id == item.id)
+      for (var index in list) {
+        if (list[index].id == item.id)
           return true;
       }
 
@@ -329,6 +344,7 @@ export default {
     }
   },
   data: () => ({
+    page: 0,
     check: false,
     searchText: '',
     selectedItemList: [],
