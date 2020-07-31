@@ -238,7 +238,7 @@
 
                   <v-card-subtitle class="caption mt-n10 ml-n4 mb-2 grey--text text--lighten-1">
                     {{$vuetify.lang.t('$vuetify.ORIGEM')}}:
-                    {{$vuetify.lang.t('$vuetify.'+issue.origem) + ' ('+issue.identificadorOrigem+')'}}
+                    {{$vuetify.lang.t('$vuetify.'+issue.origem) + issue.identificadorOrigem?' ('+issue.identificadorOrigem+')':''}}
                   </v-card-subtitle>
 
                   <v-row>
@@ -375,7 +375,7 @@
           :showSuccess="showSuccess"
           :showDialogLoading="showDialogLoading"
           :close="closeBatchDialog"
-          :send="sendIssue"
+          :send="sendBatchIssue"
           :search="searchCircuits"
           :entity="{type: 'circuit'}"
           :itemList="itemList"
@@ -406,6 +406,35 @@ export default {
     BatchIssueDialog
   },
   methods: {
+    sendBatchIssue (issue, entity) {
+
+      if (!issue.reason) {
+        return;
+      }
+
+      this.showDialogLoading = true;
+
+      issue = {
+        origem: issue.origin,
+        identificadorOrigem: undefined,
+        motivoAbertura: issue.reason,
+        observacaoAbertura: issue.observation,
+        lote: issue.items.map(function (item) {
+          return item.nome
+        }),
+        contrato: { id: this.$props.contract.id }
+      }
+      this.$post('/chamado/create', issue).then((response) => {
+
+        if (response.data) {
+
+          this.showSuccess = true;
+          this.showDialogLoading = false;
+          this.$root.$emit('new-issue', response.data)
+          entity.protocolo = response.data.protocolo
+        }
+      });
+    },
     searchCircuits (text, page) {
 
       if (!text || text.length == 0) {
@@ -604,6 +633,10 @@ export default {
     searchText: '',
   }),
   created: function () {
+
+    this.reasonBatchList = [this.$vuetify.lang.t('$vuetify.ATIVACAO'),
+    this.$vuetify.lang.t('$vuetify.CONFIGURACAO'),
+    this.$vuetify.lang.t('$vuetify.DESATIVACAO')]
 
     this.reasonList = [this.$vuetify.lang.t('$vuetify.DESISTI_CHAMADO'),
     this.$vuetify.lang.t('$vuetify.PROBLEMA_RESOLVIDO')]

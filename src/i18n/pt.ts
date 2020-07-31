@@ -217,4 +217,7 @@ export default {
     ANTERIOR: 'Anterior',
     SELECIONE_CIRCUITOS: 'Busque e selecione os circuitos do seu interesse',
     NENHUM_CIRCUITO_SELECIONADO: 'Nenhum circuito selecionado',
+    CIRCUITO_LOTE: 'Circuitos em lote',
+    ATIVACAO: 'Ativação',
+    DESATIVACAO: 'Desativação'
 }

@@ -218,4 +218,7 @@ export default {
     ANTERIOR: 'Previous',
     SELECIONE_CIRCUITOS: 'Search and select the circuits of interest',
     NENHUM_CIRCUITO_SELECIONADO: 'No circuit selected',
+    CIRCUITO_LOTE: 'Batch circuits',
+    ATIVACAO: 'Activation',
+    DESATIVACAO: 'Deactivation'
 }

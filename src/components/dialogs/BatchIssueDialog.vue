@@ -102,18 +102,6 @@
                   v-show="itemList.length == 0 && !showDialogLoading"
                 ></EmptyPanel>
 
-                <!--<v-row
-                  justify="center"
-                  v-show="showDialogLoading"
-                >
-                  <v-progress-circular
-                    class="d-flex justify-center mt-4"
-                    :width="3"
-                    color="red"
-                    indeterminate
-                  ></v-progress-circular>
-                </v-row> -->
-
                 <v-lazy
                   :options="{threshold: .6}"
                   transition="slide-x-transition"
@@ -219,7 +207,7 @@
           <v-btn
             color="primary"
             text
-            @click="selectReason = true"
+            @click="next()"
             :x-small="$vuetify.breakpoint.xs"
             v-show="!selectReason"
           >{{$vuetify.lang.t('$vuetify.PROXIMO')}}</v-btn>
@@ -296,6 +284,11 @@ export default {
     reasonList: Array
   },
   methods: {
+    next () {
+      if (this.selectedItemList.length > 0) {
+        this.selectReason = true
+      }
+    },
     searchMore () {
 
       if (this.showDialogLoading || this.noResult) {
@@ -310,6 +303,10 @@ export default {
 
     },
     selectItem (item, checkList) {
+
+      if (!this.issue.items) {
+        this.issue.items = this.selectedItemList
+      }
 
       if (!this.containsItem(item, this.selectedItemList) && this.containsItem(item, this.selectedCheckList)) {
         this.selectedItemList.push(item)
@@ -350,7 +347,7 @@ export default {
     selectedItemList: [],
     selectedCheckList: [],
     selectReason: false,
-    issue: { reason: undefined, observation: '' }
+    issue: { reason: undefined, observation: '', origin: 'CIRCUITO_LOTE', items: undefined }
   })
 };
 </script>
