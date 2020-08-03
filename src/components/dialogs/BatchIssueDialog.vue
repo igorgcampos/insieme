@@ -159,17 +159,18 @@
             <v-divider
               vertical
               class="mt-3 mb-5"
-              style="height:20em;"
+              :style="{height: size + 'em'}"
             > </v-divider>
 
             <v-col
               class="overflow-y-auto overflow-x-hidden mt-4"
-              style="height:20em;"
+              :style="{height: size + 'em'}"
             >
 
               <v-col
                 cols="11"
                 class="ml-4 mt-n1"
+                :class="{'mt-n8':$vuetify.breakpoint.xs}"
               >
                 <EmptyPanel
                   class="mt-8 pt-10"
@@ -180,7 +181,7 @@
                 </EmptyPanel>
 
                 <v-row
-                  class="ml-0 mt-4 d-flex justify-left"
+                  class="ml-0 mt-2 d-flex justify-left"
                   :class="{'ml-n7':$vuetify.breakpoint.xs}"
                 >
                   <transition-group name="slide-x-transition">
@@ -356,6 +357,7 @@ export default {
     }
   },
   data: () => ({
+    size: 0,
     page: 0,
     check: false,
     searchText: '',
@@ -363,6 +365,9 @@ export default {
     selectedCheckList: [],
     selectReason: false,
     issue: { reason: undefined, observation: '', origin: 'CIRCUITO_LOTE', items: undefined }
-  })
+  }),
+  created: function () {
+    this.size = this.$vuetify.breakpoint.xs ? 14 : 20;
+  }
 };
 </script>

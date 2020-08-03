@@ -129,40 +129,52 @@ export default {
     searchText: ''
   }),
   created: function () {
-    this.items.push({      question: this.$vuetify.lang.t('$vuetify.DUVIDA_1'),
-      awnser: this.$vuetify.lang.t('$vuetify.RESPOSTA_1')    })
+    this.items.push({
+      question: this.$vuetify.lang.t('$vuetify.DUVIDA_1'),
+      awnser: this.$vuetify.lang.t('$vuetify.RESPOSTA_1')
+    })
 
-    this.items.push({      question: this.$vuetify.lang.t('$vuetify.DUVIDA_2'),
-      awnser: this.$vuetify.lang.t('$vuetify.RESPOSTA_2')    })
+    this.items.push({
+      question: this.$vuetify.lang.t('$vuetify.DUVIDA_2'),
+      awnser: this.$vuetify.lang.t('$vuetify.RESPOSTA_2')
+    })
 
-    this.items.push({      question: this.$vuetify.lang.t('$vuetify.DUVIDA_3'),
-      awnser: this.$vuetify.lang.t('$vuetify.RESPOSTA_3')    })
+    this.items.push({
+      question: this.$vuetify.lang.t('$vuetify.DUVIDA_3'),
+      awnser: this.$vuetify.lang.t('$vuetify.RESPOSTA_3')
+    })
 
-    this.items.push({      question: this.$vuetify.lang.t('$vuetify.DUVIDA_4'),
-      awnser: this.$vuetify.lang.t('$vuetify.RESPOSTA_4')    })
+    this.items.push({
+      question: this.$vuetify.lang.t('$vuetify.DUVIDA_4'),
+      awnser: this.$vuetify.lang.t('$vuetify.RESPOSTA_4')
+    })
 
-    this.items.push({      question: this.$vuetify.lang.t('$vuetify.DUVIDA_5'),
-      awnser: this.$vuetify.lang.t('$vuetify.RESPOSTA_5')    })
+    this.items.push({
+      question: this.$vuetify.lang.t('$vuetify.DUVIDA_5'),
+      awnser: this.$vuetify.lang.t('$vuetify.RESPOSTA_5')
+    })
 
-    this.items.push({      question: this.$vuetify.lang.t('$vuetify.DUVIDA_6'),
-      awnser: this.$vuetify.lang.t('$vuetify.RESPOSTA_6')    })
+    this.items.push({
+      question: this.$vuetify.lang.t('$vuetify.DUVIDA_6'),
+      awnser: this.$vuetify.lang.t('$vuetify.RESPOSTA_6')
+    })
 
-    this.items.push({      question: this.$vuetify.lang.t('$vuetify.DUVIDA_7'),
-      awnser: this.$vuetify.lang.t('$vuetify.RESPOSTA_7')    })
+    this.items.push({
+      question: this.$vuetify.lang.t('$vuetify.DUVIDA_7'),
+      awnser: this.$vuetify.lang.t('$vuetify.RESPOSTA_7')
+    })
 
-    this.items.push({      question: this.$vuetify.lang.t('$vuetify.DUVIDA_8'),
-      awnser: this.$vuetify.lang.t('$vuetify.RESPOSTA_8')    })
+    this.items.push({
+      question: this.$vuetify.lang.t('$vuetify.DUVIDA_8'),
+      awnser: this.$vuetify.lang.t('$vuetify.RESPOSTA_8')
+    })
 
-    this.items.push({      question: this.$vuetify.lang.t('$vuetify.DUVIDA_9'),
-      awnser: this.$vuetify.lang.t('$vuetify.RESPOSTA_9')    })
+    this.items.push({
+      question: this.$vuetify.lang.t('$vuetify.DUVIDA_9'),
+      awnser: this.$vuetify.lang.t('$vuetify.RESPOSTA_9')
+    })
 
     this.selectedItems = this.items
   }
 };
 </script>
-
-<style scoped>
-.customHeight {
-  max-height: calc(100% - 400px) !important;
-}
-</style>
