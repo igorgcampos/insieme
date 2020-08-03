@@ -159,12 +159,12 @@
             <v-divider
               vertical
               class="mt-3 mb-5"
-              style="height:20rem;"
+              style="height:20em;"
             > </v-divider>
 
             <v-col
-              class="overflow-y-auto mt-4"
-              style="height:20rem;"
+              class="overflow-y-auto overflow-x-hidden mt-4"
+              style="height:20em;"
             >
 
               <v-col
