@@ -9,6 +9,7 @@
       <v-card v-show="!showSuccess">
         <v-card-title
           class="headline-6"
+          :class="{'subtitle-2':$vuetify.breakpoint.xs}"
           style="word-break: normal; !important"
         >
           {{entity.type=='circuit'?
@@ -70,8 +71,8 @@
 
           <v-row>
             <v-col
-              class="overflow-y-hidden"
-              style="max-height:320px;"
+              class="overflow-y-hidden overflow-x-hidden"
+              :min-height="$vuetify.breakpoint.xs?250:320"
             >
               <v-col
                 cols="11"
@@ -111,17 +112,15 @@
                     v-show="itemList.length > 0"
                     two-line
                     flat
-                    class="ml-n6 mt-n4 pt-3"
+                    class="ml-n6 mt-n4 pt-3 overflow-y-auto"
+                    :height="$vuetify.breakpoint.xs?170:240"
+                    id="listId"
+                    v-scroll:#listId="searchMore"
                   >
-                    <v-list-item-group
-                      id="listId"
-                      v-scroll:#listId="searchMore"
-                      style="max-height:234px;"
-                      multiple
-                      class="overflow-y-auto"
-                    >
+                    <v-list-item-group multiple>
                       <v-list-item
                         class="mt-n3"
+                        :class="{'ml-n3':$vuetify.breakpoint.xs}"
                         v-for="(item, i) in itemList"
                         :key="i"
                       >
@@ -138,8 +137,15 @@
                             ></v-checkbox>
                           </v-list-item-action>
 
-                          <v-list-item-content class="ml-n3">
-                            <v-list-item-title class="subtitle-2">{{item.nome}}</v-list-item-title>
+                          <v-list-item-content
+                            class="ml-n3"
+                            :class="{'ml-n7':$vuetify.breakpoint.xs}"
+                          >
+                            <v-list-item-title
+                              class="subtitle-2"
+                              :class="{'caption':$vuetify.breakpoint.xs}"
+                            >
+                              {{item.nome}}</v-list-item-title>
                             <v-list-item-subtitle class="caption">{{item.designacaoCliente.toLowerCase()}}</v-list-item-subtitle>
                           </v-list-item-content>
                         </template>
@@ -157,23 +163,26 @@
             > </v-divider>
 
             <v-col
-              class="overflow-y-auto"
-              style="max-height:20rem;"
+              class="overflow-y-auto mt-4"
+              style="height:20rem;"
             >
 
               <v-col
                 cols="11"
-                class="ml-4 mt-n4"
+                class="ml-4 mt-n1"
               >
                 <EmptyPanel
-                  class="mt-12 pt-12"
+                  class="mt-8 pt-10"
                   :mobile=true
                   :message="$vuetify.lang.t('$vuetify.NENHUM_CIRCUITO_SELECIONADO')"
                   v-show="selectedItemList.length == 0"
                 >
                 </EmptyPanel>
 
-                <v-row class="ml-0 mt-4 d-flex justify-left">
+                <v-row
+                  class="ml-0 mt-4 d-flex justify-left"
+                  :class="{'ml-n7':$vuetify.breakpoint.xs}"
+                >
                   <transition-group name="slide-x-transition">
                     <v-chip
                       v-for="(item) in selectedItemList"
@@ -197,11 +206,11 @@
 
         <v-divider class="mt-n6"></v-divider>
         <v-card-actions>
-          <v-spacer></v-spacer>
+          <v-spacer v-if="!$vuetify.breakpoint.xs"></v-spacer>
           <v-btn
             color="primary"
             text
-            @click="close(); cleanFields()"
+            @click="close(); cleanFields(true)"
             :x-small="$vuetify.breakpoint.xs"
           >{{$vuetify.lang.t('$vuetify.CANCELAR')}}</v-btn>
           <v-btn
@@ -227,6 +236,7 @@
             v-show="selectReason"
           >{{$vuetify.lang.t('$vuetify.ENVIAR')}}</v-btn>
         </v-card-actions>
+        <v-spacer v-if="$vuetify.breakpoint.xs"></v-spacer>
       </v-card>
 
       <v-card v-show="showSuccess">
@@ -295,7 +305,7 @@ export default {
         return;
       }
 
-      if (document.getElementById('listId').scrollTop + 235 >=
+      if (document.getElementById('listId').scrollTop + (this.$vuetify.breakpoint.xs ? 171 : 241) >=
         document.getElementById('listId').scrollHeight) {
         this.page++;
         this.search(this.searchText, this.page)
@@ -332,10 +342,15 @@ export default {
 
       return false
     },
-    cleanFields () {
+    cleanFields (cancel) {
       this.issue.observation = '';
       this.issue.reason = undefined;
-      this.selectReason = !this.showSuccess
+
+      if (cancel) {
+        this.selectReason = false
+      } else {
+        this.selectReason = !this.showSuccess
+      }
       this.selectedItemList = [];
       this.searchText = '';
     }
