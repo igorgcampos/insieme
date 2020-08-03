@@ -238,7 +238,7 @@
 
                   <v-card-subtitle class="caption mt-n10 ml-n4 mb-2 grey--text text--lighten-1">
                     {{$vuetify.lang.t('$vuetify.ORIGEM')}}:
-                    {{$vuetify.lang.t('$vuetify.'+issue.origem) + issue.identificadorOrigem?' ('+issue.identificadorOrigem+')':''}}
+                    {{$vuetify.lang.t('$vuetify.'+issue.origem) + (issue.identificadorOrigem?' ('+issue.identificadorOrigem+')':'')}}
                   </v-card-subtitle>
 
                   <v-row>
@@ -249,7 +249,7 @@
                       <v-col class="pa-0">
                         <v-chip
                           :color="issue.status==1?'success':'primary'"
-                          class="ml-0 mr-2"
+                          class="ml-0 mr-2 mb-2"
                           label
                           small
                           outlined
@@ -257,6 +257,16 @@
                           {{ issue.status==1?$vuetify.lang.t('$vuetify.EM_ABERTO'):
                   $vuetify.lang.t('$vuetify.ENCERRADO') }}
                         </v-chip>
+
+                        <!--<TooltipButton
+                          :label="$vuetify.lang.t('$vuetify.LISTAR_LOTE')"
+                          :message="$vuetify.lang.t('$vuetify.LISTAR_LOTE_CIRCUITO')"
+                          :mobile=true
+                          v-if="!issue.identificadorOrigem"
+                          :event="showBatch"
+                          :object="issue"
+                        ></TooltipButton> -->
+
                       </v-col>
                     </v-col>
 
@@ -346,6 +356,7 @@
                       :event="encerrarChamado"
                       :object="issue"
                       :mobile="$vuetify.breakpoint.xs"
+                      :isText=true
                     ></TooltipButton>
                   </v-card-actions>
                 </v-expansion-panel-content>
@@ -377,7 +388,7 @@
           :close="closeBatchDialog"
           :send="sendBatchIssue"
           :search="searchCircuits"
-          :entity="{type: 'circuit'}"
+          :entity="entity"
           :itemList="itemList"
           :reasonList="reasonBatchList"
           :noResult="noBatchResult"
@@ -406,6 +417,9 @@ export default {
     BatchIssueDialog
   },
   methods: {
+    showBatch (issue) {
+      issue.showBatch = true;
+    },
     sendBatchIssue (issue, entity) {
 
       if (!issue.reason) {
@@ -613,6 +627,7 @@ export default {
     contract: Object
   },
   data: () => ({
+    entity: { type: 'circuit' },
     noBatchResult: false,
     reasonBatchList: [],
     itemList: [],

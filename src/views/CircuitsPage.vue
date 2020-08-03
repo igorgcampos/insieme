@@ -674,6 +674,7 @@
                       :event="solveProblem"
                       :object="circuit"
                       :mobile="$vuetify.breakpoint.xs"
+                      :isText=true
                     ></TooltipButton>
 
                     <TooltipButton
@@ -683,6 +684,7 @@
                       :object="circuit"
                       :mobile="$vuetify.breakpoint.xs"
                       v-if="circuit.idPrtg & $getUser().prtgToken"
+                      :isText=true
                     ></TooltipButton>
                   </v-card-actions>
                 </v-expansion-panel-content>

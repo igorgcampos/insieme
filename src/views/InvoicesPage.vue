@@ -374,6 +374,7 @@
                       :event="openIssue"
                       :object="invoice"
                       :mobile="$vuetify.breakpoint.xs"
+                      :isText=true
                     ></TooltipButton>
                   </v-card-actions>
                 </v-expansion-panel-content>

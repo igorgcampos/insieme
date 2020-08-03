@@ -335,7 +335,7 @@ export default {
     cleanFields () {
       this.issue.observation = '';
       this.issue.reason = undefined;
-      this.selectReason = false
+      this.selectReason = !this.showSuccess
       this.selectedItemList = [];
       this.searchText = '';
     }

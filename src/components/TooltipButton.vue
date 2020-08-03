@@ -2,7 +2,7 @@
   <v-tooltip top>
     <template v-slot:activator="{ on }">
       <v-btn
-        text
+        :text="isText"
         color="primary"
         @click="event(object)"
         v-on="on || on1"
@@ -23,7 +23,8 @@ export default {
     loading: Boolean,
     on1: String,
     object: Object,
-    mobile: Boolean
+    mobile: Boolean,
+    isText: Boolean,
   }
 };
 </script>

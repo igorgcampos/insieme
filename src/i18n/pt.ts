@@ -219,5 +219,7 @@ export default {
     NENHUM_CIRCUITO_SELECIONADO: 'Nenhum circuito selecionado',
     CIRCUITO_LOTE: 'Circuitos em lote',
     ATIVACAO: 'Ativação',
-    DESATIVACAO: 'Desativação'
+    DESATIVACAO: 'Desativação',
+    LISTAR_LOTE: 'Listar lote',
+    LISTAR_LOTE_CIRCUITO: 'Listar circuitos deste lote'
 }

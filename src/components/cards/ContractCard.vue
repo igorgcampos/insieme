@@ -146,6 +146,7 @@
             :message="$vuetify.lang.t('$vuetify.GERENCIAR_CONTRATOS')"
             :event="gerenciarContratos"
             :mobile="$vuetify.breakpoint.xs"
+            :isText=true
           ></TooltipButton>
 
           <TooltipButton
@@ -154,6 +155,7 @@
             :event="baixarContrato"
             :loading="isDownloading"
             :mobile="$vuetify.breakpoint.xs"
+            :isText=true
           ></TooltipButton>
         </v-card-actions>
       </v-card>

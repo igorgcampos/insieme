@@ -137,6 +137,7 @@
           :message="$vuetify.lang.t('$vuetify.VER_CONTRATOS')"
           :event="listarContratos"
           :mobile="$vuetify.breakpoint.xs"
+          :isText=true
         ></TooltipButton>
       </v-card-actions>
     </v-card>

@@ -220,5 +220,7 @@ export default {
     NENHUM_CIRCUITO_SELECIONADO: 'No circuit selected',
     CIRCUITO_LOTE: 'Batch circuits',
     ATIVACAO: 'Activation',
-    DESATIVACAO: 'Deactivation'
+    DESATIVACAO: 'Deactivation',
+    LISTAR_LOTE: 'List batch',
+    LISTAR_LOTE_CIRCUITO: 'List the circuits of this batch'
 }
