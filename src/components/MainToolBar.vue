@@ -79,6 +79,25 @@
           color="red darken-3"
           v-show="canShowShortcut()"
           class="mr-2"
+          @click="goTo('commercial')"
+        >
+          {{$vuetify.lang.t('$vuetify.COMERCIAL')}}
+        </v-chip>
+      </template>
+      <span>{{$vuetify.lang.t('$vuetify.COMERCIAL')}}</span>
+    </v-tooltip>
+
+    <v-tooltip
+      bottom
+      v-if="!$vuetify.breakpoint.xs"
+    >
+      <template v-slot:activator="{ on }">
+        <v-chip
+          pill
+          v-on="on"
+          color="red darken-3"
+          v-show="canShowShortcut()"
+          class="mr-2"
           @click="goTo('issues')"
         >
           {{$vuetify.lang.t('$vuetify.CHAMADOS')}}
@@ -211,6 +230,13 @@
           @click="goTo('invoices')"
         >
           <v-list-item-title>{{$vuetify.lang.t('$vuetify.NOTAS_FISCAIS')}}</v-list-item-title>
+        </v-list-item>
+
+        <v-list-item
+          v-show="canShowShortcut()"
+          @click="goTo('commercial')"
+        >
+          <v-list-item-title>{{$vuetify.lang.t('$vuetify.COMERCIAL')}}</v-list-item-title>
         </v-list-item>
 
         <v-list-item

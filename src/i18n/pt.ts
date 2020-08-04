@@ -221,5 +221,10 @@ export default {
     ATIVACAO: 'Ativação',
     DESATIVACAO: 'Desativação',
     LISTAR_LOTE: 'Listar lote',
-    LISTAR_LOTE_CIRCUITO: 'Listar circuitos deste lote'
+    LISTAR_LOTE_CIRCUITO: 'Listar circuitos deste lote',
+    COMERCIAL: 'Comercial',
+    UPGRADE: 'Upgrade',
+    DOWNGRADE: 'Downgrade',
+    ATIVAR: 'Ativar',
+    DESATIVAR: 'Desativar',
 }

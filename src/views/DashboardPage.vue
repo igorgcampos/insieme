@@ -25,6 +25,7 @@
 
         <CircuitsPage :contract="selectedContract"></CircuitsPage>
         <InvoicesPage :contract="selectedContract"></InvoicesPage>
+        <CommercialPage :contract="selectedContract"></CommercialPage>
         <IssuesPage :contract="selectedContract"></IssuesPage>
 
       </v-col>
@@ -37,14 +38,14 @@
 import CircuitsPage from './CircuitsPage';
 import InvoicesPage from './InvoicesPage';
 import IssuesPage from './IssuesPage';
-
-
+import CommercialPage from './CommercialPage';
 
 export default {
   components: {
     CircuitsPage,
     InvoicesPage,
     IssuesPage,
+    CommercialPage,
   },
   data: () => ({
     show: false,

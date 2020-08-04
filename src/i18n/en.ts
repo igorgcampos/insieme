@@ -222,5 +222,10 @@ export default {
     ATIVACAO: 'Activation',
     DESATIVACAO: 'Deactivation',
     LISTAR_LOTE: 'List batch',
-    LISTAR_LOTE_CIRCUITO: 'List the circuits of this batch'
+    LISTAR_LOTE_CIRCUITO: 'List the circuits of this batch',
+    COMERCIAL: 'Commercial',
+    UPGRADE: 'Upgrade',
+    DOWNGRADE: 'Downgrade',
+    ATIVAR: 'Activate',
+    DESATIVAR: 'Deactivate',
 }
