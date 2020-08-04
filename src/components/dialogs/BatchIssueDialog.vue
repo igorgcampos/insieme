@@ -368,7 +368,7 @@ export default {
     issue: { reason: undefined, observation: '', origin: 'CIRCUITO_LOTE', items: undefined }
   }),
   created: function () {
-    this.size = this.$vuetify.breakpoint.xs ? 14 : 20;
+    this.size = this.$vuetify.breakpoint.xs ? 16 : 20;
     this.search('', 0)
   }
 };
