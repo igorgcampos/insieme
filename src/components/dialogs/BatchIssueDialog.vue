@@ -19,14 +19,14 @@
         <v-card-text class="headline-6 mt-n2">{{selectReason?$vuetify.lang.t('$vuetify.SELECIONE_MOTIVO_OBSERVACAO'):
             $vuetify.lang.t('$vuetify.SELECIONE_CIRCUITOS')}}</v-card-text>
 
-        <v-col
-          class="mt-n3"
-          v-show="selectReason"
+        <v-row
+          class="ma-0 mb-3 d-flex justify-center"
+          v-if="selectReason"
         >
 
           <v-col
-            class="ml-7 pl-3"
-            cols="10"
+            class="ma-0 pa-0"
+            cols="9"
           >
             <v-row>
               <span class=" text-right subtitle-2 font-weight-bold grey--text text--lighten-1">
@@ -45,8 +45,8 @@
           </v-col>
 
           <v-col
-            class="ml-7 mt-n6"
-            cols="10"
+            class="ma-0 pa-0 mt-0"
+            cols="9"
           >
             <v-row>
               <span class=" text-right subtitle-2 font-weight-bold grey--text text--lighten-1">
@@ -62,7 +62,7 @@
               ></v-textarea>
             </v-row>
           </v-col>
-        </v-col>
+        </v-row>
 
         <v-col
           class="mt-n3"
@@ -353,6 +353,7 @@ export default {
         this.selectReason = !this.showSuccess
       }
       this.selectedItemList = [];
+      this.selectedCheckList = []
       this.searchText = '';
     }
   },

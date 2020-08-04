@@ -9,6 +9,7 @@
       <v-card v-show="!showSuccess">
         <v-card-title
           class="headline-6"
+          :class="{'subtitle-2':$vuetify.breakpoint.xs}"
           style="word-break: normal; !important"
         >
           {{getObject().type=='circuit'?
@@ -19,11 +20,11 @@
         </v-card-title>
         <v-card-text class="headline-6">{{$vuetify.lang.t('$vuetify.SELECIONE_MOTIVO_OBSERVACAO')}}</v-card-text>
 
-        <v-col class="mt-n3">
+        <v-row class="ma-0 d-flex justify-center mb-3">
 
           <v-col
-            class="ml-7"
-            cols="10"
+            class="ma-0 pa-0"
+            cols="9"
           >
             <v-row>
               <span class=" text-right subtitle-2 font-weight-bold grey--text text--lighten-1">
@@ -42,8 +43,8 @@
           </v-col>
 
           <v-col
-            class="ml-7 mt-n6"
-            cols="10"
+            class="ma-0 pa-0 mt-0"
+            cols="9"
           >
             <v-row>
               <span class=" text-right subtitle-2 font-weight-bold grey--text text--lighten-1">
@@ -59,7 +60,7 @@
               ></v-textarea>
             </v-row>
           </v-col>
-        </v-col>
+        </v-row>
 
         <v-divider class="mt-n6"></v-divider>
         <v-card-actions>
