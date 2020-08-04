@@ -368,6 +368,7 @@ export default {
   }),
   created: function () {
     this.size = this.$vuetify.breakpoint.xs ? 14 : 20;
+    this.search('', 0)
   }
 };
 </script>

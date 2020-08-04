@@ -38,8 +38,14 @@
     >
       <v-row class="mb-5 ml-3">
         <BarChart
-          :chart-data="circuitData"
-          :options="circuitOptions"
+          :chart-data="circuitDataOp"
+          :options="circuitOptionsOp"
+          :styles="circuitStyle"
+        ></BarChart>
+
+        <BarChart
+          :chart-data="circuitDataLog"
+          :options="circuitOptionsLog"
           :styles="circuitStyle"
         ></BarChart>
       </v-row>
@@ -79,7 +85,8 @@ export default {
   data () {
     return {
       show: null,
-      circuitData: undefined,
+      circuitDataOp: undefined,
+      circuitDataLog: undefined,
       invoiceData: undefined,
       issueData: undefined,
       circuitStyle: {
@@ -91,7 +98,27 @@ export default {
       issueStyle: {
         height: '16rem',
       },
-      circuitOptions: {
+      circuitOptionsOp: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          yAxes: [{
+            gridLines: { drawOnChartArea: false },
+            ticks: {
+              beginAtZero: true
+            }
+          }],
+          xAxes: [{
+            gridLines: { drawOnChartArea: false },
+          }]
+        },
+        title: {
+          display: true,
+          text: '',
+          fontSize: 16
+        }
+      },
+      circuitOptionsLog: {
         responsive: true,
         maintainAspectRatio: false,
         scales: {
@@ -151,7 +178,8 @@ export default {
   },
   created: function () {
 
-    this.circuitStyle.width = this.$vuetify.breakpoint.xs ? '20rem' : '29rem';
+    this.circuitStyle.width = this.$vuetify.breakpoint.xs ? '20rem' : '15rem';
+    this.circuitStyle.height = this.$vuetify.breakpoint.xs ? '16rem' : '12rem';
     this.invoiceStyle.width = this.$vuetify.breakpoint.xs ? '15rem' : '29rem';
     this.issueStyle.width = this.$vuetify.breakpoint.xs ? '20rem' : '29rem';
 
@@ -159,19 +187,37 @@ export default {
 
     this.$root.$on('circuit-data', (circuitData) => {
 
-      this.circuitOptions.title.text = this.$vuetify.lang.t('$vuetify.CIRCUITOS')
-      this.circuitOptions.legend = { display: false }
+      this.circuitOptionsOp.title.text = this.$vuetify.lang.t('$vuetify.STATUS_OPERACIONAL')
+      this.circuitOptionsOp.legend = { display: false }
+      this.circuitOptionsOp.title.fontSize = this.$vuetify.breakpoint.xs ? 16 : 12
 
-      this.circuitData = {
-        labels: ['Online', 'Offline', this.$vuetify.lang.t('$vuetify.ATIVADO'),
-          this.$vuetify.lang.t('$vuetify.DESATIVADO'), this.$vuetify.lang.t('$vuetify.DESINSTALADO'),
-          this.$vuetify.lang.t('$vuetify.CANCELADO')],
+      this.circuitDataOp = {
+        labels: ['Online', 'Offline'],
         datasets: [
           {
 
             backgroundColor: [
               'rgba(75, 192, 192, 0.5)',
               'rgba(255, 99, 132,  0.5)',
+            ],
+            borderWidth: 2,
+            data: circuitData
+          }
+        ]
+      }
+
+      this.circuitOptionsLog.title.text = this.$vuetify.lang.t('$vuetify.STATUS_LOGISTICA')
+      this.circuitOptionsLog.legend = { display: false }
+      this.circuitOptionsLog.title.fontSize = this.$vuetify.breakpoint.xs ? 16 : 12
+
+      this.circuitDataLog = {
+        labels: [this.$vuetify.lang.t('$vuetify.ATIVADO'),
+        this.$vuetify.lang.t('$vuetify.DESATIVADO'), this.$vuetify.lang.t('$vuetify.DESINSTALADO'),
+        this.$vuetify.lang.t('$vuetify.CANCELADO')],
+        datasets: [
+          {
+
+            backgroundColor: [
               'rgba(255, 206, 86, 0.5)',
               'rgba(54, 162, 235, 0.5)',
               'rgba(153, 102, 255, 0.5)',

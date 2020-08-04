@@ -69,7 +69,7 @@
           id="filtro"
           class="pl-0 ml-0 grey lighten-5 mb-n5 mt-2"
         >
-          <v-col cols="4">
+          <v-col :cols="!$vuetify.breakpoint.xs?4:6">
             <v-row>
               <span class=" text-right subtitle-2 font-weight-bold grey--text text--lighten-1">
                 {{$vuetify.lang.t('$vuetify.BUSCAR')}}:</span>
@@ -93,6 +93,7 @@
           <v-col
             class="ml-5"
             cols="4"
+            v-if="!$vuetify.breakpoint.xs"
           >
             <v-row>
               <span class=" text-right subtitle-2 font-weight-bold grey--text text--lighten-1">
@@ -111,23 +112,18 @@
           </v-col>
 
           <v-col
-            class="mt-5"
+            class="mt-6 ml-3"
             cols="1"
+            :class="{'mt-7':$vuetify.breakpoint.xs}"
           >
-            <v-tooltip top>
-              <template v-slot:activator="{ on }">
-                <v-btn
-                  class="ml-2 mt-1"
-                  dark
-                  color="primary"
-                  v-on="on"
-                  @click="showBatchIssueDialog()"
-                >
-                  <v-icon dark>mdi-sim-alert</v-icon>
-                </v-btn>
-              </template>
-              <span>{{$vuetify.lang.t('$vuetify.ABRIR_CHAMADO_CIRCUITOS')}}</span>
-            </v-tooltip>
+
+            <TooltipButton
+              :label="$vuetify.lang.t('$vuetify.ABRIR_CHAMADO')"
+              :message="$vuetify.lang.t('$vuetify.ABRIR_CHAMADO_CIRCUITOS')"
+              :event="showBatchIssueDialog"
+              :object="entity"
+              :mobile="$vuetify.breakpoint.xs"
+            ></TooltipButton>
           </v-col>
         </v-row>
 
@@ -451,10 +447,6 @@ export default {
     },
     searchCircuits (text, page) {
 
-      if (!text || text.length == 0) {
-        return
-      }
-
       if (page == 0) {
         this.itemList = []
       }
@@ -492,7 +484,6 @@ export default {
     closeBatchDialog () {
       this.showBatchDialog = false;
       this.showDialogLoading = false;
-      this.itemList = []
       this.noBatchResult = false
 
       setTimeout(() => {

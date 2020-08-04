@@ -147,7 +147,7 @@
                       <v-col class="flex-grow-0">
                         <CountCard
                           :count="installCounts[4]"
-                          :message="$vuetify.lang.t('$vuetify.INSTALADO')"
+                          :message="$vuetify.lang.t('$vuetify.INSTALANDO')"
                           color="primary--text"
                           :func="getInstalled"
                           :toolTipMessage="$vuetify.lang.t('$vuetify.INSTALADO_DESCRICAO')"
@@ -255,8 +255,11 @@
                   next-icon="mdi-arrow-right-thick primary--text"
                   prev-icon="mdi-arrow-left-thick primary--text"
                 >
-                  <v-slide-item>
-                    <v-col class="flex-grow-0">
+                  <v-slide-item v-slot:default="{ toggle }">
+                    <v-col
+                      class="flex-grow-0"
+                      @click="toggle"
+                    >
                       <CountCard
                         :count="installCounts[0]"
                         :message="$vuetify.lang.t('$vuetify.ATIVADO')"
@@ -267,8 +270,11 @@
                     </v-col>
                   </v-slide-item>
 
-                  <v-slide-item>
-                    <v-col class="flex-grow-0">
+                  <v-slide-item v-slot:default="{ toggle }">
+                    <v-col
+                      class="flex-grow-0"
+                      @click="toggle"
+                    >
                       <CountCard
                         :count="installCounts[1]"
                         :message="$vuetify.lang.t('$vuetify.DESATIVADO')"
@@ -279,8 +285,11 @@
                     </v-col>
                   </v-slide-item>
 
-                  <v-slide-item>
-                    <v-col class="flex-grow-0">
+                  <v-slide-item v-slot:default="{ toggle }">
+                    <v-col
+                      class="flex-grow-0"
+                      @click="toggle"
+                    >
                       <CountCard
                         :count="installCounts[3]"
                         :message="$vuetify.lang.t('$vuetify.DESINSTALADO')"
@@ -291,8 +300,11 @@
                     </v-col>
                   </v-slide-item>
 
-                  <v-slide-item>
-                    <v-col class="flex-grow-0">
+                  <v-slide-item v-slot:default="{ toggle }">
+                    <v-col
+                      class="flex-grow-0"
+                      @click="toggle"
+                    >
                       <CountCard
                         :count="installCounts[2]"
                         :message="$vuetify.lang.t('$vuetify.CANCELADO')"
@@ -303,11 +315,14 @@
                     </v-col>
                   </v-slide-item>
 
-                  <v-slide-item>
-                    <v-col class="flex-grow-0">
+                  <v-slide-item v-slot:default="{ toggle }">
+                    <v-col
+                      class="flex-grow-0"
+                      @click="toggle"
+                    >
                       <CountCard
                         :count="installCounts[4]"
-                        :message="$vuetify.lang.t('$vuetify.INSTALADO')"
+                        :message="$vuetify.lang.t('$vuetify.INSTALANDO')"
                         color="primary--text"
                         :func="getInstalled"
                         :toolTipMessage="$vuetify.lang.t('$vuetify.INSTALADO_DESCRICAO')"
@@ -315,8 +330,11 @@
                     </v-col>
                   </v-slide-item>
 
-                  <v-slide-item>
-                    <v-col class="flex-grow-0">
+                  <v-slide-item v-slot:default="{ toggle }">
+                    <v-col
+                      class="flex-grow-0"
+                      @click="toggle"
+                    >
                       <CountCard
                         :count="installCounts[5]"
                         :message="$vuetify.lang.t('$vuetify.EM_TRANSPORTE')"
@@ -327,8 +345,11 @@
                     </v-col>
                   </v-slide-item>
 
-                  <v-slide-item>
-                    <v-col class="flex-grow-0">
+                  <v-slide-item v-slot:default="{ toggle }">
+                    <v-col
+                      class="flex-grow-0"
+                      @click="toggle"
+                    >
                       <CountCard
                         :count="installCounts[6]"
                         :message="$vuetify.lang.t('$vuetify.EM_IMPLANTACAO')"
@@ -339,8 +360,11 @@
                     </v-col>
                   </v-slide-item>
 
-                  <v-slide-item>
-                    <v-col class="flex-grow-0">
+                  <v-slide-item v-slot:default="{ toggle }">
+                    <v-col
+                      class="flex-grow-0"
+                      @click="toggle"
+                    >
                       <CountCard
                         :count="installCounts[7]"
                         :message="$vuetify.lang.t('$vuetify.PROC_LOGISTICO')"
@@ -670,7 +694,7 @@
                   <v-card-actions class="mb-n2 pb-0">
                     <TooltipButton
                       :label="$vuetify.lang.t('$vuetify.RESOLVER_PROBLEMA')"
-                      :message="$vuetify.lang.t('$vuetify.SUPORTE_PROBLEM')"
+                      :message="$vuetify.lang.t('$vuetify.SUPORTE_PROBLEMA')"
                       :event="solveProblem"
                       :object="circuit"
                       :mobile="$vuetify.breakpoint.xs"
