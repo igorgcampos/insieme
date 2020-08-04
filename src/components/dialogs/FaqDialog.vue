@@ -75,19 +75,20 @@
         </v-col>
         <v-divider class="mt-n6"></v-divider>
         <v-card-actions>
+          <v-spacer v-if="!$vuetify.breakpoint.xs"></v-spacer>
           <v-btn
             color="primary"
             text
             @click="openChat()"
             :x-small="$vuetify.breakpoint.xs"
           >{{$vuetify.lang.t('$vuetify.AINDA_COM_DUVIDAS')}}</v-btn>
-          <v-spacer></v-spacer>
           <v-btn
             color="primary"
             text
             @click="close()"
             :x-small="$vuetify.breakpoint.xs"
           >{{$vuetify.lang.t('$vuetify.FECHAR')}}</v-btn>
+          <v-spacer v-if="$vuetify.breakpoint.xs"></v-spacer>
         </v-card-actions>
       </v-card>
     </v-dialog>

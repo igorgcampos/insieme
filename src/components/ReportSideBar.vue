@@ -33,7 +33,8 @@
     </div>
 
     <v-col
-      style="height:120%; background-color: #FFFFFF;"
+      style="background-color: #FFFFFF;"
+      :style="{height: size + '%'}"
       class="pt-5"
     >
       <v-row class="mb-5 ml-3">
@@ -84,6 +85,7 @@ export default {
   },
   data () {
     return {
+      size: 120,
       show: null,
       circuitDataOp: undefined,
       circuitDataLog: undefined,
@@ -177,6 +179,8 @@ export default {
     }
   },
   created: function () {
+
+    this.size = this.$vuetify.breakpoint.xs ? 150 : 120
 
     this.circuitStyle.width = this.$vuetify.breakpoint.xs ? '20rem' : '15rem';
     this.circuitStyle.height = this.$vuetify.breakpoint.xs ? '16rem' : '12rem';
