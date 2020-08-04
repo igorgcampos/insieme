@@ -180,7 +180,7 @@ export default {
   },
   created: function () {
 
-    this.size = this.$vuetify.breakpoint.xs ? 150 : 120
+    this.size = this.$vuetify.breakpoint.xs ? 130 : 120
 
     this.circuitStyle.width = this.$vuetify.breakpoint.xs ? '20rem' : '15rem';
     this.circuitStyle.height = this.$vuetify.breakpoint.xs ? '16rem' : '12rem';
