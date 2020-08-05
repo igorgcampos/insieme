@@ -82,28 +82,13 @@
       </v-card>
 
       <v-card v-show="showSuccess">
-        <v-col class="pt-8 mb-8">
-          <v-row
-            justify="center"
-            class="mb-3"
-          >
-            <v-icon
-              size="62"
-              color="success"
-            >mdi-checkbox-marked-circle</v-icon>
-          </v-row>
-          <v-row justify="center">
-            <span class="text-center headline font-weight-bold grey--text text--darken-3">
-              {{getObject().type!='closing'?$vuetify.lang.t('$vuetify.CHAMADO_CRIADO'):
-              $vuetify.lang.t('$vuetify.CHAMADO_ENCERRADO')}} </span>
+        <SuccessPanel
+          :title="getObject().type!='closing'?$vuetify.lang.t('$vuetify.CHAMADO_CRIADO'):
+              $vuetify.lang.t('$vuetify.CHAMADO_ENCERRADO')"
+          :subtitle="getObject().type!='closing'?$vuetify.lang.t('$vuetify.PROTOCOLO')+': '+getObject().protocolo:undefined"
+        >
+        </SuccessPanel>
 
-            <span
-              v-show="getObject().type!='closing'"
-              class="text-center SUBTITLE-2 font-weight-bold grey--text text--darken-3"
-            >
-              {{$vuetify.lang.t('$vuetify.PROTOCOLO')+': '+getObject().protocolo}} </span>
-          </v-row>
-        </v-col>
         <v-divider class="mt-n6"></v-divider>
         <v-card-actions>
           <v-spacer></v-spacer>
@@ -120,7 +105,13 @@
 </template>
 
 <script>
+
+import SuccessPanel from '../../components/SuccessPanel';
+
 export default {
+  components: {
+    SuccessPanel,
+  },
   props: {
     getObject: Function,
     showDialog: Boolean,
