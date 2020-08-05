@@ -112,7 +112,7 @@
           </v-col>
 
           <v-col
-            class="mt-6 ml-3"
+            class="mt-7 ml-3"
             cols="1"
             :class="{'mt-7':$vuetify.breakpoint.xs}"
           >

@@ -227,4 +227,9 @@ export default {
     DOWNGRADE: 'Downgrade',
     ATIVAR: 'Ativar',
     DESATIVAR: 'Desativar',
+    UPGRADE_DESCRICAO: 'Upgrade dos circuitos selecionados',
+    DOWNGRADE_DESCRICAO: 'Downgrade dos circuitos selecionados',
+    ATIVAR_DESCRICAO: 'Ativar os circuitos selecionados',
+    DESATIVAR_DESCRICAO: 'Desativar os circuitos selecionados',
+    CANCELAR_DESCRICAO: 'Cancelar os circuitos selecionados'
 }
