@@ -38,7 +38,10 @@ export default {
     })
 
     this.$router.push('/login')
-    this.$root.$on('login-success', () => this.$router.push('/'))
+    this.$root.$on('login-success', () => {
+      this.$router.push('/');
+      window.sessionStorage.setItem('actualPage', '/')
+    })
     this.$root.$on('logout-success', () => this.$router.push('/login'));
   }
 };

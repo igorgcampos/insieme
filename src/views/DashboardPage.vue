@@ -23,11 +23,19 @@
         class="mt-n11"
       >
 
-        <CircuitsPage :contract="selectedContract"></CircuitsPage>
-        <InvoicesPage :contract="selectedContract"></InvoicesPage>
-        <CommercialPage :contract="selectedContract"></CommercialPage>
+        <CircuitsPage
+          v-if="$hasProfile('Administrador') || $hasProfile('Cliente') || $hasProfile('Operacional')"
+          :contract="selectedContract"
+        ></CircuitsPage>
+        <InvoicesPage
+          v-if="$hasProfile('Administrador') || $hasProfile('Cliente') || $hasProfile('Financeiro')"
+          :contract="selectedContract"
+        ></InvoicesPage>
+        <CommercialPage
+          v-if="$hasProfile('Administrador') || $hasProfile('Cliente') || $hasProfile('Comercial')"
+          :contract="selectedContract"
+        ></CommercialPage>
         <IssuesPage :contract="selectedContract"></IssuesPage>
-
       </v-col>
     </v-container>
   </v-content>

@@ -27,16 +27,17 @@ export default {
 
     this.user = this.$getUser()
 
-    if (this.$hasProfile('Administrador') && window.sessionStorage.getItem('actualPage') == 'clients') {
+    if (this.$hasProfile('Administrador')
+      && (window.sessionStorage.getItem('actualPage') == 'clients' || window.sessionStorage.getItem('actualPage') == '/')) {
       this.$router.push('/clientes')
     }
-    else if (this.$hasProfile('Cliente') && window.sessionStorage.getItem('actualPage') == 'clients') {
+    else if (window.sessionStorage.getItem('actualPage') == 'clients') {
       this.$router.push({ name: 'Contracts', params: { client: { id: this.user.cliente.id } } })
     }
-    else if (window.sessionStorage.getItem('actualPage') == 'contracts') {
+    else if (window.sessionStorage.getItem('actualPage') == 'contracts' || window.sessionStorage.getItem('actualPage') == '/') {
 
-      if (!this.user.cliente && (this.$hasProfile('Financeiro') || this.$hasProfile('Comercial'))) {
-        this.user.ciente = { id: -1 }
+      if (!this.user.cliente) {
+        this.user.cliente = { id: -1 }
       }
       this.$router.push({ name: 'Contracts', params: { client: { id: this.user.cliente.id } } })
     } else {

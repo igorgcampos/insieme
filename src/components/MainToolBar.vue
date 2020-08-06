@@ -39,7 +39,7 @@
           pill
           v-on="on"
           color="red darken-3"
-          v-show="canShowShortcut()"
+          v-show="canShowShortcut() && ($hasProfile('Administrador') || $hasProfile('Cliente') || $hasProfile('Operacional'))"
           class="mr-2"
           @click="goTo('circuits')"
         >
@@ -58,7 +58,7 @@
           pill
           v-on="on"
           color="red darken-3"
-          v-show="canShowShortcut()"
+          v-show="canShowShortcut() && ($hasProfile('Administrador') || $hasProfile('Cliente') || $hasProfile('Financeiro'))"
           class="mr-2"
           @click="goTo('invoices')"
         >
@@ -77,7 +77,7 @@
           pill
           v-on="on"
           color="red darken-3"
-          v-show="canShowShortcut()"
+          v-show="canShowShortcut() && ($hasProfile('Administrador') || $hasProfile('Cliente') || $hasProfile('Comercial'))"
           class="mr-2"
           @click="goTo('commercial')"
         >
