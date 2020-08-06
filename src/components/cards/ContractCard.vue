@@ -262,10 +262,13 @@ export default {
 
           const file = new Blob(
             [response.data],
-            { type: 'application/pdf' });
+            { type: 'application/zip' });
 
           const fileURL = URL.createObjectURL(file);
-          window.open(fileURL);
+          var a = document.createElement('a')
+          a.href = fileURL
+          a.download = this.$vuetify.lang.t('$vuetify.CONTRATOS')
+          a.click()
 
           this.isDownloading = false;
         });
