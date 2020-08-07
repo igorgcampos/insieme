@@ -8,7 +8,7 @@
     >
       <v-card
         class="mx-auto"
-        width="720"
+        min-width="260"
       >
 
         <v-row>

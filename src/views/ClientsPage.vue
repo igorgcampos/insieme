@@ -17,14 +17,14 @@
     >
       <div>
 
-        <v-row class="ml-n1">
+        <v-row :class="{'ml-n12':$vuetify.breakpoint.mdAndUp}">
           <span class="mb-7 text-right display-1 font-weight-bold grey--text text--darken-1">
             {{$vuetify.lang.t('$vuetify.CLIENTES')}}</span>
         </v-row>
 
         <v-row
           id="filtro"
-          class="pl-0 ml-0 grey lighten-5"
+          class="pl-0 ml-1 grey lighten-5"
         >
           <v-col cols="4">
             <v-row>
@@ -70,6 +70,7 @@
 
         <v-row class="pl-1">
           <v-col
+            :cols="$vuetify.breakpoint.xs?11:$vuetify.breakpoint.xl?3:4"
             class="flex-grow-0"
             v-for="(client, i) in clients"
             :key="i"

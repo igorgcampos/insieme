@@ -90,6 +90,7 @@
 
         <v-row class="pl-1">
           <v-col
+            cols="12"
             class="flex-grow-0"
             v-for="(contract, i) in contracts"
             :key="i"
