@@ -284,10 +284,7 @@ export default {
 
       this.$get('/circuito/restart',
         {
-          desigClient: this.getObject().designacaoCliente,
-          hubFamily: this.getObject().plataformaSat || '',
-          hub: this.getObject().hub || '',
-          vsatIdModem: this.getObject().vsatId || ''
+          idCircuitoMon: this.getObject().idCircuitoMon
         }).then(() => {
 
           this.signalPanelId = setInterval(() => {
