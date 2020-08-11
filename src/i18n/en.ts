@@ -232,5 +232,12 @@ export default {
     DOWNGRADE_DESCRICAO: 'Downgrade the selected circuits',
     ATIVAR_DESCRICAO: 'Activate the selected circuits',
     DESATIVAR_DESCRICAO: 'Deactivate the selected circuits',
-    CANCELAR_DESCRICAO: 'Cancel the selected circuits'
+    CANCELAR_DESCRICAO: 'Cancel the selected circuits',
+    NOVO_CIRCUITO: 'New circuit',
+    NOVO_CIRCUITO_DESCRICAO: 'Ask for new circuit',
+    CANCELAR_DESATIVACAO: 'Cancel deactivation',
+    CANCELAR_DESATIVACAO_DESCRICAO: 'Cancel a request to deactivate the selected circuits',
+    FATURAMENTO: 'Billing',
+    REMANEJAR: 'Relocation',
+    REMANEJAR_DESCRICAO: 'Request the relocation of the selected circuits'
 }

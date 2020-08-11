@@ -82,20 +82,28 @@
 
               <v-list>
                 <v-list-item>
+                  <v-list-item>
+                    <v-list-item-title>{{ $vuetify.lang.t('$vuetify.NOVO_CIRCUITO') }}</v-list-item-title>
+                  </v-list-item>
+                  <v-list-item>
+                    <v-list-item-title>{{ $vuetify.lang.t('$vuetify.UPGRADE') }}</v-list-item-title>
+                  </v-list-item>
+                  <v-list-item>
+                    <v-list-item-title>{{ $vuetify.lang.t('$vuetify.REMANEJAR') }}</v-list-item-title>
+                  </v-list-item>
                   <v-list-item-title>{{ $vuetify.lang.t('$vuetify.ATIVAR') }}</v-list-item-title>
+                </v-list-item>
+                <v-list-item>
+                  <v-list-item-title>{{ $vuetify.lang.t('$vuetify.CANCELAR_DESATIVACAO') }}</v-list-item-title>
                 </v-list-item>
                 <v-list-item>
                   <v-list-item-title>{{ $vuetify.lang.t('$vuetify.DESATIVAR') }}</v-list-item-title>
                 </v-list-item>
-                <v-list-item>
-                  <v-list-item-title>{{ $vuetify.lang.t('$vuetify.CANCELAR') }}</v-list-item-title>
-                </v-list-item>
-                <v-list-item>
-                  <v-list-item-title>{{ $vuetify.lang.t('$vuetify.UPGRADE') }}</v-list-item-title>
-                </v-list-item>
+
+                <!--
                 <v-list-item>
                   <v-list-item-title>{{ $vuetify.lang.t('$vuetify.DOWNGRADE') }}</v-list-item-title>
-                </v-list-item>
+                </v-list-item> -->
               </v-list>
             </v-menu>
 
@@ -103,40 +111,19 @@
         </v-row>
 
         <v-row v-if="!$vuetify.breakpoint.xs">
-          <v-col cols="2">
+
+          <v-col cols="2 mr-4">
 
             <TooltipButton
-              :label="$vuetify.lang.t('$vuetify.ATIVAR')"
-              :message="$vuetify.lang.t('$vuetify.ATIVAR_DESCRICAO')"
+              :label="$vuetify.lang.t('$vuetify.NOVO_CIRCUITO')"
+              :message="$vuetify.lang.t('$vuetify.NOVO_CIRCUITO_DESCRICAO')"
               :event="showCommercialDialog"
               :object="entity"
               :mobile="$vuetify.breakpoint.xs"
             ></TooltipButton>
           </v-col>
 
-          <v-col cols="2 ml-n7">
-
-            <TooltipButton
-              :label="$vuetify.lang.t('$vuetify.DESATIVAR')"
-              :message="$vuetify.lang.t('$vuetify.DESATIVAR_DESCRICAO')"
-              :event="showCommercialDialog"
-              :object="entity"
-              :mobile="$vuetify.breakpoint.xs"
-            ></TooltipButton>
-          </v-col>
-
-          <v-col cols="2 ml-n1">
-
-            <TooltipButton
-              :label="$vuetify.lang.t('$vuetify.CANCELAR')"
-              :message="$vuetify.lang.t('$vuetify.CANCELAR_DESCRICAO')"
-              :event="showCommercialDialog"
-              :object="entity"
-              :mobile="$vuetify.breakpoint.xs"
-            ></TooltipButton>
-          </v-col>
-
-          <v-col cols="2 ml-n1">
+          <v-col cols="2 mr-n7">
 
             <TooltipButton
               :label="$vuetify.lang.t('$vuetify.UPGRADE')"
@@ -147,7 +134,51 @@
             ></TooltipButton>
           </v-col>
 
-          <v-col cols="2 ml-n4">
+          <v-col cols="2 mr-n2">
+
+            <TooltipButton
+              :label="$vuetify.lang.t('$vuetify.REMANEJAR')"
+              :message="$vuetify.lang.t('$vuetify.REMANEJAR_DESCRICAO')"
+              :event="showCommercialDialog"
+              :object="entity"
+              :mobile="$vuetify.breakpoint.xs"
+            ></TooltipButton>
+          </v-col>
+
+          <v-col cols="2 mr-n10">
+
+            <TooltipButton
+              :label="$vuetify.lang.t('$vuetify.ATIVAR')"
+              :message="$vuetify.lang.t('$vuetify.ATIVAR_DESCRICAO')"
+              :event="showCommercialDialog"
+              :object="entity"
+              :mobile="$vuetify.breakpoint.xs"
+            ></TooltipButton>
+          </v-col>
+
+          <v-col cols="2">
+
+            <TooltipButton
+              :label="$vuetify.lang.t('$vuetify.CANCELAR_DESATIVACAO')"
+              :message="$vuetify.lang.t('$vuetify.CANCELAR_DESATIVACAO_DESCRICAO')"
+              :event="showCommercialDialog"
+              :object="entity"
+              :mobile="$vuetify.breakpoint.xs"
+            ></TooltipButton>
+          </v-col>
+
+          <v-col cols="2 ml-12 pl-11">
+
+            <TooltipButton
+              :label="$vuetify.lang.t('$vuetify.DESATIVAR')"
+              :message="$vuetify.lang.t('$vuetify.DESATIVAR_DESCRICAO')"
+              :event="showCommercialDialog"
+              :object="entity"
+              :mobile=true
+            ></TooltipButton>
+          </v-col>
+
+          <!-- <v-col cols="2 ml-n4">
 
             <TooltipButton
               :label="$vuetify.lang.t('$vuetify.DOWNGRADE')"
@@ -156,7 +187,7 @@
               :object="entity"
               :mobile="$vuetify.breakpoint.xs"
             ></TooltipButton>
-          </v-col>
+          </v-col>-->
         </v-row>
 
         <v-row

@@ -62,10 +62,10 @@
           class="mr-2"
           @click="goTo('invoices')"
         >
-          {{$vuetify.lang.t('$vuetify.NOTAS_FISCAIS')}}
+          {{$vuetify.lang.t('$vuetify.FATURAMENTO')}}
         </v-chip>
       </template>
-      <span>{{$vuetify.lang.t('$vuetify.NOTAS_FISCAIS')}}</span>
+      <span>{{$vuetify.lang.t('$vuetify.FATURAMENTO')}}</span>
     </v-tooltip>
 
     <v-tooltip
@@ -229,7 +229,7 @@
           v-show="canShowShortcut()"
           @click="goTo('invoices')"
         >
-          <v-list-item-title>{{$vuetify.lang.t('$vuetify.NOTAS_FISCAIS')}}</v-list-item-title>
+          <v-list-item-title>{{$vuetify.lang.t('$vuetify.FATURAMENTO')}}</v-list-item-title>
         </v-list-item>
 
         <v-list-item

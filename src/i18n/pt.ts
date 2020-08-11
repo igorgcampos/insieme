@@ -227,9 +227,16 @@ export default {
     DOWNGRADE: 'Downgrade',
     ATIVAR: 'Ativar',
     DESATIVAR: 'Desativar',
-    UPGRADE_DESCRICAO: 'Upgrade dos circuitos selecionados',
+    UPGRADE_DESCRICAO: 'Pedir o Upgrade dos circuitos selecionados',
     DOWNGRADE_DESCRICAO: 'Downgrade dos circuitos selecionados',
-    ATIVAR_DESCRICAO: 'Ativar os circuitos selecionados',
-    DESATIVAR_DESCRICAO: 'Desativar os circuitos selecionados',
-    CANCELAR_DESCRICAO: 'Cancelar os circuitos selecionados'
+    ATIVAR_DESCRICAO: 'Pedir a ativação dos circuitos selecionados',
+    DESATIVAR_DESCRICAO: 'Pedir a desativação dos circuitos selecionados',
+    CANCELAR_DESCRICAO: 'Pedir o cancelamento dos circuitos selecionados',
+    NOVO_CIRCUITO: 'Novo circuito',
+    NOVO_CIRCUITO_DESCRICAO: 'Pedir um novo circuito',
+    CANCELAR_DESATIVACAO: 'Cancelar desativação',
+    CANCELAR_DESATIVACAO_DESCRICAO: 'Pedir o cancelamento da desativação dos circuitos selecionados',
+    FATURAMENTO: 'Faturamento',
+    REMANEJAR: 'Remanejar',
+    REMANEJAR_DESCRICAO: 'Pedir remanejamento dos circuitos selecionados'
 }
