@@ -396,7 +396,7 @@ export default {
       issue = {
         origem: 'CIRCUITO_LOTE',
         identificadorOrigem: null,
-        motivoAbertura: this.actionName,
+        motivoAbertura: this.$vuetify.lang.t('$vuetify.' + this.actionName),
         observacaoAbertura: issue.observation,
         contrato: { id: this.$props.contract.id },
         lote: itemList.map(function (item) {
