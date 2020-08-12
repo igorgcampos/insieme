@@ -238,5 +238,6 @@ export default {
     CANCELAR_DESATIVACAO_DESCRICAO: 'Pedir o cancelamento da desativação dos circuitos selecionados',
     FATURAMENTO: 'Faturamento',
     REMANEJAR: 'Remanejar',
-    REMANEJAR_DESCRICAO: 'Pedir remanejamento dos circuitos selecionados'
+    REMANEJAR_DESCRICAO: 'Pedir remanejamento dos circuitos selecionados',
+    PEDIDO_ENVIADO: 'Pedido enviado com sucesso! Entraremos em contato com você em breve.'
 }

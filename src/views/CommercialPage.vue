@@ -81,27 +81,27 @@
               </template>
 
               <v-list>
-                <v-list-item>
-                  <v-list-item>
-                    <v-list-item-title>{{ $vuetify.lang.t('$vuetify.NOVO_CIRCUITO') }}</v-list-item-title>
-                  </v-list-item>
-                  <v-list-item>
-                    <v-list-item-title>{{ $vuetify.lang.t('$vuetify.UPGRADE') }}</v-list-item-title>
-                  </v-list-item>
-                  <v-list-item>
-                    <v-list-item-title>{{ $vuetify.lang.t('$vuetify.REMANEJAR') }}</v-list-item-title>
-                  </v-list-item>
+                <v-list-item @click="showCommercialDialog('NOVO_CIRCUITO')">
+                  <v-list-item-title>{{ $vuetify.lang.t('$vuetify.NOVO_CIRCUITO') }}</v-list-item-title>
+                </v-list-item>
+                <!-- <v-list-item @click="showCommercialDialog('UPGRADE')">
+                  <v-list-item-title>{{ $vuetify.lang.t('$vuetify.UPGRADE') }}</v-list-item-title>
+                </v-list-item> -->
+                <v-list-item @click="showCommercialDialog('REMANEJAR')">
+                  <v-list-item-title>{{ $vuetify.lang.t('$vuetify.REMANEJAR') }}</v-list-item-title>
+                </v-list-item>
+                <v-list-item @click="showCommercialDialog('ATIVAR')">
                   <v-list-item-title>{{ $vuetify.lang.t('$vuetify.ATIVAR') }}</v-list-item-title>
                 </v-list-item>
-                <v-list-item>
+                <v-list-item @click="showCommercialDialog('CANCELAR_DESATIVACAO')">
                   <v-list-item-title>{{ $vuetify.lang.t('$vuetify.CANCELAR_DESATIVACAO') }}</v-list-item-title>
                 </v-list-item>
-                <v-list-item>
+                <v-list-item @click="showCommercialDialog('DESATIVAR')">
                   <v-list-item-title>{{ $vuetify.lang.t('$vuetify.DESATIVAR') }}</v-list-item-title>
                 </v-list-item>
 
                 <!--
-                <v-list-item>
+                <v-list-item @click="showCommercialDialog('DOWNGRADE')">
                   <v-list-item-title>{{ $vuetify.lang.t('$vuetify.DOWNGRADE') }}</v-list-item-title>
                 </v-list-item> -->
               </v-list>
@@ -117,30 +117,30 @@
             <TooltipButton
               :label="$vuetify.lang.t('$vuetify.NOVO_CIRCUITO')"
               :message="$vuetify.lang.t('$vuetify.NOVO_CIRCUITO_DESCRICAO')"
-              :event="showCommercialDialog"
-              :object="entity"
+              :event="showCommDialog"
+              :object="{actionName:'NOVO_CIRCUITO'}"
               :mobile="$vuetify.breakpoint.xs"
             ></TooltipButton>
           </v-col>
 
-          <v-col cols="2 mr-n7">
+          <!-- <v-col cols="2 mr-n7">
 
             <TooltipButton
               :label="$vuetify.lang.t('$vuetify.UPGRADE')"
               :message="$vuetify.lang.t('$vuetify.UPGRADE_DESCRICAO')"
-              :event="showCommercialDialog"
-              :object="entity"
+              :event="showCommDialog"
+              :object="{actionName:'UPGRADE'}"
               :mobile="$vuetify.breakpoint.xs"
             ></TooltipButton>
-          </v-col>
+          </v-col> -->
 
           <v-col cols="2 mr-n2">
 
             <TooltipButton
               :label="$vuetify.lang.t('$vuetify.REMANEJAR')"
               :message="$vuetify.lang.t('$vuetify.REMANEJAR_DESCRICAO')"
-              :event="showCommercialDialog"
-              :object="entity"
+              :event="showCommDialog"
+              :object="{actionName:'REMANEJAR'}"
               :mobile="$vuetify.breakpoint.xs"
             ></TooltipButton>
           </v-col>
@@ -150,8 +150,8 @@
             <TooltipButton
               :label="$vuetify.lang.t('$vuetify.ATIVAR')"
               :message="$vuetify.lang.t('$vuetify.ATIVAR_DESCRICAO')"
-              :event="showCommercialDialog"
-              :object="entity"
+              :event="showCommDialog"
+              :object="{actionName:'ATIVAR'}"
               :mobile="$vuetify.breakpoint.xs"
             ></TooltipButton>
           </v-col>
@@ -161,8 +161,8 @@
             <TooltipButton
               :label="$vuetify.lang.t('$vuetify.CANCELAR_DESATIVACAO')"
               :message="$vuetify.lang.t('$vuetify.CANCELAR_DESATIVACAO_DESCRICAO')"
-              :event="showCommercialDialog"
-              :object="entity"
+              :event="showCommDialog"
+              :object="{actionName:'CANCELAR_DESATIVACAO'}"
               :mobile="$vuetify.breakpoint.xs"
             ></TooltipButton>
           </v-col>
@@ -172,8 +172,8 @@
             <TooltipButton
               :label="$vuetify.lang.t('$vuetify.DESATIVAR')"
               :message="$vuetify.lang.t('$vuetify.DESATIVAR_DESCRICAO')"
-              :event="showCommercialDialog"
-              :object="entity"
+              :event="showCommDialog"
+              :object="{actionName:'DESATIVAR'}"
               :mobile=true
             ></TooltipButton>
           </v-col>
@@ -183,8 +183,8 @@
             <TooltipButton
               :label="$vuetify.lang.t('$vuetify.DOWNGRADE')"
               :message="$vuetify.lang.t('$vuetify.DOWNGRADE_DESCRICAO')"
-              :event="showCommercialDialog"
-              :object="entity"
+              :event="showCommDialog"
+              :object="{actionName:'DOWNGRADE'}"
               :mobile="$vuetify.breakpoint.xs"
             ></TooltipButton>
           </v-col>-->
@@ -325,6 +325,7 @@
       :itemList="selectedCheckList"
       :title="title"
       :subtitle="subtitle"
+      :actionName="actionName"
     >
     </CommercialDialog>
   </div>
@@ -343,8 +344,42 @@ export default {
     CommercialDialog
   },
   methods: {
-    showCommercialDialog () {
+    showCommercialDialog (actionName) {
+
       this.showDialog = true;
+      this.actionName = actionName;
+
+      if (actionName == 'NOVO_CIRCUITO') {
+        this.title = this.$vuetify.lang.t('$vuetify.NOVO_CIRCUITO')
+        this.subtitle = this.$vuetify.lang.t('$vuetify.NOVO_CIRCUITO_DESCRICAO')
+
+      } else if (actionName == 'ATIVAR') {
+        this.title = this.$vuetify.lang.t('$vuetify.ATIVAR')
+        this.subtitle = this.$vuetify.lang.t('$vuetify.ATIVAR_DESCRICAO')
+
+      } else if (actionName == 'DESATIVAR') {
+        this.title = this.$vuetify.lang.t('$vuetify.DESATIVAR')
+        this.subtitle = this.$vuetify.lang.t('$vuetify.DESATIVAR_DESCRICAO')
+
+      } else if (actionName == 'REMANEJAR') {
+        this.title = this.$vuetify.lang.t('$vuetify.REMANEJAR')
+        this.subtitle = this.$vuetify.lang.t('$vuetify.REMANEJAR_DESCRICAO')
+
+      } else if (actionName == 'CANCELAR_DESATIVACAO') {
+        this.title = this.$vuetify.lang.t('$vuetify.CANCELAR_DESATIVACAO')
+        this.subtitle = this.$vuetify.lang.t('$vuetify.CANCELAR_DESATIVACAO_DESCRICAO')
+
+      } else if (actionName == 'UPGRADE') {
+        this.title = this.$vuetify.lang.t('$vuetify.UPGRADE')
+        this.subtitle = this.$vuetify.lang.t('$vuetify.UPGRADE_DESCRICAO')
+
+      } else if (actionName == 'DOWNGRADE') {
+        this.title = this.$vuetify.lang.t('$vuetify.DOWNGRADE')
+        this.subtitle = this.$vuetify.lang.t('$vuetify.DOWNGRADE_DESCRICAO')
+      }
+    },
+    showCommDialog (entity) {
+      this.showCommercialDialog(entity.actionName)
     },
     closeDialog () {
       this.showDialog = false;
@@ -354,18 +389,14 @@ export default {
         this.showSuccess = false;
       }, 1000);
     },
-    sendIssue (issue, circuit) {
-
-      if (!issue.reason) {
-        return;
-      }
+    sendIssue (issue, entity) {
 
       this.showDialogLoading = true;
 
       issue = {
         origem: 'CIRCUITO',
-        identificadorOrigem: circuit.nome,
-        motivoAbertura: issue.reason,
+        identificadorOrigem: null,
+        motivoAbertura: this.actionName,
         observacaoAbertura: issue.observation,
         contrato: { id: this.$props.contract.id }
       }
@@ -376,14 +407,9 @@ export default {
           this.showSuccess = true;
           this.showDialogLoading = false;
           this.$root.$emit('new-issue', response.data)
-          circuit.protocolo = response.data.protocolo
+          entity.protocolo = response.data.protocolo
         }
       });
-    },
-    openIssue (circuit) {
-      this.selectedCircuit = circuit;
-      this.selectedCircuit.type = 'circuit';
-      this.showDialog = true;
     },
     searchMore () {
 
@@ -434,6 +460,7 @@ export default {
     contract: Object
   },
   data: () => ({
+    actionName: '',
     title: '',
     subtitle: '',
     circuits: [],

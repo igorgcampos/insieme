@@ -239,5 +239,6 @@ export default {
     CANCELAR_DESATIVACAO_DESCRICAO: 'Cancel a request to deactivate the selected circuits',
     FATURAMENTO: 'Billing',
     REMANEJAR: 'Relocation',
-    REMANEJAR_DESCRICAO: 'Request the relocation of the selected circuits'
+    REMANEJAR_DESCRICAO: 'Request the relocation of the selected circuits',
+    PEDIDO_ENVIADO: 'Order sent successfully! We will contact you soon.'
 }

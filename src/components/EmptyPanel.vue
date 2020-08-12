@@ -9,7 +9,7 @@
     </v-row>
     <v-row justify="center">
       <span
-        class="text-center headline font-weight-bold grey--text text--darken-3"
+        class="text-center headline font-weight-bold grey--text text--darken-1"
         :class="{'subtitle-2':mobile}"
       >
         {{message}} </span>
