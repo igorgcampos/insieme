@@ -7,7 +7,7 @@
     >
       <v-card>
         <v-card-title
-          v-if="itemList.length > 0 && !showSuccess"
+          v-if="(itemList.length > 0 || actionName == 'NOVO_CIRCUITO') && !showSuccess"
           class="headline-6"
           :class="{'subtitle-2':$vuetify.breakpoint.xs}"
           style="word-break: normal; !important"
@@ -15,12 +15,12 @@
           {{title}}
         </v-card-title>
         <v-card-text
-          v-if="itemList.length > 0 && !showSuccess"
+          v-if="(itemList.length > 0 || actionName == 'NOVO_CIRCUITO') && !showSuccess"
           class="headline-6 mt-n3"
         >{{subtitle}}</v-card-text>
 
         <v-card-text
-          v-if="itemList.length > 0 && !showSuccess"
+          v-if="(itemList.length > 0 && actionName != 'NOVO_CIRCUITO') && !showSuccess"
           class="caption mt-n3 font-weight-bold grey--text"
         >{{'Circuitos selecionados: '+itemList.length}}</v-card-text>
 
@@ -29,7 +29,7 @@
           <EmptyPanel
             class="mt-8 pt-10"
             :message="$vuetify.lang.t('$vuetify.NENHUM_CIRCUITO_SELECIONADO')"
-            v-show="itemList.length == 0"
+            v-show="!showSuccess && itemList.length == 0 && actionName != 'NOVO_CIRCUITO'"
           >
           </EmptyPanel>
 
@@ -44,7 +44,7 @@
           <v-col
             class="ma-0 pa-0 mt-0"
             cols="9"
-            v-show="itemList.length > 0 && !showSuccess"
+            v-show="(itemList.length > 0 || actionName == 'NOVO_CIRCUITO') && !showSuccess"
           >
             <v-row>
               <span class=" text-right subtitle-2 font-weight-bold grey--text text--lighten-1">
@@ -74,10 +74,10 @@
           <v-btn
             color="primary"
             text
-            @click="send(issue, entity);"
+            @click="send(issue, entity, itemList);"
             :x-small="$vuetify.breakpoint.xs"
             :loading="showDialogLoading"
-            v-show="itemList.length > 0 && !showSuccess"
+            v-show="(itemList.length > 0 || actionName == 'NOVO_CIRCUITO') && !showSuccess"
           >{{$vuetify.lang.t('$vuetify.ENVIAR')}}</v-btn>
         </v-card-actions>
       </v-card>

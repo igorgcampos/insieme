@@ -389,16 +389,19 @@ export default {
         this.showSuccess = false;
       }, 1000);
     },
-    sendIssue (issue, entity) {
+    sendIssue (issue, entity, itemList) {
 
       this.showDialogLoading = true;
 
       issue = {
-        origem: 'CIRCUITO',
+        origem: 'CIRCUITO_LOTE',
         identificadorOrigem: null,
         motivoAbertura: this.actionName,
         observacaoAbertura: issue.observation,
-        contrato: { id: this.$props.contract.id }
+        contrato: { id: this.$props.contract.id },
+        lote: itemList.map(function (item) {
+          return item.nome
+        }),
       }
       this.$post('/chamado/create', issue).then((response) => {
 
