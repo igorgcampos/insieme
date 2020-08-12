@@ -642,7 +642,10 @@ export default {
 
     this.reasonBatchList = [this.$vuetify.lang.t('$vuetify.ATIVACAO'),
     this.$vuetify.lang.t('$vuetify.CONFIGURACAO'),
-    this.$vuetify.lang.t('$vuetify.DESATIVACAO')]
+    this.$vuetify.lang.t('$vuetify.DESATIVACAO'),
+    this.$vuetify.lang.t('$vuetify.INOPERANCIA'),
+    this.$vuetify.lang.t('$vuetify.INTERMITENCIA'),
+    this.$vuetify.lang.t('$vuetify.LENTIDAO')]
 
     this.reasonList = [this.$vuetify.lang.t('$vuetify.DESISTI_CHAMADO'),
     this.$vuetify.lang.t('$vuetify.PROBLEMA_RESOLVIDO')]
