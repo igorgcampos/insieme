@@ -9,7 +9,7 @@
       v-show="!$vuetify.breakpoint.xs"
       src="../assets/telespazio-logo.png"
       max-height="80"
-      max-width="590"
+      max-width="190"
       min-width="130"
       aspect-ratio="5.88"
       class="mx-auto"
