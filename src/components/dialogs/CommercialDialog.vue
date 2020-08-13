@@ -43,7 +43,7 @@
 
           <v-col
             class="ma-0 pa-0 mt-0"
-            cols="9"
+            cols="10"
             v-show="(itemList.length > 0 || actionName == 'NOVO_CIRCUITO') && !showSuccess"
           >
             <v-row>
