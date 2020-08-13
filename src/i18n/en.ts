@@ -205,6 +205,7 @@ export default {
     CONVERSE_CONOSCO: 'Chat with us',
     BUSCAR_PERGUNTA: 'Search for question or answer',
     STATUS_OPERACIONAL: 'OPERATIONAL STATUS',
+    STATUS_OPERACIONAL_CAIXA_BAIXA: 'Operational status',
     STATUS_LOGISTICA: 'Logistic status',
     VENCIDA: 'Overdue',
     VENCIDAS: 'Overdue',

@@ -46,7 +46,7 @@
               <v-col cols="12">
                 <v-row justify="center">
                   <span class="mt-n3 text-center subtitle-1 font-weight-bold grey--text text--darken-1">
-                    {{$vuetify.lang.t('$vuetify.STATUS_OPERACIONAL')}}</span>
+                    {{$vuetify.lang.t('$vuetify.STATUS_OPERACIONAL_CAIXA_BAIXA')}}</span>
                 </v-row>
 
                 <v-row>

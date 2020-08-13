@@ -49,6 +49,12 @@
           :options="circuitOptionsLog"
           :styles="circuitStyle"
         ></BarChart>
+
+        <BarChart
+          :chart-data="circuitDataRede"
+          :options="circuitOptionsRede"
+          :styles="circuitStyle"
+        ></BarChart>
       </v-row>
       <v-row
         class="mt-12 pl-8"
@@ -89,6 +95,7 @@ export default {
       show: null,
       circuitDataOp: undefined,
       circuitDataLog: undefined,
+      circuitDataRede: undefined,
       invoiceData: undefined,
       issueData: undefined,
       circuitStyle: {
@@ -101,6 +108,26 @@ export default {
         height: '16rem',
       },
       circuitOptionsOp: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          yAxes: [{
+            gridLines: { drawOnChartArea: false },
+            ticks: {
+              beginAtZero: true
+            }
+          }],
+          xAxes: [{
+            gridLines: { drawOnChartArea: false },
+          }]
+        },
+        title: {
+          display: true,
+          text: '',
+          fontSize: 16
+        }
+      },
+      circuitOptionsRede: {
         responsive: true,
         maintainAspectRatio: false,
         scales: {
@@ -183,7 +210,7 @@ export default {
     this.size = this.$vuetify.breakpoint.xs ? 130 : 115
 
     this.circuitStyle.width = this.$vuetify.breakpoint.xs ? '20rem' : '15rem';
-    this.circuitStyle.height = this.$vuetify.breakpoint.xs ? '16rem' : '12rem';
+    this.circuitStyle.height = this.$vuetify.breakpoint.xs ? '16rem' : '14rem';
     this.invoiceStyle.width = this.$vuetify.breakpoint.xs ? '15rem' : '29rem';
     this.issueStyle.width = this.$vuetify.breakpoint.xs ? '20rem' : '29rem';
 
@@ -191,7 +218,7 @@ export default {
 
     this.$root.$on('circuit-data', (circuitData) => {
 
-      this.circuitOptionsOp.title.text = this.$vuetify.lang.t('$vuetify.STATUS_OPERACIONAL')
+      this.circuitOptionsOp.title.text = this.$vuetify.lang.t('$vuetify.STATUS_OPERACIONAL_CAIXA_BAIXA')
       this.circuitOptionsOp.legend = { display: false }
       this.circuitOptionsOp.title.fontSize = this.$vuetify.breakpoint.xs ? 16 : 12
 
@@ -215,9 +242,10 @@ export default {
       this.circuitOptionsLog.title.fontSize = this.$vuetify.breakpoint.xs ? 16 : 12
 
       this.circuitDataLog = {
-        labels: [this.$vuetify.lang.t('$vuetify.ATIVADO'),
-        this.$vuetify.lang.t('$vuetify.DESATIVADO'), this.$vuetify.lang.t('$vuetify.DESINSTALADO'),
-        this.$vuetify.lang.t('$vuetify.CANCELADO')],
+        labels: [this.$vuetify.lang.t('$vuetify.PROC_LOGISTICO'),
+        this.$vuetify.lang.t('$vuetify.AGUARDANDO_ACEITE'),
+        this.$vuetify.lang.t('$vuetify.INSTALANDO'),
+        this.$vuetify.lang.t('$vuetify.EM_TRANSPORTE')],
         datasets: [
           {
 
@@ -228,7 +256,30 @@ export default {
               'rgba(255, 159, 64, 0.5)'
             ],
             borderWidth: 2,
-            data: circuitData
+            data: circuitData.slice(6, 10)
+          }
+        ]
+      }
+
+      this.circuitOptionsRede.title.text = this.$vuetify.lang.t('$vuetify.STATUS_REDE')
+      this.circuitOptionsRede.legend = { display: false }
+      this.circuitOptionsRede.title.fontSize = this.$vuetify.breakpoint.xs ? 16 : 12
+
+      this.circuitDataRede = {
+        labels: [this.$vuetify.lang.t('$vuetify.ATIVADO'),
+        this.$vuetify.lang.t('$vuetify.DESATIVADO'),
+        this.$vuetify.lang.t('$vuetify.CANCELADO'), this.$vuetify.lang.t('$vuetify.DESINSTALADO')],
+        datasets: [
+          {
+
+            backgroundColor: [
+              'rgba(255, 206, 86, 0.5)',
+              'rgba(54, 162, 235, 0.5)',
+              'rgba(153, 102, 255, 0.5)',
+              'rgba(255, 159, 64, 0.5)'
+            ],
+            borderWidth: 2,
+            data: circuitData.slice(2, 6)
           }
         ]
       }

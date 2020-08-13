@@ -203,6 +203,7 @@ export default {
     CONVERSE_CONOSCO: 'Converse conosco no chat',
     BUSCAR_PERGUNTA: 'Buscar por pergunta ou resposta',
     STATUS_OPERACIONAL: 'STATUS OPERACIONAL',
+    STATUS_OPERACIONAL_CAIXA_BAIXA: 'Status operacional',
     STATUS_LOGISTICA: 'Status da logística',
     VENCIDA: 'Vencida',
     VENCIDAS: 'Vencidas',
