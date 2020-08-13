@@ -21,7 +21,7 @@
           <v-row justify="center">
             <span
               class="text-center subtitle-2 font-weight-bold grey--text text--darken-3 ma-1"
-              :class="{'button':$vuetify.breakpoint.xs}"
+              :class="{'button':$vuetify.breakpoint.xs, 'caption mt-n2':smallText}"
             >
               {{message}} </span>
           </v-row>
@@ -53,7 +53,7 @@ export default {
     count: Number,
     color: String,
     func: Function,
-
+    smallText: Boolean
   },
   watch: {
     buttonHovering (newVal) {

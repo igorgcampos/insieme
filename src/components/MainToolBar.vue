@@ -9,9 +9,9 @@
       v-show="!$vuetify.breakpoint.xs"
       src="../assets/telespazio-logo.png"
       max-height="80"
-      max-width="180"
-      min-width="80"
-      aspect-ratio="5.9"
+      max-width="590"
+      min-width="130"
+      aspect-ratio="5.88"
       class="mx-auto"
     ></v-img>
 
@@ -32,7 +32,7 @@
 
     <v-tooltip
       bottom
-      v-if="!$vuetify.breakpoint.xs"
+      v-if="!$vuetify.breakpoint.xs && !$vuetify.breakpoint.sm"
     >
       <template v-slot:activator="{ on }">
         <v-chip
@@ -51,7 +51,7 @@
 
     <v-tooltip
       bottom
-      v-if="!$vuetify.breakpoint.xs"
+      v-if="!$vuetify.breakpoint.xs && !$vuetify.breakpoint.sm"
     >
       <template v-slot:activator="{ on }">
         <v-chip
@@ -70,7 +70,7 @@
 
     <v-tooltip
       bottom
-      v-if="!$vuetify.breakpoint.xs"
+      v-if="!$vuetify.breakpoint.xs && !$vuetify.breakpoint.sm"
     >
       <template v-slot:activator="{ on }">
         <v-chip
@@ -89,7 +89,7 @@
 
     <v-tooltip
       bottom
-      v-if="!$vuetify.breakpoint.xs"
+      v-if="!$vuetify.breakpoint.xs && !$vuetify.breakpoint.sm"
     >
       <template v-slot:activator="{ on }">
         <v-chip
@@ -110,7 +110,7 @@
 
     <v-tooltip
       bottom
-      v-if="!$vuetify.breakpoint.xs"
+      v-if="!$vuetify.breakpoint.xs && !$vuetify.breakpoint.sm"
     >
       <template v-slot:activator="{ on }">
         <v-chip
@@ -129,7 +129,7 @@
 
     <v-tooltip
       bottom
-      v-if="!$vuetify.breakpoint.xs"
+      v-if="!$vuetify.breakpoint.xs && !$vuetify.breakpoint.sm"
     >
       <template v-slot:activator="{ on }">
         <v-chip
@@ -203,7 +203,7 @@
       transition="slide-x-transition"
       bottom
       right
-      v-show="$vuetify.breakpoint.xs"
+      v-show="$vuetify.breakpoint.xs || $vuetify.breakpoint.sm"
     >
       <template v-slot:activator="{ on, attrs }">
         <v-btn
