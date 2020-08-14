@@ -353,17 +353,6 @@
 
                   <v-col class="flex-grow-0">
                     <CountCard
-                      :count="installCounts[4]"
-                      :message="$vuetify.lang.t('$vuetify.AGUARDANDO_ACEITE')"
-                      color="primary--text"
-                      :func="getInstalled"
-                      :smallText="true"
-                      :toolTipMessage="$vuetify.lang.t('$vuetify.AGUARDANDO_DESCRICAO')"
-                    ></CountCard>
-                  </v-col>
-
-                  <v-col class="flex-grow-0">
-                    <CountCard
                       :count="installCounts[5]"
                       :message="$vuetify.lang.t('$vuetify.EM_TRANSPORTE')"
                       color="primary--text"
@@ -379,6 +368,17 @@
                       color="primary--text"
                       :func="getDeploying"
                       :toolTipMessage="$vuetify.lang.t('$vuetify.INSTALANDO_DESCRICAO')"
+                    ></CountCard>
+                  </v-col>
+
+                  <v-col class="flex-grow-0">
+                    <CountCard
+                      :count="installCounts[4]"
+                      :message="$vuetify.lang.t('$vuetify.AGUARDANDO_ACEITE')"
+                      color="primary--text"
+                      :func="getInstalled"
+                      :smallText="true"
+                      :toolTipMessage="$vuetify.lang.t('$vuetify.AGUARDANDO_DESCRICAO')"
                     ></CountCard>
                   </v-col>
                 </v-row>
