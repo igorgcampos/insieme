@@ -114,7 +114,14 @@ export default {
           yAxes: [{
             gridLines: { drawOnChartArea: false },
             ticks: {
-              beginAtZero: true
+              beginAtZero: true,
+              userCallback: function (label) {
+                // when the floored value is the same as the value we have a whole number
+                if (Math.floor(label) === label) {
+                  return label;
+                }
+
+              },
             }
           }],
           xAxes: [{
@@ -134,7 +141,13 @@ export default {
           yAxes: [{
             gridLines: { drawOnChartArea: false },
             ticks: {
-              beginAtZero: true
+              beginAtZero: true,
+              userCallback: function (label) {
+                // when the floored value is the same as the value we have a whole number
+                if (Math.floor(label) === label) {
+                  return label;
+                }
+              },
             }
           }],
           xAxes: [{
@@ -154,7 +167,14 @@ export default {
           yAxes: [{
             gridLines: { drawOnChartArea: false },
             ticks: {
-              beginAtZero: true
+              beginAtZero: true,
+              userCallback: function (label) {
+                // when the floored value is the same as the value we have a whole number
+                if (Math.floor(label) === label) {
+                  return label;
+                }
+
+              },
             }
           }],
           xAxes: [{
