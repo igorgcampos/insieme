@@ -278,12 +278,15 @@
                       value="log"
                       class="mt-n3 text-center caption font-weight-bold"
                       small
+                      :style="{'text-decoration':logDecoration}"
                     >
-                      {{$vuetify.lang.t('$vuetify.STATUS_LOGISTICA')}}</v-btn>
+                      {{$vuetify.lang.t('$vuetify.STATUS_LOGISTICA')}}
+                    </v-btn>
                     <v-btn
                       value="rede"
                       class="mt-n3 text-center caption font-weight-bold"
                       small
+                      :style="{'text-decoration':redeDecoration}"
                     >
                       {{$vuetify.lang.t('$vuetify.STATUS_REDE')}}</v-btn>
                   </v-btn-toggle>
@@ -1047,7 +1050,13 @@ export default {
   props: {
     contract: Object
   },
+  updated: function () {
+    this.logDecoration = this.button == 'log' ? 'underline' : 'none'
+    this.redeDecoration = this.button == 'rede' ? 'underline' : 'none'
+  },
   data: () => ({
+    logDecoration: 'none',
+    redeDecoration: 'none',
     button: 'log',
     loadingExport: false,
     allCircuits: undefined,
