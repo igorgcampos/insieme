@@ -272,8 +272,7 @@
                   <v-btn-toggle
                     v-model="button"
                     color="grey--text text--darken-3"
-                    tile
-                    group
+                    class="mb-1"
                   >
                     <v-btn
                       value="log"
