@@ -394,7 +394,7 @@ export default {
       this.showDialogLoading = true;
 
       issue = {
-        origem: 'CIRCUITO_LOTE',
+        origem: 'CIRCUITO_LOTE_COMERCIAL',
         identificadorOrigem: null,
         motivoAbertura: this.$vuetify.lang.t('$vuetify.' + this.actionName),
         observacaoAbertura: issue.observation,
