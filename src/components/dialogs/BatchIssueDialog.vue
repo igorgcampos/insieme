@@ -341,8 +341,10 @@ export default {
       return false
     },
     cleanFields (cancel) {
+
       this.issue.observation = '';
       this.issue.reason = undefined;
+      this.issue.items = undefined;
 
       if (cancel) {
         this.selectReason = false
