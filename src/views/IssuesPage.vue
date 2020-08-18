@@ -461,7 +461,7 @@ export default {
         motivoAbertura: issue.reason,
         observacaoAbertura: issue.observation,
         lote: issue.items.map(function (item) {
-          return item.nome
+          return item.nome || item.numero
         }),
         contrato: { id: this.$props.contract.id }
       }
