@@ -117,13 +117,36 @@
             :class="{'mt-7':$vuetify.breakpoint.xs}"
           >
 
-            <TooltipButton
-              :label="$vuetify.lang.t('$vuetify.ABRIR_CHAMADO')"
-              :message="$vuetify.lang.t('$vuetify.ABRIR_CHAMADO_CIRCUITOS')"
-              :event="showBatchIssueDialog"
-              :object="entity"
-              :mobile="$vuetify.breakpoint.xs"
-            ></TooltipButton>
+            <v-menu
+              transition="slide-x-transition"
+              bottom
+              right
+            >
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                  class="ml-2 mt-0"
+                  dark
+                  color="primary"
+                  v-on="on"
+                  v-bind="attrs"
+                  :x-small="$vuetify.breakpoint.xs"
+                  :small="!$vuetify.breakpoint.xs"
+                >
+                  {{$vuetify.lang.t('$vuetify.ABRIR_CHAMADO')}}
+                </v-btn>
+              </template>
+
+              <v-list>
+                <v-list-item @click="showBatchIssueDialog('circuit')">
+                  <v-list-item-title>{{$vuetify.lang.t('$vuetify.CIRCUITOS')}}</v-list-item-title>
+                </v-list-item>
+
+                <v-list-item @click="showBatchIssueDialog('invoice')">
+                  <v-list-item-title>{{$vuetify.lang.t('$vuetify.NOTAS_FISCAIS')}}</v-list-item-title>
+                </v-list-item>
+              </v-list>
+
+            </v-menu>
           </v-col>
         </v-row>
 
@@ -383,7 +406,7 @@
           :showDialogLoading="showDialogLoading"
           :close="closeBatchDialog"
           :send="sendBatchIssue"
-          :search="searchCircuits"
+          :search="searchEntities"
           :entity="entity"
           :itemList="itemList"
           :reasonList="reasonBatchList"
@@ -413,6 +436,14 @@ export default {
     BatchIssueDialog
   },
   methods: {
+    searchEntities (text, page) {
+
+      if (this.entity.type == 'circuits') {
+        this.searchCircuits(text, page)
+      } else {
+        this.searchInvoices(text, page)
+      }
+    },
     showBatch (issue) {
       issue.showBatch = true;
     },
@@ -425,7 +456,7 @@ export default {
       this.showDialogLoading = true;
 
       issue = {
-        origem: issue.origin,
+        origem: entity.type == 'circuit' ? 'CIRCUITO_LOTE' : 'NOTA_LOTE',
         identificadorOrigem: undefined,
         motivoAbertura: issue.reason,
         observacaoAbertura: issue.observation,
@@ -444,6 +475,29 @@ export default {
           entity.protocolo = response.data.protocolo
         }
       });
+    },
+    searchInvoices (text, page) {
+
+      if (page == 0) {
+        this.itemList = []
+      }
+
+      this.showDialogLoading = true
+      this.$get('/nota/busca', {
+        contractId: this.$props.contract.id,
+        searchText: text,
+        paymentStatus: 0,
+        page: page
+      })
+        .then((response) => {
+
+          if (response && response.data.length == 0) {
+            this.noBatchResult = true;
+          }
+
+          this.itemList = this.itemList.concat(response.data)
+          this.showDialogLoading = false
+        });
     },
     searchCircuits (text, page) {
 
@@ -470,7 +524,29 @@ export default {
           this.showDialogLoading = false
         });
     },
-    showBatchIssueDialog () {
+    showBatchIssueDialog (type) {
+
+      if (type == 'circuit') {
+
+        this.reasonBatchList = [this.$vuetify.lang.t('$vuetify.ATIVACAO'),
+        this.$vuetify.lang.t('$vuetify.CONFIGURACAO'),
+        this.$vuetify.lang.t('$vuetify.DESATIVACAO'),
+        this.$vuetify.lang.t('$vuetify.INOPERANCIA'),
+        this.$vuetify.lang.t('$vuetify.INTERMITENCIA'),
+        this.$vuetify.lang.t('$vuetify.LENTIDAO')]
+
+        this.searchCircuits('', 0)
+
+      } else {
+
+        this.reasonBatchList = [this.$vuetify.lang.t('$vuetify.SEGUNDA_VIA'),
+        this.$vuetify.lang.t('$vuetify.BAIXA_BOLETO'),
+        this.$vuetify.lang.t('$vuetify.ALTERAR_VENCIMENTO')]
+        this.searchInvoices('', 0)
+      }
+
+      this.entity = { type: type }
+
       this.showBatchDialog = true;
     },
     closeDialog () {
@@ -639,13 +715,6 @@ export default {
     searchText: '',
   }),
   created: function () {
-
-    this.reasonBatchList = [this.$vuetify.lang.t('$vuetify.ATIVACAO'),
-    this.$vuetify.lang.t('$vuetify.CONFIGURACAO'),
-    this.$vuetify.lang.t('$vuetify.DESATIVACAO'),
-    this.$vuetify.lang.t('$vuetify.INOPERANCIA'),
-    this.$vuetify.lang.t('$vuetify.INTERMITENCIA'),
-    this.$vuetify.lang.t('$vuetify.LENTIDAO')]
 
     this.reasonList = [this.$vuetify.lang.t('$vuetify.DESISTI_CHAMADO'),
     this.$vuetify.lang.t('$vuetify.PROBLEMA_RESOLVIDO')]

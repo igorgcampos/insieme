@@ -17,7 +17,8 @@
           $vuetify.lang.t('$vuetify.ABRINDO_CHAMADO_NOTAS')}}
         </v-card-title>
         <v-card-text class="headline-6 mt-n2">{{selectReason?$vuetify.lang.t('$vuetify.SELECIONE_MOTIVO_OBSERVACAO'):
-            $vuetify.lang.t('$vuetify.SELECIONE_CIRCUITOS')}}</v-card-text>
+            entity.type=='circuit'?$vuetify.lang.t('$vuetify.SELECIONE_CIRCUITOS'):$vuetify.lang.t('$vuetify.SELECIONE_NOTAS')}}
+        </v-card-text>
 
         <v-row
           class="ma-0 mb-3 d-flex justify-center"
@@ -87,7 +88,8 @@
                     v-model.trim="searchText"
                     dense
                     label="Regular"
-                    :placeholder="$vuetify.lang.t('$vuetify.DESIGNACAO_CLIENTE_TPZ')"
+                    :placeholder="entity.type=='circuit'?$vuetify.lang.t('$vuetify.DESIGNACAO_CLIENTE_TPZ'):
+                    $vuetify.lang.t('$vuetify.NUMERO_NOTA')"
                     single-line
                     solo
                     max-width="200"
@@ -99,7 +101,7 @@
 
                 <EmptyPanel
                   :mobile=true
-                  :message="$vuetify.lang.t('$vuetify.NENHUM_CIRCUITO')"
+                  :message="entity.type=='circuit'?$vuetify.lang.t('$vuetify.NENHUM_CIRCUITO'):$vuetify.lang.t('$vuetify.NENHUMA_NOTA')"
                   v-show="itemList.length == 0 && !showDialogLoading"
                 ></EmptyPanel>
 
@@ -145,8 +147,12 @@
                               class="subtitle-2"
                               :class="{'caption':$vuetify.breakpoint.xs}"
                             >
-                              {{item.nome}}</v-list-item-title>
-                            <v-list-item-subtitle class="caption">{{item.designacaoCliente.toLowerCase()}}</v-list-item-subtitle>
+                              {{item.nome?item.nome:item.numero}}</v-list-item-title>
+                            <v-list-item-subtitle class="caption">{{item.designacaoCliente?
+                              item.designacaoCliente.toLowerCase():
+                              (item.statusPagamento=='EM_ABERTO'?$vuetify.lang.t('$vuetify.EM_ABERTO'):
+                              item.statusPagamento=='VENCIDA'?$vuetify.lang.t('$vuetify.VENCIDA'):
+                              $vuetify.lang.t('$vuetify.PAGO'))}}</v-list-item-subtitle>
                           </v-list-item-content>
                         </template>
                       </v-list-item>
@@ -175,7 +181,8 @@
                 <EmptyPanel
                   class="mt-8 pt-10"
                   :mobile=true
-                  :message="$vuetify.lang.t('$vuetify.NENHUM_CIRCUITO_SELECIONADO')"
+                  :message="entity.type=='circuit'?$vuetify.lang.t('$vuetify.NENHUM_CIRCUITO_SELECIONADO')
+                  :$vuetify.lang.t('$vuetify.NENHUMA_NOTA_SELECIONADA')"
                   v-show="selectedItemList.length == 0"
                 >
                 </EmptyPanel>
@@ -195,7 +202,7 @@
                       @click:close="selectItem(item, false)"
                       close
                     >
-                      {{ item.nome}}
+                      {{ item.nome || item.numero}}
                     </v-chip>
                   </transition-group>
                 </v-row>
@@ -355,7 +362,7 @@ export default {
     selectedItemList: [],
     selectedCheckList: [],
     selectReason: false,
-    issue: { reason: undefined, observation: '', origin: 'CIRCUITO_LOTE', items: undefined }
+    issue: { reason: undefined, observation: '', items: undefined }
   }),
   created: function () {
     this.size = this.$vuetify.breakpoint.xs ? 16 : 20;
