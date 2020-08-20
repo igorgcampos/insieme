@@ -386,7 +386,7 @@
             v-if="issues.length == 0 && !isLoading"
             class="mt-n2"
           >
-            <EmptyPanel :message="$vuetify.lang.t('$vuetify.NENHUM_CHAMADO')"> </EmptyPanel>
+            <WarningPanel :message="$vuetify.lang.t('$vuetify.NENHUM_CHAMADO')"> </WarningPanel>
           </v-col>
         </v-row>
 
@@ -420,7 +420,7 @@
 <script>
 
 import CountCard from '../components/cards/CountCard'
-import EmptyPanel from '../components/EmptyPanel';
+import WarningPanel from '../components/panels/WarningPanel';
 import TooltipButton from '../components/TooltipButton';
 import LabelValue from '../components/LabelValue';
 import IssueDialog from '../components/dialogs/IssueDialog';
@@ -429,7 +429,7 @@ import BatchIssueDialog from '../components/dialogs/BatchIssueDialog';
 export default {
   components: {
     CountCard,
-    EmptyPanel,
+    WarningPanel,
     TooltipButton,
     LabelValue,
     IssueDialog,

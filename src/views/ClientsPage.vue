@@ -78,7 +78,7 @@
             <ClientCard :client="client"></ClientCard>
           </v-col>
           <v-col v-if="clients.length == 0 && !isLoading">
-            <EmptyPanel :message="$vuetify.lang.t('$vuetify.NENHUM_CLIENTE')"> </EmptyPanel>
+            <WarningPanel :message="$vuetify.lang.t('$vuetify.NENHUM_CLIENTE')"> </WarningPanel>
           </v-col>
         </v-row>
       </div>
@@ -91,12 +91,12 @@
 <script>
 
 import ClientCard from '../components/cards/ClientCard';
-import EmptyPanel from '../components/EmptyPanel';
+import WarningPanel from '../components/panels/WarningPanel';
 
 export default {
   components: {
     ClientCard,
-    EmptyPanel
+    WarningPanel
   },
   methods: {
     searchMore () {

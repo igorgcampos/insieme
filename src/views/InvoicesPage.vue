@@ -382,7 +382,7 @@
             </v-expansion-panels>
           </div>
           <v-col v-if="invoices.length == 0 && !isLoading">
-            <EmptyPanel :message="$vuetify.lang.t('$vuetify.NENHUMA_NOTA')"> </EmptyPanel>
+            <WarningPanel :message="$vuetify.lang.t('$vuetify.NENHUMA_NOTA')"> </WarningPanel>
           </v-col>
         </v-row>
 
@@ -403,7 +403,7 @@
 <script>
 
 import CountCard from '../components/cards/CountCard'
-import EmptyPanel from '../components/EmptyPanel';
+import WarningPanel from '../components/panels/WarningPanel';
 import TooltipButton from '../components/TooltipButton';
 import LabelValue from '../components/LabelValue';
 import IssueDialog from '../components/dialogs/IssueDialog';
@@ -411,7 +411,7 @@ import IssueDialog from '../components/dialogs/IssueDialog';
 export default {
   components: {
     CountCard,
-    EmptyPanel,
+    WarningPanel,
     TooltipButton,
     LabelValue,
     IssueDialog

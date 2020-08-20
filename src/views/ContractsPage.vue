@@ -98,7 +98,7 @@
             <ContractCard :contract="contract"></ContractCard>
           </v-col>
           <v-col v-if="contracts.length == 0 && !isLoading">
-            <EmptyPanel :message="$vuetify.lang.t('$vuetify.NENHUM_CONTRATO')"> </EmptyPanel>
+            <WarningPanel :message="$vuetify.lang.t('$vuetify.NENHUM_CONTRATO')"> </WarningPanel>
           </v-col>
         </v-row>
       </div>
@@ -111,12 +111,12 @@
 <script>
 
 import ContractCard from '../components/cards/ContractCard';
-import EmptyPanel from '../components/EmptyPanel';
+import WarningPanel from '../components/panels/WarningPanel';
 
 export default {
   components: {
     ContractCard,
-    EmptyPanel
+    WarningPanel
   },
   methods: {
     searchMore () {

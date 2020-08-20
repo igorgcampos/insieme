@@ -309,7 +309,7 @@
             </v-expansion-panels>
           </div>
           <v-col v-if="circuits.length == 0 && !isLoading">
-            <EmptyPanel :message="$vuetify.lang.t('$vuetify.NENHUM_CIRCUITO')"> </EmptyPanel>
+            <WarningPanel :message="$vuetify.lang.t('$vuetify.NENHUM_CIRCUITO')"> </WarningPanel>
           </v-col>
         </v-row>
 
@@ -333,13 +333,13 @@
 
 <script>
 
-import EmptyPanel from '../components/EmptyPanel';
+import WarningPanel from '../components/panels/WarningPanel';
 import TooltipButton from '../components/TooltipButton';
 import CommercialDialog from '../components/dialogs/CommercialDialog';
 
 export default {
   components: {
-    EmptyPanel,
+    WarningPanel,
     TooltipButton,
     CommercialDialog
   },

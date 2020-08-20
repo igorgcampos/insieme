@@ -99,11 +99,11 @@
                   ></v-text-field>
                 </v-row>
 
-                <EmptyPanel
+                <WarningPanel
                   :mobile=true
                   :message="entity.type=='circuit'?$vuetify.lang.t('$vuetify.NENHUM_CIRCUITO'):$vuetify.lang.t('$vuetify.NENHUMA_NOTA')"
                   v-show="itemList.length == 0 && !showDialogLoading"
-                ></EmptyPanel>
+                ></WarningPanel>
 
                 <v-lazy
                   :options="{threshold: .6}"
@@ -178,14 +178,14 @@
                 class="ml-4 mt-n1"
                 :class="{'mt-n8':$vuetify.breakpoint.xs}"
               >
-                <EmptyPanel
+                <WarningPanel
                   class="mt-8 pt-10"
                   :mobile=true
                   :message="entity.type=='circuit'?$vuetify.lang.t('$vuetify.NENHUM_CIRCUITO_SELECIONADO')
                   :$vuetify.lang.t('$vuetify.NENHUMA_NOTA_SELECIONADA')"
                   v-show="selectedItemList.length == 0"
                 >
-                </EmptyPanel>
+                </WarningPanel>
 
                 <v-row
                   class="ml-0 mt-2 d-flex justify-left"
@@ -271,12 +271,12 @@
 
 <script>
 
-import EmptyPanel from '../../components/EmptyPanel';
-import SuccessPanel from '../../components/SuccessPanel';
+import WarningPanel from '../../components/panels/WarningPanel';
+import SuccessPanel from '../../components/panels/SuccessPanel';
 
 export default {
   components: {
-    EmptyPanel,
+    WarningPanel,
     SuccessPanel,
   },
   props: {

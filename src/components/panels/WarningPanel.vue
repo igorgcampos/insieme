@@ -5,7 +5,7 @@
       justify="center"
       class="mb-3"
     >
-      <v-icon :x-large="!mobile">mdi-help-circle</v-icon>
+      <v-icon :x-large="!mobile">{{icon?icon:'mdi-help-circle'}}</v-icon>
     </v-row>
     <v-row justify="center">
       <span
@@ -20,6 +20,7 @@
 <script>
 export default {
   props: {
+    icon: String,
     message: String,
     mobile: Boolean
   }

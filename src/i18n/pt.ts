@@ -247,5 +247,24 @@ export default {
     REMANEJAR: 'Remanejar',
     REMANEJAR_DESCRICAO: 'Pedir remanejamento dos circuitos selecionados',
     PEDIDO_ENVIADO: 'Pedido enviado com sucesso! Entraremos em contato com você em breve.',
-    STATUS_REDE: 'Status de rede'
+    STATUS_REDE: 'Status de rede',
+    REMANEJAR_APENAS_UM: 'Para remanejar selecione apenas um circuito por vez',
+    LOGRADOURO: 'Logradouro',
+    BAIRRO: 'Bairro',
+    CIDADE: 'Cidade',
+    CEP: 'Cep',
+    UF: 'UF',
+    CONTATO: 'Contato',
+    TELEFONE: 'Telefone',
+    ENDERECO_REMESSA: 'Endereço de remessa',
+    ENDERECO_INSTALACAO: 'Endereço de instalação',
+    ROTAS_SUMARIZADAS: 'Rotas sumarizadas',
+    ENDERECO_LAN: 'Endereço de LAN',
+    WAN_CPE_REDE: 'Wan cpe rede',
+    INTERCONEXAO_TPZ: 'Interconexão TPZ',
+    ENDERECO_GERENCIA: 'Endereço de gerência',
+    IDENTIFICACAO_ESTACAO: 'Identificação da estação',
+    VELOCIDADE: 'Velocidade',
+    ANTENA: 'Antena'
+
 }

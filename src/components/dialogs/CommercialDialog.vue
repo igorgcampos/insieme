@@ -1,13 +1,17 @@
 <template>
-  <v-row justify="center">
+  <v-row
+    justify="center"
+    class="overflow-y-hidden"
+  >
     <v-dialog
       v-model="showDialog"
       persistent
-      max-width="370"
+      max-width="500"
+      class="overflow-y-hidden"
     >
       <v-card>
         <v-card-title
-          v-if="(itemList.length > 0 || actionName == 'NOVO_CIRCUITO') && !showSuccess"
+          v-if="canShowForm()"
           class="headline-6"
           :class="{'subtitle-2':$vuetify.breakpoint.xs}"
           style="word-break: normal; !important"
@@ -15,23 +19,34 @@
           {{title}}
         </v-card-title>
         <v-card-text
-          v-if="(itemList.length > 0 || actionName == 'NOVO_CIRCUITO') && !showSuccess"
+          v-if="canShowForm()"
           class="headline-6 mt-n3"
         >{{subtitle}}</v-card-text>
 
         <v-card-text
-          v-if="(itemList.length > 0 && actionName != 'NOVO_CIRCUITO') && !showSuccess"
+          v-if="canShowForm() && this.actionName != 'NOVO_CIRCUITO'"
           class="caption mt-n3 font-weight-bold grey--text"
         >{{'Circuitos selecionados: '+itemList.length}}</v-card-text>
 
-        <v-row class="ma-0 d-flex justify-center mb-12 ml-3 mr-3">
+        <v-row
+          class="ma-0 d-flex justify-center mb-12 ml-3 mr-3 overflow-y-auto"
+          style="max-height:20rem"
+        >
 
-          <EmptyPanel
+          <WarningPanel
             class="mt-8 pt-10"
             :message="$vuetify.lang.t('$vuetify.NENHUM_CIRCUITO_SELECIONADO')"
             v-show="!showSuccess && itemList.length == 0 && actionName != 'NOVO_CIRCUITO'"
           >
-          </EmptyPanel>
+          </WarningPanel>
+
+          <WarningPanel
+            class="mt-8 pt-10"
+            :message="$vuetify.lang.t('$vuetify.REMANEJAR_APENAS_UM')"
+            v-show="!showSuccess && itemList.length > 1 && actionName == 'REMANEJAR'"
+            icon="mdi-alert-circle"
+          >
+          </WarningPanel>
 
           <SuccessPanel
             v-show="showSuccess"
@@ -42,9 +57,47 @@
           </SuccessPanel>
 
           <v-col
-            class="ma-0 pa-0 mt-0"
             cols="10"
-            v-show="(itemList.length > 0 || actionName == 'NOVO_CIRCUITO') && !showSuccess"
+            class="ma-0 pa-0 mt-0"
+            v-show="canShowForm()"
+          >
+            <StationIdPanel :entity="stationId"> </StationIdPanel>
+          </v-col>
+
+          <v-col
+            cols="10"
+            class="ma-0 pa-0 mt-4"
+            v-show="canShowForm()"
+          >
+            <AddressPanel
+              :entity="shippingAddress"
+              :title="$vuetify.lang.t('$vuetify.ENDERECO_REMESSA')"
+            > </AddressPanel>
+          </v-col>
+
+          <v-col
+            cols="10"
+            class="ma-0 pa-0 mt-4"
+            v-show="canShowForm()"
+          >
+            <AddressPanel
+              :entity="installationAddress"
+              :title="$vuetify.lang.t('$vuetify.ENDERECO_INSTALACAO')"
+            > </AddressPanel>
+          </v-col>
+
+          <v-col
+            cols="10"
+            class="ma-0 pa-0 mt-4"
+            v-show="canShowForm()"
+          >
+            <ConfigurationPanel :entity="configuration"> </ConfigurationPanel>
+          </v-col>
+
+          <v-col
+            class="ma-0 pa-0 mt-7"
+            cols="10"
+            v-show="canShowForm()"
           >
             <v-row>
               <span class=" text-right subtitle-2 font-weight-bold grey--text text--lighten-1">
@@ -77,7 +130,7 @@
             @click="send(issue, entity, itemList);"
             :x-small="$vuetify.breakpoint.xs"
             :loading="showDialogLoading"
-            v-show="(itemList.length > 0 || actionName == 'NOVO_CIRCUITO') && !showSuccess"
+            v-show="canShowForm()"
           >{{$vuetify.lang.t('$vuetify.ENVIAR')}}</v-btn>
         </v-card-actions>
       </v-card>
@@ -87,13 +140,19 @@
 
 <script>
 
-import EmptyPanel from '../../components/EmptyPanel';
-import SuccessPanel from '../../components/SuccessPanel';
+import WarningPanel from '../../components/panels/WarningPanel';
+import SuccessPanel from '../../components/panels/SuccessPanel';
+import AddressPanel from '../../components/panels/AddressPanel';
+import ConfigurationPanel from '../../components/panels/ConfigurationPanel';
+import StationIdPanel from '../../components/panels/StationIdPanel';
 
 export default {
   components: {
-    EmptyPanel,
+    WarningPanel,
     SuccessPanel,
+    AddressPanel,
+    ConfigurationPanel,
+    StationIdPanel
   },
   props: {
     title: String,
@@ -107,12 +166,25 @@ export default {
     itemList: Array
   },
   methods: {
+    canShowForm () {
+      return ((this.itemList.length > 0 && this.actionName != 'REMANEJAR') ||
+        this.actionName == 'NOVO_CIRCUITO' ||
+        (this.itemList.length == 1 && this.actionName == 'REMANEJAR')) && !this.showSuccess
+    },
     cleanFields () {
       this.issue.observation = '';
       this.issue.reason = undefined;
+      this.shippingAddress = {}
+      this.installationAddress = {}
+      this.configuration = {}
+      this.stationId = {}
     }
   },
   data: () => ({
+    stationId: {},
+    configuration: {},
+    shippingAddress: {},
+    installationAddress: {},
     issue: { reason: undefined, observation: '' },
     entity: {}
   })

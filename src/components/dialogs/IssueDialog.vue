@@ -106,7 +106,7 @@
 
 <script>
 
-import SuccessPanel from '../../components/SuccessPanel';
+import SuccessPanel from '../../components/panels/SuccessPanel';
 
 export default {
   components: {
