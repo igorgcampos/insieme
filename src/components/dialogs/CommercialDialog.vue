@@ -69,6 +69,14 @@
             class="ma-0 pa-0 mt-4"
             v-show="canShowForm()"
           >
+            <TaxDataPanel :entity="taxData"> </TaxDataPanel>
+          </v-col>
+
+          <v-col
+            cols="10"
+            class="ma-0 pa-0 mt-4"
+            v-show="canShowForm()"
+          >
             <AddressPanel
               :entity="shippingAddress"
               :title="$vuetify.lang.t('$vuetify.ENDERECO_REMESSA')"
@@ -145,6 +153,7 @@ import SuccessPanel from '../../components/panels/SuccessPanel';
 import AddressPanel from '../../components/panels/AddressPanel';
 import ConfigurationPanel from '../../components/panels/ConfigurationPanel';
 import StationIdPanel from '../../components/panels/StationIdPanel';
+import TaxDataPanel from '../../components/panels/TaxDataPanel';
 
 export default {
   components: {
@@ -152,7 +161,8 @@ export default {
     SuccessPanel,
     AddressPanel,
     ConfigurationPanel,
-    StationIdPanel
+    StationIdPanel,
+    TaxDataPanel
   },
   props: {
     title: String,
@@ -181,6 +191,7 @@ export default {
     }
   },
   data: () => ({
+    taxData: {},
     stationId: {},
     configuration: {},
     shippingAddress: {},

@@ -265,6 +265,10 @@ export default {
     ENDERECO_GERENCIA: 'Endereço de gerência',
     IDENTIFICACAO_ESTACAO: 'Identificação da estação',
     VELOCIDADE: 'Velocidade',
-    ANTENA: 'Antena'
+    ANTENA: 'Antena',
+    DADOS_FISCAIS: 'Dados fiscais',
+    RAZAO_SOCIAL: 'Razão social',
+    NOME_FANTASIA: 'Nome fantasia',
+    INSCRICAO_ESTADUAL: 'Inscrição estadual'
 
 }

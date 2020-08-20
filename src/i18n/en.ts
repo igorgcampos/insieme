@@ -266,5 +266,9 @@ export default {
     ENDERECO_GERENCIA: 'Management address',
     IDENTIFICACAO_ESTACAO: 'Station identification',
     VELOCIDADE: 'Speed',
-    ANTENA: 'Antenna'
+    ANTENA: 'Antenna',
+    DADOS_FISCAIS: 'Tax data',
+    RAZAO_SOCIAL: 'Company name',
+    NOME_FANTASIA: 'Invented name',
+    INSCRICAO_ESTADUAL: 'State registration'
 }
