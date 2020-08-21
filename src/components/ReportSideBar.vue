@@ -237,10 +237,7 @@ export default {
     this.issueStyle.width = this.$vuetify.breakpoint.xs ? '20rem' : '29rem';
 
     this.$root.$on('report', () => { this.showReport = true; })
-    this.$root.$on('setTop', () => {
-      this.top = window.scrollY;
-      console.log(this.top)
-    })
+    this.$root.$on('setTop', () => { this.top = window.scrollY; })
 
     this.$root.$on('circuit-data', (circuitData) => {
 
