@@ -31,7 +31,6 @@
         cols="3"
         :label="$vuetify.lang.t('$vuetify.CEP')"
         :value="entity.cep"
-        mask="'#####-###'"
       ></LabelTextField>
       <LabelTextField
         cols="4"

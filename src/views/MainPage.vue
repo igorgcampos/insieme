@@ -4,6 +4,7 @@
     <MainToolBar style="z-index:1001;"></MainToolBar>
     <v-content>
       <v-container
+        v-scroll="setTop"
         fluid
         fill-height
       >
@@ -57,6 +58,9 @@ export default {
       })
   },
   methods: {
+    setTop () {
+      this.$root.$emit('setTop');
+    }
   }
 };
 </script>

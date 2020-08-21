@@ -17,7 +17,6 @@
         single-line
         solo
         max-width="200"
-        :v-mask="mask"
       ></v-text-field>
     </v-row>
   </v-col>
@@ -29,7 +28,6 @@ export default {
     label: String,
     value: String,
     cols: String,
-    mask: String,
   }
 };
 </script>

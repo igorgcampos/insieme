@@ -13,16 +13,31 @@
         :value="entity.designacao_cliente"
       ></LabelTextField>
       <LabelTextField
+        v-if="actionName == 'REMANEJAR'"
+        cols="5"
+        :label="$vuetify.lang.t('$vuetify.DESIGNACAO_TPZ')"
+        :value="entity.designacao_telespazio"
+      ></LabelTextField>
+      <LabelTextField
+        v-if="actionName == 'REMANEJAR'"
+        cols="5"
+        :label="$vuetify.lang.t('$vuetify.TIPO_REMANEJAMENTO')"
+        :value="entity.tipo_remanejamento"
+      ></LabelTextField>
+      <LabelTextField
+        v-if="actionName == 'NOVO_CIRCUITO'"
         cols="5"
         :label="$vuetify.lang.t('$vuetify.VELOCIDADE')"
         :value="entity.velocidade"
       ></LabelTextField>
       <LabelTextField
+        v-if="actionName == 'NOVO_CIRCUITO'"
         cols="5"
         :label="$vuetify.lang.t('$vuetify.ANTENA')"
         :value="entity.antena"
       ></LabelTextField>
       <LabelTextField
+        v-if="actionName == 'NOVO_CIRCUITO'"
         cols="5"
         label="BUC"
         :value="entity.buc"
@@ -41,6 +56,7 @@ export default {
   },
   props: {
     entity: Object,
+    actionName: String,
   }
 };
 </script>

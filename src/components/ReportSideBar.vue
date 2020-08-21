@@ -1,17 +1,18 @@
 <template>
 
   <v-navigation-drawer
-    :absolute="show"
-    :fixed="!show"
+    :absolute="showReport"
+    :fixed="!showReport"
     temporary
     right
     dark
-    v-model="show"
+    v-model="showReport"
     style="width:33rem; z-index:10000;"
+    :style="{top:top+'px'}"
   >
 
     <div
-      style="background-color: #E53935; position:sticky; top: 0; z-index:1000;"
+      style="background-color: #E53935; position:sticky; z-index:1000;"
       dark
     >
       <v-list-item
@@ -25,7 +26,7 @@
         <v-btn
           icon
           color="white"
-          @click="show = false; $showChatButton();"
+          @click="showReport = false; $showChatButton();"
         >
           <v-icon>mdi-close-circle</v-icon>
         </v-btn>
@@ -91,8 +92,9 @@ export default {
   },
   data () {
     return {
+      top: 0,
       size: 120,
-      show: null,
+      showReport: false,
       circuitDataOp: undefined,
       circuitDataLog: undefined,
       circuitDataRede: undefined,
@@ -219,8 +221,8 @@ export default {
     }
   },
   watch: {
-    show: function () {
-      if (!this.show) {
+    showReport: function () {
+      if (!this.showReport) {
         this.$showChatButton();
       }
     }
@@ -234,7 +236,11 @@ export default {
     this.invoiceStyle.width = this.$vuetify.breakpoint.xs ? '15rem' : '29rem';
     this.issueStyle.width = this.$vuetify.breakpoint.xs ? '20rem' : '29rem';
 
-    this.$root.$on('report', () => this.show = !this.show)
+    this.$root.$on('report', () => { this.showReport = true; })
+    this.$root.$on('setTop', () => {
+      this.top = window.scrollY;
+      console.log(this.top)
+    })
 
     this.$root.$on('circuit-data', (circuitData) => {
 

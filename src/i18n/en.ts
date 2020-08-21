@@ -270,5 +270,6 @@ export default {
     DADOS_FISCAIS: 'Tax data',
     RAZAO_SOCIAL: 'Company name',
     NOME_FANTASIA: 'Invented name',
-    INSCRICAO_ESTADUAL: 'State registration'
+    INSCRICAO_ESTADUAL: 'State registration',
+    TIPO_REMANEJAMENTO: 'Relocation type'
 }

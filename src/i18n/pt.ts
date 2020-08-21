@@ -269,6 +269,7 @@ export default {
     DADOS_FISCAIS: 'Dados fiscais',
     RAZAO_SOCIAL: 'Razão social',
     NOME_FANTASIA: 'Nome fantasia',
-    INSCRICAO_ESTADUAL: 'Inscrição estadual'
+    INSCRICAO_ESTADUAL: 'Inscrição estadual',
+    TIPO_REMANEJAMENTO: 'Tipo de remanejamento'
 
 }
