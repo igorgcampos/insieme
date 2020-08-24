@@ -68,7 +68,7 @@
       <span>{{$vuetify.lang.t('$vuetify.FATURAMENTO')}}</span>
     </v-tooltip>
 
-    <v-tooltip
+    <!--<v-tooltip
       bottom
       v-if="!$vuetify.breakpoint.xs && !$vuetify.breakpoint.sm"
     >
@@ -85,7 +85,7 @@
         </v-chip>
       </template>
       <span>{{$vuetify.lang.t('$vuetify.COMERCIAL')}}</span>
-    </v-tooltip>
+    </v-tooltip>-->
 
     <v-tooltip
       bottom
@@ -232,12 +232,12 @@
           <v-list-item-title>{{$vuetify.lang.t('$vuetify.FATURAMENTO')}}</v-list-item-title>
         </v-list-item>
 
-        <v-list-item
+        <!--<v-list-item
           v-show="canShowShortcut()"
           @click="goTo('commercial')"
         >
           <v-list-item-title>{{$vuetify.lang.t('$vuetify.COMERCIAL')}}</v-list-item-title>
-        </v-list-item>
+        </v-list-item>-->
 
         <v-list-item
           v-show="canShowShortcut()"
