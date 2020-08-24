@@ -31,10 +31,10 @@
           v-if="$hasProfile('Administrador') || $hasProfile('Cliente') || $hasProfile('Financeiro')"
           :contract="selectedContract"
         ></InvoicesPage>
-        <!--<CommercialPage
+        <CommercialPage
           v-if="$hasProfile('Administrador') || $hasProfile('Cliente') || $hasProfile('Comercial')"
           :contract="selectedContract"
-        ></CommercialPage>-->
+        ></CommercialPage>
         <IssuesPage :contract="selectedContract"></IssuesPage>
       </v-col>
     </v-container>
@@ -46,14 +46,14 @@
 import CircuitsPage from './CircuitsPage';
 import InvoicesPage from './InvoicesPage';
 import IssuesPage from './IssuesPage';
-//import CommercialPage from './CommercialPage';
+import CommercialPage from './CommercialPage';
 
 export default {
   components: {
     CircuitsPage,
     InvoicesPage,
     IssuesPage,
-    // CommercialPage,
+    CommercialPage,
   },
   data: () => ({
     show: false,
