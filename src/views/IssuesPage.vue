@@ -438,7 +438,7 @@ export default {
   methods: {
     searchEntities (text, page) {
 
-      if (this.entity.type == 'circuits') {
+      if (this.entity.type == 'circuit') {
         this.searchCircuits(text, page)
       } else {
         this.searchInvoices(text, page)
