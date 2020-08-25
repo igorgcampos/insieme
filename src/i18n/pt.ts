@@ -248,7 +248,6 @@ export default {
     REMANEJAR_DESCRICAO: 'Pedir remanejamento dos circuitos selecionados',
     PEDIDO_ENVIADO: 'Pedido enviado com sucesso! Entraremos em contato com você em breve.',
     STATUS_REDE: 'Status de rede',
-    REMANEJAR_APENAS_UM: 'Para remanejar selecione apenas um circuito por vez',
     LOGRADOURO: 'Logradouro',
     BAIRRO: 'Bairro',
     CIDADE: 'Cidade',

@@ -249,7 +249,6 @@ export default {
     REMANEJAR_DESCRICAO: 'Request the relocation of the selected circuits',
     PEDIDO_ENVIADO: 'Order sent successfully! We will contact you soon.',
     STATUS_REDE: 'Network status',
-    REMANEJAR_APENAS_UM: 'To relocate, select one circuit at a time',
     LOGRADOURO: 'Address',
     BAIRRO: 'Neighborhood',
     CIDADE: 'City',

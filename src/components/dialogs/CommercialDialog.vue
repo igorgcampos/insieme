@@ -37,14 +37,6 @@
         >
         </WarningPanel>
 
-        <WarningPanel
-          class="mt-8 pt-10"
-          :message="$vuetify.lang.t('$vuetify.REMANEJAR_APENAS_UM')"
-          v-show="!showSuccess && itemList.length > 1 && actionName == 'REMANEJAR'"
-          icon="mdi-alert-circle"
-        >
-        </WarningPanel>
-
         <SuccessPanel
           v-show="showSuccess"
           :title="$vuetify.lang.t('$vuetify.PEDIDO_ENVIADO')"
@@ -52,56 +44,6 @@
           class="mb-n3"
         >
         </SuccessPanel>
-
-        <v-col
-          cols="10"
-          class="ma-0 pa-0 mt-0"
-          v-show="canShowForm() && (actionName != 'ATIVAR' && actionName != 'CANCELAR_DESATIVACAO'
-            && actionName != 'DESATIVAR')"
-        >
-          <StationIdPanel
-            :entity="stationId"
-            :actionName="actionName"
-          > </StationIdPanel>
-        </v-col>
-
-        <v-col
-          cols="10"
-          class="ma-0 pa-0 mt-4"
-          v-show="canShowForm() && actionName == 'NOVO_CIRCUITO'"
-        >
-          <TaxDataPanel :entity="taxData"> </TaxDataPanel>
-        </v-col>
-
-        <v-col
-          cols="10"
-          class="ma-0 pa-0 mt-4"
-          v-show="canShowForm() && (actionName != 'ATIVAR' && actionName != 'CANCELAR_DESATIVACAO')"
-        >
-          <AddressPanel
-            :entity="shippingAddress"
-            :title="$vuetify.lang.t('$vuetify.ENDERECO_REMESSA')"
-          > </AddressPanel>
-        </v-col>
-
-        <v-col
-          cols="10"
-          class="ma-0 pa-0 mt-4"
-          v-show="canShowForm() && (actionName != 'ATIVAR' && actionName != 'CANCELAR_DESATIVACAO')"
-        >
-          <AddressPanel
-            :entity="installationAddress"
-            :title="$vuetify.lang.t('$vuetify.ENDERECO_INSTALACAO')"
-          > </AddressPanel>
-        </v-col>
-
-        <v-col
-          cols="10"
-          class="ma-0 pa-0 mt-4"
-          v-show="canShowForm() && actionName == 'NOVO_CIRCUITO'"
-        >
-          <ConfigurationPanel :entity="configuration"> </ConfigurationPanel>
-        </v-col>
 
         <v-col
           class="ma-0 pa-0 mt-7"
@@ -151,19 +93,11 @@
 
 import WarningPanel from '../../components/panels/WarningPanel';
 import SuccessPanel from '../../components/panels/SuccessPanel';
-import AddressPanel from '../../components/panels/AddressPanel';
-import ConfigurationPanel from '../../components/panels/ConfigurationPanel';
-import StationIdPanel from '../../components/panels/StationIdPanel';
-import TaxDataPanel from '../../components/panels/TaxDataPanel';
 
 export default {
   components: {
     WarningPanel,
     SuccessPanel,
-    AddressPanel,
-    ConfigurationPanel,
-    StationIdPanel,
-    TaxDataPanel
   },
   props: {
     title: String,

@@ -12,7 +12,7 @@
   >
 
     <div
-      style="background-color: #E53935; position:sticky; z-index:1000;"
+      style="background-color: #E53935; position:sticky; z-index:1000; top:0;"
       dark
     >
       <v-list-item
