@@ -142,7 +142,7 @@
                 </v-list-item>
 
                 <v-list-item @click="showBatchIssueDialog('invoice')">
-                  <v-list-item-title>{{$vuetify.lang.t('$vuetify.NOTAS_FISCAIS')}}</v-list-item-title>
+                  <v-list-item-title>{{$vuetify.lang.t('$vuetify.FATURAMENTO')}}</v-list-item-title>
                 </v-list-item>
               </v-list>
 
