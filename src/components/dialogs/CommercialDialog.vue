@@ -3,7 +3,7 @@
   <v-dialog
     v-model="showDialog"
     persistent
-    max-width="500"
+    :max-width="entityList == 0 && actionName != 'NOVO_CIRCUITO'?400: 700"
     class="overflow-y-hidden"
   >
     <v-card>
@@ -23,7 +23,7 @@
       <v-card-text
         v-if="canShowForm() && this.actionName != 'NOVO_CIRCUITO'"
         class="caption mt-n3 font-weight-bold grey--text"
-      >{{'Circuitos selecionados: '+itemList.length}}</v-card-text>
+      >{{'Circuitos selecionados: '+entityList.length}}</v-card-text>
 
       <v-row
         class="ma-0 d-flex justify-center mb-12 ml-3 mr-3 overflow-y-auto"
@@ -33,7 +33,7 @@
         <WarningPanel
           class="mt-8 pt-10"
           :message="$vuetify.lang.t('$vuetify.NENHUM_CIRCUITO_SELECIONADO')"
-          v-show="!showSuccess && itemList.length == 0 && actionName != 'NOVO_CIRCUITO'"
+          v-show="!showSuccess && entityList.length == 0 && actionName != 'NOVO_CIRCUITO'"
         >
         </WarningPanel>
 
@@ -45,27 +45,38 @@
         >
         </SuccessPanel>
 
-        <v-col
-          class="ma-0 pa-0 mt-7"
-          cols="10"
-          v-show="canShowForm()"
+        <v-row v-if="actionName=='NOVO_CIRCUITO'">
+          <v-btn
+            color="primary"
+            dark
+            class="mb-2 ml-7"
+            x-small
+            @click="newLine()"
+          >Nova linha</v-btn>
+        </v-row>
+
+        <v-data-table
+          v-if="canShowForm()"
+          :headers="headers"
+          :items="entityList"
+          dense
+          fixed-header
+          :height="actionName!='NOVO_CIRCUITO'?260:220"
+          class="ml-4 mr-4"
         >
-          <v-row>
-            <span class=" text-right subtitle-2 font-weight-bold grey--text text--lighten-1">
-              {{$vuetify.lang.t('$vuetify.OBSERVACAO')}}:</span>
-          </v-row>
-          <v-row>
-            <v-textarea
-              solo
-              height="100"
-              :no-resize="true"
-              rows="5"
-              v-model="issue.observation"
-            ></v-textarea>
-          </v-row>
-        </v-col>
+          <template v-slot:item.actions="{ item }">
+            <v-icon
+              small
+              @click="deleteItem(item)"
+            >
+              mdi-delete
+            </v-icon>
+          </template>
+        </v-data-table>
       </v-row>
-      <v-divider class="mt-n6"></v-divider>
+
+      <v-divider class="mt-n12"></v-divider>
+
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn
@@ -73,12 +84,12 @@
           text
           @click="close(); cleanFields()"
           :x-small="$vuetify.breakpoint.xs"
-        >{{$vuetify.lang.t('$vuetify.FECHAR')}}</v-btn>
+        >{{$vuetify.lang.t('$vuetify.CANCELAR')}}</v-btn>
 
         <v-btn
           color="primary"
           text
-          @click="send(issue, entity, itemList);"
+          @click="send(issue, entity, entityList);"
           :x-small="$vuetify.breakpoint.xs"
           :loading="showDialogLoading"
           v-show="canShowForm()"
@@ -111,10 +122,15 @@ export default {
     itemList: Array
   },
   methods: {
+    newLine () {
+      this.entityList.push({});
+    },
+    deleteItem (item) {
+      this.entityList.splice(this.entityList.indexOf(item), 1)
+    },
     canShowForm () {
-      return ((this.itemList.length > 0 && this.actionName != 'REMANEJAR') ||
-        this.actionName == 'NOVO_CIRCUITO' ||
-        (this.itemList.length == 1 && this.actionName == 'REMANEJAR')) && !this.showSuccess
+      return (this.entityList.length > 0 ||
+        this.actionName == 'NOVO_CIRCUITO') && !this.showSuccess
     },
     cleanFields () {
       this.issue.observation = '';
@@ -126,13 +142,38 @@ export default {
     }
   },
   data: () => ({
+    headers: [],
     taxData: {},
     stationId: {},
     configuration: {},
     shippingAddress: {},
     installationAddress: {},
     issue: { reason: undefined, observation: '' },
-    entity: {}
-  })
+    entity: {},
+    entityList: []
+  }),
+  watch: {
+    itemList: function () {
+      this.entityList = this.itemList.map((x) => x)
+    }
+  },
+  created: function () {
+
+    this.headers = [
+      { text: '', value: 'actions', sortable: false },
+      {
+        text: 'Designação Tpz',
+        align: 'start',
+        sortable: false,
+        value: 'nome',
+        width: 150
+      },
+      { text: 'Designação Cliente', value: 'designacaoCliente', sortable: false, width: 200 },
+      { text: 'Fat (g)', value: 'fat', sortable: false },
+      { text: 'Carbs (g)', value: 'carbs', sortable: false },
+      { text: 'Protein (g)', value: 'protein', sortable: false },
+      { text: 'Iron (%)', value: 'iron', sortable: false },
+    ];
+  }
 };
 </script>

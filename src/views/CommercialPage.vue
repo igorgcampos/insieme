@@ -322,7 +322,7 @@
       :showDialogLoading="showDialogLoading"
       :close="closeDialog"
       :send="sendIssue"
-      :itemList="selectedCheckList"
+      :itemList="actionName != 'NOVO_CIRCUITO'?selectedCheckList:[]"
       :title="title"
       :subtitle="subtitle"
       :actionName="actionName"
@@ -382,8 +382,11 @@ export default {
       this.showCommercialDialog(entity.actionName)
     },
     closeDialog () {
+
       this.showDialog = false;
       this.showDialogLoading = false;
+
+      this.selectedCheckList = this.selectedCheckList.filter(value => Object.keys(value).length !== 0)
 
       setTimeout(() => {
         this.showSuccess = false;

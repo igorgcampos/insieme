@@ -240,7 +240,7 @@ export default {
     DESATIVAR_DESCRICAO: 'Pedir a desativação dos circuitos selecionados',
     CANCELAR_DESCRICAO: 'Pedir o cancelamento dos circuitos selecionados',
     NOVO_CIRCUITO: 'Novo circuito',
-    NOVO_CIRCUITO_DESCRICAO: 'Pedir um novo circuito',
+    NOVO_CIRCUITO_DESCRICAO: 'Pedir por novos circuitos',
     CANCELAR_DESATIVACAO: 'Cancelar desativação',
     CANCELAR_DESATIVACAO_DESCRICAO: 'Pedir o cancelamento da desativação dos circuitos selecionados',
     FATURAMENTO: 'Faturamento',

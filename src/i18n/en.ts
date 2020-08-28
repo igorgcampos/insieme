@@ -241,7 +241,7 @@ export default {
     DESATIVAR_DESCRICAO: 'Deactivate the selected circuits',
     CANCELAR_DESCRICAO: 'Cancel the selected circuits',
     NOVO_CIRCUITO: 'New circuit',
-    NOVO_CIRCUITO_DESCRICAO: 'Ask for new circuit',
+    NOVO_CIRCUITO_DESCRICAO: 'Ask for new circuits',
     CANCELAR_DESATIVACAO: 'Cancel deactivation',
     CANCELAR_DESATIVACAO_DESCRICAO: 'Cancel a request to deactivate the selected circuits',
     FATURAMENTO: 'Billing',
