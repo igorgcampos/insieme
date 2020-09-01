@@ -270,5 +270,6 @@ export default {
     RAZAO_SOCIAL: 'Company name',
     NOME_FANTASIA: 'Invented name',
     INSCRICAO_ESTADUAL: 'State registration',
-    TIPO_REMANEJAMENTO: 'Relocation type'
+    TIPO_REMANEJAMENTO: 'Relocation type',
+    VERSAO: 'Version: ',
 }

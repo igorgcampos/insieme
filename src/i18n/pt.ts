@@ -270,6 +270,7 @@ export default {
     NOME_FANTASIA: 'Nome fantasia',
     INSCRICAO_ESTADUAL: 'Inscrição estadual',
     TIPO_REMANEJAMENTO: 'Tipo de remanejamento',
+    VERSAO: 'Versão: ',
 
     ENDERECO_FISCAL: 'Endereço fiscal',
     BAIRRO_FISCAL: 'Bairro fiscal',

@@ -1,7 +1,12 @@
 import Vuetify from '../plugins/vuetify'
 const utilService = {}
+const insiemeVersion = process.env.VUE_APP_VERSION
 
 utilService.install = function (Vue) {
+
+    Vue.prototype.$getVersion = () => {
+        return insiemeVersion;
+    }
 
     Vue.prototype.$formatDate = (date) => {
 

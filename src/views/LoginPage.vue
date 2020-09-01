@@ -16,19 +16,25 @@
               src="../assets/satelites.jpg"
               gradient="324deg, rgba(2,0,36,1) 0%, rgba(245,3,3,1) 0%, rgba(233,13,16,0.8547794117647058) 100%"
             >
-              <div class="text-center ma-3 mt-12 pt-12">
-                <div class="pa-12">
-                  <v-img
-                    src="../assets/telespazio-logo.png"
-                    max-height="200"
-                    max-width="300"
-                    aspect-ratio="5.9"
-                    class="mx-auto"
-                  ></v-img>
+              <div class="horizontal-center">
+                <div class="text-center vertical-center ml-3 mr-3 mt-8">
+                  <div class="pa-12">
+                    <v-img
+                      src="../assets/telespazio-logo.png"
+                      max-height="200"
+                      max-width="300"
+                      aspect-ratio="5.9"
+                      class="mx-auto"
+                    ></v-img>
+                  </div>
+                  <div class="display-1 text-xs-center font-weight-black mb-3 white--text">
+                    {{$vuetify.lang.t('$vuetify.BEM_VINDO')}}
+                  </div>
+                  <span class="subheading white--text">{{$vuetify.lang.t('$vuetify.MENSAGEM_INICIAL')}}</span>
+                  <div style="margin-top:45%;">
+                    <span class="subtitle-2 white--text">{{$vuetify.lang.t('$vuetify.VERSAO')+ $getVersion()}}</span>
+                  </div>
                 </div>
-                <div class="display-1 text-xs-center font-weight-black mb-3 white--text">
-                  {{$vuetify.lang.t('$vuetify.BEM_VINDO')}}</div>
-                <span class="subheading white--text">{{$vuetify.lang.t('$vuetify.MENSAGEM_INICIAL')}}</span>
               </div>
             </v-img>
 
@@ -36,20 +42,18 @@
         </v-flex>
 
         <v-flex
-          class="active"
+          class="active horizontal-center"
           fill-height
         >
           <v-layout
             column
             align-center
-            mt-12
             full-width
-            pa-8
+            class="vertical-center"
           >
             <v-flex
               xs12
               mb-3
-              mt-10
             >
               <div class="login-wrapper text-xs-center">
                 <div class="display-2 font-weight-black red--text text--darken-1">Insieme</div>
@@ -200,3 +204,18 @@ export default {
   }
 }
 </script>
+<style scoped>
+.vertical-center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.horizontal-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+</style>
