@@ -269,6 +269,42 @@ export default {
     RAZAO_SOCIAL: 'Razão social',
     NOME_FANTASIA: 'Nome fantasia',
     INSCRICAO_ESTADUAL: 'Inscrição estadual',
-    TIPO_REMANEJAMENTO: 'Tipo de remanejamento'
+    TIPO_REMANEJAMENTO: 'Tipo de remanejamento',
+
+    ENDERECO_FISCAL: 'Endereço fiscal',
+    BAIRRO_FISCAL: 'Bairro fiscal',
+    CIDADE_FISCAL: 'Cidade fiscal',
+    UF_FISCAL: 'UF fiscal',
+    CEP_FISCAL: 'Cep fiscal',
+
+    BAIRRO_INSTALACAO: 'Bairro da instalação',
+    CIDADE_INSTALACAO: 'Cidade da instalação',
+    UF_INSTALACAO: 'UF da instalação',
+    CEP_INSTALACAO: 'Cep da instalação',
+    CONTATO_INSTALACAO: 'Contato do cliente',
+    TELEFONE_INSTALACAO: 'Telefone do cliente',
+
+    BAIRRO_REMESSA: 'Bairro de remessa',
+    CIDADE_REMESSA: 'Cidade de remessa',
+    UF_REMESSA: 'UF de remessa',
+    CEP_REMESSA: 'Cep de remessa',
+    CONTATO_REMESSA: 'Contato de remessa',
+    TELEFONE_REMESSA: 'Telefone de remessa',
+
+    ENDERECO_ORIGEM: 'Endereço de origem',
+    BAIRRO_ORIGEM: 'Bairro de origem',
+    CIDADE_ORIGEM: 'Cidade de origem',
+    UF_ORIGEM: 'UF de origem',
+    CEP_ORIGEM: 'Cep de origem',
+    CONTATO_ORIGEM: 'Contato da origem',
+    TELEFONE_ORIGEM: 'Telefone da origem',
+
+    ENDERECO_DESTINO: 'Endereço de destino',
+    BAIRRO_DESTINO: 'Bairro de destino',
+    CIDADE_DESTINO: 'Cidade de destino',
+    UF_DESTINO: 'UF de destino',
+    CEP_DESTINO: 'Cep de destino',
+    CONTATO_DESTINO: 'Contato do destino',
+    TELEFONE_DESTINO: 'Telefone do destino',
 
 }

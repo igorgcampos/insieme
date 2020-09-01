@@ -26,7 +26,7 @@
       >{{'Circuitos selecionados: '+entityList.length}}</v-card-text>
 
       <v-row
-        class="ma-0 d-flex justify-center mb-12 ml-3 mr-3 overflow-y-auto"
+        class="ma-0 d-flex justify-center mb-12 ml-3 mr-3 overflow-y-auto overflow-x-hidden"
         style="max-height:20rem"
       >
 
@@ -63,6 +63,7 @@
           fixed-header
           :height="actionName!='NOVO_CIRCUITO'?260:220"
           class="ml-4 mr-4"
+          max-width="600"
         >
           <template v-slot:item.actions="{ item }">
             <v-icon
@@ -157,23 +158,88 @@ export default {
       this.entityList = this.itemList.map((x) => x)
     }
   },
-  created: function () {
+  beforeUpdate: function () {
 
     this.headers = [
-      { text: '', value: 'actions', sortable: false },
-      {
-        text: 'Designação Tpz',
-        align: 'start',
-        sortable: false,
-        value: 'nome',
-        width: 150
-      },
-      { text: 'Designação Cliente', value: 'designacaoCliente', sortable: false, width: 200 },
-      { text: 'Fat (g)', value: 'fat', sortable: false },
-      { text: 'Carbs (g)', value: 'carbs', sortable: false },
-      { text: 'Protein (g)', value: 'protein', sortable: false },
-      { text: 'Iron (%)', value: 'iron', sortable: false },
+      { text: '', align: 'start', value: 'actions', sortable: false }
     ];
+
+    if (this.actionName == 'DESATIVAR' || this.actionName == 'REMANEJAR' || this.actionName == 'ATIVAR' || this.actionName == 'CANCELAR_DESATIVACAO')
+      this.headers.push({
+        text: this.$vuetify.lang.t('$vuetify.DESIGNACAO_TPZ'), align: 'start', sortable: false, value: 'nome', width: 200
+      })
+
+    if (this.actionName == 'NOVO_CIRCUITO' || this.actionName == 'DESATIVAR' || this.actionName == 'ATIVAR' || this.actionName == 'CANCELAR_DESATIVACAO')
+      this.headers.push({ text: this.$vuetify.lang.t('$vuetify.DESIGNACAO_CLIENTE'), value: 'designacaoCliente', sortable: false, width: 200 })
+
+    if (this.actionName == 'NOVO_CIRCUITO') {
+      this.headers.push({ text: this.$vuetify.lang.t('$vuetify.RAZAO_SOCIAL'), value: 'razaoSocial', sortable: false, width: 200 })
+      this.headers.push({ text: this.$vuetify.lang.t('$vuetify.NOME_FANTASIA'), value: 'nomeFantasia', sortable: false, width: 200 })
+      this.headers.push({ text: 'CNPJ', value: 'cnpj', sortable: false, width: 200 })
+      this.headers.push({ text: this.$vuetify.lang.t('$vuetify.INSCRICAO_ESTADUAL'), value: 'inscricaoEstadual', sortable: false, width: 200 })
+      this.headers.push({ text: this.$vuetify.lang.t('$vuetify.ENDERECO_FISCAL'), value: 'endereco_fiscal', sortable: false, width: 200 })
+      this.headers.push({ text: this.$vuetify.lang.t('$vuetify.BAIRRO_FISCAL'), value: 'bairro_fiscal', sortable: false, width: 200 })
+      this.headers.push({ text: this.$vuetify.lang.t('$vuetify.CIDADE_FISCAL'), value: 'cidade_fiscal', sortable: false, width: 200 })
+      this.headers.push({ text: this.$vuetify.lang.t('$vuetify.UF_FISCAL'), value: 'uf_fiscal', sortable: false, width: 200 })
+      this.headers.push({ text: this.$vuetify.lang.t('$vuetify.CEP_FISCAL'), value: 'cep_fiscal', sortable: false, width: 200 })
+
+      this.headers.push({ text: this.$vuetify.lang.t('$vuetify.ENDERECO_REMESSA'), value: 'endereco_remessa', sortable: false, width: 200 })
+      this.headers.push({ text: this.$vuetify.lang.t('$vuetify.BAIRRO_REMESSA'), value: 'bairro_remessa', sortable: false, width: 200 })
+      this.headers.push({ text: this.$vuetify.lang.t('$vuetify.CIDADE_REMESSA'), value: 'cidade_remessa', sortable: false, width: 200 })
+      this.headers.push({ text: this.$vuetify.lang.t('$vuetify.UF_REMESSA'), value: 'uf_remessa', sortable: false, width: 200 })
+      this.headers.push({ text: this.$vuetify.lang.t('$vuetify.CEP_REMESSA'), value: 'cep_remessa', sortable: false, width: 200 })
+      this.headers.push({ text: this.$vuetify.lang.t('$vuetify.CONTATO_REMESSA'), value: 'contato_remessa', sortable: false, width: 200 })
+      this.headers.push({ text: this.$vuetify.lang.t('$vuetify.TELEFONE_REMESSA'), value: 'telefone_remessa', sortable: false, width: 200 })
+
+      this.headers.push({ text: this.$vuetify.lang.t('$vuetify.ENDERECO_INSTALACAO'), value: 'endereco_instalacao', sortable: false, width: 200 })
+      this.headers.push({ text: this.$vuetify.lang.t('$vuetify.BAIRRO_INSTALACAO'), value: 'bairro_instalacao', sortable: false, width: 200 })
+      this.headers.push({ text: this.$vuetify.lang.t('$vuetify.CIDADE_INSTALACAO'), value: 'cidade_instalacao', sortable: false, width: 200 })
+      this.headers.push({ text: this.$vuetify.lang.t('$vuetify.UF_INSTALACAO'), value: 'uf_instalacao', sortable: false, width: 200 })
+      this.headers.push({ text: this.$vuetify.lang.t('$vuetify.CEP_INSTALACAO'), value: 'cep_instalacao', sortable: false, width: 200 })
+      this.headers.push({ text: this.$vuetify.lang.t('$vuetify.CONTATO_INSTALACAO'), value: 'contato_instalacao', sortable: false, width: 200 })
+      this.headers.push({ text: this.$vuetify.lang.t('$vuetify.TELEFONE_INSTALACAO'), value: 'telefone_instalacao', sortable: false, width: 200 })
+
+      this.headers.push({ text: this.$vuetify.lang.t('$vuetify.ENDERECO_GERENCIA'), value: 'endereco_gerencia', sortable: false, width: 200 })
+      this.headers.push({ text: 'VLAN', value: 'vlan', sortable: false, width: 200 })
+      this.headers.push({ text: this.$vuetify.lang.t('$vuetify.INTERCONEXAO_TPZ'), value: 'interconexao_tpx', sortable: false, width: 200 })
+      this.headers.push({ text: 'WAN CPE REDE', value: 'wan_rede', sortable: false, width: 200 })
+      this.headers.push({ text: this.$vuetify.lang.t('$vuetify.ENDERECO_LAN'), value: 'endereco_lan', sortable: false, width: 200 })
+      this.headers.push({ text: 'WAN CPE HOST', value: 'wan_host', sortable: false, width: 200 })
+      this.headers.push({ text: 'Loopback CPE', value: 'loopback', sortable: false, width: 200 })
+      this.headers.push({ text: this.$vuetify.lang.t('$vuetify.ROTAS_SUMARIZADAS'), value: 'rotas_sumarizadas', sortable: false, width: 200 })
+    }
+
+    if (this.actionName == 'DESATIVAR') {
+      this.headers.push({ text: this.$vuetify.lang.t('$vuetify.ENDERECO_INSTALACAO'), value: 'endereco_instalacao', sortable: false, width: 200 })
+      this.headers.push({ text: this.$vuetify.lang.t('$vuetify.BAIRRO_INSTALACAO'), value: 'bairro_instalacao', sortable: false, width: 200 })
+      this.headers.push({ text: this.$vuetify.lang.t('$vuetify.CIDADE_INSTALACAO'), value: 'cidade_instalacao', sortable: false, width: 200 })
+      this.headers.push({ text: this.$vuetify.lang.t('$vuetify.UF_INSTALACAO'), value: 'uf_instalacao', sortable: false, width: 200 })
+      this.headers.push({ text: this.$vuetify.lang.t('$vuetify.CEP_INSTALACAO'), value: 'cep_instalacao', sortable: false, width: 200 })
+      this.headers.push({ text: this.$vuetify.lang.t('$vuetify.CONTATO_INSTALACAO'), value: 'contato_instalacao', sortable: false, width: 200 })
+      this.headers.push({ text: this.$vuetify.lang.t('$vuetify.TELEFONE_INSTALACAO'), value: 'telefone_instalacao', sortable: false, width: 200 })
+    }
+
+    if (this.actionName == 'REMANEJAR') {
+      this.headers.push({ text: this.$vuetify.lang.t('$vuetify.TIPO_REMANEJAMENTO'), value: 'tipo_remanejamento', sortable: false, width: 200 })
+
+      this.headers.push({ text: this.$vuetify.lang.t('$vuetify.ENDERECO_ORIGEM'), value: 'endereco_origem', sortable: false, width: 200 })
+      this.headers.push({ text: this.$vuetify.lang.t('$vuetify.BAIRRO_ORIGEM'), value: 'bairro_origem', sortable: false, width: 200 })
+      this.headers.push({ text: this.$vuetify.lang.t('$vuetify.CIDADE_ORIGEM'), value: 'cidade_origem', sortable: false, width: 200 })
+      this.headers.push({ text: this.$vuetify.lang.t('$vuetify.UF_ORIGEM'), value: 'uf_origem', sortable: false, width: 200 })
+      this.headers.push({ text: this.$vuetify.lang.t('$vuetify.CEP_ORIGEM'), value: 'cep_origem', sortable: false, width: 200 })
+      this.headers.push({ text: this.$vuetify.lang.t('$vuetify.CONTATO_ORIGEM'), value: 'contato_origem', sortable: false, width: 200 })
+      this.headers.push({ text: this.$vuetify.lang.t('$vuetify.TELEFONE_ORIGEM'), value: 'telefone_origem', sortable: false, width: 200 })
+
+      this.headers.push({ text: this.$vuetify.lang.t('$vuetify.ENDERECO_DESTINO'), value: 'endereco_destino', sortable: false, width: 200 })
+      this.headers.push({ text: this.$vuetify.lang.t('$vuetify.BAIRRO_DESTINO'), value: 'bairro_destino', sortable: false, width: 200 })
+      this.headers.push({ text: this.$vuetify.lang.t('$vuetify.CIDADE_DESTINO'), value: 'cidade_destino', sortable: false, width: 200 })
+      this.headers.push({ text: this.$vuetify.lang.t('$vuetify.UF_DESTINO'), value: 'uf_destino', sortable: false, width: 200 })
+      this.headers.push({ text: this.$vuetify.lang.t('$vuetify.CEP_DESTINO'), value: 'cep_destino', sortable: false, width: 200 })
+      this.headers.push({ text: this.$vuetify.lang.t('$vuetify.CONTATO_DESTINO'), value: 'contato_destino', sortable: false, width: 200 })
+      this.headers.push({ text: this.$vuetify.lang.t('$vuetify.TELEFONE_DESTINO'), value: 'telefone_destino', sortable: false, width: 200 })
+    }
+
+    this.headers.push({ text: this.$vuetify.lang.t('$vuetify.OBSERVACAO'), value: 'observacao', sortable: false, width: 200 })
   }
 };
 </script>

@@ -1022,6 +1022,8 @@ export default {
         selectedProduct = 2;
       } else if (this.product == this.products[3]) {
         selectedProduct = 3;
+      } else if (this.product == this.products[4]) {
+        selectedProduct = 4;
       }
 
       this.$get('/circuito/busca', {
@@ -1091,7 +1093,7 @@ export default {
       'Online',
       'Offline']
 
-    this.products = [this.$vuetify.lang.t('$vuetify.TODOS'), 'Gilat', 'Gilat2', 'Idirect']
+    this.products = [this.$vuetify.lang.t('$vuetify.TODOS'), 'Gilat', 'Gilat2', 'Idirect', 'Yahsat']
 
     this.$get('/circuito/status/counts',
       { contractNumber: this.$props.contract.numeroContratoTpz }).then((response) => {
