@@ -271,6 +271,7 @@ export default {
     INSCRICAO_ESTADUAL: 'Inscrição estadual',
     TIPO_REMANEJAMENTO: 'Tipo de remanejamento',
     VERSAO: 'Versão: ',
+    EDITAR: 'Editar',
 
     ENDERECO_FISCAL: 'Endereço fiscal',
     BAIRRO_FISCAL: 'Bairro fiscal',

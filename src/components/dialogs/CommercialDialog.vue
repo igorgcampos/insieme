@@ -55,25 +55,14 @@
           >Nova linha</v-btn>
         </v-row>
 
-        <v-data-table
+        <CommercialTable
           v-if="canShowForm()"
+          :actionName="actionName"
+          :entityList="entityList"
           :headers="headers"
-          :items="entityList"
-          dense
-          fixed-header
-          :height="actionName!='NOVO_CIRCUITO'?260:220"
-          class="ml-4 mr-4"
-          max-width="600"
-        >
-          <template v-slot:item.actions="{ item }">
-            <v-icon
-              small
-              @click="deleteItem(item)"
-            >
-              mdi-delete
-            </v-icon>
-          </template>
-        </v-data-table>
+          :deleteItem="deleteItem"
+        ></CommercialTable>
+
       </v-row>
 
       <v-divider class="mt-n12"></v-divider>
@@ -105,11 +94,13 @@
 
 import WarningPanel from '../../components/panels/WarningPanel';
 import SuccessPanel from '../../components/panels/SuccessPanel';
+import CommercialTable from '../../components/CommercialTable';
 
 export default {
   components: {
     WarningPanel,
     SuccessPanel,
+    CommercialTable,
   },
   props: {
     title: String,
@@ -136,22 +127,13 @@ export default {
     cleanFields () {
       this.issue.observation = '';
       this.issue.reason = undefined;
-      this.shippingAddress = {}
-      this.installationAddress = {}
-      this.configuration = {}
-      this.stationId = {}
     }
   },
   data: () => ({
-    headers: [],
-    taxData: {},
-    stationId: {},
-    configuration: {},
-    shippingAddress: {},
-    installationAddress: {},
     issue: { reason: undefined, observation: '' },
     entity: {},
-    entityList: []
+    entityList: [],
+    headers: []
   }),
   watch: {
     itemList: function () {
