@@ -412,63 +412,79 @@ export default {
       }
 
     },
-    /*convertFieldsToNames (itemList) {
+    convertFieldsToNames (itemList) {
       return itemList.map((item) => {
-        return {
-          ['Designação Tpz']: item.nome,
-          ['Designação Cliente']: item.designacaoCliente,
-          ['Razão social']: item.razaoSocial,
-          ['Nome fantasia']: item.nomeFantasia,
-          ['CNPJ']: item.cnpj,
-          ['Inscrição estadual']: item.inscricaoEstadual,
-          ['Endereço fiscal']: item.endereco_fiscal,
-          ['Bairro fiscal']: item.bairro_fiscal,
-          ['Cidade fiscal']: item.cidade_fiscal,
-          ['UF fiscal']: item.uf_fiscal,
-          ['CEP fiscal']: item.cep_fiscal,
-          ['Endereço da remessa']: item.endereco_remessa,
-          ['Bairro da remessa']: item.bairro_remessa,
-          ['Cidade da remessa']: item.cidade_remessa,
-          ['UF da remessa']: item.uf_remessa,
-          ['CEP da remessa']: item.cep_remessa,
-          ['Contato da remessa']: item.contato_remessa,
-          ['Telefone da remessa']: item.telefone_remessa,
-          ['Endereço da instalação']: item.endereco_instalacao,
-          ['Bairro da instalação']: item.bairro_instalacao,
-          ['Cidade da instalação']: item.cidade_instalacao,
-          ['UF da instalação']: item.uf_instalacao,
-          ['CEP da instalação']: item.cep_instalacao,
-          ['Contato da instalação']: item.contato_instalacao,
-          ['']: item.telefone_instalacao,
-          ['']: item.endereco_gerencia,
-          ['']: item.vlan,
-          ['']: item.interconexao_tpz,
-          ['']: item.wan_rede,
-          ['']: item.endereco_lan,
-          ['']: item.wan_host,
-          ['']: item.loopback,
-          ['']: item.rotas_sumarizadas,
 
-          ['']: item.tipo_remanejamento,
-          ['']: item.endereco_origem,
-          ['']: item.bairro_origem,
-          ['']: item.cidade_origem,
-          ['']: item.uf_origem,
-          ['']: item.cep_origem,
-          ['']: item.contato_origem,
-          ['']: item.telefone_origem,
-          ['']: item.endereco_destino,
-          ['']: item.bairro_destino,
-          ['']: item.cidade_destino,
-          ['']: item.uf_destino,
-          ['']: item.cep_destino,
-          ['']: item.contato_destino,
-          ['']: item.telefone_destino,
-          ['']: item.observacao,
+        var obj = {};
 
-        };
+        if (this.actionName == 'DESATIVAR' || this.actionName == 'REMANEJAR' || this.actionName == 'ATIVAR' || this.actionName == 'CANCELAR_DESATIVACAO')
+          obj['Designação Tpz'] = item.nome
+
+        if (this.actionName == 'NOVO_CIRCUITO' || this.actionName == 'DESATIVAR' || this.actionName == 'ATIVAR' || this.actionName == 'CANCELAR_DESATIVACAO')
+          obj['Designação Cliente'] = item.designacaoCliente
+
+        if (this.actionName == 'NOVO_CIRCUITO') {
+          obj['Razão social'] = item.razaoSocial
+          obj['Nome fantasia'] = item.nomeFantasia
+          obj['CNPJ'] = item.cnpj
+          obj['Inscrição estadual'] = item.inscricaoEstadual
+          obj['Endereço fiscal'] = item.endereco_fiscal
+          obj['Bairro fiscal'] = item.bairro_fiscal
+          obj['Cidade fiscal'] = item.cidade_fiscal
+          obj['UF fiscal'] = item.uf_fiscal
+          obj['CEP fiscal'] = item.cep_fiscal
+          obj['Endereço da remessa'] = item.endereco_remessa
+          obj['Bairro da remessa'] = item.bairro_remessa
+          obj['Cidade da remessa'] = item.cidade_remessa
+          obj['UF da remessa'] = item.uf_remessa
+          obj['CEP da remessa'] = item.cep_remessa
+          obj['Contato da remessa'] = item.contato_remessa
+          obj['Telefone da remessa'] = item.telefone_remessa
+        }
+
+        if (this.actionName == 'DESATIVAR' || this.actionName == 'NOVO_CIRCUITO') {
+          obj['Endereço da instalação'] = item.endereco_instalacao
+          obj['Bairro da instalação'] = item.bairro_instalacao
+          obj['Cidade da instalação'] = item.cidade_instalacao
+          obj['UF da instalação'] = item.uf_instalacao
+          obj['CEP da instalação'] = item.cep_instalacao
+          obj['Contato da instalação'] = item.contato_instalacao
+          obj['Telefone da instalação'] = item.telefone_instalacao
+        }
+
+        if (this.actionName == 'NOVO_CIRCUITO') {
+          obj['Endereço da gerência'] = item.endereco_gerencia
+          obj['VLAN'] = item.vlan
+          obj['Interconexão Tpz'] = item.interconexao_tpz
+          obj['WAN CPE REDE'] = item.wan_rede
+          obj['Endereço de LAN'] = item.endereco_lan
+          obj['WAN CPE HOST'] = item.wan_host
+          obj['Loopback CPE'] = item.loopback
+          obj['Rotas sumarizadas'] = item.rotas_sumarizadas
+        }
+
+        if (this.actionName == 'REMANEJAR') {
+          obj['Tipo de remanejamento'] = item.tipo_remanejamento
+          obj['Endereço de origem'] = item.endereco_origem
+          obj['Bairro de origem'] = item.bairro_origem
+          obj['Cidade de origem'] = item.cidade_origem
+          obj['UF de origem'] = item.uf_origem
+          obj['CEP de origem'] = item.cep_origem
+          obj['Contato da origem'] = item.contato_origem
+          obj['Telefone da origem'] = item.telefone_origem
+          obj['Endereço de destino'] = item.endereco_destino
+          obj['Bairro de destino'] = item.bairro_destino
+          obj['Cidade de destino'] = item.cidade_destino
+          obj['UF de destino'] = item.uf_destino
+          obj['CEP de destino'] = item.cep_destino
+          obj['Contato do destino'] = item.contato_destino
+          obj['Telefone do destino'] = item.telefone_destino
+        }
+
+        obj['Observação'] = item.observacao
+        return obj;
       })
-    },*/
+    },
     sendIssue (issue, entity, itemList) {
 
       if (itemList.length == 0) {
@@ -478,7 +494,7 @@ export default {
       this.showDialogLoading = true;
 
       this.removeTrashFields(itemList)
-      //itemList = this.convertFieldsToNames(itemList)
+      itemList = this.convertFieldsToNames(itemList)
 
       issue = {
         origem: 'CIRCUITO_LOTE_COMERCIAL',
