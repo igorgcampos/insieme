@@ -392,9 +392,93 @@ export default {
         this.showSuccess = false;
       }, 1000);
     },
+    removeTrashFields (itemList) {
+
+      for (var index in itemList) {
+        delete itemList[index]['id']
+        delete itemList[index]['numeroContratoTpz']
+        delete itemList[index]['numeroContratoSap']
+        delete itemList[index]['dataAtivacao']
+        delete itemList[index]['dataInstalacao']
+        delete itemList[index]['statusInstalacao']
+        delete itemList[index]['endereco']
+        delete itemList[index]['cidade']
+        delete itemList[index]['bairro']
+        delete itemList[index]['uf']
+        delete itemList[index]['ip']
+        delete itemList[index]['online']
+        delete itemList[index]['idPrtg']
+        delete itemList[index]['idCircuitoMon']
+      }
+
+    },
+    /*convertFieldsToNames (itemList) {
+      return itemList.map((item) => {
+        return {
+          ['Designação Tpz']: item.nome,
+          ['Designação Cliente']: item.designacaoCliente,
+          ['Razão social']: item.razaoSocial,
+          ['Nome fantasia']: item.nomeFantasia,
+          ['CNPJ']: item.cnpj,
+          ['Inscrição estadual']: item.inscricaoEstadual,
+          ['Endereço fiscal']: item.endereco_fiscal,
+          ['Bairro fiscal']: item.bairro_fiscal,
+          ['Cidade fiscal']: item.cidade_fiscal,
+          ['UF fiscal']: item.uf_fiscal,
+          ['CEP fiscal']: item.cep_fiscal,
+          ['Endereço da remessa']: item.endereco_remessa,
+          ['Bairro da remessa']: item.bairro_remessa,
+          ['Cidade da remessa']: item.cidade_remessa,
+          ['UF da remessa']: item.uf_remessa,
+          ['CEP da remessa']: item.cep_remessa,
+          ['Contato da remessa']: item.contato_remessa,
+          ['Telefone da remessa']: item.telefone_remessa,
+          ['Endereço da instalação']: item.endereco_instalacao,
+          ['Bairro da instalação']: item.bairro_instalacao,
+          ['Cidade da instalação']: item.cidade_instalacao,
+          ['UF da instalação']: item.uf_instalacao,
+          ['CEP da instalação']: item.cep_instalacao,
+          ['Contato da instalação']: item.contato_instalacao,
+          ['']: item.telefone_instalacao,
+          ['']: item.endereco_gerencia,
+          ['']: item.vlan,
+          ['']: item.interconexao_tpz,
+          ['']: item.wan_rede,
+          ['']: item.endereco_lan,
+          ['']: item.wan_host,
+          ['']: item.loopback,
+          ['']: item.rotas_sumarizadas,
+
+          ['']: item.tipo_remanejamento,
+          ['']: item.endereco_origem,
+          ['']: item.bairro_origem,
+          ['']: item.cidade_origem,
+          ['']: item.uf_origem,
+          ['']: item.cep_origem,
+          ['']: item.contato_origem,
+          ['']: item.telefone_origem,
+          ['']: item.endereco_destino,
+          ['']: item.bairro_destino,
+          ['']: item.cidade_destino,
+          ['']: item.uf_destino,
+          ['']: item.cep_destino,
+          ['']: item.contato_destino,
+          ['']: item.telefone_destino,
+          ['']: item.observacao,
+
+        };
+      })
+    },*/
     sendIssue (issue, entity, itemList) {
 
+      if (itemList.length == 0) {
+        return;
+      }
+
       this.showDialogLoading = true;
+
+      this.removeTrashFields(itemList)
+      //itemList = this.convertFieldsToNames(itemList)
 
       issue = {
         origem: 'CIRCUITO_LOTE_COMERCIAL',
@@ -402,9 +486,8 @@ export default {
         motivoAbertura: this.$vuetify.lang.t('$vuetify.' + this.actionName),
         observacaoAbertura: issue.observation,
         contrato: { id: this.$props.contract.id },
-        lote: itemList.map(function (item) {
-          return item.nome
-        }),
+        lote: [],
+        planilha: JSON.stringify(itemList)
       }
       this.$post('/chamado/create', issue).then((response) => {
 

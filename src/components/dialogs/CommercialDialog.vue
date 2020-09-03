@@ -3,7 +3,7 @@
   <v-dialog
     v-model="showDialog"
     persistent
-    :max-width="entityList == 0 && actionName != 'NOVO_CIRCUITO'?400: 700"
+    :max-width="(entityList.length == 0 && actionName != 'NOVO_CIRCUITO') || showSuccess?400: 700"
     class="overflow-y-hidden"
   >
     <v-card>
@@ -41,7 +41,7 @@
           v-show="showSuccess"
           :title="$vuetify.lang.t('$vuetify.PEDIDO_ENVIADO')"
           :subtitle="$vuetify.lang.t('$vuetify.PROTOCOLO')+': '+entity.protocolo"
-          class="mb-n3"
+          class="mt-5 overflow-y-hidden"
         >
         </SuccessPanel>
 
@@ -74,7 +74,7 @@
           text
           @click="close(); cleanFields()"
           :x-small="$vuetify.breakpoint.xs"
-        >{{$vuetify.lang.t('$vuetify.CANCELAR')}}</v-btn>
+        >{{!showSuccess?$vuetify.lang.t('$vuetify.CANCELAR'):$vuetify.lang.t('$vuetify.FECHAR')}}</v-btn>
 
         <v-btn
           color="primary"
@@ -155,6 +155,7 @@ export default {
       this.headers.push({ text: this.$vuetify.lang.t('$vuetify.DESIGNACAO_CLIENTE'), value: 'designacaoCliente', sortable: false, width: 200 })
 
     if (this.actionName == 'NOVO_CIRCUITO') {
+
       this.headers.push({ text: this.$vuetify.lang.t('$vuetify.RAZAO_SOCIAL'), value: 'razaoSocial', sortable: false, width: 200 })
       this.headers.push({ text: this.$vuetify.lang.t('$vuetify.NOME_FANTASIA'), value: 'nomeFantasia', sortable: false, width: 200 })
       this.headers.push({ text: 'CNPJ', value: 'cnpj', sortable: false, width: 200 })
@@ -183,7 +184,7 @@ export default {
 
       this.headers.push({ text: this.$vuetify.lang.t('$vuetify.ENDERECO_GERENCIA'), value: 'endereco_gerencia', sortable: false, width: 200 })
       this.headers.push({ text: 'VLAN', value: 'vlan', sortable: false, width: 200 })
-      this.headers.push({ text: this.$vuetify.lang.t('$vuetify.INTERCONEXAO_TPZ'), value: 'interconexao_tpx', sortable: false, width: 200 })
+      this.headers.push({ text: this.$vuetify.lang.t('$vuetify.INTERCONEXAO_TPZ'), value: 'interconexao_tpz', sortable: false, width: 200 })
       this.headers.push({ text: 'WAN CPE REDE', value: 'wan_rede', sortable: false, width: 200 })
       this.headers.push({ text: this.$vuetify.lang.t('$vuetify.ENDERECO_LAN'), value: 'endereco_lan', sortable: false, width: 200 })
       this.headers.push({ text: 'WAN CPE HOST', value: 'wan_host', sortable: false, width: 200 })

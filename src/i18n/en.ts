@@ -310,4 +310,6 @@ export default {
     CEP_DESTINO: 'Zip code of destination',
     CONTATO_DESTINO: 'Destination contact',
     TELEFONE_DESTINO: 'Destination phone',
+
+    CIRCUITO_LOTE_COMERCIAL: 'Batch circuits in the commercial area'
 }
