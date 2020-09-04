@@ -9,7 +9,10 @@
     max-width="600"
     no-data-text=""
   >
-    <template v-slot:item.actions="{ item }">
+    <template
+      v-slot:item.actions="{ item }"
+      v-if="editable"
+    >
       <v-icon
         small
         @click="deleteItem(item)"
@@ -20,7 +23,7 @@
 
     <template
       v-slot:item.designacaoCliente="props"
-      v-if="actionName == 'NOVO_CIRCUITO'"
+      v-if="actionName == 'NOVO_CIRCUITO' && editable"
     >
       <v-edit-dialog :return-value.sync="props.item.designacaoCliente"> {{ props.item.designacaoCliente }}
         <template v-slot:input>
@@ -33,7 +36,10 @@
       </v-edit-dialog>
     </template>
 
-    <template v-slot:item.tipo_remanejamento="props">
+    <template
+      v-slot:item.tipo_remanejamento="props"
+      v-if="editable"
+    >
       <v-edit-dialog :return-value.sync="props.item.tipo_remanejamento"> {{ props.item.tipo_remanejamento }}
         <template v-slot:input>
           <v-text-field
@@ -45,7 +51,10 @@
       </v-edit-dialog>
     </template>
 
-    <template v-slot:item.endereco_origem="props">
+    <template
+      v-slot:item.endereco_origem="props"
+      v-if="editable"
+    >
       <v-edit-dialog :return-value.sync="props.item.endereco_origem"> {{ props.item.endereco_origem }}
         <template v-slot:input>
           <v-text-field
@@ -57,7 +66,10 @@
       </v-edit-dialog>
     </template>
 
-    <template v-slot:item.bairro_origem="props">
+    <template
+      v-slot:item.bairro_origem="props"
+      v-if="editable"
+    >
       <v-edit-dialog :return-value.sync="props.item.bairro_origem"> {{ props.item.bairro_origem }}
         <template v-slot:input>
           <v-text-field
@@ -69,7 +81,10 @@
       </v-edit-dialog>
     </template>
 
-    <template v-slot:item.cidade_origem="props">
+    <template
+      v-slot:item.cidade_origem="props"
+      v-if="editable"
+    >
       <v-edit-dialog :return-value.sync="props.item.cidade_origem"> {{ props.item.cidade_origem }}
         <template v-slot:input>
           <v-text-field
@@ -81,7 +96,10 @@
       </v-edit-dialog>
     </template>
 
-    <template v-slot:item.uf_origem="props">
+    <template
+      v-slot:item.uf_origem="props"
+      v-if="editable"
+    >
       <v-edit-dialog :return-value.sync="props.item.uf_origem"> {{ props.item.uf_origem }}
         <template v-slot:input>
           <v-text-field
@@ -93,7 +111,10 @@
       </v-edit-dialog>
     </template>
 
-    <template v-slot:item.cep_origem="props">
+    <template
+      v-slot:item.cep_origem="props"
+      v-if="editable"
+    >
       <v-edit-dialog :return-value.sync="props.item.cep_origem"> {{ props.item.cep_origem }}
         <template v-slot:input>
           <v-text-field
@@ -105,7 +126,10 @@
       </v-edit-dialog>
     </template>
 
-    <template v-slot:item.contato_origem="props">
+    <template
+      v-slot:item.contato_origem="props"
+      v-if="editable"
+    >
       <v-edit-dialog :return-value.sync="props.item.contato_origem"> {{ props.item.contato_origem }}
         <template v-slot:input>
           <v-text-field
@@ -117,7 +141,10 @@
       </v-edit-dialog>
     </template>
 
-    <template v-slot:item.telefone_origem="props">
+    <template
+      v-slot:item.telefone_origem="props"
+      v-if="editable"
+    >
       <v-edit-dialog :return-value.sync="props.item.telefone_origem"> {{ props.item.telefone_origem }}
         <template v-slot:input>
           <v-text-field
@@ -129,7 +156,10 @@
       </v-edit-dialog>
     </template>
 
-    <template v-slot:item.endereco_destino="props">
+    <template
+      v-slot:item.endereco_destino="props"
+      v-if="editable"
+    >
       <v-edit-dialog :return-value.sync="props.item.endereco_destino"> {{ props.item.endereco_destino }}
         <template v-slot:input>
           <v-text-field
@@ -141,7 +171,10 @@
       </v-edit-dialog>
     </template>
 
-    <template v-slot:item.bairro_destino="props">
+    <template
+      v-slot:item.bairro_destino="props"
+      v-if="editable"
+    >
       <v-edit-dialog :return-value.sync="props.item.bairro_destino"> {{ props.item.bairro_destino }}
         <template v-slot:input>
           <v-text-field
@@ -153,7 +186,10 @@
       </v-edit-dialog>
     </template>
 
-    <template v-slot:item.cidade_destino="props">
+    <template
+      v-slot:item.cidade_destino="props"
+      v-if="editable"
+    >
       <v-edit-dialog :return-value.sync="props.item.cidade_destino"> {{ props.item.cidade_destino }}
         <template v-slot:input>
           <v-text-field
@@ -165,7 +201,10 @@
       </v-edit-dialog>
     </template>
 
-    <template v-slot:item.uf_destino="props">
+    <template
+      v-slot:item.uf_destino="props"
+      v-if="editable"
+    >
       <v-edit-dialog :return-value.sync="props.item.uf_destino"> {{ props.item.uf_destino }}
         <template v-slot:input>
           <v-text-field
@@ -177,7 +216,10 @@
       </v-edit-dialog>
     </template>
 
-    <template v-slot:item.cep_destino="props">
+    <template
+      v-slot:item.cep_destino="props"
+      v-if="editable"
+    >
       <v-edit-dialog :return-value.sync="props.item.cep_destino"> {{ props.item.cep_destino }}
         <template v-slot:input>
           <v-text-field
@@ -189,7 +231,10 @@
       </v-edit-dialog>
     </template>
 
-    <template v-slot:item.contato_destino="props">
+    <template
+      v-slot:item.contato_destino="props"
+      v-if="editable"
+    >
       <v-edit-dialog :return-value.sync="props.item.contato_destino"> {{ props.item.contato_destino }}
         <template v-slot:input>
           <v-text-field
@@ -201,7 +246,10 @@
       </v-edit-dialog>
     </template>
 
-    <template v-slot:item.telefone_destino="props">
+    <template
+      v-slot:item.telefone_destino="props"
+      v-if="editable"
+    >
       <v-edit-dialog :return-value.sync="props.item.telefone_destino"> {{ props.item.telefone_destino }}
         <template v-slot:input>
           <v-text-field
@@ -213,7 +261,10 @@
       </v-edit-dialog>
     </template>
 
-    <template v-slot:item.endereco_instalacao="props">
+    <template
+      v-slot:item.endereco_instalacao="props"
+      v-if="editable"
+    >
       <v-edit-dialog :return-value.sync="props.item.endereco_instalacao"> {{ props.item.endereco_instalacao }}
         <template v-slot:input>
           <v-text-field
@@ -225,7 +276,10 @@
       </v-edit-dialog>
     </template>
 
-    <template v-slot:item.bairro_instalacao="props">
+    <template
+      v-slot:item.bairro_instalacao="props"
+      v-if="editable"
+    >
       <v-edit-dialog :return-value.sync="props.item.bairro_instalacao"> {{ props.item.bairro_instalacao }}
         <template v-slot:input>
           <v-text-field
@@ -237,7 +291,10 @@
       </v-edit-dialog>
     </template>
 
-    <template v-slot:item.cidade_instalacao="props">
+    <template
+      v-slot:item.cidade_instalacao="props"
+      v-if="editable"
+    >
       <v-edit-dialog :return-value.sync="props.item.cidade_instalacao"> {{ props.item.cidade_instalacao }}
         <template v-slot:input>
           <v-text-field
@@ -249,7 +306,10 @@
       </v-edit-dialog>
     </template>
 
-    <template v-slot:item.uf_instalacao="props">
+    <template
+      v-slot:item.uf_instalacao="props"
+      v-if="editable"
+    >
       <v-edit-dialog :return-value.sync="props.item.uf_instalacao"> {{ props.item.uf_instalacao }}
         <template v-slot:input>
           <v-text-field
@@ -261,7 +321,10 @@
       </v-edit-dialog>
     </template>
 
-    <template v-slot:item.cep_instalacao="props">
+    <template
+      v-slot:item.cep_instalacao="props"
+      v-if="editable"
+    >
       <v-edit-dialog :return-value.sync="props.item.cep_instalacao"> {{ props.item.cep_instalacao }}
         <template v-slot:input>
           <v-text-field
@@ -273,7 +336,10 @@
       </v-edit-dialog>
     </template>
 
-    <template v-slot:item.contato_instalacao="props">
+    <template
+      v-slot:item.contato_instalacao="props"
+      v-if="editable"
+    >
       <v-edit-dialog :return-value.sync="props.item.contato_instalacao"> {{ props.item.contato_instalacao }}
         <template v-slot:input>
           <v-text-field
@@ -285,7 +351,10 @@
       </v-edit-dialog>
     </template>
 
-    <template v-slot:item.telefone_instalacao="props">
+    <template
+      v-slot:item.telefone_instalacao="props"
+      v-if="editable"
+    >
       <v-edit-dialog :return-value.sync="props.item.telefone_instalacao"> {{ props.item.telefone_instalacao }}
         <template v-slot:input>
           <v-text-field
@@ -297,7 +366,10 @@
       </v-edit-dialog>
     </template>
 
-    <template v-slot:item.endereco_remessa="props">
+    <template
+      v-slot:item.endereco_remessa="props"
+      v-if="editable"
+    >
       <v-edit-dialog :return-value.sync="props.item.endereco_remessa"> {{ props.item.endereco_remessa }}
         <template v-slot:input>
           <v-text-field
@@ -309,7 +381,10 @@
       </v-edit-dialog>
     </template>
 
-    <template v-slot:item.bairro_remessa="props">
+    <template
+      v-slot:item.bairro_remessa="props"
+      v-if="editable"
+    >
       <v-edit-dialog :return-value.sync="props.item.bairro_remessa"> {{ props.item.bairro_remessa }}
         <template v-slot:input>
           <v-text-field
@@ -321,7 +396,10 @@
       </v-edit-dialog>
     </template>
 
-    <template v-slot:item.cidade_remessa="props">
+    <template
+      v-slot:item.cidade_remessa="props"
+      v-if="editable"
+    >
       <v-edit-dialog :return-value.sync="props.item.cidade_remessa"> {{ props.item.cidade_remessa }}
         <template v-slot:input>
           <v-text-field
@@ -333,7 +411,10 @@
       </v-edit-dialog>
     </template>
 
-    <template v-slot:item.uf_remessa="props">
+    <template
+      v-slot:item.uf_remessa="props"
+      v-if="editable"
+    >
       <v-edit-dialog :return-value.sync="props.item.uf_remessa"> {{ props.item.uf_remessa }}
         <template v-slot:input>
           <v-text-field
@@ -345,7 +426,10 @@
       </v-edit-dialog>
     </template>
 
-    <template v-slot:item.cep_remessa="props">
+    <template
+      v-slot:item.cep_remessa="props"
+      v-if="editable"
+    >
       <v-edit-dialog :return-value.sync="props.item.cep_remessa"> {{ props.item.cep_remessa }}
         <template v-slot:input>
           <v-text-field
@@ -357,7 +441,10 @@
       </v-edit-dialog>
     </template>
 
-    <template v-slot:item.contato_remessa="props">
+    <template
+      v-slot:item.contato_remessa="props"
+      v-if="editable"
+    >
       <v-edit-dialog :return-value.sync="props.item.contato_remessa"> {{ props.item.contato_remessa }}
         <template v-slot:input>
           <v-text-field
@@ -369,7 +456,10 @@
       </v-edit-dialog>
     </template>
 
-    <template v-slot:item.telefone_remessa="props">
+    <template
+      v-slot:item.telefone_remessa="props"
+      v-if="editable"
+    >
       <v-edit-dialog :return-value.sync="props.item.telefone_remessa"> {{ props.item.telefone_remessa }}
         <template v-slot:input>
           <v-text-field
@@ -381,7 +471,10 @@
       </v-edit-dialog>
     </template>
 
-    <template v-slot:item.cnpj="props">
+    <template
+      v-slot:item.cnpj="props"
+      v-if="editable"
+    >
       <v-edit-dialog :return-value.sync="props.item.cnpj"> {{ props.item.cnpj }}
         <template v-slot:input>
           <v-text-field
@@ -393,7 +486,10 @@
       </v-edit-dialog>
     </template>
 
-    <template v-slot:item.razaoSocial="props">
+    <template
+      v-slot:item.razaoSocial="props"
+      v-if="editable"
+    >
       <v-edit-dialog :return-value.sync="props.item.razaoSocial"> {{ props.item.razaoSocial }}
         <template v-slot:input>
           <v-text-field
@@ -405,7 +501,10 @@
       </v-edit-dialog>
     </template>
 
-    <template v-slot:item.nomeFantasia="props">
+    <template
+      v-slot:item.nomeFantasia="props"
+      v-if="editable"
+    >
       <v-edit-dialog :return-value.sync="props.item.nomeFantasia"> {{ props.item.nomeFantasia }}
         <template v-slot:input>
           <v-text-field
@@ -417,7 +516,10 @@
       </v-edit-dialog>
     </template>
 
-    <template v-slot:item.inscricaoEstadual="props">
+    <template
+      v-slot:item.inscricaoEstadual="props"
+      v-if="editable"
+    >
       <v-edit-dialog :return-value.sync="props.item.inscricaoEstadual"> {{ props.item.inscricaoEstadual }}
         <template v-slot:input>
           <v-text-field
@@ -429,7 +531,10 @@
       </v-edit-dialog>
     </template>
 
-    <template v-slot:item.endereco_fiscal="props">
+    <template
+      v-slot:item.endereco_fiscal="props"
+      v-if="editable"
+    >
       <v-edit-dialog :return-value.sync="props.item.endereco_fiscal"> {{ props.item.endereco_fiscal }}
         <template v-slot:input>
           <v-text-field
@@ -441,7 +546,10 @@
       </v-edit-dialog>
     </template>
 
-    <template v-slot:item.bairro_fiscal="props">
+    <template
+      v-slot:item.bairro_fiscal="props"
+      v-if="editable"
+    >
       <v-edit-dialog :return-value.sync="props.item.bairro_fiscal"> {{ props.item.bairro_fiscal }}
         <template v-slot:input>
           <v-text-field
@@ -453,7 +561,10 @@
       </v-edit-dialog>
     </template>
 
-    <template v-slot:item.cidade_fiscal="props">
+    <template
+      v-slot:item.cidade_fiscal="props"
+      v-if="editable"
+    >
       <v-edit-dialog :return-value.sync="props.item.cidade_fiscal"> {{ props.item.cidade_fiscal }}
         <template v-slot:input>
           <v-text-field
@@ -465,7 +576,10 @@
       </v-edit-dialog>
     </template>
 
-    <template v-slot:item.uf_fiscal="props">
+    <template
+      v-slot:item.uf_fiscal="props"
+      v-if="editable"
+    >
       <v-edit-dialog :return-value.sync="props.item.uf_fiscal"> {{ props.item.uf_fiscal }}
         <template v-slot:input>
           <v-text-field
@@ -477,7 +591,10 @@
       </v-edit-dialog>
     </template>
 
-    <template v-slot:item.cep_fiscal="props">
+    <template
+      v-slot:item.cep_fiscal="props"
+      v-if="editable"
+    >
       <v-edit-dialog :return-value.sync="props.item.cep_fiscal"> {{ props.item.cep_fiscal }}
         <template v-slot:input>
           <v-text-field
@@ -489,7 +606,10 @@
       </v-edit-dialog>
     </template>
 
-    <template v-slot:item.endereco_gerencia="props">
+    <template
+      v-slot:item.endereco_gerencia="props"
+      v-if="editable"
+    >
       <v-edit-dialog :return-value.sync="props.item.endereco_gerencia"> {{ props.item.endereco_gerencia }}
         <template v-slot:input>
           <v-text-field
@@ -501,7 +621,10 @@
       </v-edit-dialog>
     </template>
 
-    <template v-slot:item.vlan="props">
+    <template
+      v-slot:item.vlan="props"
+      v-if="editable"
+    >
       <v-edit-dialog :return-value.sync="props.item.vlan"> {{ props.item.vlan }}
         <template v-slot:input>
           <v-text-field
@@ -513,7 +636,10 @@
       </v-edit-dialog>
     </template>
 
-    <template v-slot:item.interconexao_tpz="props">
+    <template
+      v-slot:item.interconexao_tpz="props"
+      v-if="editable"
+    >
       <v-edit-dialog :return-value.sync="props.item.interconexao_tpz"> {{ props.item.interconexao_tpz }}
         <template v-slot:input>
           <v-text-field
@@ -525,7 +651,10 @@
       </v-edit-dialog>
     </template>
 
-    <template v-slot:item.wan_rede="props">
+    <template
+      v-slot:item.wan_rede="props"
+      v-if="editable"
+    >
       <v-edit-dialog :return-value.sync="props.item.wan_rede"> {{ props.item.wan_rede }}
         <template v-slot:input>
           <v-text-field
@@ -537,7 +666,10 @@
       </v-edit-dialog>
     </template>
 
-    <template v-slot:item.endereco_lan="props">
+    <template
+      v-slot:item.endereco_lan="props"
+      v-if="editable"
+    >
       <v-edit-dialog :return-value.sync="props.item.endereco_lan"> {{ props.item.endereco_lan }}
         <template v-slot:input>
           <v-text-field
@@ -549,7 +681,10 @@
       </v-edit-dialog>
     </template>
 
-    <template v-slot:item.wan_host="props">
+    <template
+      v-slot:item.wan_host="props"
+      v-if="editable"
+    >
       <v-edit-dialog :return-value.sync="props.item.wan_host"> {{ props.item.wan_host }}
         <template v-slot:input>
           <v-text-field
@@ -561,7 +696,10 @@
       </v-edit-dialog>
     </template>
 
-    <template v-slot:item.loopback="props">
+    <template
+      v-slot:item.loopback="props"
+      v-if="editable"
+    >
       <v-edit-dialog :return-value.sync="props.item.loopback"> {{ props.item.loopback }}
         <template v-slot:input>
           <v-text-field
@@ -573,7 +711,10 @@
       </v-edit-dialog>
     </template>
 
-    <template v-slot:item.rotas_sumarizadas="props">
+    <template
+      v-slot:item.rotas_sumarizadas="props"
+      v-if="editable"
+    >
       <v-edit-dialog :return-value.sync="props.item.rotas_sumarizadas"> {{ props.item.rotas_sumarizadas }}
         <template v-slot:input>
           <v-text-field
@@ -585,7 +726,10 @@
       </v-edit-dialog>
     </template>
 
-    <template v-slot:item.observacao="props">
+    <template
+      v-slot:item.observacao="props"
+      v-if="editable"
+    >
       <v-edit-dialog :return-value.sync="props.item.observacao"> {{ props.item.observacao }}
         <template v-slot:input>
           <v-text-field
@@ -607,6 +751,7 @@ export default {
     entityList: Array,
     actionName: String,
     deleteItem: Function,
+    editable: Boolean,
   },
   methods: {
   },

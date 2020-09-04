@@ -277,15 +277,6 @@
                   $vuetify.lang.t('$vuetify.ENCERRADO') }}
                         </v-chip>
 
-                        <!--<TooltipButton
-                          :label="$vuetify.lang.t('$vuetify.LISTAR_LOTE')"
-                          :message="$vuetify.lang.t('$vuetify.LISTAR_LOTE_CIRCUITO')"
-                          :mobile=true
-                          v-if="!issue.identificadorOrigem"
-                          :event="showBatch"
-                          :object="issue"
-                        ></TooltipButton> -->
-
                       </v-col>
                     </v-col>
 
@@ -377,6 +368,16 @@
                       :mobile="$vuetify.breakpoint.xs"
                       :isText=true
                     ></TooltipButton>
+
+                    <TooltipButton
+                      :label="$vuetify.lang.t('$vuetify.LISTAR_LOTE')"
+                      :message="$vuetify.lang.t('$vuetify.LISTAR_LOTE_CIRCUITO', '')"
+                      :mobile="$vuetify.breakpoint.xs"
+                      v-if="issue.origem == 'CIRCUITO_LOTE_COMERCIAL'"
+                      :event="showCommercialCircuits"
+                      :object="issue"
+                      :isText=true
+                    ></TooltipButton>
                   </v-card-actions>
                 </v-expansion-panel-content>
               </v-expansion-panel>
@@ -412,6 +413,17 @@
           :reasonList="reasonBatchList"
           :noResult="noBatchResult"
         ></BatchIssueDialog>
+
+        <CommercialDialog
+          :showDialog="showCommercialDialog"
+          :close="closeCommercialDialog"
+          :itemList="selectedCommercialList"
+          :title="$vuetify.lang.t('$vuetify.LISTAR_LOTE')"
+          :subtitle="$vuetify.lang.t('$vuetify.LISTAR_LOTE_CIRCUITO', entity.protocolo)"
+          :actionName="actionName"
+          :editable="false"
+        >
+        </CommercialDialog>
       </div>
     </v-lazy>
   </div>
@@ -425,6 +437,7 @@ import TooltipButton from '../components/TooltipButton';
 import LabelValue from '../components/LabelValue';
 import IssueDialog from '../components/dialogs/IssueDialog';
 import BatchIssueDialog from '../components/dialogs/BatchIssueDialog';
+import CommercialDialog from '../components/dialogs/CommercialDialog';
 
 export default {
   components: {
@@ -433,9 +446,95 @@ export default {
     TooltipButton,
     LabelValue,
     IssueDialog,
-    BatchIssueDialog
+    BatchIssueDialog,
+    CommercialDialog
   },
   methods: {
+    closeCommercialDialog () {
+
+      this.showCommercialDialog = false;
+    },
+    convertNamesToFields (itemList) {
+      return itemList.map((item) => {
+
+        var obj = {};
+
+        if (this.actionName == 'DESATIVAR' || this.actionName == 'REMANEJAR' || this.actionName == 'ATIVAR' || this.actionName == 'CANCELAR_DESATIVACAO')
+          obj.nome = item['Designação Tpz']
+
+        if (this.actionName == 'NOVO_CIRCUITO' || this.actionName == 'DESATIVAR' || this.actionName == 'ATIVAR' || this.actionName == 'CANCELAR_DESATIVACAO')
+          obj.designacaoCliente = item['Designação Cliente']
+
+        if (this.actionName == 'NOVO_CIRCUITO') {
+          obj.razaoSocial = item['Razão social']
+          obj.nomeFantasia = item['Nome fantasia']
+          obj.cnpj = item['CNPJ']
+          obj.inscricaoEstadual = item['Inscrição estadual']
+          obj.endereco_fiscal = item['Endereço fiscal']
+          obj.bairro_fiscal = item['Bairro fiscal']
+          obj.cidade_fiscal = item['Cidade fiscal']
+          obj.uf_fiscal = item['UF fiscal']
+          obj.cep_fiscal = item['CEP fiscal']
+          obj.endereco_remessa = item['Endereço da remessa']
+          obj.bairro_remessa = item['Bairro da remessa']
+          obj.cidade_remessa = item['Cidade da remessa']
+          obj.uf_remessa = item['UF da remessa']
+          obj.cep_remessa = item['CEP da remessa']
+          obj.contato_remessa = item['Contato da remessa']
+          obj.telefone_remessa = item['Telefone da remessa']
+        }
+
+        if (this.actionName == 'DESATIVAR' || this.actionName == 'NOVO_CIRCUITO') {
+          obj.endereco_instalacao = item['Endereço da instalação']
+          obj.bairro_instalacao = item['Bairro da instalação']
+          obj.cidade_instalacao = item['Cidade da instalação']
+          obj.uf_instalacao = item['UF da instalação']
+          obj.cep_instalacao = item['CEP da instalação']
+          obj.contato_instalacao = item['Contato da instalação']
+          obj.telefone_instalacao = item['Telefone da instalação']
+        }
+
+        if (this.actionName == 'NOVO_CIRCUITO') {
+          obj.endereco_gerencia = item['Endereço da gerência']
+          obj.vlan = item['VLAN']
+          obj.interconexao_tpz = item['Interconexão Tpz']
+          obj.wan_rede = item['WAN CPE REDE']
+          obj.endereco_lan = item['Endereço de LAN']
+          obj.wan_host = item['WAN CPE HOST']
+          obj.loopback = item['Loopback CPE']
+          obj.rotas_sumarizadas = item['Rotas sumarizadas']
+        }
+
+        if (this.actionName == 'REMANEJAR') {
+          obj.tipo_remanejamento = item['Tipo de remanejamento']
+          obj.endereco_origem = item['Endereço de origem']
+          obj.bairro_origem = item['Bairro de origem']
+          obj.cidade_origem = item['Cidade de origem']
+          obj.uf_origem = item['UF de origem']
+          obj.cep_origem = item['CEP de origem']
+          obj.contato_origem = item['Contato da origem']
+          obj.telefone_origem = item['Telefone da origem']
+          obj.endereco_destino = item['Endereço de destino']
+          obj.bairro_destino = item['Bairro de destino']
+          obj.cidade_destino = item['Cidade de destino']
+          obj.uf_destino = item['UF de destino']
+          obj.cep_destino = item['CEP de destino']
+          obj.contato_destino = item['Contato do destino']
+          obj.telefone_destino = item['Telefone do destino']
+        }
+
+        obj.observacao = item['Observação']
+        return obj;
+      })
+    },
+    showCommercialCircuits (issue) {
+
+      this.actionName = issue.lote[0]
+      this.selectedCommercialList = JSON.parse(issue.planilha);
+      this.selectedCommercialList = this.convertNamesToFields(this.selectedCommercialList)
+      this.showCommercialDialog = true;
+      this.entity = issue
+    },
     searchEntities (text, page) {
 
       if (this.entity.type == 'circuit') {
@@ -694,6 +793,9 @@ export default {
     contract: Object
   },
   data: () => ({
+    showCommercialDialog: false,
+    actionName: '',
+    selectedCommercialList: undefined,
     entity: { type: 'circuit' },
     noBatchResult: false,
     reasonBatchList: [],

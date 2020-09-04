@@ -326,6 +326,7 @@
       :title="title"
       :subtitle="subtitle"
       :actionName="actionName"
+      :editable="true"
     >
     </CommercialDialog>
   </div>
@@ -502,7 +503,7 @@ export default {
         motivoAbertura: this.$vuetify.lang.t('$vuetify.' + this.actionName),
         observacaoAbertura: issue.observation,
         contrato: { id: this.$props.contract.id },
-        lote: [],
+        lote: [this.actionName],
         planilha: JSON.stringify(itemList)
       }
       this.$post('/chamado/create', issue).then((response) => {

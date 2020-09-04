@@ -21,7 +21,7 @@
       >{{subtitle}}</v-card-text>
 
       <v-card-text
-        v-if="canShowForm() && this.actionName != 'NOVO_CIRCUITO'"
+        v-if="canShowForm() && this.actionName != 'NOVO_CIRCUITO' && editable"
         class="caption mt-n3 font-weight-bold grey--text"
       >{{'Circuitos selecionados: '+entityList.length}}</v-card-text>
 
@@ -45,7 +45,7 @@
         >
         </SuccessPanel>
 
-        <v-row v-if="actionName=='NOVO_CIRCUITO'">
+        <v-row v-if="actionName=='NOVO_CIRCUITO' && editable && !showSuccess">
           <v-btn
             color="primary"
             dark
@@ -61,6 +61,7 @@
           :entityList="entityList"
           :headers="headers"
           :deleteItem="deleteItem"
+          :editable="editable"
         ></CommercialTable>
 
       </v-row>
@@ -74,7 +75,7 @@
           text
           @click="close(); cleanFields()"
           :x-small="$vuetify.breakpoint.xs"
-        >{{!showSuccess?$vuetify.lang.t('$vuetify.CANCELAR'):$vuetify.lang.t('$vuetify.FECHAR')}}</v-btn>
+        >{{!showSuccess && editable?$vuetify.lang.t('$vuetify.CANCELAR'):$vuetify.lang.t('$vuetify.FECHAR')}}</v-btn>
 
         <v-btn
           color="primary"
@@ -82,7 +83,7 @@
           @click="send(issue, entity, entityList);"
           :x-small="$vuetify.breakpoint.xs"
           :loading="showDialogLoading"
-          v-show="canShowForm()"
+          v-show="canShowForm() && editable"
         >{{$vuetify.lang.t('$vuetify.ENVIAR')}}</v-btn>
       </v-card-actions>
     </v-card>
@@ -109,6 +110,7 @@ export default {
     showDialog: Boolean,
     showSuccess: Boolean,
     showDialogLoading: Boolean,
+    editable: Boolean,
     close: Function,
     send: Function,
     itemList: Array
