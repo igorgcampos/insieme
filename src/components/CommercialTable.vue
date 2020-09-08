@@ -8,6 +8,8 @@
     class="ml-4 mr-4"
     max-width="600"
     no-data-text=""
+    :locale="$vuetify.lang.current"
+    :options="{rowPageText:$vuetify.lang.t('$vuetify.LINHAS_PAGINA')}"
   >
     <template
       v-slot:item.actions="{ item }"
@@ -25,7 +27,10 @@
       v-slot:item.designacaoCliente="props"
       v-if="actionName == 'NOVO_CIRCUITO' && editable"
     >
-      <v-edit-dialog :return-value.sync="props.item.designacaoCliente"> {{ props.item.designacaoCliente }}
+      <v-edit-dialog
+        :return-value.sync="props.item.designacaoCliente"
+        large
+      > {{ props.item.designacaoCliente }}
         <template v-slot:input>
           <v-text-field
             v-model="props.item.designacaoCliente"
@@ -784,8 +789,25 @@ export default {
     editable: Boolean,
   },
   methods: {
+    save () {
+
+    },
+    cancel () {
+
+    }
   },
   data: () => ({
   }),
 };
 </script>
+
+<style>
+td {
+  border-bottom: thin solid rgba(0, 0, 0, 0.12) !important;
+  border-right: thin solid rgba(0, 0, 0, 0.12) !important;
+}
+
+td:hover {
+  background: rgb(195, 219, 226) !important;
+}
+</style>

@@ -234,6 +234,7 @@ export default {
     ALTERAR_VELOCIDADE_DESCRICAO: 'Change the speed of the selected circuits',
     VELOCIDADE_ATUAL: 'Current speed',
     VELOCIDADE_SOLICITADA: 'Requested speed',
+    LINHAS_PAGINA: 'Rows per page',
     DESATIVACAO: 'Deactivation',
     LISTAR_LOTE: 'Show circuits',
     LISTAR_LOTE_CIRCUITO: 'Show the circuits of this ticket',

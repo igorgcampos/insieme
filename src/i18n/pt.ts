@@ -251,6 +251,7 @@ export default {
     SUSPENDER_DESCRICAO: 'Pedir a suspensão dos circuitos selecionados',
     VELOCIDADE_ATUAL: 'Velocidade atual',
     VELOCIDADE_SOLICITADA: 'Velocidade solicitada',
+    LINHAS_PAGINA: 'Linhas por página',
     ALTERAR_VELOCIDADE_DESCRICAO: 'Pedir alteração de velocidade para os circuitos selecionados',
     REMANEJAR_DESCRICAO: 'Pedir remanejamento dos circuitos selecionados',
     PEDIDO_ENVIADO: 'Pedido enviado com sucesso! Entraremos em contato com você em breve.',
