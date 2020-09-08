@@ -459,11 +459,18 @@ export default {
 
         var obj = {};
 
-        if (this.actionName == 'DESATIVAR' || this.actionName == 'REMANEJAR' || this.actionName == 'ATIVAR' || this.actionName == 'CANCELAR_DESATIVACAO')
+        if (this.actionName == 'ALTERAR_VELOCIDADE' || this.actionName == 'SUSPENDER' || this.actionName == 'DESATIVAR' || this.actionName == 'REMANEJAR' || this.actionName == 'ATIVAR' || this.actionName == 'CANCELAR_DESATIVACAO')
           obj.nome = item['Designação Tpz']
 
-        if (this.actionName == 'NOVO_CIRCUITO' || this.actionName == 'DESATIVAR' || this.actionName == 'ATIVAR' || this.actionName == 'CANCELAR_DESATIVACAO')
+        if (this.actionName == 'DESATIVAR' || this.actionName == 'NOVO_CIRCUITO' || this.actionName == 'DESATIVAR' || this.actionName == 'ATIVAR' || this.actionName == 'CANCELAR_DESATIVACAO')
           obj.designacaoCliente = item['Designação Cliente']
+
+        if (this.actionName == 'ALTERAR_VELOCIDADE') {
+          obj.contato_instalacao = item['Contato do cliente']
+          obj.telefone_instalacao = item['Telefone do cliente']
+          obj.velocidade_atual = item['Velocidade atual']
+          obj.velocidade_solicitada = item['Velocidade solicitada']
+        }
 
         if (this.actionName == 'NOVO_CIRCUITO') {
           obj.razaoSocial = item['Razão social']
@@ -494,7 +501,7 @@ export default {
           obj.telefone_instalacao = item['Telefone da instalação']
         }
 
-        if (this.actionName == 'NOVO_CIRCUITO') {
+        if (this.actionName == 'NOVO_CIRCUITO' || this.actionName == 'ALTERAR_VELOCIDADE') {
           obj.endereco_gerencia = item['Endereço da gerência']
           obj.vlan = item['VLAN']
           obj.interconexao_tpz = item['Interconexão Tpz']
