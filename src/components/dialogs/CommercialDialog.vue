@@ -212,10 +212,12 @@ export default {
       this.headers.push({ text: 'Loopback CPE', value: 'loopback', sortable: false, width: 200 })
       this.headers.push({ text: this.$vuetify.lang.t('$vuetify.ROTAS_SUMARIZADAS'), value: 'rotas_sumarizadas', sortable: false, width: 200 })
 
-      this.entityList.push({});
-      this.entityList.push({});
-      this.entityList.push({});
-      this.entityList.push({});
+      if (this.entityList.length == 0) {
+        this.entityList.push({});
+        this.entityList.push({});
+        this.entityList.push({});
+        this.entityList.push({});
+      }
     }
 
     if (this.actionName == 'DESATIVAR') {

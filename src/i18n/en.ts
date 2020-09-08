@@ -227,6 +227,14 @@ export default {
     NENHUM_CIRCUITO_SELECIONADO: 'No circuit selected',
     CIRCUITO_LOTE: 'Batch circuits',
     ATIVACAO: 'Activation',
+    dataTable: {
+        itemsPerPageText: 'Rows per page:',
+    },
+    dataFooter: {
+        pageText: '{0}-{1} of {2}',
+        itemsPerPageAll: 'All',
+    },
+    SALVAR: 'Save',
     ALTERAR_VELOCIDADE: 'Change speed',
     MAIS_OPCOES: 'More options',
     SUSPENDER: 'Suspend',
@@ -234,7 +242,6 @@ export default {
     ALTERAR_VELOCIDADE_DESCRICAO: 'Change the speed of the selected circuits',
     VELOCIDADE_ATUAL: 'Current speed',
     VELOCIDADE_SOLICITADA: 'Requested speed',
-    LINHAS_PAGINA: 'Rows per page',
     DESATIVACAO: 'Deactivation',
     LISTAR_LOTE: 'Show circuits',
     LISTAR_LOTE_CIRCUITO: 'Show the circuits of this ticket',

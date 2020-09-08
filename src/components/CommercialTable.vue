@@ -8,8 +8,6 @@
     class="ml-4 mr-4"
     max-width="600"
     no-data-text=""
-    :locale="$vuetify.lang.current"
-    :options="{rowPageText:$vuetify.lang.t('$vuetify.LINHAS_PAGINA')}"
   >
     <template
       v-slot:item.actions="{ item }"
@@ -30,6 +28,8 @@
       <v-edit-dialog
         :return-value.sync="props.item.designacaoCliente"
         large
+        :cancel-text="$vuetify.lang.t('$vuetify.CANCELAR')"
+        :save-text="$vuetify.lang.t('$vuetify.SALVAR')"
       > {{ props.item.designacaoCliente }}
         <template v-slot:input>
           <v-text-field
@@ -45,7 +45,12 @@
       v-slot:item.tipo_remanejamento="props"
       v-if="editable"
     >
-      <v-edit-dialog :return-value.sync="props.item.tipo_remanejamento"> {{ props.item.tipo_remanejamento }}
+      <v-edit-dialog
+        :return-value.sync="props.item.tipo_remanejamento"
+        large
+        :cancel-text="$vuetify.lang.t('$vuetify.CANCELAR')"
+        :save-text="$vuetify.lang.t('$vuetify.SALVAR')"
+      > {{ props.item.tipo_remanejamento }}
         <template v-slot:input>
           <v-text-field
             v-model="props.item.tipo_remanejamento"
@@ -60,7 +65,12 @@
       v-slot:item.endereco_origem="props"
       v-if="editable"
     >
-      <v-edit-dialog :return-value.sync="props.item.endereco_origem"> {{ props.item.endereco_origem }}
+      <v-edit-dialog
+        :return-value.sync="props.item.endereco_origem"
+        large
+        :cancel-text="$vuetify.lang.t('$vuetify.CANCELAR')"
+        :save-text="$vuetify.lang.t('$vuetify.SALVAR')"
+      > {{ props.item.endereco_origem }}
         <template v-slot:input>
           <v-text-field
             v-model="props.item.endereco_origem"
@@ -75,7 +85,12 @@
       v-slot:item.bairro_origem="props"
       v-if="editable"
     >
-      <v-edit-dialog :return-value.sync="props.item.bairro_origem"> {{ props.item.bairro_origem }}
+      <v-edit-dialog
+        :return-value.sync="props.item.bairro_origem"
+        large
+        :cancel-text="$vuetify.lang.t('$vuetify.CANCELAR')"
+        :save-text="$vuetify.lang.t('$vuetify.SALVAR')"
+      > {{ props.item.bairro_origem }}
         <template v-slot:input>
           <v-text-field
             v-model="props.item.bairro_origem"
@@ -90,7 +105,12 @@
       v-slot:item.cidade_origem="props"
       v-if="editable"
     >
-      <v-edit-dialog :return-value.sync="props.item.cidade_origem"> {{ props.item.cidade_origem }}
+      <v-edit-dialog
+        :return-value.sync="props.item.cidade_origem"
+        large
+        :cancel-text="$vuetify.lang.t('$vuetify.CANCELAR')"
+        :save-text="$vuetify.lang.t('$vuetify.SALVAR')"
+      > {{ props.item.cidade_origem }}
         <template v-slot:input>
           <v-text-field
             v-model="props.item.cidade_origem"
@@ -105,7 +125,12 @@
       v-slot:item.uf_origem="props"
       v-if="editable"
     >
-      <v-edit-dialog :return-value.sync="props.item.uf_origem"> {{ props.item.uf_origem }}
+      <v-edit-dialog
+        :return-value.sync="props.item.uf_origem"
+        large
+        :cancel-text="$vuetify.lang.t('$vuetify.CANCELAR')"
+        :save-text="$vuetify.lang.t('$vuetify.SALVAR')"
+      > {{ props.item.uf_origem }}
         <template v-slot:input>
           <v-text-field
             v-model="props.item.uf_origem"
@@ -120,7 +145,12 @@
       v-slot:item.cep_origem="props"
       v-if="editable"
     >
-      <v-edit-dialog :return-value.sync="props.item.cep_origem"> {{ props.item.cep_origem }}
+      <v-edit-dialog
+        :return-value.sync="props.item.cep_origem"
+        large
+        :cancel-text="$vuetify.lang.t('$vuetify.CANCELAR')"
+        :save-text="$vuetify.lang.t('$vuetify.SALVAR')"
+      > {{ props.item.cep_origem }}
         <template v-slot:input>
           <v-text-field
             v-model="props.item.cep_origem"
@@ -135,7 +165,12 @@
       v-slot:item.contato_origem="props"
       v-if="editable"
     >
-      <v-edit-dialog :return-value.sync="props.item.contato_origem"> {{ props.item.contato_origem }}
+      <v-edit-dialog
+        :return-value.sync="props.item.contato_origem"
+        large
+        :cancel-text="$vuetify.lang.t('$vuetify.CANCELAR')"
+        :save-text="$vuetify.lang.t('$vuetify.SALVAR')"
+      > {{ props.item.contato_origem }}
         <template v-slot:input>
           <v-text-field
             v-model="props.item.contato_origem"
@@ -150,7 +185,12 @@
       v-slot:item.telefone_origem="props"
       v-if="editable"
     >
-      <v-edit-dialog :return-value.sync="props.item.telefone_origem"> {{ props.item.telefone_origem }}
+      <v-edit-dialog
+        :return-value.sync="props.item.telefone_origem"
+        large
+        :cancel-text="$vuetify.lang.t('$vuetify.CANCELAR')"
+        :save-text="$vuetify.lang.t('$vuetify.SALVAR')"
+      > {{ props.item.telefone_origem }}
         <template v-slot:input>
           <v-text-field
             v-model="props.item.telefone_origem"
@@ -165,7 +205,12 @@
       v-slot:item.endereco_destino="props"
       v-if="editable"
     >
-      <v-edit-dialog :return-value.sync="props.item.endereco_destino"> {{ props.item.endereco_destino }}
+      <v-edit-dialog
+        :return-value.sync="props.item.endereco_destino"
+        large
+        :cancel-text="$vuetify.lang.t('$vuetify.CANCELAR')"
+        :save-text="$vuetify.lang.t('$vuetify.SALVAR')"
+      > {{ props.item.endereco_destino }}
         <template v-slot:input>
           <v-text-field
             v-model="props.item.endereco_destino"
@@ -180,7 +225,12 @@
       v-slot:item.bairro_destino="props"
       v-if="editable"
     >
-      <v-edit-dialog :return-value.sync="props.item.bairro_destino"> {{ props.item.bairro_destino }}
+      <v-edit-dialog
+        :return-value.sync="props.item.bairro_destino"
+        large
+        :cancel-text="$vuetify.lang.t('$vuetify.CANCELAR')"
+        :save-text="$vuetify.lang.t('$vuetify.SALVAR')"
+      > {{ props.item.bairro_destino }}
         <template v-slot:input>
           <v-text-field
             v-model="props.item.bairro_destino"
@@ -195,7 +245,12 @@
       v-slot:item.cidade_destino="props"
       v-if="editable"
     >
-      <v-edit-dialog :return-value.sync="props.item.cidade_destino"> {{ props.item.cidade_destino }}
+      <v-edit-dialog
+        :return-value.sync="props.item.cidade_destino"
+        large
+        :cancel-text="$vuetify.lang.t('$vuetify.CANCELAR')"
+        :save-text="$vuetify.lang.t('$vuetify.SALVAR')"
+      > {{ props.item.cidade_destino }}
         <template v-slot:input>
           <v-text-field
             v-model="props.item.cidade_destino"
@@ -210,7 +265,12 @@
       v-slot:item.uf_destino="props"
       v-if="editable"
     >
-      <v-edit-dialog :return-value.sync="props.item.uf_destino"> {{ props.item.uf_destino }}
+      <v-edit-dialog
+        :return-value.sync="props.item.uf_destino"
+        large
+        :cancel-text="$vuetify.lang.t('$vuetify.CANCELAR')"
+        :save-text="$vuetify.lang.t('$vuetify.SALVAR')"
+      > {{ props.item.uf_destino }}
         <template v-slot:input>
           <v-text-field
             v-model="props.item.uf_destino"
@@ -225,7 +285,12 @@
       v-slot:item.cep_destino="props"
       v-if="editable"
     >
-      <v-edit-dialog :return-value.sync="props.item.cep_destino"> {{ props.item.cep_destino }}
+      <v-edit-dialog
+        :return-value.sync="props.item.cep_destino"
+        large
+        :cancel-text="$vuetify.lang.t('$vuetify.CANCELAR')"
+        :save-text="$vuetify.lang.t('$vuetify.SALVAR')"
+      > {{ props.item.cep_destino }}
         <template v-slot:input>
           <v-text-field
             v-model="props.item.cep_destino"
@@ -240,7 +305,12 @@
       v-slot:item.contato_destino="props"
       v-if="editable"
     >
-      <v-edit-dialog :return-value.sync="props.item.contato_destino"> {{ props.item.contato_destino }}
+      <v-edit-dialog
+        :return-value.sync="props.item.contato_destino"
+        large
+        :cancel-text="$vuetify.lang.t('$vuetify.CANCELAR')"
+        :save-text="$vuetify.lang.t('$vuetify.SALVAR')"
+      > {{ props.item.contato_destino }}
         <template v-slot:input>
           <v-text-field
             v-model="props.item.contato_destino"
@@ -255,7 +325,12 @@
       v-slot:item.telefone_destino="props"
       v-if="editable"
     >
-      <v-edit-dialog :return-value.sync="props.item.telefone_destino"> {{ props.item.telefone_destino }}
+      <v-edit-dialog
+        :return-value.sync="props.item.telefone_destino"
+        large
+        :cancel-text="$vuetify.lang.t('$vuetify.CANCELAR')"
+        :save-text="$vuetify.lang.t('$vuetify.SALVAR')"
+      > {{ props.item.telefone_destino }}
         <template v-slot:input>
           <v-text-field
             v-model="props.item.telefone_destino"
@@ -270,7 +345,12 @@
       v-slot:item.endereco_instalacao="props"
       v-if="editable"
     >
-      <v-edit-dialog :return-value.sync="props.item.endereco_instalacao"> {{ props.item.endereco_instalacao }}
+      <v-edit-dialog
+        :return-value.sync="props.item.endereco_instalacao"
+        large
+        :cancel-text="$vuetify.lang.t('$vuetify.CANCELAR')"
+        :save-text="$vuetify.lang.t('$vuetify.SALVAR')"
+      > {{ props.item.endereco_instalacao }}
         <template v-slot:input>
           <v-text-field
             v-model="props.item.endereco_instalacao"
@@ -285,7 +365,12 @@
       v-slot:item.bairro_instalacao="props"
       v-if="editable"
     >
-      <v-edit-dialog :return-value.sync="props.item.bairro_instalacao"> {{ props.item.bairro_instalacao }}
+      <v-edit-dialog
+        :return-value.sync="props.item.bairro_instalacao"
+        large
+        :cancel-text="$vuetify.lang.t('$vuetify.CANCELAR')"
+        :save-text="$vuetify.lang.t('$vuetify.SALVAR')"
+      > {{ props.item.bairro_instalacao }}
         <template v-slot:input>
           <v-text-field
             v-model="props.item.bairro_instalacao"
@@ -300,7 +385,12 @@
       v-slot:item.cidade_instalacao="props"
       v-if="editable"
     >
-      <v-edit-dialog :return-value.sync="props.item.cidade_instalacao"> {{ props.item.cidade_instalacao }}
+      <v-edit-dialog
+        :return-value.sync="props.item.cidade_instalacao"
+        large
+        :cancel-text="$vuetify.lang.t('$vuetify.CANCELAR')"
+        :save-text="$vuetify.lang.t('$vuetify.SALVAR')"
+      > {{ props.item.cidade_instalacao }}
         <template v-slot:input>
           <v-text-field
             v-model="props.item.cidade_instalacao"
@@ -315,7 +405,12 @@
       v-slot:item.uf_instalacao="props"
       v-if="editable"
     >
-      <v-edit-dialog :return-value.sync="props.item.uf_instalacao"> {{ props.item.uf_instalacao }}
+      <v-edit-dialog
+        :return-value.sync="props.item.uf_instalacao"
+        large
+        :cancel-text="$vuetify.lang.t('$vuetify.CANCELAR')"
+        :save-text="$vuetify.lang.t('$vuetify.SALVAR')"
+      > {{ props.item.uf_instalacao }}
         <template v-slot:input>
           <v-text-field
             v-model="props.item.uf_instalacao"
@@ -330,7 +425,12 @@
       v-slot:item.cep_instalacao="props"
       v-if="editable"
     >
-      <v-edit-dialog :return-value.sync="props.item.cep_instalacao"> {{ props.item.cep_instalacao }}
+      <v-edit-dialog
+        :return-value.sync="props.item.cep_instalacao"
+        large
+        :cancel-text="$vuetify.lang.t('$vuetify.CANCELAR')"
+        :save-text="$vuetify.lang.t('$vuetify.SALVAR')"
+      > {{ props.item.cep_instalacao }}
         <template v-slot:input>
           <v-text-field
             v-model="props.item.cep_instalacao"
@@ -345,7 +445,12 @@
       v-slot:item.contato_instalacao="props"
       v-if="editable"
     >
-      <v-edit-dialog :return-value.sync="props.item.contato_instalacao"> {{ props.item.contato_instalacao }}
+      <v-edit-dialog
+        :return-value.sync="props.item.contato_instalacao"
+        large
+        :cancel-text="$vuetify.lang.t('$vuetify.CANCELAR')"
+        :save-text="$vuetify.lang.t('$vuetify.SALVAR')"
+      > {{ props.item.contato_instalacao }}
         <template v-slot:input>
           <v-text-field
             v-model="props.item.contato_instalacao"
@@ -360,7 +465,12 @@
       v-slot:item.telefone_instalacao="props"
       v-if="editable"
     >
-      <v-edit-dialog :return-value.sync="props.item.telefone_instalacao"> {{ props.item.telefone_instalacao }}
+      <v-edit-dialog
+        :return-value.sync="props.item.telefone_instalacao"
+        large
+        :cancel-text="$vuetify.lang.t('$vuetify.CANCELAR')"
+        :save-text="$vuetify.lang.t('$vuetify.SALVAR')"
+      > {{ props.item.telefone_instalacao }}
         <template v-slot:input>
           <v-text-field
             v-model="props.item.telefone_instalacao"
@@ -375,7 +485,12 @@
       v-slot:item.endereco_remessa="props"
       v-if="editable"
     >
-      <v-edit-dialog :return-value.sync="props.item.endereco_remessa"> {{ props.item.endereco_remessa }}
+      <v-edit-dialog
+        :return-value.sync="props.item.endereco_remessa"
+        large
+        :cancel-text="$vuetify.lang.t('$vuetify.CANCELAR')"
+        :save-text="$vuetify.lang.t('$vuetify.SALVAR')"
+      > {{ props.item.endereco_remessa }}
         <template v-slot:input>
           <v-text-field
             v-model="props.item.endereco_remessa"
@@ -390,7 +505,12 @@
       v-slot:item.bairro_remessa="props"
       v-if="editable"
     >
-      <v-edit-dialog :return-value.sync="props.item.bairro_remessa"> {{ props.item.bairro_remessa }}
+      <v-edit-dialog
+        :return-value.sync="props.item.bairro_remessa"
+        large
+        :cancel-text="$vuetify.lang.t('$vuetify.CANCELAR')"
+        :save-text="$vuetify.lang.t('$vuetify.SALVAR')"
+      > {{ props.item.bairro_remessa }}
         <template v-slot:input>
           <v-text-field
             v-model="props.item.bairro_remessa"
@@ -405,7 +525,12 @@
       v-slot:item.cidade_remessa="props"
       v-if="editable"
     >
-      <v-edit-dialog :return-value.sync="props.item.cidade_remessa"> {{ props.item.cidade_remessa }}
+      <v-edit-dialog
+        :return-value.sync="props.item.cidade_remessa"
+        large
+        :cancel-text="$vuetify.lang.t('$vuetify.CANCELAR')"
+        :save-text="$vuetify.lang.t('$vuetify.SALVAR')"
+      > {{ props.item.cidade_remessa }}
         <template v-slot:input>
           <v-text-field
             v-model="props.item.cidade_remessa"
@@ -420,7 +545,12 @@
       v-slot:item.uf_remessa="props"
       v-if="editable"
     >
-      <v-edit-dialog :return-value.sync="props.item.uf_remessa"> {{ props.item.uf_remessa }}
+      <v-edit-dialog
+        :return-value.sync="props.item.uf_remessa"
+        large
+        :cancel-text="$vuetify.lang.t('$vuetify.CANCELAR')"
+        :save-text="$vuetify.lang.t('$vuetify.SALVAR')"
+      > {{ props.item.uf_remessa }}
         <template v-slot:input>
           <v-text-field
             v-model="props.item.uf_remessa"
@@ -435,7 +565,12 @@
       v-slot:item.cep_remessa="props"
       v-if="editable"
     >
-      <v-edit-dialog :return-value.sync="props.item.cep_remessa"> {{ props.item.cep_remessa }}
+      <v-edit-dialog
+        :return-value.sync="props.item.cep_remessa"
+        large
+        :cancel-text="$vuetify.lang.t('$vuetify.CANCELAR')"
+        :save-text="$vuetify.lang.t('$vuetify.SALVAR')"
+      > {{ props.item.cep_remessa }}
         <template v-slot:input>
           <v-text-field
             v-model="props.item.cep_remessa"
@@ -450,7 +585,12 @@
       v-slot:item.contato_remessa="props"
       v-if="editable"
     >
-      <v-edit-dialog :return-value.sync="props.item.contato_remessa"> {{ props.item.contato_remessa }}
+      <v-edit-dialog
+        :return-value.sync="props.item.contato_remessa"
+        large
+        :cancel-text="$vuetify.lang.t('$vuetify.CANCELAR')"
+        :save-text="$vuetify.lang.t('$vuetify.SALVAR')"
+      > {{ props.item.contato_remessa }}
         <template v-slot:input>
           <v-text-field
             v-model="props.item.contato_remessa"
@@ -465,7 +605,12 @@
       v-slot:item.telefone_remessa="props"
       v-if="editable"
     >
-      <v-edit-dialog :return-value.sync="props.item.telefone_remessa"> {{ props.item.telefone_remessa }}
+      <v-edit-dialog
+        :return-value.sync="props.item.telefone_remessa"
+        large
+        :cancel-text="$vuetify.lang.t('$vuetify.CANCELAR')"
+        :save-text="$vuetify.lang.t('$vuetify.SALVAR')"
+      > {{ props.item.telefone_remessa }}
         <template v-slot:input>
           <v-text-field
             v-model="props.item.telefone_remessa"
@@ -480,7 +625,12 @@
       v-slot:item.cnpj="props"
       v-if="editable"
     >
-      <v-edit-dialog :return-value.sync="props.item.cnpj"> {{ props.item.cnpj }}
+      <v-edit-dialog
+        :return-value.sync="props.item.cnpj"
+        large
+        :cancel-text="$vuetify.lang.t('$vuetify.CANCELAR')"
+        :save-text="$vuetify.lang.t('$vuetify.SALVAR')"
+      > {{ props.item.cnpj }}
         <template v-slot:input>
           <v-text-field
             v-model="props.item.cnpj"
@@ -495,7 +645,12 @@
       v-slot:item.razaoSocial="props"
       v-if="editable"
     >
-      <v-edit-dialog :return-value.sync="props.item.razaoSocial"> {{ props.item.razaoSocial }}
+      <v-edit-dialog
+        :return-value.sync="props.item.razaoSocial"
+        large
+        :cancel-text="$vuetify.lang.t('$vuetify.CANCELAR')"
+        :save-text="$vuetify.lang.t('$vuetify.SALVAR')"
+      > {{ props.item.razaoSocial }}
         <template v-slot:input>
           <v-text-field
             v-model="props.item.razaoSocial"
@@ -510,7 +665,12 @@
       v-slot:item.nomeFantasia="props"
       v-if="editable"
     >
-      <v-edit-dialog :return-value.sync="props.item.nomeFantasia"> {{ props.item.nomeFantasia }}
+      <v-edit-dialog
+        :return-value.sync="props.item.nomeFantasia"
+        large
+        :cancel-text="$vuetify.lang.t('$vuetify.CANCELAR')"
+        :save-text="$vuetify.lang.t('$vuetify.SALVAR')"
+      > {{ props.item.nomeFantasia }}
         <template v-slot:input>
           <v-text-field
             v-model="props.item.nomeFantasia"
@@ -525,7 +685,12 @@
       v-slot:item.inscricaoEstadual="props"
       v-if="editable"
     >
-      <v-edit-dialog :return-value.sync="props.item.inscricaoEstadual"> {{ props.item.inscricaoEstadual }}
+      <v-edit-dialog
+        :return-value.sync="props.item.inscricaoEstadual"
+        large
+        :cancel-text="$vuetify.lang.t('$vuetify.CANCELAR')"
+        :save-text="$vuetify.lang.t('$vuetify.SALVAR')"
+      > {{ props.item.inscricaoEstadual }}
         <template v-slot:input>
           <v-text-field
             v-model="props.item.inscricaoEstadual"
@@ -540,7 +705,12 @@
       v-slot:item.endereco_fiscal="props"
       v-if="editable"
     >
-      <v-edit-dialog :return-value.sync="props.item.endereco_fiscal"> {{ props.item.endereco_fiscal }}
+      <v-edit-dialog
+        :return-value.sync="props.item.endereco_fiscal"
+        large
+        :cancel-text="$vuetify.lang.t('$vuetify.CANCELAR')"
+        :save-text="$vuetify.lang.t('$vuetify.SALVAR')"
+      > {{ props.item.endereco_fiscal }}
         <template v-slot:input>
           <v-text-field
             v-model="props.item.endereco_fiscal"
@@ -555,7 +725,12 @@
       v-slot:item.bairro_fiscal="props"
       v-if="editable"
     >
-      <v-edit-dialog :return-value.sync="props.item.bairro_fiscal"> {{ props.item.bairro_fiscal }}
+      <v-edit-dialog
+        :return-value.sync="props.item.bairro_fiscal"
+        large
+        :cancel-text="$vuetify.lang.t('$vuetify.CANCELAR')"
+        :save-text="$vuetify.lang.t('$vuetify.SALVAR')"
+      > {{ props.item.bairro_fiscal }}
         <template v-slot:input>
           <v-text-field
             v-model="props.item.bairro_fiscal"
@@ -570,7 +745,12 @@
       v-slot:item.cidade_fiscal="props"
       v-if="editable"
     >
-      <v-edit-dialog :return-value.sync="props.item.cidade_fiscal"> {{ props.item.cidade_fiscal }}
+      <v-edit-dialog
+        :return-value.sync="props.item.cidade_fiscal"
+        large
+        :cancel-text="$vuetify.lang.t('$vuetify.CANCELAR')"
+        :save-text="$vuetify.lang.t('$vuetify.SALVAR')"
+      > {{ props.item.cidade_fiscal }}
         <template v-slot:input>
           <v-text-field
             v-model="props.item.cidade_fiscal"
@@ -585,7 +765,12 @@
       v-slot:item.uf_fiscal="props"
       v-if="editable"
     >
-      <v-edit-dialog :return-value.sync="props.item.uf_fiscal"> {{ props.item.uf_fiscal }}
+      <v-edit-dialog
+        :return-value.sync="props.item.uf_fiscal"
+        large
+        :cancel-text="$vuetify.lang.t('$vuetify.CANCELAR')"
+        :save-text="$vuetify.lang.t('$vuetify.SALVAR')"
+      > {{ props.item.uf_fiscal }}
         <template v-slot:input>
           <v-text-field
             v-model="props.item.uf_fiscal"
@@ -600,7 +785,12 @@
       v-slot:item.cep_fiscal="props"
       v-if="editable"
     >
-      <v-edit-dialog :return-value.sync="props.item.cep_fiscal"> {{ props.item.cep_fiscal }}
+      <v-edit-dialog
+        :return-value.sync="props.item.cep_fiscal"
+        large
+        :cancel-text="$vuetify.lang.t('$vuetify.CANCELAR')"
+        :save-text="$vuetify.lang.t('$vuetify.SALVAR')"
+      > {{ props.item.cep_fiscal }}
         <template v-slot:input>
           <v-text-field
             v-model="props.item.cep_fiscal"
@@ -615,7 +805,12 @@
       v-slot:item.velocidade_atual="props"
       v-if="editable"
     >
-      <v-edit-dialog :return-value.sync="props.item.velocidade_atual"> {{ props.item.velocidade_atual }}
+      <v-edit-dialog
+        :return-value.sync="props.item.velocidade_atual"
+        large
+        :cancel-text="$vuetify.lang.t('$vuetify.CANCELAR')"
+        :save-text="$vuetify.lang.t('$vuetify.SALVAR')"
+      > {{ props.item.velocidade_atual }}
         <template v-slot:input>
           <v-text-field
             v-model="props.item.velocidade_atual"
@@ -630,7 +825,12 @@
       v-slot:item.velocidade_solicitada="props"
       v-if="editable"
     >
-      <v-edit-dialog :return-value.sync="props.item.velocidade_solicitada"> {{ props.item.velocidade_solicitada }}
+      <v-edit-dialog
+        :return-value.sync="props.item.velocidade_solicitada"
+        large
+        :cancel-text="$vuetify.lang.t('$vuetify.CANCELAR')"
+        :save-text="$vuetify.lang.t('$vuetify.SALVAR')"
+      > {{ props.item.velocidade_solicitada }}
         <template v-slot:input>
           <v-text-field
             v-model="props.item.velocidade_solicitada"
@@ -645,7 +845,12 @@
       v-slot:item.endereco_gerencia="props"
       v-if="editable"
     >
-      <v-edit-dialog :return-value.sync="props.item.endereco_gerencia"> {{ props.item.endereco_gerencia }}
+      <v-edit-dialog
+        :return-value.sync="props.item.endereco_gerencia"
+        large
+        :cancel-text="$vuetify.lang.t('$vuetify.CANCELAR')"
+        :save-text="$vuetify.lang.t('$vuetify.SALVAR')"
+      > {{ props.item.endereco_gerencia }}
         <template v-slot:input>
           <v-text-field
             v-model="props.item.endereco_gerencia"
@@ -660,7 +865,12 @@
       v-slot:item.vlan="props"
       v-if="editable"
     >
-      <v-edit-dialog :return-value.sync="props.item.vlan"> {{ props.item.vlan }}
+      <v-edit-dialog
+        :return-value.sync="props.item.vlan"
+        large
+        :cancel-text="$vuetify.lang.t('$vuetify.CANCELAR')"
+        :save-text="$vuetify.lang.t('$vuetify.SALVAR')"
+      > {{ props.item.vlan }}
         <template v-slot:input>
           <v-text-field
             v-model="props.item.vlan"
@@ -675,7 +885,12 @@
       v-slot:item.interconexao_tpz="props"
       v-if="editable"
     >
-      <v-edit-dialog :return-value.sync="props.item.interconexao_tpz"> {{ props.item.interconexao_tpz }}
+      <v-edit-dialog
+        :return-value.sync="props.item.interconexao_tpz"
+        large
+        :cancel-text="$vuetify.lang.t('$vuetify.CANCELAR')"
+        :save-text="$vuetify.lang.t('$vuetify.SALVAR')"
+      > {{ props.item.interconexao_tpz }}
         <template v-slot:input>
           <v-text-field
             v-model="props.item.interconexao_tpz"
@@ -690,7 +905,12 @@
       v-slot:item.wan_rede="props"
       v-if="editable"
     >
-      <v-edit-dialog :return-value.sync="props.item.wan_rede"> {{ props.item.wan_rede }}
+      <v-edit-dialog
+        :return-value.sync="props.item.wan_rede"
+        large
+        :cancel-text="$vuetify.lang.t('$vuetify.CANCELAR')"
+        :save-text="$vuetify.lang.t('$vuetify.SALVAR')"
+      > {{ props.item.wan_rede }}
         <template v-slot:input>
           <v-text-field
             v-model="props.item.wan_rede"
@@ -705,7 +925,12 @@
       v-slot:item.endereco_lan="props"
       v-if="editable"
     >
-      <v-edit-dialog :return-value.sync="props.item.endereco_lan"> {{ props.item.endereco_lan }}
+      <v-edit-dialog
+        :return-value.sync="props.item.endereco_lan"
+        large
+        :cancel-text="$vuetify.lang.t('$vuetify.CANCELAR')"
+        :save-text="$vuetify.lang.t('$vuetify.SALVAR')"
+      > {{ props.item.endereco_lan }}
         <template v-slot:input>
           <v-text-field
             v-model="props.item.endereco_lan"
@@ -720,7 +945,12 @@
       v-slot:item.wan_host="props"
       v-if="editable"
     >
-      <v-edit-dialog :return-value.sync="props.item.wan_host"> {{ props.item.wan_host }}
+      <v-edit-dialog
+        :return-value.sync="props.item.wan_host"
+        large
+        :cancel-text="$vuetify.lang.t('$vuetify.CANCELAR')"
+        :save-text="$vuetify.lang.t('$vuetify.SALVAR')"
+      > {{ props.item.wan_host }}
         <template v-slot:input>
           <v-text-field
             v-model="props.item.wan_host"
@@ -735,7 +965,12 @@
       v-slot:item.loopback="props"
       v-if="editable"
     >
-      <v-edit-dialog :return-value.sync="props.item.loopback"> {{ props.item.loopback }}
+      <v-edit-dialog
+        :return-value.sync="props.item.loopback"
+        large
+        :cancel-text="$vuetify.lang.t('$vuetify.CANCELAR')"
+        :save-text="$vuetify.lang.t('$vuetify.SALVAR')"
+      > {{ props.item.loopback }}
         <template v-slot:input>
           <v-text-field
             v-model="props.item.loopback"
@@ -750,7 +985,12 @@
       v-slot:item.rotas_sumarizadas="props"
       v-if="editable"
     >
-      <v-edit-dialog :return-value.sync="props.item.rotas_sumarizadas"> {{ props.item.rotas_sumarizadas }}
+      <v-edit-dialog
+        :return-value.sync="props.item.rotas_sumarizadas"
+        large
+        :cancel-text="$vuetify.lang.t('$vuetify.CANCELAR')"
+        :save-text="$vuetify.lang.t('$vuetify.SALVAR')"
+      > {{ props.item.rotas_sumarizadas }}
         <template v-slot:input>
           <v-text-field
             v-model="props.item.rotas_sumarizadas"
@@ -765,7 +1005,12 @@
       v-slot:item.observacao="props"
       v-if="editable"
     >
-      <v-edit-dialog :return-value.sync="props.item.observacao"> {{ props.item.observacao }}
+      <v-edit-dialog
+        :return-value.sync="props.item.observacao"
+        large
+        :cancel-text="$vuetify.lang.t('$vuetify.CANCELAR')"
+        :save-text="$vuetify.lang.t('$vuetify.SALVAR')"
+      > {{ props.item.observacao }}
         <template v-slot:input>
           <v-text-field
             v-model="props.item.observacao"
