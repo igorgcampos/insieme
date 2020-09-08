@@ -84,14 +84,14 @@
                 <v-list-item @click="showCommercialDialog('NOVO_CIRCUITO')">
                   <v-list-item-title>{{ $vuetify.lang.t('$vuetify.NOVO_CIRCUITO') }}</v-list-item-title>
                 </v-list-item>
-                <!-- <v-list-item @click="showCommercialDialog('UPGRADE')">
-                  <v-list-item-title>{{ $vuetify.lang.t('$vuetify.UPGRADE') }}</v-list-item-title>
-                </v-list-item> -->
                 <v-list-item @click="showCommercialDialog('REMANEJAR')">
                   <v-list-item-title>{{ $vuetify.lang.t('$vuetify.REMANEJAR') }}</v-list-item-title>
                 </v-list-item>
                 <v-list-item @click="showCommercialDialog('ATIVAR')">
                   <v-list-item-title>{{ $vuetify.lang.t('$vuetify.ATIVAR') }}</v-list-item-title>
+                </v-list-item>
+                <v-list-item @click="showCommercialDialog('ALTERAR_VELOCIDADE')">
+                  <v-list-item-title>{{ $vuetify.lang.t('$vuetify.ALTERAR_VELOCIDADE') }}</v-list-item-title>
                 </v-list-item>
                 <v-list-item @click="showCommercialDialog('CANCELAR_DESATIVACAO')">
                   <v-list-item-title>{{ $vuetify.lang.t('$vuetify.CANCELAR_DESATIVACAO') }}</v-list-item-title>
@@ -99,11 +99,9 @@
                 <v-list-item @click="showCommercialDialog('DESATIVAR')">
                   <v-list-item-title>{{ $vuetify.lang.t('$vuetify.DESATIVAR') }}</v-list-item-title>
                 </v-list-item>
-
-                <!--
-                <v-list-item @click="showCommercialDialog('DOWNGRADE')">
-                  <v-list-item-title>{{ $vuetify.lang.t('$vuetify.DOWNGRADE') }}</v-list-item-title>
-                </v-list-item> -->
+                <v-list-item @click="showCommercialDialog('SUSPENDER')">
+                  <v-list-item-title>{{ $vuetify.lang.t('$vuetify.SUSPENDER') }}</v-list-item-title>
+                </v-list-item>
               </v-list>
             </v-menu>
 
@@ -122,17 +120,6 @@
               :mobile="$vuetify.breakpoint.xs"
             ></TooltipButton>
           </v-col>
-
-          <!-- <v-col cols="2 mr-n7">
-
-            <TooltipButton
-              :label="$vuetify.lang.t('$vuetify.UPGRADE')"
-              :message="$vuetify.lang.t('$vuetify.UPGRADE_DESCRICAO')"
-              :event="showCommDialog"
-              :object="{actionName:'UPGRADE'}"
-              :mobile="$vuetify.breakpoint.xs"
-            ></TooltipButton>
-          </v-col> -->
 
           <v-col cols="2 mr-n2">
 
@@ -156,38 +143,52 @@
             ></TooltipButton>
           </v-col>
 
-          <v-col cols="2">
+          <v-col cols="3">
 
             <TooltipButton
-              :label="$vuetify.lang.t('$vuetify.CANCELAR_DESATIVACAO')"
-              :message="$vuetify.lang.t('$vuetify.CANCELAR_DESATIVACAO_DESCRICAO')"
+              :label="$vuetify.lang.t('$vuetify.ALTERAR_VELOCIDADE')"
+              :message="$vuetify.lang.t('$vuetify.ALTERAR_VELOCIDADE_DESCRICAO')"
               :event="showCommDialog"
-              :object="{actionName:'CANCELAR_DESATIVACAO'}"
+              :object="{actionName:'ALTERAR_VELOCIDADE'}"
               :mobile="$vuetify.breakpoint.xs"
             ></TooltipButton>
           </v-col>
 
-          <v-col cols="2 ml-12 pl-11">
+          <v-col cols="1 ml-n4">
+            <v-menu
+              transition="slide-x-transition"
+              bottom
+              right
+              v-show="!$vuetify.breakpoint.xs"
+            >
+              <template v-slot:activator="{ on }">
+                <v-btn
+                  class="ml-2 mt-0"
+                  dark
+                  color="primary"
+                  v-on="on"
+                  :x-small="$vuetify.breakpoint.xs"
+                  :small="!$vuetify.breakpoint.xs"
+                >
+                  {{$vuetify.lang.t('$vuetify.MAIS_OPCOES')}}
+                </v-btn>
+              </template>
 
-            <TooltipButton
-              :label="$vuetify.lang.t('$vuetify.DESATIVAR')"
-              :message="$vuetify.lang.t('$vuetify.DESATIVAR_DESCRICAO')"
-              :event="showCommDialog"
-              :object="{actionName:'DESATIVAR'}"
-              :mobile=true
-            ></TooltipButton>
+              <v-list>
+
+                <v-list-item @click="showCommDialog({actionName:'SUSPENDER'})">
+                  <v-list-item-title>{{$vuetify.lang.t('$vuetify.SUSPENDER')}}</v-list-item-title>
+                </v-list-item>
+                <v-list-item @click="showCommDialog({actionName:'CANCELAR_DESATIVACAO'})">
+                  <v-list-item-title>{{$vuetify.lang.t('$vuetify.CANCELAR_DESATIVACAO')}}</v-list-item-title>
+                </v-list-item>
+                <v-list-item @click="showCommDialog({actionName: 'DESATIVAR'})">
+                  <v-list-item-title>{{$vuetify.lang.t('$vuetify.DESATIVAR')}}</v-list-item-title>
+                </v-list-item>
+              </v-list>
+
+            </v-menu>
           </v-col>
-
-          <!-- <v-col cols="2 ml-n4">
-
-            <TooltipButton
-              :label="$vuetify.lang.t('$vuetify.DOWNGRADE')"
-              :message="$vuetify.lang.t('$vuetify.DOWNGRADE_DESCRICAO')"
-              :event="showCommDialog"
-              :object="{actionName:'DOWNGRADE'}"
-              :mobile="$vuetify.breakpoint.xs"
-            ></TooltipButton>
-          </v-col>-->
         </v-row>
 
         <v-row
@@ -370,13 +371,14 @@ export default {
         this.title = this.$vuetify.lang.t('$vuetify.CANCELAR_DESATIVACAO')
         this.subtitle = this.$vuetify.lang.t('$vuetify.CANCELAR_DESATIVACAO_DESCRICAO')
 
-      } else if (actionName == 'UPGRADE') {
-        this.title = this.$vuetify.lang.t('$vuetify.UPGRADE')
-        this.subtitle = this.$vuetify.lang.t('$vuetify.UPGRADE_DESCRICAO')
+      } else if (actionName == 'ALTERAR_VELOCIDADE') {
+        this.title = this.$vuetify.lang.t('$vuetify.ALTERAR_VELOCIDADE')
+        this.subtitle = this.$vuetify.lang.t('$vuetify.ALTERAR_VELOCIDADE_DESCRICAO')
 
-      } else if (actionName == 'DOWNGRADE') {
-        this.title = this.$vuetify.lang.t('$vuetify.DOWNGRADE')
-        this.subtitle = this.$vuetify.lang.t('$vuetify.DOWNGRADE_DESCRICAO')
+      } else if (actionName == 'SUSPENDER') {
+        this.title = this.$vuetify.lang.t('$vuetify.SUSPENDER')
+        this.subtitle = this.$vuetify.lang.t('$vuetify.SUSPENDER_DESCRICAO')
+
       }
     },
     showCommDialog (entity) {
@@ -418,11 +420,22 @@ export default {
 
         var obj = {};
 
-        if (this.actionName == 'DESATIVAR' || this.actionName == 'REMANEJAR' || this.actionName == 'ATIVAR' || this.actionName == 'CANCELAR_DESATIVACAO')
+        if (this.actionName == 'ALTERAR_VELOCIDADE' || this.actionName == 'SUSPENDER' ||
+          this.actionName == 'DESATIVAR' || this.actionName == 'REMANEJAR' ||
+          this.actionName == 'ATIVAR' || this.actionName == 'CANCELAR_DESATIVACAO')
           obj['Designação Tpz'] = item.nome
 
-        if (this.actionName == 'NOVO_CIRCUITO' || this.actionName == 'DESATIVAR' || this.actionName == 'ATIVAR' || this.actionName == 'CANCELAR_DESATIVACAO')
+        if (this.actionName == 'SUSPENDER' || this.actionName == 'NOVO_CIRCUITO' ||
+          this.actionName == 'DESATIVAR' || this.actionName == 'ATIVAR' ||
+          this.actionName == 'CANCELAR_DESATIVACAO')
           obj['Designação Cliente'] = item.designacaoCliente
+
+        if (this.actionName == 'ALTERAR_VELOCIDADE') {
+          obj['Contato do cliente'] = item.contato_instalacao
+          obj['Telefone do cliente'] = item.telefone_instalacao
+          obj['Velocidade atual'] = item.velocidade_atual
+          obj['Velocidade solicitada'] = item.velocidade_solicitada
+        }
 
         if (this.actionName == 'NOVO_CIRCUITO') {
           obj['Razão social'] = item.razaoSocial
@@ -453,7 +466,7 @@ export default {
           obj['Telefone da instalação'] = item.telefone_instalacao
         }
 
-        if (this.actionName == 'NOVO_CIRCUITO') {
+        if (this.actionName == 'NOVO_CIRCUITO' || this.actionName == 'ALTERAR_VELOCIDADE') {
           obj['Endereço da gerência'] = item.endereco_gerencia
           obj['VLAN'] = item.vlan
           obj['Interconexão Tpz'] = item.interconexao_tpz

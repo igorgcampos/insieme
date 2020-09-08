@@ -11,7 +11,8 @@
         :small="!mobile"
       >{{label}}</v-btn>
     </template>
-    <span>{{message}}</span>
+    <span style="max-width: 200px;
+    word-wrap: break-word; display:block">{{message}}</span>
   </v-tooltip>
 </template>
 

@@ -148,13 +148,32 @@ export default {
       { text: '', align: 'start', value: 'actions', sortable: false }
     ];
 
-    if (this.actionName == 'DESATIVAR' || this.actionName == 'REMANEJAR' || this.actionName == 'ATIVAR' || this.actionName == 'CANCELAR_DESATIVACAO')
+    if (this.actionName == 'ALTERAR_VELOCIDADE' || this.actionName == 'SUSPENDER' ||
+      this.actionName == 'DESATIVAR' || this.actionName == 'REMANEJAR' ||
+      this.actionName == 'ATIVAR' || this.actionName == 'CANCELAR_DESATIVACAO')
       this.headers.push({
         text: this.$vuetify.lang.t('$vuetify.DESIGNACAO_TPZ'), align: 'start', sortable: false, value: 'nome', width: 200
       })
 
-    if (this.actionName == 'NOVO_CIRCUITO' || this.actionName == 'DESATIVAR' || this.actionName == 'ATIVAR' || this.actionName == 'CANCELAR_DESATIVACAO')
+    if (this.actionName == 'SUSPENDER' || this.actionName == 'NOVO_CIRCUITO' ||
+      this.actionName == 'DESATIVAR' || this.actionName == 'ATIVAR' ||
+      this.actionName == 'CANCELAR_DESATIVACAO')
       this.headers.push({ text: this.$vuetify.lang.t('$vuetify.DESIGNACAO_CLIENTE'), value: 'designacaoCliente', sortable: false, width: 200 })
+
+    if (this.actionName == 'ALTERAR_VELOCIDADE') {
+      this.headers.push({ text: this.$vuetify.lang.t('$vuetify.VELOCIDADE_ATUAL'), value: 'velocidade_atual', sortable: false, width: 200 })
+      this.headers.push({ text: this.$vuetify.lang.t('$vuetify.VELOCIDADE_SOLICITADA'), value: 'velocidade_solicitada', sortable: false, width: 200 })
+      this.headers.push({ text: this.$vuetify.lang.t('$vuetify.CONTATO_INSTALACAO'), value: 'contato_instalacao', sortable: false, width: 200 })
+      this.headers.push({ text: this.$vuetify.lang.t('$vuetify.TELEFONE_INSTALACAO'), value: 'telefone_instalacao', sortable: false, width: 200 })
+      this.headers.push({ text: this.$vuetify.lang.t('$vuetify.ENDERECO_GERENCIA'), value: 'endereco_gerencia', sortable: false, width: 200 })
+      this.headers.push({ text: 'VLAN', value: 'vlan', sortable: false, width: 200 })
+      this.headers.push({ text: this.$vuetify.lang.t('$vuetify.INTERCONEXAO_TPZ'), value: 'interconexao_tpz', sortable: false, width: 200 })
+      this.headers.push({ text: 'WAN CPE REDE', value: 'wan_rede', sortable: false, width: 200 })
+      this.headers.push({ text: this.$vuetify.lang.t('$vuetify.ENDERECO_LAN'), value: 'endereco_lan', sortable: false, width: 200 })
+      this.headers.push({ text: 'WAN CPE HOST', value: 'wan_host', sortable: false, width: 200 })
+      this.headers.push({ text: 'Loopback CPE', value: 'loopback', sortable: false, width: 200 })
+      this.headers.push({ text: this.$vuetify.lang.t('$vuetify.ROTAS_SUMARIZADAS'), value: 'rotas_sumarizadas', sortable: false, width: 200 })
+    }
 
     if (this.actionName == 'NOVO_CIRCUITO') {
 
