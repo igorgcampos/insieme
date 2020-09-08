@@ -607,6 +607,36 @@
     </template>
 
     <template
+      v-slot:item.velocidade_atual="props"
+      v-if="editable"
+    >
+      <v-edit-dialog :return-value.sync="props.item.velocidade_atual"> {{ props.item.velocidade_atual }}
+        <template v-slot:input>
+          <v-text-field
+            v-model="props.item.velocidade_atual"
+            :label="$vuetify.lang.t('$vuetify.EDITAR')"
+            single-line
+          ></v-text-field>
+        </template>
+      </v-edit-dialog>
+    </template>
+
+    <template
+      v-slot:item.velocidade_solicitada="props"
+      v-if="editable"
+    >
+      <v-edit-dialog :return-value.sync="props.item.velocidade_solicitada"> {{ props.item.velocidade_solicitada }}
+        <template v-slot:input>
+          <v-text-field
+            v-model="props.item.velocidade_solicitada"
+            :label="$vuetify.lang.t('$vuetify.EDITAR')"
+            single-line
+          ></v-text-field>
+        </template>
+      </v-edit-dialog>
+    </template>
+
+    <template
       v-slot:item.endereco_gerencia="props"
       v-if="editable"
     >
