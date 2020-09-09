@@ -222,6 +222,27 @@
               </v-col>
             </v-row>
 
+            <v-row>
+              <v-col cols="12">
+                <v-row justify="center">
+                  <span class="mt-n3 text-center subtitle-1 font-weight-bold grey--text text--darken-1">
+                    {{$vuetify.lang.t('$vuetify.STATUS_CONTRATACAO_CAIXA_BAIXA')}}</span>
+                </v-row>
+
+                <v-row>
+                  <v-col class="d-flex justify-center ml-0 mr-n7 pr-0">
+                    <CountCard
+                      :count="installCounts[8]"
+                      :message="$vuetify.lang.t('$vuetify.SUSPENSO')"
+                      color="primary--text"
+                      :func="getSuspended"
+                      :toolTipMessage="$vuetify.lang.t('$vuetify.SUSPENSO_DESCRICAO')"
+                    ></CountCard>
+                  </v-col>
+                </v-row>
+              </v-col>
+            </v-row>
+
           </v-col>
 
           <v-row v-show="!$vuetify.breakpoint.xs">
@@ -289,7 +310,29 @@
                       :style="{'text-decoration':redeDecoration}"
                     >
                       {{$vuetify.lang.t('$vuetify.STATUS_REDE')}}</v-btn>
+                    <v-btn
+                      value="contract"
+                      class="mt-n3 text-center caption font-weight-bold"
+                      small
+                      :style="{'text-decoration':contractDecoration}"
+                    >
+                      {{$vuetify.lang.t('$vuetify.STATUS_CONTRATACAO')}}</v-btn>
                   </v-btn-toggle>
+                </v-row>
+
+                <v-row
+                  class="ml-2"
+                  v-show="button == 'contract'"
+                >
+                  <v-col class="flex-grow-0">
+                    <CountCard
+                      :count="installCounts[8]"
+                      :message="$vuetify.lang.t('$vuetify.SUSPENSO')"
+                      color="primary--text"
+                      :func="getSuspended"
+                      :toolTipMessage="$vuetify.lang.t('$vuetify.SUSPENSO_DESCRICAO')"
+                    ></CountCard>
+                  </v-col>
                 </v-row>
 
                 <v-row
@@ -876,6 +919,9 @@ export default {
     getLogistic () {
       this.getFromStatusInstall(8)
     },
+    getSuspended () {
+      this.getFromStatusInstall(9)
+    },
     getFromStatusInstall (status) {
 
       if (this.isLoading) {
@@ -1055,10 +1101,12 @@ export default {
   updated: function () {
     this.logDecoration = this.button == 'log' ? 'underline' : 'none'
     this.redeDecoration = this.button == 'rede' ? 'underline' : 'none'
+    this.contractDecoration = this.button == 'contract' ? 'underline' : 'none'
   },
   data: () => ({
     logDecoration: 'none',
     redeDecoration: 'none',
+    contractDecoration: 'none',
     button: 'log',
     loadingExport: false,
     allCircuits: undefined,
@@ -1069,7 +1117,7 @@ export default {
     showDialog: false,
     showSuccess: false,
     counts: [0, 0],
-    installCounts: [0, 0, 0, 0, 0, 0, 0, 0],
+    installCounts: [0, 0, 0, 0, 0, 0, 0, 0, 0],
     circuits: [],
     statuses: [],
     products: [],
