@@ -52,8 +52,8 @@
         ></BarChart>
 
         <BarChart
-          :chart-data="circuitDataRede"
-          :options="circuitOptionsRede"
+          :chart-data="circuitDataContratacao"
+          :options="circuitOptionsContratacao"
           :styles="circuitStyle"
         ></BarChart>
       </v-row>
@@ -97,7 +97,7 @@ export default {
       showReport: false,
       circuitDataOp: undefined,
       circuitDataLog: undefined,
-      circuitDataRede: undefined,
+      circuitDataContratacao: undefined,
       invoiceData: undefined,
       issueData: undefined,
       circuitStyle: {
@@ -136,7 +136,7 @@ export default {
           fontSize: 16
         }
       },
-      circuitOptionsRede: {
+      circuitOptionsContratacao: {
         responsive: true,
         maintainAspectRatio: false,
         scales: {
@@ -284,14 +284,15 @@ export default {
         ]
       }
 
-      this.circuitOptionsRede.title.text = this.$vuetify.lang.t('$vuetify.STATUS_REDE')
-      this.circuitOptionsRede.legend = { display: false }
-      this.circuitOptionsRede.title.fontSize = this.$vuetify.breakpoint.xs ? 16 : 12
+      this.circuitOptionsContratacao.title.text = this.$vuetify.lang.t('$vuetify.STATUS_CONTRATACAO_CAIXA_BAIXA')
+      this.circuitOptionsContratacao.legend = { display: false }
+      this.circuitOptionsContratacao.title.fontSize = this.$vuetify.breakpoint.xs ? 16 : 12
 
-      this.circuitDataRede = {
+      this.circuitDataContratacao = {
         labels: [this.$vuetify.lang.t('$vuetify.ATIVADO'),
         this.$vuetify.lang.t('$vuetify.DESATIVADO'),
-        this.$vuetify.lang.t('$vuetify.CANCELADO'), this.$vuetify.lang.t('$vuetify.DESINSTALADO')],
+        this.$vuetify.lang.t('$vuetify.CANCELADO'), this.$vuetify.lang.t('$vuetify.DESINSTALADO'),
+        this.$vuetify.lang.t('$vuetify.SUSPENSO')],
         datasets: [
           {
 
@@ -302,7 +303,7 @@ export default {
               'rgba(255, 159, 64, 0.5)'
             ],
             borderWidth: 2,
-            data: circuitData.slice(2, 6)
+            data: circuitData.slice(2, 6).concat(circuitData.slice(10, 11))
           }
         ]
       }

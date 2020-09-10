@@ -306,7 +306,7 @@
                 <v-sheet
                   class="ma-0 pa-0"
                   style="background:#FAFAFA"
-                  v-show="button == 'contract'"
+                  v-if="button == 'contract'"
                   max-width="500"
                 >
 
