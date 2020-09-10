@@ -155,7 +155,7 @@
               >
                 <v-row justify="center">
                   <span class="mt-n3 text-center subtitle-1 font-weight-bold grey--text text--darken-1">
-                    {{$vuetify.lang.t('$vuetify.STATUS_REDE')}}</span>
+                    {{$vuetify.lang.t('$vuetify.STATUS_CONTRATACAO_CAIXA_BAIXA')}}</span>
                 </v-row>
 
                 <v-sheet
@@ -217,29 +217,19 @@
                         ></CountCard>
                       </v-col>
                     </v-slide-item>
+                    <v-slide-item>
+                      <v-col class="flex-grow-0">
+                        <CountCard
+                          :count="installCounts[8]"
+                          :message="$vuetify.lang.t('$vuetify.SUSPENSO')"
+                          color="primary--text"
+                          :func="getSuspended"
+                          :toolTipMessage="$vuetify.lang.t('$vuetify.SUSPENSO_DESCRICAO')"
+                        ></CountCard>
+                      </v-col>
+                    </v-slide-item>
                   </v-slide-group>
                 </v-sheet>
-              </v-col>
-            </v-row>
-
-            <v-row>
-              <v-col cols="12">
-                <v-row justify="center">
-                  <span class="mt-n3 text-center subtitle-1 font-weight-bold grey--text text--darken-1">
-                    {{$vuetify.lang.t('$vuetify.STATUS_CONTRATACAO_CAIXA_BAIXA')}}</span>
-                </v-row>
-
-                <v-row>
-                  <v-col class="d-flex justify-center ml-0 mr-n7 pr-0">
-                    <CountCard
-                      :count="installCounts[8]"
-                      :message="$vuetify.lang.t('$vuetify.SUSPENSO')"
-                      color="primary--text"
-                      :func="getSuspended"
-                      :toolTipMessage="$vuetify.lang.t('$vuetify.SUSPENSO_DESCRICAO')"
-                    ></CountCard>
-                  </v-col>
-                </v-row>
               </v-col>
             </v-row>
 
@@ -304,13 +294,6 @@
                       {{$vuetify.lang.t('$vuetify.STATUS_LOGISTICA')}}
                     </v-btn>
                     <v-btn
-                      value="rede"
-                      class="mt-n3 text-center caption font-weight-bold"
-                      small
-                      :style="{'text-decoration':redeDecoration}"
-                    >
-                      {{$vuetify.lang.t('$vuetify.STATUS_REDE')}}</v-btn>
-                    <v-btn
                       value="contract"
                       class="mt-n3 text-center caption font-weight-bold"
                       small
@@ -320,66 +303,78 @@
                   </v-btn-toggle>
                 </v-row>
 
-                <v-row
-                  class="ml-2"
+                <v-sheet
+                  class="ma-0 pa-0"
+                  style="background:#FAFAFA"
                   v-show="button == 'contract'"
-                >
-                  <v-col class="flex-grow-0">
-                    <CountCard
-                      :count="installCounts[8]"
-                      :message="$vuetify.lang.t('$vuetify.SUSPENSO')"
-                      color="primary--text"
-                      :func="getSuspended"
-                      :toolTipMessage="$vuetify.lang.t('$vuetify.SUSPENSO_DESCRICAO')"
-                    ></CountCard>
-                  </v-col>
-                </v-row>
-
-                <v-row
-                  class="ml-2"
-                  v-show="button == 'rede'"
+                  max-width="500"
                 >
 
-                  <v-col class="flex-grow-0">
-                    <CountCard
-                      :count="installCounts[0]"
-                      :message="$vuetify.lang.t('$vuetify.ATIVADO')"
-                      color="primary--text"
-                      :func="getActive"
-                      :toolTipMessage="$vuetify.lang.t('$vuetify.ATIVADO_DESCRICAO')"
-                    ></CountCard>
-                  </v-col>
+                  <v-slide-group
+                    :v-model="null"
+                    show-arrows
+                    center-active
+                    next-icon="mdi-arrow-right-thick primary--text"
+                    prev-icon="mdi-arrow-left-thick primary--text"
+                  >
 
-                  <v-col class="flex-grow-0">
-                    <CountCard
-                      :count="installCounts[1]"
-                      :message="$vuetify.lang.t('$vuetify.DESATIVADO')"
-                      color="primary--text"
-                      :func="getDeactive"
-                      :toolTipMessage="$vuetify.lang.t('$vuetify.DESATIVADO_DESCRICAO')"
-                    ></CountCard>
-                  </v-col>
-
-                  <v-col class="flex-grow-0">
-                    <CountCard
-                      :count="installCounts[3]"
-                      :message="$vuetify.lang.t('$vuetify.DESINSTALADO')"
-                      color="primary--text"
-                      :func="getUninstall"
-                      :toolTipMessage="$vuetify.lang.t('$vuetify.DESINSTALADO_DESCRICAO')"
-                    ></CountCard>
-                  </v-col>
-
-                  <v-col class="flex-grow-0">
-                    <CountCard
-                      :count="installCounts[2]"
-                      :message="$vuetify.lang.t('$vuetify.CANCELADO')"
-                      color="primary--text"
-                      :func="getCanceled"
-                      :toolTipMessage="$vuetify.lang.t('$vuetify.CANCELADO_DESCRICAO')"
-                    ></CountCard>
-                  </v-col>
-                </v-row>
+                    <v-slide-item>
+                      <v-col class="flex-grow-0">
+                        <CountCard
+                          :count="installCounts[0]"
+                          :message="$vuetify.lang.t('$vuetify.ATIVADO')"
+                          color="primary--text"
+                          :func="getActive"
+                          :toolTipMessage="$vuetify.lang.t('$vuetify.ATIVADO_DESCRICAO')"
+                        ></CountCard>
+                      </v-col>
+                    </v-slide-item>
+                    <v-slide-item>
+                      <v-col class="flex-grow-0">
+                        <CountCard
+                          :count="installCounts[1]"
+                          :message="$vuetify.lang.t('$vuetify.DESATIVADO')"
+                          color="primary--text"
+                          :func="getDeactive"
+                          :toolTipMessage="$vuetify.lang.t('$vuetify.DESATIVADO_DESCRICAO')"
+                        ></CountCard>
+                      </v-col>
+                    </v-slide-item>
+                    <v-slide-item>
+                      <v-col class="flex-grow-0">
+                        <CountCard
+                          :count="installCounts[3]"
+                          :message="$vuetify.lang.t('$vuetify.DESINSTALADO')"
+                          color="primary--text"
+                          :func="getUninstall"
+                          :toolTipMessage="$vuetify.lang.t('$vuetify.DESINSTALADO_DESCRICAO')"
+                        ></CountCard>
+                      </v-col>
+                    </v-slide-item>
+                    <v-slide-item>
+                      <v-col class="flex-grow-0">
+                        <CountCard
+                          :count="installCounts[2]"
+                          :message="$vuetify.lang.t('$vuetify.CANCELADO')"
+                          color="primary--text"
+                          :func="getCanceled"
+                          :toolTipMessage="$vuetify.lang.t('$vuetify.CANCELADO_DESCRICAO')"
+                        ></CountCard>
+                      </v-col>
+                    </v-slide-item>
+                    <v-slide-item>
+                      <v-col class="flex-grow-0">
+                        <CountCard
+                          :count="installCounts[8]"
+                          :message="$vuetify.lang.t('$vuetify.SUSPENSO')"
+                          color="primary--text"
+                          :func="getSuspended"
+                          :toolTipMessage="$vuetify.lang.t('$vuetify.SUSPENSO_DESCRICAO')"
+                        ></CountCard>
+                      </v-col>
+                    </v-slide-item>
+                  </v-slide-group>
+                </v-sheet>
 
                 <v-row
                   class="ml-2"
@@ -1100,12 +1095,10 @@ export default {
   },
   updated: function () {
     this.logDecoration = this.button == 'log' ? 'underline' : 'none'
-    this.redeDecoration = this.button == 'rede' ? 'underline' : 'none'
     this.contractDecoration = this.button == 'contract' ? 'underline' : 'none'
   },
   data: () => ({
     logDecoration: 'none',
-    redeDecoration: 'none',
     contractDecoration: 'none',
     button: 'log',
     loadingExport: false,
