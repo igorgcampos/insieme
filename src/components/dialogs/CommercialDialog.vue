@@ -139,7 +139,9 @@ export default {
   }),
   watch: {
     itemList: function () {
-      this.entityList = this.itemList.map((x) => x)
+
+      if (this.itemList)
+        this.entityList = this.itemList.map((x) => x)
     }
   },
   beforeUpdate: function () {

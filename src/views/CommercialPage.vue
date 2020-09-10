@@ -549,7 +549,6 @@ export default {
       if (!page) {
         this.page = 0;
         this.noResult = false;
-        this.selectedCheckList = []
       }
 
       this.$get('/circuito/busca', {
@@ -564,10 +563,12 @@ export default {
 
         if (!page) {
           this.circuits = []
+          this.selectedCheckList = []
         }
 
         this.circuits = this.circuits.concat(response.data);
         this.isLoading = false;
+
       });
 
     },
