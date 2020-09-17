@@ -150,16 +150,16 @@ export default {
       { text: '', align: 'start', value: 'actions', sortable: false }
     ];
 
-    if (this.actionName == 'ALTERAR_VELOCIDADE' || this.actionName == 'SUSPENDER' ||
-      this.actionName == 'DESATIVAR' || this.actionName == 'REMANEJAR' ||
-      this.actionName == 'ATIVAR' || this.actionName == 'CANCELAR_DESATIVACAO')
+    if (this.actionName == 'ALTERAR_VELOCIDADE' || this.actionName == 'DESATIVACAO_TEMPORARIA' ||
+      this.actionName == 'CANCELAR' || this.actionName == 'REMANEJAR' ||
+      this.actionName == 'ATIVAR' || this.actionName == 'REVOGAR_CANCELAMENTO')
       this.headers.push({
         text: this.$vuetify.lang.t('$vuetify.DESIGNACAO_TPZ'), align: 'start', sortable: false, value: 'nome', width: 200
       })
 
-    if (this.actionName == 'SUSPENDER' || this.actionName == 'NOVO_CIRCUITO' ||
-      this.actionName == 'DESATIVAR' || this.actionName == 'ATIVAR' ||
-      this.actionName == 'CANCELAR_DESATIVACAO')
+    if (this.actionName == 'DESATIVACAO_TEMPORARIA' || this.actionName == 'NOVO_CIRCUITO' ||
+      this.actionName == 'CANCELAR' || this.actionName == 'ATIVAR' ||
+      this.actionName == 'REVOGAR_CANCELAMENTO')
       this.headers.push({ text: this.$vuetify.lang.t('$vuetify.DESIGNACAO_CLIENTE'), value: 'designacaoCliente', sortable: false, width: 200 })
 
     if (this.actionName == 'ALTERAR_VELOCIDADE') {
@@ -222,7 +222,7 @@ export default {
       }
     }
 
-    if (this.actionName == 'DESATIVAR') {
+    if (this.actionName == 'CANCELAR') {
       this.headers.push({ text: this.$vuetify.lang.t('$vuetify.ENDERECO_INSTALACAO'), value: 'endereco_instalacao', sortable: false, width: 200 })
       this.headers.push({ text: this.$vuetify.lang.t('$vuetify.BAIRRO_INSTALACAO'), value: 'bairro_instalacao', sortable: false, width: 200 })
       this.headers.push({ text: this.$vuetify.lang.t('$vuetify.CIDADE_INSTALACAO'), value: 'cidade_instalacao', sortable: false, width: 200 })

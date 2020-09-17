@@ -93,14 +93,14 @@
                 <v-list-item @click="showCommercialDialog('ALTERAR_VELOCIDADE')">
                   <v-list-item-title>{{ $vuetify.lang.t('$vuetify.ALTERAR_VELOCIDADE') }}</v-list-item-title>
                 </v-list-item>
-                <v-list-item @click="showCommercialDialog('CANCELAR_DESATIVACAO')">
-                  <v-list-item-title>{{ $vuetify.lang.t('$vuetify.CANCELAR_DESATIVACAO') }}</v-list-item-title>
+                <v-list-item @click="showCommercialDialog('REVOGAR_CANCELAMENTO')">
+                  <v-list-item-title>{{ $vuetify.lang.t('$vuetify.REVOGAR_CANCELAMENTO') }}</v-list-item-title>
                 </v-list-item>
-                <v-list-item @click="showCommercialDialog('DESATIVAR')">
-                  <v-list-item-title>{{ $vuetify.lang.t('$vuetify.DESATIVAR') }}</v-list-item-title>
+                <v-list-item @click="showCommercialDialog('CANCELAR')">
+                  <v-list-item-title>{{ $vuetify.lang.t('$vuetify.CANCELAR') }}</v-list-item-title>
                 </v-list-item>
-                <v-list-item @click="showCommercialDialog('SUSPENDER')">
-                  <v-list-item-title>{{ $vuetify.lang.t('$vuetify.SUSPENDER') }}</v-list-item-title>
+                <v-list-item @click="showCommercialDialog('DESATIVACAO_TEMPORARIA')">
+                  <v-list-item-title>{{ $vuetify.lang.t('$vuetify.DESATIVACAO_TEMPORARIA') }}</v-list-item-title>
                 </v-list-item>
               </v-list>
             </v-menu>
@@ -176,14 +176,14 @@
 
               <v-list>
 
-                <v-list-item @click="showCommDialog({actionName:'SUSPENDER'})">
-                  <v-list-item-title>{{$vuetify.lang.t('$vuetify.SUSPENDER')}}</v-list-item-title>
+                <v-list-item @click="showCommDialog({actionName:'DESATIVACAO_TEMPORARIA'})">
+                  <v-list-item-title>{{$vuetify.lang.t('$vuetify.DESATIVACAO_TEMPORARIA')}}</v-list-item-title>
                 </v-list-item>
-                <v-list-item @click="showCommDialog({actionName:'CANCELAR_DESATIVACAO'})">
-                  <v-list-item-title>{{$vuetify.lang.t('$vuetify.CANCELAR_DESATIVACAO')}}</v-list-item-title>
+                <v-list-item @click="showCommDialog({actionName:'REVOGAR_CANCELAMENTO'})">
+                  <v-list-item-title>{{$vuetify.lang.t('$vuetify.REVOGAR_CANCELAMENTO')}}</v-list-item-title>
                 </v-list-item>
-                <v-list-item @click="showCommDialog({actionName: 'DESATIVAR'})">
-                  <v-list-item-title>{{$vuetify.lang.t('$vuetify.DESATIVAR')}}</v-list-item-title>
+                <v-list-item @click="showCommDialog({actionName: 'CANCELAR'})">
+                  <v-list-item-title>{{$vuetify.lang.t('$vuetify.CANCELAR')}}</v-list-item-title>
                 </v-list-item>
               </v-list>
 
@@ -359,25 +359,25 @@ export default {
         this.title = this.$vuetify.lang.t('$vuetify.ATIVAR')
         this.subtitle = this.$vuetify.lang.t('$vuetify.ATIVAR_DESCRICAO')
 
-      } else if (actionName == 'DESATIVAR') {
-        this.title = this.$vuetify.lang.t('$vuetify.DESATIVAR')
-        this.subtitle = this.$vuetify.lang.t('$vuetify.DESATIVAR_DESCRICAO')
+      } else if (actionName == 'CANCELAR') {
+        this.title = this.$vuetify.lang.t('$vuetify.CANCELAR')
+        this.subtitle = this.$vuetify.lang.t('$vuetify.CANCELAR_DESCRICAO')
 
       } else if (actionName == 'REMANEJAR') {
         this.title = this.$vuetify.lang.t('$vuetify.REMANEJAR')
         this.subtitle = this.$vuetify.lang.t('$vuetify.REMANEJAR_DESCRICAO')
 
-      } else if (actionName == 'CANCELAR_DESATIVACAO') {
-        this.title = this.$vuetify.lang.t('$vuetify.CANCELAR_DESATIVACAO')
-        this.subtitle = this.$vuetify.lang.t('$vuetify.CANCELAR_DESATIVACAO_DESCRICAO')
+      } else if (actionName == 'REVOGAR_CANCELAMENTO') {
+        this.title = this.$vuetify.lang.t('$vuetify.REVOGAR_CANCELAMENTO')
+        this.subtitle = this.$vuetify.lang.t('$vuetify.REVOGAR_CANCELAMENTO_DESCRICAO')
 
       } else if (actionName == 'ALTERAR_VELOCIDADE') {
         this.title = this.$vuetify.lang.t('$vuetify.ALTERAR_VELOCIDADE')
         this.subtitle = this.$vuetify.lang.t('$vuetify.ALTERAR_VELOCIDADE_DESCRICAO')
 
-      } else if (actionName == 'SUSPENDER') {
-        this.title = this.$vuetify.lang.t('$vuetify.SUSPENDER')
-        this.subtitle = this.$vuetify.lang.t('$vuetify.SUSPENDER_DESCRICAO')
+      } else if (actionName == 'DESATIVACAO_TEMPORARIA') {
+        this.title = this.$vuetify.lang.t('$vuetify.DESATIVACAO_TEMPORARIA')
+        this.subtitle = this.$vuetify.lang.t('$vuetify.DESATIVACAO_TEMPORARIA_DESCRICAO')
 
       }
     },
@@ -420,14 +420,14 @@ export default {
 
         var obj = {};
 
-        if (this.actionName == 'ALTERAR_VELOCIDADE' || this.actionName == 'SUSPENDER' ||
-          this.actionName == 'DESATIVAR' || this.actionName == 'REMANEJAR' ||
-          this.actionName == 'ATIVAR' || this.actionName == 'CANCELAR_DESATIVACAO')
+        if (this.actionName == 'ALTERAR_VELOCIDADE' || this.actionName == 'DESATIVACAO_TEMPORARIA' ||
+          this.actionName == 'CANCELAR' || this.actionName == 'REMANEJAR' ||
+          this.actionName == 'ATIVAR' || this.actionName == 'REVOGAR_CANCELAMENTO')
           obj['Designação Tpz'] = item.nome
 
-        if (this.actionName == 'SUSPENDER' || this.actionName == 'NOVO_CIRCUITO' ||
-          this.actionName == 'DESATIVAR' || this.actionName == 'ATIVAR' ||
-          this.actionName == 'CANCELAR_DESATIVACAO')
+        if (this.actionName == 'DESATIVACAO_TEMPORARIA' || this.actionName == 'NOVO_CIRCUITO' ||
+          this.actionName == 'CANCELAR' || this.actionName == 'ATIVAR' ||
+          this.actionName == 'REVOGAR_CANCELAMENTO')
           obj['Designação Cliente'] = item.designacaoCliente
 
         if (this.actionName == 'ALTERAR_VELOCIDADE') {
@@ -456,7 +456,7 @@ export default {
           obj['Telefone da remessa'] = item.telefone_remessa
         }
 
-        if (this.actionName == 'DESATIVAR' || this.actionName == 'NOVO_CIRCUITO') {
+        if (this.actionName == 'CANCELAR' || this.actionName == 'NOVO_CIRCUITO') {
           obj['Endereço da instalação'] = item.endereco_instalacao
           obj['Bairro da instalação'] = item.bairro_instalacao
           obj['Cidade da instalação'] = item.cidade_instalacao
