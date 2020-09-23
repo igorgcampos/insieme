@@ -85,7 +85,7 @@
                 single-line
                 solo
                 ref="password"
-                :rules="[rules.min, rules.emailMatch, rules.noProfile]"
+                :rules="[rules.emailMatch, rules.noProfile]"
                 :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
                 prepend-inner-icon="mdi-lock"
                 :type="show ? 'text' : 'password'"
