@@ -334,5 +334,6 @@ export default {
     CONTATO_DESTINO: 'Destination contact',
     TELEFONE_DESTINO: 'Destination phone',
 
-    CIRCUITO_LOTE_COMERCIAL: 'Batch circuits in the commercial area'
+    CIRCUITO_LOTE_COMERCIAL: 'Batch circuits in the commercial area',
+    SEM_PERMISSAO: 'No access permission',
 }

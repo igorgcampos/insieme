@@ -366,9 +366,9 @@ export default {
     },
     logout () {
 
-      this.$hideChatButton()
       this.$logout().then(() => {
         this.$root.$emit('logout-success')
+        this.$hideChatButton()
       })
     }
   },

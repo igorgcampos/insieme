@@ -330,5 +330,6 @@ export default {
     CONTATO_DESTINO: 'Contato do destino',
     TELEFONE_DESTINO: 'Telefone do destino',
 
-    CIRCUITO_LOTE_COMERCIAL: 'Circuitos em lote da área comercial'
+    CIRCUITO_LOTE_COMERCIAL: 'Circuitos em lote da área comercial',
+    SEM_PERMISSAO: 'Sem permissão para acessar',
 }

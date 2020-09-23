@@ -85,7 +85,7 @@
                 single-line
                 solo
                 ref="password"
-                :rules="[rules.min, rules.emailMatch]"
+                :rules="[rules.min, rules.emailMatch, rules.noProfile]"
                 :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
                 prepend-inner-icon="mdi-lock"
                 :type="show ? 'text' : 'password'"
@@ -165,6 +165,7 @@ export default {
       rules: {
         min: v => v.length >= 6 || this.$vuetify.lang.t('$vuetify.MINIMO_CARACTERES'),
         emailMatch: () => !!this.success || this.$vuetify.lang.t('$vuetify.SENHA_INCORRETA'),
+        noProfile: () => this.$getUser().perfis.length > 0 || this.$vuetify.lang.t('$vuetify.SEM_PERMISSAO')
       },
     }
   },
@@ -192,7 +193,7 @@ export default {
       this.$login(this.username, this.password).then(response => {
 
         this.success = response
-        if (this.success) {
+        if (this.success && this.$getUser().perfis.length > 0) {
           this.$root.$emit('login-success')
         } else {
           this.$refs["password"].validate(true)
