@@ -145,23 +145,46 @@
       </template>
       <span>{{$vuetify.lang.t('$vuetify.PAGINA_CLIENTES')}}</span>
     </v-tooltip>
+
     <v-menu
       bottom
       right
       transition="slide-x-transition"
       origin="top left"
+      :close-on-click="true"
+      :close-on-content-click="false"
     >
       <template v-slot:activator="{ on }">
+
         <v-chip
           pill
           v-on="on"
           color="red darken-3"
           :class="{'caption':$vuetify.breakpoint.xs}"
         >
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-avatar
+                left
+                class="red darken-5"
+                v-bind="attrs"
+                v-on="on"
+              >
+                {{newNotificationsCount}}
+              </v-avatar>
+            </template>
+            <span>{{$vuetify.lang.t('$vuetify.NOVAS_NOTIFICACOES', newNotificationsCount)}}</span>
+          </v-tooltip>
           {{$vuetify.lang.t('$vuetify.OLA')}}, {{user.nome}}
         </v-chip>
+
       </template>
-      <v-card width="300">
+
+      <v-card
+        width="300"
+        height="450"
+        style="overflow-y:hidden;"
+      >
         <v-list
           color="red darken-3"
           dark
@@ -171,31 +194,55 @@
               <v-list-item-title>{{user.nome}}</v-list-item-title>
               <v-list-item-subtitle>{{user.email}}</v-list-item-subtitle>
             </v-list-item-content>
-            <v-list-item-action>
-              <v-btn
-                icon
-                color="white"
-                @click="menu = false"
-              >
-                <v-icon>mdi-close-circle</v-icon>
-              </v-btn>
-            </v-list-item-action>
           </v-list-item>
         </v-list>
-        <v-list>
-          <v-list-item>
-            <v-list-item-action>
-              <v-icon>mdi-account-multiple</v-icon>
-            </v-list-item-action>
-            <v-list-item-title>{{$vuetify.lang.t('$vuetify.PERFIS')}}</v-list-item-title>
-          </v-list-item>
-          <v-list-item
-            v-for="perfil in user.perfis"
-            :key="perfil"
+
+        <v-tabs
+          v-model="tab"
+          centered
+          color="red accent-4"
+          icons-and-text
+        >
+          <v-tabs-slider></v-tabs-slider>
+
+          <v-tab
+            href="#tab-1"
+            class="caption"
           >
-            <v-subheader>{{perfil}}</v-subheader>
-          </v-list-item>
-        </v-list>
+            {{$vuetify.lang.t('$vuetify.NOTIFICACOES')}}
+            <v-icon>mdi-alert-box</v-icon>
+          </v-tab>
+
+          <v-tab
+            href="#tab-2"
+            class="caption"
+          >
+            {{$vuetify.lang.t('$vuetify.PERFIS')}}
+            <v-icon>mdi-account-multiple</v-icon>
+          </v-tab>
+
+        </v-tabs>
+
+        <v-tabs-items v-model="tab">
+          <v-tab-item value="tab-1">
+            <NotificationList
+              :notifications="notifications"
+              :removeFunction="removeNotification"
+              :viewFunction="viewNotification"
+            ></NotificationList>
+          </v-tab-item>
+
+          <v-tab-item value="tab-2">
+            <v-list style="overflow-y:auto;">
+              <v-list-item
+                v-for="perfil in user.perfis"
+                :key="perfil"
+              >
+                <v-subheader>{{perfil}}</v-subheader>
+              </v-list-item>
+            </v-list>
+          </v-tab-item>
+        </v-tabs-items>
       </v-card>
     </v-menu>
 
@@ -312,10 +359,12 @@
 <script>
 
 import FaqDialog from '../components/dialogs/FaqDialog';
+import NotificationList from '../components/NotificationList';
 
 export default {
   components: {
     FaqDialog,
+    NotificationList,
   },
   created: function () {
     this.user = this.$getUser();
@@ -324,12 +373,47 @@ export default {
 
     var vm = this;
     setTimeout(function () { vm.$showChatButton() }, 2000)
+
+    this.$get('/notificacao/busca', { clientId: this.$getUser().cliente.id }).
+      then(response => {
+
+        this.notifications = response.data;
+        this.newNotificationsCount = this.notifications.filter(note => note.visualizado == false).length
+      })
+
   },
   data: () => ({
     user: {},
-    showFaq: false
+    showFaq: false,
+    notifications: [],
+    newNotificationsCount: 0,
+    tab: 'null',
   }),
   methods: {
+    removeNotification (notification) {
+
+      this.$delete('/notificacao/delete', { notificationId: notification.id }).
+        then(response => {
+
+          if (response.data) {
+            this.notifications.splice(this.notification.indexOf(notification), 1)
+            this.newNotificationsCount = this.notifications.filter(note => note.visualizado == false).length
+          }
+        })
+
+    },
+    viewNotification (notification) {
+
+      //TODO - Evento de mudar para tela de dashboard, ir para modulo de faturamento,
+      //e busca automatica pelo numero da nota fiscal.
+
+      this.$get('/notificacao/visualizar', { notificationId: notification.id }).
+        then(() => {
+
+          notification.visualizado = true;
+          this.newNotificationsCount = this.notifications.filter(note => note.visualizado == false).length
+        })
+    },
     showReport () {
       this.$root.$emit('report')
       this.$hideChatButton();
