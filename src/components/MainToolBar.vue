@@ -61,6 +61,7 @@
           v-show="canShowShortcut() && ($hasProfile('Administrador') || $hasProfile('Cliente') || $hasProfile('Financeiro'))"
           class="mr-2"
           @click="goTo('invoices')"
+          ref="invoiceChip"
         >
           {{$vuetify.lang.t('$vuetify.FATURAMENTO')}}
         </v-chip>
@@ -173,7 +174,9 @@
                 {{newNotificationsCount}}
               </v-avatar>
             </template>
-            <span>{{$vuetify.lang.t('$vuetify.NOVAS_NOTIFICACOES', newNotificationsCount)}}</span>
+            <span>{{newNotificationsCount == 0?$vuetify.lang.t('$vuetify.SEM_NOTIFICACOES', newNotificationsCount):
+              newNotificationsCount == 1?$vuetify.lang.t('$vuetify.NOVA_NOTIFICACAO', newNotificationsCount):
+              $vuetify.lang.t('$vuetify.NOVAS_NOTIFICACOES', newNotificationsCount)}}</span>
           </v-tooltip>
           {{$vuetify.lang.t('$vuetify.OLA')}}, {{user.nome}}
         </v-chip>
@@ -275,6 +278,7 @@
         <v-list-item
           v-show="canShowShortcut()"
           @click="goTo('invoices')"
+          ref="invoiceItem"
         >
           <v-list-item-title>{{$vuetify.lang.t('$vuetify.FATURAMENTO')}}</v-list-item-title>
         </v-list-item>
@@ -396,7 +400,9 @@ export default {
         then(response => {
 
           if (response.data) {
-            this.notifications.splice(this.notification.indexOf(notification), 1)
+            this.notifications = this.notifications.filter(note => {
+              return note.id != notification.id
+            });
             this.newNotificationsCount = this.notifications.filter(note => note.visualizado == false).length
           }
         })
@@ -404,8 +410,22 @@ export default {
     },
     viewNotification (notification) {
 
-      //TODO - Evento de mudar para tela de dashboard, ir para modulo de faturamento,
-      //e busca automatica pelo numero da nota fiscal.
+      this.$router.push({ name: 'Dashboard', params: { contract: notification.contrato } })
+
+      setTimeout(() => {
+
+        if (!this.$vuetify.breakpoint.xs)
+          this.$refs.invoiceChip.click();
+        if (this.$vuetify.breakpoint.xs)
+          this.$refs.invoiceItem.click();
+
+        this.$root.$emit('search-invoice', notification.mensagem)
+      }, 300)
+
+
+      if (notification.visualizado) {
+        return;
+      }
 
       this.$get('/notificacao/visualizar', { notificationId: notification.id }).
         then(() => {

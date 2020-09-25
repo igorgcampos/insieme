@@ -86,6 +86,7 @@
                 append-icon="mdi-magnify"
                 @click:append="search()"
                 @keypress.enter="search()"
+                ref="searchField"
               ></v-text-field>
             </v-row>
           </v-col>
@@ -143,7 +144,10 @@
             v-scroll:#invoiceId="searchMore"
             style="max-height:340px; width:100%;"
           >
-            <v-expansion-panels class="ma-1">
+            <v-expansion-panels
+              class="ma-1"
+              v-model="openedPanel"
+            >
               <v-expansion-panel
                 v-for="(invoice, i) in invoices"
                 :key="i"
@@ -547,11 +551,11 @@ export default {
         this.search(this.page);
       }
     },
-    search (page) {
+    search (page, selectInvoiceIndex) {
 
       this.isLoading = true;
 
-      if (!page) {
+      if (!page || page == 0) {
         this.page = 0;
         this.noResult = false;
       }
@@ -582,6 +586,7 @@ export default {
 
         this.invoices = this.invoices.concat(response.data);
         this.isLoading = false;
+        this.openedPanel = selectInvoiceIndex
       });
 
     },
@@ -590,6 +595,7 @@ export default {
     contract: Object
   },
   data: () => ({
+    openedPanel: undefined,
     allInvoices: undefined,
     loadingExport: false,
     showPanel: true,
@@ -634,6 +640,12 @@ export default {
         this.invoices = response.data;
         this.isLoading = false;
       });
+
+    this.$root.$on('search-invoice', (invoiceNumber) => {
+
+      this.searchText = invoiceNumber;
+      this.search(0, 0);
+    })
   }
 };
 </script>

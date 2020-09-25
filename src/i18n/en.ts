@@ -337,6 +337,9 @@ export default {
     CIRCUITO_LOTE_COMERCIAL: 'Batch circuits in the commercial area',
     SEM_PERMISSAO: 'No access permission',
     NOVAS_NOTIFICACOES: '{0} new notifications',
+    NOVA_NOTIFICACAO: '{0} new notification',
+    SEM_NOTIFICACOES: 'No new notifications',
+    NENHUMA_NOTIFICACAO: 'No notifications',
     NOTIFICACOES: 'Notifications',
     APAGAR_NOTIFICACAO: 'Erase notification'
 }

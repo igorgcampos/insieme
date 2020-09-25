@@ -64,10 +64,15 @@ httpService.install = function (Vue, router) {
         }
     }
 
-    Vue.prototype.$delete = async (url, body) => {
+    Vue.prototype.$delete = async (url, params) => {
         try {
             return await axios.delete(serverUrl.concat(url),
-                { data: body, headers: { Authorization: 'Bearer '.concat(window.sessionStorage.getItem('keyCloakToken')) } })
+                {
+                    headers: {
+                        Authorization: 'Bearer '.concat(window.sessionStorage.getItem('keyCloakToken'))
+                    },
+                    params: params,
+                })
 
         } catch (error) {
             console.log(error)

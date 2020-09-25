@@ -333,6 +333,9 @@ export default {
     CIRCUITO_LOTE_COMERCIAL: 'Circuitos em lote da área comercial',
     SEM_PERMISSAO: 'Sem permissão para acessar',
     NOVAS_NOTIFICACOES: '{0} novas notificações',
+    NOVA_NOTIFICACAO: '{0} nova notificação',
+    SEM_NOTIFICACOES: 'Nenhuma notificação nova',
+    NENHUMA_NOTIFICACAO: 'Nenhuma notificação',
     NOTIFICACOES: 'Notificações',
     APAGAR_NOTIFICACAO: 'Apagar notificação'
 }
