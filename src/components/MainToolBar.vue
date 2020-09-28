@@ -155,32 +155,39 @@
       :close-on-click="true"
       :close-on-content-click="false"
     >
-      <template v-slot:activator="{ on }">
+      <template v-slot:activator="{ on: menu, attrs }">
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on: tooltip }">
+            <v-chip
+              pill
+              color="red darken-3"
+              :class="{'caption':$vuetify.breakpoint.xs}"
+              class="pa-5"
+              v-bind="attrs"
+              v-on="{ ...tooltip, ...menu }"
+            >
+              {{$vuetify.lang.t('$vuetify.OLA')}}, {{user.nome}}
 
-        <v-chip
-          pill
-          v-on="on"
-          color="red darken-3"
-          :class="{'caption':$vuetify.breakpoint.xs}"
-        >
-          <v-tooltip bottom>
-            <template v-slot:activator="{ on, attrs }">
-              <v-avatar
-                left
-                class="red darken-5"
-                v-bind="attrs"
-                v-on="on"
+              <v-badge
+                :content="newNotificationsCount == 0? '0':newNotificationsCount"
+                :value="true"
+                color="red"
+                overlap
+                offset-x="9"
+                offset-y="12"
+                class="ml-4 mt-0"
               >
-                {{newNotificationsCount}}
-              </v-avatar>
-            </template>
-            <span>{{newNotificationsCount == 0?$vuetify.lang.t('$vuetify.SEM_NOTIFICACOES', newNotificationsCount):
+                <v-icon medium>
+                  mdi-bell-ring
+                </v-icon>
+              </v-badge>
+            </v-chip>
+
+          </template>
+          <span class="mt-6">{{newNotificationsCount == 0?$vuetify.lang.t('$vuetify.SEM_NOTIFICACOES', newNotificationsCount):
               newNotificationsCount == 1?$vuetify.lang.t('$vuetify.NOVA_NOTIFICACAO', newNotificationsCount):
               $vuetify.lang.t('$vuetify.NOVAS_NOTIFICACOES', newNotificationsCount)}}</span>
-          </v-tooltip>
-          {{$vuetify.lang.t('$vuetify.OLA')}}, {{user.nome}}
-        </v-chip>
-
+        </v-tooltip>
       </template>
 
       <v-card
@@ -213,7 +220,7 @@
             class="caption"
           >
             {{$vuetify.lang.t('$vuetify.NOTIFICACOES')}}
-            <v-icon>mdi-alert-box</v-icon>
+            <v-icon>mdi-bell-ring</v-icon>
           </v-tab>
 
           <v-tab
@@ -383,6 +390,19 @@ export default {
 
         this.notifications = response.data;
         this.newNotificationsCount = this.notifications.filter(note => note.visualizado == false).length
+        this.notifications.sort(function (a, b) {
+
+
+          if (a.visualizado) {
+            return 1
+          }
+
+          if (a.visualizado === b.visualizado) {
+            return 0
+          }
+
+          return -1
+        })
       })
 
   },
