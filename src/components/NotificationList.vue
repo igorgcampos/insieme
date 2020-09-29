@@ -34,11 +34,17 @@
             >
               {{'Número da nota: ' + item.mensagem}}</span>
 
-            <span
-              v-if="item.visualizado"
-              class="caption font-weight-bold green--text text--lighten-1 mt-n6"
+            <v-lazy
+              :options="{
+              threshold: .6}"
+              transition="slide-x-transition"
             >
-              {{'Visualizado'}}</span>
+              <span
+                v-if="item.visualizado"
+                class="caption font-weight-bold green--text text--lighten-1 mt-n6"
+              >
+                {{'Visualizado'}}</span>
+            </v-lazy>
           </v-list-item-content>
 
           <TooltipButton
