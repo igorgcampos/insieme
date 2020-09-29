@@ -454,7 +454,7 @@
 
           <v-col
             class="ml-5"
-            cols="3"
+            cols="2"
           >
             <v-row>
               <span class=" text-right subtitle-2 font-weight-bold grey--text text--lighten-1">
@@ -464,7 +464,7 @@
               <v-select
                 :items="statuses"
                 v-model="status"
-                label="Online/Offline"
+                :label="$vuetify.lang.t('$vuetify.TODOS')"
                 solo
                 dense
                 @change="search()"
@@ -474,7 +474,7 @@
 
           <v-col
             class="ml-5"
-            cols="3"
+            cols="2"
           >
             <v-row>
               <span class=" text-right subtitle-2 font-weight-bold grey--text text--lighten-1">
@@ -484,6 +484,26 @@
               <v-select
                 :items="products"
                 v-model="product"
+                :label="$vuetify.lang.t('$vuetify.TODOS')"
+                solo
+                dense
+                @change="search()"
+              ></v-select>
+            </v-row>
+          </v-col>
+
+          <v-col
+            class="ml-5"
+            cols="2"
+          >
+            <v-row>
+              <span class=" text-right subtitle-2 font-weight-bold grey--text text--lighten-1">
+                {{$vuetify.lang.t('$vuetify.TECNOLOGIA')}}:</span>
+            </v-row>
+            <v-row>
+              <v-select
+                :items="technologies"
+                v-model="technology"
                 :label="$vuetify.lang.t('$vuetify.TODOS')"
                 solo
                 dense
@@ -727,6 +747,14 @@
                       </v-col>
                       <v-col class="pt-0 mt-n6">
                         <LabelValue
+                          label="Tecnologia"
+                          :value="circuit.tecnologia?circuit.tecnologia+'/'+circuit.banda:'--'"
+                          justify="start"
+                          style="width:150px;"
+                        ></LabelValue>
+                      </v-col>
+                      <v-col class="pt-0 mt-n6">
+                        <LabelValue
                           label="Esno"
                           :value="circuit.esno || '--'"
                           justify="start"
@@ -929,13 +957,15 @@ export default {
       this.status = this.statuses[0]
       this.circuits = [];
       this.product = this.products[0]
+      this.technology = this.technologies[0]
 
       this.$get('/circuito/busca', {
         contractNumber: this.$props.contract.numeroContratoTpz,
         searchText: this.searchText,
         onlineStatus: 0,
         installStatus: status,
-        productType: 0,
+        productType: '',
+        techType: '',
         page: 0
       }).then((response) => {
 
@@ -962,10 +992,11 @@ export default {
       this.status = this.statuses[1]
       this.circuits = [];
       this.product = this.products[0]
+      this.technology = this.technologies[0]
 
       this.$get('/circuito/busca', {
         contractNumber: this.$props.contract.numeroContratoTpz, searchText: this.searchText, onlineStatus: 1,
-        installStatus: 0, productType: 0, page: 0
+        installStatus: 0, productType: '', techType: '', page: 0
       }).then((response) => {
 
         if (response && response.data.length == 0) {
@@ -988,12 +1019,14 @@ export default {
       this.status = this.statuses[2]
       this.circuits = [];
       this.product = this.products[0]
+      this.technology = this.technologies[0]
 
       this.$get('/circuito/busca', {
         contractNumber: this.$props.contract.numeroContratoTpz, searchText: this.searchText,
         onlineStatus: 2,
         installStatus: 0,
-        productType: 0,
+        productType: '',
+        techType: '',
         page: 0
       }).then((response) => {
 
@@ -1027,13 +1060,16 @@ export default {
     searchMore () {
 
       if (this.isLoding || this.noResult) {
+        console.log('return')
         return;
       }
 
+      console.log('vai dar search')
       if (document.getElementById('circuitId').scrollTop + 341 >=
         document.getElementById('circuitId').scrollHeight) {
         this.page++;
         this.search(this.page);
+        console.log('deu search')
       }
     },
     search (page) {
@@ -1054,23 +1090,13 @@ export default {
         selectedStatus = 2;
       }
 
-      var selectedProduct = 0
-      if (this.product == this.products[0]) {
-        selectedProduct = 0;
-      } else if (this.product == this.products[1]) {
-        selectedProduct = 1;
-      } else if (this.product == this.products[2]) {
-        selectedProduct = 2;
-      } else if (this.product == this.products[3]) {
-        selectedProduct = 3;
-      } else if (this.product == this.products[4]) {
-        selectedProduct = 4;
-      }
-
       this.$get('/circuito/busca', {
         contractNumber: this.$props.contract.numeroContratoTpz,
         searchText: this.searchText, onlineStatus: selectedStatus,
-        installStatus: 0, productType: selectedProduct, page: this.page
+        installStatus: 0,
+        productType: this.product == this.$vuetify.lang.t('$vuetify.TODOS') ? '' : this.product,
+        techType: this.technology == this.$vuetify.lang.t('$vuetify.TODOS') ? '' : this.technology,
+        page: this.page
       }).then((response) => {
 
         if (response && response.data.length == 0) {
@@ -1114,8 +1140,10 @@ export default {
     circuits: [],
     statuses: [],
     products: [],
-    product: 0,
+    technologies: [],
+    product: '',
     status: 0,
+    technology: '',
     page: 0,
     isLoading: true,
     noResult: false,
@@ -1134,7 +1162,18 @@ export default {
       'Online',
       'Offline']
 
-    this.products = [this.$vuetify.lang.t('$vuetify.TODOS'), 'Gilat', 'Gilat2', 'Idirect', 'Yahsat']
+    this.products = [this.$vuetify.lang.t('$vuetify.TODOS')]
+    this.technologies = [this.$vuetify.lang.t('$vuetify.TODOS')]
+
+    this.$get('/circuito/produtos', {})
+      .then((response) => {
+        this.products = this.products.concat(response.data)
+      });
+
+    this.$get('/circuito/tecnologias', {})
+      .then((response) => {
+        this.technologies = this.technologies.concat(response.data)
+      });
 
     this.$get('/circuito/status/counts',
       { contractNumber: this.$props.contract.numeroContratoTpz }).then((response) => {
@@ -1162,7 +1201,8 @@ export default {
       searchText: '',
       onlineStatus: 0,
       installStatus: 0,
-      productType: 0,
+      productType: '',
+      techType: '',
       page: 0
     })
       .then((response) => {

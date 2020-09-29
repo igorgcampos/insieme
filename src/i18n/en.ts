@@ -341,5 +341,6 @@ export default {
     SEM_NOTIFICACOES: 'No new notifications',
     NENHUMA_NOTIFICACAO: 'No notifications',
     NOTIFICACOES: 'Notifications',
-    APAGAR_NOTIFICACAO: 'Erase notification'
+    APAGAR_NOTIFICACAO: 'Erase notification',
+    TECNOLOGIA: 'Technology'
 }

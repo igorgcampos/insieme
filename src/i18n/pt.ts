@@ -337,5 +337,6 @@ export default {
     SEM_NOTIFICACOES: 'Nenhuma notificação nova',
     NENHUMA_NOTIFICACAO: 'Nenhuma notificação',
     NOTIFICACOES: 'Notificações',
-    APAGAR_NOTIFICACAO: 'Apagar notificação'
+    APAGAR_NOTIFICACAO: 'Apagar notificação',
+    TECNOLOGIA: 'Tecnologia'
 }
