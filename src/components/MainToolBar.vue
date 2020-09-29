@@ -440,7 +440,7 @@ export default {
           this.$refs.invoiceItem.click();
 
         this.$root.$emit('search-invoice', notification.mensagem)
-      }, 300)
+      }, 400)
 
 
       if (notification.visualizado) {
