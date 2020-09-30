@@ -342,5 +342,10 @@ export default {
     NENHUMA_NOTIFICACAO: 'No notifications',
     NOTIFICACOES: 'Notifications',
     APAGAR_NOTIFICACAO: 'Erase notification',
-    TECNOLOGIA: 'Technology'
+    TECNOLOGIA: 'Technology',
+    VERSOES: 'Versions',
+    VERSOES_DESCRICAO: 'See the features released in each version',
+    V_2_0_0: 'New version of Insieme totally reformulated. Main changes: Visualization and restart of circuits, direct integration with PRTG and visualization of invoices. ',
+    V_2_1_0: 'New commercial module that allows several opening operations to circuits as: activate, deactivate, suspend and request new circuits.',
+    V_2_2_0: 'New notification system that warns the user about creating new invoices.'
 }

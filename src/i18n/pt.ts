@@ -338,5 +338,10 @@ export default {
     NENHUMA_NOTIFICACAO: 'Nenhuma notificação',
     NOTIFICACOES: 'Notificações',
     APAGAR_NOTIFICACAO: 'Apagar notificação',
-    TECNOLOGIA: 'Tecnologia'
+    TECNOLOGIA: 'Tecnologia',
+    VERSOES: 'Versões',
+    VERSOES_DESCRICAO: 'Veja as funcionalidades lançadas em cada versão',
+    V_2_0_0: 'Nova versão do Insieme totalmente reformulada. Principais mudanças: Visualização e restart de circuitos, integração direta com PRTG e visualização de notas fiscais.',
+    V_2_1_0: 'Novo modulo comercial que permite várias operações de abertura de chamado para circuitos como: ativar, desativar, suspender e pedido de novos circuitos.',
+    V_2_2_0: 'Novo sistema de notificações que avisa ao usuário sobre criação de novas notas fiscais.'
 }

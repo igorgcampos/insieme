@@ -32,7 +32,14 @@
                   </div>
                   <span class="subheading white--text">{{$vuetify.lang.t('$vuetify.MENSAGEM_INICIAL')}}</span>
                   <div style="margin-top:45%;">
-                    <span class="subtitle-2 white--text">{{$vuetify.lang.t('$vuetify.VERSAO')+ $getVersion()}}</span>
+                    <v-btn
+                      outlined
+                      color="white"
+                      small
+                      @click="openVersionDialog = true"
+                    >
+                      {{$vuetify.lang.t('$vuetify.VERSAO')+ $getVersion()}}
+                    </v-btn>
                   </div>
                 </div>
               </div>
@@ -135,13 +142,22 @@
         </v-flex>
       </v-layout>
     </v-container>
+
+    <VersionsDialog
+      :close="closeVersionsDialog"
+      :show="openVersionDialog"
+    ></VersionsDialog>
   </v-content>
 </template>
 
 <script>
 
-export default {
+import VersionsDialog from '../components/dialogs/VersionsDialog';
 
+export default {
+  components: {
+    VersionsDialog
+  },
   created: function () {
 
     if (this.$vuetify.lang.current == 'pt') {
@@ -154,6 +170,7 @@ export default {
   },
   data () {
     return {
+      openVersionDialog: false,
       brazilUnselected: false,
       usaUnselected: true,
       username: '',
@@ -170,6 +187,9 @@ export default {
     }
   },
   methods: {
+    closeVersionsDialog () {
+      this.openVersionDialog = false
+    },
     selectIdiom (country) {
       if (country == 'brasil') {
 
