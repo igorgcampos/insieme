@@ -44,7 +44,8 @@
                       <span
                         class="subtitle-3 font-weight-bold"
                         :class="{'caption':$vuetify.breakpoint.xs}"
-                      >{{item.description}}</span>
+                        v-html="item.description"
+                      ></span>
                     </v-expansion-panel-content>
                   </v-expansion-panel>
                 </v-expansion-panels>
@@ -85,7 +86,10 @@ export default {
     items: [],
     searchText: ''
   }),
-  created: function () {
+  beforeUpdate: function () {
+
+    this.items = []
+
     this.items.push({
       title: 'V2.0.0',
       description: this.$vuetify.lang.t('$vuetify.V_2_0_0')
