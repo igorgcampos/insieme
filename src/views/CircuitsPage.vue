@@ -750,7 +750,7 @@
                     <TooltipButton
                       :label="$vuetify.lang.t('$vuetify.RESOLVER_PROBLEMA')"
                       :message="$vuetify.lang.t('$vuetify.SUPORTE_PROBLEMA')"
-                      :event="solveProblem"
+                      :event="circuit.tecnologia == 'VSAT'?solveProblem:openIssue"
                       :object="circuit"
                       :mobile="$vuetify.breakpoint.xs"
                       :isText=true
@@ -1157,12 +1157,18 @@ export default {
 
     this.$get('/circuito/produtos', {})
       .then((response) => {
+        response.data.sort()
         this.products = this.products.concat(response.data)
       });
 
     this.$get('/circuito/tecnologias', {})
       .then((response) => {
+
+        response.data.sort()
         this.technologies = this.technologies.concat(response.data)
+        this.technologies = this.technologies.filter(tech => {
+          return tech != 'LINK TERRESTRE'
+        })
       });
 
     this.$get('/circuito/status/counts',
