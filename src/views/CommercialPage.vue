@@ -559,6 +559,8 @@ export default {
 
         if (response && response.data.length == 0) {
           this.noResult = true;
+        } else {
+          this.noResult = false;
         }
 
         if (!page) {

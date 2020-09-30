@@ -513,6 +513,8 @@ export default {
 
         if (response && response.data.length == 0) {
           this.noResult = true;
+        } else {
+          this.noResult = false;
         }
 
         this.invoices = response.data;
@@ -578,6 +580,8 @@ export default {
 
         if (response && response.data.length == 0) {
           this.noResult = true;
+        } else {
+          this.noResult = false;
         }
 
         if (!page) {

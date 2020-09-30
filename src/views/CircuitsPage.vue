@@ -446,35 +446,15 @@
                 solo
                 max-width="200"
                 append-icon="mdi-magnify"
-                @click:append="search()"
-                @keypress.enter="search()"
+                @click:append="status = 0; installStatus = 0; search()"
+                @keypress.enter="status = 0; installStatus = 0; search()"
               ></v-text-field>
             </v-row>
           </v-col>
 
           <v-col
             class="ml-5"
-            cols="2"
-          >
-            <v-row>
-              <span class=" text-right subtitle-2 font-weight-bold grey--text text--lighten-1">
-                {{$vuetify.lang.t('$vuetify.STATUS')}}:</span>
-            </v-row>
-            <v-row>
-              <v-select
-                :items="statuses"
-                v-model="status"
-                :label="$vuetify.lang.t('$vuetify.TODOS')"
-                solo
-                dense
-                @change="search()"
-              ></v-select>
-            </v-row>
-          </v-col>
-
-          <v-col
-            class="ml-5"
-            cols="2"
+            cols="3"
           >
             <v-row>
               <span class=" text-right subtitle-2 font-weight-bold grey--text text--lighten-1">
@@ -487,14 +467,14 @@
                 :label="$vuetify.lang.t('$vuetify.TODOS')"
                 solo
                 dense
-                @change="search()"
+                @change="status = 0; installStatus = 0; search()"
               ></v-select>
             </v-row>
           </v-col>
 
           <v-col
             class="ml-5"
-            cols="2"
+            cols="3"
           >
             <v-row>
               <span class=" text-right subtitle-2 font-weight-bold grey--text text--lighten-1">
@@ -507,7 +487,7 @@
                 :label="$vuetify.lang.t('$vuetify.TODOS')"
                 solo
                 dense
-                @change="search()"
+                @change="status = 0; installStatus = 0; search()"
               ></v-select>
             </v-row>
           </v-col>
@@ -958,12 +938,13 @@ export default {
       this.circuits = [];
       this.product = this.products[0]
       this.technology = this.technologies[0]
+      this.installStatus = status
 
       this.$get('/circuito/busca', {
         contractNumber: this.$props.contract.numeroContratoTpz,
         searchText: this.searchText,
         onlineStatus: 0,
-        installStatus: status,
+        installStatus: this.installStatus,
         productType: '',
         techType: '',
         page: 0
@@ -971,6 +952,8 @@ export default {
 
         if (response && response.data.length == 0) {
           this.noResult = true;
+        } else {
+          this.noResult = false;
         }
 
         this.circuits = response.data;
@@ -1001,6 +984,8 @@ export default {
 
         if (response && response.data.length == 0) {
           this.noResult = true;
+        } else {
+          this.noResult = false;
         }
 
         this.circuits = response.data;
@@ -1032,6 +1017,8 @@ export default {
 
         if (response && response.data.length == 0) {
           this.noResult = true;
+        } else {
+          this.noResult = false;
         }
 
         this.circuits = response.data;
@@ -1093,7 +1080,7 @@ export default {
       this.$get('/circuito/busca', {
         contractNumber: this.$props.contract.numeroContratoTpz,
         searchText: this.searchText, onlineStatus: selectedStatus,
-        installStatus: 0,
+        installStatus: this.installStatus,
         productType: this.product == this.$vuetify.lang.t('$vuetify.TODOS') ? '' : this.product,
         techType: this.technology == this.$vuetify.lang.t('$vuetify.TODOS') ? '' : this.technology,
         page: this.page
@@ -1101,6 +1088,8 @@ export default {
 
         if (response && response.data.length == 0) {
           this.noResult = true;
+        } else {
+          this.noResult = false;
         }
 
         if (!page) {
@@ -1143,6 +1132,7 @@ export default {
     technologies: [],
     product: '',
     status: 0,
+    installStatus: 0,
     technology: '',
     page: 0,
     isLoading: true,
