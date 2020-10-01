@@ -1166,9 +1166,6 @@ export default {
 
         response.data.sort()
         this.technologies = this.technologies.concat(response.data)
-        this.technologies = this.technologies.filter(tech => {
-          return tech != 'LINK TERRESTRE'
-        })
       });
 
     this.$get('/circuito/status/counts',
