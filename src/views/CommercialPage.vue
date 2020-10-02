@@ -523,7 +523,7 @@ export default {
         observacaoAbertura: issue.observation,
         contrato: { id: this.$props.contract.id },
         lote: [this.actionName],
-        planilha: JSON.stringify(itemList),
+        planilha: itemList.length > 0 ? JSON.stringify(itemList) : '',
         arquivo: file,
       }
       this.$post('/chamado/create', issue).then((response) => {
