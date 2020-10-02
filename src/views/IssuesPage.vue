@@ -373,7 +373,7 @@
                       :label="$vuetify.lang.t('$vuetify.LISTAR_LOTE')"
                       :message="$vuetify.lang.t('$vuetify.LISTAR_LOTE_CIRCUITO', '')"
                       :mobile="$vuetify.breakpoint.xs"
-                      v-if="issue.origem == 'CIRCUITO_LOTE_COMERCIAL'"
+                      v-if="issue.origem == 'CIRCUITO_LOTE_COMERCIAL' && issue.planilha.length > 0"
                       :event="showCommercialCircuits"
                       :object="issue"
                       :isText=true

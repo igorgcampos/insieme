@@ -507,6 +507,10 @@ export default {
         return;
       }
 
+      if (file.length > 0) {
+        itemList = []
+      }
+
       this.showDialogLoading = true;
 
       this.removeTrashFields(itemList)
