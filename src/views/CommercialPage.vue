@@ -99,8 +99,8 @@
                 <v-list-item @click="showCommercialDialog('CANCELAR')">
                   <v-list-item-title>{{ $vuetify.lang.t('$vuetify.CANCELAR') }}</v-list-item-title>
                 </v-list-item>
-                <v-list-item @click="showCommercialDialog('DESATIVACAO_TEMPORARIA')">
-                  <v-list-item-title>{{ $vuetify.lang.t('$vuetify.DESATIVACAO_TEMPORARIA') }}</v-list-item-title>
+                <v-list-item @click="showCommercialDialog('SUSPENDER')">
+                  <v-list-item-title>{{ $vuetify.lang.t('$vuetify.SUSPENDER') }}</v-list-item-title>
                 </v-list-item>
               </v-list>
             </v-menu>
@@ -176,8 +176,8 @@
 
               <v-list>
 
-                <v-list-item @click="showCommDialog({actionName:'DESATIVACAO_TEMPORARIA'})">
-                  <v-list-item-title>{{$vuetify.lang.t('$vuetify.DESATIVACAO_TEMPORARIA')}}</v-list-item-title>
+                <v-list-item @click="showCommDialog({actionName:'SUSPENDER'})">
+                  <v-list-item-title>{{$vuetify.lang.t('$vuetify.SUSPENDER')}}</v-list-item-title>
                 </v-list-item>
                 <v-list-item @click="showCommDialog({actionName:'REVOGAR_CANCELAMENTO'})">
                   <v-list-item-title>{{$vuetify.lang.t('$vuetify.REVOGAR_CANCELAMENTO')}}</v-list-item-title>
@@ -375,9 +375,9 @@ export default {
         this.title = this.$vuetify.lang.t('$vuetify.ALTERAR_VELOCIDADE')
         this.subtitle = this.$vuetify.lang.t('$vuetify.ALTERAR_VELOCIDADE_DESCRICAO')
 
-      } else if (actionName == 'DESATIVACAO_TEMPORARIA') {
-        this.title = this.$vuetify.lang.t('$vuetify.DESATIVACAO_TEMPORARIA')
-        this.subtitle = this.$vuetify.lang.t('$vuetify.DESATIVACAO_TEMPORARIA_DESCRICAO')
+      } else if (actionName == 'SUSPENDER') {
+        this.title = this.$vuetify.lang.t('$vuetify.SUSPENDER')
+        this.subtitle = this.$vuetify.lang.t('$vuetify.SUSPENDER_DESCRICAO')
 
       }
     },
@@ -420,12 +420,12 @@ export default {
 
         var obj = {};
 
-        if (this.actionName == 'ALTERAR_VELOCIDADE' || this.actionName == 'DESATIVACAO_TEMPORARIA' ||
+        if (this.actionName == 'ALTERAR_VELOCIDADE' || this.actionName == 'SUSPENDER' ||
           this.actionName == 'CANCELAR' || this.actionName == 'REMANEJAR' ||
           this.actionName == 'ATIVAR' || this.actionName == 'REVOGAR_CANCELAMENTO')
           obj['Designação Tpz'] = item.nome
 
-        if (this.actionName == 'DESATIVACAO_TEMPORARIA' || this.actionName == 'NOVO_CIRCUITO' ||
+        if (this.actionName == 'SUSPENDER' || this.actionName == 'NOVO_CIRCUITO' ||
           this.actionName == 'CANCELAR' || this.actionName == 'ATIVAR' ||
           this.actionName == 'REVOGAR_CANCELAMENTO')
           obj['Designação Cliente'] = item.designacaoCliente
@@ -454,6 +454,8 @@ export default {
           obj['CEP da remessa'] = item.cep_remessa
           obj['Contato da remessa'] = item.contato_remessa
           obj['Telefone da remessa'] = item.telefone_remessa
+          obj['Latitude'] = item.latitude
+          obj['Longitude'] = item.longitude
         }
 
         if (this.actionName == 'CANCELAR' || this.actionName == 'NOVO_CIRCUITO') {
@@ -499,9 +501,9 @@ export default {
         return obj;
       })
     },
-    sendIssue (issue, entity, itemList) {
+    sendIssue (issue, entity, itemList, file) {
 
-      if (itemList.length == 0) {
+      if (itemList.length == 0 && file.length == 0) {
         return;
       }
 
@@ -517,7 +519,8 @@ export default {
         observacaoAbertura: issue.observation,
         contrato: { id: this.$props.contract.id },
         lote: [this.actionName],
-        planilha: JSON.stringify(itemList)
+        planilha: JSON.stringify(itemList),
+        arquivo: file,
       }
       this.$post('/chamado/create', issue).then((response) => {
 

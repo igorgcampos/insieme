@@ -48,7 +48,7 @@
             :event="removeFunction"
             :object="item"
             :mobile="$vuetify.breakpoint.xs"
-            :isText=true
+            :isText="false"
           ></TooltipButton>
 
         </v-list-item>

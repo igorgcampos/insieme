@@ -1,5 +1,8 @@
 <template>
-  <v-tooltip top>
+  <v-tooltip
+    :top="!bottom"
+    :bottom="bottom"
+  >
     <template v-slot:activator="{ on }">
       <v-btn
         v-if="label"
@@ -42,6 +45,7 @@ export default {
     object: Object,
     mobile: Boolean,
     isText: Boolean,
+    bottom: Boolean,
   }
 };
 </script>

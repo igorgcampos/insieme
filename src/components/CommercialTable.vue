@@ -1002,6 +1002,46 @@
     </template>
 
     <template
+      v-slot:item.latitude="props"
+      v-if="editable"
+    >
+      <v-edit-dialog
+        :return-value.sync="props.item.latitude"
+        large
+        :cancel-text="$vuetify.lang.t('$vuetify.CANCELAR')"
+        :save-text="$vuetify.lang.t('$vuetify.SALVAR')"
+      > {{ props.item.latitude }}
+        <template v-slot:input>
+          <v-text-field
+            v-model="props.item.latitude"
+            :label="$vuetify.lang.t('$vuetify.EDITAR')"
+            single-line
+          ></v-text-field>
+        </template>
+      </v-edit-dialog>
+    </template>
+
+    <template
+      v-slot:item.longitude="props"
+      v-if="editable"
+    >
+      <v-edit-dialog
+        :return-value.sync="props.item.longitude"
+        large
+        :cancel-text="$vuetify.lang.t('$vuetify.CANCELAR')"
+        :save-text="$vuetify.lang.t('$vuetify.SALVAR')"
+      > {{ props.item.longitude }}
+        <template v-slot:input>
+          <v-text-field
+            v-model="props.item.longitude"
+            :label="$vuetify.lang.t('$vuetify.EDITAR')"
+            single-line
+          ></v-text-field>
+        </template>
+      </v-edit-dialog>
+    </template>
+
+    <template
       v-slot:item.observacao="props"
       v-if="editable"
     >

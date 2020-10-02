@@ -342,6 +342,12 @@ export default {
     VERSOES: 'Versões',
     VERSOES_DESCRICAO: 'Veja as funcionalidades lançadas em cada versão',
     V_2_0_0: 'Nova versão do Insieme totalmente reformulada. Principais mudanças: Visualização e restart de circuitos, integração direta com PRTG e visualização de notas fiscais.',
-    V_2_1_0: 'Novo modulo comercial que permite várias operações de abertura de chamado para circuitos como: ativar, desativar, suspender e pedido de novos circuitos.',
-    V_2_2_0: '- Novo sistema de notificações que avisa ao usuário sobre criação de novas notas fiscais além de enviar um email automático para cada usuário. <br>- Filtragem de circuitos por tecnologia (BGAN, Iridium, VOIP e etc.) <br>- O tipo de banda (KA/KU/L) agora é exibido nos detalhes de cada circuito.'
+    V_2_1_0: 'Novo modulo comercial que permite várias operações de abertura de chamado para circuitos como: ativar, desativar, suspender e pedido de novos circuitos. O preenchimento das informações pode ser tanto manual quanto por importação de uma planilha excel.',
+    V_2_2_0: '- Novo sistema de notificações que avisa ao usuário sobre criação de novas notas fiscais além de enviar um email automático para cada usuário. <br>- Filtragem de circuitos por tecnologia (BGAN, Iridium, VOIP e etc.) <br>- O tipo de banda (KA/KU/L) agora é exibido nos detalhes de cada circuito.',
+    NOVA_LINHA: 'Nova linha',
+    BAIXAR_EXCEL: 'Baixar modelo em excel',
+    IMPORTAR_EXCEL: 'Importar excel preenchido',
+    BAIXAR_EXCEL_DESCRICAO: 'Se você não quiser usar a tabela abaixo, pode baixar o modelo em excel para preenchimento das informações necessárias para abrir o chamado',
+    IMPORTAR_EXCEL_DESCRICAO: 'Importar o arquivo excel preenchido com as informações necessárias para abrir um chamado. Qualquer informação preenchida na tabela abaixo será ignorada.',
+    ARQUIVO_IMPORTADO: 'Arquivo importado. Clique em enviar.',
 }

@@ -9,16 +9,20 @@
         color="success"
       >mdi-checkbox-marked-circle</v-icon>
     </v-row>
-    <v-row justify="center">
-      <span class="text-center headline font-weight-bold grey--text text--darken-3">
-        {{title}} </span>
+    <v-col justify="center">
+      <v-row justify="center">
+        <span class="text-center headline font-weight-bold grey--text text--darken-3">
+          {{title}} </span>
+      </v-row>
 
-      <span
-        v-show="subtitle"
-        class="text-center SUBTITLE-2 font-weight-bold grey--text text--darken-3"
-      >
-        {{subtitle}} </span>
-    </v-row>
+      <v-row justify="center">
+        <span
+          v-show="subtitle"
+          class="text-center SUBTITLE-2 font-weight-bold grey--text text--darken-3"
+        >
+          {{subtitle}} </span>
+      </v-row>
+    </v-col>
   </v-col>
 </template>
 

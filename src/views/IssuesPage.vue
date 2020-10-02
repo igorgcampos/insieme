@@ -459,7 +459,7 @@ export default {
 
         var obj = {};
 
-        if (this.actionName == 'ALTERAR_VELOCIDADE' || this.actionName == 'DESATIVACAO_TEMPORARIA' || this.actionName == 'CANCELAR' || this.actionName == 'REMANEJAR' || this.actionName == 'ATIVAR' || this.actionName == 'REVOGAR_CANCELAMENTO')
+        if (this.actionName == 'ALTERAR_VELOCIDADE' || this.actionName == 'SUSPENDER' || this.actionName == 'CANCELAR' || this.actionName == 'REMANEJAR' || this.actionName == 'ATIVAR' || this.actionName == 'REVOGAR_CANCELAMENTO')
           obj.nome = item['Designação Tpz']
 
         if (this.actionName == 'CANCELAR' || this.actionName == 'NOVO_CIRCUITO' || this.actionName == 'CANCELAR' || this.actionName == 'ATIVAR' || this.actionName == 'REVOGAR_CANCELAMENTO')
@@ -489,6 +489,8 @@ export default {
           obj.cep_remessa = item['CEP da remessa']
           obj.contato_remessa = item['Contato da remessa']
           obj.telefone_remessa = item['Telefone da remessa']
+          obj.latitude = item['Latitude']
+          obj.longitude = item['Longitude']
         }
 
         if (this.actionName == 'CANCELAR' || this.actionName == 'NOVO_CIRCUITO') {
@@ -619,7 +621,8 @@ export default {
         searchText: text,
         onlineStatus: 0,
         installStatus: 0,
-        productType: 0,
+        productType: '',
+        techType: '',
         page: page
       })
         .then((response) => {

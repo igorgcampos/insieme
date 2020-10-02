@@ -346,6 +346,12 @@ export default {
     VERSOES: 'Versions',
     VERSOES_DESCRICAO: 'See the features released in each version',
     V_2_0_0: 'New version of Insieme totally reformulated. Main changes: Visualization and restart of circuits, direct integration with PRTG and visualization of invoices. ',
-    V_2_1_0: 'New commercial module that allows several opening operations to circuits as: activate, deactivate, suspend and request new circuits.',
-    V_2_2_0: '- New notification system that notifies the user of creating new invoices in addition to sending an automatic email to each user. <br> - Filtering circuits by technology (BGAN, Iridium, VOIP, etc.) <br> - The type of band (KA / KU / L) is now displayed in the details of each circuit. '
+    V_2_1_0: 'New commercial module that allows several opening operations to circuits as: activate, deactivate, suspend and request new circuits. Information can be filled out either manually or by importing an excel spreadsheet.',
+    V_2_2_0: '- New notification system that notifies the user of creating new invoices in addition to sending an automatic email to each user. <br> - Filtering circuits by technology (BGAN, Iridium, VOIP, etc.) <br> - The type of band (KA / KU / L) is now displayed in the details of each circuit. ',
+    NOVA_LINHA: 'New line',
+    BAIXAR_EXCEL: 'Download spreadsheet template',
+    IMPORTAR_EXCEL: 'Import filled excel',
+    BAIXAR_EXCEL_DESCRICAO: 'If you don´t want to use the table below, you can download the excel template from the spreadsheet to fill in the necessary information to open the ticket',
+    IMPORTAR_EXCEL_DESCRICAO: 'Import the excel spreadsheet filled with the necessary information to open a ticket. Any information filled in the table below will be ignored. ',
+    ARQUIVO_IMPORTADO: 'File imported. Click the send button',
 }

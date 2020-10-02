@@ -3,12 +3,12 @@
   <v-dialog
     v-model="showDialog"
     persistent
-    :max-width="(entityList.length == 0 && actionName != 'NOVO_CIRCUITO') || showSuccess?400: 700"
+    :max-width="showSuccess?400: 700"
     class="overflow-y-hidden"
   >
     <v-card>
       <v-card-title
-        v-if="canShowForm()"
+        v-if="!showSuccess"
         class="headline-6"
         :class="{'subtitle-2':$vuetify.breakpoint.xs}"
         style="word-break: normal; !important"
@@ -16,26 +16,52 @@
         {{title}}
       </v-card-title>
       <v-card-text
-        v-if="canShowForm()"
+        v-if="!showSuccess"
         class="headline-6 mt-n3"
       >{{subtitle}}</v-card-text>
 
       <v-card-text
-        v-if="canShowForm() && this.actionName != 'NOVO_CIRCUITO' && editable"
+        v-if="this.actionName != 'NOVO_CIRCUITO' && editable && !showSuccess"
         class="caption mt-n3 font-weight-bold grey--text"
       >{{'Circuitos selecionados: '+entityList.length}}</v-card-text>
+
+      <v-row
+        v-if="this.actionName != 'NOVO_CIRCUITO' && editable && !showSuccess"
+        class="mt-n9 mb-4 mr-4"
+      >
+        <v-spacer></v-spacer>
+        <TooltipButton
+          :label="$vuetify.lang.t('$vuetify.BAIXAR_EXCEL')"
+          :message="$vuetify.lang.t('$vuetify.BAIXAR_EXCEL_DESCRICAO')"
+          :event="downloadExcel"
+          :object="{}"
+          :mobile="true"
+          :isText="true"
+          :bottom="true"
+        ></TooltipButton>
+
+        <TooltipButton
+          :label="$vuetify.lang.t('$vuetify.IMPORTAR_EXCEL')"
+          :message="$vuetify.lang.t('$vuetify.IMPORTAR_EXCEL_DESCRICAO')"
+          :object="{}"
+          :event="clickInput"
+          :mobile="true"
+          :isText="true"
+          :bottom="true"
+        ></TooltipButton>
+        <input
+          v-show="false"
+          ref="file"
+          type="file"
+          @change="importExcel"
+          accept=".xls, .xlsx"
+        >
+      </v-row>
 
       <v-row
         class="ma-0 d-flex justify-center mb-12 ml-3 mr-3 overflow-y-auto overflow-x-hidden"
         style="max-height:20rem"
       >
-
-        <WarningPanel
-          class="mt-8 pt-10"
-          :message="$vuetify.lang.t('$vuetify.NENHUM_CIRCUITO_SELECIONADO')"
-          v-show="!showSuccess && entityList.length == 0 && actionName != 'NOVO_CIRCUITO'"
-        >
-        </WarningPanel>
 
         <SuccessPanel
           v-show="showSuccess"
@@ -45,18 +71,54 @@
         >
         </SuccessPanel>
 
-        <v-row v-if="actionName=='NOVO_CIRCUITO' && editable && !showSuccess">
+        <v-row
+          v-if="actionName=='NOVO_CIRCUITO' && editable && !showSuccess"
+          class="mr-1"
+        >
           <v-btn
             color="primary"
             dark
             class="mb-2 ml-7"
             x-small
             @click="newLine()"
-          >Nova linha</v-btn>
+          >{{$vuetify.lang.t('$vuetify.NOVA_LINHA')}}</v-btn>
+
+          <v-spacer></v-spacer>
+
+          <TooltipButton
+            class="d-flex justify-right"
+            :label="$vuetify.lang.t('$vuetify.BAIXAR_EXCEL')"
+            :message="$vuetify.lang.t('$vuetify.BAIXAR_EXCEL_DESCRICAO')"
+            :event="downloadExcel"
+            :object="{}"
+            :mobile="true"
+            :isText="true"
+            :bottom="true"
+            v-if="!showSuccess"
+          ></TooltipButton>
+
+          <TooltipButton
+            class="d-flex justify-right"
+            :label="$vuetify.lang.t('$vuetify.IMPORTAR_EXCEL')"
+            :message="$vuetify.lang.t('$vuetify.IMPORTAR_EXCEL_DESCRICAO')"
+            :object="{}"
+            :event="clickInput"
+            :mobile="true"
+            :isText="true"
+            :bottom="true"
+            v-if="!showSuccess"
+          ></TooltipButton>
+          <input
+            v-show="false"
+            ref="file"
+            type="file"
+            @change="importExcel"
+            accept=".xls, .xlsx"
+          >
         </v-row>
 
         <CommercialTable
-          v-if="canShowForm()"
+          v-if="!uploadSuccess && !showSuccess"
           :actionName="actionName"
           :entityList="entityList"
           :headers="headers"
@@ -65,6 +127,15 @@
         ></CommercialTable>
 
       </v-row>
+
+      <SuccessPanel
+        v-show="uploadSuccess && !showSuccess"
+        :title="$vuetify.lang.t('$vuetify.ARQUIVO_IMPORTADO')"
+        :subtitle="file?file.name:''"
+        class="mt-n12 overflow-y-hidden mb-12"
+        max-width="200"
+      >
+      </SuccessPanel>
 
       <v-divider class="mt-n12"></v-divider>
 
@@ -80,10 +151,10 @@
         <v-btn
           color="primary"
           text
-          @click="send(issue, entity, entityList);"
+          @click="send(issue, entity, entityList, fileByteArray);"
           :x-small="$vuetify.breakpoint.xs"
           :loading="showDialogLoading"
-          v-show="canShowForm() && editable"
+          v-show="editable && !showSuccess"
         >{{$vuetify.lang.t('$vuetify.ENVIAR')}}</v-btn>
       </v-card-actions>
     </v-card>
@@ -93,15 +164,15 @@
 
 <script>
 
-import WarningPanel from '../../components/panels/WarningPanel';
 import SuccessPanel from '../../components/panels/SuccessPanel';
 import CommercialTable from '../../components/CommercialTable';
+import TooltipButton from '../../components/TooltipButton';
 
 export default {
   components: {
-    WarningPanel,
     SuccessPanel,
     CommercialTable,
+    TooltipButton,
   },
   props: {
     title: String,
@@ -116,26 +187,64 @@ export default {
     itemList: Array
   },
   methods: {
+    clickInput () {
+      this.$refs.file.click()
+    },
+    importExcel (e) {
+
+      var files = e.target.files || e.dataTransfer.files;
+      if (!files.length)
+        return;
+
+      var reader = new FileReader();
+      this.fileByteArray = [];
+      var vm = this;
+
+      reader.readAsArrayBuffer(files[0]);
+      reader.onloadend = function (evt) {
+        if (evt.target.readyState == FileReader.DONE) {
+          var arrayBuffer = evt.target.result,
+            array = new Uint8Array(arrayBuffer);
+          for (var i = 0; i < array.length; i++) {
+            vm.fileByteArray.push(array[i]);
+          }
+        }
+      }
+
+      this.uploadSuccess = true;
+      this.file = files[0]
+    },
+    downloadExcel () {
+      const link = document.createElement("a");
+      link.href = 'planilha.xlsx';
+      link.setAttribute("download", "planilha.xlsx");
+      link.click();
+    },
+    handle () {
+      let formData = new FormData();
+      console.log(formData)
+    },
     newLine () {
       this.entityList.push({});
     },
     deleteItem (item) {
       this.entityList.splice(this.entityList.indexOf(item), 1)
     },
-    canShowForm () {
-      return (this.entityList.length > 0 ||
-        this.actionName == 'NOVO_CIRCUITO') && !this.showSuccess
-    },
     cleanFields () {
       this.issue.observation = '';
       this.issue.reason = undefined;
+      this.uploadSuccess = false;
+      this.file = undefined;
     }
   },
   data: () => ({
     issue: { reason: undefined, observation: '' },
     entity: {},
     entityList: [],
-    headers: []
+    headers: [],
+    file: undefined,
+    fileByteArray: [],
+    uploadSuccess: false,
   }),
   watch: {
     itemList: function () {
@@ -150,14 +259,14 @@ export default {
       { text: '', align: 'start', value: 'actions', sortable: false }
     ];
 
-    if (this.actionName == 'ALTERAR_VELOCIDADE' || this.actionName == 'DESATIVACAO_TEMPORARIA' ||
+    if (this.actionName == 'ALTERAR_VELOCIDADE' || this.actionName == 'SUSPENDER' ||
       this.actionName == 'CANCELAR' || this.actionName == 'REMANEJAR' ||
       this.actionName == 'ATIVAR' || this.actionName == 'REVOGAR_CANCELAMENTO')
       this.headers.push({
         text: this.$vuetify.lang.t('$vuetify.DESIGNACAO_TPZ'), align: 'start', sortable: false, value: 'nome', width: 200
       })
 
-    if (this.actionName == 'DESATIVACAO_TEMPORARIA' || this.actionName == 'NOVO_CIRCUITO' ||
+    if (this.actionName == 'SUSPENDER' || this.actionName == 'NOVO_CIRCUITO' ||
       this.actionName == 'CANCELAR' || this.actionName == 'ATIVAR' ||
       this.actionName == 'REVOGAR_CANCELAMENTO')
       this.headers.push({ text: this.$vuetify.lang.t('$vuetify.DESIGNACAO_CLIENTE'), value: 'designacaoCliente', sortable: false, width: 200 })
@@ -213,6 +322,8 @@ export default {
       this.headers.push({ text: 'WAN CPE HOST', value: 'wan_host', sortable: false, width: 200 })
       this.headers.push({ text: 'Loopback CPE', value: 'loopback', sortable: false, width: 200 })
       this.headers.push({ text: this.$vuetify.lang.t('$vuetify.ROTAS_SUMARIZADAS'), value: 'rotas_sumarizadas', sortable: false, width: 200 })
+      this.headers.push({ text: this.$vuetify.lang.t('$vuetify.LATITUDE'), value: 'latitude', sortable: false, width: 200 })
+      this.headers.push({ text: this.$vuetify.lang.t('$vuetify.LONGITUDE'), value: 'longitude', sortable: false, width: 200 })
 
       if (this.entityList.length == 0) {
         this.entityList.push({});
