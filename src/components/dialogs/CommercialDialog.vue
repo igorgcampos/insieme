@@ -362,6 +362,9 @@ export default {
 
       if (this.entityList.length == 0) {
         this.entityList.push({});
+        this.entityList.push({});
+        this.entityList.push({});
+        this.entityList.push({});
       }
     }
 

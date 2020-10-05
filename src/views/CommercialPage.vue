@@ -532,6 +532,8 @@ export default {
     },
     sendIssue (issue, entity, itemList, file) {
 
+      itemList = itemList.filter(value => Object.keys(value).length !== 0);
+
       if (itemList.length == 0 && file.length == 0) {
         return;
       }
