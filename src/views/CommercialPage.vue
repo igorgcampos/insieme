@@ -87,14 +87,14 @@
                 <v-list-item @click="showCommercialDialog('REMANEJAR')">
                   <v-list-item-title>{{ $vuetify.lang.t('$vuetify.REMANEJAR') }}</v-list-item-title>
                 </v-list-item>
-                <v-list-item @click="showCommercialDialog('ATIVAR')">
-                  <v-list-item-title>{{ $vuetify.lang.t('$vuetify.ATIVAR') }}</v-list-item-title>
-                </v-list-item>
                 <v-list-item @click="showCommercialDialog('ALTERAR_VELOCIDADE')">
                   <v-list-item-title>{{ $vuetify.lang.t('$vuetify.ALTERAR_VELOCIDADE') }}</v-list-item-title>
                 </v-list-item>
                 <v-list-item @click="showCommercialDialog('REVOGAR_CANCELAMENTO')">
                   <v-list-item-title>{{ $vuetify.lang.t('$vuetify.REVOGAR_CANCELAMENTO') }}</v-list-item-title>
+                </v-list-item>
+                <v-list-item @click="showCommercialDialog('REVOGAR_SUSPENSAO')">
+                  <v-list-item-title>{{ $vuetify.lang.t('$vuetify.REVOGAR_SUSPENSAO') }}</v-list-item-title>
                 </v-list-item>
                 <v-list-item @click="showCommercialDialog('CANCELAR')">
                   <v-list-item-title>{{ $vuetify.lang.t('$vuetify.CANCELAR') }}</v-list-item-title>
@@ -132,15 +132,37 @@
             ></TooltipButton>
           </v-col>
 
-          <v-col cols="2 mr-n10">
+          <v-col cols="2 ml-n2 mr-n4">
+            <v-menu
+              transition="slide-x-transition"
+              bottom
+              right
+              v-show="!$vuetify.breakpoint.xs"
+            >
+              <template v-slot:activator="{ on }">
+                <v-btn
+                  class="ml-2 mt-0"
+                  dark
+                  color="primary"
+                  v-on="on"
+                  :x-small="$vuetify.breakpoint.xs"
+                  :small="!$vuetify.breakpoint.xs"
+                >
+                  {{$vuetify.lang.t('$vuetify.REATIVAR')}}
+                </v-btn>
+              </template>
 
-            <TooltipButton
-              :label="$vuetify.lang.t('$vuetify.ATIVAR')"
-              :message="$vuetify.lang.t('$vuetify.ATIVAR_DESCRICAO')"
-              :event="showCommDialog"
-              :object="{actionName:'ATIVAR'}"
-              :mobile="$vuetify.breakpoint.xs"
-            ></TooltipButton>
+              <v-list>
+                <v-list-item @click="showCommDialog({actionName:'REVOGAR_SUSPENSAO'})">
+                  <v-list-item-title>{{$vuetify.lang.t('$vuetify.REVOGAR_SUSPENSAO')}}</v-list-item-title>
+                </v-list-item>
+
+                <v-list-item @click="showCommDialog({actionName:'REVOGAR_CANCELAMENTO'})">
+                  <v-list-item-title>{{$vuetify.lang.t('$vuetify.REVOGAR_CANCELAMENTO')}}</v-list-item-title>
+                </v-list-item>
+              </v-list>
+
+            </v-menu>
           </v-col>
 
           <v-col cols="3">
@@ -179,9 +201,7 @@
                 <v-list-item @click="showCommDialog({actionName:'SUSPENDER'})">
                   <v-list-item-title>{{$vuetify.lang.t('$vuetify.SUSPENDER')}}</v-list-item-title>
                 </v-list-item>
-                <v-list-item @click="showCommDialog({actionName:'REVOGAR_CANCELAMENTO'})">
-                  <v-list-item-title>{{$vuetify.lang.t('$vuetify.REVOGAR_CANCELAMENTO')}}</v-list-item-title>
-                </v-list-item>
+
                 <v-list-item @click="showCommDialog({actionName: 'CANCELAR'})">
                   <v-list-item-title>{{$vuetify.lang.t('$vuetify.CANCELAR')}}</v-list-item-title>
                 </v-list-item>
@@ -371,6 +391,10 @@ export default {
         this.title = this.$vuetify.lang.t('$vuetify.REVOGAR_CANCELAMENTO')
         this.subtitle = this.$vuetify.lang.t('$vuetify.REVOGAR_CANCELAMENTO_DESCRICAO')
 
+      } else if (actionName == 'REVOGAR_SUSPENSAO') {
+        this.title = this.$vuetify.lang.t('$vuetify.REVOGAR_SUSPENSAO')
+        this.subtitle = this.$vuetify.lang.t('$vuetify.REVOGAR_SUSPENSAO_DESCRICAO')
+
       } else if (actionName == 'ALTERAR_VELOCIDADE') {
         this.title = this.$vuetify.lang.t('$vuetify.ALTERAR_VELOCIDADE')
         this.subtitle = this.$vuetify.lang.t('$vuetify.ALTERAR_VELOCIDADE_DESCRICAO')
@@ -422,12 +446,13 @@ export default {
 
         if (this.actionName == 'ALTERAR_VELOCIDADE' || this.actionName == 'SUSPENDER' ||
           this.actionName == 'CANCELAR' || this.actionName == 'REMANEJAR' ||
-          this.actionName == 'ATIVAR' || this.actionName == 'REVOGAR_CANCELAMENTO')
+          this.actionName == 'ATIVAR' || this.actionName == 'REVOGAR_CANCELAMENTO' ||
+          this.actionName == 'REVOGAR_SUSPENSAO')
           obj['Designação Tpz'] = item.nome
 
         if (this.actionName == 'SUSPENDER' || this.actionName == 'NOVO_CIRCUITO' ||
           this.actionName == 'CANCELAR' || this.actionName == 'ATIVAR' ||
-          this.actionName == 'REVOGAR_CANCELAMENTO')
+          this.actionName == 'REVOGAR_CANCELAMENTO' || this.actionName == 'REVOGAR_SUSPENSAO')
           obj['Designação Cliente'] = item.designacaoCliente
 
         if (this.actionName == 'ALTERAR_VELOCIDADE') {

@@ -241,6 +241,7 @@ export default {
     DESATIVACAO_TEMPORARIA_DESCRICAO: 'Request temporary deactivation of the selected circuits',
     REVOGAR_CANCELAMENTO: 'Revoke cancellation',
     REVOGAR_CANCELAMENTO_DESCRICAO: 'Request the revocation of the cancellation of the selected circuits',
+    REVOGAR_SUSPENSAO_DESCRICAO: 'Request the revocation of the suspension of the selected circuits',
     SUSPENDER: 'Suspend',
     SUSPENSO: 'Suspended',
     SUSPENDER_DESCRICAO: 'Suspend the circuits selected',
@@ -354,4 +355,6 @@ export default {
     BAIXAR_EXCEL_DESCRICAO: 'If you don´t want to use the table below, you can download the excel template from the spreadsheet to fill in the necessary information to open the ticket',
     IMPORTAR_EXCEL_DESCRICAO: 'Import the excel spreadsheet filled with the necessary information to open a ticket. Any information filled in the table below will be ignored. ',
     ARQUIVO_IMPORTADO: 'File imported. Click the send button',
+    REATIVAR: 'Reactivate',
+    REVOGAR_SUSPENSAO: 'Revoke suspension',
 }

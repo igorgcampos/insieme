@@ -26,7 +26,7 @@
       >{{'Circuitos selecionados: '+entityList.length}}</v-card-text>
 
       <v-row
-        v-if="this.actionName != 'NOVO_CIRCUITO' && editable && !showSuccess"
+        v-if="this.actionName != 'NOVO_CIRCUITO' && editable && !showSuccess && canShowExcelButtons()"
         class="mt-n9 mb-4 mr-4"
       >
         <v-spacer></v-spacer>
@@ -187,6 +187,12 @@ export default {
     itemList: Array
   },
   methods: {
+    canShowExcelButtons () {
+      return this.actionName == 'NOVO_CIRCUITO' ||
+        this.actionName == 'REMANEJAR' ||
+        this.actionName == 'ALTERAR_VELOCIDADE' ||
+        this.actionName == 'CANCELAR'
+    },
     clickInput () {
       this.$refs.file.click()
     },
@@ -216,8 +222,27 @@ export default {
     },
     downloadExcel () {
       const link = document.createElement("a");
-      link.href = 'planilha.xlsx';
-      link.setAttribute("download", "planilha.xlsx");
+
+      if (this.actionName == 'NOVO_CIRCUITO') {
+        link.href = 'novo_circuito.xlsx';
+        link.setAttribute("download", "novo_circuito.xlsx");
+      }
+
+      if (this.actionName == 'REMANEJAR') {
+        link.href = 'remanejar.xlsx';
+        link.setAttribute("download", "remanejar.xlsx");
+      }
+
+      if (this.actionName == 'ALTERAR_VELOCIDADE') {
+        link.href = 'alterar_velocidade.xlsx';
+        link.setAttribute("download", "alterar_velocidade.xlsx");
+      }
+
+      if (this.actionName == 'CANCELAR') {
+        link.href = 'cancelar.xlsx';
+        link.setAttribute("download", "cancelar.xlsx");
+      }
+
       link.click();
     },
     handle () {
@@ -261,14 +286,14 @@ export default {
 
     if (this.actionName == 'ALTERAR_VELOCIDADE' || this.actionName == 'SUSPENDER' ||
       this.actionName == 'CANCELAR' || this.actionName == 'REMANEJAR' ||
-      this.actionName == 'ATIVAR' || this.actionName == 'REVOGAR_CANCELAMENTO')
+      this.actionName == 'ATIVAR' || this.actionName == 'REVOGAR_CANCELAMENTO' || this.actionName == 'REVOGAR_SUSPENSAO')
       this.headers.push({
         text: this.$vuetify.lang.t('$vuetify.DESIGNACAO_TPZ'), align: 'start', sortable: false, value: 'nome', width: 200
       })
 
     if (this.actionName == 'SUSPENDER' || this.actionName == 'NOVO_CIRCUITO' ||
       this.actionName == 'CANCELAR' || this.actionName == 'ATIVAR' ||
-      this.actionName == 'REVOGAR_CANCELAMENTO')
+      this.actionName == 'REVOGAR_CANCELAMENTO' || this.actionName == 'REVOGAR_SUSPENSAO')
       this.headers.push({ text: this.$vuetify.lang.t('$vuetify.DESIGNACAO_CLIENTE'), value: 'designacaoCliente', sortable: false, width: 200 })
 
     if (this.actionName == 'ALTERAR_VELOCIDADE') {

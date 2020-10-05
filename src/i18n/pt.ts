@@ -243,6 +243,7 @@ export default {
     NOVO_CIRCUITO_DESCRICAO: 'Pedir por novos circuitos',
     REVOGAR_CANCELAMENTO: 'Revogar cancelamento',
     REVOGAR_CANCELAMENTO_DESCRICAO: 'Pedir a revogação do cancelamento dos circuitos selecionados',
+    REVOGAR_SUSPENSAO_DESCRICAO: 'Pedir a revogação da suspensão dos circuitos selecionados',
     FATURAMENTO: 'Faturamento',
     REMANEJAR: 'Remanejar',
     ALTERAR_VELOCIDADE: 'Alterar velocidade',
@@ -350,4 +351,6 @@ export default {
     BAIXAR_EXCEL_DESCRICAO: 'Se você não quiser usar a tabela abaixo, pode baixar o modelo em excel para preenchimento das informações necessárias para abrir o chamado',
     IMPORTAR_EXCEL_DESCRICAO: 'Importar o arquivo excel preenchido com as informações necessárias para abrir um chamado. Qualquer informação preenchida na tabela abaixo será ignorada.',
     ARQUIVO_IMPORTADO: 'Arquivo importado. Clique em enviar.',
+    REATIVAR: 'Reativar',
+    REVOGAR_SUSPENSAO: 'Revogar suspensão',
 }

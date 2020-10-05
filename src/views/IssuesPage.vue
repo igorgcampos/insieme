@@ -459,10 +459,14 @@ export default {
 
         var obj = {};
 
-        if (this.actionName == 'ALTERAR_VELOCIDADE' || this.actionName == 'SUSPENDER' || this.actionName == 'CANCELAR' || this.actionName == 'REMANEJAR' || this.actionName == 'ATIVAR' || this.actionName == 'REVOGAR_CANCELAMENTO')
+        if (this.actionName == 'ALTERAR_VELOCIDADE' || this.actionName == 'SUSPENDER' ||
+          this.actionName == 'CANCELAR' || this.actionName == 'REMANEJAR' || this.actionName == 'ATIVAR' ||
+          this.actionName == 'REVOGAR_CANCELAMENTO' || this.actionName == 'REVOGAR_SUSPENSAO')
           obj.nome = item['Designação Tpz']
 
-        if (this.actionName == 'CANCELAR' || this.actionName == 'NOVO_CIRCUITO' || this.actionName == 'CANCELAR' || this.actionName == 'ATIVAR' || this.actionName == 'REVOGAR_CANCELAMENTO')
+        if (this.actionName == 'CANCELAR' || this.actionName == 'NOVO_CIRCUITO' ||
+          this.actionName == 'CANCELAR' || this.actionName == 'ATIVAR' ||
+          this.actionName == 'REVOGAR_CANCELAMENTO' || this.actionName == 'REVOGAR_SUSPENSAO')
           obj.designacaoCliente = item['Designação Cliente']
 
         if (this.actionName == 'ALTERAR_VELOCIDADE') {
