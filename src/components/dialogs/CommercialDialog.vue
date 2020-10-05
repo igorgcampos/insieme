@@ -191,7 +191,8 @@ export default {
       return this.actionName == 'NOVO_CIRCUITO' ||
         this.actionName == 'REMANEJAR' ||
         this.actionName == 'ALTERAR_VELOCIDADE' ||
-        this.actionName == 'CANCELAR'
+        this.actionName == 'CANCELAR' ||
+        this.actionName == 'SUSPENDER'
     },
     clickInput () {
       this.$refs.file.click()
@@ -224,23 +225,28 @@ export default {
       const link = document.createElement("a");
 
       if (this.actionName == 'NOVO_CIRCUITO') {
-        link.href = 'novo_circuito.xlsx';
-        link.setAttribute("download", "novo_circuito.xlsx");
+        link.href = 'nova_instalacao.xlsx';
+        link.setAttribute("download", "nova_instalacao.xlsx");
       }
 
       if (this.actionName == 'REMANEJAR') {
-        link.href = 'remanejar.xlsx';
-        link.setAttribute("download", "remanejar.xlsx");
+        link.href = 'remanejamento.xlsx';
+        link.setAttribute("download", "remanejamento.xlsx");
       }
 
       if (this.actionName == 'ALTERAR_VELOCIDADE') {
-        link.href = 'alterar_velocidade.xlsx';
-        link.setAttribute("download", "alterar_velocidade.xlsx");
+        link.href = 'alteracao_velocidade.xlsx';
+        link.setAttribute("download", "alteracao_velocidade.xlsx");
       }
 
       if (this.actionName == 'CANCELAR') {
-        link.href = 'cancelar.xlsx';
-        link.setAttribute("download", "cancelar.xlsx");
+        link.href = 'cancelamento.xlsx';
+        link.setAttribute("download", "cancelamento.xlsx");
+      }
+
+      if (this.actionName == 'SUSPENDER') {
+        link.href = 'suspensao.xlsx';
+        link.setAttribute("download", "suspensao.xlsx");
       }
 
       link.click();
@@ -313,6 +319,10 @@ export default {
 
     if (this.actionName == 'NOVO_CIRCUITO') {
 
+      this.headers.push({ text: this.$vuetify.lang.t('$vuetify.BANDA'), value: 'banda', sortable: false, width: 200 })
+      this.headers.push({ text: this.$vuetify.lang.t('$vuetify.VELOCIDADE'), value: 'velocidade', sortable: false, width: 200 })
+      this.headers.push({ text: this.$vuetify.lang.t('$vuetify.ANTENA'), value: 'antena', sortable: false, width: 200 })
+      this.headers.push({ text: 'BUC', value: 'buc', sortable: false, width: 200 })
       this.headers.push({ text: this.$vuetify.lang.t('$vuetify.RAZAO_SOCIAL'), value: 'razaoSocial', sortable: false, width: 200 })
       this.headers.push({ text: this.$vuetify.lang.t('$vuetify.NOME_FANTASIA'), value: 'nomeFantasia', sortable: false, width: 200 })
       this.headers.push({ text: 'CNPJ', value: 'cnpj', sortable: false, width: 200 })
@@ -338,7 +348,8 @@ export default {
       this.headers.push({ text: this.$vuetify.lang.t('$vuetify.CEP_INSTALACAO'), value: 'cep_instalacao', sortable: false, width: 200 })
       this.headers.push({ text: this.$vuetify.lang.t('$vuetify.CONTATO_INSTALACAO'), value: 'contato_instalacao', sortable: false, width: 200 })
       this.headers.push({ text: this.$vuetify.lang.t('$vuetify.TELEFONE_INSTALACAO'), value: 'telefone_instalacao', sortable: false, width: 200 })
-
+      this.headers.push({ text: this.$vuetify.lang.t('$vuetify.LATITUDE'), value: 'latitude', sortable: false, width: 200 })
+      this.headers.push({ text: this.$vuetify.lang.t('$vuetify.LONGITUDE'), value: 'longitude', sortable: false, width: 200 })
       this.headers.push({ text: this.$vuetify.lang.t('$vuetify.ENDERECO_GERENCIA'), value: 'endereco_gerencia', sortable: false, width: 200 })
       this.headers.push({ text: 'VLAN', value: 'vlan', sortable: false, width: 200 })
       this.headers.push({ text: this.$vuetify.lang.t('$vuetify.INTERCONEXAO_TPZ'), value: 'interconexao_tpz', sortable: false, width: 200 })
@@ -347,18 +358,14 @@ export default {
       this.headers.push({ text: 'WAN CPE HOST', value: 'wan_host', sortable: false, width: 200 })
       this.headers.push({ text: 'Loopback CPE', value: 'loopback', sortable: false, width: 200 })
       this.headers.push({ text: this.$vuetify.lang.t('$vuetify.ROTAS_SUMARIZADAS'), value: 'rotas_sumarizadas', sortable: false, width: 200 })
-      this.headers.push({ text: this.$vuetify.lang.t('$vuetify.LATITUDE'), value: 'latitude', sortable: false, width: 200 })
-      this.headers.push({ text: this.$vuetify.lang.t('$vuetify.LONGITUDE'), value: 'longitude', sortable: false, width: 200 })
+
 
       if (this.entityList.length == 0) {
-        this.entityList.push({});
-        this.entityList.push({});
-        this.entityList.push({});
         this.entityList.push({});
       }
     }
 
-    if (this.actionName == 'CANCELAR') {
+    if (this.actionName == 'CANCELAR' || this.actionName == 'SUSPENDER') {
       this.headers.push({ text: this.$vuetify.lang.t('$vuetify.ENDERECO_INSTALACAO'), value: 'endereco_instalacao', sortable: false, width: 200 })
       this.headers.push({ text: this.$vuetify.lang.t('$vuetify.BAIRRO_INSTALACAO'), value: 'bairro_instalacao', sortable: false, width: 200 })
       this.headers.push({ text: this.$vuetify.lang.t('$vuetify.CIDADE_INSTALACAO'), value: 'cidade_instalacao', sortable: false, width: 200 })

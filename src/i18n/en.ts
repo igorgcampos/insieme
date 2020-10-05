@@ -357,4 +357,5 @@ export default {
     ARQUIVO_IMPORTADO: 'File imported. Click the send button',
     REATIVAR: 'Reactivate',
     REVOGAR_SUSPENSAO: 'Revoke suspension',
+    BANDA: 'Band',
 }

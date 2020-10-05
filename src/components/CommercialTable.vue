@@ -1002,6 +1002,86 @@
     </template>
 
     <template
+      v-slot:item.banda="props"
+      v-if="editable"
+    >
+      <v-edit-dialog
+        :return-value.sync="props.item.banda"
+        large
+        :cancel-text="$vuetify.lang.t('$vuetify.CANCELAR')"
+        :save-text="$vuetify.lang.t('$vuetify.SALVAR')"
+      > {{ props.item.banda }}
+        <template v-slot:input>
+          <v-text-field
+            v-model="props.item.banda"
+            :label="$vuetify.lang.t('$vuetify.EDITAR')"
+            single-line
+          ></v-text-field>
+        </template>
+      </v-edit-dialog>
+    </template>
+
+    <template
+      v-slot:item.velocidade="props"
+      v-if="editable"
+    >
+      <v-edit-dialog
+        :return-value.sync="props.item.velocidade"
+        large
+        :cancel-text="$vuetify.lang.t('$vuetify.CANCELAR')"
+        :save-text="$vuetify.lang.t('$vuetify.SALVAR')"
+      > {{ props.item.velocidade }}
+        <template v-slot:input>
+          <v-text-field
+            v-model="props.item.velocidade"
+            :label="$vuetify.lang.t('$vuetify.EDITAR')"
+            single-line
+          ></v-text-field>
+        </template>
+      </v-edit-dialog>
+    </template>
+
+    <template
+      v-slot:item.antena="props"
+      v-if="editable"
+    >
+      <v-edit-dialog
+        :return-value.sync="props.item.antena"
+        large
+        :cancel-text="$vuetify.lang.t('$vuetify.CANCELAR')"
+        :save-text="$vuetify.lang.t('$vuetify.SALVAR')"
+      > {{ props.item.antena }}
+        <template v-slot:input>
+          <v-text-field
+            v-model="props.item.antena"
+            :label="$vuetify.lang.t('$vuetify.EDITAR')"
+            single-line
+          ></v-text-field>
+        </template>
+      </v-edit-dialog>
+    </template>
+
+    <template
+      v-slot:item.buc="props"
+      v-if="editable"
+    >
+      <v-edit-dialog
+        :return-value.sync="props.item.buc"
+        large
+        :cancel-text="$vuetify.lang.t('$vuetify.CANCELAR')"
+        :save-text="$vuetify.lang.t('$vuetify.SALVAR')"
+      > {{ props.item.buc }}
+        <template v-slot:input>
+          <v-text-field
+            v-model="props.item.buc"
+            :label="$vuetify.lang.t('$vuetify.EDITAR')"
+            single-line
+          ></v-text-field>
+        </template>
+      </v-edit-dialog>
+    </template>
+
+    <template
       v-slot:item.latitude="props"
       v-if="editable"
     >

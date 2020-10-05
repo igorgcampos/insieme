@@ -464,7 +464,7 @@ export default {
           this.actionName == 'REVOGAR_CANCELAMENTO' || this.actionName == 'REVOGAR_SUSPENSAO')
           obj.nome = item['Designação Tpz']
 
-        if (this.actionName == 'CANCELAR' || this.actionName == 'NOVO_CIRCUITO' ||
+        if (this.actionName == 'SUSPENDER' || this.actionName == 'NOVO_CIRCUITO' ||
           this.actionName == 'CANCELAR' || this.actionName == 'ATIVAR' ||
           this.actionName == 'REVOGAR_CANCELAMENTO' || this.actionName == 'REVOGAR_SUSPENSAO')
           obj.designacaoCliente = item['Designação Cliente']
@@ -477,6 +477,10 @@ export default {
         }
 
         if (this.actionName == 'NOVO_CIRCUITO') {
+          obj.banda = item['Banda']
+          obj.velocidade = item['Velocidade']
+          obj.antena = item['Antena']
+          obj.buc = item['BUC']
           obj.razaoSocial = item['Razão social']
           obj.nomeFantasia = item['Nome fantasia']
           obj.cnpj = item['CNPJ']
@@ -497,7 +501,7 @@ export default {
           obj.longitude = item['Longitude']
         }
 
-        if (this.actionName == 'CANCELAR' || this.actionName == 'NOVO_CIRCUITO') {
+        if (this.actionName == 'CANCELAR' || this.actionName == 'NOVO_CIRCUITO' || this.actionName == 'SUSPENDER') {
           obj.endereco_instalacao = item['Endereço da instalação']
           obj.bairro_instalacao = item['Bairro da instalação']
           obj.cidade_instalacao = item['Cidade da instalação']

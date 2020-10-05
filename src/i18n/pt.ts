@@ -353,4 +353,5 @@ export default {
     ARQUIVO_IMPORTADO: 'Arquivo importado. Clique em enviar.',
     REATIVAR: 'Reativar',
     REVOGAR_SUSPENSAO: 'Revogar suspensão',
+    BANDA: 'Banda',
 }

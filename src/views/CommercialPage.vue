@@ -463,6 +463,10 @@ export default {
         }
 
         if (this.actionName == 'NOVO_CIRCUITO') {
+          obj['Banda'] = item.banda
+          obj['Velocidade'] = item.velocidade
+          obj['Antena'] = item.antena
+          obj['BUC'] = item.buc
           obj['Razão social'] = item.razaoSocial
           obj['Nome fantasia'] = item.nomeFantasia
           obj['CNPJ'] = item.cnpj
@@ -483,7 +487,7 @@ export default {
           obj['Longitude'] = item.longitude
         }
 
-        if (this.actionName == 'CANCELAR' || this.actionName == 'NOVO_CIRCUITO') {
+        if (this.actionName == 'CANCELAR' || this.actionName == 'NOVO_CIRCUITO' || this.actionName == 'SUSPENDER') {
           obj['Endereço da instalação'] = item.endereco_instalacao
           obj['Bairro da instalação'] = item.bairro_instalacao
           obj['Cidade da instalação'] = item.cidade_instalacao
