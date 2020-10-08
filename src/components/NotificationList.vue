@@ -25,20 +25,26 @@
             <span
               class="text-uppercase caption mt-n3"
               :class="{'font-weight-bold': !item.visualizado, 'font-weight-regular mb-5': item.visualizado}"
-            >{{item.tipo=='NOVA_NOTA_FISCAL'?'Uma nova nota fiscal foi emitida!':
-          'Um chamado foi aberto automaticamente!'}}</span>
+            >{{item.tipo=='NOVA_NOTA_FISCAL'?$vuetify.lang.t('$vuetify.NOTA_FISCAL_EMITIDA'):
+          $vuetify.lang.t('$vuetify.CHAMADO_ABERTO_CIRCUITO_OFLFINE')}}</span>
 
             <span
               v-if="item.tipo=='NOVA_NOTA_FISCAL'"
               class="caption font-weight-bold grey--text text--lighten-1 mt-n8"
             >
-              {{'Número da nota: ' + item.mensagem}}</span>
+              {{$vuetify.lang.t('$vuetify.NUMERO_NOTA') +': ' + item.mensagem}}</span>
+
+            <span
+              v-if="item.tipo=='CIRCUITO_OFFLINE'"
+              class="caption font-weight-bold grey--text text--lighten-1 mt-n5 mb-5"
+            >
+              {{$vuetify.lang.t('$vuetify.CIRCUITO')+': ' + item.mensagem}}</span>
 
             <span
               v-if="item.visualizado"
               class="caption font-weight-bold green--text text--lighten-1 mt-n6"
             >
-              {{'Visualizado'}}</span>
+              {{$vuetify.lang.t('$vuetify.VISUALIZADO')}}</span>
 
           </v-list-item-content>
 

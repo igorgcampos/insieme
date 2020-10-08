@@ -525,7 +525,10 @@
             v-scroll:#circuitId="searchMore"
             style="max-height:340px; width:100%;"
           >
-            <v-expansion-panels class="ma-1">
+            <v-expansion-panels
+              class="ma-1"
+              v-model="openedPanel"
+            >
               <v-expansion-panel
                 v-for="(circuit, i) in circuits"
                 :key="i"
@@ -1047,19 +1050,16 @@ export default {
     searchMore () {
 
       if (this.isLoding || this.noResult) {
-        console.log('return')
         return;
       }
 
-      console.log('vai dar search')
       if (document.getElementById('circuitId').scrollTop + 341 >=
         document.getElementById('circuitId').scrollHeight) {
         this.page++;
         this.search(this.page);
-        console.log('deu search')
       }
     },
-    search (page) {
+    search (page, selectInvoiceIndex) {
 
       this.isLoading = true;
 
@@ -1098,6 +1098,7 @@ export default {
 
         this.circuits = this.circuits.concat(response.data);
         this.isLoading = false;
+        this.openedPanel = selectInvoiceIndex
       });
 
     },
@@ -1113,6 +1114,7 @@ export default {
     this.contractDecoration = this.button == 'contract' ? 'underline' : 'none'
   },
   data: () => ({
+    openedPanel: undefined,
     logDecoration: 'none',
     contractDecoration: 'none',
     button: 'log',
@@ -1203,6 +1205,12 @@ export default {
         this.isLoading = false;
         window.scrollTo(0, 0);
       });
+
+    this.$root.$on('search-circuit', (desigTpz) => {
+
+      this.searchText = desigTpz;
+      this.search(0, 0);
+    })
   }
 };
 </script>

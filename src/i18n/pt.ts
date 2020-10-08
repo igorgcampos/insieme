@@ -354,4 +354,7 @@ export default {
     REATIVAR: 'Reativar',
     REVOGAR_SUSPENSAO: 'Revogar suspensão',
     BANDA: 'Banda',
+    VISUALIZADO: 'Visualizado',
+    NOTA_FISCAL_EMITIDA: 'Uma nova nota fiscal foi emitida!',
+    CHAMADO_ABERTO_CIRCUITO_OFLFINE: 'Chamado aberto para circuito offline!'
 }

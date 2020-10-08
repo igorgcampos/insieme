@@ -358,4 +358,7 @@ export default {
     REATIVAR: 'Reactivate',
     REVOGAR_SUSPENSAO: 'Revoke suspension',
     BANDA: 'Band',
+    VISUALIZADO: 'Visualized',
+    NOTA_FISCAL_EMITIDA: 'A new invoice was emitted!',
+    CHAMADO_ABERTO_CIRCUITO_OFLFINE: 'Open call for offline circuit!'
 }

@@ -42,6 +42,7 @@
           v-show="canShowShortcut() && ($hasProfile('Administrador') || $hasProfile('Cliente') || $hasProfile('Operacional'))"
           class="mr-2"
           @click="goTo('circuits')"
+          ref="circuitChip"
         >
           {{$vuetify.lang.t('$vuetify.CIRCUITOS')}}
         </v-chip>
@@ -278,6 +279,7 @@
         <v-list-item
           v-show="canShowShortcut()"
           @click="goTo('circuits')"
+          ref="circuitItem"
         >
           <v-list-item-title>{{$vuetify.lang.t('$vuetify.CIRCUITOS')}}</v-list-item-title>
         </v-list-item>
@@ -434,12 +436,22 @@ export default {
 
       setTimeout(() => {
 
-        if (!this.$vuetify.breakpoint.xs)
-          this.$refs.invoiceChip.click();
-        if (this.$vuetify.breakpoint.xs)
-          this.$refs.invoiceItem.click();
+        if (notification.tipo == 'NOVA_NOTA_FISCAL') {
+          if (!this.$vuetify.breakpoint.xs)
+            this.$refs.invoiceChip.click();
+          if (this.$vuetify.breakpoint.xs)
+            this.$refs.invoiceItem.click();
 
-        this.$root.$emit('search-invoice', notification.mensagem)
+          this.$root.$emit('search-invoice', notification.mensagem)
+        } else {
+
+          if (!this.$vuetify.breakpoint.xs)
+            this.$refs.circuitChip.click();
+          if (this.$vuetify.breakpoint.xs)
+            this.$refs.circuitItem.click();
+
+          this.$root.$emit('search-circuit', notification.mensagem)
+        }
       }, 400)
 
 
