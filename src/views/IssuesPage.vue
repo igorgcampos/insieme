@@ -49,7 +49,7 @@
               :count="0"
               :message="$vuetify.lang.t('$vuetify.EM_ANDAMENTO')"
               color="warning--text"
-              :func="getClosed"
+              :func="getResolving"
             ></CountCard>
           </v-col>
           <v-col
@@ -180,13 +180,13 @@
                       sm="2"
                     >
                       <v-chip
-                        :color="issue.status==1?'success':'primary'"
+                        :color="issue.status=='ABERTO'?'success':'primary'"
                         class="ml-0 mr-4"
                         label
                         small
                         outlined
                       >
-                        {{ issue.status==1?$vuetify.lang.t('$vuetify.EM_ABERTO'):
+                        {{ issue.status=='ABERTO'?$vuetify.lang.t('$vuetify.EM_ABERTO'):
                   $vuetify.lang.t('$vuetify.ENCERRADO') }}
                       </v-chip>
                     </v-col>
@@ -211,10 +211,10 @@
                       v-show="!$vuetify.breakpoint.xs"
                     >
                       <strong class="font-weight-bold grey--text text--lighten-1 mr-2">
-                        {{issue.status==1?$vuetify.lang.t('$vuetify.DATA_ABERTURA')+':':
+                        {{issue.status=='ABERTO'?$vuetify.lang.t('$vuetify.DATA_ABERTURA')+':':
                     $vuetify.lang.t('$vuetify.DATA_ENCERRAMENTO')+':'}}</strong>
 
-                      <strong>{{issue.status==1?formatDate(issue.dataAbertura):
+                      <strong>{{issue.status=='ABERTO'?formatDate(issue.dataAbertura):
                   formatDate(issue.dataEncerramento)}}</strong>
                     </v-col>
 
@@ -243,10 +243,10 @@
                         v-if="!open"
                       >
                         <strong class="caption font-weight-bold grey--text text--lighten-1 mr-2">
-                          {{issue.status==1?$vuetify.lang.t('$vuetify.DATA_ABERTURA')+':':
+                          {{issue.status=='ABERTO'?$vuetify.lang.t('$vuetify.DATA_ABERTURA')+':':
                     $vuetify.lang.t('$vuetify.DATA_ENCERRAMENTO')+':'}}</strong>
 
-                        <strong class="caption font-weight-bold">{{issue.status==1?formatDate(issue.dataAbertura):
+                        <strong class="caption font-weight-bold">{{issue.status=='ABERTO'?formatDate(issue.dataAbertura):
                   formatDate(issue.dataEncerramento)}}</strong>
                       </v-row>
                     </v-col>
@@ -267,13 +267,13 @@
                     >
                       <v-col class="pa-0">
                         <v-chip
-                          :color="issue.status==1?'success':'primary'"
+                          :color="issue.status=='ABERTO'?'success':'primary'"
                           class="ml-0 mr-2 mb-2"
                           label
                           small
                           outlined
                         >
-                          {{ issue.status==1?$vuetify.lang.t('$vuetify.EM_ABERTO'):
+                          {{ issue.status=='ABERTO'?$vuetify.lang.t('$vuetify.EM_ABERTO'):
                   $vuetify.lang.t('$vuetify.ENCERRADO') }}
                         </v-chip>
 
@@ -353,12 +353,12 @@
 
                   <v-divider
                     class="mt-n3"
-                    v-show="issue.status==1"
+                    v-show="issue.status=='ABERTO'"
                   ></v-divider>
 
                   <v-card-actions
                     class="mb-n2 pb-0"
-                    v-show="issue.status==1"
+                    v-show="issue.status=='ABERTO'"
                   >
                     <TooltipButton
                       :label="$vuetify.lang.t('$vuetify.ENCERRAR_CHAMADO')"
@@ -719,10 +719,13 @@ export default {
       return this.selectedIssue;
     },
     getOpened () {
-      this.getFromStatus(1)
+      this.getFromStatus('ABERTO')
     },
     getClosed () {
-      this.getFromStatus(2)
+      this.getFromStatus('ENCERRADO')
+    },
+    getResolving () {
+      this.getFromStatus('EM_ANDAMENTO')
     },
     getFromStatus (status) {
 
@@ -783,16 +786,17 @@ export default {
 
       var selectedStatus = 0
       if (this.status == this.statuses[0]) {
-        selectedStatus = 0;
+        selectedStatus = '';
       } else if (this.status == this.statuses[1]) {
-        selectedStatus = 1;
+        selectedStatus = 'ABERTO';
       } else if (this.status == this.statuses[2]) {
-        selectedStatus = 2;
+        selectedStatus = 'ENCERRADO';
       }
 
       this.$get('/chamado/busca', {
         contractId: this.$props.contract.id,
-        searchText: this.searchText, status: selectedStatus,
+        searchText: this.searchText,
+        status: selectedStatus,
         page: this.page
       }).then((response) => {
 
@@ -874,7 +878,7 @@ export default {
     this.$get('/chamado/busca', {
       contractId: this.$props.contract.id,
       searchText: '',
-      status: 0,
+      status: '',
       page: 0
     })
       .then((response) => {
