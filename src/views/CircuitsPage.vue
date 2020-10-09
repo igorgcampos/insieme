@@ -1059,7 +1059,7 @@ export default {
         this.search(this.page);
       }
     },
-    search (page, selectInvoiceIndex) {
+    search (page, selectCircuitIndex) {
 
       this.isLoading = true;
 
@@ -1098,7 +1098,7 @@ export default {
 
         this.circuits = this.circuits.concat(response.data);
         this.isLoading = false;
-        this.openedPanel = selectInvoiceIndex
+        this.openedPanel = selectCircuitIndex
       });
 
     },
@@ -1211,6 +1211,13 @@ export default {
       this.searchText = desigTpz;
       this.search(0, 0);
     })
+
+    var vm = this;
+    setInterval(function () {
+      if (window.sessionStorage.getItem('actualPage') == 'dashboard') {
+        vm.search(this.page, this.openedPanel)
+      }
+    }, 120000)
   }
 };
 </script>

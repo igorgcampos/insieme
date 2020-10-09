@@ -24,9 +24,11 @@
           <v-list-item-content>
             <span
               class="text-uppercase caption mt-n3"
-              :class="{'font-weight-bold': !item.visualizado, 'font-weight-regular mb-5': item.visualizado}"
+              :class="{'font-weight-bold': !item.visualizado, 'font-weight-regular mb-5': item.visualizado,
+              'pt-2': item.tipo != 'NOVA_NOTA_FISCAL'}"
             >{{item.tipo=='NOVA_NOTA_FISCAL'?$vuetify.lang.t('$vuetify.NOTA_FISCAL_EMITIDA'):
-          $vuetify.lang.t('$vuetify.CHAMADO_ABERTO_CIRCUITO_OFLFINE')}}</span>
+              $vuetify.lang.t('$vuetify.CHAMADO_ABERTO_CIRCUITO_OFLFINE')}}
+            </span>
 
             <span
               v-if="item.tipo=='NOVA_NOTA_FISCAL'"
