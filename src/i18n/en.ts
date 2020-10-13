@@ -360,5 +360,6 @@ export default {
     BANDA: 'Band',
     VISUALIZADO: 'Visualized',
     NOTA_FISCAL_EMITIDA: 'A new invoice was emitted!',
-    CHAMADO_ABERTO_CIRCUITO_OFLFINE: 'Open call for offline circuit!'
+    CHAMADO_ABERTO_CIRCUITO_OFLFINE: 'Open call for offline circuit!',
+    NOTA_FISCAL_CANCELADA: 'Invoice canceled!'
 }

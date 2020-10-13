@@ -26,12 +26,11 @@
               class="text-uppercase caption mt-n3"
               :class="{'font-weight-bold': !item.visualizado, 'font-weight-regular mb-5': item.visualizado,
               'pt-2': item.tipo != 'NOVA_NOTA_FISCAL'}"
-            >{{item.tipo=='NOVA_NOTA_FISCAL'?$vuetify.lang.t('$vuetify.NOTA_FISCAL_EMITIDA'):
-              $vuetify.lang.t('$vuetify.CHAMADO_ABERTO_CIRCUITO_OFLFINE')}}
+            >{{getTitle(item)}}
             </span>
 
             <span
-              v-if="item.tipo=='NOVA_NOTA_FISCAL'"
+              v-if="item.tipo=='NOVA_NOTA_FISCAL' || item.tipo=='NOTA_FISCAL_CANCELADA'"
               class="caption font-weight-bold grey--text text--lighten-1 mt-n8"
             >
               {{$vuetify.lang.t('$vuetify.NUMERO_NOTA') +': ' + item.mensagem}}</span>
@@ -79,5 +78,12 @@ export default {
     removeFunction: Function,
     viewFunction: Function,
   },
+  methods: {
+    getTitle (item) {
+      return item.tipo == 'NOVA_NOTA_FISCAL' ? this.$vuetify.lang.t('$vuetify.NOTA_FISCAL_EMITIDA') :
+        item.tipo == 'NOVA_NOTA_FISCAL' ? this.$vuetify.lang.t('$vuetify.NOTA_FISCAL_CANCELADA') :
+          this.$vuetify.lang.t('$vuetify.CHAMADO_ABERTO_CIRCUITO_OFLFINE')
+    }
+  }
 };
 </script>

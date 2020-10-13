@@ -356,5 +356,6 @@ export default {
     BANDA: 'Banda',
     VISUALIZADO: 'Visualizado',
     NOTA_FISCAL_EMITIDA: 'Uma nova nota fiscal foi emitida!',
-    CHAMADO_ABERTO_CIRCUITO_OFLFINE: 'Chamado aberto para circuito offline!'
+    CHAMADO_ABERTO_CIRCUITO_OFLFINE: 'Chamado aberto para circuito offline!',
+    NOTA_FISCAL_CANCELADA: 'Nota fiscal cancelada!'
 }
