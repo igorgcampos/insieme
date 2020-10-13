@@ -154,7 +154,7 @@
         <v-btn
           color="primary"
           text
-          @click="close(); clean();"
+          @click="createClosedIssue(); close(); clean();"
           :x-small="$vuetify.breakpoint.xs"
           v-show="showRestartResultPanel && restartOk"
         >{{$vuetify.lang.t('$vuetify.ESTA_OK')}}</v-btn>
@@ -186,7 +186,8 @@ export default {
     getObject: Function,
     showDialog: Boolean,
     close: Function,
-    openIssue: Function
+    openIssue: Function,
+    createClosedIssue: Function,
   },
   data: () => ({
     showCircuitQuestionPanel: false,
@@ -267,8 +268,6 @@ export default {
       this.close();
       this.clean();
 
-      //this.showFirstQuestionPanel = false
-      //this.showChatQuestions = true;
     },
     openIssueDialog () {
       this.close();

@@ -793,6 +793,7 @@
           :close="closeProblemSolveDialog"
           :getObject="getObject"
           :openIssue="openIssue"
+          :createClosedIssue="createClosedIssue"
         ></SolveProblemDialog>
 
       </div>
@@ -819,6 +820,28 @@ export default {
     SolveProblemDialog
   },
   methods: {
+    createClosedIssue () {
+
+      var issue = {
+        reason: 'Robô fez um restart do circuito',
+        observation: ''
+      }
+
+      this.$root.$on('close-issue', function (issue) {
+
+        issue.motivoEncerramento = 'Meu problema foi resolvido';
+        issue.observacaoEncerramento = 'O robô conseguiu reiniciar o circuito do cliente com sucesso!'
+
+        this.$put('/chamado/close', issue).then((response) => {
+
+          if (response.data) {
+            this.$root.$emit('close-issue-success', response.data)
+          }
+        });
+      })
+
+      this.sendIssue(issue, this.selectedCircuit, true)
+    },
     openPRTG (circuit) {
       window.open('https://monitor.telespazio.com.br/device.htm?id=' + circuit.idPrtg +
         '&tabid=1&username=' + this.$getUser().apelido + '&passhash=' + this.$getUser().prtgToken)
@@ -875,7 +898,7 @@ export default {
         this.showSuccess = false;
       }, 1000);
     },
-    sendIssue (issue, circuit) {
+    sendIssue (issue, circuit, close) {
 
       if (!issue.reason) {
         return;
@@ -888,7 +911,8 @@ export default {
         identificadorOrigem: circuit.nome,
         motivoAbertura: issue.reason,
         observacaoAbertura: issue.observation,
-        contrato: { id: this.$props.contract.id }
+        contrato: { id: this.$props.contract.id },
+        status: issue.status ? issue.status : undefined,
       }
       this.$post('/chamado/create', issue).then((response) => {
 
@@ -898,6 +922,10 @@ export default {
           this.showDialogLoading = false;
           this.$root.$emit('new-issue', response.data)
           circuit.protocolo = response.data.protocolo
+
+          if (close) {
+            this.$root.$emit('close-issue', response.data)
+          }
         }
       });
     },

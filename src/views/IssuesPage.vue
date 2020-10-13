@@ -345,6 +345,7 @@
                           :value="issue.observacaoEncerramento || '--'"
                           justify="start"
                           truncate
+                          style="max-width:150px;"
                           :class="{'pl-0 pr-0':$vuetify.breakpoint.xs}"
                         ></LabelValue>
                       </v-col>
@@ -703,7 +704,7 @@ export default {
 
           this.showSuccess = true;
           this.showDialogLoading = false;
-          this.selectedIssue.status = 2;
+          this.selectedIssue.status = response.data.status;
           this.selectedIssue.dataEncerramento = response.data.dataEncerramento;
           this.counts[0] -= 1;
           this.counts[1] += 1;
@@ -885,6 +886,27 @@ export default {
         this.issues = response.data;
         this.isLoading = false;
       });
+
+    this.$root.$on('close-issue-success', (issue) => {
+
+      if (!this.issues) {
+        return;
+      }
+
+      this.issues.forEach(element => {
+
+        if (element.protocolo == issue.protocolo) {
+
+          element.motivoEncerramento = issue.motivoEncerramento;
+          element.observacaoEncerramento = issue.observacaoEncerramento;
+          element.status = 'ENCERRADO'
+          element.dataEncerramento = issue.dataEncerramento
+          this.counts[0] -= 1;
+          this.counts[1] += 1;
+        }
+      });
+
+    })
   }
 };
 </script>
