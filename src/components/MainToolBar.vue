@@ -436,7 +436,7 @@ export default {
 
       setTimeout(() => {
 
-        if (notification.tipo == 'NOVA_NOTA_FISCAL') {
+        if (notification.tipo == 'NOVA_NOTA_FISCAL' || notification.tipo == 'NOTA_FISCAL_CANCELADA') {
           if (!this.$vuetify.breakpoint.xs)
             this.$refs.invoiceChip.click();
           if (this.$vuetify.breakpoint.xs)

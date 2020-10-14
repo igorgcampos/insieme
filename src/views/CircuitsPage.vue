@@ -1245,7 +1245,7 @@ export default {
       if (window.sessionStorage.getItem('actualPage') == 'dashboard') {
         vm.search(this.page, this.openedPanel)
       }
-    }, 120000)
+    }, 180000)
   }
 };
 </script>
