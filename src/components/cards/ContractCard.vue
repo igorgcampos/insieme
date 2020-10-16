@@ -47,6 +47,18 @@
               >
                 {{contract.tipo == 'LOCAÇÃO'?$vuetify.lang.t('$vuetify.LOCACAO'):$vuetify.lang.t('$vuetify.VENDA')}}
               </v-chip>
+
+              <v-chip
+                label
+                class="caption ml-3 mb-1"
+                color="error"
+                text-color="error"
+                small
+                outlined
+                v-if="contract.suporte=='proativo'"
+              >
+                {{$vuetify.lang.t('$vuetify.PROATIVO')}}
+              </v-chip>
             </v-col>
           </v-col>
 

@@ -361,5 +361,6 @@ export default {
     VISUALIZADO: 'Visualized',
     NOTA_FISCAL_EMITIDA: 'A new invoice was emitted!',
     CHAMADO_ABERTO_CIRCUITO_OFLFINE: 'Open call for offline circuit!',
-    NOTA_FISCAL_CANCELADA: 'Invoice canceled!'
+    NOTA_FISCAL_CANCELADA: 'Invoice canceled!',
+    PROATIVO: 'Proactive',
 }
