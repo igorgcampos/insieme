@@ -38,6 +38,7 @@
             <span
               v-if="item.tipo=='CIRCUITO_OFFLINE'"
               class="caption font-weight-bold grey--text text--lighten-1 mt-n5 mb-5"
+              :class="{'pt-5':!item.visualizado}"
             >
               {{$vuetify.lang.t('$vuetify.CIRCUITO')+': ' + item.mensagem}}</span>
 
