@@ -416,7 +416,9 @@ export default {
     tab: 'null',
   }),
   methods: {
-    removeNotification (notification) {
+    removeNotification (notification, event) {
+
+      event.stopPropagation();
 
       this.$delete('/notificacao/delete', { notificationId: notification.id }).
         then(response => {
