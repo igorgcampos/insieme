@@ -50,9 +50,9 @@
 
               <v-chip
                 label
-                class="caption ml-3 mb-1"
-                color="error"
-                text-color="error"
+                class="caption ml-3 mb-1 mt-2"
+                color="blue-grey"
+                text-color="blue-grey"
                 small
                 outlined
                 v-if="contract.suporte=='proativo'"

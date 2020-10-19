@@ -655,6 +655,19 @@
                           {{ $vuetify.lang.t('$vuetify.'+circuit.statusInstalacao) }}
                         </v-chip>
                       </v-col>
+
+                      <v-col class="pa-0 mt-3">
+                        <v-chip
+                          color="blue-grey"
+                          class="ml-0 mr-2"
+                          label
+                          small
+                          outlined
+                          v-if="circuit.proatividade"
+                        >
+                          {{ $vuetify.lang.t('$vuetify.PROATIVO') }}
+                        </v-chip>
+                      </v-col>
                     </v-col>
 
                     <v-col
