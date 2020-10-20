@@ -36,29 +36,34 @@
 
         <v-row>
           <v-col class="mt-n6 mr-1">
-            <v-col class="pa-0 pl-1">
-              <v-chip
-                label
-                class="caption ml-3 mb-1"
-                :color="contract.tipo=='LOCAÇÃO'?'warning':'primary'"
-                :text-color="contract.tipo=='LOCAÇÃO'?'warning':'primary'"
-                small
-                outlined
-              >
-                {{contract.tipo == 'LOCAÇÃO'?$vuetify.lang.t('$vuetify.LOCACAO'):$vuetify.lang.t('$vuetify.VENDA')}}
-              </v-chip>
+            <v-col class="pa-0 pl-1 ml-3">
+              <v-row>
+                <v-chip
+                  label
+                  class="caption ml-3 mb-1"
+                  :color="contract.tipo=='LOCAÇÃO'?'warning':'primary'"
+                  :text-color="contract.tipo=='LOCAÇÃO'?'warning':'primary'"
+                  small
+                  outlined
+                >
+                  {{contract.tipo == 'LOCAÇÃO'?$vuetify.lang.t('$vuetify.LOCACAO'):$vuetify.lang.t('$vuetify.VENDA')}}
+                </v-chip>
+              </v-row>
 
-              <v-chip
-                label
-                class="caption ml-3 mb-1 mt-2"
-                color="blue-grey"
-                text-color="blue-grey"
-                small
-                outlined
-                v-if="contract.suporte=='Proativo'"
-              >
-                {{$vuetify.lang.t('$vuetify.PROATIVO')}}
-              </v-chip>
+              <v-row>
+                <v-chip
+                  label
+                  class="caption ml-3 mb-1 mt-2"
+                  color="blue-grey"
+                  text-color="blue-grey"
+                  small
+                  outlined
+                  v-if="contract.suporte=='Proativo'"
+                >
+                  {{$vuetify.lang.t('$vuetify.PROATIVO')}}
+                </v-chip>
+              </v-row>
+
             </v-col>
           </v-col>
 
