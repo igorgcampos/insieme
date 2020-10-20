@@ -663,7 +663,7 @@
                           label
                           small
                           outlined
-                          v-if="circuit.proatividade || $props.contract.suporte=='proativo'"
+                          v-if="circuit.proatividade || $props.contract.suporte=='Proativo'"
                         >
                           {{ $vuetify.lang.t('$vuetify.PROATIVO') }}
                         </v-chip>

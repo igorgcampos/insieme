@@ -55,7 +55,7 @@
                 text-color="blue-grey"
                 small
                 outlined
-                v-if="contract.suporte=='proativo'"
+                v-if="contract.suporte=='Proativo'"
               >
                 {{$vuetify.lang.t('$vuetify.PROATIVO')}}
               </v-chip>
