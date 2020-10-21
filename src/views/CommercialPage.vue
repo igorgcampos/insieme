@@ -256,13 +256,13 @@
                       sm="2"
                     >
                       <v-chip
-                        :color="circuit.online==3?'success':'error'"
+                        :color="circuit.tecnologia != 'VSAT'?'grey':circuit.online==3?'success':'error'"
                         class="ml-0 mr-2"
                         label
                         small
                         outlined
                       >
-                        {{ circuit.online==3?'Online':'Offline' }}
+                        {{ circuit.tecnologia != 'VSAT'?'N/A':circuit.online==3?'Online':'Offline' }}
                       </v-chip>
                     </v-col>
 
