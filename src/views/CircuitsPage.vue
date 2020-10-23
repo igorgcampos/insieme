@@ -1218,10 +1218,10 @@ export default {
         }
 
         this.$get('/circuito/install/counts',
-          { contractNumber: this.$props.contract.numeroContratoTpz }).then((response) => {
+          { contractNumber: this.$props.contract.numeroContratoTpz }).then((response2) => {
 
             if (response) {
-              this.installCounts = response.data;
+              this.installCounts = response2.data;
             }
             this.isLoading = false;
 
