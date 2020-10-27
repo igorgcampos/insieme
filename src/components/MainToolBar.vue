@@ -444,7 +444,8 @@ export default {
           if (this.$vuetify.breakpoint.xs)
             this.$refs.invoiceItem.click();
 
-          this.$root.$emit('search-invoice', notification.mensagem)
+          this.$root.$emit(notification.tipo == 'NOVA_NOTA_FISCAL' ? 'search-invoice' :
+            'search-canceled-invoice', notification.mensagem)
         } else {
 
           if (!this.$vuetify.breakpoint.xs)

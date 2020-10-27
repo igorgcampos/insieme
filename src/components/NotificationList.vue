@@ -25,7 +25,7 @@
             <span
               class="text-uppercase caption mt-n3"
               :class="{'font-weight-bold': !item.visualizado, 'font-weight-regular mb-5': item.visualizado,
-              'pt-2': item.tipo != 'NOVA_NOTA_FISCAL'}"
+              'pt-2': item.tipo == 'CIRCUITO_OFFLINE'}"
             >{{getTitle(item)}}
             </span>
 
@@ -82,7 +82,7 @@ export default {
   methods: {
     getTitle (item) {
       return item.tipo == 'NOVA_NOTA_FISCAL' ? this.$vuetify.lang.t('$vuetify.NOTA_FISCAL_EMITIDA') :
-        item.tipo == 'NOVA_NOTA_FISCAL' ? this.$vuetify.lang.t('$vuetify.NOTA_FISCAL_CANCELADA') :
+        item.tipo == 'NOTA_FISCAL_CANCELADA' ? this.$vuetify.lang.t('$vuetify.NOTA_FISCAL_CANCELADA') :
           this.$vuetify.lang.t('$vuetify.CHAMADO_ABERTO_CIRCUITO_OFLFINE')
     }
   }

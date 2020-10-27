@@ -167,14 +167,16 @@
                       sm="2"
                     >
                       <v-chip
-                        :color="invoice.statusPagamento=='EM_ABERTO'?'warning':
+                        :color="invoice.statusValido=='CANCELADA'?'blue-grey':
+                        invoice.statusPagamento=='EM_ABERTO'?'warning':
                         invoice.statusPagamento=='VENCIDA'?'error':'success'"
                         class="ml-0 mr-2"
                         label
                         small
                         outlined
                       >
-                        {{ invoice.statusPagamento=='EM_ABERTO'?$vuetify.lang.t('$vuetify.EM_ABERTO'):
+                        {{ invoice.statusValido=='CANCELADA'?$vuetify.lang.t('$vuetify.CANCELADA')
+                        :invoice.statusPagamento=='EM_ABERTO'?$vuetify.lang.t('$vuetify.EM_ABERTO'):
                         invoice.statusPagamento=='VENCIDA'?$vuetify.lang.t('$vuetify.VENCIDA'):
                   $vuetify.lang.t('$vuetify.PAGO') }}
                       </v-chip>
@@ -197,8 +199,9 @@
                         {{(invoice.statusPagamento=='EM_ABERTO' || invoice.statusPagamento=='VENCIDA')?$vuetify.lang.t('$vuetify.VENCE_EM')+":":
                     $vuetify.lang.t('$vuetify.PAGO_EM')+":"}}</strong>
 
-                      <strong>{{(invoice.statusPagamento=='EM_ABERTO' || invoice.statusPagamento=='VENCIDA')?formatDate(invoice.dataVencimento):
-                    formatDate(invoice.dataPagamento)}}</strong>
+                      <strong>{{(invoice.statusPagamento=='EM_ABERTO' || invoice.statusPagamento=='VENCIDA')?
+                        formatDate(invoice.dataVencimento):
+                        formatDate(invoice.dataPagamento)}}</strong>
                     </v-col>
 
                     <v-col
@@ -222,8 +225,9 @@
                           {{invoice.statusPagamento=='EM_ABERTO'?$vuetify.lang.t('$vuetify.VENCE_EM')+":":
                     $vuetify.lang.t('$vuetify.PAGO_EM')+":"}}</strong>
 
-                        <strong class="caption font-weight-bold">{{invoice.statusPagamento=='EM_ABERTO'?formatDate(invoice.dataVencimento):
-                    formatDate(invoice.dataPagamento)}}</strong>
+                        <strong class="caption font-weight-bold">{{invoice.statusPagamento=='EM_ABERTO'?
+                          formatDate(invoice.dataVencimento):
+                          formatDate(invoice.dataPagamento)}}</strong>
                       </v-row>
                     </v-col>
                   </v-row>
@@ -238,16 +242,18 @@
                     >
                       <v-col class="pa-0">
                         <v-chip
-                          :color="invoice.statusPagamento=='EM_ABERTO'?'warning':
+                          :color="invoice.statusValido=='CANCELADA'?'blue-grey':
+                          invoice.statusPagamento=='EM_ABERTO'?'warning':
                           invoice.statusPagamento=='VENCIDA'?'error':'success'"
                           class="ml-0 mr-2"
                           label
                           small
                           outlined
                         >
-                          {{ invoice.statusPagamento=='EM_ABERTO'?$vuetify.lang.t('$vuetify.EM_ABERTO'):
-                          invoice.statusPagamento=='VENCIDA'?$vuetify.lang.t('$vuetify.VENCIDA'):
-                          $vuetify.lang.t('$vuetify.PAGO') }}
+                          {{ invoice.statusValido=='CANCELADA'?$vuetify.lang.t('$vuetify.CANCELADA')
+                            :invoice.statusPagamento=='EM_ABERTO'?$vuetify.lang.t('$vuetify.EM_ABERTO'):
+                            invoice.statusPagamento=='VENCIDA'?$vuetify.lang.t('$vuetify.VENCIDA'):
+                            $vuetify.lang.t('$vuetify.PAGO') }}
                         </v-chip>
                       </v-col>
 
@@ -594,6 +600,22 @@ export default {
       });
 
     },
+    searchCanceledInvoice (invoiceNumber) {
+
+      this.isLoading = true;
+      this.$get('/nota/canceled',
+        { numero: invoiceNumber, contractId: this.$props.contract.id }).then((response) => {
+
+          if (response) {
+            this.invoices = []
+            this.invoices.push(response.data);
+            this.openedPanel = 0;
+          }
+
+          this.isLoading = false;
+        });
+
+    }
   },
   props: {
     contract: Object
@@ -649,6 +671,10 @@ export default {
 
       this.searchText = invoiceNumber;
       this.search(0, 0);
+    })
+
+    this.$root.$on('search-canceled-invoice', (invoiceNumber) => {
+      this.searchCanceledInvoice(invoiceNumber);
     })
   }
 };

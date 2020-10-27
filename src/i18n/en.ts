@@ -363,4 +363,5 @@ export default {
     CHAMADO_ABERTO_CIRCUITO_OFLFINE: 'Open call for offline circuit!',
     NOTA_FISCAL_CANCELADA: 'Invoice canceled!',
     PROATIVO: 'Proactive',
+    CANCELADA: 'Canceled',
 }
