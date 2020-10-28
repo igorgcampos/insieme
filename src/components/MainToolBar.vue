@@ -269,7 +269,7 @@
           v-bind="attrs"
           v-on="on"
           icon
-          v-show="$vuetify.breakpoint.xs"
+          v-show="$vuetify.breakpoint.xs  || $vuetify.breakpoint.sm"
         >
           <v-icon v-on="on">mdi-menu</v-icon>
         </v-btn>

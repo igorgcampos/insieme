@@ -386,6 +386,16 @@
                       :mobile="$vuetify.breakpoint.xs"
                       :isText=true
                     ></TooltipButton>
+
+                    <TooltipButton
+                      :label="$vuetify.lang.t('$vuetify.BAIXAR')"
+                      :message="$vuetify.lang.t('$vuetify.DOWNLOAD_NOTA')"
+                      :event="downloadInvoice"
+                      :object="invoice"
+                      :mobile="$vuetify.breakpoint.xs"
+                      :isText=true
+                      :loading="isDownloading"
+                    ></TooltipButton>
                   </v-card-actions>
                 </v-expansion-panel-content>
               </v-expansion-panel>
@@ -405,6 +415,14 @@
           :getObject="getObject"
           :itemList="reasonList"
         ></IssueDialog>
+
+        <InfoDialog
+          :title="$vuetify.lang.t('$vuetify.NOTA_FISCAL_NAO_ENCONTRADA')"
+          :info="$vuetify.lang.t('$vuetify.NOTA_NAO_DIGITALIZADO')"
+          :close="closeInfoDialog"
+          :dialog="infoDialog"
+        >
+        </InfoDialog>
       </div>
     </v-lazy>
   </div>
@@ -417,6 +435,7 @@ import WarningPanel from '../components/panels/WarningPanel';
 import TooltipButton from '../components/TooltipButton';
 import LabelValue from '../components/LabelValue';
 import IssueDialog from '../components/dialogs/IssueDialog';
+import InfoDialog from '../components/dialogs/InfoDialog';
 
 export default {
   components: {
@@ -424,9 +443,42 @@ export default {
     WarningPanel,
     TooltipButton,
     LabelValue,
-    IssueDialog
+    IssueDialog,
+    InfoDialog,
   },
   methods: {
+    closeInfoDialog () {
+      this.infoDialog = false;
+    },
+    downloadInvoice (invoice) {
+
+      this.isDownloading = true;
+
+      this.$get('/nota/download', {
+        invoiceType: invoice.tipo,
+        invoiceNumber: invoice.numero
+      }, 'arraybuffer').then(response => {
+
+        if (!response) {
+          this.infoDialog = true;
+          this.isDownloading = false;
+          return;
+        }
+
+        const file = new Blob(
+          [response.data],
+          { type: 'application/zip' });
+
+        const fileURL = URL.createObjectURL(file);
+        var a = document.createElement('a')
+        a.href = fileURL
+        a.download = this.$vuetify.lang.t('$vuetify.NOTAS_FISCAIS')
+        a.click()
+
+        this.isDownloading = false;
+      });
+
+    },
     formatInvoice (invoice) {
 
       return {
@@ -621,6 +673,8 @@ export default {
     contract: Object
   },
   data: () => ({
+    isDownloading: false,
+    infoDialog: false,
     openedPanel: undefined,
     allInvoices: undefined,
     loadingExport: false,

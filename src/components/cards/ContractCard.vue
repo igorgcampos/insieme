@@ -178,30 +178,14 @@
       </v-card>
     </v-lazy>
 
-    <v-dialog
-      v-model="dialog"
-      max-width="320"
+    <InfoDialog
+      :title="$vuetify.lang.t('$vuetify.CONTRATO_NAO_ENCONTRADO')"
+      :info="$vuetify.lang.t('$vuetify.CONTRATO_NAO_DIGITALIZADO')"
+      :close="closeInfoDialog"
+      :dialog="dialog"
     >
-      <v-card class="mt-2">
-        <v-card-title class="headline">{{$vuetify.lang.t('$vuetify.CONTRATO_NAO_ENCONTRADO')}}</v-card-title>
+    </InfoDialog>
 
-        <v-card-text>
-          {{$vuetify.lang.t('$vuetify.CONTRATO_NAO_DIGITALIZADO')}}
-        </v-card-text>
-
-        <v-divider></v-divider>
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn
-            color="primary"
-            text
-            @click="dialog = false"
-          >
-            {{$vuetify.lang.t('$vuetify.FECHAR')}}
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
   </div>
 </template>
 
@@ -209,6 +193,8 @@
 
 import LabelValue from '../../components/LabelValue';
 import TooltipButton from '../../components/TooltipButton';
+import InfoDialog from '../../components/dialogs/InfoDialog';
+
 export default {
 
   data: () => ({
@@ -217,9 +203,13 @@ export default {
   }),
   components: {
     LabelValue,
-    TooltipButton
+    TooltipButton,
+    InfoDialog,
   },
   methods: {
+    closeInfoDialog () {
+      this.dialog = false;
+    },
     formatDate (date) {
       return this.$formatDate(date)
     },

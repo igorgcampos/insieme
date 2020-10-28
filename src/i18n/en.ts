@@ -348,7 +348,7 @@ export default {
     VERSOES_DESCRICAO: 'See the features released in each version',
     V_2_0_0: 'New version of Insieme totally reformulated. Main changes: Visualization and restart of circuits, direct integration with PRTG and visualization of invoices. ',
     V_2_1_0: 'New commercial module that allows several opening operations to circuits as: activate, deactivate, suspend and request new circuits. Information can be filled out either manually or by importing an excel spreadsheet.',
-    V_2_2_0: '- New notification system that notifies the user of creating new invoices in addition to sending an automatic email to each user. <br> - Filtering circuits by technology (BGAN, Iridium, VOIP, etc.) <br> - The type of band (KA / KU / L) is now displayed in the details of each circuit. <br>- The proactive character is already being exhibited in the proactive contracts and the circuits that belong to them. ',
+    V_2_2_0: '- New notification system that notifies the user of creating/canceling invoices in addition to sending an automatic email to each user. <br> - Filtering circuits by technology (BGAN, Iridium, VOIP, etc.) <br> - The type of band (KA / KU / L) is now displayed in the details of each circuit. <br>- The proactive character is already being exhibited in the proactive contracts and the circuits that belong to them. ',
     NOVA_LINHA: 'New line',
     BAIXAR_EXCEL: 'Download spreadsheet template',
     IMPORTAR_EXCEL: 'Import filled excel',
@@ -364,4 +364,7 @@ export default {
     NOTA_FISCAL_CANCELADA: 'Invoice canceled!',
     PROATIVO: 'Proactive',
     CANCELADA: 'Canceled',
+    DOWNLOAD_NOTA: 'Download this invoice',
+    NOTA_FISCAL_NAO_ENCONTRADA: 'Invoice not found',
+    NOTA_NAO_DIGITALIZADO: 'This scanned invoice is not yet available.'
 }

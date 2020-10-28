@@ -257,7 +257,10 @@
                   ></CountCard>
                 </v-col>
 
-                <v-col class="flex-grow-0">
+                <v-col
+                  class="flex-grow-0"
+                  :class="{'ml-n4':$vuetify.breakpoint.sm}"
+                >
                   <CountCard
                     :count="counts[1]"
                     message="Offline"
@@ -307,7 +310,7 @@
                   class="ma-0 pa-0"
                   style="background:#FAFAFA"
                   v-if="button == 'contract'"
-                  max-width="500"
+                  :max-width="!$vuetify.breakpoint.sm?500:480"
                 >
 
                   <v-slide-group
@@ -337,7 +340,8 @@
                           color="primary--text"
                           :func="getDeactive"
                           :toolTipMessage="$vuetify.lang.t('$vuetify.DESATIVADO_DESCRICAO')"
-                        ></CountCard>
+                        >
+                        </CountCard>
                       </v-col>
                     </v-slide-item>
                     <v-slide-item>
@@ -398,6 +402,7 @@
                       color="primary--text"
                       :func="getInTransport"
                       :toolTipMessage="$vuetify.lang.t('$vuetify.EM_TRANSPORTE_DESCRICAO')"
+                      :class="{'ml-n4':$vuetify.breakpoint.sm}"
                     ></CountCard>
                   </v-col>
 
@@ -408,6 +413,7 @@
                       color="primary--text"
                       :func="getDeploying"
                       :toolTipMessage="$vuetify.lang.t('$vuetify.INSTALANDO_DESCRICAO')"
+                      :class="{'ml-n4':$vuetify.breakpoint.sm}"
                     ></CountCard>
                   </v-col>
 
@@ -419,6 +425,7 @@
                       :func="getInstalled"
                       :smallText="true"
                       :toolTipMessage="$vuetify.lang.t('$vuetify.AGUARDANDO_DESCRICAO')"
+                      :class="{'ml-n4':$vuetify.breakpoint.sm}"
                     ></CountCard>
                   </v-col>
                 </v-row>
