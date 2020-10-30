@@ -366,5 +366,8 @@ export default {
     CANCELADA: 'Canceled',
     DOWNLOAD_NOTA: 'Download this invoice',
     NOTA_FISCAL_NAO_ENCONTRADA: 'Invoice not found',
-    NOTA_NAO_DIGITALIZADO: 'This scanned invoice is not yet available.'
+    NOTA_NAO_DIGITALIZADO: 'This scanned invoice is not yet available.',
+    FEEDBACK: 'Give your feedback',
+    FEEDBACK_DESCRICAO: 'Rate it and tell us what you think of Insieme and how we can improve it',
+    COMENTARIOS: 'Comments',
 }

@@ -362,5 +362,8 @@ export default {
     CANCELADA: 'Cancelada',
     DOWNLOAD_NOTA: 'Fazer o download desta nota fiscal',
     NOTA_FISCAL_NAO_ENCONTRADA: 'Nota fiscal não encontrada',
-    NOTA_NAO_DIGITALIZADO: 'Esta nota fiscal digitalizada ainda não está disponível.'
+    NOTA_NAO_DIGITALIZADO: 'Esta nota fiscal digitalizada ainda não está disponível.',
+    FEEDBACK: 'Dê o seu feedback',
+    FEEDBACK_DESCRICAO: 'Dê sua nota e nos diga o que você achou do Insieme e como podemos melhorá-lo',
+    COMENTARIOS: 'Comentários'
 }

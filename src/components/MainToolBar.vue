@@ -162,12 +162,12 @@
             <v-chip
               pill
               color="red darken-3"
-              :class="{'caption':$vuetify.breakpoint.xs}"
+              :class="{'caption pl-0':$vuetify.breakpoint.xs}"
               class="pa-5"
               v-bind="attrs"
               v-on="{ ...tooltip, ...menu }"
             >
-              {{$vuetify.lang.t('$vuetify.OLA')}}, {{user.nome}}
+              {{!$vuetify.breakpoint.xs?$vuetify.lang.t('$vuetify.OLA') + ', '+user.nome:''}}
 
               <v-badge
                 :content="newNotificationsCount == 0? '0':newNotificationsCount"
