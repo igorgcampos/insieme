@@ -365,5 +365,7 @@ export default {
     NOTA_NAO_DIGITALIZADO: 'Esta nota fiscal digitalizada ainda não está disponível.',
     FEEDBACK: 'Dê o seu feedback',
     FEEDBACK_DESCRICAO: 'Dê sua nota e nos diga o que você achou do Insieme e como podemos melhorá-lo',
-    COMENTARIOS: 'Comentários'
+    COMENTARIOS: 'Comentários',
+    MUITO_OBRIGADO: 'Muito obrigado!',
+    FEEDBACK_ENVIADO: 'Seu feedback foi enviado com sucesso!',
 }

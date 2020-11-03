@@ -7,42 +7,55 @@
     class="mt-n3 overflow-y-hidden overflow-x-hidden"
   >
     <v-card>
-      <v-card-title
-        class="headline-6"
-        style="word-break: normal; !important"
-        :class="{'subtitle-2':$vuetify.breakpoint.xs}"
+
+      <div
+        class="ma-0 pa-0"
+        v-if="!showSuccess"
       >
-        {{$vuetify.lang.t('$vuetify.FEEDBACK')}}
-      </v-card-title>
-      <v-card-text
-        class="mt-n2 headline-6"
-        :class="{'caption':$vuetify.breakpoint.xs}"
-      >{{$vuetify.lang.t('$vuetify.FEEDBACK_DESCRICAO')}}</v-card-text>
+        <v-card-title
+          class="headline-6"
+          style="word-break: normal; !important"
+          :class="{'subtitle-2':$vuetify.breakpoint.xs}"
+        >
+          {{$vuetify.lang.t('$vuetify.FEEDBACK')}}
+        </v-card-title>
+        <v-card-text
+          class="mt-n2 headline-6"
+          :class="{'caption':$vuetify.breakpoint.xs}"
+        >{{$vuetify.lang.t('$vuetify.FEEDBACK_DESCRICAO')}}</v-card-text>
 
-      <div class="text-center mt-2 mb-8">
-        <v-rating
-          v-model="rating"
-          color="orange"
-          background-color="orange lighten-3"
-          half-increments
-          hover
-          large
-        ></v-rating>
+        <div class="text-center mt-2 mb-8">
+          <v-rating
+            v-model="rating"
+            color="orange"
+            background-color="orange lighten-3"
+            half-increments
+            hover
+            large
+          ></v-rating>
+        </div>
+
+        <span class=" ml-7 text-right subtitle-2 font-weight-bold grey--text text--lighten-1">
+          {{$vuetify.lang.t('$vuetify.COMENTARIOS')}}:</span>
+        <div class="text-center mt-2 mb-10">
+
+          <v-textarea
+            solo
+            height="100"
+            :no-resize="true"
+            rows="5"
+            v-model="comments"
+            class="ml-7 mr-7"
+          ></v-textarea>
+        </div>
       </div>
 
-      <span class=" ml-7 text-right subtitle-2 font-weight-bold grey--text text--lighten-1">
-        {{$vuetify.lang.t('$vuetify.COMENTARIOS')}}:</span>
-      <div class="text-center mt-2 mb-10">
-
-        <v-textarea
-          solo
-          height="100"
-          :no-resize="true"
-          rows="5"
-          v-model="comments"
-          class="ml-7 mr-7"
-        ></v-textarea>
-      </div>
+      <SuccessPanel
+        v-if="showSuccess"
+        :title="$vuetify.lang.t('$vuetify.MUITO_OBRIGADO')"
+        :subtitle="$vuetify.lang.t('$vuetify.FEEDBACK_ENVIADO')"
+      >
+      </SuccessPanel>
 
       <v-divider class="mt-n6"></v-divider>
       <v-card-actions>
@@ -50,7 +63,7 @@
         <v-btn
           color="primary"
           text
-          @click="close()"
+          @click="close(); closeDialog();"
           :x-small="$vuetify.breakpoint.xs"
         >{{!showSuccess?$vuetify.lang.t('$vuetify.CANCELAR'):$vuetify.lang.t('$vuetify.FECHAR')}}</v-btn>
 
@@ -70,14 +83,25 @@
 
 <script>
 
+import SuccessPanel from '../../components/panels/SuccessPanel';
+
 export default {
+  components: {
+    SuccessPanel,
+  },
   props: {
     close: Function,
     show: Boolean
   },
   methods: {
+    closeDialog () {
+      this.showSuccess = false;
+      this.rating = 4;
+      this.comments = ''
+    },
     sendEvaluation () {
 
+      this.showDialogLoading = true
       var evaluation = {
         comentario: this.comments,
         nota: this.rating,

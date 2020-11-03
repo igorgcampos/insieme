@@ -370,4 +370,6 @@ export default {
     FEEDBACK: 'Give your feedback',
     FEEDBACK_DESCRICAO: 'Rate it and tell us what you think of Insieme and how we can improve it',
     COMENTARIOS: 'Comments',
+    MUITO_OBRIGADO: 'Thank you!',
+    FEEDBACK_ENVIADO: 'Your feedback was sent successfully!',
 }
