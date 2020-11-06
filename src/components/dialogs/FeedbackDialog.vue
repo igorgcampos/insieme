@@ -50,12 +50,19 @@
         </div>
       </div>
 
-      <SuccessPanel
-        v-if="showSuccess"
-        :title="$vuetify.lang.t('$vuetify.MUITO_OBRIGADO')"
-        :subtitle="$vuetify.lang.t('$vuetify.FEEDBACK_ENVIADO')"
+      <v-lazy
+        :options="{
+            threshold: .6
+            }"
+        transition="slide-x-transition"
       >
-      </SuccessPanel>
+        <SuccessPanel
+          v-if="showSuccess"
+          :title="$vuetify.lang.t('$vuetify.MUITO_OBRIGADO')"
+          :subtitle="$vuetify.lang.t('$vuetify.FEEDBACK_ENVIADO')"
+        >
+        </SuccessPanel>
+      </v-lazy>
 
       <v-divider class="mt-n6"></v-divider>
       <v-card-actions>

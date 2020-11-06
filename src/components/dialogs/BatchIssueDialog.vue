@@ -248,6 +248,7 @@
     </v-card>
 
     <v-card v-show="showSuccess">
+
       <SuccessPanel
         :title="$vuetify.lang.t('$vuetify.CHAMADO_CRIADO')"
         :subtitle="$vuetify.lang.t('$vuetify.PROTOCOLO')+': '+entity.protocolo"
@@ -364,7 +365,7 @@ export default {
     selectedItemList: [],
     selectedCheckList: [],
     selectReason: false,
-    issue: { reason: undefined, observation: '', items: undefined }
+    issue: { reason: '', observation: '', items: undefined }
   }),
   created: function () {
     this.size = this.$vuetify.breakpoint.xs ? 16 : 20;

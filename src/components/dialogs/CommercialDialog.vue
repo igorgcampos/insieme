@@ -63,13 +63,20 @@
         style="max-height:20rem"
       >
 
-        <SuccessPanel
-          v-show="showSuccess"
-          :title="$vuetify.lang.t('$vuetify.PEDIDO_ENVIADO')"
-          :subtitle="$vuetify.lang.t('$vuetify.PROTOCOLO')+': '+entity.protocolo"
-          class="mt-5 overflow-y-hidden"
+        <v-lazy
+          :options="{
+            threshold: .6
+            }"
+          transition="slide-x-transition"
         >
-        </SuccessPanel>
+          <SuccessPanel
+            v-show="showSuccess"
+            :title="$vuetify.lang.t('$vuetify.PEDIDO_ENVIADO')"
+            :subtitle="$vuetify.lang.t('$vuetify.PROTOCOLO')+': '+entity.protocolo"
+            class="mt-5 overflow-y-hidden"
+          >
+          </SuccessPanel>
+        </v-lazy>
 
         <v-row
           v-if="actionName=='NOVO_CIRCUITO' && editable && !showSuccess"
@@ -269,7 +276,7 @@ export default {
     }
   },
   data: () => ({
-    issue: { reason: undefined, observation: '' },
+    issue: { reason: '', observation: '' },
     entity: {},
     entityList: [],
     headers: [],

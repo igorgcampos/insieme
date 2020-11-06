@@ -82,6 +82,7 @@
     </v-card>
 
     <v-card v-show="showSuccess">
+
       <SuccessPanel
         :title="getObject().type!='closing'?$vuetify.lang.t('$vuetify.CHAMADO_CRIADO'):
               $vuetify.lang.t('$vuetify.CHAMADO_ENCERRADO')"
@@ -128,7 +129,7 @@ export default {
     }
   },
   data: () => ({
-    issue: { reason: undefined, observation: '' }
+    issue: { reason: '', observation: '' }
   })
 };
 </script>
