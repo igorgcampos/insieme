@@ -277,6 +277,16 @@
                   $vuetify.lang.t('$vuetify.ENCERRADO') }}
                         </v-chip>
 
+                        <v-chip
+                          color="blue-grey"
+                          class="ml-0 mr-2"
+                          label
+                          small
+                          outlined
+                          v-if="issue.proatividade"
+                        >
+                          {{ $vuetify.lang.t('$vuetify.PROATIVO') }}
+                        </v-chip>
                       </v-col>
                     </v-col>
 
@@ -354,12 +364,12 @@
 
                   <v-divider
                     class="mt-n3"
-                    v-show="issue.status=='ABERTO'"
+                    v-show="issue.status=='ABERTO' && !issue.proatividade"
                   ></v-divider>
 
                   <v-card-actions
                     class="mb-n2 pb-0"
-                    v-show="issue.status=='ABERTO'"
+                    v-show="issue.status=='ABERTO' && !issue.proatividade"
                   >
                     <TooltipButton
                       :label="$vuetify.lang.t('$vuetify.ENCERRAR_CHAMADO')"
@@ -451,6 +461,18 @@ export default {
     CommercialDialog
   },
   methods: {
+    filterIssues () {
+
+      if (this.$hasProfile('Administrador')) {
+        return this.issues;
+      }
+
+      this.issues = this.issues.filter(function (issue) {
+        return !issue.proatividade;
+      })
+
+      return this.issues;
+    },
     closeCommercialDialog () {
 
       this.showCommercialDialog = false;
@@ -754,6 +776,7 @@ export default {
         }
 
         this.issues = response.data;
+        this.filterIssues()
         this.isLoading = false;
       });
     },
@@ -785,7 +808,7 @@ export default {
         this.noResult = false;
       }
 
-      var selectedStatus = 0
+      var selectedStatus = ''
       if (this.status == this.statuses[0]) {
         selectedStatus = '';
       } else if (this.status == this.statuses[1]) {
@@ -812,6 +835,7 @@ export default {
         }
 
         this.issues = this.issues.concat(response.data);
+        this.filterIssues()
         this.isLoading = false;
       });
 
@@ -884,6 +908,7 @@ export default {
     })
       .then((response) => {
         this.issues = response.data;
+        this.filterIssues()
         this.isLoading = false;
       });
 
