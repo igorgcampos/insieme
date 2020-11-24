@@ -25,7 +25,13 @@ const routes = [
         name: 'Dashboard',
         props: true,
         component: () => import('../views/DashboardPage.vue')
-      }
+      },
+      {
+        path: 'proatividade',
+        name: 'Proactivity',
+        props: true,
+        component: () => import('../views/ProactivityPage.vue')
+      },
     ]
   },
   {

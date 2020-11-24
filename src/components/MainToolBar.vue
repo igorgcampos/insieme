@@ -148,6 +148,25 @@
       <span>{{$vuetify.lang.t('$vuetify.PAGINA_CLIENTES')}}</span>
     </v-tooltip>
 
+    <v-tooltip
+      bottom
+      v-if="!$vuetify.breakpoint.xs && !$vuetify.breakpoint.sm"
+    >
+      <template v-slot:activator="{ on }">
+        <v-chip
+          pill
+          v-on="on"
+          color="red darken-3"
+          v-show="canShowProactiveLink()"
+          class="mr-2"
+          @click="toProactivePage()"
+        >
+          {{$vuetify.lang.t('$vuetify.PROATIVIDADE')}}
+        </v-chip>
+      </template>
+      <span>{{$vuetify.lang.t('$vuetify.PAGINA_PROATIVIDADE')}}</span>
+    </v-tooltip>
+
     <v-menu
       bottom
       right
@@ -321,6 +340,13 @@
         >
           <v-list-item-title>{{$vuetify.lang.t('$vuetify.CLIENTES')}}</v-list-item-title>
         </v-list-item>
+
+        <v-list-item
+          v-show="canShowProactiveLink()"
+          @click="toProactivePage()"
+        >
+          <v-list-item-title>{{$vuetify.lang.t('$vuetify.PROATIVIDADE')}}</v-list-item-title>
+        </v-list-item>
       </v-list>
     </v-menu>
 
@@ -487,21 +513,36 @@ export default {
     },
 
     toContractList () {
+      window.sessionStorage.setItem('actualPage', 'contracts');
       this.$router.push('/contratos')
     },
     toClientsList () {
+      window.sessionStorage.setItem('actualPage', 'clients');
       window.sessionStorage.setItem('selectedClientId', -1);
       this.$router.push('/clientes')
     },
+    toProactivePage () {
+      window.sessionStorage.setItem('actualPage', 'proactivity');
+      this.$router.push('/proatividade')
+    },
     canShowContractLink () {
-      return this.$route.path === '/clientes' || this.$route.path === '/dashboard'
+      return this.$route.path === '/clientes' ||
+        this.$route.path === '/dashboard' ||
+        this.$route.path === '/proatividade'
+    },
+    canShowProactiveLink () {
+      return this.$hasProfile('Administrador')
+        && this.$route.path !== '/dashboard'
+        && this.$route.path !== '/proatividade'
     },
     canShowReport () {
       return this.$route.path === '/dashboard'
     },
     canShowClientLink () {
       return this.$hasProfile('Administrador') &&
-        (this.$route.path === '/contratos' || this.$route.path === '/dashboard')
+        (this.$route.path === '/contratos' ||
+          this.$route.path === '/dashboard' ||
+          this.$route.path === '/proatividade')
     },
     logout () {
 

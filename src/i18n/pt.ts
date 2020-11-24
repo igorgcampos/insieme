@@ -47,7 +47,7 @@ export default {
     GERENCIAR_CONTRATOS: 'Gerenciar circuitos, notas fiscais e abertura de chamados',
     BAIXAR: 'DOWNLOAD',
     BAIXAR_CONTRATO: 'Fazer o download do contrato',
-    PAGINA_CLIENTES: 'Voltar para a lista de clientes',
+    PAGINA_CLIENTES: 'Ir para a lista de clientes',
     NENHUM_CONTRATO: 'Nenhum contrato encontrado',
     COD_SAP: 'Cód. SAP',
     COD_TPZ: 'Cód. Tpz',
@@ -368,4 +368,6 @@ export default {
     COMENTARIOS: 'Comentários',
     MUITO_OBRIGADO: 'Muito obrigado!',
     FEEDBACK_ENVIADO: 'Seu feedback foi enviado com sucesso!',
+    PROATIVIDADE: 'Proatividade',
+    PAGINA_PROATIVIDADE: 'Ir para a página de proatividade',
 }

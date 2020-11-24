@@ -372,4 +372,6 @@ export default {
     COMENTARIOS: 'Comments',
     MUITO_OBRIGADO: 'Thank you!',
     FEEDBACK_ENVIADO: 'Your feedback was sent successfully!',
+    PROATIVIDADE: 'Proactivity',
+    PAGINA_PROATIVIDADE: 'Go to proactivity page',
 }

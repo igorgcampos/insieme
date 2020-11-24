@@ -41,6 +41,8 @@ export default {
         this.user.cliente = { id: -1 }
       }
       this.$router.push({ name: 'Contracts', params: { client: { id: this.user.cliente.id } } })
+    } else if (window.sessionStorage.getItem('actualPage') == 'proactivity') {
+      this.$router.push({ name: 'Proactivity' })
     } else {
       this.$router.push({ name: 'Dashboard', params: { contract: undefined } })
     }
