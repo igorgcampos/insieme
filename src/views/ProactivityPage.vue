@@ -16,10 +16,9 @@
         class="mt-n11"
       >
 
-        <CircuitsPage
-          v-if="$hasProfile('Administrador') || $hasProfile('Cliente') || $hasProfile('Operacional')"
-          :contract="selectedContract"
-        ></CircuitsPage>
+        <!--<OperationsPage></OperationsPage> -->
+
+        <IssuesPage :proactivity="true"></IssuesPage>
 
       </v-col>
 
@@ -29,11 +28,13 @@
 
 <script>
 
-import CircuitsPage from './CircuitsPage';
+//import OperationsPage from './OperationsPage';
+import IssuesPage from './IssuesPage';
 
 export default {
   components: {
-    CircuitsPage,
+    //OperationsPage,
+    IssuesPage,
   },
   data: () => ({
 

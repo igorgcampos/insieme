@@ -68,7 +68,10 @@
           v-if="$hasProfile('Administrador') || $hasProfile('Cliente') || $hasProfile('Comercial')"
           :contract="selectedContract"
         ></CommercialPage>
-        <IssuesPage :contract="selectedContract"></IssuesPage>
+        <IssuesPage
+          :contract="selectedContract"
+          :proactivity="undefined"
+        ></IssuesPage>
       </v-col>
 
       <FeedbackDialog

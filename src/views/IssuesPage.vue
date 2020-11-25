@@ -115,6 +115,7 @@
             class="mt-7 ml-3"
             cols="1"
             :class="{'mt-7':$vuetify.breakpoint.xs}"
+            v-if="!proactivity"
           >
 
             <v-menu
@@ -577,6 +578,10 @@ export default {
     },
     searchEntities (text, page) {
 
+      if (!this.$props.contract) {
+        return
+      }
+
       if (this.entity.type == 'circuit') {
         this.searchCircuits(text, page)
       } else {
@@ -763,9 +768,10 @@ export default {
       this.issues = [];
 
       this.$get('/chamado/busca', {
-        contractId: this.$props.contract.id,
+        contractId: this.$props.contract ? this.$props.contract.id : undefined,
         searchText: this.searchText,
         status: status,
+        proactivity: this.$props.proactivity,
         page: 0
       }).then((response) => {
 
@@ -818,9 +824,10 @@ export default {
       }
 
       this.$get('/chamado/busca', {
-        contractId: this.$props.contract.id,
+        contractId: this.$props.contract ? this.$props.contract.id : undefined,
         searchText: this.searchText,
         status: selectedStatus,
+        proactivity: this.$props.proactivity,
         page: this.page
       }).then((response) => {
 
@@ -845,7 +852,8 @@ export default {
     }
   },
   props: {
-    contract: Object
+    contract: Object,
+    proactivity: Boolean,
   },
   data: () => ({
     showCommercialDialog: false,
@@ -889,7 +897,10 @@ export default {
     this.$vuetify.lang.t('$vuetify.ENCERRADOS')]
 
     this.$get('/chamado/counts',
-      { contractId: this.$props.contract.id }).then((response) => {
+      {
+        contractId: this.$props.contract ? this.$props.contract.id : undefined,
+        proactivity: this.$props.proactivity
+      }).then((response) => {
 
         this.counts = response.data;
         if (this.counts.length == 0)
@@ -901,9 +912,10 @@ export default {
       });
 
     this.$get('/chamado/busca', {
-      contractId: this.$props.contract.id,
+      contractId: this.$props.contract ? this.$props.contract.id : undefined,
       searchText: '',
       status: '',
+      proactivity: this.$props.proactivity,
       page: 0
     })
       .then((response) => {
