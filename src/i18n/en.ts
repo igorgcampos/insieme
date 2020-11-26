@@ -374,4 +374,13 @@ export default {
     FEEDBACK_ENVIADO: 'Your feedback was sent successfully!',
     PROATIVIDADE: 'Proactivity',
     PAGINA_PROATIVIDADE: 'Go to proactivity page',
+    RESTART_CIRCUITOS: 'Circuits Restart',
+    DESIGNACAO_TPZ_CIRCUITO: 'Tpz desig. of the circuit',
+    VER_CHAMADO: 'See issue',
+    VER_CHAMADO_TOPDESK: 'See issue in TopDesk',
+    NENHUM_RESTART: 'No restart operation found',
+    COM_SUCESSO: 'Success',
+    SEM_SUCESSO: 'No success',
+    DATA_OPERACAO: 'Operation date',
+    CONCLUIDO: 'Done',
 }

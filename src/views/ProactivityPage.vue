@@ -15,11 +15,7 @@
         xm="12"
         class="mt-n11"
       >
-
-        <!--<OperationsPage></OperationsPage> -->
-
-        <IssuesPage :proactivity="true"></IssuesPage>
-
+        <OperationsPage></OperationsPage>
       </v-col>
 
     </v-container>
@@ -28,13 +24,11 @@
 
 <script>
 
-//import OperationsPage from './OperationsPage';
-import IssuesPage from './IssuesPage';
+import OperationsPage from './OperationsPage';
 
 export default {
   components: {
-    //OperationsPage,
-    IssuesPage,
+    OperationsPage,
   },
   data: () => ({
 

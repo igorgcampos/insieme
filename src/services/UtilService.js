@@ -21,6 +21,15 @@ utilService.install = function (Vue) {
         return date.day + '/' + date.month + '/' + date.year
     }
 
+    Vue.prototype.$formatHour = (date) => {
+
+        if (!date) {
+            return '--'
+        }
+
+        return date.hour + ':' + date.minutes + ':' + date.seconds
+    }
+
     Vue.prototype.$showChat = () => {
 
         if (window.Huggy.init) {
