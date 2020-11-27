@@ -413,6 +413,10 @@ export default {
     var vm = this;
     setTimeout(function () { vm.$showChatButton() }, 2000)
 
+    if (!this.$getUser().cliente) {
+      return
+    }
+
     this.$get('/notificacao/busca', { clientId: this.$getUser().cliente.id }).
       then(response => {
 

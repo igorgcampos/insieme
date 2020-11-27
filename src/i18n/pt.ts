@@ -375,8 +375,10 @@ export default {
     VER_CHAMADO: 'Ver chamado',
     VER_CHAMADO_TOPDESK: 'Ver chamado no TopDesk',
     NENHUM_RESTART: 'Nenhuma operação de restart encontrada',
-    COM_SUCESSO: 'Com sucesso',
-    SEM_SUCESSO: 'Sem sucesso',
+    COM_SUCESSO: 'Sucesso',
+    SEM_SUCESSO: 'Insucesso',
     DATA_OPERACAO: 'Data da operacao',
     CONCLUIDO: 'Concluído',
+    HORA_INICIO: 'Hora de início',
+    HORA_FIM: 'Hora do término'
 }

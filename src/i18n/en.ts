@@ -383,4 +383,6 @@ export default {
     SEM_SUCESSO: 'No success',
     DATA_OPERACAO: 'Operation date',
     CONCLUIDO: 'Done',
+    HORA_INICIO: 'Start time',
+    HORA_FIM: 'End time'
 }

@@ -27,7 +27,7 @@ utilService.install = function (Vue) {
             return '--'
         }
 
-        return date.hour + ':' + date.minutes + ':' + date.seconds
+        return date.hour + ':' + date.minute + ':' + (date.second < 10 ? '0' + date.second : date.second)
     }
 
     Vue.prototype.$showChat = () => {

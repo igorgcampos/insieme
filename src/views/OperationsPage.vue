@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-row
-      id="issues"
+      id="operations"
       :class="{'ml-n12':$vuetify.breakpoint.mdAndUp}"
     >
       <span class="mb-7 text-right display-1 font-weight-bold grey--text text--darken-1">
@@ -74,7 +74,7 @@
               <span class=" text-right subtitle-2 font-weight-bold grey--text text--lighten-1">
                 {{$vuetify.lang.t('$vuetify.BUSCAR')}}:</span>
             </v-row>
-            <v-row md="2">
+            <v-row md="3">
               <v-text-field
                 v-model.trim="searchText"
                 dense
@@ -84,7 +84,7 @@
                 solo
                 max-width="200"
                 append-icon="mdi-magnify"
-                @click:append="search()"
+                @click:append="resultado = undefined; status = undefined; search()"
                 @keypress.enter="search()"
               ></v-text-field>
             </v-row>
@@ -117,12 +117,12 @@
                   >
                     <v-col
                       v-if="!open"
-                      cols="6"
+                      :cols="!$vuetify.breakpoint.xs?6:5"
                       sm="2"
                     >
                       <v-chip
                         :color="operation.status=='EM_ANDAMENTO'?'warning':
-                        operation.resultado=='SUCESSO'?'primary':'error'"
+                        operation.resultado=='SUCESSO'?'success':'error'"
                         class="ml-0 mr-4"
                         label
                         small
@@ -136,13 +136,16 @@
 
                     <v-col
                       sm="5"
-                      md="4"
-                      v-show="!$vuetify.breakpoint.xs"
+                      md="5"
+                      xm="2"
                     >
-                      <strong class="font-weight-bold grey--text text--lighten-1 mr-2">
+                      <strong
+                        class="font-weight-bold grey--text text--lighten-1 mr-2"
+                        :class="{'caption':$vuetify.breakpoint.xs,'subtitle-2':!$vuetify.breakpoint.xs}"
+                      >
                         {{$vuetify.lang.t('$vuetify.DESIGNACAO_TPZ_CIRCUITO')}}:</strong>
                       <strong
-                        class="subtitle-2"
+                        :class="{'caption':$vuetify.breakpoint.xs,'subtitle-2':!$vuetify.breakpoint.xs}"
                         v-html="operation.referenciaEntidade"
                       ></strong>
                     </v-col>
@@ -156,32 +159,31 @@
                       <strong class="font-weight-bold grey--text text--lighten-1 mr-2">
                         {{$vuetify.lang.t('$vuetify.DATA_OPERACAO')+':'}}</strong>
 
-                      <strong>{{formatDate(operation.createdOn)}}</strong>
+                      <strong>{{formatDate(operation.createdOn.date)}}</strong>
                     </v-col>
                   </v-row>
                 </v-expansion-panel-header>
 
                 <v-expansion-panel-content>
 
-                  <v-card-subtitle class="caption mt-n10 ml-n4 mb-2 grey--text text--lighten-1">
-                    {{$vuetify.lang.t('$vuetify.DESIGNACAO_TPZ_CIRCUITO')}}:
-                    {{operation.referenciaEntidade}}
-                  </v-card-subtitle>
-
-                  <v-row>
+                  <v-row class="
+                        mt-4">
                     <v-col
                       class="mt-n6 mr-5"
                       :class="{'col-5':$vuetify.breakpoint.xs, 'col-2':!$vuetify.breakpoint.xs}"
                     >
-                      <v-col class="pa-0">
+                      <v-col
+                        class="pa-0 mt-n2"
+                        :class="{'mt-n3':$vuetify.breakpoint.xs}"
+                      >
                         <v-chip
-                          :color="opertion.status=='CONCLUIDO'?'blue-grey':'warning'"
+                          :color="operation.status=='CONCLUIDA'?'blue-grey':'warning'"
                           class="ml-0 mr-2 mb-2"
                           label
                           small
                           outlined
                         >
-                          {{ opertion.status=='CONCLUIDO'?$vuetify.lang.t('$vuetify.CONCLUIDO'):
+                          {{ operation.status=='CONCLUIDA'?$vuetify.lang.t('$vuetify.CONCLUIDO'):
                                 $vuetify.lang.t('$vuetify.EM_ANDAMENTO') }}
                         </v-chip>
 
@@ -190,7 +192,9 @@
                           label
                           small
                           outlined
+                          v-if="operation.resultado"
                           :color="operation.resultado=='SUCESSO'?'success':'error'"
+                          :class="{'mb-3':$vuetify.breakpoint.xs}"
                         >
                           {{ operation.resultado=='SUCESSO'?$vuetify.lang.t('$vuetify.COM_SUCESSO'):
                           $vuetify.lang.t('$vuetify.SEM_SUCESSO') }}
@@ -198,35 +202,44 @@
                       </v-col>
                     </v-col>
 
-                    <v-col
+                    <v-row
                       class="mt-n3"
-                      :class="{'col-6 pl-3':$vuetify.breakpoint.xs}"
+                      :class="{'pl-10 pt-3':$vuetify.breakpoint.xs}"
                     >
-                      <v-col class="pt-0 pl-0 mt-n6">
+                      <v-col
+                        class="pt-0 pl-0 mt-n6"
+                        :class="{'col-4':$vuetify.breakpoint.xs}"
+                      >
                         <LabelValue
                           :label="$vuetify.lang.t('$vuetify.DATA_OPERACAO')"
-                          :value="formatDate(operation.createdOn)"
+                          :value="formatDate(operation.createdOn.date)"
                           justify="start"
-                          :class="{'pl-0':$vuetify.breakpoint.xs}"
+                          :class="{'pl-0 col-12':$vuetify.breakpoint.xs}"
                         ></LabelValue>
                       </v-col>
-                      <v-col class="pt-0 pl-0 pr-0 mt-n6">
+                      <v-col
+                        class="pt-0 pl-0 pr-0 mt-n6"
+                        :class="{'col-4 ml-2':$vuetify.breakpoint.xs}"
+                      >
                         <LabelValue
                           :label="$vuetify.lang.t('$vuetify.HORA_INICIO')"
-                          :value="formatHour(operation.createdOn)"
+                          :value="formatHour(operation.createdOn.time)"
                           justify="start"
                           :class="{'pr-0 pl-0':$vuetify.breakpoint.xs}"
                         ></LabelValue>
                       </v-col>
-                      <v-col class="pt-0 pl-0 pr-0 mt-n6">
+                      <v-col
+                        class="pt-0 pl-0 pr-0 mt-n6"
+                        :class="{'col-4 ml-n3':$vuetify.breakpoint.xs}"
+                      >
                         <LabelValue
                           :label="$vuetify.lang.t('$vuetify.HORA_FIM')"
-                          :value="formatHour(operation.updatedOn)"
+                          :value="formatHour(operation.updatedOn?operation.updatedOn.time:undefined)"
                           justify="start"
                           :class="{'pr-0 pl-0':$vuetify.breakpoint.xs}"
                         ></LabelValue>
                       </v-col>
-                    </v-col>
+                    </v-row>
 
                   </v-row>
 
@@ -241,7 +254,7 @@
                   >
                     <TooltipButton
                       :label="$vuetify.lang.t('$vuetify.VER_CHAMADO')"
-                      :message="$vuetify.lang.t('$vuetify.VER_CHAMADO_TOPDESK')"
+                      :message="$vuetify.lang.t('$vuetify.VER_CHAMADO_TOPDESK') + ' (Em desenvolvimento)'"
                       :event="toTopDesk"
                       :object="operation.chamado"
                       :mobile="$vuetify.breakpoint.xs"
@@ -280,17 +293,19 @@ export default {
     LabelValue,
   },
   methods: {
+    toTopDesk () {
 
+    },
     getWithSuccess () {
-      this.getFromStatus('SUCESSO')
+      this.getFromStatus('SUCESSO', undefined)
     },
     getWithoutSuccess () {
-      this.getFromStatus('INSUCESSO')
+      this.getFromStatus('INSUCESSO', undefined)
     },
     getInProgress () {
-      this.getFromStatus('EM_ANDAMENTO')
+      this.getFromStatus(undefined, 'EM_ANDAMENTO')
     },
-    getFromStatus (status) {
+    getFromStatus (resultado, status) {
 
       if (this.isLoading) {
         return
@@ -299,14 +314,15 @@ export default {
       this.searchText = '';
       this.page = 0;
       this.isLoading = true;
-      this.status = this.statuses[0]
-      this.issues = [];
+      this.status = status;
+      this.resultado = resultado;
+      this.operations = [];
 
-      this.$get('/chamado/busca', {
-        contractId: this.$props.contract ? this.$props.contract.id : undefined,
+      this.$get('/operacao/busca', {
         searchText: this.searchText,
+        type: 'RESTART_CIRCUITO',
         status: status,
-        proactivity: this.$props.proactivity,
+        result: resultado,
         page: 0
       }).then((response) => {
 
@@ -316,8 +332,7 @@ export default {
           this.noResult = false;
         }
 
-        this.issues = response.data;
-        this.filterIssues()
+        this.operations = response.data;
         this.isLoading = false;
       });
     },
@@ -333,8 +348,8 @@ export default {
         return;
       }
 
-      if (document.getElementById('issueId').scrollTop + 341 >=
-        document.getElementById('issueId').scrollHeight) {
+      if (document.getElementById('operationId').scrollTop + 341 >=
+        document.getElementById('operationId').scrollHeight) {
         this.page++;
         this.search(this.page);
       }
@@ -348,21 +363,12 @@ export default {
         this.noResult = false;
       }
 
-      var selectedStatus = ''
-      if (this.status == this.statuses[0]) {
-        selectedStatus = '';
-      } else if (this.status == this.statuses[1]) {
-        selectedStatus = 'ABERTO';
-      } else if (this.status == this.statuses[2]) {
-        selectedStatus = 'ENCERRADO';
-      }
-
-      this.$get('/chamado/busca', {
-        contractId: this.$props.contract ? this.$props.contract.id : undefined,
+      this.$get('/operacao/busca', {
         searchText: this.searchText,
-        status: selectedStatus,
-        proactivity: this.$props.proactivity,
-        page: this.page
+        type: 'RESTART_CIRCUITO',
+        status: this.status,
+        result: this.resultado,
+        page: page
       }).then((response) => {
 
         if (response && response.data.length == 0) {
@@ -372,11 +378,10 @@ export default {
         }
 
         if (!page) {
-          this.issues = []
+          this.operations = []
         }
 
-        this.issues = this.issues.concat(response.data);
-        this.filterIssues()
+        this.operations = this.operations.concat(response.data);
         this.isLoading = false;
       });
 
@@ -385,47 +390,37 @@ export default {
       this.showPanel = !this.showPanel;
     }
   },
-  props: {
-    contract: Object,
-    proactivity: Boolean,
-  },
   data: () => ({
     isLoading: false,
     operations: [],
     showPanel: true,
     counts: [0, 0, 0],
-    status: 0,
+    status: undefined,
     page: 0,
     noResult: false,
     searchText: '',
+    resultado: undefined,
   }),
   created: function () {
 
-    this.$get('/chamado/counts',
-      {
-        contractId: this.$props.contract ? this.$props.contract.id : undefined,
-        proactivity: this.$props.proactivity
-      }).then((response) => {
+    this.$get('/operacao/counts').then((response) => {
 
-        this.counts = response.data;
-        if (this.counts.length == 0)
-          this.counts = [0, 0, 0]
+      this.counts = response.data;
+      if (this.counts.length == 0)
+        this.counts = [0, 0, 0]
 
-        this.isLoading = false;
-        this.counts.push(0)
-        this.$root.$emit('issue-data', this.counts)
-      });
+      this.isLoading = false;
+    });
 
-    this.$get('/chamado/busca', {
-      contractId: this.$props.contract ? this.$props.contract.id : undefined,
-      searchText: '',
-      status: '',
-      proactivity: this.$props.proactivity,
+    this.$get('/operacao/busca', {
+      searchText: this.searchText,
+      type: 'RESTART_CIRCUITO',
+      status: status,
+      result: this.resultado,
       page: 0
     })
       .then((response) => {
-        this.issues = response.data;
-        this.filterIssues()
+        this.operations = response.data;
         this.isLoading = false;
       });
   }
