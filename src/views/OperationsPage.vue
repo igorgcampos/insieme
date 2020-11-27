@@ -244,7 +244,7 @@
                   </v-row>
 
                   <v-divider
-                    class="mt-n3"
+                    class="mt-n1"
                     v-show="operation.chamado"
                   ></v-divider>
 
