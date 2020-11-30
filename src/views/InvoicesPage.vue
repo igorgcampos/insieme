@@ -580,13 +580,13 @@ export default {
       });
     },
     getPaid () {
-      this.getByStatus(1);
+      this.getByStatus('PAGO');
     },
     getOpened () {
-      this.getByStatus(2);
+      this.getByStatus('EM_ABERTO');
     },
     getOverdue () {
-      this.getByStatus(3);
+      this.getByStatus('VENCIDA');
     },
     openIssue (invoice) {
       this.selectedInvoice = invoice;
@@ -620,15 +620,13 @@ export default {
         this.noResult = false;
       }
 
-      var selectedStatus = 0
-      if (this.status == this.statuses[0]) {
-        selectedStatus = 0;
-      } else if (this.status == this.statuses[1]) {
-        selectedStatus = 1;
+      var selectedStatus = undefined
+      if (this.status == this.statuses[1]) {
+        selectedStatus = 'PAGO';
       } else if (this.status == this.statuses[2]) {
-        selectedStatus = 2;
+        selectedStatus = 'EM_ABERTO';
       } else if (this.status == this.statuses[3]) {
-        selectedStatus = 3;
+        selectedStatus = 'VENCIDA';
       }
 
       this.$get('/nota/busca', {
@@ -715,7 +713,7 @@ export default {
       });
 
     this.$get('/nota/busca',
-      { contractId: this.$props.contract.id, searchText: '', paymentStatus: 0, page: 0 })
+      { contractId: this.$props.contract.id, searchText: '', paymentStatus: undefined, page: 0 })
       .then((response) => {
         this.invoices = response.data;
         this.isLoading = false;
