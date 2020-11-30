@@ -85,7 +85,7 @@
                 max-width="200"
                 append-icon="mdi-magnify"
                 @click:append="resultado = undefined; status = undefined; search()"
-                @keypress.enter="search()"
+                @keypress.enter="resultado = undefined; status = undefined; search()"
               ></v-text-field>
             </v-row>
           </v-col>
@@ -368,7 +368,7 @@ export default {
         type: 'RESTART_CIRCUITO',
         status: this.status,
         result: this.resultado,
-        page: page
+        page: this.page
       }).then((response) => {
 
         if (response && response.data.length == 0) {
@@ -415,7 +415,7 @@ export default {
     this.$get('/operacao/busca', {
       searchText: this.searchText,
       type: 'RESTART_CIRCUITO',
-      status: status,
+      status: this.status,
       result: this.resultado,
       page: 0
     })
