@@ -75,7 +75,12 @@
             v-for="(client, i) in clients"
             :key="i"
           >
-            <ClientCard :client="client"></ClientCard>
+            <v-lazy
+              :options="{threshold: .6}"
+              transition="slide-x-transition"
+            >
+              <ClientCard :client="client"></ClientCard>
+            </v-lazy>
           </v-col>
           <v-col v-if="clients.length == 0 && !isLoading">
             <WarningPanel :message="$vuetify.lang.t('$vuetify.NENHUM_CLIENTE')"> </WarningPanel>

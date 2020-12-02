@@ -97,9 +97,7 @@
             :key="i"
           >
             <v-lazy
-              :options="{
-          threshold: .6
-        }"
+              :options="{threshold: .6}"
               transition="slide-x-transition"
             >
               <ContractCard :contract="contract"></ContractCard>
