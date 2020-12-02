@@ -388,6 +388,29 @@ export default {
     },
     expandPanel () {
       this.showPanel = !this.showPanel;
+    },
+    initialSearch () {
+
+      this.$get('/operacao/counts').then((response) => {
+
+        this.counts = response.data;
+        if (this.counts.length == 0)
+          this.counts = [0, 0, 0]
+
+        this.isLoading = false;
+      });
+
+      this.$get('/operacao/busca', {
+        searchText: this.searchText,
+        type: 'RESTART_CIRCUITO',
+        status: this.status,
+        result: this.resultado,
+        page: 0
+      })
+        .then((response) => {
+          this.operations = response.data;
+          this.isLoading = false;
+        });
     }
   },
   data: () => ({
@@ -403,26 +426,11 @@ export default {
   }),
   created: function () {
 
-    this.$get('/operacao/counts').then((response) => {
+    this.initialSearch();
 
-      this.counts = response.data;
-      if (this.counts.length == 0)
-        this.counts = [0, 0, 0]
-
-      this.isLoading = false;
-    });
-
-    this.$get('/operacao/busca', {
-      searchText: this.searchText,
-      type: 'RESTART_CIRCUITO',
-      status: this.status,
-      result: this.resultado,
-      page: 0
-    })
-      .then((response) => {
-        this.operations = response.data;
-        this.isLoading = false;
-      });
+    setInterval(() => {
+      this.initialSearch();
+    }, 60000)
   }
 };
 </script>
