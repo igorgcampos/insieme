@@ -89,17 +89,26 @@
         </v-row>
 
         <v-row class="pl-1">
+
           <v-col
             cols="12"
             class="flex-grow-0"
             v-for="(contract, i) in contracts"
             :key="i"
           >
-            <ContractCard :contract="contract"></ContractCard>
+            <v-lazy
+              :options="{
+          threshold: .6
+        }"
+              transition="slide-x-transition"
+            >
+              <ContractCard :contract="contract"></ContractCard>
+            </v-lazy>
           </v-col>
           <v-col v-if="contracts.length == 0 && !isLoading">
             <WarningPanel :message="$vuetify.lang.t('$vuetify.NENHUM_CONTRATO')"> </WarningPanel>
           </v-col>
+
         </v-row>
       </div>
 
