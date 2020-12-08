@@ -16,7 +16,7 @@ O arquivo principal de todo projeto Vue.js é o App.vue.
 
 Ela contém todos os arquivos .vue das páginas do Insieme. Nem todas tem url associada para serem acessadas pelo campo de endereço do Browser.
 
-Para novas telas que apresentem url, após criar um novo arquivo .vue, é necessário cadastrar a rota desta url no arquivo `/router/index.js`. Um exemplo é mostrado abaixo para a tela de proatividade:
+Para novas telas que apresentem url, após criar um novo arquivo .vue, é necessário cadastrar a rota desta url no arquivo [`/router/index.js`](src/router/index.js). Um exemplo é mostrado abaixo para a tela de proatividade:
 
 ```javascript
 {
@@ -43,13 +43,17 @@ Esta pasta contém todos os componentes customizados para serem reutilizados por
 
 Esta pasta guarda arquivos javascript que funcionam como utilitários por todo o projeto.
 
-- `AuthService` - Utilitário que oferece funções para logar e deslogar do Keycloak e para veririficar informações de perfil do usuário logado.
+- [`AuthService`](src/services/AuthService.js) - Utilitário que oferece funções para logar e deslogar do Keycloak e para veririficar informações de perfil do usuário logado.
 
-- `HttpService` - Utilitário que esconde as conplexidades relacionadas a chamadas HTTP. Oferece funções que fazem as operações básicas de GET/POST/PUT/DELETE e faz tratamento posterior em caso de erro. Utiliza a biblioteca [`Axios`](https://www.npmjs.com/package/axios) para fazer as requisições.
+- [`HttpService`](src/services/HttpService.js) - Utilitário que esconde as conplexidades relacionadas a chamadas HTTP. Oferece funções que fazem as operações básicas de GET/POST/PUT/DELETE e faz tratamento posterior em caso de erro. Utiliza a biblioteca [`Axios`](https://www.npmjs.com/package/axios) para fazer as requisições.
 
-- `ExportService` - Utilitário que oferece uma função para auxiliar na exportação de arquivos em formato .csv.
+- [`ExportService`](src/services/ExportService.js) - Utilitário que oferece uma função para auxiliar na exportação de arquivos em formato .csv.
 
-- `UtilsService` - Utilitário genérico que oferece funções para formatação de data e hora, além de exibir e esconder o botão do Chat Bot da Huggy.
+- [`UtilsService`](src/services/UtilsService.js) - Utilitário genérico que oferece funções para formatação de data e hora, além de exibir e esconder o botão do Chat Bot da Huggy.
+
+### **Internacionalização**
+
+Existem dois arquivos que contém os bundles de todas as mensagens e rótulos do Insieme. O arquivo [`i18n/pt.ts`](src/i18n/pt.ts) está em portugues e o outro [`i18n/en.ts`](src/i18n/en.ts) em inglês. Ambos contém a mesma lista de bundles mas cada um em seu idioma específico.
 
 Abaixo os comandos principais para compilar e rodar o projeto:
 
