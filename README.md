@@ -31,9 +31,13 @@ Para mais detalhes sobre o roteamento de telas, estude a bilbioteca [`Vue Router
 
 Esta pasta guarda arquivos javascript que funcionam como utilitários por todo o projeto.
 
-    - `AuthService` - Utilitário que oferece funções para logar e deslogar do Keycloak e para veririficar informações de perfil do usuário logado.
+- `AuthService` - Utilitário que oferece funções para logar e deslogar do Keycloak e para veririficar informações de perfil do usuário logado.
 
-    - `HttpService` - Utilitário que esconde as conplexidades relacionadas a chamadas HTTP. Oferece funções que fazem as operações básicas de GET/POST/PUT/DELETE e faz tratamento posterior em caso de erro. Utiliza a biblioteca [`Axios`](https://www.npmjs.com/package/axios) para fazer as requisições.
+- `HttpService` - Utilitário que esconde as conplexidades relacionadas a chamadas HTTP. Oferece funções que fazem as operações básicas de GET/POST/PUT/DELETE e faz tratamento posterior em caso de erro. Utiliza a biblioteca [`Axios`](https://www.npmjs.com/package/axios) para fazer as requisições.
+
+- `ExportService` - Utilitário que oferece uma função para auxiliar na exportação de arquivos em formato .csv.
+
+- `UtilsService` - Utilitário genérico que oferece funções para formatação de data e hora, além de exibir e esconder o botão do Chat Bot da Huggy.
 
 Abaixo os comandos principais para compilar e rodar o projeto:
 
