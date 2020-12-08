@@ -49,7 +49,7 @@ Esta pasta guarda arquivos javascript que funcionam como utilitários por todo o
 
 - [`ExportService`](src/services/ExportService.js) - Utilitário que oferece uma função para auxiliar na exportação de arquivos em formato .csv.
 
-- [`UtilsService`](src/services/UtilsService.js) - Utilitário genérico que oferece funções para formatação de data e hora, além de exibir e esconder o botão do Chat Bot da Huggy.
+- [`UtilService`](src/services/UtilService.js) - Utilitário genérico que oferece funções para formatação de data e hora, além de exibir e esconder o botão do Chat Bot da Huggy.
 
 ### **Internacionalização**
 
