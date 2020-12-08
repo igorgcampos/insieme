@@ -2,11 +2,19 @@
 
 O projeto frontend-insieme foi construído utilizando-se como framework principal o Vue.js. Para acelerar ainda mais o desenvolvimento das interfaces gráficias, também foi utilzado o framework [`Vuetify`](https://vuetifyjs.com) que é compatível com Vue.js e tem como base a ferramenta [`VueCLI`](cli.vuejs.org)
 
+> A IDE preferêncial para este projeto é o [`VSCode`](https://code.visualstudio.com/). Mas você pode configurar uma outra IDE de sua preferência para compilar e executar o projeto.
+
 Abaixo é apresentado a arquitetura de alto nível do projeto e como os pacotes principais se interrelacionam.
 
 ![diagram](frontend-diagram.svg)
 
-Repare que a barra lateral de relatório está localizada dentro do arquivo principal App.vue. Foi a forma encontrada para permitir que o relatório aparecesse acima de todas as telas do Insieme.
+O arquivo principal de todo projeto Vue.js é o App.vue.
+
+>Repare que a barra lateral de relatório está localizada exatamente neste arquivo principal. Foi a forma encontrada para permitir que o relatório aparecesse acima de todas as telas do Insieme.
+
+### **A pasta Views**
+
+Ela contém todos os arquivos .vue das páginas do Insieme. Nem todas tem url associada para serem acessadas pelo campo de endereço do Browser.
 
 Para novas telas que apresentem url, após criar um novo arquivo .vue, é necessário cadastrar a rota desta url no arquivo `/router/index.js`. Um exemplo é mostrado abaixo para a tela de proatividade:
 
@@ -26,6 +34,10 @@ this.$router.push('/proatividade')
 ```
 
 Para mais detalhes sobre o roteamento de telas, estude a bilbioteca [`Vue Router`](https://router.vuejs.org/) usada neste projeto.
+
+### **A pasta Components**
+
+Esta pasta contém todos os componentes customizados para serem reutilizados por todas as páginas do projetos e também podem ser usados como base para a construção de novos componentes.
 
 ### **A pasta Services**
 
