@@ -41,7 +41,7 @@ Esta pasta contém todos os componentes customizados para serem reutilizados por
 
 ### **A pasta Services**
 
-Esta pasta guarda arquivos javascript que funcionam como utilitários por todo o projeto.
+Esta pasta guarda arquivos javascript que funcionam como utilitários para todo o projeto.
 
 - [`AuthService`](src/services/AuthService.js) - Utilitário que oferece funções para logar e deslogar do Keycloak e para veririficar informações de perfil do usuário logado.
 
@@ -57,22 +57,45 @@ Existem dois arquivos que contém os bundles de todas as mensagens e rótulos do
 
 Abaixo os comandos principais para compilar e rodar o projeto:
 
-### Project setup
+### Configuração inicial
+
+Dentro do VSCode, na tela de terminal `Ctrl + "`, execute o comando abaixo para compilar o projeto.
 
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+Depois execute o comando abaixo para iniciar localmente o frontend:
 
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production (Executar na máquina de Produção/Homologação)
+Em seguinda basta acessar o Insieme pela url `http://localhost:8081`.
+
+### Deployment em Produção/Homologação
+
+Logado na máquina que será feito o deployment, vá para o diretório
+`/var/www/html/insieme`. Em seguida digite o comando git para baixar
+possíveis atualizações:
 
 ```
-npm run build
+sudo git pull http://192.168.100.146:7990/scm/insieme/insieme-frontend.git
+```
+
+Por fim, execute o comando de iniciar o frontend:
+
+```
+sudo npm run build
+```
+
+### NGINX
+
+Caso seja necessário configurar certificados SSL ou rotas de provimento de páginas, o Nginx é o responsável por redirecionar
+as chamadas das páginas do Insieme. O arquivo de configuração é:
+
+```
+/etc/nginx/sites-enabled/default
 ```
 
 ### Lints and fixes files
