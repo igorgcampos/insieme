@@ -220,6 +220,8 @@ export default {
         }
 
         this.loading = false;
+
+        this.$saveOperation({ tipo: 'LOGIN', usuario: this.$getUser() })
       })
     }
   }

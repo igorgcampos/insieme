@@ -550,6 +550,8 @@ export default {
     },
     logout () {
 
+      this.$saveOperation({ tipo: 'LOGOUT', usuario: this.$getUser() })
+
       this.$logout().then(() => {
         this.$root.$emit('logout-success')
         this.$hideChatButton()

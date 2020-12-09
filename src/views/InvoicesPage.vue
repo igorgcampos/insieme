@@ -454,6 +454,8 @@ export default {
 
       this.isDownloading = true;
 
+      this.$saveOperation({ tipo: 'DOWNLOAD_NOTA', usuario: this.$getUser() })
+
       this.$get('/nota/download', {
         invoiceType: invoice.tipo,
         invoiceNumber: invoice.numero

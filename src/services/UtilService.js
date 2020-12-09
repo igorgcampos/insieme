@@ -4,6 +4,10 @@ const insiemeVersion = process.env.VUE_APP_VERSION
 
 utilService.install = function (Vue) {
 
+    Vue.prototype.$saveOperation = (operation) => {
+        Vue.prototype.$post('/operacao/save', operation)
+    }
+
     Vue.prototype.$getVersion = () => {
         return insiemeVersion;
     }

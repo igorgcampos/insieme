@@ -386,4 +386,5 @@ export default {
     HORA_INICIO: 'Start time',
     HORA_FIM: 'End time',
     ADMINISTRACAO: 'Administration',
+    AUDITORIA: 'Audit',
 }

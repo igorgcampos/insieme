@@ -5,7 +5,7 @@
       :class="{'ml-n12':$vuetify.breakpoint.mdAndUp}"
     >
       <span class="mb-7 text-right display-1 font-weight-bold grey--text text--darken-1">
-        {{$vuetify.lang.t('$vuetify.RESTART_CIRCUITOS')}}</span>
+        {{$vuetify.lang.t('$vuetify.AUDITORIA')}}</span>
 
       <v-col>
         <v-tooltip bottom>
@@ -318,7 +318,7 @@ export default {
       this.resultado = resultado;
       this.operations = [];
 
-      this.$get('/operacao/proatividade/busca', {
+      this.$get('/operacao/busca', {
         searchText: this.searchText,
         type: 'RESTART_CIRCUITO',
         status: status,
@@ -363,7 +363,7 @@ export default {
         this.noResult = false;
       }
 
-      this.$get('/operacao/proatividade/busca', {
+      this.$get('/operacao/busca', {
         searchText: this.searchText,
         type: 'RESTART_CIRCUITO',
         status: this.status,
@@ -391,7 +391,7 @@ export default {
     },
     initialSearch () {
 
-      this.$get('/operacao/proatividade/counts').then((response) => {
+      this.$get('/operacao/counts').then((response) => {
 
         this.counts = response.data;
         if (this.counts.length == 0)
@@ -400,7 +400,7 @@ export default {
         this.isLoading = false;
       });
 
-      this.$get('/operacao/proatividade/busca', {
+      this.$get('/operacao/busca', {
         searchText: this.searchText,
         type: 'RESTART_CIRCUITO',
         status: this.status,

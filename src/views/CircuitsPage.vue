@@ -865,6 +865,8 @@ export default {
     openPRTG (circuit) {
       window.open('https://monitor.telespazio.com.br/device.htm?id=' + circuit.idPrtg +
         '&tabid=1&username=' + this.$getUser().apelido + '&passhash=' + this.$getUser().prtgToken)
+
+      this.$saveOperation({ tipo: 'LINK_PRTG', usuario: this.$getUser() })
     },
     formatCircuit (circuit) {
 
