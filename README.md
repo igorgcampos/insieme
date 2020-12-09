@@ -16,21 +16,21 @@ O arquivo principal de todo projeto Vue.js é o App.vue.
 
 Ela contém todos os arquivos .vue das páginas do Insieme. Nem todas tem url associada para serem acessadas pelo campo de endereço do Browser.
 
-Para novas telas que apresentem url, após criar um novo arquivo .vue, é necessário cadastrar a rota desta url no arquivo [`/router/index.js`](src/router/index.js). Um exemplo é mostrado abaixo para a tela de proatividade:
+Para novas telas que apresentem url, após criar um novo arquivo .vue, é necessário cadastrar a rota desta url no arquivo [`/router/index.js`](src/router/index.js). Um exemplo é mostrado abaixo para a tela de contratos:
 
 ```javascript
-{
-        path: 'proatividade', //aparecerá no final da url
-        name: 'Proactivity',
+ {
+        path: 'contratos',
+        name: 'Contracts',
         props: true,
-        component: () => import('../views/ProactivityPage.vue')
+        component: () => import('../views/ContractsPage.vue')
 },
 ```
 
 Desta forma, se você quiser ir para esta página programaticamente através de um evento de botão, basta executar este comando dentro do evento de click:
 
 ```javascript
-this.$router.push('/proatividade')
+this.$router.push('/contratos')
 ```
 
 Para mais detalhes sobre o roteamento de telas, estude a bilbioteca [`Vue Router`](https://router.vuejs.org/) usada neste projeto.

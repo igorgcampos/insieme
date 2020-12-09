@@ -27,10 +27,10 @@ const routes = [
         component: () => import('../views/DashboardPage.vue')
       },
       {
-        path: 'proatividade',
-        name: 'Proactivity',
+        path: 'administracao',
+        name: 'Administration',
         props: true,
-        component: () => import('../views/ProactivityPage.vue')
+        component: () => import('../views/OperationsPage.vue')
       },
     ]
   },

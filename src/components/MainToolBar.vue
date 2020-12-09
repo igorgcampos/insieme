@@ -157,14 +157,14 @@
           pill
           v-on="on"
           color="red darken-3"
-          v-show="canShowProactiveLink()"
+          v-show="canShowAdminLink()"
           class="mr-2"
           @click="toProactivePage()"
         >
-          {{$vuetify.lang.t('$vuetify.PROATIVIDADE')}}
+          {{$vuetify.lang.t('$vuetify.ADMINISTRACAO')}}
         </v-chip>
       </template>
-      <span>{{$vuetify.lang.t('$vuetify.PAGINA_PROATIVIDADE')}}</span>
+      <span>{{$vuetify.lang.t('$vuetify.PAGINA_ADMINISTRACAO')}}</span>
     </v-tooltip>
 
     <v-menu
@@ -342,10 +342,10 @@
         </v-list-item>
 
         <v-list-item
-          v-show="canShowProactiveLink()"
+          v-show="canShowAdminLink()"
           @click="toProactivePage()"
         >
-          <v-list-item-title>{{$vuetify.lang.t('$vuetify.PROATIVIDADE')}}</v-list-item-title>
+          <v-list-item-title>{{$vuetify.lang.t('$vuetify.ADMINISTRACAO')}}</v-list-item-title>
         </v-list-item>
       </v-list>
     </v-menu>
@@ -526,18 +526,18 @@ export default {
       this.$router.push('/clientes')
     },
     toProactivePage () {
-      window.sessionStorage.setItem('actualPage', 'proactivity');
-      this.$router.push('/proatividade')
+      window.sessionStorage.setItem('actualPage', 'administracao');
+      this.$router.push('/administracao')
     },
     canShowContractLink () {
       return this.$route.path === '/clientes' ||
         this.$route.path === '/dashboard' ||
-        this.$route.path === '/proatividade'
+        this.$route.path === '/administracao'
     },
-    canShowProactiveLink () {
+    canShowAdminLink () {
       return this.$hasProfile('Administrador')
         && this.$route.path !== '/dashboard'
-        && this.$route.path !== '/proatividade'
+        && this.$route.path !== '/administracao'
     },
     canShowReport () {
       return this.$route.path === '/dashboard'
@@ -546,7 +546,7 @@ export default {
       return this.$hasProfile('Administrador') &&
         (this.$route.path === '/contratos' ||
           this.$route.path === '/dashboard' ||
-          this.$route.path === '/proatividade')
+          this.$route.path === '/administracao')
     },
     logout () {
 

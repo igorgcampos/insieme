@@ -369,7 +369,7 @@ export default {
     MUITO_OBRIGADO: 'Muito obrigado!',
     FEEDBACK_ENVIADO: 'Seu feedback foi enviado com sucesso!',
     PROATIVIDADE: 'Proatividade',
-    PAGINA_PROATIVIDADE: 'Ir para a página de proatividade',
+    PAGINA_ADMINISTRACAO: 'Ir para a página de administração',
     RESTART_CIRCUITOS: 'Restart de circuitos',
     DESIGNACAO_TPZ_CIRCUITO: 'Desig. Tpz do circuito',
     VER_CHAMADO: 'Ver chamado',
@@ -380,5 +380,6 @@ export default {
     DATA_OPERACAO: 'Data da operacao',
     CONCLUIDO: 'Concluído',
     HORA_INICIO: 'Hora de início',
-    HORA_FIM: 'Hora do término'
+    HORA_FIM: 'Hora do término',
+    ADMINISTRACAO: 'Administração',
 }
