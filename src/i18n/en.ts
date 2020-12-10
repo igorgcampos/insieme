@@ -364,7 +364,7 @@ export default {
     NOTA_FISCAL_CANCELADA: 'Invoice canceled!',
     PROATIVO: 'Proactive',
     CANCELADA: 'Canceled',
-    DOWNLOAD_NOTA: 'Download this invoice',
+    DOWNLOAD_DESTA_NOTA: 'Download this invoice',
     NOTA_FISCAL_NAO_ENCONTRADA: 'Invoice not found',
     NOTA_NAO_DIGITALIZADO: 'This scanned invoice is not yet available.',
     FEEDBACK: 'Give your feedback',
@@ -387,4 +387,18 @@ export default {
     HORA_FIM: 'End time',
     ADMINISTRACAO: 'Administration',
     AUDITORIA: 'Audit',
+
+    LOGINS: 'Logins',
+    LOGOUTS: 'Logouts',
+    DOWNLOADS_CONTRATO: 'Contract downloads',
+    DOWNLOADS_NF: 'Invoice downloads',
+    ACESSOS_PRTG: 'PRTG access',
+    NENHUMA_OPERACAO: 'No operation found',
+
+    LOGIN: 'Login',
+    LOGOUT: 'Logout',
+    DOWNLOAD_CONTRATO: 'Contract download',
+    DOWNLOAD_NOTA: 'Invoice download',
+    LINK_PRTG: 'PRTG access',
+    DATA: 'Date',
 }

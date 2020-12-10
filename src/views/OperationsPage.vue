@@ -16,6 +16,7 @@
         class="mt-n11"
       >
         <ProactivityPage></ProactivityPage>
+        <AuditPage></AuditPage>
       </v-col>
 
     </v-container>
@@ -25,10 +26,12 @@
 <script>
 
 import ProactivityPage from './ProactivityPage';
+import AuditPage from './AuditPage';
 
 export default {
   components: {
     ProactivityPage,
+    AuditPage,
   },
   data: () => ({
 

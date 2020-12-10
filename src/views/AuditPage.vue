@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-row
-      id="operations"
+      id="operations" class="mt-7"
       :class="{'ml-n12':$vuetify.breakpoint.mdAndUp}"
     >
       <span class="mb-7 text-right display-1 font-weight-bold grey--text text--darken-1">
@@ -39,17 +39,17 @@
           <v-col :class="[{'flex-grow-0':!$vuetify.breakpoint.xs},{'ml-0 pl-1 pr-0':$vuetify.breakpoint.xs}]">
             <CountCard
               :count="counts[0]"
-              :message="$vuetify.lang.t('$vuetify.COM_SUCESSO')"
-              color="success--text"
-              :func="getWithSuccess"
+              :message="$vuetify.lang.t('$vuetify.LOGINS')"
+              color="primary--text"
+              :func="getLogins"
             ></CountCard>
           </v-col>
           <v-col :class="[{'flex-grow-0':!$vuetify.breakpoint.xs},{'pl-1 pr-0':$vuetify.breakpoint.xs}]">
             <CountCard
               :count="counts[1]"
-              :message="$vuetify.lang.t('$vuetify.SEM_SUCESSO')"
-              color="error--text"
-              :func="getWithoutSuccess"
+              :message="$vuetify.lang.t('$vuetify.LOGOUTS')"
+              color="primary--text"
+              :func="getLogouts"
             ></CountCard>
           </v-col>
           <v-col
@@ -58,9 +58,33 @@
           >
             <CountCard
               :count="counts[2]"
-              :message="$vuetify.lang.t('$vuetify.EM_ANDAMENTO')"
-              color="warning--text"
-              :func="getInProgress"
+              :message="$vuetify.lang.t('$vuetify.DOWNLOADS_CONTRATO')"
+              color="primary--text"
+              :smallText="true"
+              :func="getDownloadContract"
+            ></CountCard>
+          </v-col>
+          <v-col
+            :class="[{'flex-grow-0':!$vuetify.breakpoint.xs}, {'pl-1 pr-0':$vuetify.breakpoint.xs}]"
+            class="mr-n2"
+          >
+            <CountCard
+              :count="counts[3]"
+              :message="$vuetify.lang.t('$vuetify.DOWNLOADS_NF')"
+              color="primary--text"
+              :smallText="true"
+              :func="getDownloadNF"
+            ></CountCard>
+          </v-col>
+          <v-col
+            :class="[{'flex-grow-0':!$vuetify.breakpoint.xs}, {'pl-1 pr-0':$vuetify.breakpoint.xs}]"
+            class="mr-n2"
+          >
+            <CountCard
+              :count="counts[4]"
+              :message="$vuetify.lang.t('$vuetify.ACESSOS_PRTG')"
+              color="primary--text"
+              :func="getLinkPRTG"
             ></CountCard>
           </v-col>
         </v-row>
@@ -69,7 +93,7 @@
           id="filtro"
           class="pl-0 ml-0 grey lighten-5 mb-n5 mt-2"
         >
-          <v-col :cols="!$vuetify.breakpoint.xs?4:6">
+          <v-col :cols="!$vuetify.breakpoint.xs?3:4">
             <v-row>
               <span class=" text-right subtitle-2 font-weight-bold grey--text text--lighten-1">
                 {{$vuetify.lang.t('$vuetify.BUSCAR')}}:</span>
@@ -79,7 +103,7 @@
                 v-model.trim="searchText"
                 dense
                 label="Regular"
-                :placeholder="$vuetify.lang.t('$vuetify.DESIGNACAO_TPZ_CIRCUITO')"
+                :placeholder="$vuetify.lang.t('$vuetify.USUARIO')"
                 single-line
                 solo
                 max-width="200"
@@ -87,6 +111,26 @@
                 @click:append="resultado = undefined; status = undefined; search()"
                 @keypress.enter="resultado = undefined; status = undefined; search()"
               ></v-text-field>
+            </v-row>
+          </v-col>
+
+          <v-col
+            class="ml-5"
+            cols="3"
+          >
+            <v-row>
+              <span class=" text-right subtitle-2 font-weight-bold grey--text text--lighten-1">
+                {{$vuetify.lang.t('$vuetify.DATA')}}:</span>
+            </v-row>
+            <v-row>
+              <v-select
+                :items="types"
+                v-model="type"
+                :label="$vuetify.lang.t('$vuetify.TODOS')"
+                solo
+                dense
+                @change="search()"
+              ></v-select>
             </v-row>
           </v-col>
         </v-row>
@@ -121,16 +165,13 @@
                       sm="2"
                     >
                       <v-chip
-                        :color="operation.status=='EM_ANDAMENTO'?'warning':
-                        operation.resultado=='SUCESSO'?'success':'error'"
+                        color="primary"
                         class="ml-0 mr-4"
                         label
                         small
                         outlined
                       >
-                        {{ operation.status=='EM_ANDAMENTO'?$vuetify.lang.t('$vuetify.EM_ANDAMENTO'):
-                            operation.resultado=='SUCESSO'?$vuetify.lang.t('$vuetify.COM_SUCESSO'):
-                            $vuetify.lang.t('$vuetify.SEM_SUCESSO') }}
+                        {{ $vuetify.lang.t('$vuetify.'+operation.tipo)}}
                       </v-chip>
                     </v-col>
 
@@ -143,10 +184,10 @@
                         class="font-weight-bold grey--text text--lighten-1 mr-2"
                         :class="{'caption':$vuetify.breakpoint.xs,'subtitle-2':!$vuetify.breakpoint.xs}"
                       >
-                        {{$vuetify.lang.t('$vuetify.DESIGNACAO_TPZ_CIRCUITO')}}:</strong>
+                        {{$vuetify.lang.t('$vuetify.USUARIO')}}:</strong>
                       <strong
                         :class="{'caption':$vuetify.breakpoint.xs,'subtitle-2':!$vuetify.breakpoint.xs}"
-                        v-html="operation.referenciaEntidade"
+                        v-html="operation.usuario.apelido"
                       ></strong>
                     </v-col>
 
@@ -176,28 +217,16 @@
                         class="pa-0 mt-n2"
                         :class="{'mt-n3':$vuetify.breakpoint.xs}"
                       >
-                        <v-chip
-                          :color="operation.status=='CONCLUIDA'?'blue-grey':'warning'"
-                          class="ml-0 mr-2 mb-2"
-                          label
-                          small
-                          outlined
-                        >
-                          {{ operation.status=='CONCLUIDA'?$vuetify.lang.t('$vuetify.CONCLUIDO'):
-                                $vuetify.lang.t('$vuetify.EM_ANDAMENTO') }}
-                        </v-chip>
 
                         <v-chip
                           class="ml-0 mr-2"
                           label
                           small
                           outlined
-                          v-if="operation.resultado"
-                          :color="operation.resultado=='SUCESSO'?'success':'error'"
+                          color="primary"
                           :class="{'mb-3':$vuetify.breakpoint.xs}"
                         >
-                          {{ operation.resultado=='SUCESSO'?$vuetify.lang.t('$vuetify.COM_SUCESSO'):
-                          $vuetify.lang.t('$vuetify.SEM_SUCESSO') }}
+                          {{ $vuetify.lang.t('$vuetify.'+operation.tipo) }}
                         </v-chip>
                       </v-col>
                     </v-col>
@@ -206,6 +235,18 @@
                       class="mt-n3"
                       :class="{'pl-10 pt-3':$vuetify.breakpoint.xs}"
                     >
+                      <v-col
+                        class="pt-0 pl-0 pr-0 mt-n6"
+                        :class="{'col-4 ml-2':$vuetify.breakpoint.xs}"
+                      >
+                        <LabelValue
+                          :label="$vuetify.lang.t('$vuetify.USUARIO')"
+                          :value="formatHour(operation.usuario.apelido)"
+                          justify="start"
+                          :class="{'pr-0 pl-0':$vuetify.breakpoint.xs}"
+                        ></LabelValue>
+                      </v-col>
+
                       <v-col
                         class="pt-0 pl-0 mt-n6"
                         :class="{'col-4':$vuetify.breakpoint.xs}"
@@ -217,50 +258,10 @@
                           :class="{'pl-0 col-12':$vuetify.breakpoint.xs}"
                         ></LabelValue>
                       </v-col>
-                      <v-col
-                        class="pt-0 pl-0 pr-0 mt-n6"
-                        :class="{'col-4 ml-2':$vuetify.breakpoint.xs}"
-                      >
-                        <LabelValue
-                          :label="$vuetify.lang.t('$vuetify.HORA_INICIO')"
-                          :value="formatHour(operation.createdOn.time)"
-                          justify="start"
-                          :class="{'pr-0 pl-0':$vuetify.breakpoint.xs}"
-                        ></LabelValue>
-                      </v-col>
-                      <v-col
-                        class="pt-0 pl-0 pr-0 mt-n6"
-                        :class="{'col-4 ml-n3':$vuetify.breakpoint.xs}"
-                      >
-                        <LabelValue
-                          :label="$vuetify.lang.t('$vuetify.HORA_FIM')"
-                          :value="formatHour(operation.updatedOn?operation.updatedOn.time:undefined)"
-                          justify="start"
-                          :class="{'pr-0 pl-0':$vuetify.breakpoint.xs}"
-                        ></LabelValue>
-                      </v-col>
                     </v-row>
 
                   </v-row>
 
-                  <v-divider
-                    class="mt-n1"
-                    v-show="operation.chamado"
-                  ></v-divider>
-
-                  <v-card-actions
-                    class="mb-n2 pb-0"
-                    v-show="operation.chamado"
-                  >
-                    <TooltipButton
-                      :label="$vuetify.lang.t('$vuetify.VER_CHAMADO')"
-                      :message="$vuetify.lang.t('$vuetify.VER_CHAMADO_TOPDESK') + ' (Em desenvolvimento)'"
-                      :event="toTopDesk"
-                      :object="operation.chamado"
-                      :mobile="$vuetify.breakpoint.xs"
-                      :isText=true
-                    ></TooltipButton>
-                  </v-card-actions>
                 </v-expansion-panel-content>
               </v-expansion-panel>
             </v-expansion-panels>
@@ -269,7 +270,7 @@
             v-if="operations.length == 0 && !isLoading"
             class="mt-n2"
           >
-            <WarningPanel :message="$vuetify.lang.t('$vuetify.NENHUM_RESTART')"> </WarningPanel>
+            <WarningPanel :message="$vuetify.lang.t('$vuetify.NENHUMA_OPERACAO')"> </WarningPanel>
           </v-col>
         </v-row>
 
@@ -282,30 +283,31 @@
 
 import CountCard from '../components/cards/CountCard'
 import WarningPanel from '../components/panels/WarningPanel';
-import TooltipButton from '../components/TooltipButton';
 import LabelValue from '../components/LabelValue';
 
 export default {
   components: {
     CountCard,
     WarningPanel,
-    TooltipButton,
     LabelValue,
   },
   methods: {
-    toTopDesk () {
-
+    getLogins () {
+      this.getFromType('LOGIN')
     },
-    getWithSuccess () {
-      this.getFromStatus('SUCESSO', undefined)
+    getLogouts () {
+      this.getFromType('LOGOUT')
     },
-    getWithoutSuccess () {
-      this.getFromStatus('INSUCESSO', undefined)
+    getDownloadContract () {
+      this.getFromType('DOWNOAD_CONTRATO')
     },
-    getInProgress () {
-      this.getFromStatus(undefined, 'EM_ANDAMENTO')
+    getDownloadNF () {
+      this.getFromType('DOWNOAD_NOTA')
     },
-    getFromStatus (resultado, status) {
+    getLinkPRTG () {
+      this.getFromType('LINK_PRTG')
+    },
+    getFromType (type) {
 
       if (this.isLoading) {
         return
@@ -314,15 +316,12 @@ export default {
       this.searchText = '';
       this.page = 0;
       this.isLoading = true;
-      this.status = status;
-      this.resultado = resultado;
+      this.type = type;
       this.operations = [];
 
-      this.$get('/operacao/busca', {
+      this.$get('/operacao/auditoria/busca', {
         searchText: this.searchText,
-        type: 'RESTART_CIRCUITO',
-        status: status,
-        result: resultado,
+        type: type,
         page: 0
       }).then((response) => {
 
@@ -363,11 +362,10 @@ export default {
         this.noResult = false;
       }
 
-      this.$get('/operacao/busca', {
+      this.$get('/operacao/auditoria/busca', {
         searchText: this.searchText,
-        type: 'RESTART_CIRCUITO',
-        status: this.status,
-        result: this.resultado,
+        type: this.type,
+        date:this.date,
         page: this.page
       }).then((response) => {
 
@@ -391,33 +389,40 @@ export default {
     },
     initialSearch () {
 
-      this.$get('/operacao/counts').then((response) => {
+      this.$get('/operacao/auditoria/counts').then((response) => {
 
         this.counts = response.data;
         if (this.counts.length == 0)
-          this.counts = [0, 0, 0]
+          this.counts = [0, 0, 0, 0, 0]
 
         this.isLoading = false;
       });
 
-      this.$get('/operacao/busca', {
+      this.$get('/operacao/auditoria/busca', {
         searchText: this.searchText,
-        type: 'RESTART_CIRCUITO',
-        status: this.status,
-        result: this.resultado,
         page: 0
       })
         .then((response) => {
           this.operations = response.data;
           this.isLoading = false;
         });
+
+        this.$get('/operacao/tipos')
+        .then((response) => {
+          this.types = response.data;
+          this.types = this.types.filter((t) => t != 'RESTART_CIRCUITO')
+          this.types = this.types.map((t) => this.$vuetify.lang.t('$vuetify.'+t))
+          this.types.sort()
+        });
     }
   },
   data: () => ({
+    types: [],
+    type: undefined,
     isLoading: false,
     operations: [],
     showPanel: true,
-    counts: [0, 0, 0],
+    counts: [0, 0, 0, 0, 0],
     status: undefined,
     page: 0,
     noResult: false,
@@ -427,10 +432,6 @@ export default {
   created: function () {
 
     this.initialSearch();
-
-    setInterval(() => {
-      this.initialSearch();
-    }, 60000)
   }
 };
 </script>

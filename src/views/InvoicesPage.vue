@@ -389,7 +389,7 @@
 
                     <TooltipButton
                       :label="$vuetify.lang.t('$vuetify.BAIXAR')"
-                      :message="$vuetify.lang.t('$vuetify.DOWNLOAD_NOTA')"
+                      :message="$vuetify.lang.t('$vuetify.DOWNLOAD_DESTA_NOTA')"
                       :event="downloadInvoice"
                       :object="invoice"
                       :mobile="$vuetify.breakpoint.xs"

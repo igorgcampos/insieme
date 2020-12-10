@@ -360,7 +360,7 @@ export default {
     NOTA_FISCAL_CANCELADA: 'Nota fiscal cancelada!',
     PROATIVO: 'Proativo',
     CANCELADA: 'Cancelada',
-    DOWNLOAD_NOTA: 'Fazer o download desta nota fiscal',
+    DOWNLOAD_DESTA_NOTA: 'Fazer o download desta nota fiscal',
     NOTA_FISCAL_NAO_ENCONTRADA: 'Nota fiscal não encontrada',
     NOTA_NAO_DIGITALIZADO: 'Esta nota fiscal digitalizada ainda não está disponível.',
     FEEDBACK: 'Dê o seu feedback',
@@ -383,4 +383,18 @@ export default {
     HORA_FIM: 'Hora do término',
     ADMINISTRACAO: 'Administração',
     AUDITORIA: 'Auditoria',
+
+    LOGINS: 'Logins',
+    LOGOUTS: 'Logouts',
+    DOWNLOADS_CONTRATO: 'Downloads de contrato',
+    DOWNLOADS_NF: 'Downloads de NF',
+    ACESSOS_PRTG: 'Acessos PRTG',
+    NENHUMA_OPERACAO: 'Nenhuma operação encontrada',
+
+    LOGIN: 'Login',
+    LOGOUT: 'Logout',
+    DOWNLOAD_CONTRATO: 'Download de contrato',
+    DOWNLOAD_NOTA: 'Download de NF',
+    LINK_PRTG: 'Acesso PRTG',
+    DATA: 'Data',
 }
