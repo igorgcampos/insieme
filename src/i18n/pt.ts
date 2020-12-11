@@ -383,6 +383,9 @@ export default {
     HORA_FIM: 'Hora do término',
     ADMINISTRACAO: 'Administração',
     AUDITORIA: 'Auditoria',
+    HORA: 'Hora',
+    RESTART_SUCESSO: 'O circuito passou a responder após o restart',
+    RESTART_INSUCESSO: 'O circuito continuou não respondendo após o restart',
 
     LOGINS: 'Logins',
     LOGOUTS: 'Logouts',
@@ -397,4 +400,5 @@ export default {
     DOWNLOAD_NOTA: 'Download de NF',
     LINK_PRTG: 'Acesso PRTG',
     DATA: 'Data',
+    DOWNLOAD_CONTRATO_MOBILE: 'Download contrato',
 }

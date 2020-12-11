@@ -42,6 +42,7 @@
               :message="$vuetify.lang.t('$vuetify.COM_SUCESSO')"
               color="success--text"
               :func="getWithSuccess"
+              :toolTipMessage="$vuetify.lang.t('$vuetify.RESTART_SUCESSO')"
             ></CountCard>
           </v-col>
           <v-col :class="[{'flex-grow-0':!$vuetify.breakpoint.xs},{'pl-1 pr-0':$vuetify.breakpoint.xs}]">
@@ -50,6 +51,7 @@
               :message="$vuetify.lang.t('$vuetify.SEM_SUCESSO')"
               color="error--text"
               :func="getWithoutSuccess"
+              :toolTipMessage="$vuetify.lang.t('$vuetify.RESTART_INSUCESSO')"
             ></CountCard>
           </v-col>
           <v-col
@@ -208,7 +210,7 @@
                     >
                       <v-col
                         class="pt-0 pl-0 mt-n6"
-                        :class="{'col-4':$vuetify.breakpoint.xs}"
+                        :class="{'col-6':$vuetify.breakpoint.xs}"
                       >
                         <LabelValue
                           :label="$vuetify.lang.t('$vuetify.DATA_OPERACAO')"
@@ -219,7 +221,7 @@
                       </v-col>
                       <v-col
                         class="pt-0 pl-0 pr-0 mt-n6"
-                        :class="{'col-4 ml-2':$vuetify.breakpoint.xs}"
+                        :class="{'col-6 ml-0':$vuetify.breakpoint.xs}"
                       >
                         <LabelValue
                           :label="$vuetify.lang.t('$vuetify.HORA_INICIO')"
@@ -230,7 +232,7 @@
                       </v-col>
                       <v-col
                         class="pt-0 pl-0 pr-0 mt-n6"
-                        :class="{'col-4 ml-n3':$vuetify.breakpoint.xs}"
+                        :class="{'col-4 ml-0':$vuetify.breakpoint.xs}"
                       >
                         <LabelValue
                           :label="$vuetify.lang.t('$vuetify.HORA_FIM')"

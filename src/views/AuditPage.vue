@@ -1,7 +1,8 @@
 <template>
   <div>
     <v-row
-      id="operations" class="mt-7"
+      id="operations"
+      class="mt-7"
       :class="{'ml-n12':$vuetify.breakpoint.mdAndUp}"
     >
       <span class="mb-7 text-right display-1 font-weight-bold grey--text text--darken-1">
@@ -85,6 +86,7 @@
               :message="$vuetify.lang.t('$vuetify.ACESSOS_PRTG')"
               color="primary--text"
               :func="getLinkPRTG"
+              :smallText="$vuetify.breakpoint.xs?true:false"
             ></CountCard>
           </v-col>
         </v-row>
@@ -108,8 +110,8 @@
                 solo
                 max-width="200"
                 append-icon="mdi-magnify"
-                @click:append="resultado = undefined; status = undefined; search()"
-                @keypress.enter="resultado = undefined; status = undefined; search()"
+                @click:append="search()"
+                @keypress.enter="search()"
               ></v-text-field>
             </v-row>
           </v-col>
@@ -120,7 +122,7 @@
           >
             <v-row>
               <span class=" text-right subtitle-2 font-weight-bold grey--text text--lighten-1">
-                {{$vuetify.lang.t('$vuetify.DATA')}}:</span>
+                {{$vuetify.lang.t('$vuetify.TIPO')}}:</span>
             </v-row>
             <v-row>
               <v-select
@@ -129,8 +131,22 @@
                 :label="$vuetify.lang.t('$vuetify.TODOS')"
                 solo
                 dense
+                item-text="text"
+                item-value="value"
                 @change="search()"
               ></v-select>
+            </v-row>
+          </v-col>
+          <v-col class="ml-2">
+            <v-row>
+              <span class="ml-3 mb-n3 text-right subtitle-2 font-weight-bold grey--text text--lighten-1">
+                {{$vuetify.lang.t('$vuetify.DATA')}}:</span>
+            </v-row>
+            <v-row md="3">
+              <DatePickerField
+                :date="date"
+                :event="searchWithDate"
+              ></DatePickerField>
             </v-row>
           </v-col>
         </v-row>
@@ -140,9 +156,9 @@
           style="min-height:120px;"
         >
           <div
-            id="operationId"
+            id="auditId"
             class="pr-2 overflow-y-auto overflow-x-hidden"
-            v-scroll:#operationId="searchMore"
+            v-scroll:#auditId="searchMore"
             style="max-height:340px; width:100%;"
           >
             <v-expansion-panels class="ma-1">
@@ -160,9 +176,8 @@
                     no-gutters
                   >
                     <v-col
-                      v-if="!open"
                       :cols="!$vuetify.breakpoint.xs?6:5"
-                      sm="2"
+                      sm="3"
                     >
                       <v-chip
                         color="primary"
@@ -171,14 +186,16 @@
                         small
                         outlined
                       >
-                        {{ $vuetify.lang.t('$vuetify.'+operation.tipo)}}
+                        {{ $vuetify.breakpoint.xs && operation.tipo == 'DOWNLOAD_CONTRATO'?$vuetify.lang.t('$vuetify.DOWNLOAD_CONTRATO_MOBILE')
+                         :$vuetify.lang.t('$vuetify.'+operation.tipo)}}
                       </v-chip>
                     </v-col>
 
                     <v-col
-                      sm="5"
-                      md="5"
+                      sm="4"
+                      md="4"
                       xm="2"
+                      v-if="!open"
                     >
                       <strong
                         class="font-weight-bold grey--text text--lighten-1 mr-2"
@@ -207,59 +224,45 @@
 
                 <v-expansion-panel-content>
 
-                  <v-row class="
-                        mt-4">
+                  <v-row
+                    class="mt-2 ml-1"
+                    :class="{'pl-10 pt-3 ml-n5':$vuetify.breakpoint.xs}"
+                  >
                     <v-col
-                      class="mt-n6 mr-5"
-                      :class="{'col-5':$vuetify.breakpoint.xs, 'col-2':!$vuetify.breakpoint.xs}"
+                      class="pt-0 pl-0 pr-0 mt-n6"
+                      :class="{'col-6 ml-0':$vuetify.breakpoint.xs}"
                     >
-                      <v-col
-                        class="pa-0 mt-n2"
-                        :class="{'mt-n3':$vuetify.breakpoint.xs}"
-                      >
-
-                        <v-chip
-                          class="ml-0 mr-2"
-                          label
-                          small
-                          outlined
-                          color="primary"
-                          :class="{'mb-3':$vuetify.breakpoint.xs}"
-                        >
-                          {{ $vuetify.lang.t('$vuetify.'+operation.tipo) }}
-                        </v-chip>
-                      </v-col>
+                      <LabelValue
+                        :label="$vuetify.lang.t('$vuetify.USUARIO')"
+                        :value="operation.usuario.apelido"
+                        justify="start"
+                        :class="{'pr-0 pl-0':$vuetify.breakpoint.xs}"
+                      ></LabelValue>
                     </v-col>
 
-                    <v-row
-                      class="mt-n3"
-                      :class="{'pl-10 pt-3':$vuetify.breakpoint.xs}"
+                    <v-col
+                      class="pt-0 pl-0 mt-n6"
+                      :class="{'col-6':$vuetify.breakpoint.xs}"
                     >
-                      <v-col
-                        class="pt-0 pl-0 pr-0 mt-n6"
-                        :class="{'col-4 ml-2':$vuetify.breakpoint.xs}"
-                      >
-                        <LabelValue
-                          :label="$vuetify.lang.t('$vuetify.USUARIO')"
-                          :value="formatHour(operation.usuario.apelido)"
-                          justify="start"
-                          :class="{'pr-0 pl-0':$vuetify.breakpoint.xs}"
-                        ></LabelValue>
-                      </v-col>
+                      <LabelValue
+                        :label="$vuetify.lang.t('$vuetify.DATA_OPERACAO')"
+                        :value="formatDate(operation.createdOn.date)"
+                        justify="start"
+                        :class="{'pl-0 col-12':$vuetify.breakpoint.xs}"
+                      ></LabelValue>
+                    </v-col>
 
-                      <v-col
-                        class="pt-0 pl-0 mt-n6"
-                        :class="{'col-4':$vuetify.breakpoint.xs}"
-                      >
-                        <LabelValue
-                          :label="$vuetify.lang.t('$vuetify.DATA_OPERACAO')"
-                          :value="formatDate(operation.createdOn.date)"
-                          justify="start"
-                          :class="{'pl-0 col-12':$vuetify.breakpoint.xs}"
-                        ></LabelValue>
-                      </v-col>
-                    </v-row>
-
+                    <v-col
+                      class="pt-0 pl-0 mt-n6"
+                      :class="{'col-6':$vuetify.breakpoint.xs}"
+                    >
+                      <LabelValue
+                        :label="$vuetify.lang.t('$vuetify.HORA')"
+                        :value="formatHour(operation.createdOn.time)"
+                        justify="start"
+                        :class="{'pl-0 col-12':$vuetify.breakpoint.xs}"
+                      ></LabelValue>
+                    </v-col>
                   </v-row>
 
                 </v-expansion-panel-content>
@@ -284,14 +287,27 @@
 import CountCard from '../components/cards/CountCard'
 import WarningPanel from '../components/panels/WarningPanel';
 import LabelValue from '../components/LabelValue';
+import DatePickerField from '../components/fields/DatePickerField';
 
 export default {
   components: {
     CountCard,
     WarningPanel,
     LabelValue,
+    DatePickerField,
   },
   methods: {
+    searchWithDate (date) {
+      this.date = date
+
+      if (this.isLoading) {
+        return
+      }
+
+      this.page = 0;
+      this.operations = [];
+      this.search()
+    },
     getLogins () {
       this.getFromType('LOGIN')
     },
@@ -299,13 +315,19 @@ export default {
       this.getFromType('LOGOUT')
     },
     getDownloadContract () {
-      this.getFromType('DOWNOAD_CONTRATO')
+      this.getFromType('DOWNLOAD_CONTRATO')
     },
     getDownloadNF () {
-      this.getFromType('DOWNOAD_NOTA')
+      this.getFromType('DOWNLOAD_NOTA')
     },
     getLinkPRTG () {
       this.getFromType('LINK_PRTG')
+    },
+    clearFields () {
+      this.searchText = '';
+      this.page = 0;
+      this.operations = [];
+      this.date = null;
     },
     getFromType (type) {
 
@@ -313,27 +335,9 @@ export default {
         return
       }
 
-      this.searchText = '';
-      this.page = 0;
-      this.isLoading = true;
       this.type = type;
-      this.operations = [];
-
-      this.$get('/operacao/auditoria/busca', {
-        searchText: this.searchText,
-        type: type,
-        page: 0
-      }).then((response) => {
-
-        if (response && response.data.length == 0) {
-          this.noResult = true;
-        } else {
-          this.noResult = false;
-        }
-
-        this.operations = response.data;
-        this.isLoading = false;
-      });
+      this.clearFields()
+      this.search()
     },
     formatDate (date) {
       return this.$formatDate(date)
@@ -347,8 +351,8 @@ export default {
         return;
       }
 
-      if (document.getElementById('operationId').scrollTop + 341 >=
-        document.getElementById('operationId').scrollHeight) {
+      if (document.getElementById('auditId').scrollTop + 341 >=
+        document.getElementById('auditId').scrollHeight) {
         this.page++;
         this.search(this.page);
       }
@@ -365,7 +369,7 @@ export default {
       this.$get('/operacao/auditoria/busca', {
         searchText: this.searchText,
         type: this.type,
-        date:this.date,
+        date: this.date,
         page: this.page
       }).then((response) => {
 
@@ -407,12 +411,19 @@ export default {
           this.isLoading = false;
         });
 
-        this.$get('/operacao/tipos')
+      this.$get('/operacao/tipos')
         .then((response) => {
+
           this.types = response.data;
           this.types = this.types.filter((t) => t != 'RESTART_CIRCUITO')
-          this.types = this.types.map((t) => this.$vuetify.lang.t('$vuetify.'+t))
+
+          var vm = this;
+          this.types = this.types.map(function (t) {
+            return { text: vm.$vuetify.lang.t('$vuetify.' + t), value: t }
+          })
           this.types.sort()
+          this.types.unshift({ text: this.$vuetify.lang.t('$vuetify.TODOS'), value: null })
+
         });
     }
   },
@@ -427,7 +438,7 @@ export default {
     page: 0,
     noResult: false,
     searchText: '',
-    resultado: undefined,
+    date: null,
   }),
   created: function () {
 
