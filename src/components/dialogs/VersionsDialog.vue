@@ -105,6 +105,11 @@ export default {
       description: this.$vuetify.lang.t('$vuetify.V_2_2_0')
     })
 
+    this.items.push({
+      title: 'V2.3.0',
+      description: this.$vuetify.lang.t('$vuetify.V_2_3_0')
+    })
+
     this.selectedItems = this.items
   }
 };
