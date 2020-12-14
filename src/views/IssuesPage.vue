@@ -106,6 +106,8 @@
                 :label="$vuetify.lang.t('$vuetify.EM_ABERTO_ENCERRADO')"
                 solo
                 dense
+                item-text="text"
+                item-value="value"
                 @change="search()"
               ></v-select>
             </v-row>
@@ -755,36 +757,20 @@ export default {
     getResolving () {
       this.getFromStatus('EM_ANDAMENTO')
     },
+    clearFields () {
+      this.searchText = '';
+      this.page = 0;
+      this.issues = [];
+    },
     getFromStatus (status) {
 
       if (this.isLoading) {
         return
       }
 
-      this.searchText = '';
-      this.page = 0;
-      this.isLoading = true;
-      this.status = this.statuses[0]
-      this.issues = [];
-
-      this.$get('/chamado/busca', {
-        contractId: this.$props.contract ? this.$props.contract.id : undefined,
-        searchText: this.searchText,
-        status: status,
-        proactivity: this.$props.proactivity,
-        page: 0
-      }).then((response) => {
-
-        if (response && response.data.length == 0) {
-          this.noResult = true;
-        } else {
-          this.noResult = false;
-        }
-
-        this.issues = response.data;
-        this.filterIssues()
-        this.isLoading = false;
-      });
+      this.status = status
+      this.clearFields()
+      this.search();
     },
     formatDate (date) {
 
@@ -814,19 +800,10 @@ export default {
         this.noResult = false;
       }
 
-      var selectedStatus = ''
-      if (this.status == this.statuses[0]) {
-        selectedStatus = '';
-      } else if (this.status == this.statuses[1]) {
-        selectedStatus = 'ABERTO';
-      } else if (this.status == this.statuses[2]) {
-        selectedStatus = 'ENCERRADO';
-      }
-
       this.$get('/chamado/busca', {
         contractId: this.$props.contract ? this.$props.contract.id : undefined,
         searchText: this.searchText,
-        status: selectedStatus,
+        status: this.status,
         proactivity: this.$props.proactivity,
         page: this.page
       }).then((response) => {
@@ -892,9 +869,22 @@ export default {
       this.counts[0] += 1;
     })
 
-    this.statuses = [this.$vuetify.lang.t('$vuetify.TODOS'),
-    this.$vuetify.lang.t('$vuetify.EM_ABERTO'),
-    this.$vuetify.lang.t('$vuetify.ENCERRADOS')]
+    var vm = this;
+    this.$get('/chamado/tipos', {}).then((response) => {
+
+      this.statuses = response.data;
+      this.statuses = this.statuses.map(function (t) {
+
+        var text = t
+        if (text == 'ABERTO') {
+          text = 'EM_ABERTO'
+        }
+
+        return { text: vm.$vuetify.lang.t('$vuetify.' + text), value: t }
+      })
+      this.statuses.sort()
+      this.statuses.unshift({ text: this.$vuetify.lang.t('$vuetify.TODOS'), value: null })
+    })
 
     this.$get('/chamado/counts',
       {

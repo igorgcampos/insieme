@@ -307,36 +307,23 @@ export default {
     getInProgress () {
       this.getFromStatus(undefined, 'EM_ANDAMENTO')
     },
+    clearFields () {
+      this.searchText = '';
+      this.page = 0;
+      this.operations = [];
+
+    },
     getFromStatus (resultado, status) {
 
       if (this.isLoading) {
         return
       }
 
-      this.searchText = '';
-      this.page = 0;
-      this.isLoading = true;
       this.status = status;
       this.resultado = resultado;
-      this.operations = [];
 
-      this.$get('/operacao/proatividade/busca', {
-        searchText: this.searchText,
-        type: 'RESTART_CIRCUITO',
-        status: status,
-        result: resultado,
-        page: 0
-      }).then((response) => {
-
-        if (response && response.data.length == 0) {
-          this.noResult = true;
-        } else {
-          this.noResult = false;
-        }
-
-        this.operations = response.data;
-        this.isLoading = false;
-      });
+      this.clearFields();
+      this.search()
     },
     formatDate (date) {
       return this.$formatDate(date)
