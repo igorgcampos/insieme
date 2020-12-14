@@ -39,7 +39,7 @@
           <v-col :class="[{'flex-grow-0':!$vuetify.breakpoint.xs},{'ml-0 pl-1 pr-0':$vuetify.breakpoint.xs}]">
             <CountCard
               :count="counts[0]"
-              :message="$vuetify.lang.t('$vuetify.EM_ABERTO')"
+              :message="$vuetify.lang.t('$vuetify.ABERTO')"
               color="success--text"
               :func="getOpened"
             ></CountCard>
@@ -189,7 +189,7 @@
                         small
                         outlined
                       >
-                        {{ issue.status=='ABERTO'?$vuetify.lang.t('$vuetify.EM_ABERTO'):
+                        {{ issue.status=='ABERTO'?$vuetify.lang.t('$vuetify.ABERTO'):
                   $vuetify.lang.t('$vuetify.ENCERRADO') }}
                       </v-chip>
                     </v-col>
@@ -276,7 +276,7 @@
                           small
                           outlined
                         >
-                          {{ issue.status=='ABERTO'?$vuetify.lang.t('$vuetify.EM_ABERTO'):
+                          {{ issue.status=='ABERTO'?$vuetify.lang.t('$vuetify.ABERTO'):
                   $vuetify.lang.t('$vuetify.ENCERRADO') }}
                         </v-chip>
 
@@ -875,12 +875,7 @@ export default {
       this.statuses = response.data;
       this.statuses = this.statuses.map(function (t) {
 
-        var text = t
-        if (text == 'ABERTO') {
-          text = 'EM_ABERTO'
-        }
-
-        return { text: vm.$vuetify.lang.t('$vuetify.' + text), value: t }
+        return { text: vm.$vuetify.lang.t('$vuetify.' + t), value: t }
       })
       this.statuses.sort()
       this.statuses.unshift({ text: this.$vuetify.lang.t('$vuetify.TODOS'), value: null })

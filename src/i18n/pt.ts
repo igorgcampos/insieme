@@ -68,7 +68,7 @@ export default {
     CHAMADOS: 'Chamados',
     NENHUMA_NOTA: 'Nenhuma nota encontrada',
     NENHUMA_NOTA_SELECIONADA: 'Nenhuma nota selecionada',
-    EM_ABERTO: 'Em aberto',
+    ABERTO: 'Em aberto',
     PAGO: 'Pago',
     PAGOS: 'Pagos',
     NUMERO_NOTA: 'Número da nota',

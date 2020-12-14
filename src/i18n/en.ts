@@ -70,7 +70,7 @@ export default {
     DESISTI_CHAMADO: 'I gave up the call',
     PROBLEMA_RESOLVIDO: 'My problem was solved',
     NENHUMA_NOTA: 'No invoice found',
-    EM_ABERTO: 'Opened',
+    ABERTO: 'Opened',
     PAGO: 'Paid',
     PAGOS: 'Paid',
     NUMERO_NOTA: 'Invoice number',
