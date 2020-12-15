@@ -62,6 +62,8 @@
                 :label="$vuetify.lang.t('$vuetify.TIPOS_CONTRATOS')"
                 solo
                 dense
+                item-text="text"
+                item-value="value"
                 @change="search()"
               ></v-select>
             </v-row>
@@ -82,6 +84,8 @@
                 :label="$vuetify.lang.t('$vuetify.ATIVO_EXPIRADO')"
                 solo
                 dense
+                item-text="text"
+                item-value="value"
                 @change="search()"
               ></v-select>
             </v-row>
@@ -157,27 +161,12 @@ export default {
         this.cameFromCard = false;
       }
 
-      var selectedType = 0
-      if (this.type == this.types[0]) {
-        selectedType = 0;
-      } else if (this.type == this.types[1]) {
-        selectedType = 1;
-      } else if (this.type == this.types[2]) {
-        selectedType = 2;
-      }
-
-      var selectedStatus = 0
-      if (this.status == this.statuses[0]) {
-        selectedStatus = 0;
-      } else if (this.status == this.statuses[1]) {
-        selectedStatus = 1;
-      } else if (this.status == this.statuses[2]) {
-        selectedStatus = 2;
-      }
-
       this.$get('/contrato/busca', {
-        searchText: this.searchText, clientId: this.selectedClient.id, type: selectedType,
-        status: selectedStatus, page: this.page
+        searchText: this.searchText,
+        clientId: this.selectedClient.id,
+        type: this.type,
+        status: this.status,
+        page: this.page
       }).then((response) => {
 
         if (response && response.data.length == 0) {
@@ -203,8 +192,8 @@ export default {
   data: () => ({
     types: [],
     statuses: [],
-    type: 0,
-    status: 0,
+    type: 'TODOS',
+    status: 'TODOS',
     page: 0,
     isLoading: true,
     noResult: false,
@@ -214,13 +203,31 @@ export default {
   }),
   created: function () {
 
-    this.types = [this.$vuetify.lang.t('$vuetify.TODOS'),
-    this.$vuetify.lang.t('$vuetify.LOCACAO'),
-    this.$vuetify.lang.t('$vuetify.VENDA')]
+    this.$get('/contrato/tipos')
+      .then((response) => {
 
-    this.statuses = [this.$vuetify.lang.t('$vuetify.TODOS'),
-    this.$vuetify.lang.t('$vuetify.ATIVO'),
-    this.$vuetify.lang.t('$vuetify.EXPIRADO')]
+        this.types = response.data;
+
+        var vm = this;
+        this.types = this.types.map(function (t) {
+
+          if (t == 'LOCAÇÃO') t = 'LOCACAO'
+          return { text: vm.$vuetify.lang.t('$vuetify.' + t), value: t }
+        })
+
+      });
+
+    this.$get('/contrato/status')
+      .then((response) => {
+
+        this.statuses = response.data;
+
+        var vm = this;
+        this.statuses = this.statuses.map(function (t) {
+          return { text: vm.$vuetify.lang.t('$vuetify.' + t), value: t }
+        })
+
+      });
 
     this.selectedClient = this.$props.client;
 
@@ -234,7 +241,7 @@ export default {
     }
 
     this.$get('/contrato/busca',
-      { searchText: '', clientId: this.selectedClient.id, type: 0, status: 0, page: 0 }).
+      { searchText: '', clientId: this.selectedClient.id, type: this.type, status: this.status, page: 0 }).
       then((response) => {
         this.contracts = response.data;
       });
