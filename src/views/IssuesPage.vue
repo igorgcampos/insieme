@@ -39,7 +39,7 @@
           <v-col :class="[{'flex-grow-0':!$vuetify.breakpoint.xs},{'ml-0 pl-1 pr-0':$vuetify.breakpoint.xs}]">
             <CountCard
               :count="counts[0]"
-              :message="$vuetify.lang.t('$vuetify.ABERTO')"
+              :message="$vuetify.lang.t('$vuetify.ABERTOS')"
               color="success--text"
               :func="getOpened"
             ></CountCard>

@@ -106,6 +106,8 @@
                 :label="$vuetify.lang.t('$vuetify.STATUS_PAGAMENTO')"
                 solo
                 dense
+                item-text="text"
+                item-value="value"
                 @change="search()"
               ></v-select>
             </v-row>
@@ -556,30 +558,23 @@ export default {
         }
       });
     },
+    clearFields () {
+      this.searchText = '';
+      this.page = 0;
+      this.invoices = []
+      this.status = null
+    },
     getByStatus (status) {
+
       if (this.isLoading) {
         return
       }
 
-      this.searchText = '';
-      this.page = 0;
-      this.isLoading = true;
-      this.status = this.statuses[status]
+      this.clearFields()
+      this.status = status
 
-      this.$get('/nota/busca', {
-        contractId: this.$props.contract.id, searchText: this.searchText,
-        paymentStatus: status, page: this.page
-      }).then((response) => {
-
-        if (response && response.data.length == 0) {
-          this.noResult = true;
-        } else {
-          this.noResult = false;
-        }
-
-        this.invoices = response.data;
-        this.isLoading = false;
-      });
+      this.search()
+      this.status = null
     },
     getPaid () {
       this.getByStatus('PAGO');
@@ -622,18 +617,11 @@ export default {
         this.noResult = false;
       }
 
-      var selectedStatus = undefined
-      if (this.status == this.statuses[1]) {
-        selectedStatus = 'PAGO';
-      } else if (this.status == this.statuses[2]) {
-        selectedStatus = 'EM_ABERTO';
-      } else if (this.status == this.statuses[3]) {
-        selectedStatus = 'VENCIDA';
-      }
-
       this.$get('/nota/busca', {
-        contractId: this.$props.contract.id, searchText: this.searchText,
-        paymentStatus: selectedStatus, page: this.page
+        contractId: this.$props.contract.id,
+        searchText: this.searchText,
+        paymentStatus: this.status,
+        page: this.page
       }).then((response) => {
 
         if (response && response.data.length == 0) {
@@ -699,10 +687,19 @@ export default {
     this.$vuetify.lang.t('$vuetify.BAIXA_BOLETO'),
     this.$vuetify.lang.t('$vuetify.ALTERAR_VENCIMENTO')]
 
-    this.statuses = [this.$vuetify.lang.t('$vuetify.TODOS'),
-    this.$vuetify.lang.t('$vuetify.PAGOS'),
-    this.$vuetify.lang.t('$vuetify.EM_ABERTO'),
-    this.$vuetify.lang.t('$vuetify.VENCIDAS')]
+    this.$get('/nota/status')
+      .then((response) => {
+
+        this.statuses = response.data;
+
+        var vm = this;
+        this.statuses = this.statuses.map(function (t) {
+          return { text: vm.$vuetify.lang.t('$vuetify.' + t), value: t }
+        })
+        this.statuses.sort()
+        this.statuses.unshift({ text: this.$vuetify.lang.t('$vuetify.TODOS'), value: null })
+
+      });
 
     this.$get('/nota/counts',
       { contractId: this.$props.contract.id }).then((response) => {
