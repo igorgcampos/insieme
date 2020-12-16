@@ -998,8 +998,8 @@ export default {
         searchText: this.searchText,
         onlineStatus: 0,
         installStatus: this.installStatus,
-        productType: '',
-        techType: '',
+        productType: null,
+        techType: null,
         page: 0
       }).then((response) => {
 
@@ -1017,35 +1017,12 @@ export default {
       return circuit.endereco + ' ' + circuit.bairro + ' ' + circuit.cidade + ', ' + circuit.uf
     },
     getOnline () {
-
-      if (this.isLoading) {
-        return
-      }
-
-      this.searchText = '';
-      this.page = 0;
-      this.isLoading = true;
-      this.status = this.statuses[1]
-      this.circuits = [];
-      this.product = this.products[0]
-      this.technology = this.technologies[0]
-
-      this.$get('/circuito/busca', {
-        contractNumber: this.$props.contract.numeroContratoTpz, searchText: this.searchText, onlineStatus: 1,
-        installStatus: 0, productType: '', techType: '', page: 0
-      }).then((response) => {
-
-        if (response && response.data.length == 0) {
-          this.noResult = true;
-        } else {
-          this.noResult = false;
-        }
-
-        this.circuits = response.data;
-        this.isLoading = false;
-      });
+      this.getFromStatus(1)
     },
     getOffline () {
+      this.getFromStatus(2)
+    },
+    getFromStatus (onlineStatus) {
 
       if (this.isLoading) {
         return
@@ -1054,17 +1031,18 @@ export default {
       this.searchText = '';
       this.page = 0;
       this.isLoading = true;
-      this.status = this.statuses[2]
+      this.status = this.statuses[onlineStatus]
       this.circuits = [];
       this.product = this.products[0]
       this.technology = this.technologies[0]
 
       this.$get('/circuito/busca', {
-        contractNumber: this.$props.contract.numeroContratoTpz, searchText: this.searchText,
-        onlineStatus: 2,
+        contractNumber: this.$props.contract.numeroContratoTpz,
+        searchText: this.searchText,
+        onlineStatus: onlineStatus,
         installStatus: 0,
-        productType: '',
-        techType: '',
+        productType: null,
+        techType: null,
         page: 0
       }).then((response) => {
 
@@ -1131,8 +1109,8 @@ export default {
         contractNumber: this.$props.contract.numeroContratoTpz,
         searchText: this.searchText, onlineStatus: selectedStatus,
         installStatus: this.installStatus,
-        productType: this.product == this.$vuetify.lang.t('$vuetify.TODOS') ? '' : this.product,
-        techType: this.technology == this.$vuetify.lang.t('$vuetify.TODOS') ? '' : this.technology,
+        productType: this.product == this.$vuetify.lang.t('$vuetify.TODOS') ? null : this.product,
+        techType: this.technology == this.$vuetify.lang.t('$vuetify.TODOS') ? null : this.technology,
         page: this.page
       }).then((response) => {
 
@@ -1246,8 +1224,8 @@ export default {
       searchText: '',
       onlineStatus: 0,
       installStatus: 0,
-      productType: '',
-      techType: '',
+      productType: null,
+      techType: null,
       page: 0
     })
       .then((response) => {
