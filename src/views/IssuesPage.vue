@@ -659,8 +659,8 @@ export default {
         searchText: text,
         onlineStatus: 0,
         installStatus: 0,
-        productType: '',
-        techType: '',
+        productType: null,
+        techType: null,
         page: page
       })
         .then((response) => {

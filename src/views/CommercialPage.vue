@@ -592,7 +592,7 @@ export default {
       this.$get('/circuito/busca', {
         contractNumber: this.$props.contract.numeroContratoTpz,
         searchText: this.searchText, onlineStatus: 0,
-        installStatus: 0, productType: '', techType: '', page: this.page
+        installStatus: 0, productType: null, techType: null, page: this.page
       }).then((response) => {
 
         if (response && response.data.length == 0) {
@@ -642,8 +642,8 @@ export default {
       searchText: '',
       onlineStatus: 0,
       installStatus: 0,
-      productType: '',
-      techType: '',
+      productType: null,
+      techType: null,
       page: 0
     })
       .then((response) => {
