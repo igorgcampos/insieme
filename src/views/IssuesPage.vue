@@ -632,7 +632,7 @@ export default {
       this.$get('/nota/busca', {
         contractId: this.$props.contract.id,
         searchText: text,
-        paymentStatus: 0,
+        paymentStatus: undefined,
         page: page
       })
         .then((response) => {
