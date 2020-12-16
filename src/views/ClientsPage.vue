@@ -62,6 +62,8 @@
                 :label="$vuetify.lang.t('$vuetify.TIPOS_CLIENTE')"
                 solo
                 dense
+                item-text="text"
+                item-value="value"
                 @change="search()"
               ></v-select>
             </v-row>
@@ -131,19 +133,10 @@ export default {
         this.cameFromCard = false;
       }
 
-      var selectedType = 0
-      if (this.type == this.types[0]) {
-        selectedType = 0;
-      } else if (this.type == this.types[1]) {
-        selectedType = 1;
-      } else if (this.type == this.types[2]) {
-        selectedType = 2;
-      } else if (this.type == this.types[3]) {
-        selectedType = 3;
-      }
-
       this.$get('/cliente/busca', {
-        searchText: this.searchText, clientType: selectedType, page: this.page
+        searchText: this.searchText,
+        clientType: this.type,
+        page: this.page
       }).then((response) => {
 
         if (response && response.data.length == 0) {
@@ -171,7 +164,7 @@ export default {
   },
   data: () => ({
     types: [],
-    type: 0,
+    type: null,
     page: 0,
     isLoading: true,
     noResult: false,
@@ -181,13 +174,20 @@ export default {
   }),
   created: function () {
 
-    this.types = [this.$vuetify.lang.t('$vuetify.TODOS'),
-    this.$vuetify.lang.t('$vuetify.PRINCIPAL'),
-    this.$vuetify.lang.t('$vuetify.ASSOCIADO'),
-    this.$vuetify.lang.t('$vuetify.FINAL')]
+    this.$get('/cliente/tipos')
+      .then((response) => {
+
+        this.types = response.data;
+
+        var vm = this;
+        this.types = this.types.map(function (t) {
+          return { text: vm.$vuetify.lang.t('$vuetify.' + t), value: t }
+        })
+
+      });
 
     this.$get('/cliente/busca',
-      { searchText: '', clientType: 0, page: 0 }).then((response) => {
+      { searchText: '', clientType: 'TODOS', page: 0 }).then((response) => {
         this.clients = response.data;
       });
 
