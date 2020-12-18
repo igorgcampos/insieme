@@ -101,6 +101,7 @@
           v-show="canShowShortcut()"
           class="mr-2"
           @click="goTo('issues')"
+          ref="issueChip"
         >
           {{$vuetify.lang.t('$vuetify.CHAMADOS')}}
         </v-chip>
@@ -321,6 +322,7 @@
         <v-list-item
           v-show="canShowShortcut()"
           @click="goTo('issues')"
+          ref="issueItem"
         >
           <v-list-item-title>{{$vuetify.lang.t('$vuetify.CHAMADOS')}}</v-list-item-title>
         </v-list-item>
@@ -435,8 +437,9 @@ export default {
 
           return -1
         })
-      })
+      });
 
+    this.$root.$on('remove-notification', (notification) => vm.removeNotification(notification))
   },
   data: () => ({
     user: {},
@@ -448,7 +451,8 @@ export default {
   methods: {
     removeNotification (notification, event) {
 
-      event.stopPropagation();
+      if (event)
+        event.stopPropagation();
 
       this.$delete('/notificacao/delete', { notificationId: notification.id }).
         then(response => {
@@ -476,7 +480,7 @@ export default {
 
           this.$root.$emit(notification.tipo == 'NOVA_NOTA_FISCAL' ? 'search-invoice' :
             'search-canceled-invoice', notification.mensagem)
-        } else {
+        } else if (notification.tipo == 'CIRCUITO_OFFLINE') {
 
           if (!this.$vuetify.breakpoint.xs)
             this.$refs.circuitChip.click();
@@ -484,6 +488,14 @@ export default {
             this.$refs.circuitItem.click();
 
           this.$root.$emit('search-circuit', notification.mensagem)
+
+        } else {
+
+          if (!this.$vuetify.breakpoint.xs)
+            this.$refs.issueChip.click();
+          if (this.$vuetify.breakpoint.xs)
+            this.$refs.issueItem.click();
+          this.$root.$emit('open-feedback', notification)
         }
       }, 400)
 

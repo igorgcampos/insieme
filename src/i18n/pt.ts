@@ -124,7 +124,8 @@ export default {
     DATA_ABERTURA: 'Data de abertura',
     DATA_ENCERRAMENTO: 'Data de encerramento',
     ORIGEM: 'Origem',
-    ENCERRAR_CHAMADO: 'Encerrar chamado',
+    ENCERRAR: 'Encerrar',
+    ENCERRAR_CHAMADO: 'Encerrar este chamado',
     NENHUM_CHAMADO: 'Nenhum chamado encontrado',
     MOTIVO_ABERTURA: 'Motivo da abertura',
     MOTIVO_ENCERRAMENTO: 'Motivo do encerramento',
@@ -404,4 +405,7 @@ export default {
     LINK_PRTG: 'Acesso PRTG',
     DATA: 'Data',
     DOWNLOAD_CONTRATO_MOBILE: 'Download contrato',
+    AVALIACAO_CHAMADO: 'Seu chamado foi encerrado!',
+    AVALIE_CHAMADO: 'Por favor, avalie nosso atendimento',
+    FEEDBACK_CHAMADO: 'Dê o seu feedback para o chamado ',
 }

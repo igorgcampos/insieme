@@ -77,6 +77,7 @@
       <FeedbackDialog
         :show="showFeedBack"
         :close="closeFeedback"
+        :entity="entity"
       >
       </FeedbackDialog>
     </v-container>
@@ -103,13 +104,20 @@ export default {
     showFeedBack: false,
     show: false,
     selectedContract: undefined,
+    entity: undefined,
   }),
   props: {
     contract: Object
   },
   methods: {
-    openFeedBack () {
+    openFeedBack (notification) {
       this.showFeedBack = true;
+
+      if (notification) {
+        this.entity = { issue: { id: notification.mensagem.split(':')[0] }, notification: notification }
+      }
+
+      this.$root.$emit('search-issue', notification.mensagem.split(':')[1])
     },
     closeFeedback () {
       this.showFeedBack = false;
@@ -130,6 +138,10 @@ export default {
       window.sessionStorage.setItem('selectedContractId', this.selectedContract.id);
       window.sessionStorage.setItem('selectedContractTpz', this.selectedContract.numeroContratoTpz);
     }
+
+    this.$root.$on('open-feedback', (notification) => {
+      this.openFeedBack(notification)
+    })
 
     this.$root.$on('go-to', (target) => {
 

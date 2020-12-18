@@ -163,7 +163,10 @@
             v-scroll:#issueId="searchMore"
             style="max-height:340px; width:100%;"
           >
-            <v-expansion-panels class="ma-1">
+            <v-expansion-panels
+              class="ma-1"
+              v-model="openedPanel"
+            >
               <v-expansion-panel
                 v-for="(issue, i) in issues"
                 :key="i"
@@ -375,7 +378,7 @@
                     v-show="issue.status=='ABERTO' && !issue.proatividade"
                   >
                     <TooltipButton
-                      :label="$vuetify.lang.t('$vuetify.ENCERRAR_CHAMADO')"
+                      :label="$vuetify.lang.t('$vuetify.ENCERRAR')"
                       :message="$vuetify.lang.t('$vuetify.ENCERRAR_CHAMADO')"
                       :event="encerrarChamado"
                       :object="issue"
@@ -791,7 +794,7 @@ export default {
         this.search(this.page);
       }
     },
-    search (page) {
+    search (page, selectInvoiceIndex) {
 
       this.isLoading = true;
 
@@ -821,6 +824,7 @@ export default {
         this.issues = this.issues.concat(response.data);
         this.filterIssues()
         this.isLoading = false;
+        this.openedPanel = selectInvoiceIndex
       });
 
     },
@@ -833,6 +837,7 @@ export default {
     proactivity: Boolean,
   },
   data: () => ({
+    openedPanel: undefined,
     showCommercialDialog: false,
     actionName: '',
     selectedCommercialList: undefined,
@@ -850,7 +855,7 @@ export default {
     counts: [0, 0],
     issues: [],
     statuses: [],
-    status: 0,
+    status: null,
     page: 0,
     isLoading: true,
     noResult: false,
@@ -899,7 +904,7 @@ export default {
     this.$get('/chamado/busca', {
       contractId: this.$props.contract ? this.$props.contract.id : undefined,
       searchText: '',
-      status: '',
+      status: null,
       proactivity: this.$props.proactivity,
       page: 0
     })
@@ -928,6 +933,12 @@ export default {
         }
       });
 
+    });
+
+    this.$root.$on('search-issue', (protocol) => {
+
+      this.searchText = protocol;
+      this.search(0, 0);
     })
   }
 };

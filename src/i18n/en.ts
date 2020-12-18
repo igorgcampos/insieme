@@ -126,7 +126,8 @@ export default {
     DATA_ABERTURA: 'Opening date',
     DATA_ENCERRAMENTO: 'Closing date',
     ORIGEM: 'Origin',
-    ENCERRAR_CHAMADO: 'Close issue',
+    ENCERRAR: 'Close',
+    ENCERRAR_CHAMADO: 'Close this issue',
     NENHUM_CHAMADO: 'No issue found',
     MOTIVO_ABERTURA: 'Opening reason',
     MOTIVO_ENCERRAMENTO: 'Closing reason',
@@ -408,4 +409,8 @@ export default {
     LINK_PRTG: 'PRTG access',
     DATA: 'Date',
     DOWNLOAD_CONTRATO_MOBILE: 'Contract download',
+    AVALIACAO_CHAMADO: 'Your issue was closed!',
+    AVALIE_CHAMADO: 'Please, give your feedback',
+    FEEDBACK_CHAMADO: 'Give your feedback for the issue ',
+
 }

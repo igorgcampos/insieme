@@ -25,7 +25,7 @@
             <span
               class="text-uppercase caption mt-n3"
               :class="{'font-weight-bold': !item.visualizado, 'font-weight-regular mb-5': item.visualizado,
-              'pt-2': item.tipo == 'CIRCUITO_OFFLINE'}"
+              'pt-2': item.tipo == 'CIRCUITO_OFFLINE' || item.tipo == 'AVALIAR_CHAMADO'}"
             >{{getTitle(item)}}
             </span>
 
@@ -34,6 +34,19 @@
               class="caption font-weight-bold grey--text text--lighten-1 mt-n8"
             >
               {{$vuetify.lang.t('$vuetify.NUMERO_NOTA') +': ' + item.mensagem}}</span>
+
+            <span
+              v-if="item.tipo=='AVALIAR_CHAMADO'"
+              class="caption font-weight-bold grey--text text--lighten-1 mt-n4"
+              :class="{'pt-4': !item.visualizado}"
+            >
+              {{$vuetify.lang.t('$vuetify.PROTOCOLO') +': ' + item.mensagem.split(':')[1]}}</span>
+
+            <span
+              v-if="item.tipo=='AVALIAR_CHAMADO'"
+              class="caption font-weight-bold grey--text text--lighten-1 mt-n0 mb-6"
+            >
+              {{$vuetify.lang.t('$vuetify.AVALIE_CHAMADO')}}</span>
 
             <span
               v-if="item.tipo=='CIRCUITO_OFFLINE'"
@@ -83,7 +96,8 @@ export default {
     getTitle (item) {
       return item.tipo == 'NOVA_NOTA_FISCAL' ? this.$vuetify.lang.t('$vuetify.NOTA_FISCAL_EMITIDA') :
         item.tipo == 'NOTA_FISCAL_CANCELADA' ? this.$vuetify.lang.t('$vuetify.NOTA_FISCAL_CANCELADA') :
-          this.$vuetify.lang.t('$vuetify.CHAMADO_ABERTO_CIRCUITO_OFLFINE')
+          item.tipo == 'AVALIAR_CHAMADO' ? this.$vuetify.lang.t('$vuetify.AVALIACAO_CHAMADO') :
+            this.$vuetify.lang.t('$vuetify.CHAMADO_ABERTO_CIRCUITO_OFLFINE')
     }
   }
 };

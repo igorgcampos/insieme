@@ -17,12 +17,13 @@
           style="word-break: normal; !important"
           :class="{'subtitle-2':$vuetify.breakpoint.xs}"
         >
-          {{$vuetify.lang.t('$vuetify.FEEDBACK')}}
+          {{!entity?$vuetify.lang.t('$vuetify.FEEDBACK'):
+          $vuetify.lang.t('$vuetify.FEEDBACK_CHAMADO')+entity.notification.mensagem.split(':')[1]}}
         </v-card-title>
         <v-card-text
           class="mt-n2 headline-6"
           :class="{'caption':$vuetify.breakpoint.xs}"
-        >{{$vuetify.lang.t('$vuetify.FEEDBACK_DESCRICAO')}}</v-card-text>
+        >{{!entity?$vuetify.lang.t('$vuetify.FEEDBACK_DESCRICAO'):''}}</v-card-text>
 
         <div class="text-center mt-2 mb-8">
           <v-rating
@@ -98,7 +99,8 @@ export default {
   },
   props: {
     close: Function,
-    show: Boolean
+    show: Boolean,
+    entity: Object,
   },
   methods: {
     closeDialog () {
@@ -112,7 +114,8 @@ export default {
       var evaluation = {
         comentario: this.comments,
         nota: this.rating,
-        usuario: this.$getUser()
+        usuario: this.$getUser(),
+        chamado: this.entity ? this.entity.issue : null
       }
 
       this.$post('/avaliacao', evaluation).then((response) => {
@@ -121,7 +124,11 @@ export default {
 
           this.showSuccess = true;
           this.showDialogLoading = false;
+        }
 
+        //Remove a notificação para evitar do usuário dar dois feedbacks na mesma entidade.
+        if (this.entity) {
+          this.$root.$emit('remove-notification', this.entity.notification)
         }
       });
     },
