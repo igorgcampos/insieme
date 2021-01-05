@@ -413,6 +413,6 @@ export default {
     AVALIACAO_CHAMADO: 'Your issue was closed!',
     AVALIE_CHAMADO: 'Please, give your feedback',
     FEEDBACK_CHAMADO: 'Give your feedback for the issue ',
-    AVALIACAO: 'Evaluation',
+    AVALIACAO: 'Rating',
 
 }
