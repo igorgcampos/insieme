@@ -124,7 +124,7 @@ export default {
     DATA_ABERTURA: 'Data de abertura',
     DATA_ENCERRAMENTO: 'Data de encerramento',
     ORIGEM: 'Origem',
-    ENCERRAR: 'Encerrar',
+    ENCERRAR: 'Encerrar chamado',
     ENCERRAR_CHAMADO: 'Encerrar este chamado',
     NENHUM_CHAMADO: 'Nenhum chamado encontrado',
     MOTIVO_ABERTURA: 'Motivo da abertura',
@@ -408,4 +408,6 @@ export default {
     AVALIACAO_CHAMADO: 'Seu chamado foi encerrado!',
     AVALIE_CHAMADO: 'Por favor, avalie nosso atendimento',
     FEEDBACK_CHAMADO: 'Dê o seu feedback para o chamado ',
+    AVALIACAO: 'Avaliação',
+
 }

@@ -168,8 +168,8 @@
               v-model="openedPanel"
             >
               <v-expansion-panel
-                v-for="(issue, i) in issues"
-                :key="i"
+                v-for="(issue) in issues"
+                :key="issue.key"
                 hide-actions
               >
                 <v-expansion-panel-header
@@ -179,6 +179,7 @@
                   <v-row
                     align="center"
                     no-gutters
+                    @click="getEvaluation(issue, open)"
                   >
                     <v-col
                       v-if="!open"
@@ -221,7 +222,7 @@
                     $vuetify.lang.t('$vuetify.DATA_ENCERRAMENTO')+':'}}</strong>
 
                       <strong>{{issue.status=='ABERTO'?formatDate(issue.dataAbertura):
-                  formatDate(issue.dataEncerramento)}}</strong>
+                                formatDate(issue.dataEncerramento)}}</strong>
                     </v-col>
 
                     <v-col
@@ -293,6 +294,23 @@
                         >
                           {{ $vuetify.lang.t('$vuetify.PROATIVO') }}
                         </v-chip>
+
+                        <span
+                          v-if="issue.evaluation"
+                          class="text-right caption font-weight-bold grey--text text--lighten-1 pl-1"
+                        >{{$vuetify.lang.t('$vuetify.AVALIACAO')+':'}}</span>
+
+                        <v-rating
+                          v-if="issue.evaluation"
+                          v-model="issue.evaluation.nota"
+                          color="orange"
+                          background-color="orange lighten-3"
+                          half-increments
+                          hover
+                          dense
+                          small
+                          readonly
+                        ></v-rating>
                       </v-col>
                     </v-col>
 
@@ -370,13 +388,11 @@
 
                   <v-divider
                     class="mt-n3"
-                    v-show="issue.status=='ABERTO' && !issue.proatividade"
+                    v-show="(issue.status=='ABERTO' || (issue.status!='ABERTO' && !issue.evaluation))
+                    && !issue.proatividade"
                   ></v-divider>
 
-                  <v-card-actions
-                    class="mb-n2 pb-0"
-                    v-show="issue.status=='ABERTO' && !issue.proatividade"
-                  >
+                  <v-card-actions class="mb-n2 pb-0">
                     <TooltipButton
                       :label="$vuetify.lang.t('$vuetify.ENCERRAR')"
                       :message="$vuetify.lang.t('$vuetify.ENCERRAR_CHAMADO')"
@@ -384,6 +400,17 @@
                       :object="issue"
                       :mobile="$vuetify.breakpoint.xs"
                       :isText=true
+                      v-if="issue.status=='ABERTO' && !issue.proatividade"
+                    ></TooltipButton>
+
+                    <TooltipButton
+                      :label="$vuetify.lang.t('$vuetify.FEEDBACK')"
+                      :message="$vuetify.lang.t('$vuetify.AVALIE_CHAMADO')"
+                      :event="openFeedBack"
+                      :object="issue"
+                      :mobile="$vuetify.breakpoint.xs"
+                      :isText=true
+                      v-if="issue.status!='ABERTO' && !issue.evaluation"
                     ></TooltipButton>
 
                     <TooltipButton
@@ -441,6 +468,14 @@
           :editable="false"
         >
         </CommercialDialog>
+
+        <FeedbackDialog
+          :show="showFeedBack"
+          :close="closeFeedback"
+          :entity="selectedIssue"
+          :function="feedBackFunction"
+        >
+        </FeedbackDialog>
       </div>
     </v-lazy>
   </div>
@@ -455,6 +490,7 @@ import LabelValue from '../components/LabelValue';
 import IssueDialog from '../components/dialogs/IssueDialog';
 import BatchIssueDialog from '../components/dialogs/BatchIssueDialog';
 import CommercialDialog from '../components/dialogs/CommercialDialog';
+import FeedbackDialog from '../components/dialogs/FeedbackDialog';
 
 export default {
   components: {
@@ -464,7 +500,8 @@ export default {
     LabelValue,
     IssueDialog,
     BatchIssueDialog,
-    CommercialDialog
+    CommercialDialog,
+    FeedbackDialog,
   },
   methods: {
     filterIssues () {
@@ -830,6 +867,28 @@ export default {
     },
     expandPanel () {
       this.showPanel = !this.showPanel;
+    },
+    getEvaluation (issue, open) {
+
+      if (open || issue.evaluation || issue.status == 'ABERTO') {
+        return
+      }
+
+      this.$get('/avaliacao', { issueId: issue.id }).then((response) => {
+
+        issue.evaluation = response.data;
+        this.$forceUpdate()
+      })
+    },
+    openFeedBack (issue) {
+      this.showFeedBack = true;
+      this.selectedIssue = { issue: issue };
+    },
+    closeFeedback () {
+      this.showFeedBack = false;
+    },
+    feedBackFunction () {
+      this.$forceUpdate()
     }
   },
   props: {
@@ -837,6 +896,7 @@ export default {
     proactivity: Boolean,
   },
   data: () => ({
+    showFeedBack: false,
     openedPanel: undefined,
     showCommercialDialog: false,
     actionName: '',
@@ -909,6 +969,7 @@ export default {
       page: 0
     })
       .then((response) => {
+
         this.issues = response.data;
         this.filterIssues()
         this.isLoading = false;

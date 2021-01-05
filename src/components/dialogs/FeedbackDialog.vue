@@ -18,7 +18,8 @@
           :class="{'subtitle-2':$vuetify.breakpoint.xs}"
         >
           {{!entity?$vuetify.lang.t('$vuetify.FEEDBACK'):
-          $vuetify.lang.t('$vuetify.FEEDBACK_CHAMADO')+entity.notification.mensagem.split(':')[1]}}
+          $vuetify.lang.t('$vuetify.FEEDBACK_CHAMADO') +
+          (entity.notification?entity.notification.mensagem.split(':')[1]:entity.issue.protocolo)}}
         </v-card-title>
         <v-card-text
           class="mt-n2 headline-6"
@@ -101,6 +102,7 @@ export default {
     close: Function,
     show: Boolean,
     entity: Object,
+    feedBackFunction: Function,
   },
   methods: {
     closeDialog () {
@@ -124,10 +126,15 @@ export default {
 
           this.showSuccess = true;
           this.showDialogLoading = false;
+          this.entity.issue.evaluation = response.data;
+
+          if (this.feedBackFunction) {
+            this.feedBackFunction()
+          }
         }
 
         //Remove a notificação para evitar do usuário dar dois feedbacks na mesma entidade.
-        if (this.entity) {
+        if (this.entity && this.entity.notification) {
           this.$root.$emit('remove-notification', this.entity.notification)
         }
       });

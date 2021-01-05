@@ -126,7 +126,7 @@ export default {
     DATA_ABERTURA: 'Opening date',
     DATA_ENCERRAMENTO: 'Closing date',
     ORIGEM: 'Origin',
-    ENCERRAR: 'Close',
+    ENCERRAR: 'Close issue',
     ENCERRAR_CHAMADO: 'Close this issue',
     NENHUM_CHAMADO: 'No issue found',
     MOTIVO_ABERTURA: 'Opening reason',
@@ -412,5 +412,6 @@ export default {
     AVALIACAO_CHAMADO: 'Your issue was closed!',
     AVALIE_CHAMADO: 'Please, give your feedback',
     FEEDBACK_CHAMADO: 'Give your feedback for the issue ',
+    AVALIACAO: 'Evaluation',
 
 }
