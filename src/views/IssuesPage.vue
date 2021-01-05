@@ -388,7 +388,8 @@
 
                   <v-divider
                     class="mt-n3"
-                    v-show="(issue.status=='ABERTO' || (issue.status!='ABERTO' && !issue.evaluation))
+                    v-show="(issue.status == 'ABERTO' || (issue.status != 'ABERTO' && !issue.evaluation)
+                    || (issue.origem == 'CIRCUITO_LOTE_COMERCIAL' && issue.planilha.length > 0) )
                     && !issue.proatividade"
                   ></v-divider>
 

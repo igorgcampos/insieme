@@ -353,6 +353,7 @@ export default {
     V_2_1_0: 'New commercial module that allows several opening operations to circuits as: activate, deactivate, suspend and request new circuits. Information can be filled out either manually or by importing an excel spreadsheet.',
     V_2_2_0: '- New notification system that notifies the user of creating/canceling invoices in addition to sending an automatic email to each user. <br> - Filtering circuits by technology (BGAN, Iridium, VOIP, etc.) <br> - The type of band (KA / KU / L) is now displayed in the details of each circuit. <br>- The proactive character is already being exhibited in the proactive contracts and the circuits that belong to them. <br> - The user can send his feedback through a button located in the upper right part of the dashboard screen.',
     V_2_3_0: 'New administration screen with features for auditing Insieme.',
+    V_2_4_0: 'New functionality to provide feedback for answering a call.',
     NOVA_LINHA: 'New line',
     BAIXAR_EXCEL: 'Download spreadsheet template',
     IMPORTAR_EXCEL: 'Import filled excel',
