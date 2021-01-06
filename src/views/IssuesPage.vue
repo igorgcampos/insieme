@@ -864,6 +864,7 @@ export default {
         this.isLoading = false;
         this.openedPanel = selectInvoiceIndex
 
+        //Se a busca foi feita pelo evento de clique da notificação, busca a avaliação do chamado.
         if (selectInvoiceIndex == 0) {
           this.getEvaluation(this.issues[0], false, true)
         }
