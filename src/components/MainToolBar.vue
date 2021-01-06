@@ -463,6 +463,8 @@ export default {
             });
             this.newNotificationsCount = this.notifications.filter(note => note.visualizado == false).length
           }
+
+          this.$forceUpdate()
         })
 
     },

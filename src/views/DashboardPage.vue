@@ -111,13 +111,14 @@ export default {
   },
   methods: {
     openFeedBack (notification) {
-      this.showFeedBack = true;
 
       if (notification) {
         this.entity = { issue: { id: notification.mensagem.split(':')[0] }, notification: notification }
+        this.$root.$emit('search-issue', notification.mensagem.split(':')[1])
+        return
       }
 
-      this.$root.$emit('search-issue', notification.mensagem.split(':')[1])
+      this.showFeedBack = true;
     },
     closeFeedback () {
       this.showFeedBack = false;

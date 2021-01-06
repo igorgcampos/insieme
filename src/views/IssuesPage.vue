@@ -168,8 +168,8 @@
               v-model="openedPanel"
             >
               <v-expansion-panel
-                v-for="(issue) in issues"
-                :key="issue.key"
+                v-for="(issue, i) in issues"
+                :key="i"
                 hide-actions
               >
                 <v-expansion-panel-header
@@ -863,13 +863,17 @@ export default {
         this.filterIssues()
         this.isLoading = false;
         this.openedPanel = selectInvoiceIndex
+
+        if (selectInvoiceIndex == 0) {
+          this.getEvaluation(this.issues[0], false, true)
+        }
       });
 
     },
     expandPanel () {
       this.showPanel = !this.showPanel;
     },
-    getEvaluation (issue, open) {
+    getEvaluation (issue, open, showFeedBack) {
 
       if (open || issue.evaluation || issue.status == 'ABERTO') {
         return
@@ -879,6 +883,10 @@ export default {
 
         issue.evaluation = response.data;
         this.$forceUpdate()
+
+        if (!issue.evaluation && showFeedBack) {
+          this.openFeedBack(issue)
+        }
       })
     },
     openFeedBack (issue) {
