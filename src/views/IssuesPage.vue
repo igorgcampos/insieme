@@ -779,6 +779,7 @@ export default {
           this.selectedIssue.dataEncerramento = response.data.dataEncerramento;
           this.counts[0] -= 1;
           this.counts[1] += 1;
+          this.canShowButton = true
         }
       });
     },
