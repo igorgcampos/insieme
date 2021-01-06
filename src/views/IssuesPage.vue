@@ -389,8 +389,9 @@
                   <v-divider
                     class="mt-n3"
                     v-show="(issue.status == 'ABERTO' || (issue.status != 'ABERTO' && !issue.evaluation)
-                    || (issue.origem == 'CIRCUITO_LOTE_COMERCIAL' && issue.planilha.length > 0) )
-                    && !issue.proatividade || (canShowButton && issue.origem != 'CIRCUITO_LOTE_COMERCIAL')"
+                    || (issue.origem == 'CIRCUITO_LOTE_COMERCIAL' && issue.planilha.length > 0)
+                    || (canShowButton && issue.origem != 'CIRCUITO_LOTE_COMERCIAL'))
+                    && !issue.proatividade"
                   ></v-divider>
 
                   <v-card-actions class="mb-n2 pb-0">
