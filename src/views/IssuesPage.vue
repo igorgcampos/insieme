@@ -175,11 +175,11 @@
                 <v-expansion-panel-header
                   v-slot="{ open }"
                   class="pt-0 pb-0"
+                  @click="getEvaluation(issue, open)"
                 >
                   <v-row
                     align="center"
                     no-gutters
-                    @click="getEvaluation(issue, open)"
                   >
                     <v-col
                       v-if="!open"
@@ -390,7 +390,7 @@
                     class="mt-n3"
                     v-show="(issue.status == 'ABERTO' || (issue.status != 'ABERTO' && !issue.evaluation)
                     || (issue.origem == 'CIRCUITO_LOTE_COMERCIAL' && issue.planilha.length > 0)
-                    || (canShowButton && issue.origem != 'CIRCUITO_LOTE_COMERCIAL'))
+                    || (!canShowButton && issue.origem != 'CIRCUITO_LOTE_COMERCIAL'))
                     && !issue.proatividade"
                   ></v-divider>
 
