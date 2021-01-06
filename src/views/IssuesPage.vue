@@ -878,12 +878,14 @@ export default {
     },
     getEvaluation (issue, open, showFeedBack) {
 
-      this.canShowButton = false
       if (open || issue.evaluation || issue.status == 'ABERTO') {
-        this.canShowButton = true
+        if (issue.evaluation) {
+          this.canShowButton = false
+        }
         return
       }
 
+      this.canShowButton = false
       this.$get('/avaliacao', { issueId: issue.id }).then((response) => {
 
         issue.evaluation = response.data;
