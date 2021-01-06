@@ -390,7 +390,7 @@
                     class="mt-n3"
                     v-show="(issue.status == 'ABERTO' || (issue.status != 'ABERTO' && !issue.evaluation)
                     || (issue.origem == 'CIRCUITO_LOTE_COMERCIAL' && issue.planilha.length > 0) )
-                    && !issue.proatividade"
+                    && !issue.proatividade || (canShowButton && issue.origem != 'CIRCUITO_LOTE_COMERCIAL')"
                   ></v-divider>
 
                   <v-card-actions class="mb-n2 pb-0">
@@ -411,7 +411,7 @@
                       :object="issue"
                       :mobile="$vuetify.breakpoint.xs"
                       :isText=true
-                      v-if="issue.status!='ABERTO' && !issue.evaluation"
+                      v-if="issue.status!='ABERTO' && !issue.evaluation && canShowButton"
                     ></TooltipButton>
 
                     <TooltipButton
@@ -835,6 +835,7 @@ export default {
     search (page, selectInvoiceIndex) {
 
       this.isLoading = true;
+      this.canShowButton = false
 
       if (!page) {
         this.page = 0;
@@ -876,7 +877,9 @@ export default {
     },
     getEvaluation (issue, open, showFeedBack) {
 
+      this.canShowButton = false
       if (open || issue.evaluation || issue.status == 'ABERTO') {
+        this.canShowButton = true
         return
       }
 
@@ -884,6 +887,9 @@ export default {
 
         issue.evaluation = response.data;
         this.$forceUpdate()
+
+        if (!response.data)
+          this.canShowButton = true
 
         if (!issue.evaluation && showFeedBack) {
           this.openFeedBack(issue)
@@ -906,6 +912,7 @@ export default {
     proactivity: Boolean,
   },
   data: () => ({
+    canShowButton: false,
     showFeedBack: false,
     openedPanel: undefined,
     showCommercialDialog: false,
