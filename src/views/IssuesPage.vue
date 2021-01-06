@@ -390,7 +390,7 @@
                     class="mt-n3"
                     v-show="(issue.status == 'ABERTO' || (issue.status != 'ABERTO' && !issue.evaluation)
                     || (issue.origem == 'CIRCUITO_LOTE_COMERCIAL' && issue.planilha.length > 0)
-                    || (!canShowButton && issue.origem != 'CIRCUITO_LOTE_COMERCIAL'))
+                    || (canShowButton && issue.origem != 'CIRCUITO_LOTE_COMERCIAL'))
                     && !issue.proatividade"
                   ></v-divider>
 
