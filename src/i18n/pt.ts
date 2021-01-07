@@ -382,7 +382,7 @@ export default {
     NENHUM_RESTART: 'Nenhuma operação de restart encontrada',
     COM_SUCESSO: 'Sucesso',
     SEM_SUCESSO: 'Insucesso',
-    DATA_OPERACAO: 'Data da operacao',
+    DATA_OPERACAO: 'Data da operação',
     CONCLUIDO: 'Concluído',
     HORA_INICIO: 'Hora de início',
     HORA_FIM: 'Hora do término',
