@@ -442,7 +442,7 @@
           :showSuccess="showSuccess"
           :showDialogLoading="showDialogLoading"
           :close="closeDialog"
-          :send="sendIssue"
+          :send="closeIssue"
           :getObject="getObject"
           :itemList="reasonList"
         ></IssueDialog>
@@ -742,9 +742,10 @@ export default {
 
       this.showBatchDialog = true;
     },
-    closeDialog () {
+    closeDialog (issue) {
       this.showDialog = false;
       this.showDialogLoading = false;
+      this.openFeedBack(issue);
 
       setTimeout(() => {
         this.showSuccess = false;
@@ -759,7 +760,7 @@ export default {
         this.showSuccess = false;
       }, 1000);
     },
-    sendIssue (issue) {
+    closeIssue (issue) {
 
       if (!issue.reason) {
         return;

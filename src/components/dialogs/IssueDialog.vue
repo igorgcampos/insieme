@@ -96,7 +96,7 @@
         <v-btn
           color="primary"
           text
-          @click="close(); cleanFields()"
+          @click="close(getObject()); cleanFields()"
           :x-small="$vuetify.breakpoint.xs"
         >{{$vuetify.lang.t('$vuetify.FECHAR')}}</v-btn>
       </v-card-actions>
