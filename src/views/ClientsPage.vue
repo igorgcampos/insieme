@@ -164,7 +164,7 @@ export default {
   },
   data: () => ({
     types: [],
-    type: null,
+    type: 'TODOS',
     page: 0,
     isLoading: true,
     noResult: false,
