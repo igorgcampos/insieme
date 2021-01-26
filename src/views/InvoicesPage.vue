@@ -675,7 +675,7 @@ export default {
     counts: [0, 0, 0],
     invoices: [],
     statuses: [],
-    status: 0,
+    status: undefined,
     page: 0,
     isLoading: true,
     noResult: false,

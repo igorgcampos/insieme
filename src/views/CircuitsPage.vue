@@ -1161,7 +1161,7 @@ export default {
     products: [],
     technologies: [],
     product: undefined,
-    status: 0,
+    status: undefined,
     installStatus: 0,
     technology: '',
     page: 0,
