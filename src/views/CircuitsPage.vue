@@ -1107,7 +1107,8 @@ export default {
 
       this.$get('/circuito/busca', {
         contractNumber: this.$props.contract.numeroContratoTpz,
-        searchText: this.searchText, onlineStatus: selectedStatus,
+        searchText: this.searchText,
+        onlineStatus: selectedStatus,
         installStatus: this.installStatus,
         productType: this.product == this.$vuetify.lang.t('$vuetify.TODOS') ? null : this.product,
         techType: this.technology == this.$vuetify.lang.t('$vuetify.TODOS') ? null : this.technology,
@@ -1163,7 +1164,7 @@ export default {
     product: undefined,
     status: undefined,
     installStatus: 0,
-    technology: '',
+    technology: undefined,
     page: 0,
     isLoading: true,
     noResult: false,
