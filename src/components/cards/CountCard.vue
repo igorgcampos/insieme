@@ -14,9 +14,20 @@
             class="mb-1 mt-n1"
           >
             <span
+              v-if="!isLoading"
               :class="[color]"
               style="font-size:x-large;"
             >{{count}}</span>
+
+            <v-progress-circular
+              v-if="isLoading"
+              :size="30"
+              :width="3"
+              color="red"
+              indeterminate
+              class="mt-3 mb-n1"
+            ></v-progress-circular>
+
           </v-row>
           <v-row justify="center">
             <span
@@ -53,7 +64,8 @@ export default {
     count: Number,
     color: String,
     func: Function,
-    smallText: Boolean
+    smallText: Boolean,
+    isLoading: Boolean,
   },
   watch: {
     buttonHovering (newVal) {

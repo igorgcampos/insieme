@@ -57,6 +57,7 @@
                       color="success--text"
                       :func="getOnline"
                       :toolTipMessage="$vuetify.lang.t('$vuetify.ONLINE_DESCRICAO')"
+                      :isLoading="isLoadingOnline"
                     ></CountCard>
                   </v-col>
 
@@ -67,6 +68,7 @@
                       color="error--text"
                       :func="getOffline"
                       :toolTipMessage="$vuetify.lang.t('$vuetify.OFFLINE_DESCRICAO')"
+                      :isLoading="isLoadingOffline"
                     ></CountCard>
                   </v-col>
                 </v-row>
@@ -254,6 +256,7 @@
                     color="success--text"
                     :func="getOnline"
                     :toolTipMessage="$vuetify.lang.t('$vuetify.ONLINE_DESCRICAO')"
+                    :isLoading="isLoadingOnline"
                   ></CountCard>
                 </v-col>
 
@@ -267,6 +270,7 @@
                     color="error--text"
                     :func="getOffline"
                     :toolTipMessage="$vuetify.lang.t('$vuetify.OFFLINE_DESCRICAO')"
+                    :isLoading="isLoadingOffline"
                   ></CountCard>
                 </v-col>
               </v-row>
@@ -1054,6 +1058,7 @@ export default {
 
         this.circuits = response.data;
         this.isLoading = false;
+
       });
     },
     openIssue (circuit) {
@@ -1143,6 +1148,8 @@ export default {
     this.contractDecoration = this.button == 'contract' ? 'underline' : 'none'
   },
   data: () => ({
+    isLoadingOffline: false,
+    isLoadingOnline: false,
     openedPanel: undefined,
     logDecoration: 'none',
     contractDecoration: 'none',
@@ -1199,11 +1206,17 @@ export default {
         this.technologies = this.technologies.concat(response.data)
       });
 
+    this.isLoadingOnline = true;
+    this.isLoadingOffline = true;
+
     this.$get('/circuito/status/counts',
       { contractNumber: this.$props.contract.numeroContratoTpz }).then((response) => {
         if (response) {
           this.counts = response.data;
         }
+
+        this.isLoadingOnline = false;
+        this.isLoadingOffline = false;
 
         this.$get('/circuito/install/counts',
           { contractNumber: this.$props.contract.numeroContratoTpz }).then((response2) => {

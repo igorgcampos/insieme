@@ -210,13 +210,6 @@ export default {
 
     this.verifyingSignalMessage = this.$vuetify.lang.t('$vuetify.VERIFICANDO_SINAL')
     this.restartingCircuitMessage = this.$vuetify.lang.t('$vuetify.COLETANDO_INFORMACOES');
-
-    /*this.questions.push(this.$vuetify.lang.t('$vuetify.PERGUNTA_1'))
-    this.questions.push(this.$vuetify.lang.t('$vuetify.PERGUNTA_2'))
-    this.questions.push(this.$vuetify.lang.t('$vuetify.PERGUNTA_3'))
-    this.questions.push(this.$vuetify.lang.t('$vuetify.PERGUNTA_4'))
-    this.questions.push(this.$vuetify.lang.t('$vuetify.PERGUNTA_5'))
-    this.questions.push(this.$vuetify.lang.t('$vuetify.PERGUNTA_6'));*/
   },
   methods: {
     showOptionsPanel () {
