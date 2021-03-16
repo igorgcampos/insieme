@@ -574,7 +574,6 @@ export default {
       this.status = status
 
       this.search()
-      this.status = null
     },
     getPaid () {
       this.getByStatus('PAGO');
@@ -637,6 +636,7 @@ export default {
         this.invoices = this.invoices.concat(response.data);
         this.isLoading = false;
         this.openedPanel = selectInvoiceIndex
+        this.status = null
       });
 
     },
