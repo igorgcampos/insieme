@@ -333,6 +333,7 @@
                           color="primary--text"
                           :func="getActive"
                           :toolTipMessage="$vuetify.lang.t('$vuetify.ATIVADO_DESCRICAO')"
+                          :isLoading="isLoadingStatus"
                         ></CountCard>
                       </v-col>
                     </v-slide-item>
@@ -344,6 +345,7 @@
                           color="primary--text"
                           :func="getDeactive"
                           :toolTipMessage="$vuetify.lang.t('$vuetify.DESATIVADO_DESCRICAO')"
+                          :isLoading="isLoadingStatus"
                         >
                         </CountCard>
                       </v-col>
@@ -356,6 +358,7 @@
                           color="primary--text"
                           :func="getUninstall"
                           :toolTipMessage="$vuetify.lang.t('$vuetify.DESINSTALADO_DESCRICAO')"
+                          :isLoading="isLoadingStatus"
                         ></CountCard>
                       </v-col>
                     </v-slide-item>
@@ -367,6 +370,7 @@
                           color="primary--text"
                           :func="getCanceled"
                           :toolTipMessage="$vuetify.lang.t('$vuetify.CANCELADO_DESCRICAO')"
+                          :isLoading="isLoadingStatus"
                         ></CountCard>
                       </v-col>
                     </v-slide-item>
@@ -378,6 +382,7 @@
                           color="primary--text"
                           :func="getSuspended"
                           :toolTipMessage="$vuetify.lang.t('$vuetify.SUSPENSO_DESCRICAO')"
+                          :isLoading="isLoadingStatus"
                         ></CountCard>
                       </v-col>
                     </v-slide-item>
@@ -396,6 +401,7 @@
                       color="primary--text"
                       :func="getLogistic"
                       :toolTipMessage="$vuetify.lang.t('$vuetify.PROC_LOGISTICO_DESCRICAO')"
+                      :isLoading="isLoadingStatus"
                     ></CountCard>
                   </v-col>
 
@@ -407,6 +413,7 @@
                       :func="getInTransport"
                       :toolTipMessage="$vuetify.lang.t('$vuetify.EM_TRANSPORTE_DESCRICAO')"
                       :class="{'ml-n4':$vuetify.breakpoint.sm}"
+                      :isLoading="isLoadingStatus"
                     ></CountCard>
                   </v-col>
 
@@ -418,6 +425,7 @@
                       :func="getDeploying"
                       :toolTipMessage="$vuetify.lang.t('$vuetify.INSTALANDO_DESCRICAO')"
                       :class="{'ml-n4':$vuetify.breakpoint.sm}"
+                      :isLoading="isLoadingStatus"
                     ></CountCard>
                   </v-col>
 
@@ -430,6 +438,7 @@
                       :smallText="true"
                       :toolTipMessage="$vuetify.lang.t('$vuetify.AGUARDANDO_DESCRICAO')"
                       :class="{'ml-n4':$vuetify.breakpoint.sm}"
+                      :isLoading="isLoadingStatus"
                     ></CountCard>
                   </v-col>
                 </v-row>
@@ -1150,6 +1159,7 @@ export default {
   data: () => ({
     isLoadingOffline: false,
     isLoadingOnline: false,
+    isLoadingStatus: false,
     openedPanel: undefined,
     logDecoration: 'none',
     contractDecoration: 'none',
@@ -1208,6 +1218,7 @@ export default {
 
     this.isLoadingOnline = true;
     this.isLoadingOffline = true;
+    this.isLoadingStatus = true;
 
     this.$get('/circuito/status/counts',
       { contractNumber: this.$props.contract.numeroContratoTpz }).then((response) => {
@@ -1230,6 +1241,8 @@ export default {
             countsArray.unshift(this.counts[1])
             countsArray.unshift(this.counts[0])
             this.$root.$emit('circuit-data', countsArray)
+
+            this.isLoadingStatus = false;
           });
       });
 
