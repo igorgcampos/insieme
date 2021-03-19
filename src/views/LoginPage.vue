@@ -14,7 +14,7 @@
           <v-layout column>
             <v-img
               src="../assets/satelites.jpg"
-              gradient="324deg, rgba(2,0,36,1) 0%, rgba(245,3,3,1) 0%, rgba(233,13,16,0.8547794117647058) 100%"
+              gradient="324deg, rgba(2,0,36,1) 0%, rgba(245,3,3,1) 0%, rgba(233,13,16,0.8547794117647058) 85%"
             >
               <div class="horizontal-center">
                 <div class="text-center vertical-center ml-3 mr-3 mt-8">
