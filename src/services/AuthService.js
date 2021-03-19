@@ -50,6 +50,7 @@ authService.install = function (Vue) {
     }
 
     Vue.prototype.$getUser = () => {
+
         return JSON.parse(window.sessionStorage.getItem('user'));
     }
 
@@ -65,6 +66,14 @@ authService.install = function (Vue) {
         }
 
         return false;
+    }
+
+    Vue.prototype.$setKeycloakToken = async (token) => {
+        window.sessionStorage.setItem('keyCloakToken', token);
+
+        if (!window.sessionStorage.getItem('user')) {
+            await getUser()
+        }
     }
 }
 
