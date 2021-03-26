@@ -108,7 +108,12 @@
             </v-lazy>
           </v-col>
           <v-col v-if="contracts.length == 0 && !isLoading">
-            <WarningPanel :message="$vuetify.lang.t('$vuetify.NENHUM_CONTRATO')"> </WarningPanel>
+            <v-lazy
+              :options="{threshold: .6}"
+              transition="slide-x-transition"
+            >
+              <WarningPanel :message="$vuetify.lang.t('$vuetify.NENHUM_CONTRATO')"> </WarningPanel>
+            </v-lazy>
           </v-col>
 
         </v-row>

@@ -404,7 +404,12 @@
             </v-expansion-panels>
           </div>
           <v-col v-if="invoices.length == 0 && !isLoading">
-            <WarningPanel :message="$vuetify.lang.t('$vuetify.NENHUMA_NOTA')"> </WarningPanel>
+            <v-lazy
+              :options="{threshold: .6}"
+              transition="slide-x-transition"
+            >
+              <WarningPanel :message="$vuetify.lang.t('$vuetify.NENHUMA_NOTA')"> </WarningPanel>
+            </v-lazy>
           </v-col>
         </v-row>
 

@@ -807,7 +807,12 @@
             </v-expansion-panels>
           </div>
           <v-col v-if="circuits.length == 0 && !isLoading">
-            <WarningPanel :message="$vuetify.lang.t('$vuetify.NENHUM_CIRCUITO')"> </WarningPanel>
+            <v-lazy
+              :options="{threshold: .6}"
+              transition="slide-x-transition"
+            >
+              <WarningPanel :message="$vuetify.lang.t('$vuetify.NENHUM_CIRCUITO')"> </WarningPanel>
+            </v-lazy>
           </v-col>
         </v-row>
 

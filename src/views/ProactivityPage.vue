@@ -271,7 +271,12 @@
             v-if="operations.length == 0 && !isLoading"
             class="mt-n2"
           >
-            <WarningPanel :message="$vuetify.lang.t('$vuetify.NENHUM_RESTART')"> </WarningPanel>
+            <v-lazy
+              :options="{threshold: .6}"
+              transition="slide-x-transition"
+            >
+              <WarningPanel :message="$vuetify.lang.t('$vuetify.NENHUM_RESTART')"> </WarningPanel>
+            </v-lazy>
           </v-col>
         </v-row>
 
