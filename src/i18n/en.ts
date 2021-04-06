@@ -414,5 +414,7 @@ export default {
     AVALIE_CHAMADO: 'Please, give your feedback',
     FEEDBACK_CHAMADO: 'Give your feedback for the issue ',
     AVALIACAO: 'Rating',
+    LISTA_CIRCUITOS: 'Circuit list',
+    LISTA_CIRCUITOS_ASSOCIADOS: 'Circuits linked to this issue',
 
 }

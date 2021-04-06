@@ -410,5 +410,7 @@ export default {
     AVALIE_CHAMADO: 'Por favor, avalie nosso atendimento',
     FEEDBACK_CHAMADO: 'Dê o seu feedback para o chamado ',
     AVALIACAO: 'Avaliação',
+    LISTA_CIRCUITOS: 'Lista dos circuitos',
+    LISTA_CIRCUITOS_ASSOCIADOS: 'Circuitos associados ao chamado'
 
 }

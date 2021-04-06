@@ -140,11 +140,17 @@
               </template>
 
               <v-list>
-                <v-list-item @click="showBatchIssueDialog('circuit')">
+                <v-list-item
+                  @click="showBatchIssueDialog('circuit')"
+                  v-if="$hasProfile('Operacional') || $hasProfile('Cliente') || $hasProfile('Administrador')"
+                >
                   <v-list-item-title>{{$vuetify.lang.t('$vuetify.CIRCUITOS')}}</v-list-item-title>
                 </v-list-item>
 
-                <v-list-item @click="showBatchIssueDialog('invoice')">
+                <v-list-item
+                  @click="showBatchIssueDialog('invoice')"
+                  v-if="$hasProfile('Financeiro') || $hasProfile('Cliente') || $hasProfile('Administrador')"
+                >
                   <v-list-item-title>{{$vuetify.lang.t('$vuetify.FATURAMENTO')}}</v-list-item-title>
                 </v-list-item>
               </v-list>
@@ -424,6 +430,16 @@
                       :object="issue"
                       :isText=true
                     ></TooltipButton>
+
+                    <TooltipButton
+                      :label="$vuetify.lang.t('$vuetify.LISTAR_LOTE')"
+                      :message="$vuetify.lang.t('$vuetify.LISTAR_LOTE_CIRCUITO', '')"
+                      :mobile="$vuetify.breakpoint.xs"
+                      v-if="issue.lote && issue.lote.length > 0 && !(issue.origem == 'CIRCUITO_LOTE_COMERCIAL' && issue.planilha.length > 0)"
+                      :event="showListCircuits"
+                      :object="issue"
+                      :isText=true
+                    ></TooltipButton>
                   </v-card-actions>
                 </v-expansion-panel-content>
               </v-expansion-panel>
@@ -483,6 +499,14 @@
           :function="feedBackFunction"
         >
         </FeedbackDialog>
+
+        <ListDialog
+          :close="hideListCircuits"
+          :show="showCircuitListDialog"
+          :title="$vuetify.lang.t('$vuetify.LISTA_CIRCUITOS')"
+          :info="$vuetify.lang.t('$vuetify.LISTA_CIRCUITOS_ASSOCIADOS')"
+          :objects="selectedList"
+        ></ListDialog>
       </div>
     </v-lazy>
   </div>
@@ -498,6 +522,7 @@ import IssueDialog from '../components/dialogs/IssueDialog';
 import BatchIssueDialog from '../components/dialogs/BatchIssueDialog';
 import CommercialDialog from '../components/dialogs/CommercialDialog';
 import FeedbackDialog from '../components/dialogs/FeedbackDialog';
+import ListDialog from '../components/dialogs/ListDialog';
 
 export default {
   components: {
@@ -509,6 +534,7 @@ export default {
     BatchIssueDialog,
     CommercialDialog,
     FeedbackDialog,
+    ListDialog,
   },
   methods: {
     filterIssues () {
@@ -625,6 +651,13 @@ export default {
       this.showCommercialDialog = true;
       this.entity = issue
     },
+    showListCircuits (issue) {
+      this.selectedList = issue.lote;
+      this.showCircuitListDialog = true;
+    },
+    hideListCircuits () {
+      this.showCircuitListDialog = false;
+    },
     searchEntities (text, page) {
 
       if (!this.$props.contract) {
@@ -642,7 +675,7 @@ export default {
     },
     sendBatchIssue (issue, entity) {
 
-      if (!issue.reason) {
+      if (!issue.reason || !issue.items) {
         return;
       }
 
@@ -662,10 +695,11 @@ export default {
 
         if (response.data) {
 
+          this.entity.protocolo = response.data.protocolo
           this.showSuccess = true;
           this.showDialogLoading = false;
           this.$root.$emit('new-issue', response.data)
-          entity.protocolo = response.data.protocolo
+
         }
       });
     },
@@ -922,6 +956,8 @@ export default {
     proactivity: Boolean,
   },
   data: () => ({
+    selectedList: [],
+    showCircuitListDialog: false,
     canShowButton: false,
     showFeedBack: false,
     openedPanel: undefined,
