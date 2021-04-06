@@ -26,7 +26,7 @@
         >
 
           <v-list-item
-            v-for="(object, i) in objects"
+            v-for="(object, i) in list"
             :key="i"
           >
 
@@ -64,7 +64,7 @@ export default {
     show: Boolean,
     title: String,
     info: String,
-    objects: Array,
+    list: Array,
   },
 };
 </script>

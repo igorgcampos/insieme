@@ -505,7 +505,7 @@
           :show="showCircuitListDialog"
           :title="$vuetify.lang.t('$vuetify.LISTA_CIRCUITOS')"
           :info="$vuetify.lang.t('$vuetify.LISTA_CIRCUITOS_ASSOCIADOS')"
-          :objects="selectedList"
+          :list="selectedList"
         ></ListDialog>
       </div>
     </v-lazy>
