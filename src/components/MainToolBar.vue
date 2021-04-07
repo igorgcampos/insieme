@@ -564,6 +564,7 @@ export default {
     },
     logout () {
 
+      window.sessionStorage.setItem('contractSelected', 'false');
       this.$saveOperation({ tipo: 'LOGOUT', usuario: this.$getUser() })
 
       this.$logout().then(() => {

@@ -249,6 +249,13 @@ export default {
       { searchText: '', clientId: this.selectedClient.id, type: this.type, status: this.status, page: 0 }).
       then((response) => {
         this.contracts = response.data;
+
+        if (this.contracts.length == 1 && this.$hasProfile('Operacional') &&
+          window.sessionStorage.getItem('contractSelected') == 'false') {
+
+          this.$root.$emit('contract-selected', this.contracts[0])
+          window.sessionStorage.setItem('contractSelected', 'true');
+        }
       });
   }
 };
