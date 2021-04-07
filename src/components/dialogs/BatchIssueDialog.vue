@@ -190,21 +190,55 @@
               <v-row
                 class="ml-0 mt-2 d-flex justify-left"
                 :class="{'ml-n7':$vuetify.breakpoint.xs}"
+                v-for="(item) in selectedItemList"
+                :key="item.id"
               >
-                <transition-group name="slide-x-transition">
+
+                <v-lazy
+                  :options="{threshold: .6}"
+                  transition="slide-x-transition"
+                >
                   <v-chip
-                    v-for="(item) in selectedItemList"
                     :key="item.id"
+                    color="orange"
+                    class="ml-0 mr-2 mt-2"
+                    label
+                    :small="$vuetify.breakpoint.xs"
+                    @click:close="selectItem(item, false)"
+                    close
+                    large
+                    :id="item.id"
+                    v-show="item.hasIssue"
+                  >
+                    <v-col>
+                      <v-row class="mt-2">{{ item.nome || item.numero}}</v-row>
+
+                      <v-row>
+                        <strong class="mt-n1 caption font-weight-bold">
+                          {{$vuetify.lang.t('$vuetify.CHAMADO_JA_ABERTO')}}</strong>
+                      </v-row>
+                    </v-col>
+                  </v-chip>
+                </v-lazy>
+
+                <v-lazy
+                  :options="{threshold: .6}"
+                  transition="slide-x-transition"
+                >
+                  <v-chip
+                    :key="item.id + 1"
                     color="success"
                     class="ml-0 mr-2 mt-2"
                     label
                     :small="$vuetify.breakpoint.xs"
                     @click:close="selectItem(item, false)"
                     close
+                    v-show="!item.hasIssue"
+                    :id="item.nome"
                   >
                     {{ item.nome || item.numero}}
                   </v-chip>
-                </transition-group>
+                </v-lazy>
               </v-row>
 
             </v-col>
@@ -319,6 +353,23 @@ export default {
 
       if (!this.containsItem(item, this.selectedItemList) && this.containsItem(item, this.selectedCheckList)) {
         this.selectedItemList.push(item)
+
+        //verifica se o circuito já tem chamado aberto. Se tiver muda a cor dele na lista
+        if (item.nome) {
+          this.$get('/chamado/circuito', {
+            desigTpz: item.nome
+          })
+            .then((response) => {
+
+              if (response && response.data > 0) {
+                item.hasIssue = true;
+                document.getElementById(item.id).style.display = 'none';
+                document.getElementById(item.id).style.display = 'block';
+                document.getElementById(item.nome).style.display = 'none';
+
+              }
+            });
+        }
       } else {
 
         if (!checkList || !this.containsItem(item, this.selectedCheckList))

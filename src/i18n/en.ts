@@ -416,5 +416,5 @@ export default {
     AVALIACAO: 'Rating',
     LISTA_CIRCUITOS: 'Circuit list',
     LISTA_CIRCUITOS_ASSOCIADOS: 'Circuits linked to this issue',
-
+    CHAMADO_JA_ABERTO: 'Ticket already opened',
 }
