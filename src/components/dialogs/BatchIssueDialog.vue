@@ -201,7 +201,7 @@
                   <v-chip
                     :key="item.id"
                     color="orange"
-                    class="ml-0 mr-2 mt-2"
+                    class="ml-n6 mr-6 mt-2"
                     label
                     :small="$vuetify.breakpoint.xs"
                     @click:close="selectItem(item, false)"
@@ -229,6 +229,7 @@
                     :key="item.id + 1"
                     color="success"
                     class="ml-0 mr-2 mt-2"
+                    :class="{'ml-2':$vuetify.breakpoint.xs}"
                     label
                     :small="$vuetify.breakpoint.xs"
                     @click:close="selectItem(item, false)"

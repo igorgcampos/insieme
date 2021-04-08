@@ -412,6 +412,6 @@ export default {
     AVALIACAO: 'Avaliação',
     LISTA_CIRCUITOS: 'Lista dos circuitos',
     LISTA_CIRCUITOS_ASSOCIADOS: 'Circuitos associados ao chamado',
-    CHAMADO_JA_ABERTO: 'Chamado já aberto',
+    CHAMADO_JA_ABERTO: 'Há um chamado em aberto',
 
 }
