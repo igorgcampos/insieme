@@ -557,7 +557,7 @@ export default {
         identificadorOrigem: null,
         motivoAbertura: this.$vuetify.lang.t('$vuetify.' + this.actionName),
         observacaoAbertura: issue.observation,
-        contrato: { id: this.$props.contract.id },
+        contrato: this.$props.contract,
         lote: [this.actionName],
         planilha: itemList.length > 0 ? JSON.stringify(itemList) : '',
         arquivo: file,
