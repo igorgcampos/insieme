@@ -552,6 +552,7 @@ export default {
       this.removeTrashFields(itemList)
       itemList = this.convertFieldsToNames(itemList)
 
+      console.log(this.$props.contract)
       issue = {
         origem: 'CIRCUITO_LOTE_COMERCIAL',
         identificadorOrigem: null,
