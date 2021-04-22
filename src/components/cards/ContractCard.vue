@@ -246,7 +246,7 @@ export default {
       return endDateExpired && renewDateExpired;
     },
     gerenciarContratos () {
-      this.$root.$emit('contract-selected', this.$props.contract)
+      this.$root.$emit('contract-selected', this.contract)
     },
     baixarContrato () {
       this.isDownloading = true;
