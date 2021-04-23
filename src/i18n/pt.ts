@@ -413,5 +413,9 @@ export default {
     LISTA_CIRCUITOS: 'Lista dos circuitos',
     LISTA_CIRCUITOS_ASSOCIADOS: 'Circuitos associados ao chamado',
     CHAMADO_JA_ABERTO: 'Há um chamado em aberto',
-
+    NOVO_CIRCUITO_XLSX: 'novo_circuito.xlsx',
+    REMANEJAMENTO_XLSX: 'remanejamento.xlsx',
+    CANCELAMENTO_XLSX: 'cancelamento.xlsx',
+    ALTERACAO_VELOCIDADE_XLSX: 'alteracao_velocidade.xlsx',
+    SUSPENSAO_XLSX: 'suspensao.xlsx'
 }

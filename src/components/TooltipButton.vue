@@ -13,6 +13,7 @@
         :loading="loading"
         :x-small="mobile"
         :small="!mobile"
+        :class="{'ma-2': margin}"
       >{{label}}</v-btn>
 
       <v-btn
@@ -46,6 +47,7 @@ export default {
     mobile: Boolean,
     isText: Boolean,
     bottom: Boolean,
+    margin: Boolean,
   }
 };
 </script>

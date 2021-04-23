@@ -108,107 +108,101 @@
           </v-col>
         </v-row>
 
-        <v-row v-if="!$vuetify.breakpoint.xs">
+        <v-row
+          v-if="!$vuetify.breakpoint.xs"
+          class="pl-1"
+        >
 
-          <v-col cols="2 mr-4">
+          <TooltipButton
+            :label="$vuetify.lang.t('$vuetify.NOVO_CIRCUITO')"
+            :message="$vuetify.lang.t('$vuetify.NOVO_CIRCUITO_DESCRICAO')"
+            :event="showCommDialog"
+            :object="{actionName:'NOVO_CIRCUITO'}"
+            :mobile="$vuetify.breakpoint.xs"
+            :margin="true"
+          ></TooltipButton>
 
-            <TooltipButton
-              :label="$vuetify.lang.t('$vuetify.NOVO_CIRCUITO')"
-              :message="$vuetify.lang.t('$vuetify.NOVO_CIRCUITO_DESCRICAO')"
-              :event="showCommDialog"
-              :object="{actionName:'NOVO_CIRCUITO'}"
-              :mobile="$vuetify.breakpoint.xs"
-            ></TooltipButton>
-          </v-col>
+          <TooltipButton
+            :label="$vuetify.lang.t('$vuetify.REMANEJAR')"
+            :message="$vuetify.lang.t('$vuetify.REMANEJAR_DESCRICAO')"
+            :event="showCommDialog"
+            :object="{actionName:'REMANEJAR'}"
+            :mobile="$vuetify.breakpoint.xs"
+            :margin="true"
+          ></TooltipButton>
 
-          <v-col cols="2 mr-n2">
+          <v-menu
+            transition="slide-x-transition"
+            bottom
+            right
+            v-show="!$vuetify.breakpoint.xs"
+          >
+            <template v-slot:activator="{ on }">
+              <v-btn
+                class="ma-2"
+                dark
+                color="primary"
+                v-on="on"
+                :x-small="$vuetify.breakpoint.xs"
+                :small="!$vuetify.breakpoint.xs"
+              >
+                {{$vuetify.lang.t('$vuetify.REATIVAR')}}
+              </v-btn>
+            </template>
 
-            <TooltipButton
-              :label="$vuetify.lang.t('$vuetify.REMANEJAR')"
-              :message="$vuetify.lang.t('$vuetify.REMANEJAR_DESCRICAO')"
-              :event="showCommDialog"
-              :object="{actionName:'REMANEJAR'}"
-              :mobile="$vuetify.breakpoint.xs"
-            ></TooltipButton>
-          </v-col>
+            <v-list>
+              <v-list-item @click="showCommDialog({actionName:'REVOGAR_SUSPENSAO'})">
+                <v-list-item-title>{{$vuetify.lang.t('$vuetify.REVOGAR_SUSPENSAO')}}</v-list-item-title>
+              </v-list-item>
 
-          <v-col cols="2 ml-n2 mr-n4">
-            <v-menu
-              transition="slide-x-transition"
-              bottom
-              right
-              v-show="!$vuetify.breakpoint.xs"
-            >
-              <template v-slot:activator="{ on }">
-                <v-btn
-                  class="ml-2 mt-0"
-                  dark
-                  color="primary"
-                  v-on="on"
-                  :x-small="$vuetify.breakpoint.xs"
-                  :small="!$vuetify.breakpoint.xs"
-                >
-                  {{$vuetify.lang.t('$vuetify.REATIVAR')}}
-                </v-btn>
-              </template>
+              <v-list-item @click="showCommDialog({actionName:'REVOGAR_CANCELAMENTO'})">
+                <v-list-item-title>{{$vuetify.lang.t('$vuetify.REVOGAR_CANCELAMENTO')}}</v-list-item-title>
+              </v-list-item>
+            </v-list>
 
-              <v-list>
-                <v-list-item @click="showCommDialog({actionName:'REVOGAR_SUSPENSAO'})">
-                  <v-list-item-title>{{$vuetify.lang.t('$vuetify.REVOGAR_SUSPENSAO')}}</v-list-item-title>
-                </v-list-item>
+          </v-menu>
 
-                <v-list-item @click="showCommDialog({actionName:'REVOGAR_CANCELAMENTO'})">
-                  <v-list-item-title>{{$vuetify.lang.t('$vuetify.REVOGAR_CANCELAMENTO')}}</v-list-item-title>
-                </v-list-item>
-              </v-list>
+          <TooltipButton
+            :label="$vuetify.lang.t('$vuetify.ALTERAR_VELOCIDADE')"
+            :message="$vuetify.lang.t('$vuetify.ALTERAR_VELOCIDADE_DESCRICAO')"
+            :event="showCommDialog"
+            :object="{actionName:'ALTERAR_VELOCIDADE'}"
+            :mobile="$vuetify.breakpoint.xs"
+            :margin="true"
+          ></TooltipButton>
 
-            </v-menu>
-          </v-col>
+          <v-menu
+            transition="slide-x-transition"
+            bottom
+            right
+            v-show="!$vuetify.breakpoint.xs"
+          >
+            <template v-slot:activator="{ on }">
+              <v-btn
+                class="ma-2"
+                dark
+                color="primary"
+                v-on="on"
+                :x-small="$vuetify.breakpoint.xs"
+                :small="!$vuetify.breakpoint.xs"
+              >
+                {{$vuetify.lang.t('$vuetify.MAIS_OPCOES')}}
+              </v-btn>
+            </template>
 
-          <v-col cols="3">
+            <v-list>
 
-            <TooltipButton
-              :label="$vuetify.lang.t('$vuetify.ALTERAR_VELOCIDADE')"
-              :message="$vuetify.lang.t('$vuetify.ALTERAR_VELOCIDADE_DESCRICAO')"
-              :event="showCommDialog"
-              :object="{actionName:'ALTERAR_VELOCIDADE'}"
-              :mobile="$vuetify.breakpoint.xs"
-            ></TooltipButton>
-          </v-col>
+              <v-list-item @click="showCommDialog({actionName:'SUSPENDER'})">
+                <v-list-item-title>{{$vuetify.lang.t('$vuetify.SUSPENDER')}}</v-list-item-title>
+              </v-list-item>
 
-          <v-col cols="1 ml-n4">
-            <v-menu
-              transition="slide-x-transition"
-              bottom
-              right
-              v-show="!$vuetify.breakpoint.xs"
-            >
-              <template v-slot:activator="{ on }">
-                <v-btn
-                  class="ml-2 mt-0"
-                  dark
-                  color="primary"
-                  v-on="on"
-                  :x-small="$vuetify.breakpoint.xs"
-                  :small="!$vuetify.breakpoint.xs"
-                >
-                  {{$vuetify.lang.t('$vuetify.MAIS_OPCOES')}}
-                </v-btn>
-              </template>
+              <v-list-item @click="showCommDialog({actionName: 'CANCELAR'})">
+                <v-list-item-title>{{$vuetify.lang.t('$vuetify.CANCELAR')}}</v-list-item-title>
+              </v-list-item>
+            </v-list>
 
-              <v-list>
+          </v-menu>
 
-                <v-list-item @click="showCommDialog({actionName:'SUSPENDER'})">
-                  <v-list-item-title>{{$vuetify.lang.t('$vuetify.SUSPENDER')}}</v-list-item-title>
-                </v-list-item>
-
-                <v-list-item @click="showCommDialog({actionName: 'CANCELAR'})">
-                  <v-list-item-title>{{$vuetify.lang.t('$vuetify.CANCELAR')}}</v-list-item-title>
-                </v-list-item>
-              </v-list>
-
-            </v-menu>
-          </v-col>
         </v-row>
 
         <v-row

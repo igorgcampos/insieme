@@ -233,27 +233,27 @@ export default {
 
       if (this.actionName == 'NOVO_CIRCUITO') {
         link.href = 'nova_instalacao.xlsx';
-        link.setAttribute("download", "nova_instalacao.xlsx");
+        link.setAttribute("download", this.$vuetify.lang.t('$vuetify.NOVO_CIRCUITO_XLSX'));
       }
 
       if (this.actionName == 'REMANEJAR') {
         link.href = 'remanejamento.xlsx';
-        link.setAttribute("download", "remanejamento.xlsx");
+        link.setAttribute("download", this.$vuetify.lang.t('$vuetify.REMANEJAMENTO_XLSX'));
       }
 
       if (this.actionName == 'ALTERAR_VELOCIDADE') {
         link.href = 'alteracao_velocidade.xlsx';
-        link.setAttribute("download", "alteracao_velocidade.xlsx");
+        link.setAttribute("download", this.$vuetify.lang.t('$vuetify.ALTERACAO_VELOCIDADE_XLSX'));
       }
 
       if (this.actionName == 'CANCELAR') {
         link.href = 'cancelamento.xlsx';
-        link.setAttribute("download", "cancelamento.xlsx");
+        link.setAttribute("download", this.$vuetify.lang.t('$vuetify.CANCELAMENTO_XLSX'));
       }
 
       if (this.actionName == 'SUSPENDER') {
         link.href = 'suspensao.xlsx';
-        link.setAttribute("download", "suspensao.xlsx");
+        link.setAttribute("download", this.$vuetify.lang.t('$vuetify.SUSPENSAO_XLSX'));
       }
 
       link.click();

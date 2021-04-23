@@ -417,4 +417,9 @@ export default {
     LISTA_CIRCUITOS: 'Circuit list',
     LISTA_CIRCUITOS_ASSOCIADOS: 'Circuits linked to this issue',
     CHAMADO_JA_ABERTO: 'Ticket already opened',
+    NOVO_CIRCUITO_XLSX: 'new_circuit.xlsx',
+    REMANEJAMENTO_XLSX: 'relocation.xlsx',
+    CANCELAMENTO_XLSX: 'cancellation.xlsx',
+    ALTERACAO_VELOCIDADE_XLSX: 'change_speed.xlsx',
+    SUSPENSAO_XLSX: 'suspension.xlsx'
 }
