@@ -381,6 +381,8 @@
       <span>{{$vuetify.lang.t('$vuetify.RELATORIO')}}</span>
     </v-tooltip>
 
+    <ApplicationsMenu :v-if="$hasProfile('Administrador')"></ApplicationsMenu>
+
     <v-tooltip bottom>
       <template v-slot:activator="{ on }">
         <v-btn
@@ -401,11 +403,13 @@
 
 import FaqDialog from '../components/dialogs/FaqDialog';
 import NotificationList from '../components/NotificationList';
+import ApplicationsMenu from '../components/ApplicationsMenu';
 
 export default {
   components: {
     FaqDialog,
     NotificationList,
+    ApplicationsMenu,
   },
   created: function () {
     this.user = this.$getUser();

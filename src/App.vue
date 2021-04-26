@@ -37,12 +37,24 @@ export default {
       else next()
     })
 
+    this.setUrlToken();
+
     this.$router.push('/login')
     this.$root.$on('login-success', () => {
       this.$router.push('/');
       window.sessionStorage.setItem('actualPage', '/')
     })
     this.$root.$on('logout-success', () => this.$router.push('/login'));
+  },
+  methods: {
+    setUrlToken () {
+      let uri = window.location.search.substring(1);
+      let params = new URLSearchParams(uri);
+
+      if (params.get("token")) {
+        this.$setKeycloakToken(params.get("token"))
+      }
+    },
   }
 };
 </script>

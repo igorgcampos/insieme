@@ -417,5 +417,6 @@ export default {
     REMANEJAMENTO_XLSX: 'remanejamento.xlsx',
     CANCELAMENTO_XLSX: 'cancelamento.xlsx',
     ALTERACAO_VELOCIDADE_XLSX: 'alteracao_velocidade.xlsx',
-    SUSPENSAO_XLSX: 'suspensao.xlsx'
+    SUSPENSAO_XLSX: 'suspensao.xlsx',
+    APLICACOES: 'Aplicações',
 }
