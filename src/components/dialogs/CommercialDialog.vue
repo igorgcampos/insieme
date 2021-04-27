@@ -258,10 +258,6 @@ export default {
 
       link.click();
     },
-    handle () {
-      let formData = new FormData();
-      console.log(formData)
-    },
     newLine () {
       this.entityList.push({});
     },
