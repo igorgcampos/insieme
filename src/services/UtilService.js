@@ -1,6 +1,10 @@
 import Vuetify from '../plugins/vuetify'
 const utilService = {}
 const insiemeVersion = process.env.VUE_APP_VERSION
+const insiemeUrl = process.env.VUE_APP_INSIEME_URL;
+const chilometerUrl = process.env.VUE_APP_CHILOMETER_URL;
+const operacoesUrl = process.env.VUE_APP_OPERACOES_URL;
+const protocolosUrl = process.env.VUE_APP_PROTOCOLOS_URL;
 
 utilService.install = function (Vue) {
 
@@ -10,6 +14,26 @@ utilService.install = function (Vue) {
 
     Vue.prototype.$getVersion = () => {
         return insiemeVersion;
+    }
+
+    Vue.prototype.$getAppUrl = (appName) => {
+
+        if (appName == 'insieme') {
+            return insiemeUrl;
+        }
+
+        if (appName == 'chilometer') {
+            return chilometerUrl;
+        }
+
+        if (appName == 'operacoes') {
+            return operacoesUrl;
+        }
+
+        if (appName == 'protocolos') {
+            return protocolosUrl;
+        }
+
     }
 
     Vue.prototype.$formatDate = (date) => {

@@ -34,26 +34,26 @@
         <ApplicationItem
           name="Insieme"
           icon="mdi-satellite-variant"
-          :url="'http://localhost:8082/?token='+ getToken()"
+          :url="$getAppUrl('insieme')+'/?token='+ getToken()"
           color="red darken-2"
           :hide="true"
         ></ApplicationItem>
         <ApplicationItem
           name="Chilometer"
           icon="mdi-road-variant"
-          :url="'http://localhost:8081/?token='+ getToken()"
+          :url="$getAppUrl('chilometer')+'/?token='+ getToken()"
           color="green darken-2"
         ></ApplicationItem>
         <ApplicationItem
           name="Operações"
           icon="mdi-cogs"
-          url=""
+          :url="$getAppUrl('operacoes')+'/?token='+ getToken()"
           color="blue darken-2"
         ></ApplicationItem>
         <ApplicationItem
           name="Protocolos"
           icon="mdi-format-list-numbered"
-          url=""
+          :url="$getAppUrl('protocolos')+'/?token='+ getToken()"
           color="yellow darken-2"
         ></ApplicationItem>
 
