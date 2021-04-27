@@ -39,7 +39,7 @@
           :hide="true"
         ></ApplicationItem>
         <ApplicationItem
-          name="Chilometer"
+          name="Chilometri"
           icon="mdi-road-variant"
           :url="$getAppUrl('chilometer')+'/?token='+ getToken()"
           color="green darken-2"
