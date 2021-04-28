@@ -70,10 +70,8 @@ authService.install = function (Vue) {
 
     Vue.prototype.$setKeycloakToken = async (token) => {
         window.sessionStorage.setItem('keyCloakToken', token);
-
-        if (!window.sessionStorage.getItem('user')) {
-            await getUser()
-        }
+        window.history.replaceState({}, document.title, "/")
+        await getUser()
     }
 }
 

@@ -571,8 +571,6 @@ export default {
       window.sessionStorage.setItem('contractSelected', 'false');
       this.$saveOperation({ tipo: 'LOGOUT', usuario: this.$getUser() })
 
-      window.history.replaceState({}, document.title, "/")
-
       this.$logout().then(() => {
         this.$root.$emit('logout-success')
         this.$hideChatButton()

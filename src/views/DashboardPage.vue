@@ -129,9 +129,10 @@ export default {
 
     this.selectedContract = this.$props.contract;
     if (!this.selectedContract) {
-      if (!window.sessionStorage.getItem('selectedContractId'))
+      if (!window.sessionStorage.getItem('selectedContractId')) {
+        this.$router.push({ name: 'Contracts', params: { client: undefined } })
         return;
-      else
+      } else
         this.selectedContract = {
           id: window.sessionStorage.getItem('selectedContractId'),
           numeroContratoTpz: window.sessionStorage.getItem('selectedContractTpz')
