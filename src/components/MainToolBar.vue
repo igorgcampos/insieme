@@ -381,7 +381,7 @@
       <span>{{$vuetify.lang.t('$vuetify.RELATORIO')}}</span>
     </v-tooltip>
 
-    <ApplicationsMenu :v-if="$hasProfile('Administrador')"></ApplicationsMenu>
+    <ApplicationsMenu v-if="$hasProfile('Administrador')"></ApplicationsMenu>
 
     <v-tooltip bottom>
       <template v-slot:activator="{ on }">
