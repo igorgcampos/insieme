@@ -69,7 +69,6 @@
           :contract="selectedContract"
         ></CommercialPage>
         <IssuesPage
-          v-show="false"
           :contract="selectedContract"
           :proactivity="undefined"
         ></IssuesPage>
