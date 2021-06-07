@@ -136,6 +136,7 @@ export default {
     OBSERVACAO_ENCERRAMENTO: 'Closing observation',
     OBSERVACAO_ENCERRAMENTO_ABREVIADO: 'Closing observation',
     OBSERVACAO: 'Observation',
+    BREVE_DESCRICAO: 'Brief description',
     SELECIONE_MOTIVO: 'Select the reason',
     ABRINDO_CHAMADO_CIRCUITO: 'Opening issue for circuit {0}',
     ABRINDO_CHAMADO_CIRCUITOS: 'Opening issue for circuits',

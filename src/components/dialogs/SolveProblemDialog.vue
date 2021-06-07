@@ -148,7 +148,7 @@
           text
           @click="openIssueDialog"
           :x-small="$vuetify.breakpoint.xs"
-          v-show="false/*showOpenIssuePanel || showRestartResultPanel || (showStatusResultPanel && statusOk)*/"
+          v-show="showOpenIssuePanel || showRestartResultPanel || (showStatusResultPanel && statusOk)"
         >{{$vuetify.lang.t('$vuetify.ABRIR_CHAMADO')}}</v-btn>
 
         <v-btn

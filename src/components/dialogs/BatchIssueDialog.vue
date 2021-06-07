@@ -51,7 +51,7 @@
         >
           <v-row>
             <span class=" text-right subtitle-2 font-weight-bold grey--text text--lighten-1">
-              {{$vuetify.lang.t('$vuetify.OBSERVACAO')}}:</span>
+              {{$vuetify.lang.t('$vuetify.BREVE_DESCRICAO')}}:</span>
           </v-row>
           <v-row>
             <v-textarea

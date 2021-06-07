@@ -134,6 +134,7 @@ export default {
     OBSERVACAO_ENCERRAMENTO: 'Obs. sobre encerramento',
     OBSERVACAO_ENCERRAMENTO_ABREVIADO: 'Obs. encerramento',
     OBSERVACAO: 'Observação',
+    BREVE_DESCRICAO: 'Breve descrição',
     SELECIONE_MOTIVO: 'Selecione o motivo',
     ABRINDO_CHAMADO_CIRCUITO: 'Abrindo chamado para o circuito {0}',
     ABRINDO_CHAMADO_CIRCUITOS: 'Abrindo chamado para circuitos',

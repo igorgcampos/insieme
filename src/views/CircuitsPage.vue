@@ -780,7 +780,10 @@
                     </v-col>
                   </v-row>
 
-                  <v-divider class="mt-n3"></v-divider>
+                  <v-divider
+                    v-if="circuit.statusInstalacao == 'ATIVADO'"
+                    class="mt-n3"
+                  ></v-divider>
 
                   <v-card-actions class="mb-n2 pb-0">
                     <TooltipButton
@@ -790,6 +793,7 @@
                       :object="circuit"
                       :mobile="$vuetify.breakpoint.xs"
                       :isText=true
+                      v-if="circuit.statusInstalacao == 'ATIVADO'"
                     ></TooltipButton>
 
                     <TooltipButton
@@ -1195,11 +1199,10 @@ export default {
   }),
   created: function () {
 
-    this.reasonList = [this.$vuetify.lang.t('$vuetify.INOPERANCIA'),
-    this.$vuetify.lang.t('$vuetify.INTERMITENCIA'),
-    this.$vuetify.lang.t('$vuetify.LENTIDAO'),
-    this.$vuetify.lang.t('$vuetify.CONFIGURACAO'),
-      'Hardware']
+    this.$get('/chamado/motivos', {})
+      .then((response) => {
+        this.reasonList = response.data;
+      });
 
     this.statuses = [this.$vuetify.lang.t('$vuetify.TODOS'),
       'Online',

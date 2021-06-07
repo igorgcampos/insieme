@@ -760,12 +760,10 @@ export default {
 
       if (type == 'circuit') {
 
-        this.reasonBatchList = [this.$vuetify.lang.t('$vuetify.ATIVACAO'),
-        this.$vuetify.lang.t('$vuetify.CONFIGURACAO'),
-        this.$vuetify.lang.t('$vuetify.DESATIVACAO'),
-        this.$vuetify.lang.t('$vuetify.INOPERANCIA'),
-        this.$vuetify.lang.t('$vuetify.INTERMITENCIA'),
-        this.$vuetify.lang.t('$vuetify.LENTIDAO')]
+        this.$get('/chamado/motivos', {})
+          .then((response) => {
+            this.reasonBatchList = response.data;
+          });
 
         this.searchCircuits('', 0)
 
