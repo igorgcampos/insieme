@@ -739,7 +739,7 @@ export default {
         contractNumber: this.$props.contract.numeroContratoTpz,
         searchText: text,
         onlineStatus: 0,
-        installStatus: 0,
+        installStatus: 1,
         productType: null,
         techType: null,
         page: page

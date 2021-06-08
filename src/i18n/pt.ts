@@ -137,7 +137,7 @@ export default {
     BREVE_DESCRICAO: 'Breve descrição (Obrigatório)',
     SELECIONE_MOTIVO: 'Selecione o motivo',
     ABRINDO_CHAMADO_CIRCUITO: 'Abrindo chamado para o circuito {0}',
-    ABRINDO_CHAMADO_CIRCUITOS: 'Abrindo chamado para circuitos',
+    ABRINDO_CHAMADO_CIRCUITOS: 'Abrindo chamado para circuitos ativados',
     ABRINDO_CHAMADO_NOTA: 'Abrindo chamado para a nota fiscal ',
     ABRINDO_CHAMADO_NOTAS: 'Abrindo chamado para notas fiscais ',
     ENCERRANDO_CHAMADO: 'Encerrando chamado ',
