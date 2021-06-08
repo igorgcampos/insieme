@@ -539,7 +539,7 @@ export default {
     },
     sendIssue (issue, invoice) {
 
-      if (!issue.reason) {
+      if (!issue.reason || issue.observation) {
         return;
       }
 

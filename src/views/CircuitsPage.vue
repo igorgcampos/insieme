@@ -944,7 +944,7 @@ export default {
     },
     sendIssue (issue, circuit, close) {
 
-      if (!issue.reason) {
+      if (!issue.reason || !issue.observation) {
         return;
       }
 
