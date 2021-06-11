@@ -46,7 +46,7 @@
           </v-col>
           <v-col :class="[{'flex-grow-0':!$vuetify.breakpoint.xs},{'pl-1 pr-0':$vuetify.breakpoint.xs}]">
             <CountCard
-              :count="0"
+              :count="counts[2]"
               :message="$vuetify.lang.t('$vuetify.EM_ANDAMENTO')"
               color="warning--text"
               :func="getResolving"
@@ -193,14 +193,15 @@
                       sm="2"
                     >
                       <v-chip
-                        :color="issue.status=='ABERTO'?'success':'primary'"
+                        :color="issue.status=='ABERTO'?'success':issue.status=='ENCERRADO'?'primary':'warning'"
                         class="ml-0 mr-4"
                         label
                         small
                         outlined
                       >
                         {{ issue.status=='ABERTO'?$vuetify.lang.t('$vuetify.ABERTO'):
-                  $vuetify.lang.t('$vuetify.ENCERRADO') }}
+                            issue.status=='ENCERRADO'?$vuetify.lang.t('$vuetify.ENCERRADO'):
+                            $vuetify.lang.t('$vuetify.EM_ANDAMENTO') }}
                       </v-chip>
                     </v-col>
 
@@ -280,14 +281,15 @@
                     >
                       <v-col class="pa-0">
                         <v-chip
-                          :color="issue.status=='ABERTO'?'success':'primary'"
+                          :color="issue.status=='ABERTO'?'success':issue.status=='ENCERRADO'?'primary':'warning'"
                           class="ml-0 mr-2 mb-2"
                           label
                           small
                           outlined
                         >
                           {{ issue.status=='ABERTO'?$vuetify.lang.t('$vuetify.ABERTO'):
-                  $vuetify.lang.t('$vuetify.ENCERRADO') }}
+                            issue.status=='ENCERRADO'?$vuetify.lang.t('$vuetify.ENCERRADO'):
+                            $vuetify.lang.t('$vuetify.EM_ANDAMENTO') }}
                         </v-chip>
 
                         <v-chip
@@ -301,12 +303,29 @@
                           {{ $vuetify.lang.t('$vuetify.PROATIVO') }}
                         </v-chip>
 
+                        <v-chip
+                          color="blue-grey"
+                          class="ml-0 mr-2 mb-2 text-break"
+                          label
+                          small
+                          outlined
+                          v-if="issue.status = 'EM_ANDAMENTO'"
+                        >
+                          <span
+                            class="chip-class"
+                            :title="issue.statusProcessamento"
+                          >
+                            {{ issue.statusProcessamento }}
+                          </span>
+                        </v-chip>
+
                         <span
                           v-if="issue.evaluation"
                           class="text-right caption font-weight-bold grey--text text--lighten-1 pl-1"
                         >{{$vuetify.lang.t('$vuetify.AVALIACAO')+':'}}</span>
 
                         <v-rating
+                          class="mb-4"
                           v-if="issue.evaluation"
                           v-model="issue.evaluation.nota"
                           color="orange"
@@ -394,7 +413,7 @@
 
                   <v-divider
                     class="mt-n3"
-                    v-show="(issue.status == 'ABERTO' || (issue.status != 'ABERTO' && !issue.evaluation)
+                    v-show="(issue.status == 'ABERTO' || (issue.status != 'ABERTO' && (!issue.evaluation || issue.origem == 'CIRCUITO_LOTE'))
                     || (issue.origem == 'CIRCUITO_LOTE_COMERCIAL' && issue.planilha.length > 0)
                     || (canShowButton && issue.origem != 'CIRCUITO_LOTE_COMERCIAL'))
                     && !issue.proatividade"
@@ -1065,3 +1084,9 @@ export default {
   }
 };
 </script>
+<style scoped>
+.chip-class {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+</style>
