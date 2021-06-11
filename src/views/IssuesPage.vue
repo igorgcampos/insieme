@@ -309,7 +309,7 @@
                           label
                           small
                           outlined
-                          v-if="issue.status = 'EM_ANDAMENTO'"
+                          v-if="issue.status == 'EM_ANDAMENTO'"
                         >
                           <span
                             class="chip-class"
@@ -833,6 +833,7 @@ export default {
           this.showSuccess = true;
           this.showDialogLoading = false;
           this.selectedIssue.status = response.data.status;
+          this.selectedIssue.statusProcessamento = undefined;
           this.selectedIssue.dataEncerramento = response.data.dataEncerramento;
           this.counts[0] -= 1;
           this.counts[1] += 1;
