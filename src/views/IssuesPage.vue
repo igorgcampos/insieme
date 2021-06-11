@@ -700,17 +700,58 @@ export default {
 
       this.showDialogLoading = true;
 
-      issue = {
-        origem: entity.type == 'circuit' ? 'CIRCUITO_LOTE' : 'NOTA_LOTE',
+      if (entity.type == 'circuit') {
+        this.createIssueForEachCircuit(issue);
+      } else {
+        this.createBatchIssueForInvoices(issue);
+      }
+
+    },
+    createIssueForEachCircuit (issue) {
+
+      var count = 0;
+      var total = issue.items.length;
+      for (var circuit in issue.items) {
+
+        var object = {
+          origem: 'CIRCUITO',
+          identificadorOrigem: circuit.nome,
+          motivoAbertura: issue.reason,
+          observacaoAbertura: issue.observation,
+          contrato: { id: this.$props.contract.id }
+        }
+
+        this.$post('/chamado/create', object).then((response) => {
+
+          if (response.data) {
+
+            count++;
+
+            if (count == total) {
+              this.showSuccess = true;
+              this.showDialogLoading = false;
+            }
+
+          }
+          this.$root.$emit('new-issue', response.data)
+
+        });
+      }
+    },
+    createBatchIssueForInvoices (issue) {
+
+      var object = {
+        origem: 'NOTA_LOTE',
         identificadorOrigem: undefined,
         motivoAbertura: issue.reason,
         observacaoAbertura: issue.observation,
         lote: issue.items.map(function (item) {
-          return item.nome || item.numero
+          return item.numero
         }),
         contrato: { id: this.$props.contract.id }
       }
-      this.$post('/chamado/create', issue).then((response) => {
+
+      this.$post('/chamado/create', object).then((response) => {
 
         if (response.data) {
 

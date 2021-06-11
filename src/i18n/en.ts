@@ -155,6 +155,7 @@ export default {
     FECHAR: 'Close',
     ENVIAR: 'Send',
     CHAMADO_CRIADO: 'Issue created successfully!',
+    CHAMADOS_CRIADOS: 'Issues created successfully!',
     SEGUNDA_VIA: 'Second copy',
     BAIXA_BOLETO: 'Low ticket',
     ALTERAR_VENCIMENTO: 'Change due',

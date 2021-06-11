@@ -150,6 +150,7 @@ export default {
     FECHAR: 'Fechar',
     ENVIAR: 'Enviar',
     CHAMADO_CRIADO: 'Chamado criado com sucesso!',
+    CHAMADOS_CRIADOS: 'Chamados criados com sucesso!',
     SEGUNDA_VIA: 'Segunda via',
     BAIXA_BOLETO: 'Baixa de boleto',
     ALTERAR_VENCIMENTO: 'Alterar vencimento',

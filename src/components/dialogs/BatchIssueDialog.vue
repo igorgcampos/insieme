@@ -285,8 +285,8 @@
     <v-card v-show="showSuccess">
 
       <SuccessPanel
-        :title="$vuetify.lang.t('$vuetify.CHAMADO_CRIADO')"
-        :subtitle="$vuetify.lang.t('$vuetify.PROTOCOLO')+': '+entity.protocolo"
+        :title="entity.protocolo?$vuetify.lang.t('$vuetify.CHAMADO_CRIADO'):$vuetify.lang.t('$vuetify.CHAMADOS_CRIADOS')"
+        :subtitle="entity.protocolo?$vuetify.lang.t('$vuetify.PROTOCOLO')+': '+entity.protocolo:''"
       >
       </SuccessPanel>
 
