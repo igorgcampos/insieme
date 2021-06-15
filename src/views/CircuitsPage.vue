@@ -1275,6 +1275,10 @@ export default {
       this.search(0, 0);
     })
 
+    this.$root.$on('solve-problem', (circuit) => {
+      this.solveProblem(circuit)
+    });
+
     var vm = this;
     setInterval(function () {
       if (window.sessionStorage.getItem('actualPage') == 'dashboard') {
