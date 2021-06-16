@@ -425,4 +425,5 @@ export default {
     ALTERACAO_VELOCIDADE_XLSX: 'change_speed.xlsx',
     SUSPENSAO_XLSX: 'suspension.xlsx',
     APLICACOES: 'Applications',
+    MASSIVA: 'Massive',
 }

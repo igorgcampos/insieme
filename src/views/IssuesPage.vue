@@ -153,6 +153,13 @@
                 >
                   <v-list-item-title>{{$vuetify.lang.t('$vuetify.FATURAMENTO')}}</v-list-item-title>
                 </v-list-item>
+
+                <v-list-item
+                  @click="showQuestionsDialog()"
+                  v-if="$hasProfile('Operacional') || $hasProfile('Cliente') || $hasProfile('Administrador')"
+                >
+                  <v-list-item-title>{{$vuetify.lang.t('$vuetify.MASSIVA')}}</v-list-item-title>
+                </v-list-item>
               </v-list>
 
             </v-menu>
@@ -526,6 +533,13 @@
           :info="$vuetify.lang.t('$vuetify.LISTA_CIRCUITOS_ASSOCIADOS')"
           :list="selectedList"
         ></ListDialog>
+
+        <QuestionsDialog
+          :close="closeQuestionsDialog"
+          :show="showMassive"
+          :questions="questions"
+        >
+        </QuestionsDialog>
       </div>
     </v-lazy>
   </div>
@@ -542,6 +556,7 @@ import BatchIssueDialog from '../components/dialogs/BatchIssueDialog';
 import CommercialDialog from '../components/dialogs/CommercialDialog';
 import FeedbackDialog from '../components/dialogs/FeedbackDialog';
 import ListDialog from '../components/dialogs/ListDialog';
+import QuestionsDialog from '../components/dialogs/QuestionsDialog';
 
 export default {
   components: {
@@ -554,8 +569,15 @@ export default {
     CommercialDialog,
     FeedbackDialog,
     ListDialog,
+    QuestionsDialog,
   },
   methods: {
+    showQuestionsDialog () {
+      this.showMassive = true
+    },
+    closeQuestionsDialog () {
+      this.showMassive = false
+    },
     filterIssues () {
 
       if (this.$hasProfile('Administrador')) {
@@ -966,7 +988,8 @@ export default {
         this.isLoading = false;
         this.openedPanel = selectInvoiceIndex
 
-        //Se a busca foi feita pelo evento de clique da notificação, busca a avaliação do chamado.
+        //Se a busca foi feita pelo evento de clique da notificação,
+        //busca a avaliação do chamado.
         if (selectInvoiceIndex == 0) {
           this.getEvaluation(this.issues[0], false, true)
         }
@@ -1042,6 +1065,8 @@ export default {
     isLoading: true,
     noResult: false,
     searchText: '',
+    showMassive: false,
+    questions: [],
   }),
   created: function () {
 
@@ -1123,6 +1148,10 @@ export default {
       this.searchText = protocol;
       this.search(0, 0);
     })
+
+    this.questions[0] = 'Teste 1';
+    this.questions[1] = 'Teste 2';
+    this.questions[2] = 'Teste 3';
   }
 };
 </script>
