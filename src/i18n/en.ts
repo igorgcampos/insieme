@@ -426,4 +426,8 @@ export default {
     SUSPENSAO_XLSX: 'suspension.xlsx',
     APLICACOES: 'Applications',
     MASSIVA: 'Massive',
+    MASSIVA_0: 'The circuits belong to the same HUB?',
+    MASSIVA_1: 'Do the circuits belong to the same region?',
+    MASSIVA_2: 'The circuits belong to the same customer?',
+    MASSIVA_3: 'Please contact our call center on 0800 8888722',
 }

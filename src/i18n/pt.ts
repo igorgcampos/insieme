@@ -422,4 +422,8 @@ export default {
     SUSPENSAO_XLSX: 'suspensao.xlsx',
     APLICACOES: 'Aplicações',
     MASSIVA: 'Massiva',
+    MASSIVA_0: 'Os circuitos pertencem a mesma HUB?',
+    MASSIVA_1: 'Os circuitos pertencem a mesma região?',
+    MASSIVA_2: 'Os circuitos pertencem ao mesmo cliente?',
+    MASSIVA_3: 'Por favor, entre em contato com a nossa central de atendimento pelo número 0800 8888722',
 }

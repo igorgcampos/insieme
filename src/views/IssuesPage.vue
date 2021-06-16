@@ -1149,15 +1149,10 @@ export default {
       this.search(0, 0);
     })
 
-    this.questions[0] = 'Teste 1';
-    this.questions[1] = 'Teste 2';
-    this.questions[2] = 'Teste 3';
+    this.questions[0] = this.$vuetify.lang.t('$vuetify.MASSIVA_0');
+    this.questions[1] = this.$vuetify.lang.t('$vuetify.MASSIVA_1');
+    this.questions[2] = this.$vuetify.lang.t('$vuetify.MASSIVA_2');
+    this.questions[3] = this.$vuetify.lang.t('$vuetify.MASSIVA_3');
   }
 };
 </script>
-<style scoped>
-.chip-class {
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-</style>
