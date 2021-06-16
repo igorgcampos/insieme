@@ -9,7 +9,7 @@
 
       <v-row
         justify="center"
-        class="ma-0 pa-8 "
+        class="ma-0 pa-12"
       >
         <span class="text-center headline font-weight-bold grey--text text--darken-3">
           {{questions[index]}} </span>
