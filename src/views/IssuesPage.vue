@@ -733,11 +733,11 @@ export default {
 
       var count = 0;
       var total = issue.items.length;
-      for (var circuit in issue.items) {
+      for (var index in issue.items) {
 
         var object = {
           origem: 'CIRCUITO',
-          identificadorOrigem: circuit.nome,
+          identificadorOrigem: issue.items[index].nome,
           motivoAbertura: issue.reason,
           observacaoAbertura: issue.observation,
           contrato: { id: this.$props.contract.id }
