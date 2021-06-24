@@ -366,6 +366,18 @@
                           :class="{'pr-0 pl-0':$vuetify.breakpoint.xs}"
                         ></LabelValue>
                       </v-col>
+                      <v-col
+                        class="pt-0 pl-0 pr-0 mt-n6"
+                        v-if="issue.mensagens && issue.mensagens.length > 0"
+                      >
+                        <LabelValue
+                          :label="$vuetify.lang.t('$vuetify.OBSERVACAO_ABERTURA')"
+                          :value="issue.observacaoAbertura || '--'"
+                          justify="start"
+                          truncate
+                          :class="{'pl-0':$vuetify.breakpoint.xs}"
+                        ></LabelValue>
+                      </v-col>
                     </v-col>
 
                     <v-col
@@ -389,11 +401,26 @@
                           :class="{'pl-0 pr-0':$vuetify.breakpoint.xs}"
                         ></LabelValue>
                       </v-col>
+                      <v-col
+                        class="pt-0 pl-0 pr-0 mt-n6"
+                        v-if="issue.mensagens && issue.mensagens.length > 0"
+                      >
+                        <LabelValue
+                          :label="$vuetify.breakpoint.xs?
+                          $vuetify.lang.t('$vuetify.OBSERVACAO_ENCERRAMENTO_ABREVIADO'):$vuetify.lang.t('$vuetify.OBSERVACAO_ENCERRAMENTO')"
+                          :value="issue.observacaoEncerramento || '--'"
+                          justify="start"
+                          truncate
+                          style="max-width:150px;"
+                          :class="{'pl-0 pr-0':$vuetify.breakpoint.xs}"
+                        ></LabelValue>
+                      </v-col>
                     </v-col>
 
                     <v-col
                       class="mt-n12"
                       :class="{'col-6 pr-0 pl-2':$vuetify.breakpoint.xs}"
+                      v-if="issue.mensagens && issue.mensagens.length == 0"
                     >
                       <v-col class="pl-0">
                         <LabelValue
@@ -416,6 +443,43 @@
                         ></LabelValue>
                       </v-col>
                     </v-col>
+
+                    <div
+                      class="col-4 mt-n7 mr-0 ml-0"
+                      v-if="issue.mensagens && issue.mensagens.length > 0"
+                    >
+                      <span class="text-center caption font-weight-bold grey--text text--lighten-1">
+                        {{$vuetify.lang.t('$vuetify.MENSAGENS')}} </span>
+                      <v-col
+                        :class="{'col-6 pl-3':$vuetify.breakpoint.xs}"
+                        class="mt-0 overflow-y-auto mb-5"
+                        style="max-height:160px;"
+                      >
+
+                        <v-list
+                          subheader
+                          three-line
+                        >
+                          <v-list-item
+                            class="ml-n4 mt-n3"
+                            v-for="(message, i) in issue.mensagens"
+                            :key="i"
+                            :id="!message.usuario || message.usuario.id"
+                          >
+                            <v-list-item-content>
+                              <v-list-item-subtitle
+                                class="caption mb-2"
+                                :class="{'red--text':!message.usuario, 'green--text':message.usuario}"
+                              >{{!message.usuario?'Telespazio:':message.usuario.nome+':'}}</v-list-item-subtitle>
+                              <v-list-item-subtitle
+                                class="caption font-weight-bold"
+                                v-html="message.conteudo"
+                              ></v-list-item-subtitle>
+                            </v-list-item-content>
+                          </v-list-item>
+                        </v-list>
+                      </v-col>
+                    </div>
                   </v-row>
 
                   <v-divider
@@ -465,6 +529,16 @@
                       :event="showListCircuits"
                       :object="issue"
                       :isText=true
+                    ></TooltipButton>
+
+                    <TooltipButton
+                      :label="$vuetify.lang.t('$vuetify.ENVIAR_MENSAGEM')"
+                      :message="$vuetify.lang.t('$vuetify.ENVIAR_MENSAGEM')"
+                      :event="openMessageDialog"
+                      :object="issue"
+                      :mobile="$vuetify.breakpoint.xs"
+                      :isText=true
+                      v-if="issue.status!='ENCERRADO' && (issue.mensagens && issue.mensagens.length > 0)"
                     ></TooltipButton>
                   </v-card-actions>
                 </v-expansion-panel-content>
@@ -540,6 +614,17 @@
           :questions="questions"
         >
         </QuestionsDialog>
+
+        <AddMessageDialog
+          :close="closeMessageDialog"
+          :show="showMessageDialog"
+          :send="sendMessage"
+          :title="$vuetify.lang.t('$vuetify.ENVIAR_MENSAGEM')"
+          :subtitle="$vuetify.lang.t('$vuetify.ENVIAR_MENSAGEM_DESCRICAO')"
+          :entity="selectedIssue"
+          :loading="isLoading"
+        >
+        </AddMessageDialog>
       </div>
     </v-lazy>
   </div>
@@ -557,6 +642,7 @@ import CommercialDialog from '../components/dialogs/CommercialDialog';
 import FeedbackDialog from '../components/dialogs/FeedbackDialog';
 import ListDialog from '../components/dialogs/ListDialog';
 import QuestionsDialog from '../components/dialogs/QuestionsDialog';
+import AddMessageDialog from '../components/dialogs/AddMessageDialog';
 
 export default {
   components: {
@@ -570,8 +656,36 @@ export default {
     FeedbackDialog,
     ListDialog,
     QuestionsDialog,
+    AddMessageDialog,
   },
   methods: {
+    sendMessage (content, issue) {
+
+      this.isLoading = true;
+      this.$post('/chamado/mensagem', { issueId: issue.id, message: content }).then(() => {
+
+        this.isLoading = false;
+        this.showMessageDialog = false;
+        issue.mensagens =
+          issue.mensagens.concat({ conteudo: content, usuario: this.$getUser() });
+
+        var element = document.getElementById(this.$getUser().id);
+        console.log(element);
+        this.$vuetify.goTo(element, {
+          duration: 200,
+          offset: 25,
+          easing: 'linear',
+        })
+
+      });
+    },
+    openMessageDialog (issue) {
+      this.selectedIssue = issue;
+      this.showMessageDialog = true;
+    },
+    closeMessageDialog () {
+      this.showMessageDialog = false;
+    },
     showQuestionsDialog () {
       this.showMassive = true
     },
@@ -993,6 +1107,16 @@ export default {
         if (selectInvoiceIndex == 0) {
           this.getEvaluation(this.issues[0], false, true)
         }
+
+        response.data.forEach((element) => {
+          this.$get('/mensagem/issue', {
+            issueId: element.id
+
+          }).then((resp) => {
+            element.mensagens = resp.data;
+          });
+        })
+
       });
 
     },
@@ -1038,6 +1162,7 @@ export default {
     proactivity: Boolean,
   },
   data: () => ({
+    showMessageDialog: false,
     selectedList: [],
     showCircuitListDialog: false,
     canShowButton: false,
@@ -1116,6 +1241,15 @@ export default {
       page: 0
     })
       .then((response) => {
+
+        response.data.forEach((element) => {
+          this.$get('/mensagem/issue', {
+            issueId: element.id
+
+          }).then((resp) => {
+            element.mensagens = resp.data;
+          });
+        })
 
         this.issues = response.data;
         this.filterIssues()

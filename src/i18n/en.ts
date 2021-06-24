@@ -430,4 +430,8 @@ export default {
     MASSIVA_1: 'Do the circuits belong to the same region?',
     MASSIVA_2: 'The circuits belong to the same customer?',
     MASSIVA_3: 'Please contact our call center on 0800 8888722',
+    ENVIAR_MENSAGEM: 'Send message',
+    MENSAGENS: 'Messages',
+    MENSAGEM: 'Message',
+    ENVIAR_MESSAGEM_DESCRICAO: 'Send us a message for this issue',
 }
