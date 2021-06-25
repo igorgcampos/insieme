@@ -538,7 +538,7 @@
                       :object="issue"
                       :mobile="$vuetify.breakpoint.xs"
                       :isText=true
-                      v-if="issue.status!='ENCERRADO' && (issue.mensagens && issue.mensagens.length > 0)"
+                      v-if="issue.status!='ENCERRADO'"
                     ></TooltipButton>
                   </v-card-actions>
                 </v-expansion-panel-content>
@@ -660,6 +660,10 @@ export default {
   },
   methods: {
     sendMessage (content, issue) {
+
+      if (!issue.mensagens) {
+        issue.mensagens = [];
+      }
 
       this.isLoading = true;
       this.$post('/chamado/mensagem', { issueId: issue.id, message: content }).then(() => {
