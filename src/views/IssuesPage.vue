@@ -313,17 +313,13 @@
                         <v-chip
                           color="blue-grey"
                           class="ml-0 mr-2 mb-2 text-break"
+                          :class="{'main-chip':hasBreakLine(formatStatus(issue.statusProcessamento))}"
                           label
                           small
                           outlined
                           v-if="issue.status == 'EM_ANDAMENTO'"
                         >
-                          <span
-                            class="chip-class"
-                            :title="issue.statusProcessamento"
-                          >
-                            {{ issue.statusProcessamento }}
-                          </span>
+                          <span v-html="formatStatus(issue.statusProcessamento)"></span>
                         </v-chip>
 
                         <span
@@ -659,6 +655,29 @@ export default {
     AddMessageDialog,
   },
   methods: {
+    formatStatus (text) {
+      var array = text.split(' ');
+
+      if (array.length == 1) {
+        return text;
+      }
+
+      var formattedText = '';
+
+      array.forEach(item => {
+        if (item == array[0]) {
+          formattedText += array[0] + '<br/> ';
+          return;
+        }
+
+        formattedText += item + ' ';
+      })
+
+      return formattedText;
+    },
+    hasBreakLine (text) {
+      return text.includes('<br/>')
+    },
     sendMessage (content, issue) {
 
       if (!issue.mensagens) {
@@ -1285,3 +1304,10 @@ export default {
   }
 };
 </script>
+<style scoped>
+.main-chip.v-chip.v-size--small {
+  height: 44px !important;
+  padding-top: 20px !important;
+  padding-bottom: 20px !important;
+}
+</style>
