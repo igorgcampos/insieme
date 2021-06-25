@@ -672,15 +672,6 @@ export default {
         this.showMessageDialog = false;
         issue.mensagens =
           issue.mensagens.concat({ conteudo: content, usuario: this.$getUser() });
-
-        var element = document.getElementById(this.$getUser().id);
-        console.log(element);
-        this.$vuetify.goTo(element, {
-          duration: 200,
-          offset: 25,
-          easing: 'linear',
-        })
-
       });
     },
     openMessageDialog (issue) {
