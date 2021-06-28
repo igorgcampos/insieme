@@ -342,6 +342,43 @@
                       </v-col>
                     </v-col>
 
+                    <div
+                      class="col-4 mt-n7 mr-0 ml-0"
+                      v-if="issue.mensagens && issue.mensagens.length > 0"
+                    >
+                      <span class="text-center caption font-weight-bold grey--text text--lighten-1">
+                        {{$vuetify.lang.t('$vuetify.MENSAGENS')}} </span>
+                      <v-col
+                        :class="{'col-6 pl-3':$vuetify.breakpoint.xs}"
+                        class="mt-0 overflow-y-auto mb-5"
+                        style="max-height:160px;"
+                      >
+
+                        <v-list
+                          subheader
+                          three-line
+                        >
+                          <v-list-item
+                            class="ml-n4 mt-n3"
+                            v-for="(message, i) in issue.mensagens"
+                            :key="i"
+                            :id="!message.usuario || message.usuario.id"
+                          >
+                            <v-list-item-content>
+                              <v-list-item-subtitle
+                                class="caption mb-2"
+                                :class="{'red--text':!message.usuario, 'green--text':message.usuario}"
+                              >{{!message.usuario?'Telespazio:':message.usuario.nome+':'}}</v-list-item-subtitle>
+                              <v-list-item-subtitle
+                                class="caption font-weight-bold"
+                                v-html="message.conteudo"
+                              ></v-list-item-subtitle>
+                            </v-list-item-content>
+                          </v-list-item>
+                        </v-list>
+                      </v-col>
+                    </div>
+
                     <v-col
                       class="mt-n3"
                       :class="{'col-6 pl-3':$vuetify.breakpoint.xs}"
@@ -440,42 +477,6 @@
                       </v-col>
                     </v-col>
 
-                    <div
-                      class="col-4 mt-n7 mr-0 ml-0"
-                      v-if="issue.mensagens && issue.mensagens.length > 0"
-                    >
-                      <span class="text-center caption font-weight-bold grey--text text--lighten-1">
-                        {{$vuetify.lang.t('$vuetify.MENSAGENS')}} </span>
-                      <v-col
-                        :class="{'col-6 pl-3':$vuetify.breakpoint.xs}"
-                        class="mt-0 overflow-y-auto mb-5"
-                        style="max-height:160px;"
-                      >
-
-                        <v-list
-                          subheader
-                          three-line
-                        >
-                          <v-list-item
-                            class="ml-n4 mt-n3"
-                            v-for="(message, i) in issue.mensagens"
-                            :key="i"
-                            :id="!message.usuario || message.usuario.id"
-                          >
-                            <v-list-item-content>
-                              <v-list-item-subtitle
-                                class="caption mb-2"
-                                :class="{'red--text':!message.usuario, 'green--text':message.usuario}"
-                              >{{!message.usuario?'Telespazio:':message.usuario.nome+':'}}</v-list-item-subtitle>
-                              <v-list-item-subtitle
-                                class="caption font-weight-bold"
-                                v-html="message.conteudo"
-                              ></v-list-item-subtitle>
-                            </v-list-item-content>
-                          </v-list-item>
-                        </v-list>
-                      </v-col>
-                    </div>
                   </v-row>
 
                   <v-divider
