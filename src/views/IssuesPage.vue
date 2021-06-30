@@ -362,7 +362,6 @@
                             class="ml-n4 mt-n3"
                             v-for="(message, i) in issue.mensagens"
                             :key="i"
-                            :id="!message.usuario || message.usuario.id"
                           >
                             <v-list-item-content>
                               <v-list-item-subtitle
@@ -495,7 +494,7 @@
                       :object="issue"
                       :mobile="$vuetify.breakpoint.xs"
                       :isText=true
-                      v-if="issue.status=='ABERTO' && !issue.proatividade"
+                      v-if="issue.status != 'ENCERRADO' && !issue.proatividade"
                     ></TooltipButton>
 
                     <TooltipButton
@@ -505,7 +504,7 @@
                       :object="issue"
                       :mobile="$vuetify.breakpoint.xs"
                       :isText=true
-                      v-if="issue.status!='ABERTO' && !issue.evaluation && canShowButton"
+                      v-if="issue.status == 'ENCERRADO' && !issue.evaluation && canShowButton"
                     ></TooltipButton>
 
                     <TooltipButton
