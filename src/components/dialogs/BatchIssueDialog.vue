@@ -22,7 +22,7 @@
 
       <v-row
         class="ma-0 mb-3 d-flex justify-center"
-        v-if="selectReason"
+        v-if="selectReason && !showDialogLoading"
       >
 
         <v-col
@@ -63,6 +63,20 @@
             ></v-textarea>
           </v-row>
         </v-col>
+      </v-row>
+
+      <v-row
+        justify="center"
+        class="mt-3 mb-12 mr-5 ml-5"
+        v-if="showDialogLoading && !showSuccess && selectReason"
+      >
+        <v-progress-circular
+          :size="60"
+          :width="3"
+          color="red"
+          indeterminate
+          class="mb-8"
+        ></v-progress-circular>
       </v-row>
 
       <v-col
@@ -248,7 +262,7 @@
       </v-col>
 
       <v-divider class="mt-n6"></v-divider>
-      <v-card-actions>
+      <v-card-actions v-if="!showDialogLoading">
         <v-spacer v-if="!$vuetify.breakpoint.xs"></v-spacer>
         <v-btn
           color="primary"
