@@ -546,6 +546,7 @@
                       :isText=true
                       icon="mdi-reload"
                       color="primary"
+                      v-if="issue.status!='ENCERRADO'"
                     ></TooltipButton>
                   </v-card-actions>
                 </v-expansion-panel-content>
