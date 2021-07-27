@@ -19,7 +19,7 @@
       <v-btn
         v-if="icon"
         :text="isText"
-        color="red darken-5"
+        :color="color || 'red darken-5'"
         @click="event(object, $event)"
         v-on="on || on1"
         :loading="loading"
@@ -39,6 +39,7 @@ export default {
   props: {
     label: String,
     icon: String,
+    color: String,
     message: String,
     event: Function,
     loading: Boolean,

@@ -537,6 +537,16 @@
                       :isText=true
                       v-if="issue.status!='ENCERRADO'"
                     ></TooltipButton>
+
+                    <TooltipButton
+                      :message="$vuetify.lang.t('$vuetify.ATUALIZAR')"
+                      :event="refreshIssue"
+                      :object="issue"
+                      :mobile="$vuetify.breakpoint.xs"
+                      :isText=true
+                      icon="mdi-reload"
+                      color="primary"
+                    ></TooltipButton>
                   </v-card-actions>
                 </v-expansion-panel-content>
               </v-expansion-panel>
@@ -656,6 +666,21 @@ export default {
     AddMessageDialog,
   },
   methods: {
+    refreshIssue (issue) {
+
+      this.$get('/chamado/atualizar', { issueId: issue.id }).then((response) => {
+
+        this.issues.forEach(selectedIssue => {
+          if (selectedIssue.idIncidenteTopdesk == response.data.idIncidenteTopdesk) {
+            selectedIssue.status = response.data.status;
+            selectedIssue.statusProcessamento = response.data.statusProcessamento;
+            selectedIssue.dataEncerramento = response.data.dataEncerramento;
+            this.$forceUpdate()
+          }
+        })
+
+      });
+    },
     formatStatus (text) {
       var array = text.split(' ');
 

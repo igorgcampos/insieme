@@ -430,4 +430,5 @@ export default {
     MENSAGENS: 'Mensagens',
     MENSAGEM: 'Mensagem',
     ENVIAR_MENSAGEM_DESCRICAO: 'Envie para nós uma mensagem para este chamado',
+    ATUALIZAR: 'Atualizar',
 }

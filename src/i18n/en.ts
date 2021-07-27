@@ -434,4 +434,5 @@ export default {
     MENSAGENS: 'Messages',
     MENSAGEM: 'Message',
     ENVIAR_MESSAGEM_DESCRICAO: 'Send us a message for this issue',
+    ATUALIZAR: 'Refresh',
 }
