@@ -343,7 +343,7 @@
                     </v-col>
 
                     <div
-                      class="col-4 mt-n7 mr-0 ml-0"
+                      class="col-3 mt-n7 mr-0 ml-0 pl-0 pr-0"
                       v-if="issue.mensagens && issue.mensagens.length > 0"
                     >
                       <span class="text-center caption font-weight-bold grey--text text--lighten-1">
@@ -357,6 +357,7 @@
                         <v-list
                           subheader
                           three-line
+                          class="ml-n3"
                         >
                           <v-list-item
                             class="ml-n4 mt-n3"
@@ -369,7 +370,7 @@
                                 :class="{'red--text':!message.usuario, 'green--text':message.usuario}"
                               >{{!message.usuario?'Telespazio:':message.usuario.nome+':'}}</v-list-item-subtitle>
                               <v-list-item-subtitle
-                                class="caption font-weight-bold"
+                                class="caption font-weight-bold ml-1"
                                 v-html="message.conteudo"
                               ></v-list-item-subtitle>
                             </v-list-item-content>
