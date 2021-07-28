@@ -92,7 +92,7 @@
                 single-line
                 solo
                 ref="password"
-                :rules="success?[rules.min, rules.emailMatch, rules.noProfile]:[rules.min, rules.emailMatch]"
+                :rules="success?[rules.emailMatch, rules.noProfile]:[rules.emailMatch]"
                 :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
                 prepend-inner-icon="mdi-lock"
                 :type="show ? 'text' : 'password'"
@@ -180,7 +180,6 @@ export default {
       password: '',
       success: undefined,
       rules: {
-        min: v => v.length >= 6 || this.$vuetify.lang.t('$vuetify.MINIMO_CARACTERES'),
         emailMatch: () => this.success || this.success == undefined || this.$vuetify.lang.t('$vuetify.SENHA_INCORRETA'),
         noProfile: () => (this.$getUser() && this.$getUser().perfis.length > 0) || this.$vuetify.lang.t('$vuetify.SEM_PERMISSAO')
       },
