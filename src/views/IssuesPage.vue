@@ -676,6 +676,7 @@ export default {
             selectedIssue.status = response.data.status;
             selectedIssue.statusProcessamento = response.data.statusProcessamento;
             selectedIssue.dataEncerramento = response.data.dataEncerramento;
+            selectedIssue.mensagens = response.data.mensagens;
             this.$forceUpdate()
           }
         })
