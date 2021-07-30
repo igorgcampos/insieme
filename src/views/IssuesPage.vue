@@ -722,6 +722,8 @@ export default {
         this.showMessageDialog = false;
         issue.mensagens =
           issue.mensagens.concat({ conteudo: content, usuario: this.$getUser() });
+
+        refreshIssue(issue);
       });
     },
     openMessageDialog (issue) {
