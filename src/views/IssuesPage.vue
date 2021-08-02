@@ -1335,6 +1335,7 @@ export default {
     this.questions[1] = this.$vuetify.lang.t('$vuetify.MASSIVA_1');
     this.questions[2] = this.$vuetify.lang.t('$vuetify.MASSIVA_2');
     this.questions[3] = this.$vuetify.lang.t('$vuetify.MASSIVA_3');
+    this.questions[4] = this.$vuetify.lang.t('$vuetify.MASSIVA_4');
   }
 };
 </script>

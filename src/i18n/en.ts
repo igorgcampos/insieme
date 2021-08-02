@@ -435,4 +435,6 @@ export default {
     MENSAGEM: 'Message',
     ENVIAR_MESSAGEM_DESCRICAO: 'Send us a message for this issue',
     ATUALIZAR: 'Refresh',
+    MASSIVA_4: 'Great, the problem is probably not widespread. Select the circuits with problem and let us solve them. If you have any questions, call 0800 8888722',
+    SELECAO_MAXIMA: 'At most {0} circuits can be selected',
 }

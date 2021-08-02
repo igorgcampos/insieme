@@ -263,6 +263,10 @@
 
       <v-divider class="mt-n6"></v-divider>
       <v-card-actions v-if="!showDialogLoading">
+        <span
+          class="ml-3 caption font-weight-bold error--text"
+          v-if="showLimitWaring && entity.type=='circuit'"
+        >{{$vuetify.lang.t('$vuetify.SELECAO_MAXIMA', 30)}}</span>
         <v-spacer v-if="!$vuetify.breakpoint.xs"></v-spacer>
         <v-btn
           color="primary"
@@ -376,6 +380,12 @@ export default {
       }
 
       if (!this.containsItem(item, this.selectedItemList) && this.containsItem(item, this.selectedCheckList)) {
+
+        if (this.selectedItemList.length > 30 && this.entity.type == 'circuit') {
+          this.showLimitWaring = true;
+          return;
+        }
+
         this.selectedItemList.push(item)
 
         //verifica se o circuito já tem chamado aberto. Se tiver muda a cor dele na lista
@@ -396,15 +406,20 @@ export default {
         }
       } else {
 
-        if (!checkList || !this.containsItem(item, this.selectedCheckList))
+        if (!checkList || !this.containsItem(item, this.selectedCheckList)) {
           this.selectedItemList = this.selectedItemList.filter(function (value) {
             return value.id != item.id
           });
 
-        if (!checkList)
-          this.selectedCheckList = this.selectedCheckList.filter(function (value) {
-            return value.id != item.id
-          });
+          if (!checkList)
+            this.selectedCheckList = this.selectedCheckList.filter(function (value) {
+              return value.id != item.id
+            });
+
+          if (this.selectedItemList.length <= 30 && this.entity.type == 'circuit') {
+            this.showLimitWaring = false;
+          }
+        }
       }
     },
     containsItem (item, list) {
@@ -440,7 +455,8 @@ export default {
     selectedItemList: [],
     selectedCheckList: [],
     selectReason: false,
-    issue: { reason: '', observation: '', items: undefined }
+    issue: { reason: '', observation: '', items: undefined },
+    showLimitWaring: false,
   }),
   created: function () {
     this.size = this.$vuetify.breakpoint.xs ? 16 : 20;

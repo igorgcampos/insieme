@@ -431,4 +431,6 @@ export default {
     MENSAGEM: 'Mensagem',
     ENVIAR_MENSAGEM_DESCRICAO: 'Envie para nós uma mensagem para este chamado',
     ATUALIZAR: 'Atualizar',
+    MASSIVA_4: 'Ótimo, provavelmente o problema não é generalizado. Selecione os circuitos com problema e deixe conosco que resolveremos. Caso tenha dúvidas, ligar para 0800 8888722',
+    SELECAO_MAXIMA: 'No máximo {0} circuitos podem ser selecionados',
 }
