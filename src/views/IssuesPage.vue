@@ -712,6 +712,10 @@ export default {
       return formattedText;
     },
     hasBreakLine (text) {
+
+      if (!text) {
+        return;
+      }
       return text.includes('<br/>')
     },
     sendMessage (content, issue) {
