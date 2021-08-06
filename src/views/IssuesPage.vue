@@ -687,6 +687,11 @@ export default {
       });
     },
     formatStatus (text) {
+
+      if (!text) {
+        return;
+      }
+
       var array = text.split(' ');
 
       if (array.length == 1) {
