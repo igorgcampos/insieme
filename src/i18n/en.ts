@@ -437,4 +437,5 @@ export default {
     ATUALIZAR: 'Refresh',
     MASSIVA_4: 'Great, the problem is probably not widespread. Select the circuits with problem and let us solve them. If you have any questions, call 0800 8888722',
     SELECAO_MAXIMA: 'At most {0} circuits can be selected',
+    ERRO_CRIACAO_CHAMADO: 'We had a problem opening the ticket. Our team will analyze the problem and resolve it shortly. In the meantime, please contact us on 0800 8888722. Telezpazio thanks you.',
 }

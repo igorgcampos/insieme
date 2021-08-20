@@ -587,6 +587,7 @@
           :itemList="itemList"
           :reasonList="reasonBatchList"
           :noResult="noBatchResult"
+          :error="error"
         ></BatchIssueDialog>
 
         <CommercialDialog
@@ -916,6 +917,11 @@ export default {
 
         this.$post('/chamado/create', object).then((response) => {
 
+          if (!response) {
+            this.error = true;
+            return;
+          }
+
           if (response.data) {
 
             count++;
@@ -945,6 +951,11 @@ export default {
       }
 
       this.$post('/chamado/create', object).then((response) => {
+
+        if (!response) {
+          this.error = true;
+          return;
+        }
 
         if (response.data) {
 
@@ -1045,6 +1056,7 @@ export default {
       this.showBatchDialog = false;
       this.showDialogLoading = false;
       this.noBatchResult = false
+      this.error = false;
 
       setTimeout(() => {
         this.showSuccess = false;
@@ -1219,6 +1231,7 @@ export default {
     proactivity: Boolean,
   },
   data: () => ({
+    error: false,
     showMessageDialog: false,
     selectedList: [],
     showCircuitListDialog: false,

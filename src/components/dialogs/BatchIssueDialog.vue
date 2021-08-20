@@ -6,7 +6,7 @@
     :max-width="selectReason?360:470"
     v-if="showDialog"
   >
-    <v-card v-show="!showSuccess">
+    <v-card v-show="!showSuccess && !error">
       <v-card-title
         class="headline-6"
         :class="{'subtitle-2':$vuetify.breakpoint.xs}"
@@ -68,7 +68,7 @@
       <v-row
         justify="center"
         class="mt-3 mb-12 mr-5 ml-5"
-        v-if="showDialogLoading && !showSuccess && selectReason"
+        v-if="showDialogLoading && !showSuccess && selectReason && !error"
       >
         <v-progress-circular
           :size="60"
@@ -300,13 +300,38 @@
       <v-spacer v-if="$vuetify.breakpoint.xs"></v-spacer>
     </v-card>
 
-    <v-card v-show="showSuccess">
+    <v-card v-show="showSuccess && !error">
 
       <SuccessPanel
         :title="entity.protocolo?$vuetify.lang.t('$vuetify.CHAMADO_CRIADO'):$vuetify.lang.t('$vuetify.CHAMADOS_CRIADOS')"
         :subtitle="entity.protocolo?$vuetify.lang.t('$vuetify.PROTOCOLO')+': '+entity.protocolo:''"
       >
       </SuccessPanel>
+
+      <v-divider class="mt-n6"></v-divider>
+      <v-card-actions>
+        <v-spacer></v-spacer>
+        <v-btn
+          color="primary"
+          text
+          @click="close(); cleanFields()"
+          :x-small="$vuetify.breakpoint.xs"
+        >{{$vuetify.lang.t('$vuetify.FECHAR')}}</v-btn>
+      </v-card-actions>
+    </v-card>
+
+    <v-card
+      v-show="!showSuccess && error"
+      class="mr-4"
+    >
+
+      <WarningPanel
+        class="pt-10 mb-8 pr-5 pl-5"
+        :mobile=true
+        :message="$vuetify.lang.t('$vuetify.ERRO_CRIACAO_CHAMADO')"
+        icon="mdi-alert-box"
+      >
+      </WarningPanel>
 
       <v-divider class="mt-n6"></v-divider>
       <v-card-actions>
@@ -337,6 +362,7 @@ export default {
     entity: Object,
     showDialog: Boolean,
     showSuccess: Boolean,
+    error: Boolean,
     showDialogLoading: Boolean,
     noResult: Boolean,
     close: Function,
@@ -439,8 +465,10 @@ export default {
 
       if (cancel) {
         this.selectReason = false
+      } else if (this.error) {
+        this.selectReason = false;
       } else {
-        this.selectReason = !this.showSuccess
+        this.selectReason = !this.showSuccess;
       }
       this.selectedItemList = [];
       this.selectedCheckList = []

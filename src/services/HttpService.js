@@ -45,7 +45,10 @@ httpService.install = function (Vue, router) {
                 Vue.prototype.$clearSessionStorage();
                 router.push('/login')
             }
+
+            return null;
         }
+
     }
 
     Vue.prototype.$put = async (url, body) => {
