@@ -329,7 +329,7 @@
         class="pt-10 mb-8 pr-5 pl-5"
         :mobile=true
         :message="$vuetify.lang.t('$vuetify.ERRO_CRIACAO_CHAMADO')"
-        icon="mdi-alert-box"
+        robot="true"
       >
       </WarningPanel>
 

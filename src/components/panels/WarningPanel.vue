@@ -5,7 +5,14 @@
       justify="center"
       class="mb-3"
     >
-      <v-icon :x-large="!mobile">{{icon?icon:'mdi-help-circle'}}</v-icon>
+      <v-icon v-if="!robot" :x-large="!mobile">{{icon?icon:'mdi-help-circle'}}</v-icon>
+      <v-img
+              src="../../assets/robo.png"
+              max-height="100"
+              max-width="100"
+              class="mx-auto mt-6 mb-6"
+              v-if="robot"
+            ></v-img>
     </v-row>
     <v-row justify="center">
       <span
@@ -22,7 +29,8 @@ export default {
   props: {
     icon: String,
     message: String,
-    mobile: Boolean
+    mobile: Boolean,
+    robot: Boolean,
   }
 };
 </script>
