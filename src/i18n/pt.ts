@@ -433,5 +433,5 @@ export default {
     ATUALIZAR: 'Atualizar',
     MASSIVA_4: 'Ótimo, provavelmente o problema não é generalizado. Selecione os circuitos com problema e deixe conosco que resolveremos. Caso tenha dúvidas, ligar para 0800 8888722',
     SELECAO_MAXIMA: 'No máximo {0} circuitos podem ser selecionados',
-    ERRO_CRIACAO_CHAMADO: 'Tivemos um problema em abrir o chamado. Nossa equipe analisará o problema e resolverá em breve. Enquanto isso, por favor entre em contato pelo telefone 0800 8888722. A Telespazio agradece.',
+    ERRO_CRIACAO_CHAMADO: 'Tivemos um problema ao abrir o chamado. Nossa equipe analisará o problema e resolverá em breve. Enquanto isso, por favor entre em contato pelo telefone 0800 8888722. A Telespazio agradece.',
 }
