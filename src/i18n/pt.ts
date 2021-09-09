@@ -353,6 +353,7 @@ export default {
     V_2_2_0: '- Novo sistema de notificações que avisa ao usuário sobre criação/cancelamento de notas fiscais além de enviar um email automático para cada usuário. <br>- Filtragem de circuitos por tecnologia (BGAN, Iridium, VOIP e etc.) <br>- O tipo de banda (KA/KU/L) agora é exibido nos detalhes de cada circuito. <br>- O caráter proativo já está sendo exibido nos contratos proativos e nos circuitos que a eles pertencem. <br>- O usuário poderá enviar seu feedback através de um botão localizado na parte superior direita da tela de dashboard.',
     V_2_3_0: 'Nova tela de administração com funcionalidades para fazer auditoria no Insieme.',
     V_2_4_0: 'Nova funcionalidade de fornecer feedback para o atendimento de um chamado.',
+    V_2_5_0: '- Agora o cliente pode enviar mensagens para o operador do NOC de dentro do próprio chamado. <br>- Cliente também poderá abrir um chamado do tipo massiva. <br>- Novas opções foram adicionadas no módulo comercial para abrir chamado do tipo "Site survey" e "Outros serviços".',
     NOVA_LINHA: 'Nova linha',
     BAIXAR_EXCEL: 'Baixar modelo em excel',
     IMPORTAR_EXCEL: 'Importar excel preenchido',

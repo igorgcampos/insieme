@@ -357,6 +357,7 @@ export default {
     V_2_2_0: '- New notification system that notifies the user of creating/canceling invoices in addition to sending an automatic email to each user. <br> - Filtering circuits by technology (BGAN, Iridium, VOIP, etc.) <br> - The type of band (KA / KU / L) is now displayed in the details of each circuit. <br>- The proactive character is already being exhibited in the proactive contracts and the circuits that belong to them. <br> - The user can send his feedback through a button located in the upper right part of the dashboard screen.',
     V_2_3_0: 'New administration screen with features for auditing Insieme.',
     V_2_4_0: 'New functionality to provide feedback for answering a call.',
+    V_2_5_0: '- Now the client can send messages to the NOC operator from within the call itself. <br>- Customer can also open a massive call. <br>- New options have been added in the commercial module to open calls like "Site survey" and "Other services".',
     NOVA_LINHA: 'New line',
     BAIXAR_EXCEL: 'Download spreadsheet template',
     IMPORTAR_EXCEL: 'Import filled excel',
