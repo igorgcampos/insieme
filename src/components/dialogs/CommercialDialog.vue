@@ -281,7 +281,7 @@ export default {
       this.issue.reason = undefined;
       this.uploadSuccess = false;
       this.file = undefined;
-      this.fileByteArray = undefined;
+      this.fileByteArray = [];
       this.entityList = [];
     }
   },
