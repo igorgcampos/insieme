@@ -599,6 +599,9 @@ export default {
           this.showDialogLoading = false;
           this.$root.$emit('new-issue', response.data)
           entity.protocolo = response.data.protocolo
+
+          file = undefined;
+          itemList = [];
         }
       });
     },
