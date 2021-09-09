@@ -21,12 +21,12 @@
       >{{subtitle}}</v-card-text>
 
       <v-card-text
-        v-if="this.actionName != 'NOVO_CIRCUITO' && editable && !showSuccess"
+        v-if="this.actionName != 'NOVO_CIRCUITO' && this.actionName != 'SITE_SURVEY' && editable && !showSuccess"
         class="caption mt-n3 font-weight-bold grey--text"
       >{{'Circuitos selecionados: '+entityList.length}}</v-card-text>
 
       <v-row
-        v-if="this.actionName != 'NOVO_CIRCUITO' && editable && !showSuccess && canShowExcelButtons()"
+        v-if="this.actionName != 'NOVO_CIRCUITO' && this.actionName != 'SITE_SURVEY' && editable && !showSuccess && canShowExcelButtons()"
         class="mt-n9 mb-4 mr-4"
       >
         <v-spacer></v-spacer>
@@ -79,7 +79,7 @@
         </v-lazy>
 
         <v-row
-          v-if="actionName=='NOVO_CIRCUITO' && editable && !showSuccess"
+          v-if="(actionName=='NOVO_CIRCUITO' || this.actionName == 'SITE_SURVEY') && editable && !showSuccess"
           class="mr-1"
         >
           <v-btn
@@ -199,7 +199,9 @@ export default {
         this.actionName == 'REMANEJAR' ||
         this.actionName == 'ALTERAR_VELOCIDADE' ||
         this.actionName == 'CANCELAR' ||
-        this.actionName == 'SUSPENDER'
+        this.actionName == 'SUSPENDER' ||
+        this.actionName == 'SITE_SURVEY' ||
+        this.actionName == 'OUTROS'
     },
     clickInput () {
       this.$refs.file.click()
@@ -256,6 +258,16 @@ export default {
         link.setAttribute("download", this.$vuetify.lang.t('$vuetify.SUSPENSAO_XLSX'));
       }
 
+      if (this.actionName == 'OUTROS') {
+        link.href = 'outros.xlsx';
+        link.setAttribute("download", this.$vuetify.lang.t('$vuetify.OUTROS_XLSX'));
+      }
+
+      if (this.actionName == 'SITE_SURVEY') {
+        link.href = 'nova_instalacao.xlsx';
+        link.setAttribute("download", this.$vuetify.lang.t('$vuetify.SITE_SURVEY_XLSX'));
+      }
+
       link.click();
     },
     newLine () {
@@ -293,14 +305,14 @@ export default {
       { text: '', align: 'start', value: 'actions', sortable: false }
     ];
 
-    if (this.actionName == 'ALTERAR_VELOCIDADE' || this.actionName == 'SUSPENDER' ||
+    if (this.actionName == 'OUTROS' || this.actionName == 'ALTERAR_VELOCIDADE' || this.actionName == 'SUSPENDER' ||
       this.actionName == 'CANCELAR' || this.actionName == 'REMANEJAR' ||
       this.actionName == 'ATIVAR' || this.actionName == 'REVOGAR_CANCELAMENTO' || this.actionName == 'REVOGAR_SUSPENSAO')
       this.headers.push({
         text: this.$vuetify.lang.t('$vuetify.DESIGNACAO_TPZ'), align: 'start', sortable: false, value: 'nome', width: 200
       })
 
-    if (this.actionName == 'SUSPENDER' || this.actionName == 'NOVO_CIRCUITO' ||
+    if (this.actionName == 'OUTROS' || this.actionName == 'SUSPENDER' || this.actionName == 'NOVO_CIRCUITO' || this.actionName == 'SITE_SURVEY' ||
       this.actionName == 'CANCELAR' || this.actionName == 'ATIVAR' ||
       this.actionName == 'REVOGAR_CANCELAMENTO' || this.actionName == 'REVOGAR_SUSPENSAO')
       this.headers.push({ text: this.$vuetify.lang.t('$vuetify.DESIGNACAO_CLIENTE'), value: 'designacaoCliente', sortable: false, width: 200 })
@@ -320,7 +332,11 @@ export default {
       this.headers.push({ text: this.$vuetify.lang.t('$vuetify.ROTAS_SUMARIZADAS'), value: 'rotas_sumarizadas', sortable: false, width: 200 })
     }
 
-    if (this.actionName == 'NOVO_CIRCUITO') {
+    if (this.actionName == 'OUTROS') {
+      this.headers.push({ text: this.$vuetify.lang.t('$vuetify.SERVICO'), value: 'servico', sortable: false, width: 200 })
+    }
+
+    if (this.actionName == 'NOVO_CIRCUITO' || this.actionName == 'SITE_SURVEY') {
 
       this.headers.push({ text: this.$vuetify.lang.t('$vuetify.BANDA'), value: 'banda', sortable: false, width: 200 })
       this.headers.push({ text: this.$vuetify.lang.t('$vuetify.VELOCIDADE'), value: 'velocidade', sortable: false, width: 200 })
@@ -363,7 +379,7 @@ export default {
       this.headers.push({ text: this.$vuetify.lang.t('$vuetify.ROTAS_SUMARIZADAS'), value: 'rotas_sumarizadas', sortable: false, width: 200 })
 
 
-      if (this.entityList.length == 0) {
+      if (this.entityList.length == 0 && this.actionName == 'NOVO_CIRCUITO') {
         this.entityList.push({});
         this.entityList.push({});
         this.entityList.push({});
@@ -380,6 +396,17 @@ export default {
       this.headers.push({ text: this.$vuetify.lang.t('$vuetify.CONTATO_INSTALACAO'), value: 'contato_instalacao', sortable: false, width: 200 })
       this.headers.push({ text: this.$vuetify.lang.t('$vuetify.TELEFONE_INSTALACAO'), value: 'telefone_instalacao', sortable: false, width: 200 })
     }
+
+    if (this.actionName == 'OUTROS') {
+      this.headers.push({ text: this.$vuetify.lang.t('$vuetify.ENDERECO'), value: 'endereco', sortable: false, width: 200 })
+      this.headers.push({ text: this.$vuetify.lang.t('$vuetify.BAIRRO'), value: 'bairro', sortable: false, width: 200 })
+      this.headers.push({ text: this.$vuetify.lang.t('$vuetify.CIDADE'), value: 'cidade', sortable: false, width: 200 })
+      this.headers.push({ text: this.$vuetify.lang.t('$vuetify.UF'), value: 'uf', sortable: false, width: 200 })
+      this.headers.push({ text: this.$vuetify.lang.t('$vuetify.CEP'), value: 'cep', sortable: false, width: 200 })
+      this.headers.push({ text: this.$vuetify.lang.t('$vuetify.CONTATO'), value: 'contato', sortable: false, width: 200 })
+      this.headers.push({ text: this.$vuetify.lang.t('$vuetify.TELEFONE'), value: 'telefone', sortable: false, width: 200 })
+    }
+
 
     if (this.actionName == 'REMANEJAR') {
       this.headers.push({ text: this.$vuetify.lang.t('$vuetify.TIPO_REMANEJAMENTO'), value: 'tipo_remanejamento', sortable: false, width: 200 })

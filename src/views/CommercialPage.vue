@@ -102,6 +102,12 @@
                 <v-list-item @click="showCommercialDialog('SUSPENDER')">
                   <v-list-item-title>{{ $vuetify.lang.t('$vuetify.SUSPENDER') }}</v-list-item-title>
                 </v-list-item>
+                <v-list-item @click="showCommercialDialog('SITE_SURVEY')">
+                  <v-list-item-title>{{ $vuetify.lang.t('$vuetify.SITE_SURVEY') }}</v-list-item-title>
+                </v-list-item>
+                <v-list-item @click="showCommercialDialog('OUTROS')">
+                  <v-list-item-title>{{ $vuetify.lang.t('$vuetify.OUTROS') }}</v-list-item-title>
+                </v-list-item>
               </v-list>
             </v-menu>
 
@@ -192,12 +198,20 @@
 
             <v-list>
 
+              <v-list-item @click="showCommDialog({actionName:'SITE_SURVEY'})">
+                <v-list-item-title>{{$vuetify.lang.t('$vuetify.SITE_SURVEY')}}</v-list-item-title>
+              </v-list-item>
+
               <v-list-item @click="showCommDialog({actionName:'SUSPENDER'})">
                 <v-list-item-title>{{$vuetify.lang.t('$vuetify.SUSPENDER')}}</v-list-item-title>
               </v-list-item>
 
               <v-list-item @click="showCommDialog({actionName: 'CANCELAR'})">
                 <v-list-item-title>{{$vuetify.lang.t('$vuetify.CANCELAR')}}</v-list-item-title>
+              </v-list-item>
+
+              <v-list-item @click="showCommDialog({actionName:'OUTROS'})">
+                <v-list-item-title>{{$vuetify.lang.t('$vuetify.OUTROS')}}</v-list-item-title>
               </v-list-item>
             </v-list>
 
@@ -402,6 +416,14 @@ export default {
         this.title = this.$vuetify.lang.t('$vuetify.SUSPENDER')
         this.subtitle = this.$vuetify.lang.t('$vuetify.SUSPENDER_DESCRICAO')
 
+      } else if (actionName == 'SITE_SURVEY') {
+        this.title = this.$vuetify.lang.t('$vuetify.SITE_SURVEY')
+        this.subtitle = this.$vuetify.lang.t('$vuetify.SITE_SURVEY_DESCRICAO')
+
+      } else if (actionName == 'OUTROS') {
+        this.title = this.$vuetify.lang.t('$vuetify.OUTROS')
+        this.subtitle = this.$vuetify.lang.t('$vuetify.OUTROS_DESCRICAO')
+
       }
     },
     showCommDialog (entity) {
@@ -443,13 +465,13 @@ export default {
 
         var obj = {};
 
-        if (this.actionName == 'ALTERAR_VELOCIDADE' || this.actionName == 'SUSPENDER' ||
+        if (this.actionName == 'OUTROS' || this.actionName == 'ALTERAR_VELOCIDADE' || this.actionName == 'SUSPENDER' ||
           this.actionName == 'CANCELAR' || this.actionName == 'REMANEJAR' ||
           this.actionName == 'ATIVAR' || this.actionName == 'REVOGAR_CANCELAMENTO' ||
           this.actionName == 'REVOGAR_SUSPENSAO')
           obj['Designação Tpz'] = item.nome
 
-        if (this.actionName == 'SUSPENDER' || this.actionName == 'NOVO_CIRCUITO' ||
+        if (this.actionName == 'OUTROS' || this.actionName == 'SUSPENDER' || this.actionName == 'NOVO_CIRCUITO' || this.actionName == 'SITE_SURVEY' ||
           this.actionName == 'CANCELAR' || this.actionName == 'ATIVAR' ||
           this.actionName == 'REVOGAR_CANCELAMENTO' || this.actionName == 'REVOGAR_SUSPENSAO')
           obj['Designação Cliente'] = item.designacaoCliente
@@ -461,7 +483,7 @@ export default {
           obj['Velocidade solicitada'] = item.velocidade_solicitada
         }
 
-        if (this.actionName == 'NOVO_CIRCUITO') {
+        if (this.actionName == 'NOVO_CIRCUITO' || this.actionName == 'SITE_SURVEY') {
           obj['Banda'] = item.banda
           obj['Velocidade'] = item.velocidade
           obj['Antena'] = item.antena
@@ -486,7 +508,8 @@ export default {
           obj['Longitude'] = item.longitude
         }
 
-        if (this.actionName == 'CANCELAR' || this.actionName == 'NOVO_CIRCUITO' || this.actionName == 'SUSPENDER') {
+        if (this.actionName == 'CANCELAR' || this.actionName == 'NOVO_CIRCUITO' ||
+          this.actionName == 'SITE_SURVEY' || this.actionName == 'SUSPENDER') {
           obj['Endereço da instalação'] = item.endereco_instalacao
           obj['Bairro da instalação'] = item.bairro_instalacao
           obj['Cidade da instalação'] = item.cidade_instalacao
@@ -496,7 +519,19 @@ export default {
           obj['Telefone da instalação'] = item.telefone_instalacao
         }
 
-        if (this.actionName == 'NOVO_CIRCUITO' || this.actionName == 'ALTERAR_VELOCIDADE') {
+        if (this.actionName == 'OUTROS') {
+          obj['Endereço'] = item.endereco
+          obj['Bairro'] = item.bairro
+          obj['Cidade'] = item.cidade
+          obj['UF'] = item.uf
+          obj['CEP'] = item.cep
+          obj['Contato'] = item.contato
+          obj['Telefone'] = item.telefone
+          obj['Serviço'] = item.servico
+        }
+
+        if (this.actionName == 'NOVO_CIRCUITO' || this.actionName == 'ALTERAR_VELOCIDADE'
+          || this.actionName == 'SITE_SURVEY') {
           obj['Endereço da gerência'] = item.endereco_gerencia
           obj['VLAN'] = item.vlan
           obj['Interconexão Tpz'] = item.interconexao_tpz

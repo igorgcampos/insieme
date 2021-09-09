@@ -83,6 +83,7 @@ export default {
     MAIS_DETALHES: 'Mais detalhes',
     VER_DETALHES_PRTG: 'Ver mais detalhes no PRTG',
     DESCRICAO_SERVICO: 'Descrição do serviço',
+    SERVICO: 'Serviço',
     CONDICAO_PAGAMENTO: 'Cond. de pagamento',
     DATA_COMPETENCIA: 'Data de competência',
     DATA_EMISSAO: 'Data de emissão',
@@ -434,4 +435,10 @@ export default {
     MASSIVA_4: 'Ótimo, provavelmente o problema não é generalizado. Selecione os circuitos com problema e deixe conosco que resolveremos. Caso tenha dúvidas, ligar para 0800 8888722',
     SELECAO_MAXIMA: 'No máximo {0} circuitos podem ser selecionados',
     ERRO_CRIACAO_CHAMADO: 'Tivemos um problema ao abrir o chamado. Nossa equipe analisará o problema e resolverá em breve. Enquanto isso, por favor entre em contato pelo telefone 0800 8888722. A Telespazio agradece.',
+    SITE_SURVEY: 'Site survey',
+    OUTROS: 'Outros',
+    SITE_SURVEY_DESCRICAO: 'Pedir abertura de um site survey',
+    OUTROS_DESCRICAO: 'Pedir a realização de outros serviços',
+    OUTROS_XLSX: 'outros.xlsx',
+    SITE_SURVEY_XLSX: 'site_survey.xlsx',
 }

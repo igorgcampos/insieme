@@ -83,6 +83,7 @@ export default {
     ABRIR_CHAMADO: 'Open ticket',
     ABRIR_CHAMADO_NOTA: 'Open an issue for this invoice',
     DESCRICAO_SERVICO: 'Service description',
+    SERVICO: 'Service',
     CONDICAO_PAGAMENTO: 'Payment condition',
     DATA_COMPETENCIA: 'Competency date',
     DATA_EMISSAO: 'Emit date',
@@ -438,4 +439,10 @@ export default {
     MASSIVA_4: 'Great, the problem is probably not widespread. Select the circuits with problem and let us solve them. If you have any questions, call 0800 8888722',
     SELECAO_MAXIMA: 'At most {0} circuits can be selected',
     ERRO_CRIACAO_CHAMADO: 'We had a problem opening the ticket. Our team will analyze the problem and resolve it shortly. In the meantime, please contact us on 0800 8888722. Telespazio thanks you.',
+    SITE_SURVEY: 'Site survey',
+    OUTROS: 'Others',
+    SITE_SURVEY_DESCRICAO: 'Ask to open a survey site',
+    OUTROS_DESCRICAO: 'Request the performance of other services',
+    OUTROS_XLSX: 'others.xlsx',
+    SITE_SURVEY_XLSX: 'site_survey.xlsx',
 }

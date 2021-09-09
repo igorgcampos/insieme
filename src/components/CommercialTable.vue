@@ -4,7 +4,7 @@
     :items="entityList"
     dense
     fixed-header
-    :height="actionName!='NOVO_CIRCUITO'?260:220"
+    :height="(actionName !='NOVO_CIRCUITO' && this.actionName != 'SITE_SURVEY')?260:220"
     class="ml-4 mr-4"
     max-width="600"
     no-data-text=""
@@ -23,7 +23,7 @@
 
     <template
       v-slot:item.designacaoCliente="props"
-      v-if="actionName == 'NOVO_CIRCUITO' && editable"
+      v-if="(actionName == 'NOVO_CIRCUITO' || actionName == 'SITE_SURVEY') && editable"
     >
       <v-edit-dialog
         :return-value.sync="props.item.designacaoCliente"
@@ -1114,6 +1114,166 @@
         <template v-slot:input>
           <v-text-field
             v-model="props.item.longitude"
+            :label="$vuetify.lang.t('$vuetify.EDITAR')"
+            single-line
+          ></v-text-field>
+        </template>
+      </v-edit-dialog>
+    </template>
+
+    <template
+      v-slot:item.servico="props"
+      v-if="editable"
+    >
+      <v-edit-dialog
+        :return-value.sync="props.item.servico"
+        large
+        :cancel-text="$vuetify.lang.t('$vuetify.CANCELAR')"
+        :save-text="$vuetify.lang.t('$vuetify.SALVAR')"
+      > {{ props.item.servico }}
+        <template v-slot:input>
+          <v-text-field
+            v-model="props.item.servico"
+            :label="$vuetify.lang.t('$vuetify.EDITAR')"
+            single-line
+          ></v-text-field>
+        </template>
+      </v-edit-dialog>
+    </template>
+
+    <template
+      v-slot:item.endereco="props"
+      v-if="editable"
+    >
+      <v-edit-dialog
+        :return-value.sync="props.item.endereco"
+        large
+        :cancel-text="$vuetify.lang.t('$vuetify.CANCELAR')"
+        :save-text="$vuetify.lang.t('$vuetify.SALVAR')"
+      > {{ props.item.endereco }}
+        <template v-slot:input>
+          <v-text-field
+            v-model="props.item.endereco"
+            :label="$vuetify.lang.t('$vuetify.EDITAR')"
+            single-line
+          ></v-text-field>
+        </template>
+      </v-edit-dialog>
+    </template>
+
+    <template
+      v-slot:item.bairro="props"
+      v-if="editable"
+    >
+      <v-edit-dialog
+        :return-value.sync="props.item.bairro"
+        large
+        :cancel-text="$vuetify.lang.t('$vuetify.CANCELAR')"
+        :save-text="$vuetify.lang.t('$vuetify.SALVAR')"
+      > {{ props.item.bairro }}
+        <template v-slot:input>
+          <v-text-field
+            v-model="props.item.bairro"
+            :label="$vuetify.lang.t('$vuetify.EDITAR')"
+            single-line
+          ></v-text-field>
+        </template>
+      </v-edit-dialog>
+    </template>
+
+    <template
+      v-slot:item.cidade="props"
+      v-if="editable"
+    >
+      <v-edit-dialog
+        :return-value.sync="props.item.cidade"
+        large
+        :cancel-text="$vuetify.lang.t('$vuetify.CANCELAR')"
+        :save-text="$vuetify.lang.t('$vuetify.SALVAR')"
+      > {{ props.item.cidade }}
+        <template v-slot:input>
+          <v-text-field
+            v-model="props.item.cidade"
+            :label="$vuetify.lang.t('$vuetify.EDITAR')"
+            single-line
+          ></v-text-field>
+        </template>
+      </v-edit-dialog>
+    </template>
+
+    <template
+      v-slot:item.uf="props"
+      v-if="editable"
+    >
+      <v-edit-dialog
+        :return-value.sync="props.item.uf"
+        large
+        :cancel-text="$vuetify.lang.t('$vuetify.CANCELAR')"
+        :save-text="$vuetify.lang.t('$vuetify.SALVAR')"
+      > {{ props.item.uf }}
+        <template v-slot:input>
+          <v-text-field
+            v-model="props.item.uf"
+            :label="$vuetify.lang.t('$vuetify.EDITAR')"
+            single-line
+          ></v-text-field>
+        </template>
+      </v-edit-dialog>
+    </template>
+
+    <template
+      v-slot:item.cep="props"
+      v-if="editable"
+    >
+      <v-edit-dialog
+        :return-value.sync="props.item.cep"
+        large
+        :cancel-text="$vuetify.lang.t('$vuetify.CANCELAR')"
+        :save-text="$vuetify.lang.t('$vuetify.SALVAR')"
+      > {{ props.item.cep }}
+        <template v-slot:input>
+          <v-text-field
+            v-model="props.item.cep"
+            :label="$vuetify.lang.t('$vuetify.EDITAR')"
+            single-line
+          ></v-text-field>
+        </template>
+      </v-edit-dialog>
+    </template>
+
+    <template
+      v-slot:item.contato="props"
+      v-if="editable"
+    >
+      <v-edit-dialog
+        :return-value.sync="props.item.contato"
+        large
+        :cancel-text="$vuetify.lang.t('$vuetify.CANCELAR')"
+        :save-text="$vuetify.lang.t('$vuetify.SALVAR')"
+      > {{ props.item.contato }}
+        <template v-slot:input>
+          <v-text-field
+            v-model="props.item.contato"
+            :label="$vuetify.lang.t('$vuetify.EDITAR')"
+            single-line
+          ></v-text-field>
+        </template>
+      </v-edit-dialog>
+    </template>
+
+    <template
+      v-slot:item.telefone="props"
+      v-if="editable"
+    >
+      <v-edit-dialog
+        :return-value.sync="props.item.telefone"
+        large
+        :cancel-text="$vuetify.lang.t('$vuetify.CANCELAR')"
+        :save-text="$vuetify.lang.t('$vuetify.SALVAR')"
+      > {{ props.item.telefone }}
+        <template v-slot:input>
+          <v-text-field
+            v-model="props.item.telefone"
             :label="$vuetify.lang.t('$vuetify.EDITAR')"
             single-line
           ></v-text-field>
