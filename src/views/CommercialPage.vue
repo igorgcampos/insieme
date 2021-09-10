@@ -584,13 +584,14 @@ export default {
       issue = {
         origem: 'CIRCUITO_LOTE_COMERCIAL',
         identificadorOrigem: null,
-        motivoAbertura: this.$vuetify.lang.t('$vuetify.' + this.actionName),
+        motivoAbertura: this.actionName,
         observacaoAbertura: issue.observation,
         contrato: this.$props.contract,
         lote: [this.actionName],
         planilha: itemList.length > 0 ? JSON.stringify(itemList) : '',
         arquivo: file,
       }
+
       this.$post('/chamado/create', issue).then((response) => {
 
         if (response.data) {
