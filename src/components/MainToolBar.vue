@@ -412,6 +412,7 @@ export default {
     ApplicationsMenu,
   },
   created: function () {
+
     this.user = this.$getUser();
 
     (function (i, s, o, g, r, a, m) { i[r] = { context: { id: '8551dbde3f168db249381597eea81c71' } }; a = o; o = s.createElement(o); o.async = 1; o.src = g; m = s.getElementsByTagName(a)[0]; m.parentNode.insertBefore(o, m); })(window, document, 'script', 'https://js.huggy.chat/widget.min.js?v=8.0.0', 'pwz')
@@ -419,7 +420,7 @@ export default {
     var vm = this;
     setTimeout(function () { vm.$showChatButton() }, 2000)
 
-    if (!this.$getUser().cliente) {
+    if (!this.user.cliente) {
       return
     }
 
