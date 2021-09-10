@@ -539,7 +539,7 @@ export default {
     },
     sendIssue (issue, invoice) {
 
-      if (!issue.reason || issue.observation) {
+      if (!issue.reason || !issue.observation) {
         return;
       }
 
@@ -548,10 +548,11 @@ export default {
       issue = {
         origem: 'NOTA_FISCAL',
         identificadorOrigem: invoice.numero,
-        motivoAbertura: issue.reason,
+        motivoAbertura: this.getMotive(issue.reason),
         observacaoAbertura: issue.observation,
         contrato: { id: this.$props.contract.id }
       }
+
       this.$post('/chamado/create', issue).then((response) => {
 
         if (response.data) {
@@ -562,6 +563,27 @@ export default {
           this.$root.$emit('new-issue', response.data)
         }
       });
+    },
+    getMotive (reason) {
+
+      var currentLanguage = this.$vuetify.lang.current;
+      this.$vuetify.lang.current = 'pt';
+
+      var selectedReason;
+      if (this.reasonList[0] == reason) {
+        selectedReason = this.$vuetify.lang.t('$vuetify.SEGUNDA_VIA')
+      }
+
+      if (this.reasonList[1] == reason) {
+        selectedReason = this.$vuetify.lang.t('$vuetify.BAIXA_BOLETO')
+      }
+
+      if (this.reasonList[2] == reason) {
+        selectedReason = this.$vuetify.lang.t('$vuetify.ALTERAR_VENCIMENTO')
+      }
+
+      this.$vuetify.lang.current = currentLanguage;
+      return selectedReason;
     },
     clearFields () {
       this.searchText = '';
@@ -700,6 +722,7 @@ export default {
         this.statuses = this.statuses.map(function (t) {
           return { text: vm.$vuetify.lang.t('$vuetify.' + t), value: t }
         })
+
         this.statuses.sort()
         this.statuses.unshift({ text: this.$vuetify.lang.t('$vuetify.TODOS'), value: null })
 

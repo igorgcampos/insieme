@@ -581,16 +581,21 @@ export default {
       this.removeTrashFields(itemList)
       itemList = this.convertFieldsToNames(itemList)
 
+      var currentLanguage = this.$vuetify.lang.current;
+      this.$vuetify.lang.current = 'pt';
+
       issue = {
         origem: 'CIRCUITO_LOTE_COMERCIAL',
         identificadorOrigem: null,
-        motivoAbertura: this.actionName,
+        motivoAbertura: this.$vuetify.lang.t('$vuetify.' + this.actionName),
         observacaoAbertura: issue.observation,
         contrato: this.$props.contract,
         lote: [this.actionName],
         planilha: itemList.length > 0 ? JSON.stringify(itemList) : '',
         arquivo: file,
       }
+
+      this.$vuetify.lang.current = currentLanguage;
 
       this.$post('/chamado/create', issue).then((response) => {
 
