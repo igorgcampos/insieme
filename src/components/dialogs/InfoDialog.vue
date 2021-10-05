@@ -24,10 +24,10 @@
 
       <v-card-title
         style="word-break: normal; !important"
-        class="headline"
+        class="headline justify-center"
       >{{title}}</v-card-title>
 
-      <v-card-text>
+      <v-card-text class="text-center">
         {{info}}
       </v-card-text>
 
