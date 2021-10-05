@@ -24,7 +24,7 @@
 
       <v-card-title
         style="word-break: normal; !important"
-        class="headline justify-center"
+        class="headline justify-center text-center"
       >{{title}}</v-card-title>
 
       <v-card-text class="text-center">
