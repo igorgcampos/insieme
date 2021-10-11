@@ -187,7 +187,7 @@ export default {
     showDialog: Boolean,
     close: Function,
     openIssue: Function,
-    createClosedIssue: Function,
+    createRestartIssue: Function,
     closeIssue: Function,
   },
   data: () => ({
@@ -275,7 +275,7 @@ export default {
       this.showRestartingCircuitPanel = true
       this.showRestartResultPanel = false
 
-      this.createClosedIssue();
+      this.createRestartIssue();
 
       this.$get('/circuito/restart',
         {
@@ -293,7 +293,7 @@ export default {
                 if (response && response.data == '3') {
                   this.restartOk = true;
                   this.getObject().online = response.data //Atualiza o circuito com o status online
-                  this.closeIssue();
+                  this.closeIssue(true);
                 } else {
                   this.restartOk = false;
                 }

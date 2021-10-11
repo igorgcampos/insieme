@@ -836,7 +836,7 @@
           :getObject="getObject"
           :openIssue="openIssue"
           :closeIssue="closeRestartIssue"
-          :createClosedIssue="createClosedIssue"
+          :createRestartIssue="createRestartIssue"
         ></SolveProblemDialog>
 
       </div>
@@ -863,21 +863,22 @@ export default {
     SolveProblemDialog
   },
   methods: {
-    closeRestartIssue () {
+    closeRestartIssue (close) {
 
-      if (!this.selectedIssue) {
+      if (!this.selectedIssue || !close) {
         return;
       }
 
       this.selectedIssue.motivoEncerramento = 'Meu problema foi resolvido';
       this.selectedIssue.observacaoEncerramento = 'O robô conseguiu reiniciar o circuito do cliente com sucesso!'
 
-      this.$put('/chamado/close', this.selectedIssue).then(() => {
+      this.$put('/chamado/close', this.selectedIssue).then((response) => {
+        this.$root.$emit('close-issue-success', response.data)
         this.selectedIssue = undefined;
         this.showSuccess = false
       });
     },
-    createClosedIssue () {
+    createRestartIssue () {
 
       var issue = {
         reason: 'Inoperância',
@@ -897,7 +898,7 @@ export default {
         });
       })
 
-      this.sendIssue(issue, this.selectedCircuit, true)
+      this.sendIssue(issue, this.selectedCircuit, false)
     },
     openPRTG (circuit) {
       window.open('https://monitor.telespazio.com.br/device.htm?id=' + circuit.idPrtg +
