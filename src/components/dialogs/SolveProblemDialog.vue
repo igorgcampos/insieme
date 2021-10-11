@@ -154,7 +154,7 @@
         <v-btn
           color="primary"
           text
-          @click="createClosedIssue(); close(); clean();"
+          @click="close(); clean();"
           :x-small="$vuetify.breakpoint.xs"
           v-show="showRestartResultPanel && restartOk"
         >{{$vuetify.lang.t('$vuetify.ESTA_OK')}}</v-btn>
@@ -188,6 +188,7 @@ export default {
     close: Function,
     openIssue: Function,
     createClosedIssue: Function,
+    closeIssue: Function,
   },
   data: () => ({
     showCircuitQuestionPanel: false,
@@ -235,7 +236,7 @@ export default {
           this.showVerifyingSignalPanel = true
 
           this.$get('/circuito/status',
-            { desigClient: this.getObject().designacaoCliente }).then((response) => {
+            { desigTpz: this.getObject().nome }).then((response) => {
 
               this.showStatusResultPanel = true;
               this.showVerifyingSignalPanel = false;
@@ -268,10 +269,13 @@ export default {
       this.openIssue(this.getObject());
     },
     restart () {
+
       this.showVerifyingSignalPanel = false
       this.showStatusResultPanel = false
       this.showRestartingCircuitPanel = true
       this.showRestartResultPanel = false
+
+      this.createClosedIssue();
 
       this.$get('/circuito/restart',
         {
@@ -281,14 +285,15 @@ export default {
           this.signalPanelId = setInterval(() => {
 
             this.$get('/circuito/status',
-              { desigClient: this.getObject().designacaoCliente }).then((response) => {
+              { desigTpz: this.getObject().nome }).then((response) => {
 
                 this.showRestartResultPanel = true;
                 this.showRestartingCircuitPanel = false;
 
-                if (response && response.data == 3) {
+                if (response && response.data == '3') {
                   this.restartOk = true;
                   this.getObject().online = response.data //Atualiza o circuito com o status online
+                  this.closeIssue();
                 } else {
                   this.restartOk = false;
                 }
@@ -298,6 +303,7 @@ export default {
         });
     },
     clean () {
+
       this.showOpenIssuePanel = false
       this.questionIndex = 0;
       this.showChatQuestions = false

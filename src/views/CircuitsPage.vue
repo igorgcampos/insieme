@@ -835,6 +835,7 @@
           :close="closeProblemSolveDialog"
           :getObject="getObject"
           :openIssue="openIssue"
+          :closeIssue="closeRestartIssue"
           :createClosedIssue="createClosedIssue"
         ></SolveProblemDialog>
 
@@ -862,11 +863,25 @@ export default {
     SolveProblemDialog
   },
   methods: {
+    closeRestartIssue () {
+
+      if (!this.selectedIssue) {
+        return;
+      }
+
+      this.selectedIssue.motivoEncerramento = 'Meu problema foi resolvido';
+      this.selectedIssue.observacaoEncerramento = 'O robô conseguiu reiniciar o circuito do cliente com sucesso!'
+
+      this.$put('/chamado/close', this.selectedIssue).then(() => {
+        this.selectedIssue = undefined;
+        this.showSuccess = false
+      });
+    },
     createClosedIssue () {
 
       var issue = {
-        reason: 'Robô fez um restart do circuito',
-        observation: ''
+        reason: 'Inoperância',
+        observation: 'Criação de incidente via restart de circuito realizado pelo cliente',
       }
 
       this.$root.$on('close-issue', function (issue) {
@@ -933,10 +948,13 @@ export default {
     },
     closeProblemSolveDialog () {
       this.showProblemSolveDialog = false
+      this.selectedIssue = undefined;
     },
     closeDialog () {
+
       this.showDialog = false;
       this.showDialogLoading = false;
+      this.selectedIssue = undefined;
 
       setTimeout(() => {
         this.showSuccess = false;
@@ -958,6 +976,7 @@ export default {
         contrato: { id: this.$props.contract.id },
         status: issue.status ? issue.status : undefined,
       }
+
       this.$post('/chamado/create', issue).then((response) => {
 
         if (response.data) {
@@ -966,6 +985,7 @@ export default {
           this.showDialogLoading = false;
           this.$root.$emit('new-issue', response.data)
           circuit.protocolo = response.data.protocolo
+          this.selectedIssue = response.data;
 
           if (close) {
             this.$root.$emit('close-issue', response.data)
@@ -1083,6 +1103,10 @@ export default {
       this.selectedCircuit = circuit;
       this.selectedCircuit.type = 'circuit';
       this.showDialog = true;
+
+      if (this.selectedIssue) {
+        this.showSuccess = true;
+      }
     },
     getObject () {
       return this.selectedCircuit;
