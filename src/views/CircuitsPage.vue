@@ -1224,10 +1224,8 @@ export default {
   }),
   created: function () {
 
-    this.$get('/chamado/motivos', {})
-      .then((response) => {
-        this.reasonList = response.data;
-      });
+    this.reasonList = ['Atividade Programada', 'Configuração', 'Desempenho',
+      'Emissão de Relatório', 'Inoperância']
 
     this.statuses = [this.$vuetify.lang.t('$vuetify.TODOS'),
       'Online',

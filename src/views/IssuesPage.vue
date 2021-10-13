@@ -1024,10 +1024,8 @@ export default {
 
       if (type == 'circuit') {
 
-        this.$get('/chamado/motivos', {})
-          .then((response) => {
-            this.reasonBatchList = response.data;
-          });
+        this.reasonBatchList = ['Atividade Programada', 'Configuração', 'Desempenho',
+          'Emissão de Relatório', 'Inoperância']
 
         this.searchCircuits('', 0)
 

@@ -45,7 +45,6 @@ export default {
         window.sessionStorage.setItem('actualPage', '/')
       })
       this.$root.$on('logout-success', () => this.$router.push('/login'));
-      console.log("etrou na pagina inicial")
     });
 
   },
@@ -56,7 +55,6 @@ export default {
 
       if (params.get("token")) {
         await this.$setKeycloakToken(params.get("token"))
-        console.log("setou token")
       }
     },
   }
