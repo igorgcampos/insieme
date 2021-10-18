@@ -871,6 +871,7 @@ export default {
 
       this.selectedIssue.motivoEncerramento = 'Meu problema foi resolvido';
       this.selectedIssue.observacaoEncerramento = 'O robô conseguiu reiniciar o circuito do cliente com sucesso!'
+      this.selectedIssue.statusProcessamento = 'Concluído';
 
       this.$put('/chamado/close', this.selectedIssue).then((response) => {
         this.$root.$emit('close-issue-success', response.data)
