@@ -442,4 +442,5 @@ export default {
     OUTROS_DESCRICAO: 'Pedir a realização de outros serviços',
     OUTROS_XLSX: 'outros.xlsx',
     SITE_SURVEY_XLSX: 'site_survey.xlsx',
+    INSTALADO: 'Instalado',
 }

@@ -447,4 +447,5 @@ export default {
     OUTROS_DESCRICAO: 'Request the performance of other services',
     OUTROS_XLSX: 'others.xlsx',
     SITE_SURVEY_XLSX: 'site_survey.xlsx',
+    INSTALADO: 'Installed',
 }
