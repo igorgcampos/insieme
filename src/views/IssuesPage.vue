@@ -408,6 +408,7 @@
                           :value="issue.observacaoAbertura || '--'"
                           justify="start"
                           truncate
+                          style="max-width:150px;"
                           :class="{'pl-0':$vuetify.breakpoint.xs}"
                         ></LabelValue>
                       </v-col>
