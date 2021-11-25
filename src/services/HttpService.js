@@ -2,6 +2,16 @@ const axios = require('axios').default;
 const httpService = {}
 const serverUrl = process.env.VUE_APP_SERVER_URL
 
+axios.interceptors.response.use(
+    (resp) => {
+        let v = resp.headers['vers'] || 'default'
+        if (v !== localStorage.getItem('vers') && resp.config.method == 'get') {
+            localStorage.setItem('vers', v)
+            window.location.reload() // For new version, simply reload on any get
+        }
+        return Promise.resolve(resp)
+    })
+
 httpService.install = function (Vue, router) {
 
     Vue.prototype.$get = async (url, params, responseType) => {
