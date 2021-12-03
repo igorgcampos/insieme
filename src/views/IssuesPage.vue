@@ -233,7 +233,7 @@
                         {{$vuetify.lang.t('$vuetify.ORIGEM')}}:</strong>
                       <strong
                         class="subtitle-2 font-weight-bold"
-                        v-html="issue.identificadorOrigem + ' / ' + issue.identificadorOrigemSecundario"
+                        v-html="issue.identificadorOrigem + ' / ' + (issue.identificadorOrigemSecundario?issue.identificadorOrigemSecundario:'--')"
                       ></strong>
                     </v-col>
 
