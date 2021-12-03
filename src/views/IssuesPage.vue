@@ -940,7 +940,7 @@ export default {
         var object = {
           origem: 'CIRCUITO',
           identificadorOrigem: issue.items[index].nome,
-          identificadorOrigemSecundario: circuit.designacaoCliente,
+          identificadorOrigemSecundario: issue.items[index].designacaoCliente,
           motivoAbertura: issue.reason,
           observacaoAbertura: issue.observation,
           contrato: { id: this.$props.contract.id }
