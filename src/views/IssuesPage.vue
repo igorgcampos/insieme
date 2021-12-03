@@ -225,7 +225,7 @@
 
                     <v-col
                       v-show="!$vuetify.breakpoint.xs"
-                      v-if="!open && (issue.origem == 'CIRCUITO' || issue.origem == 'NOTA_LOTE')"
+                      v-if="!open && issue.origem == 'CIRCUITO'"
                       cols="4"
                       :class="{'col-sm-10':open, 'col-md-10':open}"
                     >
@@ -233,7 +233,7 @@
                         {{$vuetify.lang.t('$vuetify.ORIGEM')}}:</strong>
                       <strong
                         class="subtitle-2 font-weight-bold"
-                        v-html="issue.origem == 'NOTA_LOTE'?issue.identificadorOrigem:issue.identificadorOrigemSecundario"
+                        v-html="issue.identificadorOrigem + ' \ ' + issue.identificadorOrigemSecundario"
                       ></strong>
                     </v-col>
 
