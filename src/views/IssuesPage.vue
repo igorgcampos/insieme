@@ -549,11 +549,11 @@
                     ></TooltipButton>
 
                     <TooltipButton
-                      :label="$vuetify.lang.t('$vuetify.LISTAR_LOTE')"
-                      :message="$vuetify.lang.t('$vuetify.LISTAR_LOTE_CIRCUITO', '')"
+                      :label="$vuetify.lang.t('$vuetify.LISTAR_NOTAS')"
+                      :message="$vuetify.lang.t('$vuetify.LISTAR_NOTAS_CHAMADO', '')"
                       :mobile="$vuetify.breakpoint.xs"
                       v-if="issue.lote && issue.lote.length > 0 && !(issue.origem == 'CIRCUITO_LOTE_COMERCIAL' && issue.planilha.length > 0)"
-                      :event="showListCircuits"
+                      :event="showListInvoices"
                       :object="issue"
                       :isText=true
                     ></TooltipButton>
@@ -640,10 +640,10 @@
         </FeedbackDialog>
 
         <ListDialog
-          :close="hideListCircuits"
-          :show="showCircuitListDialog"
-          :title="$vuetify.lang.t('$vuetify.LISTA_CIRCUITOS')"
-          :info="$vuetify.lang.t('$vuetify.LISTA_CIRCUITOS_ASSOCIADOS')"
+          :close="hideListInvoices"
+          :show="showListDialog"
+          :title="$vuetify.lang.t('$vuetify.LISTAR_NOTAS')"
+          :info="$vuetify.lang.t('$vuetify.LISTAR_NOTAS_CHAMADO')"
           :list="selectedList"
         ></ListDialog>
 
@@ -894,12 +894,12 @@ export default {
       this.showCommercialDialog = true;
       this.entity = issue
     },
-    showListCircuits (issue) {
+    showListInvoices (issue) {
       this.selectedList = issue.lote;
-      this.showCircuitListDialog = true;
+      this.showListDialog = true;
     },
-    hideListCircuits () {
-      this.showCircuitListDialog = false;
+    hideListInvoices () {
+      this.showListDialog = false;
     },
     searchEntities (text, page) {
 
@@ -1263,7 +1263,7 @@ export default {
     error: false,
     showMessageDialog: false,
     selectedList: [],
-    showCircuitListDialog: false,
+    showListDialog: false,
     canShowButton: false,
     showFeedBack: false,
     openedPanel: undefined,
