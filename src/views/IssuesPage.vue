@@ -933,7 +933,7 @@ export default {
 
         var object = {
           origem: 'CIRCUITO',
-          identificadorOrigem: (issue.items[index].designacaoCliente || '--') + ' / ' + issue.items[index].nome,
+          identificadorOrigem: issue.items[index].nome,
           motivoAbertura: issue.reason,
           observacaoAbertura: issue.observation,
           contrato: { id: this.$props.contract.id }

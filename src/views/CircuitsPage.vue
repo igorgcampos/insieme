@@ -991,7 +991,7 @@ export default {
 
       issue = {
         origem: 'CIRCUITO',
-        identificadorOrigem: (circuit.designacaoCliente || '--') + ' / ' + circuit.nome,
+        identificadorOrigem: circuit.nome,
         motivoAbertura: issue.reason,
         observacaoAbertura: issue.observation,
         contrato: { id: this.$props.contract.id },
