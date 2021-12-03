@@ -1255,13 +1255,13 @@ export default {
     this.products = [this.$vuetify.lang.t('$vuetify.TODOS')]
     this.technologies = [this.$vuetify.lang.t('$vuetify.TODOS')]
 
-    this.$get('/circuito/produtos', {})
+    this.$get('/circuito/produtos', { tpzContractNumber: this.$props.contract.numeroContratoTpz })
       .then((response) => {
         response.data.sort()
         this.products = this.products.concat(response.data)
       });
 
-    this.$get('/circuito/tecnologias', {})
+    this.$get('/circuito/tecnologias', { tpzContractNumber: this.$props.contract.numeroContratoTpz })
       .then((response) => {
 
         response.data.sort()
