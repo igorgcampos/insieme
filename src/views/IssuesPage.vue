@@ -230,10 +230,10 @@
                       :class="{'col-sm-10':open, 'col-md-10':open}"
                     >
                       <strong class="font-weight-bold grey--text text--lighten-1 mr-2">
-                        {{issue.origem == 'CIRCUITO'?$vuetify.lang.t('$vuetify.DESIGNACAO_TPZ'):$vuetify.lang.t('$vuetify.NUMERO_NOTA')}}:</strong>
+                        {{$vuetify.lang.t('$vuetify.ORIGEM')}}:</strong>
                       <strong
                         class="subtitle-2 font-weight-bold"
-                        v-html="issue.identificadorOrigem || '--'"
+                        v-html="issue.origem == 'NOTA_LOTE'?issue.identificadorOrigem:issue.identificadorOrigemSecundario"
                       ></strong>
                     </v-col>
 
@@ -289,7 +289,8 @@
 
                   <v-card-subtitle class="caption mt-n10 ml-n4 mb-2 grey--text text--lighten-1">
                     {{$vuetify.lang.t('$vuetify.ORIGEM')}}:
-                    {{$vuetify.lang.t('$vuetify.'+issue.origem) + (issue.identificadorOrigem?' ('+issue.identificadorOrigem+')':'')}}
+                    {{$vuetify.lang.t('$vuetify.'+issue.origem) + (issue.identificadorOrigem?' ('+
+                    issue.identificadorOrigem + (issue.identificadorOrigemSecundario? ' / ' + issue.identificadorOrigemSecundario: '')  +')':'')}}
                   </v-card-subtitle>
 
                   <v-row>
@@ -333,23 +334,28 @@
                           <span v-html="formatStatus(issue.statusProcessamento)"></span>
                         </v-chip>
 
-                        <span
-                          v-if="issue.evaluation"
-                          class="text-right caption font-weight-bold grey--text text--lighten-1 pl-1"
-                        >{{$vuetify.lang.t('$vuetify.AVALIACAO')+':'}}</span>
+                        <v-col
+                          cols="1"
+                          class="ml-n3 mt-n2"
+                        >
+                          <span
+                            v-if="issue.evaluation"
+                            class="text-right caption font-weight-bold grey--text text--lighten-1 pl-1"
+                          >{{$vuetify.lang.t('$vuetify.AVALIACAO')+':'}}</span>
 
-                        <v-rating
-                          class="mb-4"
-                          v-if="issue.evaluation"
-                          v-model="issue.evaluation.nota"
-                          color="orange"
-                          background-color="orange lighten-3"
-                          half-increments
-                          hover
-                          dense
-                          small
-                          readonly
-                        ></v-rating>
+                          <v-rating
+                            class="mb-4"
+                            v-if="issue.evaluation"
+                            v-model="issue.evaluation.nota"
+                            color="orange"
+                            background-color="orange lighten-3"
+                            half-increments
+                            hover
+                            dense
+                            small
+                            readonly
+                          ></v-rating>
+                        </v-col>
                       </v-col>
                     </v-col>
 
@@ -934,6 +940,7 @@ export default {
         var object = {
           origem: 'CIRCUITO',
           identificadorOrigem: issue.items[index].nome,
+          identificadorOrigemSecundario: circuit.designacaoCliente,
           motivoAbertura: issue.reason,
           observacaoAbertura: issue.observation,
           contrato: { id: this.$props.contract.id }

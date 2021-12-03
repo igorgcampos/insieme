@@ -992,6 +992,7 @@ export default {
       issue = {
         origem: 'CIRCUITO',
         identificadorOrigem: circuit.nome,
+        identificadorOrigemSecundario: circuit.designacaoCliente,
         motivoAbertura: issue.reason,
         observacaoAbertura: issue.observation,
         contrato: { id: this.$props.contract.id },
