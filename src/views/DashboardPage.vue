@@ -3,76 +3,76 @@
     <v-container
       column
       align-center
-      style="max-width:800px;"
+      style="max-width:1200px;"
     >
 
-      <v-row
-        class="offset-7 mt-n12"
-        :class="{'offset-9':$vuetify.breakpoint.xs || $vuetify.breakpoint.sm}"
-        style="position:fixed; z-index:100;"
-      >
+      <v-row justify="center">
+        <v-row
+          class="offset-7 mt-n12"
+          :class="{'offset-9':$vuetify.breakpoint.xs || $vuetify.breakpoint.sm}"
+          style="position:fixed; z-index:100;"
+        >
 
-        <v-lazy
-          :options="{
+          <v-lazy
+            :options="{
           threshold: .6
         }"
-          transition="slide-y-transition"
-          class="mt-n3"
-        >
-          <v-btn
-            color="red darken-1"
-            class="white--text pt-7 pb-5 mt-n12 mr-12"
-            :class="{'pt-8':$vuetify.breakpoint.xs || $vuetify.breakpoint.md || $vuetify.breakpoint.sm}"
-            @click="openFeedBack()"
-            x-small
-            depressed
+            transition="slide-y-transition"
+            class="mt-n3"
           >
-            <v-icon
-              left
-              dark
-              small
-              class="ml-0"
-              :class="{'ml-2':$vuetify.breakpoint.xs}"
-            >mdi-comment-processing</v-icon>
-            {{!$vuetify.breakpoint.xs?$vuetify.lang.t('$vuetify.FEEDBACK'):''}}
-          </v-btn>
-        </v-lazy>
-      </v-row>
+            <v-btn
+              color="red darken-1"
+              class="white--text pt-7 pb-5 mt-n12 mr-12"
+              :class="{'pt-8':$vuetify.breakpoint.xs || $vuetify.breakpoint.md || $vuetify.breakpoint.sm}"
+              @click="openFeedBack()"
+              x-small
+              depressed
+            >
+              <v-icon
+                left
+                dark
+                small
+                class="ml-0"
+                :class="{'ml-2':$vuetify.breakpoint.xs}"
+              >mdi-comment-processing</v-icon>
+              {{!$vuetify.breakpoint.xs?$vuetify.lang.t('$vuetify.FEEDBACK'):''}}
+            </v-btn>
+          </v-lazy>
+        </v-row>
 
-      <v-row
-        class="mt-n12 ml-0 mb-6"
-        :class="{'ml-n9':$vuetify.breakpoint.mdAndUp}"
-      >
-        <span class="mb-7 text-right subtitle-1 font-weight-bold grey--text text--darken-1">
-          {{$vuetify.lang.t('$vuetify.CONTRATO_SELECIONADO') + ': '+selectedContract.numeroContratoTpz}} </span>
-      </v-row>
-      <v-col
-        md="12"
-        lg="12"
-        xl="12"
-        sm="12"
-        xs="12"
-        xm="12"
-        class="mt-n11"
-      >
+        <v-col
+          md="6"
+          lg="10"
+          xl="12"
+          sm="12"
+          xs="12"
+          xm="12"
+          class="mt-n11"
+        >
 
-        <CircuitsPage
-          v-if="$hasProfile('Administrador') || $hasProfile('Cliente') || $hasProfile('Operacional')"
-          :contract="selectedContract"
-        ></CircuitsPage>
-        <InvoicesPage
-          v-if="$hasProfile('Administrador') || $hasProfile('Cliente') || $hasProfile('Financeiro')"
-          :contract="selectedContract"
-        ></InvoicesPage>
-        <CommercialPage
-          v-if="$hasProfile('Administrador') || $hasProfile('Cliente') || $hasProfile('Comercial')"
-          :contract="selectedContract"
-        ></CommercialPage>
-        <IssuesPage
-          :contract="selectedContract"
-          :proactivity="undefined"
-        ></IssuesPage>
-      </v-col>
+          <v-row class="mb-n2 mt-n3 ml-n12 mb-6">
+            <span class="mb-7 text-right subtitle-1 font-weight-bold grey--text text--darken-1">
+              {{$vuetify.lang.t('$vuetify.CONTRATO_SELECIONADO') + ': '+selectedContract.numeroContratoTpz}} </span>
+          </v-row>
+
+          <CircuitsPage
+            v-if="$hasProfile('Administrador') || $hasProfile('Cliente') || $hasProfile('Operacional')"
+            :contract="selectedContract"
+          ></CircuitsPage>
+          <InvoicesPage
+            v-if="$hasProfile('Administrador') || $hasProfile('Cliente') || $hasProfile('Financeiro')"
+            :contract="selectedContract"
+          ></InvoicesPage>
+          <CommercialPage
+            v-if="$hasProfile('Administrador') || $hasProfile('Cliente') || $hasProfile('Comercial')"
+            :contract="selectedContract"
+          ></CommercialPage>
+          <IssuesPage
+            :contract="selectedContract"
+            :proactivity="undefined"
+          ></IssuesPage>
+        </v-col>
+      </v-row>
 
       <FeedbackDialog
         :show="showFeedBack"

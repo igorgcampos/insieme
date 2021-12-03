@@ -448,4 +448,5 @@ export default {
     OUTROS_XLSX: 'others.xlsx',
     SITE_SURVEY_XLSX: 'site_survey.xlsx',
     INSTALADO: 'Installed',
+    EXPORTAR_CSV_CIRCUITO: 'Export all circuits from this contract to csv',
 }

@@ -196,8 +196,7 @@
                   >
                     <v-col
                       v-if="!open"
-                      cols="6"
-                      sm="2"
+                      cols="2"
                     >
                       <v-chip
                         :color="issue.status=='ABERTO'?'success':issue.status=='ENCERRADO'?'primary':'warning'"
@@ -213,8 +212,7 @@
                     </v-col>
 
                     <v-col
-                      sm="5"
-                      md="4"
+                      cols="3"
                       v-show="!$vuetify.breakpoint.xs"
                     >
                       <strong class="font-weight-bold grey--text text--lighten-1 mr-2">
@@ -226,8 +224,21 @@
                     </v-col>
 
                     <v-col
-                      sm="5"
-                      md="5"
+                      v-show="!$vuetify.breakpoint.xs"
+                      v-if="!open && (issue.origem == 'CIRCUITO' || issue.origem == 'NOTA_LOTE')"
+                      cols="4"
+                      :class="{'col-sm-10':open, 'col-md-10':open}"
+                    >
+                      <strong class="font-weight-bold grey--text text--lighten-1 mr-2">
+                        {{issue.origem == 'CIRCUITO'?$vuetify.lang.t('$vuetify.DESIGNACAO_TPZ'):$vuetify.lang.t('$vuetify.NUMERO_NOTA')}}:</strong>
+                      <strong
+                        class="subtitle-2 font-weight-bold"
+                        v-html="issue.identificadorOrigem || '--'"
+                      ></strong>
+                    </v-col>
+
+                    <v-col
+                      cols="3"
                       v-if="!open"
                       v-show="!$vuetify.breakpoint.xs"
                     >
@@ -369,10 +380,21 @@
                                 class="caption mb-2"
                                 :class="{'red--text':!message.usuario, 'green--text':message.usuario}"
                               >{{!message.usuario?'Telespazio:':message.usuario.nome+':'}}</v-list-item-subtitle>
-                              <v-list-item-subtitle
-                                class="caption font-weight-bold ml-1"
-                                v-html="message.conteudo"
-                              ></v-list-item-subtitle>
+
+                              <v-tooltip
+                                top
+                                max-width="220"
+                              >
+                                <template v-slot:activator="{ on }">
+                                  <v-list-item-subtitle
+                                    v-on="on"
+                                    class="caption font-weight-bold ml-1"
+                                    v-html="message.conteudo"
+                                  ></v-list-item-subtitle>
+                                </template>
+                                <span>{{message.conteudo}}</span>
+                              </v-tooltip>
+
                             </v-list-item-content>
                           </v-list-item>
                         </v-list>
@@ -911,7 +933,7 @@ export default {
 
         var object = {
           origem: 'CIRCUITO',
-          identificadorOrigem: issue.items[index].nome,
+          identificadorOrigem: (issue.items[index].designacaoCliente || '--') + ' / ' + issue.items[index].nome,
           motivoAbertura: issue.reason,
           observacaoAbertura: issue.observation,
           contrato: { id: this.$props.contract.id }

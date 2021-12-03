@@ -240,7 +240,7 @@
           <v-row v-show="!$vuetify.breakpoint.xs">
 
             <v-col
-              class="ml-2"
+              class="ml-0"
               cols="4"
             >
               <v-row justify="center">
@@ -248,7 +248,10 @@
                   {{$vuetify.lang.t('$vuetify.STATUS_OPERACIONAL')}}</span>
               </v-row>
 
-              <v-row class="mt-2">
+              <v-row
+                class="mt-2"
+                justify="center"
+              >
                 <v-col class="flex-grow-0">
                   <CountCard
                     :count="counts[0]"
@@ -277,10 +280,11 @@
             </v-col>
 
             <v-divider
-              class="mb-5 mt-n2"
+              class="mb-5 mt-n2 ml-n4"
               :vertical=true
               v-show="!$vuetify.breakpoint.xs"
             ></v-divider>
+
             <v-row>
               <v-col
                 cols="12"
@@ -293,6 +297,13 @@
                     class="mb-1"
                   >
                     <v-btn
+                      value="contract"
+                      class="mt-n3 text-center caption font-weight-bold"
+                      small
+                      :style="{'text-decoration':contractDecoration}"
+                    >
+                      {{$vuetify.lang.t('$vuetify.STATUS_CONTRATACAO')}}</v-btn>
+                    <v-btn
                       value="log"
                       class="mt-n3 text-center caption font-weight-bold"
                       small
@@ -300,97 +311,92 @@
                     >
                       {{$vuetify.lang.t('$vuetify.STATUS_LOGISTICA')}}
                     </v-btn>
-                    <v-btn
-                      value="contract"
-                      class="mt-n3 text-center caption font-weight-bold"
-                      small
-                      :style="{'text-decoration':contractDecoration}"
-                    >
-                      {{$vuetify.lang.t('$vuetify.STATUS_CONTRATACAO')}}</v-btn>
                   </v-btn-toggle>
                 </v-row>
 
-                <v-sheet
-                  class="ma-0 pa-0"
-                  style="background:#FAFAFA"
-                  v-if="button == 'contract'"
-                  :max-width="!$vuetify.breakpoint.sm?500:480"
-                >
-
-                  <v-slide-group
-                    :v-model="null"
-                    show-arrows
-                    center-active
-                    next-icon="mdi-arrow-right-thick primary--text"
-                    prev-icon="mdi-arrow-left-thick primary--text"
+                <v-row justify="center">
+                  <v-sheet
+                    class="ma-0 pa-0"
+                    style="background:#FAFAFA"
+                    v-if="button == 'contract'"
                   >
 
-                    <v-slide-item>
-                      <v-col class="flex-grow-0">
-                        <CountCard
-                          :count="installCounts[0]"
-                          :message="$vuetify.lang.t('$vuetify.ATIVADO')"
-                          color="primary--text"
-                          :func="getActive"
-                          :toolTipMessage="$vuetify.lang.t('$vuetify.ATIVADO_DESCRICAO')"
-                          :isLoading="isLoadingStatus"
-                        ></CountCard>
-                      </v-col>
-                    </v-slide-item>
-                    <v-slide-item>
-                      <v-col class="flex-grow-0">
-                        <CountCard
-                          :count="installCounts[1]"
-                          :message="$vuetify.lang.t('$vuetify.DESATIVADO')"
-                          color="primary--text"
-                          :func="getDeactive"
-                          :toolTipMessage="$vuetify.lang.t('$vuetify.DESATIVADO_DESCRICAO')"
-                          :isLoading="isLoadingStatus"
-                        >
-                        </CountCard>
-                      </v-col>
-                    </v-slide-item>
-                    <v-slide-item>
-                      <v-col class="flex-grow-0">
-                        <CountCard
-                          :count="installCounts[3]"
-                          :message="$vuetify.lang.t('$vuetify.DESINSTALADO')"
-                          color="primary--text"
-                          :func="getUninstall"
-                          :toolTipMessage="$vuetify.lang.t('$vuetify.DESINSTALADO_DESCRICAO')"
-                          :isLoading="isLoadingStatus"
-                        ></CountCard>
-                      </v-col>
-                    </v-slide-item>
-                    <v-slide-item>
-                      <v-col class="flex-grow-0">
-                        <CountCard
-                          :count="installCounts[2]"
-                          :message="$vuetify.lang.t('$vuetify.CANCELADO')"
-                          color="primary--text"
-                          :func="getCanceled"
-                          :toolTipMessage="$vuetify.lang.t('$vuetify.CANCELADO_DESCRICAO')"
-                          :isLoading="isLoadingStatus"
-                        ></CountCard>
-                      </v-col>
-                    </v-slide-item>
-                    <v-slide-item>
-                      <v-col class="flex-grow-0">
-                        <CountCard
-                          :count="installCounts[8]"
-                          :message="$vuetify.lang.t('$vuetify.SUSPENSO')"
-                          color="primary--text"
-                          :func="getSuspended"
-                          :toolTipMessage="$vuetify.lang.t('$vuetify.SUSPENSO_DESCRICAO')"
-                          :isLoading="isLoadingStatus"
-                        ></CountCard>
-                      </v-col>
-                    </v-slide-item>
-                  </v-slide-group>
-                </v-sheet>
+                    <v-slide-group
+                      :v-model="null"
+                      :show-arrows="!$vuetify.breakpoint.lg || !$vuetify.breakpoint.xl"
+                      center-active
+                      next-icon="mdi-arrow-right-thick primary--text"
+                      prev-icon="mdi-arrow-left-thick primary--text"
+                    >
+
+                      <v-slide-item>
+                        <v-col class="flex-grow-0">
+                          <CountCard
+                            :count="installCounts[0]"
+                            :message="$vuetify.lang.t('$vuetify.ATIVADO')"
+                            color="primary--text"
+                            :func="getActive"
+                            :toolTipMessage="$vuetify.lang.t('$vuetify.ATIVADO_DESCRICAO')"
+                            :isLoading="isLoadingStatus"
+                          ></CountCard>
+                        </v-col>
+                      </v-slide-item>
+                      <v-slide-item>
+                        <v-col class="flex-grow-0">
+                          <CountCard
+                            :count="installCounts[1]"
+                            :message="$vuetify.lang.t('$vuetify.DESATIVADO')"
+                            color="primary--text"
+                            :func="getDeactive"
+                            :toolTipMessage="$vuetify.lang.t('$vuetify.DESATIVADO_DESCRICAO')"
+                            :isLoading="isLoadingStatus"
+                          >
+                          </CountCard>
+                        </v-col>
+                      </v-slide-item>
+                      <v-slide-item>
+                        <v-col class="flex-grow-0">
+                          <CountCard
+                            :count="installCounts[3]"
+                            :message="$vuetify.lang.t('$vuetify.DESINSTALADO')"
+                            color="primary--text"
+                            :func="getUninstall"
+                            :toolTipMessage="$vuetify.lang.t('$vuetify.DESINSTALADO_DESCRICAO')"
+                            :isLoading="isLoadingStatus"
+                          ></CountCard>
+                        </v-col>
+                      </v-slide-item>
+                      <v-slide-item>
+                        <v-col class="flex-grow-0">
+                          <CountCard
+                            :count="installCounts[2]"
+                            :message="$vuetify.lang.t('$vuetify.CANCELADO')"
+                            color="primary--text"
+                            :func="getCanceled"
+                            :toolTipMessage="$vuetify.lang.t('$vuetify.CANCELADO_DESCRICAO')"
+                            :isLoading="isLoadingStatus"
+                          ></CountCard>
+                        </v-col>
+                      </v-slide-item>
+                      <v-slide-item>
+                        <v-col class="flex-grow-0">
+                          <CountCard
+                            :count="installCounts[8]"
+                            :message="$vuetify.lang.t('$vuetify.SUSPENSO')"
+                            color="primary--text"
+                            :func="getSuspended"
+                            :toolTipMessage="$vuetify.lang.t('$vuetify.SUSPENSO_DESCRICAO')"
+                            :isLoading="isLoadingStatus"
+                          ></CountCard>
+                        </v-col>
+                      </v-slide-item>
+                    </v-slide-group>
+                  </v-sheet>
+                </v-row>
 
                 <v-row
                   class="ml-2"
+                  justify="center"
                   v-show="button == 'log'"
                 >
 
@@ -530,7 +536,7 @@
                   <v-icon dark>mdi-file-export</v-icon>
                 </v-btn>
               </template>
-              <span>{{$vuetify.lang.t('$vuetify.EXPORTAR_CSV')}}</span>
+              <span>{{$vuetify.lang.t('$vuetify.EXPORTAR_CSV_CIRCUITO')}}</span>
             </v-tooltip>
           </v-col>
         </v-row>
@@ -564,7 +570,7 @@
                   >
                     <v-col
                       v-if="!open"
-                      cols="5"
+                      cols="4"
                       sm="2"
                     >
                       <v-chip
@@ -580,22 +586,35 @@
 
                     <v-col
                       v-show="!$vuetify.breakpoint.xs"
-                      sm="5"
-                      md="6"
+                      cols="4"
                       :class="{'col-sm-10':open, 'col-md-10':open}"
+                      class="ml-n2"
                     >
                       <strong class="font-weight-bold grey--text text--lighten-1 mr-2">
                         {{$vuetify.lang.t('$vuetify.DESIGNACAO_CLIENTE')}}:</strong>
                       <strong
                         class="subtitle-2 font-weight-bold"
-                        v-html="circuit.designacaoCliente"
+                        v-html="circuit.designacaoCliente || '--'"
                       ></strong>
                     </v-col>
 
                     <v-col
                       v-show="!$vuetify.breakpoint.xs"
-                      sm="5"
-                      md="3"
+                      v-if="!open"
+                      cols="4"
+                      :class="{'col-sm-10':open, 'col-md-10':open}"
+                    >
+                      <strong class="font-weight-bold grey--text text--lighten-1 mr-2">
+                        {{$vuetify.lang.t('$vuetify.DESIGNACAO_TPZ')}}:</strong>
+                      <strong
+                        class="subtitle-2 font-weight-bold"
+                        v-html="circuit.nome || '--'"
+                      ></strong>
+                    </v-col>
+
+                    <v-col
+                      v-show="!$vuetify.breakpoint.xs"
+                      cols="2"
                       v-if="!open"
                     >
                       <strong class="font-weight-bold grey--text text--lighten-1 mr-2">
@@ -642,7 +661,7 @@
 
                 <v-expansion-panel-content>
 
-                  <v-card-subtitle class="caption mt-n10 ml-n4 mb-2 grey--text text--lighten-1">
+                  <v-card-subtitle class="caption mt-n10 ml-n6 mb-2 grey--text text--lighten-1">
                     {{$vuetify.lang.t('$vuetify.DESIGNACAO_TPZ')}}:
                     {{circuit.nome}}
                   </v-card-subtitle>
@@ -972,7 +991,7 @@ export default {
 
       issue = {
         origem: 'CIRCUITO',
-        identificadorOrigem: circuit.nome,
+        identificadorOrigem: (circuit.designacaoCliente || '--') + ' / ' + circuit.nome,
         motivoAbertura: issue.reason,
         observacaoAbertura: issue.observation,
         contrato: { id: this.$props.contract.id },
@@ -1198,7 +1217,7 @@ export default {
     openedPanel: undefined,
     logDecoration: 'none',
     contractDecoration: 'none',
-    button: 'log',
+    button: 'contract',
     loadingExport: false,
     allCircuits: undefined,
     showProblemSolveDialog: false,

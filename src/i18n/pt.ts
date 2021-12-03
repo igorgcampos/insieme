@@ -443,4 +443,5 @@ export default {
     OUTROS_XLSX: 'outros.xlsx',
     SITE_SURVEY_XLSX: 'site_survey.xlsx',
     INSTALADO: 'Instalado',
+    EXPORTAR_CSV_CIRCUITO: 'Exportar todos os circuitos do contrato para csv',
 }
