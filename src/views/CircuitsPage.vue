@@ -711,7 +711,7 @@
                       <v-col class="pt-0 mt-n6 pl-0 pr-0">
                         <LabelValue
                           :label="$vuetify.lang.t('$vuetify.DATA_ATIVACAO')"
-                          :value="formatDate(circuit.dataAtivacao)"
+                          :value="formatDate(circuit.dataInstalacao)"
                           justify="start"
                           truncate
                         ></LabelValue>
