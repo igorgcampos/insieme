@@ -196,8 +196,7 @@
                   >
                     <v-col
                       v-if="!open"
-                      cols="6"
-                      sm="2"
+                      cols="2"
                     >
                       <v-chip
                         :color="issue.status=='ABERTO'?'success':issue.status=='ENCERRADO'?'primary':'warning'"
@@ -213,8 +212,7 @@
                     </v-col>
 
                     <v-col
-                      sm="5"
-                      md="4"
+                      cols="3"
                       v-show="!$vuetify.breakpoint.xs"
                     >
                       <strong class="font-weight-bold grey--text text--lighten-1 mr-2">
@@ -226,8 +224,21 @@
                     </v-col>
 
                     <v-col
-                      sm="5"
-                      md="5"
+                      v-show="!$vuetify.breakpoint.xs"
+                      v-if="!open && issue.origem == 'CIRCUITO'"
+                      cols="4"
+                      :class="{'col-sm-10':open, 'col-md-10':open}"
+                    >
+                      <strong class="font-weight-bold grey--text text--lighten-1 mr-2">
+                        {{$vuetify.lang.t('$vuetify.ORIGEM')}}:</strong>
+                      <strong
+                        class="subtitle-2 font-weight-bold"
+                        v-html="issue.identificadorOrigem + ' / ' + (issue.identificadorOrigemSecundario?issue.identificadorOrigemSecundario:'--')"
+                      ></strong>
+                    </v-col>
+
+                    <v-col
+                      cols="3"
                       v-if="!open"
                       v-show="!$vuetify.breakpoint.xs"
                     >
@@ -278,7 +289,8 @@
 
                   <v-card-subtitle class="caption mt-n10 ml-n4 mb-2 grey--text text--lighten-1">
                     {{$vuetify.lang.t('$vuetify.ORIGEM')}}:
-                    {{$vuetify.lang.t('$vuetify.'+issue.origem) + (issue.identificadorOrigem?' ('+issue.identificadorOrigem+')':'')}}
+                    {{$vuetify.lang.t('$vuetify.'+issue.origem) + (issue.identificadorOrigem?' ('+
+                    issue.identificadorOrigem + (issue.identificadorOrigemSecundario? ' / ' + issue.identificadorOrigemSecundario: '')  +')':'')}}
                   </v-card-subtitle>
 
                   <v-row>
@@ -322,23 +334,28 @@
                           <span v-html="formatStatus(issue.statusProcessamento)"></span>
                         </v-chip>
 
-                        <span
-                          v-if="issue.evaluation"
-                          class="text-right caption font-weight-bold grey--text text--lighten-1 pl-1"
-                        >{{$vuetify.lang.t('$vuetify.AVALIACAO')+':'}}</span>
+                        <v-col
+                          cols="1"
+                          class="ml-n3 mt-n2"
+                        >
+                          <span
+                            v-if="issue.evaluation"
+                            class="text-right caption font-weight-bold grey--text text--lighten-1 pl-1"
+                          >{{$vuetify.lang.t('$vuetify.AVALIACAO')+':'}}</span>
 
-                        <v-rating
-                          class="mb-4"
-                          v-if="issue.evaluation"
-                          v-model="issue.evaluation.nota"
-                          color="orange"
-                          background-color="orange lighten-3"
-                          half-increments
-                          hover
-                          dense
-                          small
-                          readonly
-                        ></v-rating>
+                          <v-rating
+                            class="mb-4"
+                            v-if="issue.evaluation"
+                            v-model="issue.evaluation.nota"
+                            color="orange"
+                            background-color="orange lighten-3"
+                            half-increments
+                            hover
+                            dense
+                            small
+                            readonly
+                          ></v-rating>
+                        </v-col>
                       </v-col>
                     </v-col>
 
@@ -369,10 +386,21 @@
                                 class="caption mb-2"
                                 :class="{'red--text':!message.usuario, 'green--text':message.usuario}"
                               >{{!message.usuario?'Telespazio:':message.usuario.nome+':'}}</v-list-item-subtitle>
-                              <v-list-item-subtitle
-                                class="caption font-weight-bold ml-1"
-                                v-html="message.conteudo"
-                              ></v-list-item-subtitle>
+
+                              <v-tooltip
+                                top
+                                max-width="220"
+                              >
+                                <template v-slot:activator="{ on }">
+                                  <v-list-item-subtitle
+                                    v-on="on"
+                                    class="caption font-weight-bold ml-1"
+                                    v-html="message.conteudo"
+                                  ></v-list-item-subtitle>
+                                </template>
+                                <span>{{message.conteudo}}</span>
+                              </v-tooltip>
+
                             </v-list-item-content>
                           </v-list-item>
                         </v-list>
@@ -521,11 +549,11 @@
                     ></TooltipButton>
 
                     <TooltipButton
-                      :label="$vuetify.lang.t('$vuetify.LISTAR_LOTE')"
-                      :message="$vuetify.lang.t('$vuetify.LISTAR_LOTE_CIRCUITO', '')"
+                      :label="$vuetify.lang.t('$vuetify.LISTAR_NOTAS')"
+                      :message="$vuetify.lang.t('$vuetify.LISTAR_NOTAS_CHAMADO', '')"
                       :mobile="$vuetify.breakpoint.xs"
                       v-if="issue.lote && issue.lote.length > 0 && !(issue.origem == 'CIRCUITO_LOTE_COMERCIAL' && issue.planilha.length > 0)"
-                      :event="showListCircuits"
+                      :event="showListInvoices"
                       :object="issue"
                       :isText=true
                     ></TooltipButton>
@@ -612,10 +640,10 @@
         </FeedbackDialog>
 
         <ListDialog
-          :close="hideListCircuits"
-          :show="showCircuitListDialog"
-          :title="$vuetify.lang.t('$vuetify.LISTA_CIRCUITOS')"
-          :info="$vuetify.lang.t('$vuetify.LISTA_CIRCUITOS_ASSOCIADOS')"
+          :close="hideListInvoices"
+          :show="showListDialog"
+          :title="$vuetify.lang.t('$vuetify.LISTAR_NOTAS')"
+          :info="$vuetify.lang.t('$vuetify.LISTAR_NOTAS_CHAMADO')"
           :list="selectedList"
         ></ListDialog>
 
@@ -866,12 +894,12 @@ export default {
       this.showCommercialDialog = true;
       this.entity = issue
     },
-    showListCircuits (issue) {
+    showListInvoices (issue) {
       this.selectedList = issue.lote;
-      this.showCircuitListDialog = true;
+      this.showListDialog = true;
     },
-    hideListCircuits () {
-      this.showCircuitListDialog = false;
+    hideListInvoices () {
+      this.showListDialog = false;
     },
     searchEntities (text, page) {
 
@@ -912,6 +940,7 @@ export default {
         var object = {
           origem: 'CIRCUITO',
           identificadorOrigem: issue.items[index].nome,
+          identificadorOrigemSecundario: issue.items[index].designacaoCliente,
           motivoAbertura: issue.reason,
           observacaoAbertura: issue.observation,
           contrato: { id: this.$props.contract.id }
@@ -1234,7 +1263,7 @@ export default {
     error: false,
     showMessageDialog: false,
     selectedList: [],
-    showCircuitListDialog: false,
+    showListDialog: false,
     canShowButton: false,
     showFeedBack: false,
     openedPanel: undefined,

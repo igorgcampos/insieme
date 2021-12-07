@@ -168,6 +168,7 @@
           :loading="isDownloading"
           :mobile="$vuetify.breakpoint.xs"
           :isText=true
+          v-if="$hasProfile('Cliente')"
         ></TooltipButton>
       </v-card-actions>
     </v-card>

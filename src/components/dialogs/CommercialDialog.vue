@@ -158,7 +158,7 @@
         <v-btn
           color="primary"
           text
-          @click="send(issue, entity, entityList, fileByteArray);"
+          @click="send(issue, entity, entityList, fileByteArray); cleanFields()"
           :x-small="$vuetify.breakpoint.xs"
           :loading="showDialogLoading"
           v-show="editable && !showSuccess"
