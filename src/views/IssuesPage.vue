@@ -360,7 +360,7 @@
                     </v-col>
 
                     <div
-                      class="col-3 mt-n7 mr-0 ml-0 pl-0 pr-0"
+                      class="col-4 mt-n7 mr-0 ml-0 pl-0 pr-0"
                       v-if="issue.mensagens && issue.mensagens.length > 0"
                     >
                       <span class="text-center caption font-weight-bold grey--text text--lighten-1">
