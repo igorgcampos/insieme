@@ -933,7 +933,7 @@ export default {
         [this.$vuetify.lang.t('$vuetify.COD_TPZ')]: circuit.numeroContratoTpz,
         [this.$vuetify.lang.t('$vuetify.COD_SAP')]: circuit.numeroContratoSap,
         [this.$vuetify.lang.t('$vuetify.DESIGNACAO_CLIENTE')]: circuit.designacaoCliente,
-        [this.$vuetify.lang.t('$vuetify.DATA_ATIVACAO')]: this.formatDate(circuit.dataAtivacao),
+        [this.$vuetify.lang.t('$vuetify.DATA_ATIVACAO')]: this.formatDate(circuit.dataInstalacao),
         [this.$vuetify.lang.t('$vuetify.STATUS_INSTALACAO')]: circuit.statusInstalacao ? this.$vuetify.lang.t('$vuetify.' + circuit.statusInstalacao) : '--',
         [this.$vuetify.lang.t('$vuetify.DATA_INSTALACAO')]: this.formatDate(circuit.dataInstalacao),
         [this.$vuetify.lang.t('$vuetify.ENDERECO')]: this.getAddress(circuit),
