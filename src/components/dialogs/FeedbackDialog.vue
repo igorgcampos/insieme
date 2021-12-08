@@ -13,7 +13,7 @@
         v-if="!showSuccess"
       >
         <v-card-title
-          class="headline-6"
+          class="headline-6 ml-1 pt-5"
           style="word-break: normal; !important"
           :class="{'subtitle-2':$vuetify.breakpoint.xs}"
         >
@@ -22,7 +22,7 @@
           (entity.notification?entity.notification.mensagem.split(':')[1]:entity.issue.protocolo)}}
         </v-card-title>
         <v-card-text
-          class="mt-n2 headline-6"
+          class="mt-n2 headline-6 pl-5"
           :class="{'caption':$vuetify.breakpoint.xs}"
         >{{!entity?$vuetify.lang.t('$vuetify.FEEDBACK_DESCRICAO'):''}}</v-card-text>
 
