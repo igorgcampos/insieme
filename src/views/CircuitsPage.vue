@@ -481,6 +481,7 @@
           <v-col
             class="ml-5"
             cols="3"
+            v-if="$hasProfile('Administrador')"
           >
             <v-row>
               <span class=" text-right subtitle-2 font-weight-bold grey--text text--lighten-1">
