@@ -176,7 +176,7 @@ export default {
     CONFIRMAR_SELECAO_CIRCUITO: 'Verifiquei o seu circuito {0} e ele está online. É para este circuito que você deseja o atendimento?',
     REINICIAR: 'Reiniciar',
     ESTA_OK: 'Está ok!',
-    DESIGNACAO_CLIENTE_TPZ: 'Desig. cliente/tpz',
+    DESIGNACAO_CLIENTE_TPZ: 'Desig. cliente/tpz/hub',
     PRIMEIRA_PERGUNTA: 'Olá, sou Matteo seu assistente virtual. Vou tentar te ajudar. Mas antes, me tire um duvida: Seu problema é hardware?',
     SIM: 'Sim',
     NAO: 'Não',

@@ -97,7 +97,7 @@ export default {
     CONTRATO_NAO_ENCONTRADO: 'Contract not found',
     CONTRATO_NAO_DIGITALIZADO: 'The digitalized contract is not available yet',
     DESIGNACAO_CLIENTE: 'Client desig.',
-    DESIGNACAO_CLIENTE_TPZ: 'Client/Tpz desig.',
+    DESIGNACAO_CLIENTE_TPZ: 'Client/Tpz desig./hub',
     NENHUM_CIRCUITO: 'No circuits found',
     CONTRATO_SELECIONADO: 'Selected contract',
     ATIVADO: 'Activated',
