@@ -1079,7 +1079,7 @@ export default {
       });
     },
     getAddress (circuit) {
-      return circuit.endereco.replace(';','') + ' ' + circuit.bairro + ' ' + circuit.cidade + ', ' + circuit.uf
+      return circuit.endereco.replace(';',' ') + ' ' + circuit.bairro + ' ' + circuit.cidade + ', ' + circuit.uf
     },
     getOnline () {
       this.getFromStatus(1)
