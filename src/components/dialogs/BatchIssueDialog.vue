@@ -1,38 +1,53 @@
 <template>
-
   <v-dialog
     v-model="showDialog"
     persistent
-    :max-width="selectReason?360:470"
+    :max-width="selectReason ? 360 : 470"
     v-if="showDialog"
   >
     <v-card v-show="!showSuccess && !error">
       <v-card-title
         class="headline-6"
-        :class="{'subtitle-2':$vuetify.breakpoint.xs}"
+        :class="{ 'subtitle-2': $vuetify.breakpoint.xs }"
         style="word-break: normal; !important"
       >
-        {{entity.type=='circuit'?
-          $vuetify.lang.t('$vuetify.ABRINDO_CHAMADO_CIRCUITOS'):
-          $vuetify.lang.t('$vuetify.ABRINDO_CHAMADO_NOTAS')}}
+        {{
+          entity.type == "circuit"
+            ? $vuetify.lang.t("$vuetify.ABRINDO_CHAMADO_CIRCUITOS")
+            : $vuetify.lang.t("$vuetify.ABRINDO_CHAMADO_NOTAS")
+        }}
       </v-card-title>
-      <v-card-text class="headline-6 mt-n2">{{selectReason?$vuetify.lang.t('$vuetify.SELECIONE_MOTIVO_OBSERVACAO'):
-            entity.type=='circuit'?$vuetify.lang.t('$vuetify.SELECIONE_CIRCUITOS'):$vuetify.lang.t('$vuetify.SELECIONE_NOTAS')}}
+      <v-card-text class="headline-6 mt-n2"
+        >{{
+          selectReason
+            ? $vuetify.lang.t("$vuetify.SELECIONE_MOTIVO_OBSERVACAO")
+            : entity.type == "circuit"
+            ? $vuetify.lang.t("$vuetify.SELECIONE_CIRCUITOS")
+            : $vuetify.lang.t("$vuetify.SELECIONE_NOTAS")
+        }}
       </v-card-text>
 
       <v-row
         class="ma-0 mb-3 d-flex justify-center"
         v-if="selectReason && !showDialogLoading"
       >
-
-        <v-col
-          class="ma-0 pa-0"
-          cols="9"
-        >
+        <v-col class="ma-0 pa-0" cols="9">
           <v-row>
-            <span class=" text-right subtitle-2 font-weight-bold grey--text text--lighten-1">
-              {{entity.type=='closing'?$vuetify.lang.t('$vuetify.MOTIVO_ENCERRAMENTO'):
-                $vuetify.lang.t('$vuetify.MOTIVO_ABERTURA')}}:</span>
+            <span
+              class="
+                text-right
+                subtitle-2
+                font-weight-bold
+                grey--text
+                text--lighten-1
+              "
+            >
+              {{
+                entity.type == "closing"
+                  ? $vuetify.lang.t("$vuetify.MOTIVO_ENCERRAMENTO")
+                  : $vuetify.lang.t("$vuetify.MOTIVO_ABERTURA")
+              }}:</span
+            >
           </v-row>
           <v-row>
             <v-select
@@ -45,13 +60,19 @@
           </v-row>
         </v-col>
 
-        <v-col
-          class="ma-0 pa-0 mt-0"
-          cols="9"
-        >
+        <v-col class="ma-0 pa-0 mt-0" cols="9">
           <v-row>
-            <span class=" text-right subtitle-2 font-weight-bold grey--text text--lighten-1">
-              {{$vuetify.lang.t('$vuetify.BREVE_DESCRICAO')}}:</span>
+            <span
+              class="
+                text-right
+                subtitle-2
+                font-weight-bold
+                grey--text
+                text--lighten-1
+              "
+            >
+              {{ $vuetify.lang.t("$vuetify.BREVE_DESCRICAO") }}:</span
+            >
           </v-row>
           <v-row>
             <v-textarea
@@ -79,69 +100,84 @@
         ></v-progress-circular>
       </v-row>
 
-      <v-col
-        class="mt-n3"
-        v-show="!selectReason"
-      >
-
+      <v-col class="mt-n3" v-show="!selectReason">
         <v-row>
           <v-col
             class="overflow-y-hidden overflow-x-hidden"
-            :min-height="$vuetify.breakpoint.xs?250:320"
+            :min-height="$vuetify.breakpoint.xs ? 250 : 320"
           >
-            <v-col
-              cols="11"
-              class="ml-4 mt-n4 pr-0 mr-0"
-            >
+            <v-col cols="11" class="ml-4 mt-n4 pr-0 mr-0">
               <v-row>
-                <span class=" text-right subtitle-2 font-weight-bold grey--text text--lighten-1">
-                  {{$vuetify.lang.t('$vuetify.BUSCAR')}}:</span>
+                <span
+                  class="
+                    text-right
+                    subtitle-2
+                    font-weight-bold
+                    grey--text
+                    text--lighten-1
+                  "
+                >
+                  {{ $vuetify.lang.t("$vuetify.BUSCAR") }}:</span
+                >
               </v-row>
               <v-row class="mr-1">
                 <v-text-field
                   v-model.trim="searchText"
                   dense
                   label="Regular"
-                  :placeholder="entity.type=='circuit'?$vuetify.lang.t('$vuetify.DESIGNACAO_CLIENTE_TPZ'):
-                    $vuetify.lang.t('$vuetify.NUMERO_NOTA')"
+                  :placeholder="
+                    entity.type == 'circuit'
+                      ? $vuetify.lang.t('$vuetify.DESIGNACAO_CLIENTE_TPZ')
+                      : $vuetify.lang.t('$vuetify.NUMERO_NOTA')
+                  "
                   single-line
                   solo
                   max-width="200"
                   append-icon="mdi-magnify"
-                  @click:append="search(searchText, 0); selectedCheckList = []; page = 0;"
-                  @keypress.enter="search(searchText, 0); selectedCheckList = []; page = 0;"
+                  @click:append="
+                    search(searchText, 0);
+                    selectedCheckList = [];
+                    page = 0;
+                  "
+                  @keypress.enter="
+                    search(searchText, 0);
+                    selectedCheckList = [];
+                    page = 0;
+                  "
                 ></v-text-field>
               </v-row>
 
               <WarningPanel
-                :mobile=true
-                :message="entity.type=='circuit'?$vuetify.lang.t('$vuetify.NENHUM_CIRCUITO'):$vuetify.lang.t('$vuetify.NENHUMA_NOTA')"
+                :mobile="true"
+                :message="
+                  entity.type == 'circuit'
+                    ? $vuetify.lang.t('$vuetify.NENHUM_CIRCUITO')
+                    : $vuetify.lang.t('$vuetify.NENHUMA_NOTA')
+                "
                 v-show="itemList.length == 0 && !showDialogLoading"
               ></WarningPanel>
 
               <v-lazy
-                :options="{threshold: .6}"
+                :options="{ threshold: 0.6 }"
                 transition="slide-x-transition"
               >
-
                 <v-list
                   v-show="itemList.length > 0"
                   two-line
                   flat
                   class="ml-n6 mt-n4 pt-3 overflow-y-auto"
-                  :height="$vuetify.breakpoint.xs?170:240"
+                  :height="$vuetify.breakpoint.xs ? 170 : 240"
                   id="listId"
                   v-scroll:#listId="searchMore"
                 >
                   <v-list-item-group multiple>
                     <v-list-item
                       class="mt-n3"
-                      :class="{'ml-n3':$vuetify.breakpoint.xs}"
+                      :class="{ 'ml-n3': $vuetify.breakpoint.xs }"
                       v-for="(item, i) in itemList"
                       :key="i"
                     >
                       <template v-slot:default="{ active }">
-
                         <v-list-item-action>
                           <v-checkbox
                             :input-value="active"
@@ -155,18 +191,25 @@
 
                         <v-list-item-content
                           class="ml-n3"
-                          :class="{'ml-n7':$vuetify.breakpoint.xs}"
+                          :class="{ 'ml-n7': $vuetify.breakpoint.xs }"
                         >
                           <v-list-item-title
                             class="subtitle-2"
-                            :class="{'caption':$vuetify.breakpoint.xs}"
+                            :class="{ caption: $vuetify.breakpoint.xs }"
                           >
-                            {{item.nome?item.nome:item.numero}}</v-list-item-title>
-                          <v-list-item-subtitle class="caption">{{item.designacaoCliente?
-                              item.designacaoCliente.toLowerCase():
-                              (item.statusPagamento=='EM_ABERTO'?$vuetify.lang.t('$vuetify.EM_ABERTO'):
-                              item.statusPagamento=='VENCIDA'?$vuetify.lang.t('$vuetify.VENCIDA'):
-                              $vuetify.lang.t('$vuetify.PAGO'))}}</v-list-item-subtitle>
+                            {{
+                              item.nome ? item.nome : item.numero
+                            }}</v-list-item-title
+                          >
+                          <v-list-item-subtitle class="caption">{{
+                            item.designacaoCliente
+                              ? item.designacaoCliente.toLowerCase()
+                              : item.statusPagamento == "EM_ABERTO"
+                              ? $vuetify.lang.t("$vuetify.EM_ABERTO")
+                              : item.statusPagamento == "VENCIDA"
+                              ? $vuetify.lang.t("$vuetify.VENCIDA")
+                              : $vuetify.lang.t("$vuetify.PAGO")
+                          }}</v-list-item-subtitle>
                         </v-list-item-content>
                       </template>
                     </v-list-item>
@@ -179,37 +222,39 @@
           <v-divider
             vertical
             class="mt-3 mb-5"
-            :style="{height: size + 'em'}"
-          > </v-divider>
+            :style="{ height: size + 'em' }"
+          >
+          </v-divider>
 
           <v-col
             class="overflow-y-auto overflow-x-hidden mt-4"
-            :style="{height: size + 'em'}"
+            :style="{ height: size + 'em' }"
           >
-
             <v-col
               cols="11"
               class="ml-4 mt-n1"
-              :class="{'mt-n8':$vuetify.breakpoint.xs}"
+              :class="{ 'mt-n8': $vuetify.breakpoint.xs }"
             >
               <WarningPanel
                 class="mt-8 pt-10"
-                :mobile=true
-                :message="entity.type=='circuit'?$vuetify.lang.t('$vuetify.NENHUM_CIRCUITO_SELECIONADO')
-                  :$vuetify.lang.t('$vuetify.NENHUMA_NOTA_SELECIONADA')"
+                :mobile="true"
+                :message="
+                  entity.type == 'circuit'
+                    ? $vuetify.lang.t('$vuetify.NENHUM_CIRCUITO_SELECIONADO')
+                    : $vuetify.lang.t('$vuetify.NENHUMA_NOTA_SELECIONADA')
+                "
                 v-show="selectedItemList.length == 0"
               >
               </WarningPanel>
 
               <v-row
                 class="ml-0 mt-2 d-flex justify-left"
-                :class="{'ml-n7':$vuetify.breakpoint.xs}"
-                v-for="(item) in selectedItemList"
+                :class="{ 'ml-n7': $vuetify.breakpoint.xs }"
+                v-for="item in selectedItemList"
                 :key="item.id"
               >
-
                 <v-lazy
-                  :options="{threshold: .6}"
+                  :options="{ threshold: 0.6 }"
                   transition="slide-x-transition"
                 >
                   <v-chip
@@ -225,25 +270,28 @@
                     v-show="item.hasIssue"
                   >
                     <v-col>
-                      <v-row class="mt-2">{{ item.nome || item.numero}}</v-row>
+                      <v-row class="mt-2">{{ item.nome || item.numero }}</v-row>
 
                       <v-row>
                         <strong class="mt-n1 caption font-weight-bold">
-                          {{$vuetify.lang.t('$vuetify.CHAMADO_JA_ABERTO')}}</strong>
+                          {{
+                            $vuetify.lang.t("$vuetify.CHAMADO_JA_ABERTO")
+                          }}</strong
+                        >
                       </v-row>
                     </v-col>
                   </v-chip>
                 </v-lazy>
 
                 <v-lazy
-                  :options="{threshold: .6}"
+                  :options="{ threshold: 0.6 }"
                   transition="slide-x-transition"
                 >
                   <v-chip
                     :key="item.id + 1"
                     color="success"
                     class="ml-0 mr-2 mt-2"
-                    :class="{'ml-2':$vuetify.breakpoint.xs}"
+                    :class="{ 'ml-2': $vuetify.breakpoint.xs }"
                     label
                     :small="$vuetify.breakpoint.xs"
                     @click:close="selectItem(item, false)"
@@ -251,11 +299,10 @@
                     v-show="!item.hasIssue"
                     :id="item.nome"
                   >
-                    {{ item.nome || item.numero}}
+                    {{ item.nome || item.numero }}
                   </v-chip>
                 </v-lazy>
               </v-row>
-
             </v-col>
           </v-col>
         </v-row>
@@ -265,46 +312,64 @@
       <v-card-actions v-if="!showDialogLoading">
         <span
           class="ml-3 caption font-weight-bold error--text"
-          v-if="showLimitWaring && entity.type=='circuit'"
-        >{{$vuetify.lang.t('$vuetify.SELECAO_MAXIMA', 30)}}</span>
+          v-if="showLimitWaring && entity.type == 'circuit'"
+          >{{ $vuetify.lang.t("$vuetify.SELECAO_MAXIMA", 30) }}</span
+        >
         <v-spacer v-if="!$vuetify.breakpoint.xs"></v-spacer>
         <v-btn
           color="primary"
           text
-          @click="close(); cleanFields(true)"
+          @click="
+            close();
+            cleanFields(true);
+          "
           :x-small="$vuetify.breakpoint.xs"
-        >{{$vuetify.lang.t('$vuetify.CANCELAR')}}</v-btn>
+          >{{ $vuetify.lang.t("$vuetify.CANCELAR") }}</v-btn
+        >
         <v-btn
           color="primary"
           text
           @click="next()"
           :x-small="$vuetify.breakpoint.xs"
           v-show="!selectReason"
-        >{{$vuetify.lang.t('$vuetify.PROXIMO')}}</v-btn>
+          >{{ $vuetify.lang.t("$vuetify.PROXIMO") }}</v-btn
+        >
         <v-btn
           color="primary"
           text
           @click="selectReason = false"
           :x-small="$vuetify.breakpoint.xs"
           v-show="selectReason"
-        >{{$vuetify.lang.t('$vuetify.ANTERIOR')}}</v-btn>
+          >{{ $vuetify.lang.t("$vuetify.ANTERIOR") }}</v-btn
+        >
         <v-btn
           color="primary"
           text
-          @click="send(issue, entity); cleanFields()"
+          @click="
+            send(issue, entity);
+            cleanFields();
+          "
           :x-small="$vuetify.breakpoint.xs"
           :loading="showDialogLoading"
           v-show="selectReason"
-        >{{$vuetify.lang.t('$vuetify.ENVIAR')}}</v-btn>
+          >{{ $vuetify.lang.t("$vuetify.ENVIAR") }}</v-btn
+        >
       </v-card-actions>
       <v-spacer v-if="$vuetify.breakpoint.xs"></v-spacer>
     </v-card>
 
     <v-card v-show="showSuccess && !error">
-
       <SuccessPanel
-        :title="entity.protocolo?$vuetify.lang.t('$vuetify.CHAMADO_CRIADO'):$vuetify.lang.t('$vuetify.CHAMADOS_CRIADOS')"
-        :subtitle="entity.protocolo?$vuetify.lang.t('$vuetify.PROTOCOLO')+': '+entity.protocolo:''"
+        :title="
+          entity.protocolo
+            ? $vuetify.lang.t('$vuetify.CHAMADO_CRIADO')
+            : $vuetify.lang.t('$vuetify.CHAMADOS_CRIADOS')
+        "
+        :subtitle="
+          entity.protocolo
+            ? $vuetify.lang.t('$vuetify.PROTOCOLO') + ': ' + entity.protocolo
+            : ''
+        "
       >
       </SuccessPanel>
 
@@ -314,20 +379,20 @@
         <v-btn
           color="primary"
           text
-          @click="close(); cleanFields()"
+          @click="
+            close();
+            cleanFields();
+          "
           :x-small="$vuetify.breakpoint.xs"
-        >{{$vuetify.lang.t('$vuetify.FECHAR')}}</v-btn>
+          >{{ $vuetify.lang.t("$vuetify.FECHAR") }}</v-btn
+        >
       </v-card-actions>
     </v-card>
 
-    <v-card
-      v-show="!showSuccess && error"
-      class="mr-4"
-    >
-
+    <v-card v-show="!showSuccess && error" class="mr-4">
       <WarningPanel
         class="pt-10 mb-8 pr-5 pl-5"
-        :mobile=true
+        :mobile="true"
         :message="$vuetify.lang.t('$vuetify.ERRO_CRIACAO_CHAMADO')"
         robot="true"
       >
@@ -339,19 +404,21 @@
         <v-btn
           color="primary"
           text
-          @click="close(); cleanFields()"
+          @click="
+            close();
+            cleanFields();
+          "
           :x-small="$vuetify.breakpoint.xs"
-        >{{$vuetify.lang.t('$vuetify.FECHAR')}}</v-btn>
+          >{{ $vuetify.lang.t("$vuetify.FECHAR") }}</v-btn
+        >
       </v-card-actions>
     </v-card>
   </v-dialog>
-
 </template>
 
 <script>
-
-import WarningPanel from '../../components/panels/WarningPanel';
-import SuccessPanel from '../../components/panels/SuccessPanel';
+import WarningPanel from "../../components/panels/WarningPanel";
+import SuccessPanel from "../../components/panels/SuccessPanel";
 
 export default {
   components: {
@@ -369,126 +436,130 @@ export default {
     send: Function,
     search: Function,
     itemList: Array,
-    reasonList: Array
+    reasonList: Array,
   },
   methods: {
-    next () {
-
-      if (this.selectedItemList.length == 1 && this.$props.entity.type == 'circuit') {
-
-        this.$root.$emit('solve-problem', this.selectedItemList[0]);
+    next() {
+      if (
+        this.selectedItemList.length == 1 &&
+        this.$props.entity.type == "circuit"
+      ) {
+        this.$root.$emit("solve-problem", this.selectedItemList[0]);
         this.close();
-        this.cleanFields(true)
-        return
+        this.cleanFields(true);
+        return;
       }
 
       if (this.selectedItemList.length > 0) {
-        this.selectReason = true
+        this.selectReason = true;
       }
     },
-    searchMore () {
-
+    searchMore() {
       if (this.showDialogLoading || this.noResult) {
         return;
       }
 
-      if (document.getElementById('listId').scrollTop + (this.$vuetify.breakpoint.xs ? 171 : 241) >=
-        document.getElementById('listId').scrollHeight) {
+      if (
+        document.getElementById("listId").scrollTop +
+          (this.$vuetify.breakpoint.xs ? 171 : 241) >=
+        document.getElementById("listId").scrollHeight
+      ) {
         this.page++;
-        this.search(this.searchText, this.page)
+        this.search(this.searchText, this.page);
       }
-
     },
-    selectItem (item, checkList) {
-
-      if (!this.issue.items) {
-        this.issue.items = this.selectedItemList
-      }
-
-      if (!this.containsItem(item, this.selectedItemList) && this.containsItem(item, this.selectedCheckList)) {
-
-        if (this.selectedItemList.length > 30 && this.entity.type == 'circuit') {
+    selectItem(item, checkList) {
+      if (
+        !this.containsItem(item, this.selectedItemList) &&
+        this.containsItem(item, this.selectedCheckList)
+      ) {
+        if (
+          this.selectedItemList.length > 30 &&
+          this.entity.type == "circuit"
+        ) {
           this.showLimitWaring = true;
           return;
         }
 
-        this.selectedItemList.push(item)
+        this.selectedItemList.push(item);
 
         //verifica se o circuito já tem chamado aberto. Se tiver muda a cor dele na lista
         if (item.nome) {
-          this.$get('/chamado/circuito', {
-            desigTpz: item.nome
-          })
-            .then((response) => {
-
-              if (response && response.data > 0) {
-                item.hasIssue = true;
-                document.getElementById(item.id).style.display = 'none';
-                document.getElementById(item.id).style.display = 'block';
-                document.getElementById(item.nome).style.display = 'none';
-
-              }
-            });
+          this.$get("/chamado/circuito", {
+            desigTpz: item.nome,
+          }).then((response) => {
+            if (response && response.data > 0) {
+              item.hasIssue = true;
+              document.getElementById(item.id).style.display = "none";
+              document.getElementById(item.id).style.display = "block";
+              document.getElementById(item.nome).style.display = "none";
+            }
+          });
         }
       } else {
-
         if (!checkList || !this.containsItem(item, this.selectedCheckList)) {
-          this.selectedItemList = this.selectedItemList.filter(function (value) {
-            return value.id != item.id
+          this.selectedItemList = this.selectedItemList.filter(function (
+            value
+          ) {
+            return value.id != item.id;
           });
 
           if (!checkList)
-            this.selectedCheckList = this.selectedCheckList.filter(function (value) {
-              return value.id != item.id
+            this.selectedCheckList = this.selectedCheckList.filter(function (
+              value
+            ) {
+              return value.id != item.id;
             });
 
-          if (this.selectedItemList.length <= 30 && this.entity.type == 'circuit') {
+          if (
+            this.selectedItemList.length <= 30 &&
+            this.entity.type == "circuit"
+          ) {
             this.showLimitWaring = false;
           }
         }
       }
-    },
-    containsItem (item, list) {
 
+      this.issue.items = this.selectedItemList;
+    },
+    containsItem(item, list) {
       for (var index in list) {
-        if (list[index].id == item.id)
-          return true;
+        if (list[index].id == item.id) return true;
       }
 
-      return false
+      return false;
     },
-    cleanFields (cancel) {
-
-      this.issue.observation = '';
+    cleanFields(cancel) {
+      this.issue.observation = "";
       this.issue.reason = undefined;
       this.issue.items = undefined;
 
       if (cancel) {
-        this.selectReason = false
+        this.selectReason = false;
       } else if (this.error) {
         this.selectReason = false;
       } else {
         this.selectReason = !this.showSuccess;
       }
       this.selectedItemList = [];
-      this.selectedCheckList = []
-      this.searchText = '';
-    }
+      this.selectedCheckList = [];
+      this.searchText = "";
+    },
   },
   data: () => ({
     size: 0,
     page: 0,
     check: false,
-    searchText: '',
+    searchText: "",
     selectedItemList: [],
     selectedCheckList: [],
     selectReason: false,
-    issue: { reason: '', observation: '', items: undefined },
+    issue: { reason: "", observation: "", items: undefined },
     showLimitWaring: false,
   }),
   created: function () {
     this.size = this.$vuetify.breakpoint.xs ? 16 : 20;
-    this.search('', 0)
-  }
+    this.search("", 0);
+  },
 };
 </script>
