@@ -139,25 +139,6 @@
           pill
           v-on="on"
           color="red darken-3"
-          v-show="canShowClientLink()"
-          class="mr-2"
-          @click="toClientsList()"
-        >
-          {{$vuetify.lang.t('$vuetify.CLIENTES')}}
-        </v-chip>
-      </template>
-      <span>{{$vuetify.lang.t('$vuetify.PAGINA_CLIENTES')}}</span>
-    </v-tooltip>
-
-    <v-tooltip
-      bottom
-      v-if="!$vuetify.breakpoint.xs && !$vuetify.breakpoint.sm"
-    >
-      <template v-slot:activator="{ on }">
-        <v-chip
-          pill
-          v-on="on"
-          color="red darken-3"
           v-show="canShowAdminLink()"
           class="mr-2"
           @click="toProactivePage()"
@@ -334,13 +315,6 @@
           @click="toContractList()"
         >
           <v-list-item-title>{{$vuetify.lang.t('$vuetify.CONTRATOS')}}</v-list-item-title>
-        </v-list-item>
-
-        <v-list-item
-          v-show="canShowClientLink()"
-          @click="toClientsList()"
-        >
-          <v-list-item-title>{{$vuetify.lang.t('$vuetify.CLIENTES')}}</v-list-item-title>
         </v-list-item>
 
         <v-list-item
@@ -539,18 +513,12 @@ export default {
       window.sessionStorage.setItem('actualPage', 'contracts');
       this.$router.push('/contratos')
     },
-    toClientsList () {
-      window.sessionStorage.setItem('actualPage', 'clients');
-      window.sessionStorage.setItem('selectedClientId', -1);
-      this.$router.push('/clientes')
-    },
     toProactivePage () {
       window.sessionStorage.setItem('actualPage', 'administracao');
       this.$router.push('/administracao')
     },
     canShowContractLink () {
-      return this.$route.path === '/clientes' ||
-        this.$route.path === '/dashboard' ||
+      return this.$route.path === '/dashboard' ||
         this.$route.path === '/administracao'
     },
     canShowAdminLink () {
@@ -560,12 +528,6 @@ export default {
     },
     canShowReport () {
       return this.$route.path === '/dashboard'
-    },
-    canShowClientLink () {
-      return this.$hasProfile('Administrador') &&
-        (this.$route.path === '/contratos' ||
-          this.$route.path === '/dashboard' ||
-          this.$route.path === '/administracao')
     },
     logout () {
 

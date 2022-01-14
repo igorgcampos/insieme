@@ -10,11 +10,6 @@ const routes = [
     component: () => import('../views/MainPage.vue'),
     children: [
       {
-        path: 'clientes',
-        name: 'Clients',
-        component: () => import('../views/ClientsPage.vue')
-      },
-      {
         path: 'contratos',
         name: 'Contracts',
         props: true,

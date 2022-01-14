@@ -28,30 +28,18 @@ export default {
 
     this.user = this.$getUser()
 
-    if (this.$hasProfile('Administrador')
-      && (window.sessionStorage.getItem('actualPage') == 'clients' || window.sessionStorage.getItem('actualPage') == '/')) {
-      this.$router.push('/clientes')
-    }
-    else if (window.sessionStorage.getItem('actualPage') == 'clients') {
-      this.$router.push({ name: 'Contracts', params: { client: { id: this.user.cliente.id } } })
-    }
-    else if (window.sessionStorage.getItem('actualPage') == 'contracts' || window.sessionStorage.getItem('actualPage') == '/') {
+    if (window.sessionStorage.getItem('actualPage') == 'contracts' || window.sessionStorage.getItem('actualPage') == '/') {
 
       if (!this.user.cliente) {
         this.user.cliente = { id: -1 }
       }
       this.$router.push({ name: 'Contracts', params: { client: { id: this.user.cliente.id } } })
+
     } else if (window.sessionStorage.getItem('actualPage') == 'administracao') {
       this.$router.push({ name: 'Administration' })
     } else {
       this.$router.push({ name: 'Dashboard', params: { contract: undefined } })
     }
-
-    this.$root.$on('client-selected',
-      (client) => {
-        window.sessionStorage.setItem('actualPage', 'contracts');
-        this.$router.push({ name: 'Contracts', params: { client: client } })
-      })
 
     this.$root.$on('contract-selected',
       (contract) => {
