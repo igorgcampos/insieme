@@ -1151,7 +1151,7 @@ export default {
         return;
       }
 
-      if (document.getElementById('circuitId').scrollTop + 341 >=
+      if (document.getElementById('circuitId').scrollTop + 361 >=
         document.getElementById('circuitId').scrollHeight) {
         this.page++;
         this.search(this.page);
