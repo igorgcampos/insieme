@@ -430,4 +430,5 @@ export default {
     EXPORTAR_CSV_CIRCUITO: 'Exportar todos os circuitos deste contrato para csv',
     LISTAR_NOTAS: 'Listar notas',
     LISTAR_NOTAS_CHAMADO: 'Lista as notas deste chamado',
+    MAX_CARACTERES:'Máx. de {0} carac.',
 }

@@ -76,11 +76,14 @@
           </v-row>
           <v-row>
             <v-textarea
+              class="mb-2"
               solo
               height="100"
               :no-resize="true"
               rows="5"
               v-model="issue.observation"
+              counter
+              maxlength="80"
             ></v-textarea>
           </v-row>
         </v-col>

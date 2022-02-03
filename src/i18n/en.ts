@@ -435,4 +435,5 @@ export default {
     EXPORTAR_CSV_CIRCUITO: 'Export all circuits from this contract to csv',
     LISTAR_NOTAS: 'Show invoices',
     LISTAR_NOTAS_CHAMADO: 'Show invoices of this ticket',
+    MAX_CARACTERES:'Max. of {0} chars',
 }

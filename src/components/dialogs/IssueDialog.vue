@@ -57,6 +57,8 @@
               :no-resize="true"
               rows="5"
               v-model="issue.observation"
+              counter
+              maxlength="80"
             ></v-textarea>
           </v-row>
         </v-col>
