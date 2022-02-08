@@ -42,7 +42,7 @@
             class="mb-n3"
           >
 
-            <v-row>
+            <v-row v-sohw="!hasProfile('Sem monitoramento')">
               <v-col cols="12">
                 <v-row justify="center">
                   <span class="mt-n3 text-center subtitle-1 font-weight-bold grey--text text--darken-1">
@@ -242,6 +242,7 @@
             <v-col
               class="ml-0"
               cols="4"
+              v-if="!hasProfile('Sem monitoramento')"
             >
               <v-row justify="center">
                 <span class="mt-n3 text-center caption font-weight-bold grey--text text--darken-2">
@@ -282,7 +283,7 @@
             <v-divider
               class="mb-5 mt-n2 ml-n4"
               :vertical=true
-              v-show="!$vuetify.breakpoint.xs"
+              v-show="!hasProfile('Sem monitoramento')"
             ></v-divider>
 
             <v-row>
