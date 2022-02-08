@@ -807,14 +807,14 @@
                   ></v-divider>
 
                   <v-card-actions class="mb-n2 pb-0">
-                    <TooltipButton
+                    <TooltipButton 
                       :label="$vuetify.lang.t('$vuetify.RESOLVER_PROBLEMA')"
                       :message="$vuetify.lang.t('$vuetify.SUPORTE_PROBLEMA')"
                       :event="circuit.tecnologia == 'VSAT'?solveProblem:openIssue"
                       :object="circuit"
                       :mobile="$vuetify.breakpoint.xs"
                       :isText=true
-                      v-if="circuit.statusInstalacao == 'ATIVADO'"
+                      v-if="circuit.statusInstalacao == 'ATIVADO' && !$hasProfile('Sem monitoramento')"
                     ></TooltipButton>
 
                     <TooltipButton
