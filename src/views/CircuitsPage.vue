@@ -1082,7 +1082,7 @@ export default {
     getAddress (circuit) {
       return circuit.endereco.replaceAll(';',' ') + ' ' + (circuit.bairro?circuit.bairro:'') + 
       ' ' + (circuit.cidade?circuit.cidade:'') + 
-      ', ' + (circuit.uf?circuit.uf:'').replaceAll("\n"," ").trim()
+      ', ' + (circuit.uf?circuit.uf:'').replaceAll("\n"," ").replaceAll("\r"," ").trim()
     },
     getOnline () {
       this.getFromStatus(1)
