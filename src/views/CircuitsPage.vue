@@ -1080,9 +1080,9 @@ export default {
       });
     },
     getAddress (circuit) {
-      return circuit.endereco.replaceAll(';',' ').replaceAll("\n"," ").trim() + ' ' + (circuit.bairro?circuit.bairro:'') + 
+      return circuit.endereco.replaceAll(';',' ') + ' ' + (circuit.bairro?circuit.bairro:'') + 
       ' ' + (circuit.cidade?circuit.cidade:'') + 
-      ', ' + (circuit.uf?circuit.uf:'')
+      ', ' + (circuit.uf?circuit.uf:'').replaceAll("\n"," ").trim()
     },
     getOnline () {
       this.getFromStatus(1)
