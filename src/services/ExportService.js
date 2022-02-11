@@ -5,7 +5,7 @@ exportService.install = function (Vue) {
 
     Vue.prototype.$downloadCSV = (objectsArray, fileName) => {
 
-        let csvContent = "data:text/csv;charset=utf-8,";
+        let csvContent = "data:text/csv;charset=utf-8,\uFEFF";
         csvContent += [
             Object.keys(objectsArray[0]).join(";"),
             ...objectsArray.map((item) => Object.values(item).join(";"))
