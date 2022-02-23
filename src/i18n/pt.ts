@@ -431,4 +431,5 @@ export default {
     LISTAR_NOTAS: 'Listar notas',
     LISTAR_NOTAS_CHAMADO: 'Lista as notas deste chamado',
     MAX_CARACTERES:'Máx. de {0} carac.',
+    PROCESSO_FISCAL: 'Processo fiscal',
 }
