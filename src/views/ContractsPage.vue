@@ -1,35 +1,36 @@
 <template>
-
-  <v-layout
-    column
-    align-center
-    v-scroll="searchMore"
-  >
-    <v-col
-      cols="12"
-      md="9"
-      lg="8"
-      xl="8"
-      sm="12"
-      xs="2"
-      xm="2"
-      class="mt-5"
-    >
+  <v-layout column align-center v-scroll="searchMore">
+    <v-col cols="12" md="9" lg="8" xl="8" sm="12" xs="2" xm="2" class="mt-5">
       <div>
-
-        <v-row :class="{'ml-n12':$vuetify.breakpoint.mdAndUp}">
-          <span class="mb-7 text-right display-1 font-weight-bold grey--text text--darken-1">
-            {{$vuetify.lang.t('$vuetify.CONTRATOS')}}</span>
+        <v-row :class="{ 'ml-n12': $vuetify.breakpoint.mdAndUp }">
+          <span
+            class="
+              mb-7
+              text-right
+              display-1
+              font-weight-bold
+              grey--text
+              text--darken-1
+            "
+          >
+            {{ $vuetify.lang.t("$vuetify.CONTRATOS") }}</span
+          >
         </v-row>
 
-        <v-row
-          id="filtro"
-          class="pl-0 ml-0 grey lighten-5"
-        >
+        <v-row id="filtro" class="pl-0 ml-0 grey lighten-5">
           <v-col cols="4">
             <v-row>
-              <span class=" text-right subtitle-2 font-weight-bold grey--text text--lighten-1">
-                {{$vuetify.lang.t('$vuetify.BUSCAR')}}:</span>
+              <span
+                class="
+                  text-right
+                  subtitle-2
+                  font-weight-bold
+                  grey--text
+                  text--lighten-1
+                "
+              >
+                {{ $vuetify.lang.t("$vuetify.BUSCAR") }}:</span
+              >
             </v-row>
             <v-row md="2">
               <v-text-field
@@ -47,13 +48,19 @@
             </v-row>
           </v-col>
 
-          <v-col
-            class="ml-5"
-            cols="3"
-          >
+          <v-col class="ml-5" cols="3">
             <v-row>
-              <span class=" text-right subtitle-2 font-weight-bold grey--text text--lighten-1">
-                {{$vuetify.lang.t('$vuetify.TIPO')}}:</span>
+              <span
+                class="
+                  text-right
+                  subtitle-2
+                  font-weight-bold
+                  grey--text
+                  text--lighten-1
+                "
+              >
+                {{ $vuetify.lang.t("$vuetify.TIPO") }}:</span
+              >
             </v-row>
             <v-row>
               <v-select
@@ -69,13 +76,19 @@
             </v-row>
           </v-col>
 
-          <v-col
-            class="ml-5"
-            cols="3"
-          >
+          <v-col class="ml-5" cols="3">
             <v-row>
-              <span class=" text-right subtitle-2 font-weight-bold grey--text text--lighten-1">
-                {{$vuetify.lang.t('$vuetify.STATUS')}}:</span>
+              <span
+                class="
+                  text-right
+                  subtitle-2
+                  font-weight-bold
+                  grey--text
+                  text--lighten-1
+                "
+              >
+                {{ $vuetify.lang.t("$vuetify.STATUS") }}:</span
+              >
             </v-row>
             <v-row>
               <v-select
@@ -93,7 +106,6 @@
         </v-row>
 
         <v-row class="pl-1">
-
           <v-col
             cols="12"
             class="flex-grow-0"
@@ -101,42 +113,49 @@
             :key="i"
           >
             <v-lazy
-              :options="{threshold: .6}"
+              :options="{ threshold: 0.6 }"
               transition="slide-x-transition"
             >
-              <ContractCard :contract="contract"></ContractCard>
+            <ContractCard :contract="contract"></ContractCard>
             </v-lazy>
           </v-col>
           <v-col v-if="contracts.length == 0 && !isLoading">
             <v-lazy
-              :options="{threshold: .6}"
+              :options="{ threshold: 0.6 }"
               transition="slide-x-transition"
             >
-              <WarningPanel :message="$vuetify.lang.t('$vuetify.NENHUM_CONTRATO')"> </WarningPanel>
+              <WarningPanel
+                :message="$vuetify.lang.t('$vuetify.NENHUM_CONTRATO')"
+              >
+              </WarningPanel>
             </v-lazy>
           </v-col>
+        </v-row>
 
+        <v-row justify="center" v-if="isLoading" class="mt-5">
+          <v-progress-circular
+            :size="40"
+            :width="4"
+            color="red"
+            indeterminate
+          ></v-progress-circular>
         </v-row>
       </div>
-
     </v-col>
   </v-layout>
-
 </template>
 
 <script>
-
 import ContractCard from '../components/cards/ContractCard';
-import WarningPanel from '../components/panels/WarningPanel';
+import WarningPanel from "../components/panels/WarningPanel";
 
 export default {
   components: {
     ContractCard,
-    WarningPanel
+    WarningPanel,
   },
   methods: {
-    searchMore () {
-
+    searchMore() {
       if (this.cameFromCard) {
         return;
       }
@@ -147,33 +166,34 @@ export default {
         return;
       }
 
-      if (document.documentElement.scrollTop + window.innerHeight + 1 >= document.documentElement.scrollHeight) {
+      if (
+        document.documentElement.scrollTop + window.innerHeight + 1 >=
+        document.documentElement.scrollHeight
+      ) {
         this.page++;
         this.search(this.page);
       }
     },
-    search (page) {
-
-      if (this.$hasProfile('Administrador') && !page) {
+    search(page) {
+      if (this.$hasProfile("Administrador") && !page) {
         this.selectedClient.id = -1;
       }
 
       this.isLoading = true;
       if (!page) {
-        this.page = 0
-        this.contracts = []
+        this.page = 0;
+        this.contracts = [];
         this.noResult = false;
         this.cameFromCard = false;
       }
 
-      this.$get('/contrato/busca', {
+      this.$get("/contrato/busca", {
         searchText: this.searchText,
         clientId: this.selectedClient.id,
         type: this.type,
         status: this.status,
-        page: this.page
+        page: this.page,
       }).then((response) => {
-
         if (response && response.data.length == 0) {
           this.noResult = true;
         }
@@ -181,82 +201,84 @@ export default {
         this.contracts = this.contracts.concat(response.data);
         this.isLoading = false;
       });
-
     },
-    stickFilters () {
+    stickFilters() {
       if (document.documentElement.scrollTop > 95) {
-        document.getElementById('filtro').style = "position:sticky; z-index:100; top:55px; padding-top:10px;"
+        document.getElementById("filtro").style =
+          "position:sticky; z-index:100; top:55px; padding-top:10px;";
       } else if (document.documentElement.scrollTop < 60) {
-        document.getElementById('filtro').style = ""
+        document.getElementById("filtro").style = "";
       }
-    }
+    },
   },
   props: {
-    client: Object
+    client: Object,
   },
   data: () => ({
     types: [],
     statuses: [],
-    type: 'TODOS',
-    status: 'TODOS',
+    type: "TODOS",
+    status: "TODOS",
     page: 0,
     isLoading: true,
     noResult: false,
-    searchText: '',
+    searchText: "",
     contracts: [],
-    selectedClient: undefined
+    selectedClient: undefined,
   }),
   created: function () {
+    this.$get("/contrato/tipos").then((response) => {
+      this.types = response.data;
 
-    this.$get('/contrato/tipos')
-      .then((response) => {
-
-        this.types = response.data;
-
-        var vm = this;
-        this.types = this.types.map(function (t) {
-
-          if (t == 'LOCAÇÃO') t = 'LOCACAO'
-          return { text: vm.$vuetify.lang.t('$vuetify.' + t), value: t }
-        })
-
+      var vm = this;
+      this.types = this.types.map(function (t) {
+        if (t == "LOCAÇÃO") t = "LOCACAO";
+        return { text: vm.$vuetify.lang.t("$vuetify." + t), value: t };
       });
+    });
 
-    this.$get('/contrato/status')
-      .then((response) => {
+    this.$get("/contrato/status").then((response) => {
+      this.statuses = response.data;
 
-        this.statuses = response.data;
-
-        var vm = this;
-        this.statuses = this.statuses.map(function (t) {
-          return { text: vm.$vuetify.lang.t('$vuetify.' + t), value: t }
-        })
-
+      var vm = this;
+      this.statuses = this.statuses.map(function (t) {
+        return { text: vm.$vuetify.lang.t("$vuetify." + t), value: t };
       });
+    });
 
     this.selectedClient = this.$props.client;
 
     if (!this.selectedClient) {
-      if (!window.sessionStorage.getItem('selectedClientId'))
-        this.selectedClient = { id: -1 }
+      if (!window.sessionStorage.getItem("selectedClientId"))
+        this.selectedClient = { id: -1 };
       else
-        this.selectedClient = { id: window.sessionStorage.getItem('selectedClientId') }
+        this.selectedClient = {
+          id: window.sessionStorage.getItem("selectedClientId"),
+        };
     } else {
-      window.sessionStorage.setItem('selectedClientId', this.selectedClient.id);
+      window.sessionStorage.setItem("selectedClientId", this.selectedClient.id);
     }
 
-    this.$get('/contrato/busca',
-      { searchText: '', clientId: this.selectedClient.id, type: this.type, status: this.status, page: 0 }).
-      then((response) => {
-        this.contracts = response.data;
+    this.$get("/contrato/busca", {
+      searchText: "",
+      clientId: this.selectedClient.id,
+      type: this.type,
+      status: this.status,
+      page: 0,
+    }).then((response) => {
+      this.contracts = response.data;
 
-        if (this.contracts.length == 1 && this.$hasProfile('Operacional') &&
-          window.sessionStorage.getItem('contractSelected') == 'false') {
+      if (
+        this.contracts.length == 1 &&
+        this.$hasProfile("Operacional") &&
+        window.sessionStorage.getItem("contractSelected") == "false"
+      ) {
+        this.$root.$emit("contract-selected", this.contracts[0]);
+        window.sessionStorage.setItem("contractSelected", "true");
+      }
 
-          this.$root.$emit('contract-selected', this.contracts[0])
-          window.sessionStorage.setItem('contractSelected', 'true');
-        }
-      });
-  }
+      this.isLoading = false;
+    });
+  },
 };
 </script>
