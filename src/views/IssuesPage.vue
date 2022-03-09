@@ -323,6 +323,17 @@
                         </v-chip>
 
                         <v-chip
+                          color="yellow darken-2"
+                          class="ml-0 mr-2"
+                          label
+                          small
+                          outlined
+                          v-if="issue.massiva"
+                        >
+                          {{ $vuetify.lang.t('$vuetify.MASSIVA') }}
+                        </v-chip>
+
+                        <v-chip
                           color="blue-grey"
                           class="ml-0 mr-2 mb-2 text-break"
                           :class="{'main-chip':hasBreakLine(formatStatus(issue.statusProcessamento))}"
