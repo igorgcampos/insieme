@@ -1118,12 +1118,18 @@ export default {
 
           this.showSuccess = true;
           this.showDialogLoading = false;
-          this.selectedIssue.status = response.data.status;
           this.selectedIssue.statusProcessamento = undefined;
           this.selectedIssue.dataEncerramento = response.data.dataEncerramento;
-          this.counts[0] -= 1;
-          this.counts[1] += 1;
+
+          if(this.selectedIssue.status=='ABERTO'){
+            this.counts[0] -= 1;
+          }else{
+            this.counts[1] -= 1;
+          }
+          
+          this.counts[2] += 1;
           this.canShowButton = true
+          this.selectedIssue.status = response.data.status;
         }
       });
     },
