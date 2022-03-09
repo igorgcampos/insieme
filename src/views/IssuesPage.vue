@@ -313,7 +313,7 @@
 
                         <v-chip
                           color="blue-grey"
-                          class="ml-0 mr-2"
+                          class="ml-0 mr-2 mb-2"
                           label
                           small
                           outlined
@@ -324,7 +324,7 @@
 
                         <v-chip
                           color="yellow darken-2"
-                          class="ml-0 mr-2"
+                          class="ml-0 mr-2 mb-2"
                           label
                           small
                           outlined
