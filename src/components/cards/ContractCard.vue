@@ -65,7 +65,7 @@
         <v-col class="mt-n12">
           <v-col>
             <LabelValue
-              :label="$vuetify.lang.t('$vuetify.GERENTE_PRODUTO')"
+              :label="$vuetify.lang.t('$vuetify.GERENTE_PROJETO')"
               :value="contract.gerenteProduto?contract.gerenteProduto:'--'"
               justify="start"
               style="width:150px;"
@@ -113,7 +113,7 @@
           </v-col>
           <v-col class="pt-0 mt-n6">
             <LabelValue
-              :label="$vuetify.lang.t('$vuetify.PRODUTO')"
+              :label="$vuetify.lang.t('$vuetify.EQUIPAMENTO')"
               :value="contract.produto"
               justify="start"
               truncate
