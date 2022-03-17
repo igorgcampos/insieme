@@ -174,7 +174,7 @@
             id="issueId"
             class="pr-2 overflow-y-auto overflow-x-hidden"
             v-scroll:#issueId="searchMore"
-            style="max-height:340px; width:100%;"
+            style="max-height:390px; width:100%;"
           >
             <v-expansion-panels
               class="ma-1"
