@@ -38,31 +38,11 @@
         <v-row :class="{'ml-n6':$vuetify.breakpoint.xs}">
           <v-col :class="[{'flex-grow-0':!$vuetify.breakpoint.xs},{'ml-0 pl-1 pr-0':$vuetify.breakpoint.xs}]">
             <CountCard
-              :count="counts[0]"
-              :message="$vuetify.lang.t('$vuetify.COM_SUCESSO')"
+              :count="counts"
+              message="Restarts"
               color="success--text"
-              :func="getWithSuccess"
-              :toolTipMessage="$vuetify.lang.t('$vuetify.RESTART_SUCESSO')"
-            ></CountCard>
-          </v-col>
-          <v-col :class="[{'flex-grow-0':!$vuetify.breakpoint.xs},{'pl-1 pr-0':$vuetify.breakpoint.xs}]">
-            <CountCard
-              :count="counts[1]"
-              :message="$vuetify.lang.t('$vuetify.SEM_SUCESSO')"
-              color="error--text"
-              :func="getWithoutSuccess"
-              :toolTipMessage="$vuetify.lang.t('$vuetify.RESTART_INSUCESSO')"
-            ></CountCard>
-          </v-col>
-          <v-col
-            :class="[{'flex-grow-0':!$vuetify.breakpoint.xs}, {'pl-1 pr-0':$vuetify.breakpoint.xs}]"
-            class="mr-n2"
-          >
-            <CountCard
-              :count="counts[2]"
-              :message="$vuetify.lang.t('$vuetify.EM_ANDAMENTO')"
-              color="warning--text"
-              :func="getInProgress"
+              :func="getFromStatus"
+              toolTipMessage="Restarts"
             ></CountCard>
           </v-col>
         </v-row>
@@ -121,19 +101,18 @@
                       v-if="!open"
                       :cols="!$vuetify.breakpoint.xs?6:5"
                       sm="2"
+                      class="mt-2"
                     >
                       <v-chip
-                        :color="operation.status=='EM_ANDAMENTO'?'warning':
-                        operation.resultado=='SUCESSO'?'success':'error'"
-                        class="ml-0 mr-4"
-                        label
-                        small
-                        outlined
-                      >
-                        {{ operation.status=='EM_ANDAMENTO'?$vuetify.lang.t('$vuetify.EM_ANDAMENTO'):
-                            operation.resultado=='SUCESSO'?$vuetify.lang.t('$vuetify.COM_SUCESSO'):
-                            $vuetify.lang.t('$vuetify.SEM_SUCESSO') }}
-                      </v-chip>
+                          :color="operation.status=='CONCLUIDA'?'blue-grey':'warning'"
+                          class="ml-0 mr-2 mb-2"
+                          label
+                          small
+                          outlined
+                        >
+                          {{ operation.status=='CONCLUIDA'?$vuetify.lang.t('$vuetify.CONCLUIDO'):
+                                $vuetify.lang.t('$vuetify.EM_ANDAMENTO') }}
+                        </v-chip>
                     </v-col>
 
                     <v-col
@@ -244,25 +223,6 @@
                     </v-row>
 
                   </v-row>
-
-                  <v-divider
-                    class="mt-n1"
-                    v-show="operation.chamado"
-                  ></v-divider>
-
-                  <v-card-actions
-                    class="mb-n2 pb-0"
-                    v-show="operation.chamado"
-                  >
-                    <TooltipButton
-                      :label="$vuetify.lang.t('$vuetify.VER_CHAMADO')"
-                      :message="$vuetify.lang.t('$vuetify.VER_CHAMADO_TOPDESK') + ' (Em desenvolvimento)'"
-                      :event="toTopDesk"
-                      :object="operation.chamado"
-                      :mobile="$vuetify.breakpoint.xs"
-                      :isText=true
-                    ></TooltipButton>
-                  </v-card-actions>
                 </v-expansion-panel-content>
               </v-expansion-panel>
             </v-expansion-panels>
@@ -289,28 +249,17 @@
 
 import CountCard from '../components/cards/CountCard'
 import WarningPanel from '../components/panels/WarningPanel';
-import TooltipButton from '../components/TooltipButton';
 import LabelValue from '../components/LabelValue';
 
 export default {
   components: {
     CountCard,
     WarningPanel,
-    TooltipButton,
     LabelValue,
   },
   methods: {
     toTopDesk () {
 
-    },
-    getWithSuccess () {
-      this.getFromStatus('SUCESSO', undefined)
-    },
-    getWithoutSuccess () {
-      this.getFromStatus('INSUCESSO', undefined)
-    },
-    getInProgress () {
-      this.getFromStatus(undefined, 'EM_ANDAMENTO')
     },
     clearFields () {
       this.searchText = '';
@@ -318,14 +267,11 @@ export default {
       this.operations = [];
 
     },
-    getFromStatus (resultado, status) {
+    getFromStatus () {
 
       if (this.isLoading) {
         return
       }
-
-      this.status = status;
-      this.resultado = resultado;
 
       this.clearFields();
       this.search()
@@ -360,8 +306,6 @@ export default {
       this.$get('/operacao/proatividade/busca', {
         searchText: this.searchText,
         type: 'RESTART_CIRCUITO',
-        status: this.status,
-        result: this.resultado,
         page: this.page
       }).then((response) => {
 
@@ -388,9 +332,6 @@ export default {
       this.$get('/operacao/proatividade/counts').then((response) => {
 
         this.counts = response.data;
-        if (this.counts.length == 0)
-          this.counts = [0, 0, 0]
-
         this.isLoading = false;
       });
 

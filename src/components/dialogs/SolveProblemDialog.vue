@@ -279,8 +279,10 @@ export default {
 
       this.$get('/circuito/restart',
         {
-          idCircuitoMon: this.getObject().idCircuitoMon
+          designacao: this.getObject().nome
         }).then(() => {
+
+          this.createRestartOperation();
 
           this.signalPanelId = setInterval(() => {
 
@@ -301,6 +303,14 @@ export default {
 
           }, 60000);
         });
+    },
+    createRestartOperation(){
+      this.$post('/operacao/save', {
+        tipo: 'RESTART_CIRCUITO',
+        referenciaEntidade: this.getObject().nome,
+        usuario: this.$getUser()
+      }).then(() => {
+      });
     },
     clean () {
 
