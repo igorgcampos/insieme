@@ -433,4 +433,6 @@ export default {
     LISTAR_NOTAS_CHAMADO: 'Lista as notas deste chamado',
     MAX_CARACTERES:'Máx. de {0} carac.',
     PROCESSO_FISCAL: 'Processo fiscal',
+    ANEXAR_IMAGEM: 'Anexar imagem',
+    NOME: 'Nome para contato',
 }

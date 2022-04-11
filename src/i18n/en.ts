@@ -437,4 +437,6 @@ export default {
     LISTAR_NOTAS: 'Show invoices',
     LISTAR_NOTAS_CHAMADO: 'Show invoices of this ticket',
     MAX_CARACTERES:'Max. of {0} chars',
+    ANEXAR_IMAGEM: 'Attach image',
+    NOME: 'Contact name',
 }

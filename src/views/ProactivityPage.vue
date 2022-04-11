@@ -352,7 +352,7 @@ export default {
     isLoading: false,
     operations: [],
     showPanel: true,
-    counts: [0, 0, 0],
+    counts: 0,
     status: undefined,
     page: 0,
     noResult: false,
