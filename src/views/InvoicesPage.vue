@@ -144,7 +144,7 @@
             id="invoiceId"
             class="pr-2 overflow-y-auto overflow-x-hidden"
             v-scroll:#invoiceId="searchMore"
-            style="max-height:340px; width:100%;"
+            style="max-height:440px; width:100%;"
           >
             <v-expansion-panels
               class="ma-1"
@@ -239,7 +239,7 @@
 
                   <v-row>
                     <v-col
-                      class="mt-n6"
+                      class="mt-n4"
                       :cols="$vuetify.breakpoint.xs?5:2"
                     >
                       <v-col class="pa-0">
@@ -465,7 +465,8 @@ export default {
 
       this.$get('/nota/download', {
         invoiceType: invoice.tipo,
-        invoiceNumber: invoice.numero
+        invoiceNumber: invoice.numero,
+        uf: invoice.uf,
       }, 'arraybuffer').then(response => {
 
         if (!response) {
