@@ -53,7 +53,7 @@
           <v-row>
             <v-textarea
               solo
-              height="100"
+              height="200"
               :no-resize="true"
               rows="5"
               v-model="issue.observation"
