@@ -333,6 +333,17 @@
                           {{ $vuetify.lang.t('$vuetify.MASSIVA') }}
                         </v-chip>
 
+                         <v-chip
+                          color="blue-grey"
+                          class="ml-0 mr-2 mb-2 text-break"
+                          label
+                          small
+                          outlined
+                          v-if="issue.subCategoria"
+                        >
+                          <span>{{issue.subCategoria}}</span>
+                        </v-chip>
+
                         <v-chip
                           color="blue-grey"
                           class="ml-0 mr-2 mb-2 text-break"
@@ -343,17 +354,6 @@
                           v-if="issue.status == 'EM_ANDAMENTO'"
                         >
                           <span v-html="formatStatus(issue.statusProcessamento)"></span>
-                        </v-chip>
-
-                        <v-chip
-                          color="blue-grey"
-                          class="ml-0 mr-2 mb-2 text-break"
-                          label
-                          small
-                          outlined
-                          v-if="issue.subCategoria"
-                        >
-                          <span>{{issue.subCategoria}}</span>
                         </v-chip>
 
                         <v-col
