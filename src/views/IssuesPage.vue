@@ -345,6 +345,18 @@
                           <span v-html="formatStatus(issue.statusProcessamento)"></span>
                         </v-chip>
 
+                        <v-chip
+                          color="blue-grey"
+                          class="ml-0 mr-2 mb-2 text-break"
+                          :class="{'main-chip':hasBreakLine(formatStatus(issue.subCategoria))}"
+                          label
+                          small
+                          outlined
+                          v-if="issue.subCategoria"
+                        >
+                          <span v-html="formatStatus(issue.subCategoria)"></span>
+                        </v-chip>
+
                         <v-col
                           cols="1"
                           class="ml-n3 mt-n2"
