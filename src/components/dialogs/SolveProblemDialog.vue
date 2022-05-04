@@ -1,9 +1,5 @@
 <template>
-  <v-dialog
-    v-model="showDialog"
-    persistent
-    width="420"
-  >
+  <v-dialog v-model="showDialog" persistent width="420">
     <v-card>
       <v-col
         class="text-center"
@@ -11,8 +7,8 @@
       >
         <v-lazy
           :options="{
-            threshold: .6
-            }"
+            threshold: 0.6,
+          }"
           transition="slide-x-transition"
         >
           <div class="ma-0 pa-0">
@@ -24,9 +20,27 @@
             ></v-img>
 
             <v-row>
-              <p class="ml-3 mr-3 mb-10 text-justify SUBTITLE-2 font-weight-bold grey--text text--darken-3">
-                {{showFirstQuestionPanel?$vuetify.lang.t('$vuetify.PRIMEIRA_PERGUNTA')
-                  :$vuetify.lang.t('$vuetify.CONFIRMAR_SELECAO_CIRCUITO', getObject().nome)}} </p>
+              <p
+                class="
+                  ml-3
+                  mr-3
+                  mb-10
+                  text-justify
+                  SUBTITLE-2
+                  font-weight-bold
+                  grey--text
+                  text--darken-3
+                "
+              >
+                {{
+                  showFirstQuestionPanel
+                    ? $vuetify.lang.t("$vuetify.PRIMEIRA_PERGUNTA")
+                    : $vuetify.lang.t(
+                        "$vuetify.CONFIRMAR_SELECAO_CIRCUITO",
+                        getObject().nome
+                      )
+                }}
+              </p>
             </v-row>
           </div>
         </v-lazy>
@@ -38,8 +52,8 @@
       >
         <v-lazy
           :options="{
-            threshold: .6
-            }"
+            threshold: 0.6,
+          }"
           transition="slide-x-transition"
         >
           <div class="ma-0 pa-0">
@@ -52,8 +66,24 @@
             ></v-progress-circular>
 
             <v-row justify="center">
-              <p class="text-justify ml-3 mr-3 mb-10 SUBTITLE-2 font-weight-bold grey--text text--darken-3">
-                {{showVerifyingSignalPanel? verifyingSignalMessage:restartingCircuitMessage}} </p>
+              <p
+                class="
+                  text-justify
+                  ml-3
+                  mr-3
+                  mb-10
+                  SUBTITLE-2
+                  font-weight-bold
+                  grey--text
+                  text--darken-3
+                "
+              >
+                {{
+                  showVerifyingSignalPanel
+                    ? verifyingSignalMessage
+                    : restartingCircuitMessage
+                }}
+              </p>
             </v-row>
           </div>
         </v-lazy>
@@ -65,8 +95,8 @@
       >
         <v-lazy
           :options="{
-            threshold: .6
-            }"
+            threshold: 0.6,
+          }"
           transition="slide-x-transition"
         >
           <div class="ma-0 pa-0">
@@ -78,26 +108,44 @@
             ></v-img>
 
             <v-row>
-              <p class="ml-3 mr-3 mb-10 text-justify SUBTITLE-2 font-weight-bold grey--text text--darken-3">
-                {{(showStatusResultPanel && statusOk)?
-                  $vuetify.lang.t('$vuetify.SINAL_CIRCUITO_ONLINE'):
-                  (showRestartResultPanel && restartOk)?
-                  $vuetify.lang.t('$vuetify.SINAL_CIRCUITO_ONLINE_2'):
-                  (showRestartResultPanel && !restartOk)?$vuetify.lang.t('$vuetify.RESTART_FALHOU'):
-                  $vuetify.lang.t('$vuetify.SINAL_CIRCUITO_OFFLINE')}} </p>
+              <p
+                class="
+                  ml-3
+                  mr-3
+                  mb-10
+                  text-justify
+                  SUBTITLE-2
+                  font-weight-bold
+                  grey--text
+                  text--darken-3
+                "
+              >
+                {{
+                  showStatusResultPanel && statusOk
+                    ? $vuetify.lang.t("$vuetify.SINAL_CIRCUITO_ONLINE")
+                    : showRestartResultPanel && restartOk
+                    ? $vuetify.lang.t("$vuetify.SINAL_CIRCUITO_ONLINE_2")
+                    : showRestartResultPanel && !restartOk
+                    ? $vuetify.lang.t("$vuetify.RESTART_FALHOU")
+                    : $vuetify.lang.t("$vuetify.SINAL_CIRCUITO_OFFLINE")
+                }}
+              </p>
             </v-row>
           </div>
         </v-lazy>
       </v-col>
 
-      <v-col
-        class="text-center"
-        v-show="showChatQuestions"
-      >
+      <v-col v-show="showProgressBar" class="mt-n8 mb-8">
+        <v-progress-linear color="error" v-model="progress" height="25">
+          <strong>{{ Math.ceil(progress) }}%</strong>
+        </v-progress-linear>
+      </v-col>
+
+      <v-col class="text-center" v-show="showChatQuestions">
         <v-lazy
           :options="{
-            threshold: .6
-            }"
+            threshold: 0.6,
+          }"
           transition="slide-x-transition"
         >
           <div class="ma-0 pa-0">
@@ -109,9 +157,24 @@
             ></v-img>
 
             <v-row>
-              <p class="ml-3 mr-3 mb-10 text-justify SUBTITLE-2 font-weight-bold grey--text text--darken-3">
-                {{!showOpenIssuePanel?questions[questionIndex]:
-                  $vuetify.lang.t('$vuetify.ABRA_CHAMADO')}} </p>
+              <p
+                class="
+                  ml-3
+                  mr-3
+                  mb-10
+                  text-justify
+                  SUBTITLE-2
+                  font-weight-bold
+                  grey--text
+                  text--darken-3
+                "
+              >
+                {{
+                  !showOpenIssuePanel
+                    ? questions[questionIndex]
+                    : $vuetify.lang.t("$vuetify.ABRA_CHAMADO")
+                }}
+              </p>
             </v-row>
           </div>
         </v-lazy>
@@ -123,10 +186,17 @@
         <v-btn
           color="primary"
           text
-          @click="close(); clean();"
+          @click="
+            close();
+            clean();
+          "
           :x-small="$vuetify.breakpoint.xs"
-          v-show="!showRestartingCircuitPanel && !(showRestartResultPanel && restartOk)"
-        >{{$vuetify.lang.t('$vuetify.FECHAR')}}</v-btn>
+          v-show="
+            !showRestartingCircuitPanel &&
+            !(showRestartResultPanel && restartOk)
+          "
+          >{{ $vuetify.lang.t("$vuetify.FECHAR") }}</v-btn
+        >
 
         <v-btn
           color="primary"
@@ -141,43 +211,68 @@
           @click="restart"
           :x-small="$vuetify.breakpoint.xs"
           v-show="showStatusResultPanel"
-        >{{$vuetify.lang.t('$vuetify.REINICIAR')}}</v-btn>
+          >{{ $vuetify.lang.t("$vuetify.REINICIAR") }}</v-btn
+        >
 
         <v-btn
           color="primary"
           text
           @click="openIssueDialog"
           :x-small="$vuetify.breakpoint.xs"
-          v-show="showOpenIssuePanel || showRestartResultPanel || (showStatusResultPanel && statusOk)"
-        >{{$vuetify.lang.t('$vuetify.ABRIR_CHAMADO')}}</v-btn>
+          v-show="
+            showOpenIssuePanel ||
+            showRestartResultPanel ||
+            (showStatusResultPanel && statusOk)
+          "
+          >{{ $vuetify.lang.t("$vuetify.ABRIR_CHAMADO") }}</v-btn
+        >
 
         <v-btn
           color="primary"
           text
-          @click="close(); clean();"
+          @click="
+            close();
+            clean();
+          "
           :x-small="$vuetify.breakpoint.xs"
           v-show="showRestartResultPanel && restartOk"
-        >{{$vuetify.lang.t('$vuetify.ESTA_OK')}}</v-btn>
+          >{{ $vuetify.lang.t("$vuetify.ESTA_OK") }}</v-btn
+        >
 
         <v-btn
           color="primary"
           text
-          @click="showFirstQuestionPanel?openChatBot():showCircuitQuestionPanel?showOptionsPanel():nextQuestion()"
+          @click="
+            showFirstQuestionPanel
+              ? openChatBot()
+              : showCircuitQuestionPanel
+              ? showOptionsPanel()
+              : nextQuestion()
+          "
           :x-small="$vuetify.breakpoint.xs"
-          v-show="showCircuitQuestionPanel || showFirstQuestionPanel || (showChatQuestions && !showOpenIssuePanel)"
-        >{{$vuetify.lang.t('$vuetify.SIM')}}</v-btn>
+          v-show="
+            showCircuitQuestionPanel ||
+            showFirstQuestionPanel ||
+            (showChatQuestions && !showOpenIssuePanel)
+          "
+          >{{ $vuetify.lang.t("$vuetify.SIM") }}</v-btn
+        >
 
         <v-btn
           color="primary"
           text
-          @click="showFirstQuestionPanel?verifySignalPanel():openChatBot()"
+          @click="showFirstQuestionPanel ? verifySignalPanel() : openChatBot()"
           :x-small="$vuetify.breakpoint.xs"
-          v-show="showCircuitQuestionPanel || showFirstQuestionPanel || (showChatQuestions && !showOpenIssuePanel)"
-        >{{$vuetify.lang.t('$vuetify.NAO')}}</v-btn>
+          v-show="
+            showCircuitQuestionPanel ||
+            showFirstQuestionPanel ||
+            (showChatQuestions && !showOpenIssuePanel)
+          "
+          >{{ $vuetify.lang.t("$vuetify.NAO") }}</v-btn
+        >
       </v-card-actions>
     </v-card>
   </v-dialog>
-
 </template>
 
 <script>
@@ -204,162 +299,170 @@ export default {
     showFirstQuestionPanel: true,
     statusOk: false,
     restartOk: false,
-    verifyingSignalMessage: '',
-    restartingCircuitMessage: ''
+    verifyingSignalMessage: "",
+    restartingCircuitMessage: "",
+    progress: 0,
+    showProgressBar: false,
+    progressBarId: undefined,
   }),
   created: function () {
-
-    this.verifyingSignalMessage = this.$vuetify.lang.t('$vuetify.VERIFICANDO_SINAL')
-    this.restartingCircuitMessage = this.$vuetify.lang.t('$vuetify.COLETANDO_INFORMACOES');
+    this.verifyingSignalMessage = this.$vuetify.lang.t(
+      "$vuetify.VERIFICANDO_SINAL"
+    );
+    this.restartingCircuitMessage = this.$vuetify.lang.t(
+      "$vuetify.COLETANDO_INFORMACOES"
+    );
   },
   methods: {
-    showOptionsPanel () {
+    showOptionsPanel() {
       this.showCircuitQuestionPanel = false;
       this.showStatusResultPanel = true;
     },
-    nextQuestion () {
+    nextQuestion() {
       this.questionIndex += 1;
 
       if (this.questionIndex == this.questions.length) {
         this.showOpenIssuePanel = true;
       }
     },
-    verifySignalPanel () {
-
-      this.showFirstQuestionPanel = false
-      this.showVerifyingSignalPanel = true
+    verifySignalPanel() {
+      this.showFirstQuestionPanel = false;
+      this.showVerifyingSignalPanel = true;
 
       this.signalPanelId = setTimeout(() => {
-
         if (this.showDialog) {
+          this.showVerifyingSignalPanel = true;
 
-          this.showVerifyingSignalPanel = true
+          this.$get("/circuito/status", {
+            desigTpz: this.getObject().nome,
+          }).then((response) => {
+            this.showStatusResultPanel = true;
+            this.showVerifyingSignalPanel = false;
 
-          this.$get('/circuito/status',
-            { desigTpz: this.getObject().nome }).then((response) => {
-
-              this.showStatusResultPanel = true;
-              this.showVerifyingSignalPanel = false;
-
-              if (response && response.data == 3) {
-                this.statusOk = true;
-                this.getObject().online = response.data //Atualiza o circuito com o status online
-                this.showCircuitQuestionPanel = true;
-                this.showStatusResultPanel = false;
-              } else {
-                this.statusOk = false;
-              }
-            });
+            if (response && response.data == 3) {
+              this.statusOk = true;
+              this.getObject().online = response.data; //Atualiza o circuito com o status online
+              this.showCircuitQuestionPanel = true;
+              this.showStatusResultPanel = false;
+            } else {
+              this.statusOk = false;
+            }
+          });
         }
-
       }, 20000);
     },
-    openChatBot () {
-
+    openChatBot() {
       if (!this.showCircuitQuestionPanel) {
-        this.$showChat()
+        this.$showChat();
       }
       this.close();
       this.clean();
-
     },
-    openIssueDialog () {
+    openIssueDialog() {
       this.close();
       this.clean();
       this.openIssue(this.getObject());
     },
-    restart () {
-
-      this.showVerifyingSignalPanel = false
-      this.showStatusResultPanel = false
-      this.showRestartingCircuitPanel = true
-      this.showRestartResultPanel = false
+    restart() {
+      this.showVerifyingSignalPanel = false;
+      this.showStatusResultPanel = false;
+      this.showRestartingCircuitPanel = true;
+      this.showRestartResultPanel = false;
+      this.showProgressBar = true;
 
       this.createRestartIssue();
 
-      this.$get('/circuito/restart',
-        {
-          designacao: this.getObject().nome
-        }).then(() => {
-
-          this.createRestartOperation();
-
-          this.signalPanelId = setInterval(() => {
-
-            this.$get('/circuito/status',
-              { desigTpz: this.getObject().nome }).then((response) => {
-
-                this.showRestartResultPanel = true;
-                this.showRestartingCircuitPanel = false;
-
-                if (response && response.data == '3') {
-                  this.restartOk = true;
-                  this.getObject().online = response.data //Atualiza o circuito com o status online
-                  this.closeIssue(true);
-                } else {
-                  this.restartOk = false;
-                }
-              });
-
-          }, 60000);
-        });
-    },
-    createRestartOperation(){
-      this.$post('/operacao/save', {
-        tipo: 'RESTART_CIRCUITO',
-        referenciaEntidade: this.getObject().nome,
-        usuario: this.$getUser()
+      this.$get("/circuito/restart", {
+        designacao: this.getObject().nome,
       }).then(() => {
+        this.createRestartOperation();
+
+        this.signalPanelId = setInterval(() => {
+          this.$get("/circuito/status", {
+            desigTpz: this.getObject().nome,
+          }).then((response) => {
+            this.showRestartResultPanel = true;
+            this.showRestartingCircuitPanel = false;
+
+            if (response && response.data == "3") {
+              this.restartOk = true;
+              this.getObject().online = response.data; //Atualiza o circuito com o status online
+              this.closeIssue(true);
+            } else {
+              this.restartOk = false;
+            }
+
+            this.showProgressBar = false;
+          });
+        }, 600000);
       });
     },
-    clean () {
-
-      this.showOpenIssuePanel = false
+    createRestartOperation() {
+      this.$post("/operacao/save", {
+        tipo: "RESTART_CIRCUITO",
+        referenciaEntidade: this.getObject().nome,
+        usuario: this.$getUser(),
+      }).then(() => {});
+    },
+    clean() {
+      this.showOpenIssuePanel = false;
       this.questionIndex = 0;
-      this.showChatQuestions = false
-      this.showFirstQuestionPanel = true
-      this.showVerifyingSignalPanel = false
-      this.showStatusResultPanel = false
-      this.showRestartingCircuitPanel = false
-      this.showRestartResultPanel = false
-      this.statusOk = false
-      this.restartOk = false
-      this.verifyingSignalMessage = this.$vuetify.lang.t('$vuetify.VERIFICANDO_SINAL')
-      this.restartingCircuitMessage = this.$vuetify.lang.t('$vuetify.COLETANDO_INFORMACOES')
+      this.showChatQuestions = false;
+      this.showFirstQuestionPanel = true;
+      this.showVerifyingSignalPanel = false;
+      this.showStatusResultPanel = false;
+      this.showRestartingCircuitPanel = false;
+      this.showRestartResultPanel = false;
+      this.statusOk = false;
+      this.restartOk = false;
+      this.verifyingSignalMessage = this.$vuetify.lang.t(
+        "$vuetify.VERIFICANDO_SINAL"
+      );
+      this.restartingCircuitMessage = this.$vuetify.lang.t(
+        "$vuetify.COLETANDO_INFORMACOES"
+      );
 
       clearInterval(this.signalPanelId);
-    }
+      clearInterval(this.progressBarId);
+      this.progress = 0;
+    },
   },
   watch: {
-
+    showProgressBar: function(){
+      if(this.showProgressBar){
+        this.progressBarId = setInterval(() =>{this.progress += 5}, 30000)
+      }
+    },
     showVerifyingSignalPanel: function () {
-
       if (this.showVerifyingSignalPanel) {
-
         setTimeout(() => {
-          this.verifyingSignalMessage = this.$vuetify.lang.t('$vuetify.MAIS_ALGUNS_INSTANTES')
+          this.verifyingSignalMessage = this.$vuetify.lang.t(
+            "$vuetify.MAIS_ALGUNS_INSTANTES"
+          );
         }, 10000);
       }
     },
     showRestartingCircuitPanel: function () {
-
       if (this.showRestartingCircuitPanel) {
-
         setTimeout(() => {
-          this.restartingCircuitMessage = this.$vuetify.lang.t('$vuetify.REINICIANDO_CIRCUITO')
+          this.restartingCircuitMessage = this.$vuetify.lang.t(
+            "$vuetify.REINICIANDO_CIRCUITO"
+          );
 
           setTimeout(() => {
-            this.restartingCircuitMessage = this.$vuetify.lang.t('$vuetify.VERIFICANDO_NOVAMENTE')
+            this.restartingCircuitMessage = this.$vuetify.lang.t(
+              "$vuetify.VERIFICANDO_NOVAMENTE"
+            );
 
             setTimeout(() => {
-              this.restartingCircuitMessage = this.$vuetify.lang.t('$vuetify.MAIS_ALGUNS_INSTANTES')
-            }, 20000);
-
-          }, 20000);
-
-        }, 20000);
+              this.restartingCircuitMessage = this.$vuetify.lang.t(
+                "$vuetify.MAIS_ALGUNS_INSTANTES"
+              );
+            }, 150000);
+          }, 180000);
+        }, 240000);
       }
-    }
-  }
+    },
+  },
 };
 </script>
