@@ -83,7 +83,7 @@
               rows="5"
               v-model="issue.observation"
               counter
-              maxlength="250"
+              maxlength="80"
             ></v-textarea>
           </v-row>
         </v-col>
