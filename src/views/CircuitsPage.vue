@@ -1080,8 +1080,7 @@ export default {
       });
     },
     getAddress (circuit) {
-      console.log(circuit)
-      return circuit.endereco.replaceAll(';',' ') + ' ' + (circuit.bairro?circuit.bairro:'') + 
+      return (circuit.endereco?circuit.endereco.replaceAll(';',' '):"") + ' ' + (circuit.bairro?circuit.bairro:'') + 
       ' ' + (circuit.cidade?circuit.cidade:'') + 
       ', ' + (circuit.uf?circuit.uf:'').replaceAll("\n"," ").replaceAll("\r"," ").trim()
     },
