@@ -116,7 +116,7 @@
               :options="{ threshold: 0.6 }"
               transition="slide-x-transition"
             >
-            <ContractCard :contract="contract"></ContractCard>
+              <ContractCard :contract="contract"></ContractCard>
             </v-lazy>
           </v-col>
           <v-col v-if="contracts.length == 0 && !isLoading">
@@ -146,7 +146,7 @@
 </template>
 
 <script>
-import ContractCard from '../components/cards/ContractCard';
+import ContractCard from "../components/cards/ContractCard";
 import WarningPanel from "../components/panels/WarningPanel";
 
 export default {
@@ -213,6 +213,7 @@ export default {
   },
   props: {
     client: Object,
+    contract: Object,
   },
   data: () => ({
     types: [],
@@ -259,26 +260,32 @@ export default {
       window.sessionStorage.setItem("selectedClientId", this.selectedClient.id);
     }
 
-    this.$get("/contrato/busca", {
-      searchText: "",
-      clientId: this.selectedClient.id,
-      type: this.type,
-      status: this.status,
-      page: 0,
-    }).then((response) => {
-      this.contracts = response.data;
+    if (!this.$props.contract) {
+      this.$get("/contrato/busca", {
+        searchText: "",
+        clientId: this.selectedClient.id,
+        type: this.type,
+        status: this.status,
+        page: 0,
+      }).then((response) => {
+        this.contracts = response.data;
 
-      if (
-        this.contracts.length == 1 &&
-        this.$hasProfile("Operacional") &&
-        window.sessionStorage.getItem("contractSelected") == "false"
-      ) {
-        this.$root.$emit("contract-selected", this.contracts[0]);
-        window.sessionStorage.setItem("contractSelected", "true");
-      }
+        if (
+          this.contracts.length == 1 &&
+          this.$hasProfile("Operacional") &&
+          window.sessionStorage.getItem("contractSelected") == "false"
+        ) {
+          this.$root.$emit("contract-selected", this.contracts[0]);
+          window.sessionStorage.setItem("contractSelected", "true");
+        }
 
+        this.isLoading = false;
+      });
+    }else{
+      this.contracts = [];
+      this.contracts = this.contracts.concat(this.$props.contract);
       this.isLoading = false;
-    });
+    }
   },
 };
 </script>

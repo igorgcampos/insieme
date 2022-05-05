@@ -33,7 +33,7 @@ export default {
       if (!this.user.cliente) {
         this.user.cliente = { id: -1 }
       }
-      this.$router.push({ name: 'Contracts', params: { client: { id: this.user.cliente.id } } })
+      this.$router.push({ name: 'Contracts', params: { client: { id: this.user.cliente.id }, contract: this.user.contrato } })
 
     } else if (window.sessionStorage.getItem('actualPage') == 'administracao') {
       this.$router.push({ name: 'Administration' })
