@@ -135,11 +135,11 @@
         </v-lazy>
       </v-col>
 
-      <v-col v-show="showProgressBar" class="mt-n8 mb-8">
+      <!--<v-col v-show="showProgressBar" class="mt-n8 mb-8">
         <v-progress-linear color="error" v-model="progress" height="25">
           <strong>{{ Math.ceil(progress) }}%</strong>
         </v-progress-linear>
-      </v-col>
+      </v-col>-->
 
       <v-col class="text-center" v-show="showChatQuestions">
         <v-lazy
@@ -394,7 +394,7 @@ export default {
 
             this.showProgressBar = false;
           });
-        }, 600000);
+        }, 60000);
       });
     },
     createRestartOperation() {
@@ -458,9 +458,9 @@ export default {
               this.restartingCircuitMessage = this.$vuetify.lang.t(
                 "$vuetify.MAIS_ALGUNS_INSTANTES"
               );
-            }, 150000);
-          }, 180000);
-        }, 240000);
+            }, 20000);
+          }, 20000);
+        }, 20000);
       }
     },
   },
