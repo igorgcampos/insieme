@@ -430,7 +430,7 @@ export default {
   watch: {
     showProgressBar: function(){
       if(this.showProgressBar){
-        this.progressBarId = setInterval(() =>{this.progress += 5}, 30000)
+        this.progressBarId = setInterval(() =>{if(this.progress >= 100) return; this.progress += 1}, 6200)
       }
     },
     showVerifyingSignalPanel: function () {
