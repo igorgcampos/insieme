@@ -439,4 +439,6 @@ export default {
     MAX_CARACTERES:'Max. of {0} chars',
     ANEXAR_IMAGEM: 'Attach image',
     NOME: 'Contact name',
+    ESCONDER_RESTARTS: 'Hide restarts',
+    MOSTRAR_RESTARTS: 'Show restarts',
 }

@@ -435,4 +435,6 @@ export default {
     PROCESSO_FISCAL: 'Processo fiscal',
     ANEXAR_IMAGEM: 'Anexar imagem',
     NOME: 'Nome para contato',
+    ESCONDER_RESTARTS: 'Esconder restarts',
+    MOSTRAR_RESTARTS: 'Mostrar restarts',
 }
