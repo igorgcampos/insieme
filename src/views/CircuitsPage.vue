@@ -1,11 +1,18 @@
 <template>
   <div class="mb-10">
-    <v-row
-      id="circuits"
-      :class="{'ml-n12':$vuetify.breakpoint.mdAndUp}"
-    >
-      <span class="mb-7 text-right display-1 font-weight-bold grey--text text--darken-1">
-        {{$vuetify.lang.t('$vuetify.CIRCUITOS')}}</span>
+    <v-row id="circuits" :class="{ 'ml-n12': $vuetify.breakpoint.mdAndUp }">
+      <span
+        class="
+          mb-7
+          text-right
+          display-1
+          font-weight-bold
+          grey--text
+          text--darken-1
+        "
+      >
+        {{ $vuetify.lang.t("$vuetify.CIRCUITOS") }}</span
+      >
       <v-col>
         <v-tooltip bottom>
           <template v-slot:activator="{ on }">
@@ -15,38 +22,48 @@
               class="ml-1 mt-n2"
               @click="expandPanel()"
             >
-              <v-icon v-on="on">{{showPanel?'mdi-arrow-up-drop-circle-outline':
-            'mdi-arrow-down-drop-circle-outline'}}</v-icon>
+              <v-icon v-on="on">{{
+                showPanel
+                  ? "mdi-arrow-up-drop-circle-outline"
+                  : "mdi-arrow-down-drop-circle-outline"
+              }}</v-icon>
             </v-btn>
           </template>
-          <span>{{showPanel?$vuetify.lang.t('$vuetify.ESCONDER'):$vuetify.lang.t('$vuetify.MOSTRAR')}}</span>
+          <span>{{
+            showPanel
+              ? $vuetify.lang.t("$vuetify.ESCONDER")
+              : $vuetify.lang.t("$vuetify.MOSTRAR")
+          }}</span>
         </v-tooltip>
       </v-col>
     </v-row>
 
     <v-lazy
       :options="{
-          threshold: .6
-        }"
+        threshold: 0.6,
+      }"
       transition="slide-x-transition"
     >
-      <div
-        class="ma-0 pa-0"
-        v-show="showPanel"
-      >
-
+      <div class="ma-0 pa-0" v-show="showPanel">
         <v-row class="mt-3">
-
-          <v-col
-            v-show="$vuetify.breakpoint.xs"
-            class="mb-n3"
-          >
-
+          <v-col v-show="$vuetify.breakpoint.xs" class="mb-n3">
             <v-row v-show="!$hasProfile('Sem monitoramento')">
               <v-col cols="12">
                 <v-row justify="center">
-                  <span class="mt-n3 text-center subtitle-1 font-weight-bold grey--text text--darken-1">
-                    {{$vuetify.lang.t('$vuetify.STATUS_OPERACIONAL_CAIXA_BAIXA')}}</span>
+                  <span
+                    class="
+                      mt-n3
+                      text-center
+                      subtitle-1
+                      font-weight-bold
+                      grey--text
+                      text--darken-1
+                    "
+                  >
+                    {{
+                      $vuetify.lang.t("$vuetify.STATUS_OPERACIONAL_CAIXA_BAIXA")
+                    }}</span
+                  >
                 </v-row>
 
                 <v-row>
@@ -56,7 +73,9 @@
                       message="Online"
                       color="success--text"
                       :func="getOnline"
-                      :toolTipMessage="$vuetify.lang.t('$vuetify.ONLINE_DESCRICAO')"
+                      :toolTipMessage="
+                        $vuetify.lang.t('$vuetify.ONLINE_DESCRICAO')
+                      "
                       :isLoading="isLoadingOnline"
                     ></CountCard>
                   </v-col>
@@ -67,7 +86,9 @@
                       message="Offline"
                       color="error--text"
                       :func="getOffline"
-                      :toolTipMessage="$vuetify.lang.t('$vuetify.OFFLINE_DESCRICAO')"
+                      :toolTipMessage="
+                        $vuetify.lang.t('$vuetify.OFFLINE_DESCRICAO')
+                      "
                       :isLoading="isLoadingOffline"
                     ></CountCard>
                   </v-col>
@@ -76,20 +97,26 @@
             </v-row>
 
             <v-row>
-              <v-col
-                class="mr-0 ml-n0 pr-0 pl-0"
-                cols="12"
-              >
+              <v-col class="mr-0 ml-n0 pr-0 pl-0" cols="12">
                 <v-row justify="center">
-                  <span class="mt-n3 text-center subtitle-1 font-weight-bold grey--text text--darken-1">
-                    {{$vuetify.lang.t('$vuetify.STATUS_LOGISTICA')}}</span>
+                  <span
+                    class="
+                      mt-n3
+                      text-center
+                      subtitle-1
+                      font-weight-bold
+                      grey--text
+                      text--darken-1
+                    "
+                  >
+                    {{ $vuetify.lang.t("$vuetify.STATUS_LOGISTICA") }}</span
+                  >
                 </v-row>
 
                 <v-sheet
                   class="ma-0 pa-0 ml-n3 mr-n3"
-                  style="background:#FAFAFA"
+                  style="background: #fafafa"
                 >
-
                   <v-slide-group
                     :v-model="null"
                     show-arrows
@@ -97,15 +124,18 @@
                     next-icon="mdi-arrow-right-thick primary--text"
                     prev-icon="mdi-arrow-left-thick primary--text"
                   >
-
                     <v-slide-item>
                       <v-col class="flex-grow-0">
                         <CountCard
                           :count="installCounts[7]"
-                          :message="$vuetify.lang.t('$vuetify.PROC_LOGISTICO_MOBILE')"
+                          :message="
+                            $vuetify.lang.t('$vuetify.PROC_LOGISTICO_MOBILE')
+                          "
                           color="primary--text"
                           :func="getLogistic"
-                          :toolTipMessage="$vuetify.lang.t('$vuetify.PROC_LOGISTICO_DESCRICAO')"
+                          :toolTipMessage="
+                            $vuetify.lang.t('$vuetify.PROC_LOGISTICO_DESCRICAO')
+                          "
                         ></CountCard>
                       </v-col>
                     </v-slide-item>
@@ -114,10 +144,14 @@
                       <v-col class="flex-grow-0">
                         <CountCard
                           :count="installCounts[4]"
-                          :message="$vuetify.lang.t('$vuetify.AGUARDANDO_ACEITE_MOBILE')"
+                          :message="
+                            $vuetify.lang.t('$vuetify.AGUARDANDO_ACEITE_MOBILE')
+                          "
                           color="primary--text"
                           :func="getInstalled"
-                          :toolTipMessage="$vuetify.lang.t('$vuetify.AGUARDANDO_DESCRICAO')"
+                          :toolTipMessage="
+                            $vuetify.lang.t('$vuetify.AGUARDANDO_DESCRICAO')
+                          "
                         ></CountCard>
                       </v-col>
                     </v-slide-item>
@@ -126,10 +160,14 @@
                       <v-col class="flex-grow-0">
                         <CountCard
                           :count="installCounts[5]"
-                          :message="$vuetify.lang.t('$vuetify.EM_TRANSPORTE_MOBILE')"
+                          :message="
+                            $vuetify.lang.t('$vuetify.EM_TRANSPORTE_MOBILE')
+                          "
                           color="primary--text"
                           :func="getInTransport"
-                          :toolTipMessage="$vuetify.lang.t('$vuetify.EM_TRANSPORTE_DESCRICAO')"
+                          :toolTipMessage="
+                            $vuetify.lang.t('$vuetify.EM_TRANSPORTE_DESCRICAO')
+                          "
                         ></CountCard>
                       </v-col>
                     </v-slide-item>
@@ -141,7 +179,9 @@
                           :message="$vuetify.lang.t('$vuetify.INSTALANDO')"
                           color="primary--text"
                           :func="getDeploying"
-                          :toolTipMessage="$vuetify.lang.t('$vuetify.INSTALANDO_DESCRICAO')"
+                          :toolTipMessage="
+                            $vuetify.lang.t('$vuetify.INSTALANDO_DESCRICAO')
+                          "
                         ></CountCard>
                       </v-col>
                     </v-slide-item>
@@ -151,20 +191,28 @@
             </v-row>
 
             <v-row>
-              <v-col
-                class="mr-0 ml-n0 pr-0 pl-0"
-                cols="12"
-              >
+              <v-col class="mr-0 ml-n0 pr-0 pl-0" cols="12">
                 <v-row justify="center">
-                  <span class="mt-n3 text-center subtitle-1 font-weight-bold grey--text text--darken-1">
-                    {{$vuetify.lang.t('$vuetify.STATUS_CONTRATACAO_CAIXA_BAIXA')}}</span>
+                  <span
+                    class="
+                      mt-n3
+                      text-center
+                      subtitle-1
+                      font-weight-bold
+                      grey--text
+                      text--darken-1
+                    "
+                  >
+                    {{
+                      $vuetify.lang.t("$vuetify.STATUS_CONTRATACAO_CAIXA_BAIXA")
+                    }}</span
+                  >
                 </v-row>
 
                 <v-sheet
                   class="ma-0 pa-0 ml-n3 mr-n3"
-                  style="background:#FAFAFA"
+                  style="background: #fafafa"
                 >
-
                   <v-slide-group
                     :v-model="null"
                     show-arrows
@@ -179,7 +227,9 @@
                           :message="$vuetify.lang.t('$vuetify.ATIVADO')"
                           color="primary--text"
                           :func="getActive"
-                          :toolTipMessage="$vuetify.lang.t('$vuetify.ATIVADO_DESCRICAO')"
+                          :toolTipMessage="
+                            $vuetify.lang.t('$vuetify.ATIVADO_DESCRICAO')
+                          "
                         ></CountCard>
                       </v-col>
                     </v-slide-item>
@@ -191,7 +241,9 @@
                           :message="$vuetify.lang.t('$vuetify.DESATIVADO')"
                           color="primary--text"
                           :func="getDeactive"
-                          :toolTipMessage="$vuetify.lang.t('$vuetify.DESATIVADO_DESCRICAO')"
+                          :toolTipMessage="
+                            $vuetify.lang.t('$vuetify.DESATIVADO_DESCRICAO')
+                          "
                         ></CountCard>
                       </v-col>
                     </v-slide-item>
@@ -203,7 +255,9 @@
                           :message="$vuetify.lang.t('$vuetify.DESINSTALADO')"
                           color="primary--text"
                           :func="getUninstall"
-                          :toolTipMessage="$vuetify.lang.t('$vuetify.DESINSTALADO_DESCRICAO')"
+                          :toolTipMessage="
+                            $vuetify.lang.t('$vuetify.DESINSTALADO_DESCRICAO')
+                          "
                         ></CountCard>
                       </v-col>
                     </v-slide-item>
@@ -215,7 +269,9 @@
                           :message="$vuetify.lang.t('$vuetify.CANCELADO')"
                           color="primary--text"
                           :func="getCanceled"
-                          :toolTipMessage="$vuetify.lang.t('$vuetify.CANCELADO_DESCRICAO')"
+                          :toolTipMessage="
+                            $vuetify.lang.t('$vuetify.CANCELADO_DESCRICAO')
+                          "
                         ></CountCard>
                       </v-col>
                     </v-slide-item>
@@ -226,7 +282,9 @@
                           :message="$vuetify.lang.t('$vuetify.SUSPENSO')"
                           color="primary--text"
                           :func="getSuspended"
-                          :toolTipMessage="$vuetify.lang.t('$vuetify.SUSPENSO_DESCRICAO')"
+                          :toolTipMessage="
+                            $vuetify.lang.t('$vuetify.SUSPENSO_DESCRICAO')
+                          "
                         ></CountCard>
                       </v-col>
                     </v-slide-item>
@@ -234,46 +292,55 @@
                 </v-sheet>
               </v-col>
             </v-row>
-
           </v-col>
 
           <v-row v-show="!$vuetify.breakpoint.xs">
-
             <v-col
               class="ml-0"
               cols="4"
               v-if="!$hasProfile('Sem monitoramento')"
             >
               <v-row justify="center">
-                <span class="mt-n3 text-center caption font-weight-bold grey--text text--darken-2">
-                  {{$vuetify.lang.t('$vuetify.STATUS_OPERACIONAL')}}</span>
+                <span
+                  class="
+                    mt-n3
+                    text-center
+                    caption
+                    font-weight-bold
+                    grey--text
+                    text--darken-2
+                  "
+                >
+                  {{ $vuetify.lang.t("$vuetify.STATUS_OPERACIONAL") }}</span
+                >
               </v-row>
 
-              <v-row
-                class="mt-2"
-                justify="center"
-              >
+              <v-row class="mt-2" justify="center">
                 <v-col class="flex-grow-0">
                   <CountCard
                     :count="counts[0]"
                     message="Online"
                     color="success--text"
                     :func="getOnline"
-                    :toolTipMessage="$vuetify.lang.t('$vuetify.ONLINE_DESCRICAO')"
+                    :toolTipMessage="
+                      $vuetify.lang.t('$vuetify.ONLINE_DESCRICAO')
+                    "
                     :isLoading="isLoadingOnline"
                   ></CountCard>
                 </v-col>
 
                 <v-col
                   class="flex-grow-0"
-                  :class="{'ml-n4':$vuetify.breakpoint.sm}"
+                  :class="{ 'ml-n4': $vuetify.breakpoint.sm }"
                 >
                   <CountCard
                     :count="counts[1]"
                     message="Offline"
                     color="error--text"
                     :func="getOffline"
-                    :toolTipMessage="$vuetify.lang.t('$vuetify.OFFLINE_DESCRICAO')"
+                    :toolTipMessage="
+                      $vuetify.lang.t('$vuetify.OFFLINE_DESCRICAO')
+                    "
                     :isLoading="isLoadingOffline"
                   ></CountCard>
                 </v-col>
@@ -282,15 +349,12 @@
 
             <v-divider
               class="mb-5 mt-n2 ml-n4"
-              :vertical=true
+              :vertical="true"
               v-show="!$hasProfile('Sem monitoramento')"
             ></v-divider>
 
             <v-row>
-              <v-col
-                cols="12"
-                class="mt-n1"
-              >
+              <v-col cols="12" class="mt-n1">
                 <v-row justify="center">
                   <v-btn-toggle
                     v-model="button"
@@ -301,16 +365,19 @@
                       value="contract"
                       class="mt-n3 text-center caption font-weight-bold"
                       small
-                      :style="{'text-decoration':contractDecoration}"
+                      :style="{ 'text-decoration': contractDecoration }"
                     >
-                      {{$vuetify.lang.t('$vuetify.STATUS_CONTRATACAO')}}</v-btn>
+                      {{
+                        $vuetify.lang.t("$vuetify.STATUS_CONTRATACAO")
+                      }}</v-btn
+                    >
                     <v-btn
                       value="log"
                       class="mt-n3 text-center caption font-weight-bold"
                       small
-                      :style="{'text-decoration':logDecoration}"
+                      :style="{ 'text-decoration': logDecoration }"
                     >
-                      {{$vuetify.lang.t('$vuetify.STATUS_LOGISTICA')}}
+                      {{ $vuetify.lang.t("$vuetify.STATUS_LOGISTICA") }}
                     </v-btn>
                   </v-btn-toggle>
                 </v-row>
@@ -318,18 +385,18 @@
                 <v-row justify="center">
                   <v-sheet
                     class="ma-0 pa-0"
-                    style="background:#FAFAFA"
+                    style="background: #fafafa"
                     v-if="button == 'contract'"
                   >
-
                     <v-slide-group
                       :v-model="null"
-                      :show-arrows="!$vuetify.breakpoint.lg || !$vuetify.breakpoint.xl"
+                      :show-arrows="
+                        !$vuetify.breakpoint.lg || !$vuetify.breakpoint.xl
+                      "
                       center-active
                       next-icon="mdi-arrow-right-thick primary--text"
                       prev-icon="mdi-arrow-left-thick primary--text"
                     >
-
                       <v-slide-item>
                         <v-col class="flex-grow-0">
                           <CountCard
@@ -337,7 +404,9 @@
                             :message="$vuetify.lang.t('$vuetify.ATIVADO')"
                             color="primary--text"
                             :func="getActive"
-                            :toolTipMessage="$vuetify.lang.t('$vuetify.ATIVADO_DESCRICAO')"
+                            :toolTipMessage="
+                              $vuetify.lang.t('$vuetify.ATIVADO_DESCRICAO')
+                            "
                             :isLoading="isLoadingStatus"
                           ></CountCard>
                         </v-col>
@@ -349,7 +418,9 @@
                             :message="$vuetify.lang.t('$vuetify.DESATIVADO')"
                             color="primary--text"
                             :func="getDeactive"
-                            :toolTipMessage="$vuetify.lang.t('$vuetify.DESATIVADO_DESCRICAO')"
+                            :toolTipMessage="
+                              $vuetify.lang.t('$vuetify.DESATIVADO_DESCRICAO')
+                            "
                             :isLoading="isLoadingStatus"
                           >
                           </CountCard>
@@ -362,7 +433,9 @@
                             :message="$vuetify.lang.t('$vuetify.DESINSTALADO')"
                             color="primary--text"
                             :func="getUninstall"
-                            :toolTipMessage="$vuetify.lang.t('$vuetify.DESINSTALADO_DESCRICAO')"
+                            :toolTipMessage="
+                              $vuetify.lang.t('$vuetify.DESINSTALADO_DESCRICAO')
+                            "
                             :isLoading="isLoadingStatus"
                           ></CountCard>
                         </v-col>
@@ -374,7 +447,9 @@
                             :message="$vuetify.lang.t('$vuetify.CANCELADO')"
                             color="primary--text"
                             :func="getCanceled"
-                            :toolTipMessage="$vuetify.lang.t('$vuetify.CANCELADO_DESCRICAO')"
+                            :toolTipMessage="
+                              $vuetify.lang.t('$vuetify.CANCELADO_DESCRICAO')
+                            "
                             :isLoading="isLoadingStatus"
                           ></CountCard>
                         </v-col>
@@ -386,7 +461,9 @@
                             :message="$vuetify.lang.t('$vuetify.SUSPENSO')"
                             color="primary--text"
                             :func="getSuspended"
-                            :toolTipMessage="$vuetify.lang.t('$vuetify.SUSPENSO_DESCRICAO')"
+                            :toolTipMessage="
+                              $vuetify.lang.t('$vuetify.SUSPENSO_DESCRICAO')
+                            "
                             :isLoading="isLoadingStatus"
                           ></CountCard>
                         </v-col>
@@ -395,19 +472,16 @@
                   </v-sheet>
                 </v-row>
 
-                <v-row
-                  class="ml-2"
-                  justify="center"
-                  v-show="button == 'log'"
-                >
-
+                <v-row class="ml-2" justify="center" v-show="button == 'log'">
                   <v-col class="flex-grow-0">
                     <CountCard
                       :count="installCounts[7]"
                       :message="$vuetify.lang.t('$vuetify.PROC_LOGISTICO')"
                       color="primary--text"
                       :func="getLogistic"
-                      :toolTipMessage="$vuetify.lang.t('$vuetify.PROC_LOGISTICO_DESCRICAO')"
+                      :toolTipMessage="
+                        $vuetify.lang.t('$vuetify.PROC_LOGISTICO_DESCRICAO')
+                      "
                       :isLoading="isLoadingStatus"
                     ></CountCard>
                   </v-col>
@@ -418,8 +492,10 @@
                       :message="$vuetify.lang.t('$vuetify.EM_TRANSPORTE')"
                       color="primary--text"
                       :func="getInTransport"
-                      :toolTipMessage="$vuetify.lang.t('$vuetify.EM_TRANSPORTE_DESCRICAO')"
-                      :class="{'ml-n4':$vuetify.breakpoint.sm}"
+                      :toolTipMessage="
+                        $vuetify.lang.t('$vuetify.EM_TRANSPORTE_DESCRICAO')
+                      "
+                      :class="{ 'ml-n4': $vuetify.breakpoint.sm }"
                       :isLoading="isLoadingStatus"
                     ></CountCard>
                   </v-col>
@@ -430,8 +506,10 @@
                       :message="$vuetify.lang.t('$vuetify.INSTALANDO')"
                       color="primary--text"
                       :func="getDeploying"
-                      :toolTipMessage="$vuetify.lang.t('$vuetify.INSTALANDO_DESCRICAO')"
-                      :class="{'ml-n4':$vuetify.breakpoint.sm}"
+                      :toolTipMessage="
+                        $vuetify.lang.t('$vuetify.INSTALANDO_DESCRICAO')
+                      "
+                      :class="{ 'ml-n4': $vuetify.breakpoint.sm }"
                       :isLoading="isLoadingStatus"
                     ></CountCard>
                   </v-col>
@@ -443,8 +521,10 @@
                       color="primary--text"
                       :func="getInstalled"
                       :smallText="true"
-                      :toolTipMessage="$vuetify.lang.t('$vuetify.AGUARDANDO_DESCRICAO')"
-                      :class="{'ml-n4':$vuetify.breakpoint.sm}"
+                      :toolTipMessage="
+                        $vuetify.lang.t('$vuetify.AGUARDANDO_DESCRICAO')
+                      "
+                      :class="{ 'ml-n4': $vuetify.breakpoint.sm }"
                       :isLoading="isLoadingStatus"
                     ></CountCard>
                   </v-col>
@@ -454,39 +534,60 @@
           </v-row>
         </v-row>
 
-        <v-row
-          id="filtro"
-          class="pl-0 ml-0 grey lighten-5 mb-n5 mt-0"
-        >
+        <v-row id="filtro" class="pl-0 ml-0 grey lighten-5 mb-n5 mt-0">
           <v-col cols="3">
             <v-row>
-              <span class=" text-right subtitle-2 font-weight-bold grey--text text--lighten-1">
-                {{$vuetify.lang.t('$vuetify.BUSCAR')}}:</span>
+              <span
+                class="
+                  text-right
+                  subtitle-2
+                  font-weight-bold
+                  grey--text
+                  text--lighten-1
+                "
+              >
+                {{ $vuetify.lang.t("$vuetify.BUSCAR") }}:</span
+              >
             </v-row>
             <v-row md="2">
               <v-text-field
                 v-model.trim="searchText"
                 dense
                 label="Regular"
-                :placeholder="$vuetify.lang.t('$vuetify.DESIGNACAO_CLIENTE_TPZ')"
+                :placeholder="
+                  $vuetify.lang.t('$vuetify.DESIGNACAO_CLIENTE_TPZ')
+                "
                 single-line
                 solo
                 max-width="200"
                 append-icon="mdi-magnify"
-                @click:append="status = 0; installStatus = 0; search()"
-                @keypress.enter="status = 0; installStatus = 0; search()"
+                @click:append="
+                  status = 0;
+                  installStatus = 0;
+                  search();
+                "
+                @keypress.enter="
+                  status = 0;
+                  installStatus = 0;
+                  search();
+                "
               ></v-text-field>
             </v-row>
           </v-col>
 
-          <v-col
-            class="ml-5"
-            cols="3"
-            v-if="$hasProfile('Administrador')"
-          >
+          <v-col class="ml-5" cols="3" v-if="$hasProfile('Administrador')">
             <v-row>
-              <span class=" text-right subtitle-2 font-weight-bold grey--text text--lighten-1">
-                {{$vuetify.lang.t('$vuetify.PRODUTO')}}:</span>
+              <span
+                class="
+                  text-right
+                  subtitle-2
+                  font-weight-bold
+                  grey--text
+                  text--lighten-1
+                "
+              >
+                {{ $vuetify.lang.t("$vuetify.PRODUTO") }}:</span
+              >
             </v-row>
             <v-row>
               <v-select
@@ -495,18 +596,28 @@
                 :label="$vuetify.lang.t('$vuetify.TODOS')"
                 solo
                 dense
-                @change="status = 0; installStatus = 0; search()"
+                @change="
+                  status = 0;
+                  installStatus = 0;
+                  search();
+                "
               ></v-select>
             </v-row>
           </v-col>
 
-          <v-col
-            class="ml-5"
-            cols="3"
-          >
+          <v-col class="ml-5" cols="3">
             <v-row>
-              <span class=" text-right subtitle-2 font-weight-bold grey--text text--lighten-1">
-                {{$vuetify.lang.t('$vuetify.TECNOLOGIA')}}:</span>
+              <span
+                class="
+                  text-right
+                  subtitle-2
+                  font-weight-bold
+                  grey--text
+                  text--lighten-1
+                "
+              >
+                {{ $vuetify.lang.t("$vuetify.TECNOLOGIA") }}:</span
+              >
             </v-row>
             <v-row>
               <v-select
@@ -515,16 +626,16 @@
                 :label="$vuetify.lang.t('$vuetify.TODOS')"
                 solo
                 dense
-                @change="status = 0; installStatus = 0; search()"
+                @change="
+                  status = 0;
+                  installStatus = 0;
+                  search();
+                "
               ></v-select>
             </v-row>
           </v-col>
 
-          <v-col
-            class="mt-5"
-            cols="1"
-            v-if="!$vuetify.breakpoint.xs"
-          >
+          <v-col class="mt-5" cols="1" v-if="!$vuetify.breakpoint.xs">
             <v-tooltip top>
               <template v-slot:activator="{ on }">
                 <v-btn
@@ -538,62 +649,65 @@
                   <v-icon dark>mdi-file-export</v-icon>
                 </v-btn>
               </template>
-              <span>{{$vuetify.lang.t('$vuetify.EXPORTAR_CSV_CIRCUITO')}}</span>
+              <span>{{
+                $vuetify.lang.t("$vuetify.EXPORTAR_CSV_CIRCUITO")
+              }}</span>
             </v-tooltip>
           </v-col>
         </v-row>
 
-        <v-row
-          class="pl-2 mt-2"
-          style="min-height:120px;"
-        >
+        <v-row class="pl-2 mt-2" style="min-height: 120px">
           <div
             id="circuitId"
             class="pr-2 overflow-y-auto overflow-x-hidden"
             v-scroll:#circuitId="searchMore"
-            style="max-height:360px; width:100%;"
+            style="max-height: 360px; width: 100%"
           >
-            <v-expansion-panels
-              class="ma-1"
-              v-model="openedPanel"
-            >
+            <v-expansion-panels class="ma-1" v-model="openedPanel">
               <v-expansion-panel
                 v-for="(circuit, i) in circuits"
                 :key="i"
                 hide-actions
               >
-                <v-expansion-panel-header
-                  v-slot="{ open }"
-                  class="pt-0 pb-0"
-                >
-                  <v-row
-                    align="center"
-                    no-gutters
-                  >
-                    <v-col
-                      v-if="!open"
-                      cols="4"
-                      sm="2"
-                    >
+                <v-expansion-panel-header v-slot="{ open }" class="pt-0 pb-0">
+                  <v-row align="center" no-gutters>
+                    <v-col v-if="!open" cols="4" sm="2">
                       <v-chip
-                        :color="circuit.tecnologia != 'VSAT'?'grey':circuit.online==3?'success':'error'"
+                        :color="
+                          circuit.tecnologia != 'VSAT'
+                            ? 'grey'
+                            : circuit.online == 3
+                            ? 'success'
+                            : 'error'
+                        "
                         class="ml-0 mr-2"
                         label
                         small
                         outlined
                       >
-                        {{ circuit.tecnologia != 'VSAT'?'N/A':circuit.online==3?'Online':'Offline' }}
+                        {{
+                          circuit.tecnologia != "VSAT"
+                            ? "N/A"
+                            : circuit.online == 3
+                            ? "Online"
+                            : "Offline"
+                        }}
                       </v-chip>
                     </v-col>
 
                     <v-col
                       v-show="!$vuetify.breakpoint.xs"
                       cols="4"
-                      :class="{'col-sm-10':open, 'col-md-10':open}"
+                      :class="{ 'col-sm-10': open, 'col-md-10': open }"
                       class="ml-n2"
                     >
-                      <strong class="font-weight-bold grey--text text--lighten-1 mr-2">
-                        {{$vuetify.lang.t('$vuetify.DESIGNACAO_CLIENTE')}}:</strong>
+                      <strong
+                        class="font-weight-bold grey--text text--lighten-1 mr-2"
+                      >
+                        {{
+                          $vuetify.lang.t("$vuetify.DESIGNACAO_CLIENTE")
+                        }}:</strong
+                      >
                       <strong
                         class="subtitle-2 font-weight-bold"
                         v-html="circuit.designacaoCliente || '--'"
@@ -604,10 +718,15 @@
                       v-show="!$vuetify.breakpoint.xs"
                       v-if="!open"
                       cols="4"
-                      :class="{'col-sm-10':open, 'col-md-10':open}"
+                      :class="{ 'col-sm-10': open, 'col-md-10': open }"
                     >
-                      <strong class="font-weight-bold grey--text text--lighten-1 mr-2">
-                        {{$vuetify.lang.t('$vuetify.DESIGNACAO_TPZ')}}:</strong>
+                      <strong
+                        class="font-weight-bold grey--text text--lighten-1 mr-2"
+                      >
+                        {{
+                          $vuetify.lang.t("$vuetify.DESIGNACAO_TPZ")
+                        }}:</strong
+                      >
                       <strong
                         class="subtitle-2 font-weight-bold"
                         v-html="circuit.nome || '--'"
@@ -619,8 +738,11 @@
                       cols="2"
                       v-if="!open"
                     >
-                      <strong class="font-weight-bold grey--text text--lighten-1 mr-2">
-                        IP:</strong>
+                      <strong
+                        class="font-weight-bold grey--text text--lighten-1 mr-2"
+                      >
+                        IP:</strong
+                      >
                       <strong
                         class="font-weight-bold"
                         v-html="circuit.ip || '--'"
@@ -631,56 +753,80 @@
                       v-show="$vuetify.breakpoint.xs"
                       class="ml-3 mt-2 mb-2"
                     >
-                      <v-row
-                        sm="5"
-                        md="6"
-                        :class="{'ml-n3':open}"
-                      >
-                        <strong class="caption font-weight-bold grey--text text--lighten-1 mr-2">
-                          {{$vuetify.lang.t('$vuetify.DESIGNACAO_CLIENTE')}}:</strong>
+                      <v-row sm="5" md="6" :class="{ 'ml-n3': open }">
+                        <strong
+                          class="
+                            caption
+                            font-weight-bold
+                            grey--text
+                            text--lighten-1
+                            mr-2
+                          "
+                        >
+                          {{
+                            $vuetify.lang.t("$vuetify.DESIGNACAO_CLIENTE")
+                          }}:</strong
+                        >
                         <strong
                           class="caption font-weight-bold"
                           v-html="circuit.designacaoCliente.toLowerCase()"
                         ></strong>
                       </v-row>
 
-                      <v-row
-                        sm="5"
-                        md="3"
-                        v-if="!open"
-                      >
-                        <strong class="caption font-weight-bold grey--text text--lighten-1 mr-2">
-                          IP:</strong>
+                      <v-row sm="5" md="3" v-if="!open">
+                        <strong
+                          class="
+                            caption
+                            font-weight-bold
+                            grey--text
+                            text--lighten-1
+                            mr-2
+                          "
+                        >
+                          IP:</strong
+                        >
                         <strong
                           class="caption font-weight-bold"
                           v-html="circuit.ip || '--'"
                         ></strong>
                       </v-row>
                     </v-col>
-
                   </v-row>
                 </v-expansion-panel-header>
 
                 <v-expansion-panel-content>
-
-                  <v-card-subtitle class="caption mt-n10 ml-n6 mb-2 grey--text text--lighten-1">
-                    {{$vuetify.lang.t('$vuetify.DESIGNACAO_TPZ')}}:
-                    {{circuit.nome}}
+                  <v-card-subtitle
+                    class="caption mt-n10 ml-n6 mb-2 grey--text text--lighten-1"
+                  >
+                    {{ $vuetify.lang.t("$vuetify.DESIGNACAO_TPZ") }}:
+                    {{ circuit.nome }}
                   </v-card-subtitle>
                   <v-row>
                     <v-col
                       class="mt-n6 mr-5"
-                      :cols="$vuetify.breakpoint.xs?5:2"
+                      :cols="$vuetify.breakpoint.xs ? 5 : 2"
                     >
                       <v-col class="pa-0">
                         <v-chip
-                          :color="circuit.tecnologia != 'VSAT'?'grey':circuit.online==3?'success':'error'"
+                          :color="
+                            circuit.tecnologia != 'VSAT'
+                              ? 'grey'
+                              : circuit.online == 3
+                              ? 'success'
+                              : 'error'
+                          "
                           class="ml-0 mr-2"
                           label
                           small
                           outlined
                         >
-                          {{ circuit.tecnologia != 'VSAT'?'N/A':circuit.online==3?'Online':'Offline' }}
+                          {{
+                            circuit.tecnologia != "VSAT"
+                              ? "N/A"
+                              : circuit.online == 3
+                              ? "Online"
+                              : "Offline"
+                          }}
                         </v-chip>
                       </v-col>
 
@@ -693,7 +839,11 @@
                           outlined
                           v-if="circuit.statusInstalacao"
                         >
-                          {{ $vuetify.lang.t('$vuetify.'+circuit.statusInstalacao) }}
+                          {{
+                            $vuetify.lang.t(
+                              "$vuetify." + circuit.statusInstalacao
+                            )
+                          }}
                         </v-chip>
                       </v-col>
 
@@ -704,16 +854,19 @@
                           label
                           small
                           outlined
-                          v-if="circuit.proatividade || $props.contract.suporte=='Proativo'"
+                          v-if="
+                            circuit.proatividade ||
+                            $props.contract.suporte == 'Proativo'
+                          "
                         >
-                          {{ $vuetify.lang.t('$vuetify.PROATIVO') }}
+                          {{ $vuetify.lang.t("$vuetify.PROATIVO") }}
                         </v-chip>
                       </v-col>
                     </v-col>
 
                     <v-col
                       class="mt-n12"
-                      :class="{'col-6':$vuetify.breakpoint.xs}"
+                      :class="{ 'col-6': $vuetify.breakpoint.xs }"
                     >
                       <v-col class="pl-0">
                         <LabelValue
@@ -741,7 +894,10 @@
 
                     <v-col
                       class="mt-n12"
-                      :class="{'col-6':$vuetify.breakpoint.xs, 'ml-n12':!$vuetify.breakpoint.xs}"
+                      :class="{
+                        'col-6': $vuetify.breakpoint.xs,
+                        'ml-n12': !$vuetify.breakpoint.xs,
+                      }"
                     >
                       <v-col>
                         <LabelValue
@@ -749,21 +905,29 @@
                           :value="getAddress(circuit)"
                           justify="start"
                           truncate
-                          :class="{'col-2':$vuetify.breakpoint.xs}"
-                          style="max-width:150px"
+                          :class="{ 'col-2': $vuetify.breakpoint.xs }"
+                          style="max-width: 150px"
                         ></LabelValue>
                       </v-col>
                       <v-col class="pt-0 mt-n6">
                         <LabelValue
                           :label="$vuetify.lang.t('$vuetify.LATITUDE')"
-                          :value="circuit.latitude?circuit.latitude.toFixed(4):'--'"
+                          :value="
+                            circuit.latitude
+                              ? circuit.latitude.toFixed(4)
+                              : '--'
+                          "
                           justify="start"
                         ></LabelValue>
                       </v-col>
                       <v-col class="pt-0 mt-n6">
                         <LabelValue
                           :label="$vuetify.lang.t('$vuetify.LONGITUDE')"
-                          :value="circuit.longitude?circuit.longitude.toFixed(4): '--'"
+                          :value="
+                            circuit.longitude
+                              ? circuit.longitude.toFixed(4)
+                              : '--'
+                          "
                           justify="start"
                         ></LabelValue>
                       </v-col>
@@ -771,7 +935,7 @@
 
                     <v-col
                       class="mt-n12"
-                      :class="{'col-6':$vuetify.breakpoint.xs}"
+                      :class="{ 'col-6': $vuetify.breakpoint.xs }"
                     >
                       <v-col>
                         <LabelValue
@@ -779,15 +943,19 @@
                           :value="circuit.plataformaSat || '--'"
                           justify="start"
                           truncate
-                          style="width:150px;"
+                          style="width: 150px"
                         ></LabelValue>
                       </v-col>
                       <v-col class="pt-0 mt-n6">
                         <LabelValue
                           label="Tecnologia"
-                          :value="circuit.tecnologia?circuit.tecnologia+'/'+circuit.banda:'--'"
+                          :value="
+                            circuit.tecnologia
+                              ? circuit.tecnologia + '/' + circuit.banda
+                              : '--'
+                          "
                           justify="start"
-                          style="width:150px;"
+                          style="width: 150px"
                         ></LabelValue>
                       </v-col>
                       <v-col class="pt-0 mt-n6">
@@ -795,7 +963,7 @@
                           label="Esno"
                           :value="circuit.esno || '--'"
                           justify="start"
-                          style="width:150px;"
+                          style="width: 150px"
                         ></LabelValue>
                       </v-col>
                     </v-col>
@@ -807,14 +975,28 @@
                   ></v-divider>
 
                   <v-card-actions class="mb-n2 pb-0">
-                    <TooltipButton 
+                    <TooltipButton
                       :label="$vuetify.lang.t('$vuetify.RESOLVER_PROBLEMA')"
                       :message="$vuetify.lang.t('$vuetify.SUPORTE_PROBLEMA')"
-                      :event="circuit.tecnologia == 'VSAT'?solveProblem:openIssue"
+                      :event="
+                        circuit.tecnologia == 'VSAT' ? solveProblem : openIssue
+                      "
                       :object="circuit"
                       :mobile="$vuetify.breakpoint.xs"
-                      :isText=true
-                      v-if="circuit.statusInstalacao == 'ATIVADO' && !$hasProfile('Sem monitoramento')"
+                      :isText="true"
+                      v-if="
+                        !isRestartingCircuit(circuit) &&
+                        circuit.statusInstalacao == 'ATIVADO' &&
+                        !$hasProfile('Sem monitoramento')
+                      "
+                    ></TooltipButton>
+
+                    <TooltipButton
+                      :label="$vuetify.lang.t('$vuetify.REINICIANDO')"
+                      :mobile="$vuetify.breakpoint.xs"
+                      :isText="true"
+                      v-if="isRestartingCircuit(circuit)"
+                      :disabled="true"
                     ></TooltipButton>
 
                     <TooltipButton
@@ -824,7 +1006,7 @@
                       :object="circuit"
                       :mobile="$vuetify.breakpoint.xs"
                       v-if="circuit.idPrtg & $getUser().prtgToken"
-                      :isText=true
+                      :isText="true"
                     ></TooltipButton>
                   </v-card-actions>
                 </v-expansion-panel-content>
@@ -833,10 +1015,13 @@
           </div>
           <v-col v-if="circuits.length == 0 && !isLoading">
             <v-lazy
-              :options="{threshold: .6}"
+              :options="{ threshold: 0.6 }"
               transition="slide-x-transition"
             >
-              <WarningPanel :message="$vuetify.lang.t('$vuetify.NENHUM_CIRCUITO')"> </WarningPanel>
+              <WarningPanel
+                :message="$vuetify.lang.t('$vuetify.NENHUM_CIRCUITO')"
+              >
+              </WarningPanel>
             </v-lazy>
           </v-col>
         </v-row>
@@ -856,23 +1041,27 @@
           :close="closeProblemSolveDialog"
           :getObject="getObject"
           :openIssue="openIssue"
-          :closeIssue="closeRestartIssue"
-          :createRestartIssue="createRestartIssue"
         ></SolveProblemDialog>
 
+        <RestartsSideBar
+          :circuits="restartingCircuits"
+          :showRestarts="showRestarts"
+          :buttonEvent="showHideRestarts"
+          :contract="contract"
+        ></RestartsSideBar>
       </div>
     </v-lazy>
   </div>
 </template>
 
 <script>
-
-import CountCard from '../components/cards/CountCard'
-import WarningPanel from '../components/panels/WarningPanel';
-import TooltipButton from '../components/TooltipButton';
-import LabelValue from '../components/LabelValue';
-import IssueDialog from '../components/dialogs/IssueDialog';
-import SolveProblemDialog from '../components/dialogs/SolveProblemDialog';
+import CountCard from "../components/cards/CountCard";
+import WarningPanel from "../components/panels/WarningPanel";
+import TooltipButton from "../components/TooltipButton";
+import LabelValue from "../components/LabelValue";
+import IssueDialog from "../components/dialogs/IssueDialog";
+import SolveProblemDialog from "../components/dialogs/SolveProblemDialog";
+import RestartsSideBar from "../components/RestartsSideBar";
 
 export default {
   components: {
@@ -881,100 +1070,112 @@ export default {
     TooltipButton,
     LabelValue,
     IssueDialog,
-    SolveProblemDialog
+    SolveProblemDialog,
+    RestartsSideBar,
   },
   methods: {
-    closeRestartIssue (close) {
+    showHideRestarts() {
+      this.showRestarts = !this.showRestarts;
+    },
+    isRestartingCircuit(circuit) {
+      for (var index in this.restartingCircuits) {
+        if (this.restartingCircuits[index].nome == circuit.nome) {
+          return true;
+        }
+      }
 
+      return false;
+    },
+    closeRestartIssue(close) {
       if (!this.selectedIssue || !close) {
         return;
       }
 
-      this.selectedIssue.motivoEncerramento = 'Meu problema foi resolvido';
-      this.selectedIssue.observacaoEncerramento = 'O robô conseguiu reiniciar o circuito do cliente com sucesso!'
-      this.selectedIssue.statusProcessamento = 'Concluído';
+      this.selectedIssue.motivoEncerramento = "Meu problema foi resolvido";
+      this.selectedIssue.observacaoEncerramento =
+        "O robô conseguiu reiniciar o circuito do cliente com sucesso!";
+      this.selectedIssue.statusProcessamento = "Concluído";
 
-      this.$put('/chamado/close', this.selectedIssue).then((response) => {
-        this.$root.$emit('close-issue-success', response.data)
+      this.$put("/chamado/close", this.selectedIssue).then((response) => {
+        this.$root.$emit("close-issue-success", response.data);
         this.selectedIssue = undefined;
-        this.showSuccess = false
+        this.showSuccess = false;
       });
     },
-    createRestartIssue () {
+    openPRTG(circuit) {
+      window.open(
+        "https://monitor.telespazio.com.br/device.htm?id=" +
+          circuit.idPrtg +
+          "&tabid=1&username=" +
+          this.$getUser().apelido +
+          "&passhash=" +
+          this.$getUser().prtgToken
+      );
 
-      var issue = {
-        reason: 'Inoperância',
-        observation: 'Criação de incidente via restart de circuito realizado pelo cliente',
-      }
-
-      this.$root.$on('close-issue', function (issue) {
-
-        issue.motivoEncerramento = 'Meu problema foi resolvido';
-        issue.observacaoEncerramento = 'O robô conseguiu reiniciar o circuito do cliente com sucesso!'
-
-        this.$put('/chamado/close', issue).then((response) => {
-
-          if (response.data) {
-            this.$root.$emit('close-issue-success', response.data)
-          }
-        });
-      })
-
-      this.sendIssue(issue, this.selectedCircuit, false)
+      this.$saveOperation({ tipo: "LINK_PRTG", usuario: this.$getUser() });
     },
-    openPRTG (circuit) {
-      window.open('https://monitor.telespazio.com.br/device.htm?id=' + circuit.idPrtg +
-        '&tabid=1&username=' + this.$getUser().apelido + '&passhash=' + this.$getUser().prtgToken)
-
-      this.$saveOperation({ tipo: 'LINK_PRTG', usuario: this.$getUser() })
-    },
-    formatCircuit (circuit) {
-
+    formatCircuit(circuit) {
       return {
-        [this.$vuetify.lang.t('$vuetify.DESIGNACAO_TPZ')]: circuit.nome,
-        [this.$vuetify.lang.t('$vuetify.COD_TPZ')]: circuit.numeroContratoTpz,
-        [this.$vuetify.lang.t('$vuetify.COD_SAP')]: circuit.numeroContratoSap,
-        [this.$vuetify.lang.t('$vuetify.DESIGNACAO_CLIENTE')]: circuit.designacaoCliente?circuit.designacaoCliente.replaceAll("\n"," ").replaceAll("\r"," "):'--',
-        [this.$vuetify.lang.t('$vuetify.DATA_ATIVACAO')]: this.formatDate(circuit.dataInstalacao),
-        [this.$vuetify.lang.t('$vuetify.STATUS_INSTALACAO')]: circuit.statusInstalacao ? this.$vuetify.lang.t('$vuetify.' + circuit.statusInstalacao) : '--',
-        [this.$vuetify.lang.t('$vuetify.DATA_INSTALACAO')]: this.formatDate(circuit.dataInstalacao),
-        [this.$vuetify.lang.t('$vuetify.ENDERECO')]: this.getAddress(circuit),
-        ip: circuit.ip || '--',
-        "Online": circuit.online == 3 ? 'ONLINE' : 'OFFLINE',
-        [this.$vuetify.lang.t('$vuetify.LATITUDE')]: circuit.latitude || '--',
-        [this.$vuetify.lang.t('$vuetify.LONGITUDE')]: circuit.longitude || '--',
-        esno: circuit.esno || '--',
-        [this.$vuetify.lang.t('$vuetify.PLATAFORMA_SAT')]: circuit.plataformaSat || '--',
-        "Id VSAT": circuit.vsatId || '--',
-        hub: circuit.hub || '--',
+        [this.$vuetify.lang.t("$vuetify.DESIGNACAO_TPZ")]: circuit.nome,
+        [this.$vuetify.lang.t("$vuetify.COD_TPZ")]: circuit.numeroContratoTpz,
+        [this.$vuetify.lang.t("$vuetify.COD_SAP")]: circuit.numeroContratoSap,
+        [this.$vuetify.lang.t("$vuetify.DESIGNACAO_CLIENTE")]:
+          circuit.designacaoCliente
+            ? circuit.designacaoCliente
+                .replaceAll("\n", " ")
+                .replaceAll("\r", " ")
+            : "--",
+        [this.$vuetify.lang.t("$vuetify.DATA_ATIVACAO")]: this.formatDate(
+          circuit.dataInstalacao
+        ),
+        [this.$vuetify.lang.t("$vuetify.STATUS_INSTALACAO")]:
+          circuit.statusInstalacao
+            ? this.$vuetify.lang.t("$vuetify." + circuit.statusInstalacao)
+            : "--",
+        [this.$vuetify.lang.t("$vuetify.DATA_INSTALACAO")]: this.formatDate(
+          circuit.dataInstalacao
+        ),
+        [this.$vuetify.lang.t("$vuetify.ENDERECO")]: this.getAddress(circuit),
+        ip: circuit.ip || "--",
+        Online: circuit.online == 3 ? "ONLINE" : "OFFLINE",
+        [this.$vuetify.lang.t("$vuetify.LATITUDE")]: circuit.latitude || "--",
+        [this.$vuetify.lang.t("$vuetify.LONGITUDE")]: circuit.longitude || "--",
+        esno: circuit.esno || "--",
+        [this.$vuetify.lang.t("$vuetify.PLATAFORMA_SAT")]:
+          circuit.plataformaSat || "--",
+        "Id VSAT": circuit.vsatId || "--",
+        hub: circuit.hub || "--",
       };
     },
-    exportCSV () {
-
-      this.loadingExport = true
+    exportCSV() {
+      this.loadingExport = true;
       if (!this.allCircuits) {
-        this.$get('/circuito/all', {
-          contractNumber: this.$props.contract.numeroContratoTpz
-        }).then(response => {
-
+        this.$get("/circuito/all", {
+          contractNumber: this.$props.contract.numeroContratoTpz,
+        }).then((response) => {
           this.allCircuits = response.data.map((circuit) => {
             return this.formatCircuit(circuit);
-          })
+          });
 
-          this.$downloadCSV(this.allCircuits, this.$vuetify.lang.t('$vuetify.CIRCUITOS'))
-          this.loadingExport = false
+          this.$downloadCSV(
+            this.allCircuits,
+            this.$vuetify.lang.t("$vuetify.CIRCUITOS")
+          );
+          this.loadingExport = false;
         });
       } else {
-        this.$downloadCSV(this.allCircuits, this.$vuetify.lang.t('$vuetify.CIRCUITOS'))
-        this.loadingExport = false
+        this.$downloadCSV(
+          this.allCircuits,
+          this.$vuetify.lang.t("$vuetify.CIRCUITOS")
+        );
+        this.loadingExport = false;
       }
     },
-    closeProblemSolveDialog () {
-      this.showProblemSolveDialog = false
+    closeProblemSolveDialog() {
+      this.showProblemSolveDialog = false;
       this.selectedIssue = undefined;
     },
-    closeDialog () {
-
+    closeDialog() {
       this.showDialog = false;
       this.showDialogLoading = false;
       this.selectedIssue = undefined;
@@ -983,8 +1184,7 @@ export default {
         this.showSuccess = false;
       }, 1000);
     },
-    sendIssue (issue, circuit, close) {
-
+    sendIssue(issue, circuit, close) {
       if (!issue.reason || !issue.observation) {
         return;
       }
@@ -992,83 +1192,79 @@ export default {
       this.showDialogLoading = true;
 
       issue = {
-        origem: 'CIRCUITO',
+        origem: "CIRCUITO",
         identificadorOrigem: circuit.nome,
         identificadorOrigemSecundario: circuit.designacaoCliente,
         motivoAbertura: issue.reason,
         observacaoAbertura: issue.observation,
         contrato: { id: this.$props.contract.id },
         status: issue.status ? issue.status : undefined,
-      }
+      };
 
-      this.$post('/chamado/create', issue).then((response) => {
-
+      this.$post("/chamado/create", issue).then((response) => {
         if (response.data) {
-
           this.showSuccess = true;
           this.showDialogLoading = false;
-          this.$root.$emit('new-issue', response.data)
-          circuit.protocolo = response.data.protocolo
+          this.$root.$emit("new-issue", response.data, circuit);
+          circuit.protocolo = response.data.protocolo;
           this.selectedIssue = response.data;
 
           if (close) {
-            this.$root.$emit('close-issue', response.data)
+            this.$root.$emit("close-issue", response.data);
           }
         }
       });
     },
-    getActive () {
-      this.getFromStatusInstall(1)
+    getActive() {
+      this.getFromStatusInstall(1);
     },
-    getDeactive () {
-      this.getFromStatusInstall(2)
+    getDeactive() {
+      this.getFromStatusInstall(2);
     },
-    getUninstall () {
-      this.getFromStatusInstall(3)
+    getUninstall() {
+      this.getFromStatusInstall(3);
     },
-    getCanceled () {
-      this.getFromStatusInstall(4)
+    getCanceled() {
+      this.getFromStatusInstall(4);
     },
-    getInstalled () {
-      this.getFromStatusInstall(5)
+    getInstalled() {
+      this.getFromStatusInstall(5);
     },
-    getInTransport () {
-      this.getFromStatusInstall(6)
+    getInTransport() {
+      this.getFromStatusInstall(6);
     },
-    getDeploying () {
-      this.getFromStatusInstall(7)
+    getDeploying() {
+      this.getFromStatusInstall(7);
     },
-    getLogistic () {
-      this.getFromStatusInstall(8)
+    getLogistic() {
+      this.getFromStatusInstall(8);
     },
-    getSuspended () {
-      this.getFromStatusInstall(9)
+    getSuspended() {
+      this.getFromStatusInstall(9);
     },
-    getFromStatusInstall (status) {
-
+    getFromStatusInstall(status) {
       if (this.isLoading) {
-        return
+        return;
       }
 
-      this.searchText = '';
+      this.searchText = "";
       this.page = 0;
       this.isLoading = true;
-      this.status = this.statuses[0]
+      this.status = this.statuses[0];
       this.circuits = [];
-      this.product = this.products[0]
-      this.technology = this.technologies[0]
-      this.installStatus = status
+      this.product = this.products[0];
+      this.technology = this.technologies[0];
+      this.installStatus = status;
 
-      this.$get('/circuito/busca', {
+      this.$get("/circuito/busca", {
         contractNumber: this.$props.contract.numeroContratoTpz,
         searchText: this.searchText,
         onlineStatus: 0,
         installStatus: this.installStatus,
         productType: null,
         techType: null,
-        page: 0
+        page: 0,
       }).then((response) => {
-
         if (response && response.data.length == 0) {
           this.noResult = true;
         } else {
@@ -1079,41 +1275,48 @@ export default {
         this.isLoading = false;
       });
     },
-    getAddress (circuit) {
-      return (circuit.endereco?circuit.endereco.replaceAll(';',' '):"") + ' ' + (circuit.bairro?circuit.bairro:'') + 
-      ' ' + (circuit.cidade?circuit.cidade:'') + 
-      ', ' + (circuit.uf?circuit.uf:'').replaceAll("\n"," ").replaceAll("\r"," ").trim()
+    getAddress(circuit) {
+      return (
+        (circuit.endereco ? circuit.endereco.replaceAll(";", " ") : "") +
+        " " +
+        (circuit.bairro ? circuit.bairro : "") +
+        " " +
+        (circuit.cidade ? circuit.cidade : "") +
+        ", " +
+        (circuit.uf ? circuit.uf : "")
+          .replaceAll("\n", " ")
+          .replaceAll("\r", " ")
+          .trim()
+      );
     },
-    getOnline () {
-      this.getFromStatus(1)
+    getOnline() {
+      this.getFromStatus(1);
     },
-    getOffline () {
-      this.getFromStatus(2)
+    getOffline() {
+      this.getFromStatus(2);
     },
-    getFromStatus (onlineStatus) {
-
+    getFromStatus(onlineStatus) {
       if (this.isLoading) {
-        return
+        return;
       }
 
-      this.searchText = '';
+      this.searchText = "";
       this.page = 0;
       this.isLoading = true;
-      this.status = this.statuses[onlineStatus]
+      this.status = this.statuses[onlineStatus];
       this.circuits = [];
-      this.product = this.products[0]
-      this.technology = this.technologies[0]
+      this.product = this.products[0];
+      this.technology = this.technologies[0];
 
-      this.$get('/circuito/busca', {
+      this.$get("/circuito/busca", {
         contractNumber: this.$props.contract.numeroContratoTpz,
         searchText: this.searchText,
         onlineStatus: onlineStatus,
         installStatus: 0,
         productType: null,
         techType: null,
-        page: 0
+        page: 0,
       }).then((response) => {
-
         if (response && response.data.length == 0) {
           this.noResult = true;
         } else {
@@ -1122,46 +1325,44 @@ export default {
 
         this.circuits = response.data;
         this.isLoading = false;
-
       });
     },
-    openIssue (circuit) {
+    openIssue(circuit) {
       this.selectedCircuit = circuit;
-      this.selectedCircuit.type = 'circuit';
+      this.selectedCircuit.type = "circuit";
       this.showDialog = true;
 
       if (this.selectedIssue) {
         this.showSuccess = true;
       }
     },
-    getObject () {
+    getObject() {
       return this.selectedCircuit;
     },
-    solveProblem (circuit) {
+    solveProblem(circuit) {
       this.selectedCircuit = circuit;
       this.showProblemSolveDialog = true;
     },
-    formatDate (date) {
-
+    formatDate(date) {
       if (!date) {
-        return '--'
+        return "--";
       }
-      return this.$formatDate(date)
+      return this.$formatDate(date);
     },
-    searchMore () {
-
+    searchMore() {
       if (this.isLoding || this.noResult) {
         return;
       }
 
-      if (document.getElementById('circuitId').scrollTop + 361 >=
-        document.getElementById('circuitId').scrollHeight) {
+      if (
+        document.getElementById("circuitId").scrollTop + 361 >=
+        document.getElementById("circuitId").scrollHeight
+      ) {
         this.page++;
         this.search(this.page);
       }
     },
-    search (page, selectCircuitIndex) {
-
+    search(page, selectCircuitIndex) {
       this.isLoading = true;
 
       if (!page) {
@@ -1169,7 +1370,7 @@ export default {
         this.noResult = false;
       }
 
-      var selectedStatus = 0
+      var selectedStatus = 0;
       if (this.status == this.statuses[0]) {
         selectedStatus = 0;
       } else if (this.status == this.statuses[1]) {
@@ -1178,16 +1379,21 @@ export default {
         selectedStatus = 2;
       }
 
-      this.$get('/circuito/busca', {
+      this.$get("/circuito/busca", {
         contractNumber: this.$props.contract.numeroContratoTpz,
         searchText: this.searchText,
         onlineStatus: selectedStatus,
         installStatus: this.installStatus,
-        productType: this.product == this.$vuetify.lang.t('$vuetify.TODOS') ? null : this.product,
-        techType: this.technology == this.$vuetify.lang.t('$vuetify.TODOS') ? null : this.technology,
-        page: this.page
+        productType:
+          this.product == this.$vuetify.lang.t("$vuetify.TODOS")
+            ? null
+            : this.product,
+        techType:
+          this.technology == this.$vuetify.lang.t("$vuetify.TODOS")
+            ? null
+            : this.technology,
+        page: this.page,
       }).then((response) => {
-
         if (response && response.data.length == 0) {
           this.noResult = true;
         } else {
@@ -1195,34 +1401,33 @@ export default {
         }
 
         if (!page) {
-          this.circuits = []
+          this.circuits = [];
         }
 
         this.circuits = this.circuits.concat(response.data);
         this.isLoading = false;
-        this.openedPanel = selectCircuitIndex
+        this.openedPanel = selectCircuitIndex;
       });
-
     },
-    expandPanel () {
+    expandPanel() {
       this.showPanel = !this.showPanel;
-    }
+    },
   },
   props: {
-    contract: Object
+    contract: Object,
   },
   updated: function () {
-    this.logDecoration = this.button == 'log' ? 'underline' : 'none'
-    this.contractDecoration = this.button == 'contract' ? 'underline' : 'none'
+    this.logDecoration = this.button == "log" ? "underline" : "none";
+    this.contractDecoration = this.button == "contract" ? "underline" : "none";
   },
   data: () => ({
     isLoadingOffline: false,
     isLoadingOnline: false,
     isLoadingStatus: false,
     openedPanel: undefined,
-    logDecoration: 'none',
-    contractDecoration: 'none',
-    button: 'contract',
+    logDecoration: "none",
+    contractDecoration: "none",
+    button: "contract",
     loadingExport: false,
     allCircuits: undefined,
     showProblemSolveDialog: false,
@@ -1244,95 +1449,116 @@ export default {
     page: 0,
     isLoading: true,
     noResult: false,
-    searchText: '',
-    selectedCircuit: undefined
+    searchText: "",
+    selectedCircuit: undefined,
+    showRestarts: true,
+    restartingCircuits: [],
   }),
   created: function () {
+    this.reasonList = [
+      "Atividade Programada",
+      "Configuração",
+      "Desempenho",
+      "Emissão de Relatório",
+      "Inoperância",
+    ];
 
-    this.reasonList = ['Atividade Programada', 'Configuração', 'Desempenho',
-      'Emissão de Relatório', 'Inoperância']
+    this.statuses = [
+      this.$vuetify.lang.t("$vuetify.TODOS"),
+      "Online",
+      "Offline",
+    ];
 
-    this.statuses = [this.$vuetify.lang.t('$vuetify.TODOS'),
-      'Online',
-      'Offline']
+    this.products = [this.$vuetify.lang.t("$vuetify.TODOS")];
+    this.technologies = [this.$vuetify.lang.t("$vuetify.TODOS")];
 
-    this.products = [this.$vuetify.lang.t('$vuetify.TODOS')]
-    this.technologies = [this.$vuetify.lang.t('$vuetify.TODOS')]
+    this.$get("/circuito/produtos", {
+      tpzContractNumber: this.$props.contract.numeroContratoTpz,
+    }).then((response) => {
+      response.data.sort();
+      this.products = this.products.concat(response.data);
+    });
 
-    this.$get('/circuito/produtos', { tpzContractNumber: this.$props.contract.numeroContratoTpz })
-      .then((response) => {
-        response.data.sort()
-        this.products = this.products.concat(response.data)
-      });
-
-    this.$get('/circuito/tecnologias', { tpzContractNumber: this.$props.contract.numeroContratoTpz })
-      .then((response) => {
-
-        response.data.sort()
-        this.technologies = this.technologies.concat(response.data)
-      });
+    this.$get("/circuito/tecnologias", {
+      tpzContractNumber: this.$props.contract.numeroContratoTpz,
+    }).then((response) => {
+      response.data.sort();
+      this.technologies = this.technologies.concat(response.data);
+    });
 
     this.isLoadingOnline = true;
     this.isLoadingOffline = true;
     this.isLoadingStatus = true;
 
-    this.$get('/circuito/status/counts',
-      { contractNumber: this.$props.contract.numeroContratoTpz }).then((response) => {
-        if (response) {
-          this.counts = response.data;
-        }
-
-        this.isLoadingOnline = false;
-        this.isLoadingOffline = false;
-
-        this.$get('/circuito/install/counts',
-          { contractNumber: this.$props.contract.numeroContratoTpz }).then((response2) => {
-
-            if (response) {
-              this.installCounts = response2.data;
-            }
-            this.isLoading = false;
-
-            var countsArray = this.installCounts.slice()
-            countsArray.unshift(this.counts[1])
-            countsArray.unshift(this.counts[0])
-            this.$root.$emit('circuit-data', countsArray)
-
-            this.isLoadingStatus = false;
-          });
-      });
-
-    this.$get('/circuito/busca', {
+    this.$get("/circuito/status/counts", {
       contractNumber: this.$props.contract.numeroContratoTpz,
-      searchText: '',
+    }).then((response) => {
+      if (response) {
+        this.counts = response.data;
+      }
+
+      this.isLoadingOnline = false;
+      this.isLoadingOffline = false;
+
+      this.$get("/circuito/install/counts", {
+        contractNumber: this.$props.contract.numeroContratoTpz,
+      }).then((response2) => {
+        if (response) {
+          this.installCounts = response2.data;
+        }
+        this.isLoading = false;
+
+        var countsArray = this.installCounts.slice();
+        countsArray.unshift(this.counts[1]);
+        countsArray.unshift(this.counts[0]);
+        this.$root.$emit("circuit-data", countsArray);
+
+        this.isLoadingStatus = false;
+      });
+    });
+
+    this.$get("/circuito/busca", {
+      contractNumber: this.$props.contract.numeroContratoTpz,
+      searchText: "",
       onlineStatus: 0,
       installStatus: 0,
       productType: null,
       techType: null,
-      page: 0
-    })
-      .then((response) => {
-        this.circuits = response.data;
-        this.isLoading = false;
-        window.scrollTo(0, 0);
-      });
+      page: 0,
+    }).then((response) => {
+      this.circuits = response.data;
+      this.isLoading = false;
+      window.scrollTo(0, 0);
+    });
 
-    this.$root.$on('search-circuit', (desigTpz) => {
-
+    this.$root.$on("search-circuit", (desigTpz) => {
       this.searchText = desigTpz;
       this.search(0, 0);
-    })
+    });
 
-    this.$root.$on('solve-problem', (circuit) => {
-      this.solveProblem(circuit)
+    this.$root.$on("solve-problem", (circuit) => {
+      this.solveProblem(circuit);
+    });
+
+    this.$root.$on("restart", (circuit) => {
+      this.restartingCircuits = this.restartingCircuits.concat(circuit);
+      this.showRestarts = true;
+    });
+
+    this.$root.$on("open-issue", (circuit) => {
+      this.openIssue(circuit);
+    });
+
+    this.$root.$on("create-restart-issue", (issue, circuit) => {
+      this.sendIssue(issue, circuit, false);
     });
 
     var vm = this;
     setInterval(function () {
-      if (window.sessionStorage.getItem('actualPage') == 'dashboard') {
-        vm.search(this.page, this.openedPanel)
+      if (window.sessionStorage.getItem("actualPage") == "dashboard") {
+        vm.search(this.page, this.openedPanel);
       }
-    }, 180000)
-  }
+    }, 180000);
+  },
 };
 </script>

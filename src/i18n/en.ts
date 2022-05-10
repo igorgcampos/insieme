@@ -162,7 +162,7 @@ export default {
     VERIFICANDO_SINAL: 'Please wait while we are verifying the circuit´s signal...',
     REINICIANDO_CIRCUITO: 'The circuit is being reset. Please wait a few more moments...',
     SINAL_CIRCUITO_ONLINE: 'OK, let´s go! Click RESTART that I will run the tests! But if you want to change a configuration or your device is not turning on, please click on OPEN TICKET.',
-    SINAL_CIRCUITO_ONLINE_2: 'Okay, I restarted your circuit and verified that you are online! Tell me if it is ok, but if unfortunately it did not work out, please click on OPEN TICKET.',
+    SINAL_CIRCUITO_ONLINE_2: 'There, I restarted your circuit and verified that it is online! If the problem has not been resolved, please click OPEN TICKET.',
     SINAL_CIRCUITO_OFFLINE: 'I verify that your circuit is not responding. Would you like to restart it now (this can take a few minutes)?',
     CONFIRMAR_SELECAO_CIRCUITO: 'I checked your { 0 } circuit and it is online. Is this circuit you want to attend to?',
     REINICIAR: 'Restart',
@@ -170,7 +170,7 @@ export default {
     PRIMEIRA_PERGUNTA: 'Hello, I am Matteo your virtual assistant. I will try to help you. But first, take away a doubt: Is your problem the hardware?',
     SIM: 'Yes',
     NAO: 'No',
-    RESTART_FALHOU: 'What a pity! After restarting your circuit I verify that it still does not respond. Please open a ticket with us so that an expert can analyze your problem.',
+    RESTART_FALHOU: 'After restarting your circuit, I noticed that it still does not respond. A call has been opened for you. Track it by protocol:',
     EXPORTAR_CSV: 'Export to csv',
     MAIS_ALGUNS_INSTANTES: 'Please wait just another moment...',
     COLETANDO_INFORMACOES: 'I am resetting your circuit. Please wait a few moments while I gather some information...',
@@ -441,4 +441,5 @@ export default {
     NOME: 'Contact name',
     ESCONDER_RESTARTS: 'Hide restarts',
     MOSTRAR_RESTARTS: 'Show restarts',
+    REINICIANDO: 'Restarting...',
 }

@@ -81,7 +81,7 @@
                 {{
                   showVerifyingSignalPanel
                     ? verifyingSignalMessage
-                    : restartingCircuitMessage
+                    : ""
                 }}
               </p>
             </v-row>
@@ -134,12 +134,6 @@
           </div>
         </v-lazy>
       </v-col>
-
-      <!--<v-col v-show="showProgressBar" class="mt-n8 mb-8">
-        <v-progress-linear color="error" v-model="progress" height="25">
-          <strong>{{ Math.ceil(progress) }}%</strong>
-        </v-progress-linear>
-      </v-col>-->
 
       <v-col class="text-center" v-show="showChatQuestions">
         <v-lazy
@@ -282,8 +276,6 @@ export default {
     showDialog: Boolean,
     close: Function,
     openIssue: Function,
-    createRestartIssue: Function,
-    closeIssue: Function,
   },
   data: () => ({
     showCircuitQuestionPanel: false,
@@ -300,17 +292,10 @@ export default {
     statusOk: false,
     restartOk: false,
     verifyingSignalMessage: "",
-    restartingCircuitMessage: "",
-    progress: 0,
-    showProgressBar: false,
-    progressBarId: undefined,
   }),
   created: function () {
     this.verifyingSignalMessage = this.$vuetify.lang.t(
       "$vuetify.VERIFICANDO_SINAL"
-    );
-    this.restartingCircuitMessage = this.$vuetify.lang.t(
-      "$vuetify.COLETANDO_INFORMACOES"
     );
   },
   methods: {
@@ -364,45 +349,11 @@ export default {
       this.openIssue(this.getObject());
     },
     restart() {
-      this.showVerifyingSignalPanel = false;
-      this.showStatusResultPanel = false;
-      this.showRestartingCircuitPanel = true;
-      this.showRestartResultPanel = false;
-      this.showProgressBar = true;
 
-      this.createRestartIssue();
+      this.$root.$emit('restart', this.getObject());
+      this.close();
+      this.clean();
 
-      this.$get("/circuito/restart", {
-        designacao: this.getObject().nome,
-      }).then(() => {
-        this.createRestartOperation();
-
-        this.signalPanelId = setInterval(() => {
-          this.$get("/circuito/status", {
-            desigTpz: this.getObject().nome,
-          }).then((response) => {
-            this.showRestartResultPanel = true;
-            this.showRestartingCircuitPanel = false;
-
-            if (response && response.data == "3") {
-              this.restartOk = true;
-              this.getObject().online = response.data; //Atualiza o circuito com o status online
-              this.closeIssue(true);
-            } else {
-              this.restartOk = false;
-            }
-
-            this.showProgressBar = false;
-          });
-        }, 60000);
-      });
-    },
-    createRestartOperation() {
-      this.$post("/operacao/save", {
-        tipo: "RESTART_CIRCUITO",
-        referenciaEntidade: this.getObject().nome,
-        usuario: this.$getUser(),
-      }).then(() => {});
     },
     clean() {
       this.showOpenIssuePanel = false;
@@ -418,21 +369,11 @@ export default {
       this.verifyingSignalMessage = this.$vuetify.lang.t(
         "$vuetify.VERIFICANDO_SINAL"
       );
-      this.restartingCircuitMessage = this.$vuetify.lang.t(
-        "$vuetify.COLETANDO_INFORMACOES"
-      );
 
       clearInterval(this.signalPanelId);
-      clearInterval(this.progressBarId);
-      this.progress = 0;
     },
   },
   watch: {
-    showProgressBar: function(){
-      if(this.showProgressBar){
-        this.progressBarId = setInterval(() =>{if(this.progress >= 100) return; this.progress += 1}, 6200)
-      }
-    },
     showVerifyingSignalPanel: function () {
       if (this.showVerifyingSignalPanel) {
         setTimeout(() => {
@@ -440,27 +381,6 @@ export default {
             "$vuetify.MAIS_ALGUNS_INSTANTES"
           );
         }, 10000);
-      }
-    },
-    showRestartingCircuitPanel: function () {
-      if (this.showRestartingCircuitPanel) {
-        setTimeout(() => {
-          this.restartingCircuitMessage = this.$vuetify.lang.t(
-            "$vuetify.REINICIANDO_CIRCUITO"
-          );
-
-          setTimeout(() => {
-            this.restartingCircuitMessage = this.$vuetify.lang.t(
-              "$vuetify.VERIFICANDO_NOVAMENTE"
-            );
-
-            setTimeout(() => {
-              this.restartingCircuitMessage = this.$vuetify.lang.t(
-                "$vuetify.MAIS_ALGUNS_INSTANTES"
-              );
-            }, 20000);
-          }, 20000);
-        }, 20000);
       }
     },
   },

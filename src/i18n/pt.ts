@@ -159,7 +159,7 @@ export default {
     VERIFICANDO_SINAL: 'Por favor aguarde enquanto estamos verificando o sinal do seu circuito...',
     REINICIANDO_CIRCUITO: 'O circuito está sendo reiniciado. Por favor aguarde mais alguns instantes...',
     SINAL_CIRCUITO_ONLINE: 'Ok, vamos lá! Clique em REINICIAR que vou executar os testes! Mas caso você queira trocar uma configuração ou seu aparelho não esta ligando, por favor, clique em ABRIR CHAMADO.',
-    SINAL_CIRCUITO_ONLINE_2: 'Pronto, reiniciei o seu circuito e verifiquei que está online! Me diga se está ok, mas se infelizmente não resolveu, por favor, clique em ABRIR CHAMADO.',
+    SINAL_CIRCUITO_ONLINE_2: 'Pronto, reiniciei o seu circuito e verifiquei que está online! Caso o problema não tenha sido resolvido, por favor, clique em ABRIR CHAMADO.',
     SINAL_CIRCUITO_OFFLINE: 'Verifiquei que seu circuito não está respondendo. Gostaria de reinicia-lo agora (isso pode levar alguns minutos)?',
     CONFIRMAR_SELECAO_CIRCUITO: 'Verifiquei o seu circuito {0} e ele está online. É para este circuito que você deseja o atendimento?',
     REINICIAR: 'Reiniciar',
@@ -168,7 +168,7 @@ export default {
     PRIMEIRA_PERGUNTA: 'Olá, sou Matteo seu assistente virtual. Vou tentar te ajudar. Mas antes, me tire um duvida: Seu problema é hardware?',
     SIM: 'Sim',
     NAO: 'Não',
-    RESTART_FALHOU: 'Que pena! Após reiniciar seu circuito verifiquei que o mesmo continua sem responder. Por favor, abra um chamado conosco para que um especialista possa analisar seu problema.',
+    RESTART_FALHOU: 'Após reiniciar seu circuito verifiquei que ele continua sem responder. Um chamado foi aberto para você. Acompanhe-o pelo protocolo:',
     EXPORTAR_CSV: 'Exportar para csv',
     MAIS_ALGUNS_INSTANTES: 'Por favor aguarde mais um momentinho...',
     COLETANDO_INFORMACOES: 'Estou reiniciando seu circuito. Aguarde alguns instantes enquanto coleto algumas informações...',
@@ -437,4 +437,5 @@ export default {
     NOME: 'Nome para contato',
     ESCONDER_RESTARTS: 'Esconder restarts',
     MOSTRAR_RESTARTS: 'Mostrar restarts',
+    REINICIANDO: 'Reiniciando...',
 }

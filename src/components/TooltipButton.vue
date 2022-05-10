@@ -14,6 +14,7 @@
         :x-small="mobile"
         :small="!mobile"
         :class="{'ma-2': margin}"
+        :disabled="disabled"
       >{{label}}</v-btn>
 
       <v-btn
@@ -25,6 +26,7 @@
         :loading="loading"
         :x-small="mobile"
         :small="!mobile"
+        :disabled="disabled"
       >
         <v-icon>{{icon}}</v-icon>
       </v-btn>
@@ -49,6 +51,7 @@ export default {
     isText: Boolean,
     bottom: Boolean,
     margin: Boolean,
+    disabled: Boolean,
   }
 };
 </script>
