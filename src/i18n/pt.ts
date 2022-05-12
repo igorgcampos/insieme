@@ -438,5 +438,5 @@ export default {
     ESCONDER_RESTARTS: 'Esconder restarts',
     MOSTRAR_RESTARTS: 'Mostrar restarts',
     REINICIANDO: 'Reiniciando...',
-    TIPO_PROBLEMA_SOLICITACAO: 'Tipo problema/solicitação',
+    TIPO_PROBLEMA_SOLICITACAO: 'Tipo do problema / solicitação',
 }
