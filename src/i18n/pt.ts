@@ -342,6 +342,7 @@ export default {
     V_2_3_0: 'Nova tela de administração com funcionalidades para fazer auditoria no Insieme.',
     V_2_4_0: 'Nova funcionalidade de fornecer feedback para o atendimento de um chamado.',
     V_2_5_0: '- Agora o cliente pode enviar mensagens para o operador do NOC de dentro do próprio chamado. <br>- Cliente também poderá abrir um chamado do tipo massiva. <br>- Novas opções foram adicionadas no módulo comercial para abrir chamado do tipo "Site survey" e "Outros serviços".',
+    V_2_6_0: 'O procesos de restart de circuitos passou a ser realizado de forma independente da tela principal, permitindo que o usuário possa realizar mais de um restart ou fazer outras operações na tela principal do Insieme.',
     NOVA_LINHA: 'Nova linha',
     BAIXAR_EXCEL: 'Baixar modelo em excel',
     IMPORTAR_EXCEL: 'Importar excel preenchido',

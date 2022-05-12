@@ -347,6 +347,7 @@ export default {
     V_2_3_0: 'New administration screen with features for auditing Insieme.',
     V_2_4_0: 'New functionality to provide feedback for answering a call.',
     V_2_5_0: '- Now the client can send messages to the NOC operator from within the call itself. <br>- Customer can also open a massive call. <br>- New options have been added in the commercial module to open calls like "Site survey" and "Other services".',
+    V_2_6_0: 'The circuit restart process is now performed independently of the main screen, allowing the user to perform more than one restart or perform other operations on main screen.',
     NOVA_LINHA: 'New line',
     BAIXAR_EXCEL: 'Download spreadsheet template',
     IMPORTAR_EXCEL: 'Import filled excel',
