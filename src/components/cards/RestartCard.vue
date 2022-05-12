@@ -52,7 +52,7 @@
     <v-card-actions>
       <v-spacer></v-spacer>
       <v-btn
-        v-show="restartOk == false"
+        v-show="restartOk == false || restartOk == true"
         color="white"
         text
         @click="removeCircuit"
