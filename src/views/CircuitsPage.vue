@@ -1024,7 +1024,11 @@
               >
               </WarningPanel>
             </v-lazy>
-            <v-progress-circular justify-center
+          </v-col>
+
+          <v-row class="mt-5">
+            <v-progress-circular
+              justify-center
               v-if="circuits.length == 0 && (isLoading || isLoadingStatus)"
               :size="30"
               :width="3"
@@ -1032,7 +1036,7 @@
               indeterminate
               class="mt-3 mb-n1"
             ></v-progress-circular>
-          </v-col>
+          </v-row>
         </v-row>
 
         <IssueDialog
