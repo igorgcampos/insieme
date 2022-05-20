@@ -1013,20 +1013,26 @@
               </v-expansion-panel>
             </v-expansion-panels>
           </v-col>
-          <v-col v-if="circuits.length == 0 && !isLoading && !isLoadingStatus">
-            <v-lazy
-              :options="{ threshold: 0.6 }"
-              transition="slide-x-transition"
-            >
-              <WarningPanel
-                :message="$vuetify.lang.t('$vuetify.NENHUM_CIRCUITO')"
-              >
-              </WarningPanel>
-            </v-lazy>
-          </v-col>
         </v-row>
 
-         <v-row justify="center" class="mt-n12" v-if="circuits.length == 0 && (isLoading || isLoadingStatus)">
+        <v-row
+          justify="center"
+          v-if="circuits.length == 0 && !isLoading && !isLoadingStatus"
+          class="mt-n12"
+        >
+          <v-lazy :options="{ threshold: 0.6 }" transition="slide-x-transition">
+            <WarningPanel class="mt-n12"
+              :message="$vuetify.lang.t('$vuetify.NENHUM_CIRCUITO')"
+            >
+            </WarningPanel>
+          </v-lazy>
+        </v-row>
+
+        <v-row
+          justify="center"
+          class="mt-n12"
+          v-if="circuits.length == 0 && (isLoading || isLoadingStatus)"
+        >
           <v-progress-circular
             :size="30"
             :width="3"
