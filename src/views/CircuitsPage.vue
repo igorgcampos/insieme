@@ -657,7 +657,7 @@
         </v-row>
 
         <v-row class="pl-2 mt-2" style="min-height: 120px">
-          <div
+          <v-col
             id="circuitId"
             class="pr-2 overflow-y-auto overflow-x-hidden"
             v-scroll:#circuitId="searchMore"
@@ -1012,31 +1012,28 @@
                 </v-expansion-panel-content>
               </v-expansion-panel>
             </v-expansion-panels>
-          </div>
-          <v-col>
+          </v-col>
+          <v-col v-if="circuits.length == 0 && !isLoading && !isLoadingStatus">
             <v-lazy
               :options="{ threshold: 0.6 }"
               transition="slide-x-transition"
             >
               <WarningPanel
-                v-if="circuits.length == 0 && !isLoading && !isLoadingStatus"
                 :message="$vuetify.lang.t('$vuetify.NENHUM_CIRCUITO')"
               >
               </WarningPanel>
             </v-lazy>
           </v-col>
+        </v-row>
 
-          <v-row class="mt-5">
-            <v-progress-circular
-              justify-center
-              v-if="circuits.length == 0 && (isLoading || isLoadingStatus)"
-              :size="30"
-              :width="3"
-              color="red"
-              indeterminate
-              class="mt-3 mb-n1"
-            ></v-progress-circular>
-          </v-row>
+         <v-row justify="center" class="mt-n12" v-if="circuits.length == 0 && (isLoading || isLoadingStatus)">
+          <v-progress-circular
+            :size="30"
+            :width="3"
+            color="red"
+            indeterminate
+            class="mb-n1"
+          ></v-progress-circular>
         </v-row>
 
         <IssueDialog
@@ -1540,7 +1537,6 @@ export default {
     }).then((response) => {
       this.circuits = response.data;
       this.isLoading = false;
-      window.scrollTo(0, 0);
     });
 
     this.$root.$on("search-circuit", (desigTpz) => {
