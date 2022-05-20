@@ -1013,17 +1013,18 @@
               </v-expansion-panel>
             </v-expansion-panels>
           </div>
-          <v-col v-if="circuits.length == 0 && !isLoading && !isLoadingStatus">
+          <v-col>
             <v-lazy
               :options="{ threshold: 0.6 }"
               transition="slide-x-transition"
             >
               <WarningPanel
+                v-if="circuits.length == 0 && !isLoading && !isLoadingStatus"
                 :message="$vuetify.lang.t('$vuetify.NENHUM_CIRCUITO')"
               >
               </WarningPanel>
             </v-lazy>
-             <v-progress-circular
+            <v-progress-circular
               v-if="circuits.length == 0 && (isLoading || isLoadingStatus)"
               :size="30"
               :width="3"
