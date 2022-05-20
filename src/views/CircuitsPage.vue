@@ -1013,7 +1013,7 @@
               </v-expansion-panel>
             </v-expansion-panels>
           </div>
-          <v-col justify="center">
+          <v-col>
             <v-lazy
               :options="{ threshold: 0.6 }"
               transition="slide-x-transition"
@@ -1024,7 +1024,7 @@
               >
               </WarningPanel>
             </v-lazy>
-            <v-progress-circular
+            <v-progress-circular justify-center
               v-if="circuits.length == 0 && (isLoading || isLoadingStatus)"
               :size="30"
               :width="3"
