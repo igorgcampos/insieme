@@ -1013,7 +1013,7 @@
               </v-expansion-panel>
             </v-expansion-panels>
           </div>
-          <v-col>
+          <v-col justify="center">
             <v-lazy
               :options="{ threshold: 0.6 }"
               transition="slide-x-transition"
@@ -1515,7 +1515,6 @@ export default {
         if (response) {
           this.installCounts = response2.data;
         }
-        this.isLoading = false;
 
         var countsArray = this.installCounts.slice();
         countsArray.unshift(this.counts[1]);
