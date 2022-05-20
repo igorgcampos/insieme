@@ -1013,7 +1013,7 @@
               </v-expansion-panel>
             </v-expansion-panels>
           </div>
-          <v-col v-if="circuits.length == 0 && !isLoading">
+          <v-col v-if="circuits.length == 0 && !isLoading && !isLoadingStatus">
             <v-lazy
               :options="{ threshold: 0.6 }"
               transition="slide-x-transition"
@@ -1023,6 +1023,14 @@
               >
               </WarningPanel>
             </v-lazy>
+             <v-progress-circular
+              v-if="circuits.length == 0 && (isLoading || isLoadingStatus)"
+              :size="30"
+              :width="3"
+              color="red"
+              indeterminate
+              class="mt-3 mb-n1"
+            ></v-progress-circular>
           </v-col>
         </v-row>
 
@@ -1558,7 +1566,7 @@ export default {
       if (window.sessionStorage.getItem("actualPage") == "dashboard") {
         vm.search(this.page, this.openedPanel);
       }
-    }, 180000);
+    }, 300000);
   },
 };
 </script>
