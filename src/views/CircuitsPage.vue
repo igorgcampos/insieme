@@ -534,7 +534,7 @@
           </v-row>
         </v-row>
 
-        <v-row id="filtro" class="pl-0 ml-0 grey lighten-5 mb-n5 mt-0">
+        <v-row id="filtro" class="pl-0 ml-2 grey lighten-5 mb-n5 mt-0">
           <v-col cols="3">
             <v-row>
               <span
