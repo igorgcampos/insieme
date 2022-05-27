@@ -144,7 +144,7 @@
             id="invoiceId"
             class="pr-2 overflow-y-auto overflow-x-hidden"
             v-scroll:#invoiceId="searchMore"
-            style="max-height:440px; width:100%;"
+            style="max-height:360px; width:100%;"
           >
             <v-expansion-panels
               class="ma-1"
@@ -629,7 +629,7 @@ export default {
         return;
       }
 
-      if (document.getElementById('invoiceId').scrollTop + 341 >=
+      if (document.getElementById('invoiceId').scrollTop + 361 >=
         document.getElementById('invoiceId').scrollHeight) {
         this.page++;
         this.search(this.page);

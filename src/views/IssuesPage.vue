@@ -218,7 +218,7 @@
             id="issueId"
             class="pr-2 overflow-y-auto overflow-x-hidden"
             v-scroll:#issueId="searchMore"
-            style="max-height: 390px; width: 100%"
+            style="max-height: 360px; width: 100%"
           >
             <v-expansion-panels class="ma-1" v-model="openedPanel">
               <v-expansion-panel
@@ -1327,7 +1327,7 @@ export default {
       }
 
       if (
-        document.getElementById("issueId").scrollTop + 341 >=
+        document.getElementById("issueId").scrollTop + 361 >=
         document.getElementById("issueId").scrollHeight
       ) {
         this.page++;
