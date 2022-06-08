@@ -392,7 +392,7 @@
       </v-card-actions>
     </v-card>
 
-    <v-card v-show="!showSuccess && error" class="mr-4">
+    <v-card v-show="!showSuccess && error" class="mr-0">
       <WarningPanel
         class="pt-10 mb-8 pr-5 pl-5"
         :mobile="true"
