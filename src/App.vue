@@ -39,7 +39,13 @@ export default {
 
     this.setUrlToken().then(() => {
 
-      this.$router.push('/login')
+      if(!window.sessionStorage.getItem('keyCloakToken')){
+        this.$router.push('/login')
+      }else{
+        this.$router.push('/contratos');
+        window.sessionStorage.setItem('actualPage', 'contratos')
+      }
+
       this.$root.$on('login-success', () => {
         this.$router.push('/');
         window.sessionStorage.setItem('actualPage', '/')
