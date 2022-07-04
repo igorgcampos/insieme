@@ -28,7 +28,7 @@ export default {
 
     this.user = this.$getUser()
 
-    if (window.sessionStorage.getItem('actualPage') == 'contracts' || window.sessionStorage.getItem('actualPage') == '/') {
+    if (!window.sessionStorage.getItem("page") || window.sessionStorage.getItem('actualPage') == 'contracts' || window.sessionStorage.getItem('actualPage') == '/') {
 
       if (!this.user.cliente) {
         this.user.cliente = { id: -1 }
