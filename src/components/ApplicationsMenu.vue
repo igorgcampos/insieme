@@ -45,7 +45,7 @@
           color="green darken-2"
         ></ApplicationItem>
         <ApplicationItem
-          name="Operações"
+          name="Operazioni"
           icon="mdi-cogs"
           :url="$getAppUrl('operacoes')+'/?token='+ getToken()"
           color="blue darken-2"
