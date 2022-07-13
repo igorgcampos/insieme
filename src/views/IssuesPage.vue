@@ -1103,6 +1103,11 @@ export default {
 
       issue.items = issue.items.filter(item => !item.hasIssue);
 
+      if(issue.items.length == 0){
+        this.showBatchDialog = false;
+        return;
+      }
+
       this.showDialogLoading = true;
 
       if (entity.type == "circuit") {
