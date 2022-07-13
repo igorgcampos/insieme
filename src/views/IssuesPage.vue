@@ -1101,6 +1101,8 @@ export default {
         return;
       }
 
+      issue.items = issue.items.filter(item => !item.hasIssue);
+
       this.showDialogLoading = true;
 
       if (entity.type == "circuit") {
