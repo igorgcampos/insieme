@@ -168,7 +168,7 @@ export default {
     PRIMEIRA_PERGUNTA: 'Olá, sou Matteo seu assistente virtual. Vou tentar te ajudar. Mas antes, me tire um duvida: Seu problema é hardware?',
     SIM: 'Sim',
     NAO: 'Não',
-    RESTART_FALHOU: 'Após reiniciar seu circuito verifiquei que ele continua sem responder. Um chamado foi aberto para você. Acompanhe-o pelo protocolo:',
+    RESTART_FALHOU: 'Após reiniciar seu circuito verifiquei que ele continua sem responder. Um chamado foi aberto para você. Acompanhe-o pelo protocolo: {0}',
     EXPORTAR_CSV: 'Exportar para csv',
     MAIS_ALGUNS_INSTANTES: 'Por favor aguarde mais um momentinho...',
     COLETANDO_INFORMACOES: 'Estou reiniciando seu circuito. Aguarde alguns instantes enquanto coleto algumas informações...',
