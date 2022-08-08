@@ -4,6 +4,7 @@
     app
     color="red darken-1"
     dark
+    fixed
   >
     <v-img
       v-show="!$vuetify.breakpoint.xs"

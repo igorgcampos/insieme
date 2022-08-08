@@ -17,7 +17,7 @@
           >
         </v-row>
 
-        <v-row id="filtro" class="pl-0 ml-0 grey lighten-5">
+        <v-row id="filtro" class="pl-2 ml-0 grey lighten-5">
           <v-col cols="4">
             <v-row>
               <span
@@ -205,7 +205,7 @@ export default {
     stickFilters() {
       if (document.documentElement.scrollTop > 95) {
         document.getElementById("filtro").style =
-          "position:sticky; z-index:100; top:55px; padding-top:10px;";
+          "position:sticky; z-index:10; top:66px; box-shadow: 0 0 10px #333; border-radius: 15px;";
       } else if (document.documentElement.scrollTop < 60) {
         document.getElementById("filtro").style = "";
       }

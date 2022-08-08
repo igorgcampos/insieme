@@ -1,7 +1,7 @@
 <template>
 
   <div>
-    <MainToolBar style="z-index:1001;"></MainToolBar>
+    <MainToolBar></MainToolBar>
     <v-content>
       <v-container
         v-scroll="setTop"
