@@ -205,7 +205,7 @@ export default {
     stickFilters() {
       if (document.documentElement.scrollTop > 95) {
         document.getElementById("filtro").style =
-          "position:sticky; z-index:10; top:66px; box-shadow: 0 0 10px #333; border-radius: 15px;";
+          "position:sticky; z-index:2; top:66px; box-shadow: 0 0 10px #333; border-radius: 15px;";
       } else if (document.documentElement.scrollTop < 60) {
         document.getElementById("filtro").style = "";
       }
