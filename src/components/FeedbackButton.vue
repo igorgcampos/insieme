@@ -4,7 +4,7 @@
           :class="{
             'offset-9': $vuetify.breakpoint.xs || $vuetify.breakpoint.sm,
           }"
-          style="position: fixed; z-index: 100"
+          style="position: fixed; z-index: 2"
         >
           <v-lazy
             :options="{
