@@ -3,7 +3,7 @@
   <v-dialog
     v-model="showDialog"
     persistent
-    :max-width="showSuccess?400: 700"
+    :max-width="showSuccess?400: 900"
     class="overflow-y-hidden"
   >
     <v-card>
