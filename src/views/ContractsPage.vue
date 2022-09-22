@@ -260,7 +260,7 @@ export default {
       window.sessionStorage.setItem("selectedClientId", this.selectedClient.id);
     }
 
-    if (!this.$props.contract) {
+    if (!this.$props.contract && this.$hasProfile('Administrador')) {
       this.$get("/contrato/busca", {
         searchText: "",
         clientId: this.selectedClient.id,
@@ -283,7 +283,9 @@ export default {
       });
     }else{
       this.contracts = [];
-      this.contracts = this.contracts.concat(this.$props.contract);
+      if(this.$props.contract){
+        this.contracts = this.contracts.concat(this.$props.contract);
+      }
       this.isLoading = false;
     }
   },
