@@ -443,5 +443,5 @@ export default {
     ESCONDER_RESTARTS: 'Hide restarts',
     MOSTRAR_RESTARTS: 'Show restarts',
     REINICIANDO: 'Restarting...',
-    TIPO_PROBLEMA_SOLICITACAO: 'Problem/request type',
+    TIPO_PROBLEMA_SOLICITACAO: 'Problem/Request type',
 }
