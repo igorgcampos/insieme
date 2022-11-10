@@ -674,7 +674,7 @@
                     <v-col v-if="!open" cols="4" sm="2">
                       <v-chip
                         :color="
-                          circuit.tecnologia != 'VSAT'
+                          circuit.tecnologia != 'VSAT' && !circuit.tecnologia.includes('BGAN')
                             ? 'grey'
                             : circuit.online == 3
                             ? 'success'
@@ -809,7 +809,7 @@
                       <v-col class="pa-0">
                         <v-chip
                           :color="
-                            circuit.tecnologia != 'VSAT'
+                            circuit.tecnologia != 'VSAT' && !circuit.tecnologia.includes('BGAN')
                               ? 'grey'
                               : circuit.online == 3
                               ? 'success'
