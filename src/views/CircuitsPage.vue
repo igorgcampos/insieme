@@ -686,7 +686,7 @@
                         outlined
                       >
                         {{
-                          circuit.tecnologia != "VSAT"
+                          circuit.tecnologia != "VSAT" || !circuit.tecnologia.includes('BGAN')
                             ? "N/A"
                             : circuit.online == 3
                             ? "Online"
@@ -821,7 +821,7 @@
                           outlined
                         >
                           {{
-                            circuit.tecnologia != "VSAT"
+                            circuit.tecnologia != "VSAT"  || !circuit.tecnologia.includes('BGAN')
                               ? "N/A"
                               : circuit.online == 3
                               ? "Online"
