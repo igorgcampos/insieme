@@ -967,6 +967,42 @@
                         ></LabelValue>
                       </v-col>
                     </v-col>
+
+                    <v-col
+                      v-if="circuit.nome.includes('-BG')"
+                      class="mt-n12"
+                      :class="{ 'col-6': $vuetify.breakpoint.xs }"
+                    >
+                      <v-col>
+                        <LabelValue
+                          :label="$vuetify.lang.t('$vuetify.LATENCIA_MINIMA')"
+                          :value="circuit.latencia_minima || '--'"
+                          justify="start"
+                          truncate
+                          style="width: 150px"
+                        ></LabelValue>
+                      </v-col>
+
+                      <v-col class="pt-0 mt-n6">
+                        <LabelValue
+                          :label="$vuetify.lang.t('$vuetify.LATENCIA_MEDIA')"
+                          :value="circuit.latencia_media || '--'"
+                          justify="start"
+                          truncate
+                          style="width: 150px"
+                        ></LabelValue>
+                      </v-col>
+
+                      <v-col class="pt-0 mt-n6">
+                        <LabelValue
+                          :label="$vuetify.lang.t('$vuetify.LATENCIA_MAXIMA')"
+                          :value="circuit.latencia_maxima || '--'"
+                          justify="start"
+                          truncate
+                          style="width: 150px"
+                        ></LabelValue>
+                      </v-col>
+                    </v-col>
                   </v-row>
 
                   <v-divider
@@ -1021,7 +1057,8 @@
           class="mt-n12"
         >
           <v-lazy :options="{ threshold: 0.6 }" transition="slide-x-transition">
-            <WarningPanel class="mt-n12"
+            <WarningPanel
+              class="mt-n12"
               :message="$vuetify.lang.t('$vuetify.NENHUM_CIRCUITO')"
             >
             </WarningPanel>

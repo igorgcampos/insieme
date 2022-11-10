@@ -444,4 +444,7 @@ export default {
     MOSTRAR_RESTARTS: 'Show restarts',
     REINICIANDO: 'Restarting...',
     TIPO_PROBLEMA_SOLICITACAO: 'Problem/Request type',
+    LATENCIA_MINIMA: 'Minimum latency',
+    LATENCIA_MEDIA: 'Average latency',
+    LATENCIA_MAXIMA: 'Maximum latency',
 }

@@ -440,4 +440,7 @@ export default {
     MOSTRAR_RESTARTS: 'Mostrar restarts',
     REINICIANDO: 'Reiniciando...',
     TIPO_PROBLEMA_SOLICITACAO: 'Problema / Solicitação',
+    LATENCIA_MINIMA: 'Latência mínima',
+    LATENCIA_MEDIA: 'Latência média',
+    LATENCIA_MAXIMA: 'Latência máxima',
 }
