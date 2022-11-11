@@ -976,7 +976,7 @@
                       <v-col>
                         <LabelValue
                           :label="$vuetify.lang.t('$vuetify.LATENCIA_MINIMA')"
-                          :value="circuit.latenciaMinima || '--'"
+                          :value="circuit.latenciaMinima?circuit.latenciaMinima + ' ms':'--'"
                           justify="start"
                           truncate
                           style="width: 150px"
@@ -986,7 +986,7 @@
                       <v-col class="pt-0 mt-n6">
                         <LabelValue
                           :label="$vuetify.lang.t('$vuetify.LATENCIA_MEDIA')"
-                          :value="circuit.latenciaMedia || '--'"
+                          :value="circuit.latenciaMedia?circuit.latenciaMedia + ' ms':'--'"
                           justify="start"
                           truncate
                           style="width: 150px"
@@ -996,7 +996,7 @@
                       <v-col class="pt-0 mt-n6">
                         <LabelValue
                           :label="$vuetify.lang.t('$vuetify.LATENCIA_MAXIMA')"
-                          :value="circuit.latenciaMaxima || '--'"
+                          :value="circuit.latenciaMaxima?circuit.latenciaMaxima + ' ms':'--'"
                           justify="start"
                           truncate
                           style="width: 150px"
