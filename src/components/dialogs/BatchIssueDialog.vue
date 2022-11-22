@@ -2,7 +2,7 @@
   <v-dialog
     v-model="showDialog"
     persistent
-    :max-width="selectReason ? 360 : 470"
+    :max-width="selectReason ? 360 : 550"
     v-if="showDialog"
   >
     <v-card v-show="!showSuccess && !error">
