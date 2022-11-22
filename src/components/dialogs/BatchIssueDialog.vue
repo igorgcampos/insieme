@@ -312,7 +312,7 @@
       </v-col>
 
       <v-divider class="mt-n6"></v-divider>
-      <v-card-actions v-if="!showDialogLoading">
+      <v-card-actions v-if="!showDialogLoading || showFootButtons">
         <span
           class="ml-3 caption font-weight-bold error--text"
           v-if="showLimitWaring && entity.type == 'circuit'"
@@ -349,8 +349,9 @@
           color="primary"
           text
           @click="
+            showFootButtons = false;
             send(issue, entity);
-            cleanFields();
+            setTimeout(() => {this.cleanFields()}, 4000);
           "
           :x-small="$vuetify.breakpoint.xs"
           :loading="showDialogLoading"
@@ -547,6 +548,7 @@ export default {
       this.selectedItemList = [];
       this.selectedCheckList = [];
       this.searchText = "";
+      this.showFootButtons = true;
     },
   },
   data: () => ({
@@ -559,6 +561,7 @@ export default {
     selectReason: false,
     issue: { reason: "", observation: "", items: undefined },
     showLimitWaring: false,
+    showFootButtons: true,
   }),
   created: function () {
     this.size = this.$vuetify.breakpoint.xs ? 16 : 20;
