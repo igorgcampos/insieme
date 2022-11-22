@@ -674,7 +674,7 @@
                     <v-col v-if="!open" cols="4" sm="2">
                       <v-chip
                         :color="
-                          circuit.tecnologia != 'VSAT' && !circuit.tecnologia.includes('BGAN')
+                          circuit.tecnologia != 'VSAT' && (circuit.tecnologia && !circuit.tecnologia.includes('BGAN'))
                             ? 'grey'
                             : circuit.online == 3
                             ? 'success'
@@ -686,7 +686,7 @@
                         outlined
                       >
                         {{
-                          circuit.tecnologia != "VSAT" && !circuit.tecnologia.includes('BGAN')
+                          circuit.tecnologia != "VSAT" && (circuit.tecnologia && !circuit.tecnologia.includes('BGAN'))
                             ? "N/A"
                             : circuit.online == 3
                             ? "Online"
@@ -809,7 +809,7 @@
                       <v-col class="pa-0">
                         <v-chip
                           :color="
-                            circuit.tecnologia != 'VSAT' && !circuit.tecnologia.includes('BGAN')
+                            circuit.tecnologia != 'VSAT' && (circuit.tecnologia && !circuit.tecnologia.includes('BGAN'))
                               ? 'grey'
                               : circuit.online == 3
                               ? 'success'
@@ -821,7 +821,7 @@
                           outlined
                         >
                           {{
-                            circuit.tecnologia != "VSAT" && !circuit.tecnologia.includes('BGAN')
+                            circuit.tecnologia != "VSAT" && (circuit.tecnologia && !circuit.tecnologia.includes('BGAN'))
                               ? "N/A"
                               : circuit.online == 3
                               ? "Online"
