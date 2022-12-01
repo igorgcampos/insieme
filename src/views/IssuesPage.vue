@@ -704,9 +704,9 @@
                       v-if="
                         issue.lote &&
                         issue.lote.length > 0 &&
-                        !(
-                          issue.origem == 'CIRCUITO_LOTE_COMERCIAL' &&
-                          issue.planilha.length > 0
+                        (
+                          issue.origem != 'CIRCUITO_LOTE_COMERCIAL' &&
+                          (!issue.planilha || issue.planilha.length == 0)
                         )
                       "
                       :event="showListInvoices"
@@ -1355,6 +1355,7 @@ export default {
         searchText: this.searchText,
         status: this.status,
         proactivity: this.$props.proactivity,
+        commercial: this.$hasProfile('Comercial') ? true : undefined,
         page: this.page,
       }).then((response) => {
         if (response && response.data.length == 0) {
@@ -1488,6 +1489,7 @@ export default {
     this.$get("/chamado/counts", {
       contractId: this.$props.contract ? this.$props.contract.id : undefined,
       proactivity: this.$props.proactivity,
+      commercial: this.$hasProfile('Comercial')?true : undefined,
     }).then((response) => {
       this.counts = response.data;
       if (this.counts.length == 0) this.counts = [0, 0, 0];
@@ -1502,6 +1504,7 @@ export default {
       searchText: "",
       status: null,
       proactivity: this.$props.proactivity,
+      commercial: this.$hasProfile('Comercial') ? true : undefined,
       page: 0,
     }).then((response) => {
       response.data.forEach((element) => {
