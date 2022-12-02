@@ -867,6 +867,7 @@ export default {
               selectedIssue.statusProcessamento =
                 response.data.statusProcessamento;
               selectedIssue.dataEncerramento = response.data.dataEncerramento;
+              selectedIssue.motivoEncerramento = response.data.motivoEncerramento;
 
               this.$get("/mensagem/issue", { issueId: issue.id }).then(
                 (response) => {
