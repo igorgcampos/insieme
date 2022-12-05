@@ -49,7 +49,11 @@ authService.install = function (Vue) {
         window.sessionStorage.setItem('user', JSON.stringify(user.data));
     }
 
-    Vue.prototype.$getUser = () => {
+    Vue.prototype.$getUser = async () => {
+
+        if (!window.sessionStorage.getItem('user')) {
+            await getUser()
+        }
 
         return JSON.parse(window.sessionStorage.getItem('user'));
     }
