@@ -486,7 +486,8 @@
                       </v-col>
                     </v-col>
 
-                    <v-col cols="3"
+                    <v-col
+                      cols="3"
                       class="mt-n7 mr-0 ml-n2 mr-6 pl-0 pr-0"
                       v-if="issue.mensagens && issue.mensagens.length > 0"
                     >
@@ -542,7 +543,14 @@
                       </v-col>
                     </v-col>
 
-                    <v-col cols="6" :class="{'col-9': !$vuetify.breakpoint.xs && !(issue.mensagens && issue.mensagens.length > 0)}">
+                    <v-col
+                      cols="6"
+                      :class="{
+                        'col-9':
+                          !$vuetify.breakpoint.xs &&
+                          !(issue.mensagens && issue.mensagens.length > 0),
+                      }"
+                    >
                       <v-row
                         class="mt-n3"
                         :class="{ 'col-6 pl-3': $vuetify.breakpoint.xs }"
@@ -555,8 +563,9 @@
                             :class="{ 'pl-0': $vuetify.breakpoint.xs }"
                           ></LabelValue>
                         </v-col>
-                       
-                        <v-col cols="4"
+
+                        <v-col
+                          cols="4"
                           class="pt-0 pl-0 pr-0 mt-n6"
                           v-if="issue.mensagens && issue.mensagens.length > 0"
                         >
@@ -581,18 +590,23 @@
                           ></LabelValue>
                         </v-col>
 
-                         <v-col cols="4" class="pt-0 pl-0 pr-0 mt-n6">
+                        <v-col cols="4" class="pt-0 pl-0 pr-0 mt-n6">
                           <LabelValue
                             :label="
-                              $vuetify.lang.t('$vuetify.TIPO_PROBLEMA_SOLICITACAO')
+                              $vuetify.lang.t(
+                                '$vuetify.TIPO_PROBLEMA_SOLICITACAO'
+                              )
                             "
-                            :value="issue.subCategoria?issue.subCategoria:'--'"
+                            :value="
+                              issue.subCategoria ? issue.subCategoria : '--'
+                            "
                             justify="start"
                             :class="{ 'pr-0 pl-0': $vuetify.breakpoint.xs }"
                           ></LabelValue>
                         </v-col>
 
-                        <v-col cols="4"
+                        <v-col
+                          cols="4"
                           class="pt-0 pl-0 pr-0 mt-n6"
                           v-if="issue.mensagens && issue.mensagens.length == 0"
                           :class="{ 'col-6 pr-0 pl-2': $vuetify.breakpoint.xs }"
@@ -609,7 +623,7 @@
                           ></LabelValue>
                         </v-col>
 
-                         <v-col cols="4" class="pt-0 pl-0 pr-0 mt-n6">
+                        <v-col cols="4" class="pt-0 pl-0 pr-0 mt-n6">
                           <LabelValue
                             :label="
                               $vuetify.lang.t('$vuetify.DATA_ENCERRAMENTO')
@@ -704,10 +718,8 @@
                       v-if="
                         issue.lote &&
                         issue.lote.length > 0 &&
-                        (
-                          issue.origem != 'CIRCUITO_LOTE_COMERCIAL' &&
-                          (!issue.planilha || issue.planilha.length == 0)
-                        )
+                        issue.origem != 'CIRCUITO_LOTE_COMERCIAL' &&
+                        (!issue.planilha || issue.planilha.length == 0)
                       "
                       :event="showListInvoices"
                       :object="issue"
@@ -867,7 +879,8 @@ export default {
               selectedIssue.statusProcessamento =
                 response.data.statusProcessamento;
               selectedIssue.dataEncerramento = response.data.dataEncerramento;
-              selectedIssue.motivoEncerramento = response.data.motivoEncerramento;
+              selectedIssue.motivoEncerramento =
+                response.data.motivoEncerramento;
 
               this.$get("/mensagem/issue", { issueId: issue.id }).then(
                 (response) => {
@@ -922,15 +935,18 @@ export default {
       }).then(() => {
         this.isLoading = false;
         this.showMessageDialog = false;
-        issue.mensagens = issue.mensagens.concat({
-          conteudo: content,
-          usuario: this.$getUser(),
-        });
 
-        var vm = this;
-        setTimeout(function () {
-          vm.refreshIssue(issue);
-        }, 1000);
+        this.$getUser().then((user) => {
+          issue.mensagens = issue.mensagens.concat({
+            conteudo: content,
+            usuario: user,
+          });
+
+          var vm = this;
+          setTimeout(function () {
+            vm.refreshIssue(issue);
+          }, 1000);
+        });
       });
     },
     openMessageDialog(issue) {
@@ -1102,9 +1118,9 @@ export default {
         return;
       }
 
-      issue.items = issue.items.filter(item => !item.hasIssue);
+      issue.items = issue.items.filter((item) => !item.hasIssue);
 
-      if(issue.items.length == 0){
+      if (issue.items.length == 0) {
         this.showBatchDialog = false;
         return;
       }
@@ -1356,7 +1372,7 @@ export default {
         searchText: this.searchText,
         status: this.status,
         proactivity: this.$props.proactivity,
-        commercial: this.$hasProfile('Comercial') ? true : undefined,
+        commercial: this.$hasProfile("Comercial") ? true : undefined,
         page: this.page,
       }).then((response) => {
         if (response && response.data.length == 0) {
@@ -1490,7 +1506,7 @@ export default {
     this.$get("/chamado/counts", {
       contractId: this.$props.contract ? this.$props.contract.id : undefined,
       proactivity: this.$props.proactivity,
-      commercial: this.$hasProfile('Comercial')?true : undefined,
+      commercial: this.$hasProfile("Comercial") ? true : undefined,
     }).then((response) => {
       this.counts = response.data;
       if (this.counts.length == 0) this.counts = [0, 0, 0];
@@ -1505,7 +1521,7 @@ export default {
       searchText: "",
       status: null,
       proactivity: this.$props.proactivity,
-      commercial: this.$hasProfile('Comercial') ? true : undefined,
+      commercial: this.$hasProfile("Comercial") ? true : undefined,
       page: 0,
     }).then((response) => {
       response.data.forEach((element) => {

@@ -90,11 +90,14 @@ export default {
       this.removeCircuit();
     },
     createRestartOperation() {
-      this.$post("/operacao/save", {
+      this.$getUser().then(user =>{
+        this.$post("/operacao/save", {
         tipo: "RESTART_CIRCUITO",
         referenciaEntidade: this.circuit.nome,
-        usuario: this.$getUser(),
+        usuario: user,
       }).then(() => {});
+      })
+      
     },
     closeRestartIssue (issue) {
 

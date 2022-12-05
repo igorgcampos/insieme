@@ -389,23 +389,25 @@ export default {
         return;
       }
 
-      this.$get("/notificacao/busca", {
-        clientId: this.$getUser().cliente.id,
-      }).then((response) => {
-        this.notifications = response.data;
-        this.newNotificationsCount = this.notifications.filter(
-          (note) => note.visualizado == false
-        ).length;
-        this.notifications.sort(function (a, b) {
-          if (a.visualizado) {
-            return 1;
-          }
+      this.$getUser().then((user) => {
+        this.$get("/notificacao/busca", {
+          clientId: user.cliente.id,
+        }).then((response) => {
+          this.notifications = response.data;
+          this.newNotificationsCount = this.notifications.filter(
+            (note) => note.visualizado == false
+          ).length;
+          this.notifications.sort(function (a, b) {
+            if (a.visualizado) {
+              return 1;
+            }
 
-          if (a.visualizado === b.visualizado) {
-            return 0;
-          }
+            if (a.visualizado === b.visualizado) {
+              return 0;
+            }
 
-          return -1;
+            return -1;
+          });
         });
       });
 
@@ -528,7 +530,10 @@ export default {
     },
     logout() {
       window.sessionStorage.setItem("contractSelected", "false");
-      this.$saveOperation({ tipo: "LOGOUT", usuario: this.$getUser() });
+
+      this.$getUser().then((user) => {
+        this.$saveOperation({ tipo: "LOGOUT", usuario: user });
+      });
 
       this.$logout().then(() => {
         this.$root.$emit("logout-success");

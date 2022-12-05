@@ -1156,16 +1156,18 @@ export default {
       });
     },
     openPRTG(circuit) {
-      window.open(
+      this.$getUser().then(user =>{
+        window.open(
         "https://monitor.telespazio.com.br/device.htm?id=" +
           circuit.idPrtg +
           "&tabid=1&username=" +
-          this.$getUser().apelido +
+          user.apelido +
           "&passhash=" +
-          this.$getUser().prtgToken
+          user.prtgToken
       );
 
-      this.$saveOperation({ tipo: "LINK_PRTG", usuario: this.$getUser() });
+      this.$saveOperation({ tipo: "LINK_PRTG", usuario: user });
+      })
     },
     formatCircuit(circuit) {
       return {

@@ -211,28 +211,24 @@ export default {
   },
   methods: {
     importImage() {
-      if (this.image)
-        return (this.image = this.getFileFormData(
-          this.image
-        ));
+      if (this.image) return (this.image = this.getFileFormData(this.image));
     },
     getFileFormData(file) {
+      var reader = new FileReader();
+      const fileByteArray = [];
 
-        var reader = new FileReader();
-        const fileByteArray = [];
-
-        reader.readAsArrayBuffer(file);
-        reader.onloadend = function (evt) {
-            if (evt.target.readyState == FileReader.DONE) {
-                var arrayBuffer = evt.target.result,
-                    array = new Uint8Array(arrayBuffer);
-                for (var i = 0; i < array.length; i++) {
-                    fileByteArray.push(array[i]);
-                }
-            }
+      reader.readAsArrayBuffer(file);
+      reader.onloadend = function (evt) {
+        if (evt.target.readyState == FileReader.DONE) {
+          var arrayBuffer = evt.target.result,
+            array = new Uint8Array(arrayBuffer);
+          for (var i = 0; i < array.length; i++) {
+            fileByteArray.push(array[i]);
+          }
         }
+      };
 
-        return fileByteArray;
+      return fileByteArray;
     },
     closeDialog() {
       this.showSuccess = false;
@@ -242,32 +238,35 @@ export default {
       this.name = "";
     },
     sendEvaluation() {
+
       this.showDialogLoading = true;
-      var evaluation = {
-        comentario: this.comments,
-        nota: this.rating,
-        nome: this.name,
-        imagem: this.image,
-        telefone: this.telephone,
-        usuario: this.$getUser(),
-        chamado: this.entity ? this.entity.issue : null,
-      };
+      this.$getUser().then((user) => {
+        var evaluation = {
+          comentario: this.comments,
+          nota: this.rating,
+          nome: this.name,
+          imagem: this.image,
+          telefone: this.telephone,
+          usuario: user,
+          chamado: this.entity ? this.entity.issue : null,
+        };
 
-      this.$post("/avaliacao", evaluation).then((response) => {
-        if (response.data) {
-          this.showSuccess = true;
-          this.showDialogLoading = false;
-          this.entity.issue.evaluation = response.data;
+        this.$post("/avaliacao", evaluation).then((response) => {
+          if (response.data) {
+            this.showSuccess = true;
+            this.showDialogLoading = false;
+            this.entity.issue.evaluation = response.data;
 
-          if (this.feedBackFunction) {
-            this.feedBackFunction();
+            if (this.feedBackFunction) {
+              this.feedBackFunction();
+            }
           }
-        }
 
-        //Remove a notificação para evitar do usuário dar dois feedbacks na mesma entidade.
-        if (this.entity && this.entity.notification) {
-          this.$root.$emit("remove-notification", this.entity.notification);
-        }
+          //Remove a notificação para evitar do usuário dar dois feedbacks na mesma entidade.
+          if (this.entity && this.entity.notification) {
+            this.$root.$emit("remove-notification", this.entity.notification);
+          }
+        });
       });
     },
   },

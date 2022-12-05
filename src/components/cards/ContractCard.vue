@@ -252,8 +252,10 @@ export default {
     baixarContrato () {
       this.isDownloading = true;
 
-      this.$saveOperation({ tipo: 'DOWNLOAD_CONTRATO', usuario: this.$getUser() })
-
+      this.$getUser().then(user =>{
+        this.$saveOperation({ tipo: 'DOWNLOAD_CONTRATO', usuario: user})
+      })
+      
       this.$get('/contrato/download',
         { contractNumber: this.contract.numeroContratoSap }, 'arraybuffer').
         then((response) => {
