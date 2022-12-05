@@ -169,10 +169,10 @@
           </v-menu>
 
           <TooltipButton
-            :label="$vuetify.lang.t('$vuetify.ALTERAR_VELOCIDADE')"
-            :message="$vuetify.lang.t('$vuetify.ALTERAR_VELOCIDADE_DESCRICAO')"
+            :label="$vuetify.lang.t('$vuetify.CANCELAR')"
+            :message="$vuetify.lang.t('$vuetify.CANCELAR_DESCRICAO')"
             :event="showCommDialog"
-            :object="{actionName:'ALTERAR_VELOCIDADE'}"
+            :object="{actionName:'CANCELAR'}"
             :mobile="$vuetify.breakpoint.xs"
             :margin="true"
           ></TooltipButton>
@@ -206,8 +206,8 @@
                 <v-list-item-title>{{$vuetify.lang.t('$vuetify.SUSPENDER')}}</v-list-item-title>
               </v-list-item>
 
-              <v-list-item @click="showCommDialog({actionName: 'CANCELAR'})">
-                <v-list-item-title>{{$vuetify.lang.t('$vuetify.CANCELAR')}}</v-list-item-title>
+              <v-list-item @click="showCommDialog({actionName: 'ALTERAR_VELOCIDADE'})">
+                <v-list-item-title>{{$vuetify.lang.t('$vuetify.ALTERAR_VELOCIDADE')}}</v-list-item-title>
               </v-list-item>
 
               <v-list-item @click="showCommDialog({actionName:'OUTROS'})">
