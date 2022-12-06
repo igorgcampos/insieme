@@ -232,7 +232,7 @@
                   @click="getEvaluation(issue, open)"
                 >
                   <v-row align="center" no-gutters>
-                    <v-col v-if="!open" :cols="$vuetify.breakpoint.xs?4:2">
+                    <v-col v-if="!open" :cols="$vuetify.breakpoint.xs?5:2">
                       <v-chip
                         :color="
                           issue.status == 'ABERTO'
