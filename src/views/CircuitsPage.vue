@@ -783,11 +783,11 @@
                             mr-2
                           "
                         >
-                          IP:</strong
+                          {{$vuetify.lang.t("$vuetify.DESIGNACAO_TPZ")}}</strong
                         >
                         <strong
                           class="caption font-weight-bold"
-                          v-html="circuit.ip || '--'"
+                          v-html="circuit.nome || '--'"
                         ></strong>
                       </v-row>
                     </v-col>
