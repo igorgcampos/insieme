@@ -260,7 +260,7 @@ export default {
       window.sessionStorage.setItem("selectedClientId", this.selectedClient.id);
     }
 
-    if (!this.$props.contract && this.$hasProfile('Administrador')) {
+    if (!this.$props.contract) {
       this.$get("/contrato/busca", {
         searchText: "",
         clientId: this.selectedClient.id,
