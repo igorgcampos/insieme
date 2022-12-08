@@ -1,7 +1,7 @@
 <template>
   <v-dialog
     persistent
-    max-width="480"
+    max-width="500"
     v-model="show"
     class="mt-n3 overflow-y-hidden overflow-x-hidden"
   >
@@ -32,7 +32,7 @@
 
       <v-list
         class="ma-0 pa-0 overflow-y-auto"
-        :max-height="$vuetify.breakpoint.xl ? 650 : 400"
+        :max-height="$vuetify.breakpoint.xl ? 650 : 450"
         v-if="!showSuccess"
       >
         <div class="text-center mt-2 mb-8">
