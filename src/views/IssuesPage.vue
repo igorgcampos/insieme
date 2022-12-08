@@ -152,7 +152,7 @@
             class="mt-7 ml-3"
             cols="1"
             :class="{ 'mt-7': $vuetify.breakpoint.xs }"
-            v-if="!proactivity"
+            v-if="!proactivity && !$hasProfile('Comercial')"
           >
             <v-menu transition="slide-x-transition" bottom right>
               <template v-slot:activator="{ on, attrs }">
@@ -999,7 +999,8 @@ export default {
           this.actionName == "REVOGAR_CANCELAMENTO" ||
           this.actionName == "REVOGAR_SUSPENSAO"
         )
-          obj.designacaoCliente = item["Designação Cliente"];
+          obj.nome = item["designacaoTpz"];
+          obj.designacaoCliente = item["designacaoCliente"];
 
         if (this.actionName == "ALTERAR_VELOCIDADE") {
           obj.contato_instalacao = item["Contato do cliente"];
