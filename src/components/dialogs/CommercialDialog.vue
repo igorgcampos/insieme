@@ -309,7 +309,8 @@ export default {
 
     if (this.actionName == 'OUTROS' || this.actionName == 'ALTERAR_VELOCIDADE' || this.actionName == 'SUSPENDER' ||
       this.actionName == 'CANCELAR' || this.actionName == 'REMANEJAR' ||
-      this.actionName == 'ATIVAR' || this.actionName == 'REVOGAR_CANCELAMENTO' || this.actionName == 'REVOGAR_SUSPENSAO')
+      this.actionName == 'ATIVAR' || this.actionName == 'REVOGAR_CANCELAMENTO' || this.actionName == 'REVOGAR_SUSPENSAO' ||
+      this.actionName == 'NOVO_CIRCUITO')
       this.headers.push({
         text: this.$vuetify.lang.t('$vuetify.DESIGNACAO_TPZ'), align: 'start', sortable: false, value: 'nome', width: 200
       })

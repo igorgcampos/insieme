@@ -999,6 +999,7 @@ export default {
           this.actionName == "REVOGAR_CANCELAMENTO" ||
           this.actionName == "REVOGAR_SUSPENSAO"
         )
+        console.log(item["designacaoTpz"])
           obj.nome = item["designacaoTpz"];
           obj.designacaoCliente = item["designacaoCliente"];
 
@@ -1036,7 +1037,6 @@ export default {
 
         if (
           this.actionName == "CANCELAR" ||
-          this.actionName == "NOVO_CIRCUITO" ||
           this.actionName == "SUSPENDER"
         ) {
           obj.endereco_instalacao = item["Endereço da instalação"];
@@ -1049,7 +1049,6 @@ export default {
         }
 
         if (
-          this.actionName == "NOVO_CIRCUITO" ||
           this.actionName == "ALTERAR_VELOCIDADE"
         ) {
           obj.endereco_gerencia = item["Endereço da gerência"];
