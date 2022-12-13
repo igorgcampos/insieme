@@ -260,7 +260,7 @@
                     </v-col>
 
                     <v-col
-                      :cols="!$vuetify.breakpoint.xs?5:4"
+                      :cols="!$vuetify.breakpoint.xs?4:4"
                       sm="2"
                     >
                       <v-chip
@@ -276,9 +276,9 @@
 
                     <v-col
                       v-show="!$vuetify.breakpoint.xs"
-                      sm="5"
-                      md="6"
-                      :class="{'col-sm-10':open, 'col-md-10':open}"
+                      sm="3"
+                      md="3"
+                      :class="{'col-sm-6':open, 'col-md-6':open}"
                     >
                       <strong class="font-weight-bold grey--text text--lighten-1 mr-2">
                         {{$vuetify.lang.t('$vuetify.DESIGNACAO_CLIENTE')}}:</strong>
@@ -290,7 +290,26 @@
 
                     <v-col
                       v-show="!$vuetify.breakpoint.xs"
-                      sm="4"
+                      sm="3"
+                      md="3"
+                      :class="{ 'col-sm-6': open, 'col-md-6': open }"
+                    >
+                      <strong
+                        class="font-weight-bold grey--text text--lighten-1 mr-2"
+                      >
+                        {{
+                          $vuetify.lang.t("$vuetify.DESIGNACAO_TPZ")
+                        }}:</strong
+                      >
+                      <strong
+                        class="subtitle-2 font-weight-bold"
+                        v-html="circuit.nome || '--'"
+                      ></strong>
+                    </v-col>
+
+                    <v-col
+                      v-show="!$vuetify.breakpoint.xs"
+                      sm="3"
                       md="3"
                     >
                       <strong class="font-weight-bold grey--text text--lighten-1 mr-2">
