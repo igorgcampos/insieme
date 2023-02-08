@@ -1041,7 +1041,7 @@
                       :event="openPRTG"
                       :object="circuit"
                       :mobile="$vuetify.breakpoint.xs"
-                      v-if="circuit.idPrtg && $getUser().prtgToken"
+                      v-if="circuit.idPrtg && prtgToken"
                       :isText="true"
                     ></TooltipButton>
                   </v-card-actions>
@@ -1476,6 +1476,7 @@ export default {
     this.contractDecoration = this.button == "contract" ? "underline" : "none";
   },
   data: () => ({
+    prtgToken: undefined,
     isLoadingOffline: false,
     isLoadingOnline: false,
     isLoadingStatus: false,
@@ -1523,6 +1524,8 @@ export default {
       "Online",
       "Offline",
     ];
+
+    this.$getUser().then(user => this.prtgToken = user.prtgToken);
 
     this.products = [this.$vuetify.lang.t("$vuetify.TODOS")];
     this.technologies = [this.$vuetify.lang.t("$vuetify.TODOS")];
