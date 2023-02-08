@@ -1041,7 +1041,7 @@
                       :event="openPRTG"
                       :object="circuit"
                       :mobile="$vuetify.breakpoint.xs"
-                      v-if="circuit.idPrtg & $getUser().prtgToken"
+                      v-if="circuit.idPrtg && $getUser().prtgToken"
                       :isText="true"
                     ></TooltipButton>
                   </v-card-actions>
