@@ -110,7 +110,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ### Configurando usuário para acessar circuitos por UFs
 
-Dentro do Keycloak (https://auth.telespazio.com.br) existe uma lista de grupos de permissionamento por UFs que podem ser associados a um usuário específico. Assim, se um usuário só pode ver circuitos do RJ, associe o grupo `grp_insieme-ufs-rj`, com mostra a figura abaixo:
+Dentro do Keycloak (https://auth.telespazio.com.br) existe uma lista de grupos de permissionamento por UFs que podem ser associados a um usuário específico. Assim, se um usuário só pode ver circuitos do RJ, associe o grupo `grp_insieme-ufs-rj`, como mostra a figura abaixo:
 
 
 ![diagram](keycloak-ufs.PNG)
