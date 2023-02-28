@@ -8,7 +8,9 @@
         <v-card
           :elevation="hover ? 2 : 0"
           class="ma-0 row-pointer"
-          :href="url" 
+          :href="url"
+          target="_blank" 
+          rel="noopener noreferrer"
         >
           <v-row justify="center">
             <v-icon
