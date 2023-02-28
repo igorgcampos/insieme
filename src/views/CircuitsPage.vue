@@ -769,7 +769,7 @@
                         >
                         <strong
                           class="caption font-weight-bold"
-                          v-html="circuit.designacaoCliente.toLowerCase()"
+                          v-html="circuit.designacaoClient?circuit.designacaoCliente.toLowerCase():'--'"
                         ></strong>
                       </v-row>
 
