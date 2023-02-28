@@ -333,7 +333,7 @@
                           {{$vuetify.lang.t('$vuetify.DESIGNACAO_CLIENTE')}}:</strong>
                         <strong
                           class="caption font-weight-bold"
-                          v-html="circuit.designacaoCliente.toLowerCase()"
+                          v-html="circuit.designacaoCliente?circuit.designacaoCliente.toLowerCase():'--'"
                         ></strong>
                       </v-row>
 
