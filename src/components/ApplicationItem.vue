@@ -8,7 +8,7 @@
         <v-card
           :elevation="hover ? 2 : 0"
           class="ma-0 row-pointer"
-          :href="url"
+          :href="url" 
         >
           <v-row justify="center">
             <v-icon
