@@ -260,7 +260,7 @@ export default {
       window.sessionStorage.setItem("selectedClientId", this.selectedClient.id);
     }
 
-    if (!this.$props.contract) {
+    if (!this.contract) {
       this.$get("/contrato/busca", {
         searchText: "",
         clientId: this.selectedClient.id,
