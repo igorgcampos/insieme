@@ -4,14 +4,7 @@
       <div>
         <v-row :class="{ 'ml-n12': $vuetify.breakpoint.mdAndUp }">
           <span
-            class="
-              mb-7
-              text-right
-              display-1
-              font-weight-bold
-              grey--text
-              text--darken-1
-            "
+            class="mb-7 text-right display-1 font-weight-bold grey--text text--darken-1"
           >
             {{ $vuetify.lang.t("$vuetify.CONTRATOS") }}</span
           >
@@ -21,13 +14,7 @@
           <v-col cols="4">
             <v-row>
               <span
-                class="
-                  text-right
-                  subtitle-2
-                  font-weight-bold
-                  grey--text
-                  text--lighten-1
-                "
+                class="text-right subtitle-2 font-weight-bold grey--text text--lighten-1"
               >
                 {{ $vuetify.lang.t("$vuetify.BUSCAR") }}:</span
               >
@@ -51,13 +38,7 @@
           <v-col class="ml-5" cols="3">
             <v-row>
               <span
-                class="
-                  text-right
-                  subtitle-2
-                  font-weight-bold
-                  grey--text
-                  text--lighten-1
-                "
+                class="text-right subtitle-2 font-weight-bold grey--text text--lighten-1"
               >
                 {{ $vuetify.lang.t("$vuetify.TIPO") }}:</span
               >
@@ -79,13 +60,7 @@
           <v-col class="ml-5" cols="3">
             <v-row>
               <span
-                class="
-                  text-right
-                  subtitle-2
-                  font-weight-bold
-                  grey--text
-                  text--lighten-1
-                "
+                class="text-right subtitle-2 font-weight-bold grey--text text--lighten-1"
               >
                 {{ $vuetify.lang.t("$vuetify.STATUS") }}:</span
               >
@@ -260,34 +235,42 @@ export default {
       window.sessionStorage.setItem("selectedClientId", this.selectedClient.id);
     }
 
-    if (!this.contract) {
-      this.$get("/contrato/busca", {
-        searchText: "",
-        clientId: this.selectedClient.id,
-        type: this.type,
-        status: this.status,
-        page: 0,
-      }).then((response) => {
-        this.contracts = response.data;
+    this.$getUser().then((user) => {
 
-        if (
-          this.contracts.length == 1 &&
-          this.$hasProfile("Operacional") &&
-          window.sessionStorage.getItem("contractSelected") == "false"
-        ) {
-          this.$root.$emit("contract-selected", this.contracts[0]);
-          window.sessionStorage.setItem("contractSelected", "true");
-        }
-
-        this.isLoading = false;
-      });
-    }else{
-      this.contracts = [];
-      if(this.$props.contract){
-        this.contracts = this.contracts.concat(this.$props.contract);
+      if(user.contrato){
+        this.contracts = this.contracts.concat(user.contrato);
+        return;
       }
-      this.isLoading = false;
-    }
+      
+      if (!this.$props.contract) {
+        this.$get("/contrato/busca", {
+          searchText: "",
+          clientId: this.selectedClient.id,
+          type: this.type,
+          status: this.status,
+          page: 0,
+        }).then((response) => {
+          this.contracts = response.data;
+
+          if (
+            this.contracts.length == 1 &&
+            this.$hasProfile("Operacional") &&
+            window.sessionStorage.getItem("contractSelected") == "false"
+          ) {
+            this.$root.$emit("contract-selected", this.contracts[0]);
+            window.sessionStorage.setItem("contractSelected", "true");
+          }
+
+          this.isLoading = false;
+        });
+      } else {
+        this.contracts = [];
+        if (this.$props.contract) {
+          this.contracts = this.contracts.concat(this.$props.contract);
+        }
+        this.isLoading = false;
+      }
+    });
   },
 };
 </script>
