@@ -239,7 +239,7 @@ export default {
 
       if(user.contrato){
         this.contracts = this.contracts.concat(user.contrato);
-        isLoading = false;
+        this.isLoading = false;
         return;
       }
 
