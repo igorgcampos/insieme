@@ -239,9 +239,10 @@ export default {
 
       if(user.contrato){
         this.contracts = this.contracts.concat(user.contrato);
+        isLoading = false;
         return;
       }
-      
+
       if (!this.$props.contract) {
         this.$get("/contrato/busca", {
           searchText: "",
