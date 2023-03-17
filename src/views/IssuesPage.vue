@@ -2,14 +2,7 @@
   <div>
     <v-row id="issues" :class="{ 'ml-n12': $vuetify.breakpoint.mdAndUp }">
       <span
-        class="
-          mb-7
-          text-right
-          display-1
-          font-weight-bold
-          grey--text
-          text--darken-1
-        "
+        class="mb-7 text-right display-1 font-weight-bold grey--text text--darken-1"
       >
         {{ $vuetify.lang.t("$vuetify.CHAMADOS") }}</span
       >
@@ -93,13 +86,7 @@
           <v-col :cols="!$vuetify.breakpoint.xs ? 4 : 6">
             <v-row>
               <span
-                class="
-                  text-right
-                  subtitle-2
-                  font-weight-bold
-                  grey--text
-                  text--lighten-1
-                "
+                class="text-right subtitle-2 font-weight-bold grey--text text--lighten-1"
               >
                 {{ $vuetify.lang.t("$vuetify.BUSCAR") }}:</span
               >
@@ -123,13 +110,7 @@
           <v-col class="ml-5" cols="4" v-if="!$vuetify.breakpoint.xs">
             <v-row>
               <span
-                class="
-                  text-right
-                  subtitle-2
-                  font-weight-bold
-                  grey--text
-                  text--lighten-1
-                "
+                class="text-right subtitle-2 font-weight-bold grey--text text--lighten-1"
               >
                 {{ $vuetify.lang.t("$vuetify.STATUS") }}:</span
               >
@@ -208,6 +189,19 @@
                     $vuetify.lang.t("$vuetify.MASSIVA")
                   }}</v-list-item-title>
                 </v-list-item>
+
+                <v-list-item
+                  @click="openServiceIssue()"
+                  v-if="
+                    $hasProfile('Operacional') ||
+                    $hasProfile('Cliente') ||
+                    $hasProfile('Administrador')
+                  "
+                >
+                  <v-list-item-title>{{
+                    $vuetify.lang.t("$vuetify.SERVICOS")
+                  }}</v-list-item-title>
+                </v-list-item>
               </v-list>
             </v-menu>
           </v-col>
@@ -232,7 +226,7 @@
                   @click="getEvaluation(issue, open)"
                 >
                   <v-row align="center" no-gutters>
-                    <v-col v-if="!open" :cols="$vuetify.breakpoint.xs?5:2">
+                    <v-col v-if="!open" :cols="$vuetify.breakpoint.xs ? 5 : 2">
                       <v-chip
                         :color="
                           issue.status == 'ABERTO'
@@ -320,13 +314,7 @@
                     >
                       <v-row sm="5" md="4">
                         <strong
-                          class="
-                            caption
-                            font-weight-bold
-                            grey--text
-                            text--lighten-1
-                            mr-2
-                          "
+                          class="caption font-weight-bold grey--text text--lighten-1 mr-2"
                           :class="{ 'ml-3': open }"
                         >
                           {{ $vuetify.lang.t("$vuetify.PROTOCOLO") }}:</strong
@@ -339,13 +327,7 @@
 
                       <v-row sm="5" md="5" v-if="!open">
                         <strong
-                          class="
-                            caption
-                            font-weight-bold
-                            grey--text
-                            text--lighten-1
-                            mr-2
-                          "
+                          class="caption font-weight-bold grey--text text--lighten-1 mr-2"
                         >
                           {{
                             issue.status == "ABERTO"
@@ -457,14 +439,7 @@
                         <v-col cols="1" class="ml-n3 mt-n2">
                           <span
                             v-if="issue.evaluation"
-                            class="
-                              text-right
-                              caption
-                              font-weight-bold
-                              grey--text
-                              text--lighten-1
-                              pl-1
-                            "
+                            class="text-right caption font-weight-bold grey--text text--lighten-1 pl-1"
                             >{{
                               $vuetify.lang.t("$vuetify.AVALIACAO") + ":"
                             }}</span
@@ -492,13 +467,7 @@
                       v-if="issue.mensagens && issue.mensagens.length > 0"
                     >
                       <span
-                        class="
-                          text-center
-                          caption
-                          font-weight-bold
-                          grey--text
-                          text--lighten-1
-                        "
+                        class="text-center caption font-weight-bold grey--text text--lighten-1"
                       >
                         {{ $vuetify.lang.t("$vuetify.MENSAGENS") }}
                       </span>
@@ -765,6 +734,16 @@
         </v-row>
 
         <IssueDialog
+          :showDialog="showServiceDialog"
+          :showSuccess="showSuccess"
+          :showDialogLoading="showDialogLoading"
+          :close="closeServiceDialog"
+          :send="sendService"
+          :getObject="getObject"
+          :itemList="reasonServiceList"
+        ></IssueDialog>
+
+        <IssueDialog
           :showDialog="showDialog"
           :showSuccess="showSuccess"
           :showDialogLoading="showDialogLoading"
@@ -999,9 +978,9 @@ export default {
           this.actionName == "REVOGAR_CANCELAMENTO" ||
           this.actionName == "REVOGAR_SUSPENSAO"
         )
-        console.log(item["designacaoTpz"])
-          obj.nome = item["designacaoTpz"];
-          obj.designacaoCliente = item["designacaoCliente"];
+          console.log(item["designacaoTpz"]);
+        obj.nome = item["designacaoTpz"];
+        obj.designacaoCliente = item["designacaoCliente"];
 
         if (this.actionName == "ALTERAR_VELOCIDADE") {
           obj.contato_instalacao = item["Contato do cliente"];
@@ -1035,10 +1014,7 @@ export default {
           obj.longitude = item["Longitude"];
         }
 
-        if (
-          this.actionName == "CANCELAR" ||
-          this.actionName == "SUSPENDER"
-        ) {
+        if (this.actionName == "CANCELAR" || this.actionName == "SUSPENDER") {
           obj.endereco_instalacao = item["Endereço da instalação"];
           obj.bairro_instalacao = item["Bairro da instalação"];
           obj.cidade_instalacao = item["Cidade da instalação"];
@@ -1048,9 +1024,7 @@ export default {
           obj.telefone_instalacao = item["Telefone da instalação"];
         }
 
-        if (
-          this.actionName == "ALTERAR_VELOCIDADE"
-        ) {
+        if (this.actionName == "ALTERAR_VELOCIDADE") {
           obj.endereco_gerencia = item["Endereço da gerência"];
           obj.vlan = item["VLAN"];
           obj.interconexao_tpz = item["Interconexão Tpz"];
@@ -1248,7 +1222,7 @@ export default {
         ];
 
         this.searchCircuits("", 0);
-      } else {
+      } else if (type == "invoice") {
         this.reasonBatchList = [
           this.$vuetify.lang.t("$vuetify.SEGUNDA_VIA"),
           this.$vuetify.lang.t("$vuetify.BAIXA_BOLETO"),
@@ -1438,12 +1412,46 @@ export default {
     feedBackFunction() {
       this.$forceUpdate();
     },
+    openServiceIssue() {
+      this.showServiceDialog = true;
+      this.selectedIssue = { type: "service" };
+    },
+    sendService(issue) {
+      if (!issue.reason || issue.observation.length == 0) {
+        return;
+      }
+
+      var object = {
+        origem: "SERVICO",
+        identificadorOrigem: "Serviço",
+        motivoAbertura: issue.reason,
+        observacaoAbertura: issue.observation,
+        contrato: { id: this.$props.contract.id },
+      };
+
+      this.$post("/chamado/create", object).then((response) => {
+        if (!response) {
+          this.error = true;
+          return;
+        }
+
+        if (response.data) {
+          this.showSuccess = true;
+          this.showDialogLoading = false;
+          this.$root.$emit("new-issue", response.data);
+        }
+      });
+    },
+    closeServiceDialog() {
+      this.showServiceDialog = false;
+    },
   },
   props: {
     contract: Object,
     proactivity: Boolean,
   },
   data: () => ({
+    showServiceDialog: false,
     error: false,
     showMessageDialog: false,
     selectedList: [],
@@ -1463,6 +1471,11 @@ export default {
     selectedIssue: undefined,
     showDialogLoading: false,
     reasonList: [],
+    reasonServiceList: [
+      "Atividade Programada",
+      "Falha",
+      "Emissão de Relatório",
+    ],
     showDialog: false,
     showSuccess: false,
     counts: [0, 0],

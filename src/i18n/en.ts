@@ -131,6 +131,7 @@ export default {
     ABRINDO_CHAMADO_CIRCUITOS: 'Opening issue for circuits',
     ABRINDO_CHAMADO_NOTA: 'Opening issue for invoice ',
     ABRINDO_CHAMADO_NOTAS: 'Opening issue for invoices',
+    ABRINDO_CHAMADO_SERVICOS: 'Opening issue for service',
     NENHUMA_NOTA_SELECIONADA: 'No invoice selected',
     SELECIONE_NOTAS: 'Search and select invoices of your interest',
     NOTA_LOTE: 'Invoice batch',
@@ -447,4 +448,7 @@ export default {
     LATENCIA_MINIMA: 'Minimum latency',
     LATENCIA_MEDIA: 'Average latency',
     LATENCIA_MAXIMA: 'Maximum latency',
+    SERVICOS: 'Services',
+    TELEFONE_SOLICITANTE: 'Reclaimer phone',
+    TELEFONE_CONTATO: 'Contact phone',
 }

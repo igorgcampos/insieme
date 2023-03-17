@@ -3,7 +3,7 @@
   <v-dialog
     v-model="showDialog"
     persistent
-    max-width="350"
+    max-width="400"
     v-if="getObject()"
   >
     <v-card v-show="!showSuccess">
@@ -12,15 +12,15 @@
         :class="{'subtitle-2':$vuetify.breakpoint.xs}"
         style="word-break: normal; !important"
       >
-        {{getObject().type=='circuit'?
+        {{getObject().type == 'service'?$vuetify.lang.t("$vuetify.ABRINDO_CHAMADO_SERVICOS"): getObject().type=='circuit'?
           $vuetify.lang.t('$vuetify.ABRINDO_CHAMADO_CIRCUITO',getObject().nome):
-          getObject().type=='invoice'?
+          getObject().type == 'invoice'?
           $vuetify.lang.t('$vuetify.ABRINDO_CHAMADO_NOTA')+
           getObject().numero: $vuetify.lang.t('$vuetify.ENCERRANDO_CHAMADO')+getObject().protocolo}}
       </v-card-title>
       <v-card-text class="headline-6">{{$vuetify.lang.t('$vuetify.SELECIONE_MOTIVO_OBSERVACAO')}}</v-card-text>
 
-      <v-row class="ma-0 d-flex justify-center mb-3">
+      <v-row class="ma-0 justify-center mb-4">
 
         <v-col
           class="ma-0 pa-0"
@@ -43,6 +43,66 @@
         </v-col>
 
         <v-col
+          class="ma-0 pa-0"
+          cols="9"
+          v-if="getObject().type=='service'"
+        >
+          <v-row>
+            <span class=" text-right subtitle-2 font-weight-bold grey--text text--lighten-1">
+              {{$vuetify.lang.t('$vuetify.TELEFONE_SOLICITANTE')}}:</span>
+          </v-row>
+          <v-row>
+           <v-text-field
+                v-model.trim="reclaimerPhone"
+                dense
+                single-line
+                solo
+                max-width="200"
+              ></v-text-field>
+          </v-row>
+        </v-col>
+
+        <v-col
+          class="ma-0 pa-0"
+          cols="9"
+          v-if="getObject().type=='service'"
+        >
+          <v-row>
+            <span class=" text-right subtitle-2 font-weight-bold grey--text text--lighten-1">
+              {{$vuetify.lang.t('$vuetify.TELEFONE_CONTATO')}}:</span>
+          </v-row>
+          <v-row>
+            <v-text-field
+                v-model.trim="contactPhone"
+                dense
+                single-line
+                solo
+                max-width="200"
+              ></v-text-field>
+          </v-row>
+        </v-col>
+
+        <v-col
+          class="ma-0 pa-0"
+          cols="9"
+          v-if="getObject().type=='service'"
+        >
+          <v-row>
+            <span class=" text-right subtitle-2 font-weight-bold grey--text text--lighten-1">
+              {{'Email'}}:</span>
+          </v-row>
+          <v-row>
+             <v-text-field
+                v-model.trim="email"
+                dense
+                single-line
+                solo
+                max-width="200"
+              ></v-text-field>
+          </v-row>
+        </v-col>
+
+        <v-col
           class="ma-0 pa-0 mt-0"
           cols="9"
         >
@@ -53,7 +113,7 @@
           <v-row>
             <v-textarea
               solo
-              height="200"
+              height="100"
               :no-resize="true"
               rows="5"
               v-model="issue.observation"
@@ -76,7 +136,7 @@
         <v-btn
           color="primary"
           text
-          @click="send(issue, getObject()); cleanFields()"
+          @click="concatInfosToObservation(); send(issue, getObject()); cleanFields()"
           :x-small="$vuetify.breakpoint.xs"
           :loading="showDialogLoading"
         >{{$vuetify.lang.t('$vuetify.ENVIAR')}}</v-btn>
@@ -125,13 +185,22 @@ export default {
     itemList: Array
   },
   methods: {
+    concatInfosToObservation(){
+      if(this.getObject().type == 'service'){
+        this.issue.observation += '\n\n' + 'Telefone Contato: ' + this.contactPhone + 
+        '\n\n' + 'Telefone solicitante: ' + this.reclaimerPhone + '\n\n' + 'Email: ' + this.email;
+      }
+    },
     cleanFields () {
       this.issue.observation = '';
       this.issue.reason = undefined;
     }
   },
   data: () => ({
-    issue: { reason: '', observation: '' }
+    issue: { reason: '', observation: '' },
+    reclaimerPhone: '',
+    contactPhone: '',
+    email: '',
   })
 };
 </script>

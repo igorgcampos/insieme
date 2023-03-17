@@ -129,6 +129,7 @@ export default {
     ABRINDO_CHAMADO_CIRCUITOS: 'Abrindo chamado para circuitos ativados',
     ABRINDO_CHAMADO_NOTA: 'Abrindo chamado para a nota fiscal ',
     ABRINDO_CHAMADO_NOTAS: 'Abrindo chamado para notas fiscais ',
+    ABRINDO_CHAMADO_SERVICOS: 'Abrindo chamado para serviço',
     ENCERRANDO_CHAMADO: 'Encerrando chamado ',
     SELECIONE_MOTIVO_OBSERVACAO: 'Selecione um motivo e adicione uma observação',
     INOPERANCIA: 'Inoperância',
@@ -443,4 +444,7 @@ export default {
     LATENCIA_MINIMA: 'Latência mínima',
     LATENCIA_MEDIA: 'Latência média',
     LATENCIA_MAXIMA: 'Latência máxima',
+    SERVICOS: 'Serviços',
+    TELEFONE_SOLICITANTE: 'Telefone do solicitante',
+    TELEFONE_CONTATO: 'Telefone do contato',
 }
