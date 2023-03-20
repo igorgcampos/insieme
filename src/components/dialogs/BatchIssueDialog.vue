@@ -239,7 +239,7 @@
               :class="{ 'mt-n8': $vuetify.breakpoint.xs }"
             >
               <WarningPanel
-                class="mt-8 pt-10"
+                class="mt-12 pt-10"
                 :mobile="true"
                 :message="
                   entity.type == 'circuit'
