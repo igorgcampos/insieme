@@ -18,6 +18,12 @@
           }}</span>
         </v-row>
 
+        <v-row justify="center">
+          <span class="caption font-weight-black white--text">{{
+            $vuetify.lang.t("$vuetify.PROTOCOLO") + ': ' + issue.protocolo
+          }}</span>
+        </v-row>
+
         <v-row justify="center" class="mt-3 mb-3" v-if="restartOk == true">
           <v-icon size="22" color="white">mdi-checkbox-marked-circle</v-icon>
         </v-row>
