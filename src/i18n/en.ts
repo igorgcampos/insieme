@@ -171,7 +171,7 @@ export default {
     PRIMEIRA_PERGUNTA: 'Hello, I am Matteo your virtual assistant. I will try to help you. But first, take away a doubt: Is your problem the hardware?',
     SIM: 'Yes',
     NAO: 'No',
-    RESTART_FALHOU: 'After restarting your circuit, I noticed that it still does not respond. A call has been opened for you. Track it by protocol:',
+    RESTART_FALHOU: 'After restarting your circuit, I noticed that it still does not respond. A call has been opened for you. Track it by the protocol below:',
     EXPORTAR_CSV: 'Export to csv',
     MAIS_ALGUNS_INSTANTES: 'Please wait just another moment...',
     COLETANDO_INFORMACOES: 'I am resetting your circuit. Please wait a few moments while I gather some information...',
