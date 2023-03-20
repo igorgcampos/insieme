@@ -107,7 +107,7 @@
         <v-row>
           <v-col
             class="overflow-y-hidden overflow-x-hidden"
-            :min-height="$vuetify.breakpoint.xs ? 250 : 320"
+            :min-height="$vuetify.breakpoint.xs ? 250 : 380"
           >
             <v-col cols="11" class="ml-4 mt-n4 pr-0 mr-0">
               <v-row>
@@ -123,7 +123,7 @@
                   {{ $vuetify.lang.t("$vuetify.BUSCAR") }}:</span
                 >
               </v-row>
-              <v-row class="mr-1">
+              <v-row class="mr-1 mb-4">
                 <v-text-field
                   v-model.trim="searchText"
                   dense
@@ -169,7 +169,7 @@
                   two-line
                   flat
                   class="ml-n6 mt-n4 pt-3 overflow-y-auto"
-                  :height="$vuetify.breakpoint.xs ? 170 : 240"
+                  :height="$vuetify.breakpoint.xs ? 170 : 290"
                   id="listId"
                   v-scroll:#listId="searchMore"
                 >
@@ -316,7 +316,7 @@
         <span
           class="ml-3 caption font-weight-bold error--text"
           v-if="showLimitWaring && entity.type == 'circuit'"
-          >{{ $vuetify.lang.t("$vuetify.SELECAO_MAXIMA", 30) }}</span
+          >{{ $vuetify.lang.t("$vuetify.SELECAO_MAXIMA", maxNumber) }}</span
         >
         <v-spacer v-if="!$vuetify.breakpoint.xs"></v-spacer>
         <v-btn
@@ -334,7 +334,7 @@
           text
           @click="next()"
           :x-small="$vuetify.breakpoint.xs"
-          v-show="!selectReason"
+          v-show="!selectReason && selectedItemList.length <= maxNumber"
           >{{ $vuetify.lang.t("$vuetify.PROXIMO") }}</v-btn
         >
         <v-btn
@@ -477,15 +477,18 @@ export default {
         !this.containsItem(item, this.selectedItemList) &&
         this.containsItem(item, this.selectedCheckList)
       ) {
+        
+        this.selectedItemList.push(item);
+
         if (
-          this.selectedItemList.length > 30 &&
+          this.selectedItemList.length > this.maxNumber &&
           this.entity.type == "circuit"
         ) {
           this.showLimitWaring = true;
+          this.selectedItemList.pop(item);
+          this.selectedCheckList.pop(item);
           return;
         }
-
-        this.selectedItemList.push(item);
 
         //verifica se o circuito já tem chamado aberto. Se tiver muda a cor dele na lista
         if (item.nome) {
@@ -516,7 +519,7 @@ export default {
             });
 
           if (
-            this.selectedItemList.length <= 30 &&
+            this.selectedItemList.length <= this.maxNumber &&
             this.entity.type == "circuit"
           ) {
             this.showLimitWaring = false;
@@ -562,9 +565,10 @@ export default {
     issue: { reason: "", observation: "", items: undefined },
     showLimitWaring: false,
     showFootButtons: true,
+    maxNumber: 20,
   }),
   created: function () {
-    this.size = this.$vuetify.breakpoint.xs ? 16 : 20;
+    this.size = this.$vuetify.breakpoint.xs ? 16 : 24;
     this.search("", 0);
   },
 };
