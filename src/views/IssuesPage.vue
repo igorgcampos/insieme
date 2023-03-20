@@ -1429,6 +1429,8 @@ export default {
         contrato: { id: this.$props.contract.id },
       };
 
+      this.showDialogLoading = true;
+
       this.$post("/chamado/create", object).then((response) => {
         if (!response) {
           this.error = true;
@@ -1438,6 +1440,7 @@ export default {
         if (response.data) {
           this.showSuccess = true;
           this.showDialogLoading = false;
+          this.selectedIssue = response.data;
           this.$root.$emit("new-issue", response.data);
         }
       });

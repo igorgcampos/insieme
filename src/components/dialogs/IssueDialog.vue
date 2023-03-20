@@ -58,6 +58,7 @@
                 single-line
                 solo
                 max-width="200"
+                v-mask="'(##) ####-####'"
               ></v-text-field>
           </v-row>
         </v-col>
@@ -78,6 +79,7 @@
                 single-line
                 solo
                 max-width="200"
+                v-mask="'(##) ####-####'"
               ></v-text-field>
           </v-row>
         </v-col>
@@ -148,7 +150,7 @@
       <SuccessPanel
         :title="getObject().type!='closing'?$vuetify.lang.t('$vuetify.CHAMADO_CRIADO'):
               $vuetify.lang.t('$vuetify.CHAMADO_ENCERRADO')"
-        :subtitle="getObject().type!='closing'?$vuetify.lang.t('$vuetify.PROTOCOLO')+': '+getObject().protocolo:undefined"
+        :subtitle="getObject().type!='closing'?$vuetify.lang.t('$vuetify.PROTOCOLO')+': '+getObject().protocolo:''"
       >
       </SuccessPanel>
 
