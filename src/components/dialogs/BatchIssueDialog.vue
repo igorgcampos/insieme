@@ -465,7 +465,7 @@ export default {
 
       if (
         document.getElementById("listId").scrollTop +
-          (this.$vuetify.breakpoint.xs ? 171 : 241) >=
+          (this.$vuetify.breakpoint.xs ? 171 : 291) >=
         document.getElementById("listId").scrollHeight
       ) {
         this.page++;
