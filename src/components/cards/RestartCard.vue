@@ -18,9 +18,9 @@
           }}</span>
         </v-row>
 
-        <v-row justify="center">
+        <v-row justify="center" v-show="restartOk != false && restartOk != true">
           <span class="caption font-weight-black white--text">{{
-            $vuetify.lang.t("$vuetify.PROTOCOLO") + ': ' + issue.protocolo
+            $vuetify.lang.t("$vuetify.PROTOCOLO") + ': ' + (issue.protocolo || '--')
           }}</span>
         </v-row>
 
@@ -92,8 +92,8 @@ export default {
   }),
   methods: {
     openIssueDialog() {
-      this.$root.$emit('open-issue',this.circuit);
       this.removeCircuit();
+      this.$root.$emit('open-issue',this.circuit);
     },
     createRestartOperation() {
       this.$getUser().then(user =>{
