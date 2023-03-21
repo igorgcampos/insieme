@@ -1446,6 +1446,7 @@ export default {
     },
     closeServiceDialog() {
       this.showServiceDialog = false;
+      this.showSuccess = false;
     },
   },
   props: {
