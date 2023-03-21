@@ -160,7 +160,7 @@ export default {
     VERIFICANDO_SINAL: 'Por favor aguarde enquanto estamos verificando o sinal do seu circuito...',
     REINICIANDO_CIRCUITO: 'O circuito está sendo reiniciado. Por favor aguarde mais alguns instantes...',
     SINAL_CIRCUITO_ONLINE: 'Ok, vamos lá! Clique em REINICIAR que vou executar os testes! Mas caso você queira trocar uma configuração ou seu aparelho não esta ligando, por favor, clique em ABRIR CHAMADO.',
-    SINAL_CIRCUITO_ONLINE_2: 'Pronto, reiniciei o seu circuito e verifiquei que está online! Caso o problema não tenha sido resolvido, por favor, clique em ABRIR CHAMADO.',
+    SINAL_CIRCUITO_ONLINE_2: 'Reiniciei o seu circuito e verifiquei que está online! O chamado foi fechado, mas se o problema não foi resolvido, por favor, clique em ABRIR CHAMADO.',
     SINAL_CIRCUITO_OFFLINE: 'Verifiquei que seu circuito não está respondendo. Gostaria de reinicia-lo agora (isso pode levar alguns minutos)?',
     CONFIRMAR_SELECAO_CIRCUITO: 'Verifiquei o seu circuito {0} e ele está online. É para este circuito que você deseja o atendimento?',
     REINICIAR: 'Reiniciar',

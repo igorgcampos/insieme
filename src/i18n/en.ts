@@ -163,7 +163,7 @@ export default {
     VERIFICANDO_SINAL: 'Please wait while we are verifying the circuit´s signal...',
     REINICIANDO_CIRCUITO: 'The circuit is being reset. Please wait a few more moments...',
     SINAL_CIRCUITO_ONLINE: 'OK, let´s go! Click RESTART that I will run the tests! But if you want to change a configuration or your device is not turning on, please click on OPEN TICKET.',
-    SINAL_CIRCUITO_ONLINE_2: 'There, I restarted your circuit and verified that it is online! If the problem has not been resolved, please click OPEN TICKET.',
+    SINAL_CIRCUITO_ONLINE_2: 'I restarted your circuit and verified that it is online! The ticket was closed but, If the problem has not been resolved, please click OPEN TICKET.',
     SINAL_CIRCUITO_OFFLINE: 'I verify that your circuit is not responding. Would you like to restart it now (this can take a few minutes)?',
     CONFIRMAR_SELECAO_CIRCUITO: 'I checked your { 0 } circuit and it is online. Is this circuit you want to attend to?',
     REINICIAR: 'Restart',
