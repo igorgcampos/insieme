@@ -1475,7 +1475,8 @@ export default {
     reasonList: [],
     reasonServiceList: [
       "Atividade Programada",
-      "Falha",
+      "Problema",
+      "Serviços",
       "Emissão de Relatório",
     ],
     showDialog: false,
