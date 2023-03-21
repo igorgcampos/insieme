@@ -2,7 +2,7 @@
   <v-dialog
     v-model="showDialog"
     persistent
-    :max-width="selectReason ? 360 : 550"
+    :max-width="selectReason ? 430 : 550"
     v-if="showDialog"
   >
     <v-card v-show="!showSuccess && !error">
@@ -44,8 +44,8 @@
             >
               {{
                 entity.type == "closing"
-                  ? $vuetify.lang.t("$vuetify.MOTIVO_ENCERRAMENTO")
-                  : $vuetify.lang.t("$vuetify.MOTIVO_ABERTURA")
+                  ? '*' + $vuetify.lang.t("$vuetify.MOTIVO_ENCERRAMENTO")
+                  : '*' + $vuetify.lang.t("$vuetify.MOTIVO_ABERTURA")
               }}:</span
             >
           </v-row>
@@ -57,6 +57,68 @@
               solo
               dense
             ></v-select>
+          </v-row>
+        </v-col>
+
+         <v-col
+          class="ma-0 pa-0"
+          cols="9"
+        >
+          <v-row>
+            <span class=" text-right subtitle-2 font-weight-bold grey--text text--lighten-1">
+              {{'*' + $vuetify.lang.t('$vuetify.TELEFONE_SOLICITANTE')}}:</span>
+          </v-row>
+          <v-row>
+           <v-text-field
+                v-model.trim="reclaimerPhone"
+                dense
+                single-line
+                solo
+                max-width="200"
+                v-mask="'(##) ####-####'"
+                :rules="rules"
+              ></v-text-field>
+          </v-row>
+        </v-col>
+
+        <v-col
+          class="ma-0 pa-0"
+          cols="9"
+        >
+          <v-row>
+            <span class=" text-right subtitle-2 font-weight-bold grey--text text--lighten-1">
+              {{'*' + $vuetify.lang.t('$vuetify.TELEFONE_CONTATO')}}:</span>
+          </v-row>
+          <v-row>
+            <v-text-field
+                v-model.trim="contactPhone"
+                dense
+                single-line
+                solo
+                max-width="200"
+                v-mask="'(##) ####-####'"
+                :rules="rules"
+              ></v-text-field>
+          </v-row>
+        </v-col>
+
+        <v-col
+          class="ma-0 pa-0"
+          cols="9"
+        >
+          <v-row>
+            <span class=" text-right subtitle-2 font-weight-bold grey--text text--lighten-1">
+              {{'*Email'}}:</span>
+          </v-row>
+          <v-row>
+             <v-text-field
+                v-model.trim="email"
+                dense
+                single-line
+                solo
+                max-width="200"
+                :rules="rules"
+              ></v-text-field>
           </v-row>
         </v-col>
 
@@ -78,12 +140,13 @@
             <v-textarea
               class="mb-2"
               solo
-              height="200"
+              height="100"
               :no-resize="true"
               rows="5"
               v-model="issue.observation"
               counter
               maxlength="250"
+              :rules="rules"
             ></v-textarea>
           </v-row>
         </v-col>
@@ -349,7 +412,9 @@
           color="primary"
           text
           @click="
+            if(!allFieldsFilled()) return;
             showFootButtons = false;
+            concatInfosToObservation();
             send(issue, entity);
             setTimeout(() => {this.cleanFields()}, 4000);
           "
@@ -443,6 +508,16 @@ export default {
     reasonList: Array,
   },
   methods: {
+    allFieldsFilled(){
+      return this.reclaimerPhone && this.reclaimerPhone.length > 0
+      && this.contactPhone && this.contactPhone.length > 0
+      && this.email && this.email.length > 0
+      && this.issue.observation && this.issue.observation.length > 0;
+    },
+    concatInfosToObservation(){
+      this.issue.observation += '\n\n' + 'Telefone Contato: ' + this.contactPhone + 
+        '\n\n' + 'Telefone solicitante: ' + this.reclaimerPhone + '\n\n' + 'Email: ' + this.email;
+    },
     next() {
       if (
         this.selectedItemList.length == 1 &&
@@ -555,6 +630,7 @@ export default {
     },
   },
   data: () => ({
+    rules: [v => v && v.trim().length >= 1 || 'Campo obrigatório',],
     size: 0,
     page: 0,
     check: false,
@@ -566,6 +642,9 @@ export default {
     showLimitWaring: false,
     showFootButtons: true,
     maxNumber: 20,
+    reclaimerPhone: '',
+    contactPhone: '',
+    email: '',
   }),
   created: function () {
     this.size = this.$vuetify.breakpoint.xs ? 16 : 24;

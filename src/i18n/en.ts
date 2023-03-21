@@ -451,4 +451,5 @@ export default {
     SERVICOS: 'Services',
     TELEFONE_SOLICITANTE: 'Reclaimer phone',
     TELEFONE_CONTATO: 'Contact phone',
+    CAMPO_OBRIGATORIO: 'Mandatory field',
 }

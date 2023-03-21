@@ -447,4 +447,5 @@ export default {
     SERVICOS: 'Serviços',
     TELEFONE_SOLICITANTE: 'Telefone do solicitante',
     TELEFONE_CONTATO: 'Telefone do contato',
+    CAMPO_OBRIGATORIO: 'Campo obrigatório',
 }
