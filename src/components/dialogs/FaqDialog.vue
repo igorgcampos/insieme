@@ -21,7 +21,7 @@
 
       <v-col
         class="ma-n2 pa-0 overflow-y-hidden overflow-x-hidden"
-        style="min-height:22rem; max-height:28rem;"
+        style="min-height:22rem; max-height:32rem;"
       >
         <v-row class="mt-n3 ml-2">
           <v-col>
@@ -46,7 +46,7 @@
             <v-row>
               <div
                 class="ma-0 pt-2 mt-n4 mb-3 overflow-y-auto overflow-x-hidden"
-                style="width:97%; min-height:10rem; max-height:16rem"
+                style="width:97%; min-height:10rem; max-height:20rem"
               >
                 <v-expansion-panels class="ma-1 ml-7 mt-0 pr-12">
                   <v-expansion-panel

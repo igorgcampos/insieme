@@ -27,49 +27,53 @@
         }}
       </v-card-text>
 
-      <v-row
-        class="ma-0 mb-3 d-flex justify-center"
-        v-if="selectReason && !showDialogLoading"
+      <v-form
+        ref="form"
+        lazy-validation
+        class="overflow-y-auto overflow-x-hidden"
       >
-        <v-col class="ma-0 pa-0" cols="9">
-          <v-row>
-            <span
-              class="
-                text-right
-                subtitle-2
-                font-weight-bold
-                grey--text
-                text--lighten-1
-              "
-            >
-              {{
-                entity.type == "closing"
-                  ? '*' + $vuetify.lang.t("$vuetify.MOTIVO_ENCERRAMENTO")
-                  : '*' + $vuetify.lang.t("$vuetify.MOTIVO_ABERTURA")
-              }}:</span
-            >
-          </v-row>
-          <v-row>
-            <v-select
-              :items="reasonList"
-              v-model="issue.reason"
-              :label="$vuetify.lang.t('$vuetify.SELECIONE_MOTIVO')"
-              solo
-              dense
-            ></v-select>
-          </v-row>
-        </v-col>
-
-         <v-col
-          class="ma-0 pa-0"
-          cols="9"
+        <v-row
+          class="ma-0 mb-3 d-flex justify-center"
+          v-if="selectReason && !showDialogLoading"
         >
-          <v-row>
-            <span class=" text-right subtitle-2 font-weight-bold grey--text text--lighten-1">
-              {{'*' + $vuetify.lang.t('$vuetify.TELEFONE_SOLICITANTE')}}:</span>
-          </v-row>
-          <v-row>
-           <v-text-field
+          <v-col class="ma-0 pa-0" cols="9">
+            <v-row>
+              <span
+                class="text-right subtitle-2 font-weight-bold grey--text text--lighten-1"
+              >
+                {{
+                  entity.type == "closing"
+                    ? "*" + $vuetify.lang.t("$vuetify.MOTIVO_ENCERRAMENTO")
+                    : "*" + $vuetify.lang.t("$vuetify.MOTIVO_ABERTURA")
+                }}:</span
+              >
+            </v-row>
+            <v-row>
+              <v-select
+                :items="reasonList"
+                v-model="issue.reason"
+                :label="$vuetify.lang.t('$vuetify.SELECIONE_MOTIVO')"
+                solo
+                dense
+                :rules="[
+                  (v) => !!v || $vuetify.lang.t('$vuetify.CAMPO_OBRIGATORIO'),
+                ]"
+              ></v-select>
+            </v-row>
+          </v-col>
+
+          <v-col class="ma-0 pa-0" cols="9" v-if="entity.type == 'circuit'">
+            <v-row>
+              <span
+                class="text-right subtitle-2 font-weight-bold grey--text text--lighten-1"
+              >
+                {{
+                  "*" + $vuetify.lang.t("$vuetify.TELEFONE_SOLICITANTE")
+                }}:</span
+              >
+            </v-row>
+            <v-row>
+              <v-text-field
                 v-model.trim="reclaimerPhone"
                 dense
                 single-line
@@ -78,19 +82,19 @@
                 v-mask="'(##) ####-####'"
                 :rules="rules"
               ></v-text-field>
-          </v-row>
-        </v-col>
+            </v-row>
+          </v-col>
 
-        <v-col
-          class="ma-0 pa-0"
-          cols="9"
-        >
-          <v-row>
-            <span class=" text-right subtitle-2 font-weight-bold grey--text text--lighten-1">
-              {{'*' + $vuetify.lang.t('$vuetify.TELEFONE_CONTATO')}}:</span>
-          </v-row>
-          <v-row>
-            <v-text-field
+          <v-col class="ma-0 pa-0" cols="9" v-if="entity.type == 'circuit'">
+            <v-row>
+              <span
+                class="text-right subtitle-2 font-weight-bold grey--text text--lighten-1"
+              >
+                {{ "*" + $vuetify.lang.t("$vuetify.TELEFONE_CONTATO") }}:</span
+              >
+            </v-row>
+            <v-row>
+              <v-text-field
                 v-model.trim="contactPhone"
                 dense
                 single-line
@@ -99,19 +103,19 @@
                 v-mask="'(##) ####-####'"
                 :rules="rules"
               ></v-text-field>
-          </v-row>
-        </v-col>
+            </v-row>
+          </v-col>
 
-        <v-col
-          class="ma-0 pa-0"
-          cols="9"
-        >
-          <v-row>
-            <span class=" text-right subtitle-2 font-weight-bold grey--text text--lighten-1">
-              {{'*Email'}}:</span>
-          </v-row>
-          <v-row>
-             <v-text-field
+          <v-col class="ma-0 pa-0" cols="9" v-if="entity.type == 'circuit'">
+            <v-row>
+              <span
+                class="text-right subtitle-2 font-weight-bold grey--text text--lighten-1"
+              >
+                {{ "*Email" }}:</span
+              >
+            </v-row>
+            <v-row>
+              <v-text-field
                 v-model.trim="email"
                 dense
                 single-line
@@ -119,38 +123,33 @@
                 max-width="200"
                 :rules="rules"
               ></v-text-field>
-          </v-row>
-        </v-col>
+            </v-row>
+          </v-col>
 
-        <v-col class="ma-0 pa-0 mt-0" cols="9">
-          <v-row>
-            <span
-              class="
-                text-right
-                subtitle-2
-                font-weight-bold
-                grey--text
-                text--lighten-1
-              "
-            >
-              {{ $vuetify.lang.t("$vuetify.BREVE_DESCRICAO") }}:</span
-            >
-          </v-row>
-          <v-row>
-            <v-textarea
-              class="mb-2"
-              solo
-              height="100"
-              :no-resize="true"
-              rows="5"
-              v-model="issue.observation"
-              counter
-              maxlength="250"
-              :rules="rules"
-            ></v-textarea>
-          </v-row>
-        </v-col>
-      </v-row>
+          <v-col class="ma-0 pa-0 mt-0" cols="9">
+            <v-row>
+              <span
+                class="text-right subtitle-2 font-weight-bold grey--text text--lighten-1"
+              >
+                {{ $vuetify.lang.t("$vuetify.BREVE_DESCRICAO") }}:</span
+              >
+            </v-row>
+            <v-row>
+              <v-textarea
+                class="mb-2"
+                solo
+                height="100"
+                :no-resize="true"
+                rows="5"
+                v-model="issue.observation"
+                counter
+                maxlength="250"
+                :rules="rules"
+              ></v-textarea>
+            </v-row>
+          </v-col>
+        </v-row>
+      </v-form>
 
       <v-row
         justify="center"
@@ -175,13 +174,7 @@
             <v-col cols="11" class="ml-4 mt-n4 pr-0 mr-0">
               <v-row>
                 <span
-                  class="
-                    text-right
-                    subtitle-2
-                    font-weight-bold
-                    grey--text
-                    text--lighten-1
-                  "
+                  class="text-right subtitle-2 font-weight-bold grey--text text--lighten-1"
                 >
                   {{ $vuetify.lang.t("$vuetify.BUSCAR") }}:</span
                 >
@@ -314,7 +307,7 @@
               </WarningPanel>
 
               <v-row
-                class="ml-0 mt-2 d-flex justify-left"
+                class="ml-n2 mt-2 justify-center"
                 :class="{ 'ml-n7': $vuetify.breakpoint.xs }"
                 v-for="item in selectedItemList"
                 :key="item.id"
@@ -356,7 +349,7 @@
                   <v-chip
                     :key="item.id + 1"
                     color="success"
-                    class="ml-0 mr-2 mt-2"
+                    class="ml-0 mr-0 mt-2"
                     :class="{ 'ml-2': $vuetify.breakpoint.xs }"
                     label
                     :small="$vuetify.breakpoint.xs"
@@ -412,11 +405,14 @@
           color="primary"
           text
           @click="
-            if(!allFieldsFilled()) return;
+            $refs.form.validate();
+            if (!allFieldsFilled() && entity.type == 'circuit') return;
             showFootButtons = false;
-            concatInfosToObservation();
+            if(entity.type == 'circuit') concatInfosToObservation();
             send(issue, entity);
-            setTimeout(() => {this.cleanFields()}, 4000);
+            setTimeout(() => {
+              this.cleanFields();
+            }, 4000);
           "
           :x-small="$vuetify.breakpoint.xs"
           :loading="showDialogLoading"
@@ -508,15 +504,30 @@ export default {
     reasonList: Array,
   },
   methods: {
-    allFieldsFilled(){
-      return this.reclaimerPhone && this.reclaimerPhone.length > 0
-      && this.contactPhone && this.contactPhone.length > 0
-      && this.email && this.email.length > 0
-      && this.issue.observation && this.issue.observation.length > 0;
+    allFieldsFilled() {
+      return (
+        this.issue.reason &&
+        this.reclaimerPhone &&
+        this.reclaimerPhone.length > 0 &&
+        this.contactPhone &&
+        this.contactPhone.length > 0 &&
+        this.email &&
+        this.email.length > 0 &&
+        this.issue.observation &&
+        this.issue.observation.length > 0
+      );
     },
-    concatInfosToObservation(){
-      this.issue.observation += '\n\n' + 'Telefone Contato: ' + this.contactPhone + 
-        '\n\n' + 'Telefone solicitante: ' + this.reclaimerPhone + '\n\n' + 'Email: ' + this.email;
+    concatInfosToObservation() {
+      this.issue.observation +=
+        "\n\n" +
+        "Telefone Contato: " +
+        this.contactPhone +
+        "\n\n" +
+        "Telefone solicitante: " +
+        this.reclaimerPhone +
+        "\n\n" +
+        "Email: " +
+        this.email;
     },
     next() {
       if (
@@ -552,7 +563,6 @@ export default {
         !this.containsItem(item, this.selectedItemList) &&
         this.containsItem(item, this.selectedCheckList)
       ) {
-        
         this.selectedItemList.push(item);
 
         if (
@@ -629,23 +639,29 @@ export default {
       this.showFootButtons = true;
     },
   },
-  data: () => ({
-    rules: [v => v && v.trim().length >= 1 || 'Campo obrigatório',],
-    size: 0,
-    page: 0,
-    check: false,
-    searchText: "",
-    selectedItemList: [],
-    selectedCheckList: [],
-    selectReason: false,
-    issue: { reason: "", observation: "", items: undefined },
-    showLimitWaring: false,
-    showFootButtons: true,
-    maxNumber: 20,
-    reclaimerPhone: '',
-    contactPhone: '',
-    email: '',
-  }),
+  data() {
+    return {
+      rules: [
+        (v) =>
+          (v && v.trim().length >= 1) ||
+          this.$vuetify.lang.t("$vuetify.CAMPO_OBRIGATORIO"),
+      ],
+      size: 0,
+      page: 0,
+      check: false,
+      searchText: "",
+      selectedItemList: [],
+      selectedCheckList: [],
+      selectReason: false,
+      issue: { reason: "", observation: "", items: undefined },
+      showLimitWaring: false,
+      showFootButtons: true,
+      maxNumber: 20,
+      reclaimerPhone: "",
+      contactPhone: "",
+      email: "",
+    };
+  },
   created: function () {
     this.size = this.$vuetify.breakpoint.xs ? 16 : 24;
     this.search("", 0);
