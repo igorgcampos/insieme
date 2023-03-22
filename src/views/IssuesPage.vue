@@ -1123,9 +1123,12 @@ export default {
           issue.items[index].observation = issue.observation;
           issue.items[index].reason = issue.reason;
           this.$root.$emit("restart", issue.items[index]);
-          this.$root.$emit('clean-fields');
-          this.closeBatchDialog();
-          return;
+
+          if(index == issue.items.length - 1){
+            this.$root.$emit('clean-fields');
+            this.closeBatchDialog();
+          }
+          continue;
         }
 
         delete object.circuito;
