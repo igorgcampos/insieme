@@ -625,6 +625,9 @@ export default {
       this.issue.observation = "";
       this.issue.reason = undefined;
       this.issue.items = undefined;
+      this.reclaimerPhone = "";
+      this.contactPhone = "";
+      this.email = "";
 
       if (cancel) {
         this.selectReason = false;
@@ -665,6 +668,10 @@ export default {
   created: function () {
     this.size = this.$vuetify.breakpoint.xs ? 16 : 24;
     this.search("", 0);
+
+    this.$root.$on('clean-fields', () =>{
+      this.cleanFields(true);
+    })
   },
 };
 </script>

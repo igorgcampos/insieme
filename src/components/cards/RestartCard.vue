@@ -121,8 +121,8 @@ export default {
         origem: 'CIRCUITO',
         identificadorOrigem: this.circuit.nome,
         identificadorOrigemSecundario: this.circuit.designacaoCliente,
-        motivoAbertura: 'Inoperância',
-        observacaoAbertura: 'Criação de incidente via restart de circuito realizado pelo cliente',
+        motivoAbertura: this.circuit.reason || 'Inoperância',
+        observacaoAbertura: this.circuit.observation || 'Criação de incidente via restart de circuito realizado pelo cliente',
         contrato: { id: this.contract.id },
         status: undefined,
       } 

@@ -1119,6 +1119,16 @@ export default {
           contrato: { id: this.$props.contract.id },
         };
 
+        if(issue.reason == 'Inoperância' || issue.reason == 'Desempenho'){
+          issue.items[index].observation = issue.observation;
+          issue.items[index].reason = issue.reason;
+          this.$root.$emit("restart", issue.items[index]);
+          this.$root.$emit('clean-fields');
+          this.closeBatchDialog();
+          return;
+        }
+
+        delete object.circuito;
         this.$post("/chamado/create", object).then((response) => {
           if (!response) {
             this.error = true;
