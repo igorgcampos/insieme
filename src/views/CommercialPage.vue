@@ -193,6 +193,7 @@
                 :small="!$vuetify.breakpoint.xs"
               >
                 {{$vuetify.lang.t('$vuetify.MAIS_OPCOES')}}
+                <v-icon right dark> mdi-chevron-down </v-icon>
               </v-btn>
             </template>
 
