@@ -205,17 +205,24 @@ export default {
     },
     login() {
       this.loading = true;
-      this.$login(this.username, this.password).then((response) => {
+      this.$login(this.username, this.password).then((logged) => {
+
+        if(!logged){
+          this.loading = false;
+          this.success = logged;
+          this.$refs["password"].validate(true);
+          return;
+        }
+
         this.$getUser().then((user) => {
-          this.success = response;
-          if (this.success && user.perfis.length > 0) {
+          this.success = logged;
+          if (user.perfis.length > 0) {
             this.$root.$emit("login-success");
           } else {
             this.$refs["password"].validate(true);
           }
 
           this.loading = false;
-
           this.$saveOperation({ tipo: "LOGIN", usuario: user });
         });
       });
