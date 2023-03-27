@@ -2,14 +2,7 @@
   <div class="mb-10">
     <v-row id="circuits" :class="{ 'ml-n12': $vuetify.breakpoint.mdAndUp }">
       <span
-        class="
-          mb-7
-          text-right
-          display-1
-          font-weight-bold
-          grey--text
-          text--darken-1
-        "
+        class="mb-7 text-right display-1 font-weight-bold grey--text text--darken-1"
       >
         {{ $vuetify.lang.t("$vuetify.CIRCUITOS") }}</span
       >
@@ -51,14 +44,7 @@
               <v-col cols="12">
                 <v-row justify="center">
                   <span
-                    class="
-                      mt-n3
-                      text-center
-                      subtitle-1
-                      font-weight-bold
-                      grey--text
-                      text--darken-1
-                    "
+                    class="mt-n3 text-center subtitle-1 font-weight-bold grey--text text--darken-1"
                   >
                     {{
                       $vuetify.lang.t("$vuetify.STATUS_OPERACIONAL_CAIXA_BAIXA")
@@ -100,14 +86,7 @@
               <v-col class="mr-0 ml-n0 pr-0 pl-0" cols="12">
                 <v-row justify="center">
                   <span
-                    class="
-                      mt-n3
-                      text-center
-                      subtitle-1
-                      font-weight-bold
-                      grey--text
-                      text--darken-1
-                    "
+                    class="mt-n3 text-center subtitle-1 font-weight-bold grey--text text--darken-1"
                   >
                     {{ $vuetify.lang.t("$vuetify.STATUS_LOGISTICA") }}</span
                   >
@@ -194,14 +173,7 @@
               <v-col class="mr-0 ml-n0 pr-0 pl-0" cols="12">
                 <v-row justify="center">
                   <span
-                    class="
-                      mt-n3
-                      text-center
-                      subtitle-1
-                      font-weight-bold
-                      grey--text
-                      text--darken-1
-                    "
+                    class="mt-n3 text-center subtitle-1 font-weight-bold grey--text text--darken-1"
                   >
                     {{
                       $vuetify.lang.t("$vuetify.STATUS_CONTRATACAO_CAIXA_BAIXA")
@@ -302,14 +274,7 @@
             >
               <v-row justify="center">
                 <span
-                  class="
-                    mt-n3
-                    text-center
-                    caption
-                    font-weight-bold
-                    grey--text
-                    text--darken-2
-                  "
+                  class="mt-n3 text-center caption font-weight-bold grey--text text--darken-2"
                 >
                   {{ $vuetify.lang.t("$vuetify.STATUS_OPERACIONAL") }}</span
                 >
@@ -407,7 +372,7 @@
                             :toolTipMessage="
                               $vuetify.lang.t('$vuetify.ATIVADO_DESCRICAO')
                             "
-                            :isLoading="isLoadingStatus"
+                            :isLoading="installCounts[0] == -1"
                           ></CountCard>
                         </v-col>
                       </v-slide-item>
@@ -421,7 +386,7 @@
                             :toolTipMessage="
                               $vuetify.lang.t('$vuetify.DESATIVADO_DESCRICAO')
                             "
-                            :isLoading="isLoadingStatus"
+                            :isLoading="installCounts[1] == -1"
                           >
                           </CountCard>
                         </v-col>
@@ -436,7 +401,7 @@
                             :toolTipMessage="
                               $vuetify.lang.t('$vuetify.DESINSTALADO_DESCRICAO')
                             "
-                            :isLoading="isLoadingStatus"
+                            :isLoading="installCounts[3] == -1"
                           ></CountCard>
                         </v-col>
                       </v-slide-item>
@@ -450,7 +415,7 @@
                             :toolTipMessage="
                               $vuetify.lang.t('$vuetify.CANCELADO_DESCRICAO')
                             "
-                            :isLoading="isLoadingStatus"
+                            :isLoading="installCounts[2] == -1"
                           ></CountCard>
                         </v-col>
                       </v-slide-item>
@@ -464,7 +429,7 @@
                             :toolTipMessage="
                               $vuetify.lang.t('$vuetify.SUSPENSO_DESCRICAO')
                             "
-                            :isLoading="isLoadingStatus"
+                            :isLoading="installCounts[8] == -1"
                           ></CountCard>
                         </v-col>
                       </v-slide-item>
@@ -482,7 +447,7 @@
                       :toolTipMessage="
                         $vuetify.lang.t('$vuetify.PROC_LOGISTICO_DESCRICAO')
                       "
-                      :isLoading="isLoadingStatus"
+                      :isLoading="installCounts[7] == -1"
                     ></CountCard>
                   </v-col>
 
@@ -496,7 +461,7 @@
                         $vuetify.lang.t('$vuetify.EM_TRANSPORTE_DESCRICAO')
                       "
                       :class="{ 'ml-n4': $vuetify.breakpoint.sm }"
-                      :isLoading="isLoadingStatus"
+                      :isLoading="installCounts[5] == -1"
                     ></CountCard>
                   </v-col>
 
@@ -510,7 +475,7 @@
                         $vuetify.lang.t('$vuetify.INSTALANDO_DESCRICAO')
                       "
                       :class="{ 'ml-n4': $vuetify.breakpoint.sm }"
-                      :isLoading="isLoadingStatus"
+                      :isLoading="installCounts[6] == -1"
                     ></CountCard>
                   </v-col>
 
@@ -525,7 +490,7 @@
                         $vuetify.lang.t('$vuetify.AGUARDANDO_DESCRICAO')
                       "
                       :class="{ 'ml-n4': $vuetify.breakpoint.sm }"
-                      :isLoading="isLoadingStatus"
+                      :isLoading="installCounts[4] == -1"
                     ></CountCard>
                   </v-col>
                 </v-row>
@@ -538,13 +503,7 @@
           <v-col cols="3">
             <v-row>
               <span
-                class="
-                  text-right
-                  subtitle-2
-                  font-weight-bold
-                  grey--text
-                  text--lighten-1
-                "
+                class="text-right subtitle-2 font-weight-bold grey--text text--lighten-1"
               >
                 {{ $vuetify.lang.t("$vuetify.BUSCAR") }}:</span
               >
@@ -578,13 +537,7 @@
           <v-col class="ml-5" cols="3" v-if="$hasProfile('Administrador')">
             <v-row>
               <span
-                class="
-                  text-right
-                  subtitle-2
-                  font-weight-bold
-                  grey--text
-                  text--lighten-1
-                "
+                class="text-right subtitle-2 font-weight-bold grey--text text--lighten-1"
               >
                 {{ $vuetify.lang.t("$vuetify.PRODUTO") }}:</span
               >
@@ -608,13 +561,7 @@
           <v-col class="ml-5" cols="3">
             <v-row>
               <span
-                class="
-                  text-right
-                  subtitle-2
-                  font-weight-bold
-                  grey--text
-                  text--lighten-1
-                "
+                class="text-right subtitle-2 font-weight-bold grey--text text--lighten-1"
               >
                 {{ $vuetify.lang.t("$vuetify.TECNOLOGIA") }}:</span
               >
@@ -674,7 +621,9 @@
                     <v-col v-if="!open" cols="4" sm="2">
                       <v-chip
                         :color="
-                          circuit.tecnologia != 'VSAT' && (circuit.tecnologia && !circuit.tecnologia.includes('BGAN'))
+                          circuit.tecnologia != 'VSAT' &&
+                          circuit.tecnologia &&
+                          !circuit.tecnologia.includes('BGAN')
                             ? 'grey'
                             : circuit.online == 3
                             ? 'success'
@@ -686,7 +635,9 @@
                         outlined
                       >
                         {{
-                          circuit.tecnologia != "VSAT" && (circuit.tecnologia && !circuit.tecnologia.includes('BGAN'))
+                          circuit.tecnologia != "VSAT" &&
+                          circuit.tecnologia &&
+                          !circuit.tecnologia.includes("BGAN")
                             ? "N/A"
                             : circuit.online == 3
                             ? "Online"
@@ -755,13 +706,7 @@
                     >
                       <v-row sm="5" md="6" :class="{ 'ml-n3': open }">
                         <strong
-                          class="
-                            caption
-                            font-weight-bold
-                            grey--text
-                            text--lighten-1
-                            mr-2
-                          "
+                          class="caption font-weight-bold grey--text text--lighten-1 mr-2"
                         >
                           {{
                             $vuetify.lang.t("$vuetify.DESIGNACAO_CLIENTE")
@@ -769,21 +714,21 @@
                         >
                         <strong
                           class="caption font-weight-bold"
-                          v-html="circuit.designacaoClient?circuit.designacaoCliente.toLowerCase():'--'"
+                          v-html="
+                            circuit.designacaoClient
+                              ? circuit.designacaoCliente.toLowerCase()
+                              : '--'
+                          "
                         ></strong>
                       </v-row>
 
                       <v-row sm="5" md="3" v-if="!open">
                         <strong
-                          class="
-                            caption
-                            font-weight-bold
-                            grey--text
-                            text--lighten-1
-                            mr-2
-                          "
+                          class="caption font-weight-bold grey--text text--lighten-1 mr-2"
                         >
-                          {{$vuetify.lang.t("$vuetify.DESIGNACAO_TPZ")}}</strong
+                          {{
+                            $vuetify.lang.t("$vuetify.DESIGNACAO_TPZ")
+                          }}</strong
                         >
                         <strong
                           class="caption font-weight-bold"
@@ -809,7 +754,9 @@
                       <v-col class="pa-0">
                         <v-chip
                           :color="
-                            circuit.tecnologia != 'VSAT' && (circuit.tecnologia && !circuit.tecnologia.includes('BGAN'))
+                            circuit.tecnologia != 'VSAT' &&
+                            circuit.tecnologia &&
+                            !circuit.tecnologia.includes('BGAN')
                               ? 'grey'
                               : circuit.online == 3
                               ? 'success'
@@ -821,7 +768,9 @@
                           outlined
                         >
                           {{
-                            circuit.tecnologia != "VSAT" && (circuit.tecnologia && !circuit.tecnologia.includes('BGAN'))
+                            circuit.tecnologia != "VSAT" &&
+                            circuit.tecnologia &&
+                            !circuit.tecnologia.includes("BGAN")
                               ? "N/A"
                               : circuit.online == 3
                               ? "Online"
@@ -976,7 +925,11 @@
                       <v-col>
                         <LabelValue
                           :label="$vuetify.lang.t('$vuetify.LATENCIA_MINIMA')"
-                          :value="circuit.latenciaMinima?circuit.latenciaMinima + ' ms':'--'"
+                          :value="
+                            circuit.latenciaMinima
+                              ? circuit.latenciaMinima + ' ms'
+                              : '--'
+                          "
                           justify="start"
                           truncate
                           style="width: 150px"
@@ -986,7 +939,11 @@
                       <v-col class="pt-0 mt-n6">
                         <LabelValue
                           :label="$vuetify.lang.t('$vuetify.LATENCIA_MEDIA')"
-                          :value="circuit.latenciaMedia?circuit.latenciaMedia + ' ms':'--'"
+                          :value="
+                            circuit.latenciaMedia
+                              ? circuit.latenciaMedia + ' ms'
+                              : '--'
+                          "
                           justify="start"
                           truncate
                           style="width: 150px"
@@ -996,7 +953,11 @@
                       <v-col class="pt-0 mt-n6">
                         <LabelValue
                           :label="$vuetify.lang.t('$vuetify.LATENCIA_MAXIMA')"
-                          :value="circuit.latenciaMaxima?circuit.latenciaMaxima + ' ms':'--'"
+                          :value="
+                            circuit.latenciaMaxima
+                              ? circuit.latenciaMaxima + ' ms'
+                              : '--'
+                          "
                           justify="start"
                           truncate
                           style="width: 150px"
@@ -1156,18 +1117,18 @@ export default {
       });
     },
     openPRTG(circuit) {
-      this.$getUser().then(user =>{
+      this.$getUser().then((user) => {
         window.open(
-        "https://monitor.telespazio.com.br/device.htm?id=" +
-          circuit.idPrtg +
-          "&tabid=1&username=" +
-          user.apelido +
-          "&passhash=" +
-          user.prtgToken
-      );
+          "https://monitor.telespazio.com.br/device.htm?id=" +
+            circuit.idPrtg +
+            "&tabid=1&username=" +
+            user.apelido +
+            "&passhash=" +
+            user.prtgToken
+        );
 
-      this.$saveOperation({ tipo: "LINK_PRTG", usuario: user });
-      })
+        this.$saveOperation({ tipo: "LINK_PRTG", usuario: user });
+      });
     },
     formatCircuit(circuit) {
       return {
@@ -1467,6 +1428,23 @@ export default {
     expandPanel() {
       this.showPanel = !this.showPanel;
     },
+    getInstallStatus(status, index) {
+      this.$get("/circuito/install/counts", {
+        contractNumber: this.$props.contract.numeroContratoTpz,
+        statusInstall: status,
+      }).then((response) => {
+        this.installCounts[index] = response.data;
+
+        this.$forceUpdate();
+        if (index == this.installCounts.length - 1) {
+          var countsArray = this.installCounts.slice();
+          countsArray.unshift(this.counts[1]);
+          countsArray.unshift(this.counts[0]);
+          this.$root.$emit("circuit-data", countsArray);
+          
+        }
+      });
+    },
   },
   props: {
     contract: Object,
@@ -1493,7 +1471,7 @@ export default {
     showDialog: false,
     showSuccess: false,
     counts: [0, 0],
-    installCounts: [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    installCounts: [-1, -1, -1, -1, -1, -1, -1, -1, -1],
     circuits: [],
     statuses: [],
     products: [],
@@ -1525,7 +1503,7 @@ export default {
       "Offline",
     ];
 
-    this.$getUser().then(user => this.prtgToken = user.prtgToken);
+    this.$getUser().then((user) => (this.prtgToken = user.prtgToken));
 
     this.products = [this.$vuetify.lang.t("$vuetify.TODOS")];
     this.technologies = [this.$vuetify.lang.t("$vuetify.TODOS")];
@@ -1546,32 +1524,29 @@ export default {
 
     this.isLoadingOnline = true;
     this.isLoadingOffline = true;
-    this.isLoadingStatus = true;
 
     this.$get("/circuito/status/counts", {
       contractNumber: this.$props.contract.numeroContratoTpz,
+      online: true,
     }).then((response) => {
       if (response) {
-        this.counts = response.data;
+        this.counts[0] = response.data;
       }
 
       this.isLoadingOnline = false;
+      this.$forceUpdate();
+    });
+
+    this.$get("/circuito/status/counts", {
+      contractNumber: this.$props.contract.numeroContratoTpz,
+      online: false,
+    }).then((response) => {
+      if (response) {
+        this.counts[1] = response.data;
+      }
+
       this.isLoadingOffline = false;
-
-      this.$get("/circuito/install/counts", {
-        contractNumber: this.$props.contract.numeroContratoTpz,
-      }).then((response2) => {
-        if (response) {
-          this.installCounts = response2.data;
-        }
-
-        var countsArray = this.installCounts.slice();
-        countsArray.unshift(this.counts[1]);
-        countsArray.unshift(this.counts[0]);
-        this.$root.$emit("circuit-data", countsArray);
-
-        this.isLoadingStatus = false;
-      });
+      this.$forceUpdate();
     });
 
     this.$get("/circuito/busca", {
@@ -1586,6 +1561,16 @@ export default {
       this.circuits = response.data;
       this.isLoading = false;
     });
+
+    this.getInstallStatus("ATIVADO", 0);
+    this.getInstallStatus("DESATIVADO", 1);
+    this.getInstallStatus("CANCELADO", 2);
+    this.getInstallStatus("DESINSTALADO", 3);
+    this.getInstallStatus("INSTALADO", 4);
+    this.getInstallStatus("EM_TRANSPORTE", 5);
+    this.getInstallStatus("EM_IMPLANTAÇÃO", 6);
+    this.getInstallStatus("PROCESSO_FISCAL", 7);
+    this.getInstallStatus("SUSPENSO", 8);
 
     this.$root.$on("search-circuit", (desigTpz) => {
       this.searchText = desigTpz;
