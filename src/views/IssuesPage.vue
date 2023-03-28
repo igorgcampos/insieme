@@ -193,8 +193,7 @@
                 <v-list-item
                   @click="openServiceIssue()"
                   v-if="
-                    $hasProfile('Operacional') ||
-                    $hasProfile('Cliente') ||
+                    $hasProfile('/grp_insieme-chamado-servico') ||
                     $hasProfile('Administrador')
                   "
                 >
