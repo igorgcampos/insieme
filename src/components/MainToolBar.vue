@@ -172,7 +172,7 @@
                 overlap
                 offset-x="9"
                 offset-y="12"
-                class="ml-4 mt-0"
+                class="ml-4 mr-2 mt-1"
               >
                 <v-icon medium> mdi-bell-ring </v-icon>
               </v-badge>
