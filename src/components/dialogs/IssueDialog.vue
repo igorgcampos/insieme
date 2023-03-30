@@ -1,116 +1,150 @@
 <template>
-
   <v-dialog
     v-model="showDialog"
     persistent
     max-width="400"
     v-if="getObject()"
+    overflow-y-hidden
+    overflow-x-hidden
   >
-    <v-card v-show="!showSuccess">
+    <v-card v-show="!showSuccess" overflow-y-hidden overflow-x-hidden>
       <v-card-title
         class="headline-6"
-        :class="{'subtitle-2':$vuetify.breakpoint.xs}"
+        :class="{ 'subtitle-2': $vuetify.breakpoint.xs }"
         style="word-break: normal; !important"
       >
-        {{getObject().type == 'service'?$vuetify.lang.t("$vuetify.ABRINDO_CHAMADO_SERVICOS"): getObject().type=='circuit'?
-          $vuetify.lang.t('$vuetify.ABRINDO_CHAMADO_CIRCUITO',getObject().nome):
-          getObject().type == 'invoice'?
-          $vuetify.lang.t('$vuetify.ABRINDO_CHAMADO_NOTA')+
-          getObject().numero: $vuetify.lang.t('$vuetify.ENCERRANDO_CHAMADO')+getObject().protocolo}}
+        {{
+          getObject().type == "service"
+            ? $vuetify.lang.t("$vuetify.ABRINDO_CHAMADO_SERVICOS")
+            : getObject().type == "circuit"
+            ? $vuetify.lang.t(
+                "$vuetify.ABRINDO_CHAMADO_CIRCUITO",
+                getObject().nome
+              )
+            : getObject().type == "invoice"
+            ? $vuetify.lang.t("$vuetify.ABRINDO_CHAMADO_NOTA") +
+              getObject().numero
+            : $vuetify.lang.t("$vuetify.ENCERRANDO_CHAMADO") +
+              getObject().protocolo
+        }}
       </v-card-title>
-      <v-card-text class="headline-6">{{$vuetify.lang.t('$vuetify.SELECIONE_MOTIVO_OBSERVACAO')}}</v-card-text>
+      <v-card-text class="headline-6">{{
+        $vuetify.lang.t("$vuetify.SELECIONE_MOTIVO_OBSERVACAO")
+      }}</v-card-text>
 
-      <v-row class="ma-0 justify-center mb-4">
-
-        <v-col
-          class="ma-0 pa-0"
-          cols="9"
-        >
+      <v-row
+        class="ma-0 justify-center mb-4"
+        style="overflow-y: auto;"
+        :style="{'max-height':this.$vuetify.breakpoint.xs?'300px':this.$vuetify.breakpoint.sm?'350px':
+         this.$vuetify.breakpoint.md?'400px':this.$vuetify.breakpoint.lg?'450px':this.$vuetify.breakpoint.xl?'550px':'450px'}"
+      >
+        <v-col class="ma-0 pa-0" cols="9">
           <v-row>
-            <span class=" text-right subtitle-2 font-weight-bold grey--text text--lighten-1">
-              {{getObject().type=='closing'?$vuetify.lang.t('$vuetify.MOTIVO_ENCERRAMENTO'):
-                $vuetify.lang.t('$vuetify.MOTIVO_ABERTURA')}}:</span>
+            <span
+              class="text-right subtitle-2 font-weight-bold grey--text text--lighten-1"
+            >
+              {{
+                getObject().type == "closing"
+                  ? $vuetify.lang.t("$vuetify.MOTIVO_ENCERRAMENTO")
+                  : $vuetify.lang.t("$vuetify.MOTIVO_ABERTURA")
+              }}:</span
+            >
           </v-row>
           <v-row>
-            <v-select
+            <v-autocomplete
               :items="itemList"
               v-model="issue.reason"
               :label="$vuetify.lang.t('$vuetify.SELECIONE_MOTIVO')"
               solo
               dense
-            ></v-select>
+            ></v-autocomplete>
           </v-row>
         </v-col>
 
-        <v-col
-          class="ma-0 pa-0"
-          cols="9"
-          v-if="getObject().type=='service'"
-        >
+        <v-col class="ma-0 pa-0" cols="9" v-if="getObject().type == 'service' && assetList && assetList.length > 0">
           <v-row>
-            <span class=" text-right subtitle-2 font-weight-bold grey--text text--lighten-1">
-              {{$vuetify.lang.t('$vuetify.TELEFONE_SOLICITANTE')}}:</span>
+            <span
+              class="text-right subtitle-2 font-weight-bold grey--text text--lighten-1"
+            >
+              {{ $vuetify.lang.t("$vuetify.IDENTIFICADOR_ATIVO") }}:</span
+            >
           </v-row>
           <v-row>
-           <v-text-field
-                v-model.trim="reclaimerPhone"
-                dense
-                single-line
-                solo
-                max-width="200"
-                v-mask="'(##) ####-####'"
-              ></v-text-field>
+            <v-autocomplete
+              :items="assetList"
+              v-model="selectedAsset"
+              solo
+              dense
+            ></v-autocomplete>
           </v-row>
         </v-col>
 
-        <v-col
-          class="ma-0 pa-0"
-          cols="9"
-          v-if="getObject().type=='service'"
-        >
+        <v-col class="ma-0 pa-0" cols="9" v-if="getObject().type == 'service'">
           <v-row>
-            <span class=" text-right subtitle-2 font-weight-bold grey--text text--lighten-1">
-              {{$vuetify.lang.t('$vuetify.TELEFONE_CONTATO')}}:</span>
+            <span
+              class="text-right subtitle-2 font-weight-bold grey--text text--lighten-1"
+            >
+              {{ $vuetify.lang.t("$vuetify.TELEFONE_SOLICITANTE") }}:</span
+            >
           </v-row>
           <v-row>
             <v-text-field
-                v-model.trim="contactPhone"
-                dense
-                single-line
-                solo
-                max-width="200"
-                v-mask="'(##) ####-####'"
-              ></v-text-field>
+              v-model.trim="reclaimerPhone"
+              dense
+              single-line
+              solo
+              max-width="200"
+              v-mask="'(##) ####-####'"
+            ></v-text-field>
           </v-row>
         </v-col>
 
-        <v-col
-          class="ma-0 pa-0"
-          cols="9"
-          v-if="getObject().type=='service'"
-        >
+        <v-col class="ma-0 pa-0" cols="9" v-if="getObject().type == 'service'">
           <v-row>
-            <span class=" text-right subtitle-2 font-weight-bold grey--text text--lighten-1">
-              {{'Email'}}:</span>
+            <span
+              class="text-right subtitle-2 font-weight-bold grey--text text--lighten-1"
+            >
+              {{ $vuetify.lang.t("$vuetify.TELEFONE_CONTATO") }}:</span
+            >
           </v-row>
           <v-row>
-             <v-text-field
-                v-model.trim="email"
-                dense
-                single-line
-                solo
-                max-width="200"
-              ></v-text-field>
+            <v-text-field
+              v-model.trim="contactPhone"
+              dense
+              single-line
+              solo
+              max-width="200"
+              v-mask="'(##) ####-####'"
+            ></v-text-field>
           </v-row>
         </v-col>
 
-        <v-col
-          class="ma-0 pa-0 mt-0"
-          cols="9"
-        >
+        <v-col class="ma-0 pa-0" cols="9" v-if="getObject().type == 'service'">
           <v-row>
-            <span class=" text-right subtitle-2 font-weight-bold grey--text text--lighten-1">
-              {{$vuetify.lang.t('$vuetify.BREVE_DESCRICAO')}}:</span>
+            <span
+              class="text-right subtitle-2 font-weight-bold grey--text text--lighten-1"
+            >
+              {{ "Email" }}:</span
+            >
+          </v-row>
+          <v-row>
+            <v-text-field
+              v-model.trim="email"
+              dense
+              single-line
+              solo
+              max-width="200"
+            ></v-text-field>
+          </v-row>
+        </v-col>
+
+        <v-col class="ma-0 pa-0 mt-0" cols="9">
+          <v-row>
+            <span
+              class="text-right subtitle-2 font-weight-bold grey--text text--lighten-1"
+            >
+              {{ $vuetify.lang.t("$vuetify.BREVE_DESCRICAO") }}:</span
+            >
           </v-row>
           <v-row>
             <v-textarea
@@ -126,31 +160,48 @@
         </v-col>
       </v-row>
 
-      <v-divider class="mt-n6"></v-divider>
+      <v-divider class="mt-0"></v-divider>
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn
           color="primary"
           text
-          @click="close(); cleanFields()"
+          @click="
+            close();
+            cleanFields();
+          "
           :x-small="$vuetify.breakpoint.xs"
-        >{{$vuetify.lang.t('$vuetify.CANCELAR')}}</v-btn>
+          >{{ $vuetify.lang.t("$vuetify.CANCELAR") }}</v-btn
+        >
         <v-btn
           color="primary"
           text
-          @click="concatInfosToObservation(); send(issue, getObject()); cleanFields()"
+          @click="
+            concatInfosToObservation();
+            send(issue, getObject());
+            cleanFields();
+          "
           :x-small="$vuetify.breakpoint.xs"
           :loading="showDialogLoading"
-        >{{$vuetify.lang.t('$vuetify.ENVIAR')}}</v-btn>
+          >{{ $vuetify.lang.t("$vuetify.ENVIAR") }}</v-btn
+        >
       </v-card-actions>
     </v-card>
 
     <v-card v-show="showSuccess">
-
       <SuccessPanel
-        :title="getObject().type!='closing'?$vuetify.lang.t('$vuetify.CHAMADO_CRIADO'):
-              $vuetify.lang.t('$vuetify.CHAMADO_ENCERRADO')"
-        :subtitle="getObject().type!='closing'?$vuetify.lang.t('$vuetify.PROTOCOLO')+': '+getObject().protocolo:''"
+        :title="
+          getObject().type != 'closing'
+            ? $vuetify.lang.t('$vuetify.CHAMADO_CRIADO')
+            : $vuetify.lang.t('$vuetify.CHAMADO_ENCERRADO')
+        "
+        :subtitle="
+          getObject().type != 'closing'
+            ? $vuetify.lang.t('$vuetify.PROTOCOLO') +
+              ': ' +
+              getObject().protocolo
+            : ''
+        "
       >
       </SuccessPanel>
 
@@ -160,18 +211,20 @@
         <v-btn
           color="primary"
           text
-          @click="close(getObject()); cleanFields()"
+          @click="
+            close(getObject());
+            cleanFields();
+          "
           :x-small="$vuetify.breakpoint.xs"
-        >{{$vuetify.lang.t('$vuetify.FECHAR')}}</v-btn>
+          >{{ $vuetify.lang.t("$vuetify.FECHAR") }}</v-btn
+        >
       </v-card-actions>
     </v-card>
   </v-dialog>
-
 </template>
 
 <script>
-
-import SuccessPanel from '../../components/panels/SuccessPanel';
+import SuccessPanel from "../../components/panels/SuccessPanel";
 
 export default {
   components: {
@@ -184,25 +237,37 @@ export default {
     showDialogLoading: Boolean,
     close: Function,
     send: Function,
-    itemList: Array
+    itemList: Array,
+    assetList: Array,
   },
   methods: {
-    concatInfosToObservation(){
-      if(this.getObject().type == 'service'){
-        this.issue.observation += '\n\n' + 'Telefone Contato: ' + this.contactPhone + 
-        '\n\n' + 'Telefone solicitante: ' + this.reclaimerPhone + '\n\n' + 'Email: ' + this.email;
+    concatInfosToObservation() {
+      if (this.getObject().type == "service") {
+        this.issue.observation +=
+          "\n\n" +
+          "Telefone Contato: " +
+          this.contactPhone +
+          "\n\n" +
+          "Telefone solicitante: " +
+          this.reclaimerPhone +
+          "\n\n" +
+          "Email: " +
+          this.email +
+          "\n\n"+
+          "Id do ativo/equipamento: " + this.selectedAsset || '';
       }
     },
-    cleanFields () {
-      this.issue.observation = '';
+    cleanFields() {
+      this.issue.observation = "";
       this.issue.reason = undefined;
-    }
+    },
   },
   data: () => ({
-    issue: { reason: '', observation: '' },
-    reclaimerPhone: '',
-    contactPhone: '',
-    email: '',
-  })
+    issue: { reason: "", observation: "" },
+    reclaimerPhone: "",
+    contactPhone: "",
+    email: "",
+    selectedAsset: undefined,
+  }),
 };
 </script>

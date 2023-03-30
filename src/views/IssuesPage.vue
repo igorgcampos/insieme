@@ -739,6 +739,7 @@
           :send="sendService"
           :getObject="getObject"
           :itemList="reasonServiceList"
+          :assetList="assetList"
         ></IssueDialog>
 
         <IssueDialog
@@ -1426,6 +1427,8 @@ export default {
     openServiceIssue() {
       this.showServiceDialog = true;
       this.selectedIssue = { type: "service" };
+      this.assetList = this.$props.contract.identificadoresEquipamentos?
+          this.$props.contract.identificadoresEquipamentos.split(";"): [];
     },
     sendService(issue) {
       if (!issue.reason || issue.observation.length == 0) {
@@ -1488,7 +1491,7 @@ export default {
     reasonList: [],
     reasonServiceList: [
       "Atividade Programada",
-      "Incidente",
+      "Problema",
       "Serviços",
       "Emissão de Relatório",
     ],
@@ -1504,6 +1507,7 @@ export default {
     searchText: "",
     showMassive: false,
     questions: [],
+    assetList: [],
   }),
   created: function () {
     this.reasonList = [

@@ -453,4 +453,5 @@ export default {
     TELEFONE_SOLICITANTE: 'Reclaimer phone',
     TELEFONE_CONTATO: 'Contact phone',
     CAMPO_OBRIGATORIO: 'Mandatory field',
+    IDENTIFICADOR_ATIVO: 'Asset/Equipment id',
 }
