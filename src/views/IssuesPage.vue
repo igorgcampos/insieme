@@ -500,7 +500,7 @@
                                   <v-list-item-subtitle
                                     v-on="on"
                                     class="caption font-weight-bold ml-1"
-                                  ></v-list-item-subtitle>
+                                  >{{ message.conteudo }}</v-list-item-subtitle>
                                 </template>
                                 <span>{{ message.conteudo }}</span>
                               </v-tooltip>
