@@ -1522,6 +1522,19 @@ export default {
       this.technologies = this.technologies.concat(response.data);
     });
 
+    this.$get("/circuito/busca", {
+      contractNumber: this.$props.contract.numeroContratoTpz,
+      searchText: "",
+      onlineStatus: 0,
+      installStatus: 0,
+      productType: null,
+      techType: null,
+      page: 0,
+    }).then((response) => {
+      this.circuits = response.data;
+      this.isLoading = false;
+    });
+
     this.isLoadingOnline = true;
     this.isLoadingOffline = true;
 
@@ -1547,19 +1560,6 @@ export default {
 
       this.isLoadingOffline = false;
       this.$forceUpdate();
-    });
-
-    this.$get("/circuito/busca", {
-      contractNumber: this.$props.contract.numeroContratoTpz,
-      searchText: "",
-      onlineStatus: 0,
-      installStatus: 0,
-      productType: null,
-      techType: null,
-      page: 0,
-    }).then((response) => {
-      this.circuits = response.data;
-      this.isLoading = false;
     });
 
     this.getInstallStatus("ATIVADO", 0);
