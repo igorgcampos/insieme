@@ -530,16 +530,6 @@ export default {
         this.email;
     },
     next() {
-      if (
-        this.selectedItemList.length == 1 &&
-        this.$props.entity.type == "circuit"
-      ) {
-        this.$root.$emit("solve-problem", this.selectedItemList[0]);
-        this.close();
-        this.cleanFields(true);
-        return;
-      }
-
       if (this.selectedItemList.length > 0) {
         this.selectReason = true;
       }
