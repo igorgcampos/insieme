@@ -1561,17 +1561,17 @@ export default {
         this.isLoadingOffline = false;
         this.$forceUpdate();
       });
-    }, 1000);
 
-    this.getInstallStatus("ATIVADO", 0);
-    this.getInstallStatus("DESATIVADO", 1);
-    this.getInstallStatus("CANCELADO", 2);
-    this.getInstallStatus("DESINSTALADO", 3);
-    this.getInstallStatus("INSTALADO", 4);
-    this.getInstallStatus("EM_TRANSPORTE", 5);
-    this.getInstallStatus("EM_IMPLANTAÇÃO", 6);
-    this.getInstallStatus("PROCESSO_FISCAL", 7);
-    this.getInstallStatus("SUSPENSO", 8);
+      this.getInstallStatus("ATIVADO", 0);
+      this.getInstallStatus("DESATIVADO", 1);
+      this.getInstallStatus("CANCELADO", 2);
+      this.getInstallStatus("DESINSTALADO", 3);
+      this.getInstallStatus("INSTALADO", 4);
+      this.getInstallStatus("EM_TRANSPORTE", 5);
+      this.getInstallStatus("EM_IMPLANTAÇÃO", 6);
+      this.getInstallStatus("PROCESSO_FISCAL", 7);
+      this.getInstallStatus("SUSPENSO", 8);
+    }, 1000);
 
     this.$root.$on("search-circuit", (desigTpz) => {
       this.searchText = desigTpz;
