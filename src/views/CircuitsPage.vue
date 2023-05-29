@@ -1441,7 +1441,6 @@ export default {
           countsArray.unshift(this.counts[1]);
           countsArray.unshift(this.counts[0]);
           this.$root.$emit("circuit-data", countsArray);
-          
         }
       });
     },
@@ -1538,29 +1537,31 @@ export default {
     this.isLoadingOnline = true;
     this.isLoadingOffline = true;
 
-    this.$get("/circuito/status/counts", {
-      contractNumber: this.$props.contract.numeroContratoTpz,
-      online: true,
-    }).then((response) => {
-      if (response) {
-        this.counts[0] = response.data;
-      }
+    setTimeout(() => {
+      this.$get("/circuito/status/counts", {
+        contractNumber: this.$props.contract.numeroContratoTpz,
+        online: true,
+      }).then((response) => {
+        if (response) {
+          this.counts[0] = response.data;
+        }
 
-      this.isLoadingOnline = false;
-      this.$forceUpdate();
-    });
+        this.isLoadingOnline = false;
+        this.$forceUpdate();
+      });
 
-    this.$get("/circuito/status/counts", {
-      contractNumber: this.$props.contract.numeroContratoTpz,
-      online: false,
-    }).then((response) => {
-      if (response) {
-        this.counts[1] = response.data;
-      }
+      this.$get("/circuito/status/counts", {
+        contractNumber: this.$props.contract.numeroContratoTpz,
+        online: false,
+      }).then((response) => {
+        if (response) {
+          this.counts[1] = response.data;
+        }
 
-      this.isLoadingOffline = false;
-      this.$forceUpdate();
-    });
+        this.isLoadingOffline = false;
+        this.$forceUpdate();
+      });
+    }, 1000);
 
     this.getInstallStatus("ATIVADO", 0);
     this.getInstallStatus("DESATIVADO", 1);
