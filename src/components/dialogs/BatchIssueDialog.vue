@@ -519,13 +519,13 @@ export default {
     },
     concatInfosToObservation() {
       this.issue.observation +=
-        "\n\n" +
+        "\u000A" +
         "Telefone Contato: " +
         this.contactPhone +
-        "\n\n" +
+        "\u000A" +
         "Telefone solicitante: " +
         this.reclaimerPhone +
-        "\n\n" +
+        "\u000A" +
         "Email: " +
         this.email;
     },
