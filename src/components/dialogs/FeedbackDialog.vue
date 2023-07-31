@@ -18,7 +18,7 @@
             : $vuetify.lang.t("$vuetify.FEEDBACK_CHAMADO") +
               (entity.notification
                 ? entity.notification.mensagem.split(":")[1]
-                : entity.issue.protocolo)
+                : entity.issue ? entity.issue.protocolo : "--")
         }}
       </v-card-title>
       <v-card-text

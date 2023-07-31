@@ -450,4 +450,5 @@ export default {
     TELEFONE_CONTATO: 'Telefone do contato',
     CAMPO_OBRIGATORIO: 'Campo obrigatório',
     IDENTIFICADOR_ATIVO: 'Identificador do ativo/equipamento',
+    REABRIR_CHAMADO: 'Reabrir chamado',
 }

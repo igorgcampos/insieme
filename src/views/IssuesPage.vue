@@ -500,7 +500,10 @@
                                   <v-list-item-subtitle
                                     v-on="on"
                                     class="caption font-weight-bold ml-1"
-                                  >{{ message.conteudo }}</v-list-item-subtitle>
+                                    >{{
+                                      message.conteudo
+                                    }}</v-list-item-subtitle
+                                  >
                                 </template>
                                 <span>{{ message.conteudo }}</span>
                               </v-tooltip>
@@ -646,6 +649,18 @@
                       :isText="true"
                       v-if="issue.status != 'ENCERRADO' && !issue.proatividade"
                     ></TooltipButton>
+
+                    <div class="ma-0" v-if="issue.status == 'ENCERRADO'">
+                    <TooltipButton
+                      :label="$vuetify.lang.t('$vuetify.REABRIR_CHAMADO')"
+                      :message="$vuetify.lang.t('$vuetify.REABRIR_CHAMADO')"
+                      :event="reabrirChamado"
+                      :object="issue"
+                      :mobile="$vuetify.breakpoint.xs"
+                      :isText="true"
+                      :loading="isLoadingReopen"
+                    ></TooltipButton>
+                    </div>
 
                     <TooltipButton
                       :label="$vuetify.lang.t('$vuetify.FEEDBACK')"
@@ -845,6 +860,25 @@ export default {
     AddMessageDialog,
   },
   methods: {
+    reabrirChamado(issue) {
+      this.isLoadingReopen = true;
+
+      this.$post("/chamado/reopen", issue).then((response) => {
+        
+        this.isLoadingReopen = false;
+        this.issues.forEach((selectedIssue) => {
+          if (
+            selectedIssue.idIncidenteTopdesk == response.data.idIncidenteTopdesk
+          ) {
+            selectedIssue.status = 'EM_ANDAMENTO';
+            selectedIssue.statusProcessamento =
+              response.data.statusProcessamento;
+            selectedIssue.motivoAbertura = response.data.motivoAbertura;
+            this.$forceUpdate();
+          }
+        });
+      });
+    },
     refreshIssue(issue) {
       this.$get("/chamado/atualizar", { issueId: issue.id }).then(
         (response) => {
@@ -1119,13 +1153,13 @@ export default {
           contrato: { id: this.$props.contract.id },
         };
 
-        if(issue.reason == 'Inoperância' || issue.reason == 'Desempenho'){
+        if (issue.reason == "Inoperância" || issue.reason == "Desempenho") {
           issue.items[index].observation = issue.observation;
           issue.items[index].reason = issue.reason;
           this.$root.$emit("restart", issue.items[index]);
 
-          if(index == issue.items.length - 1){
-            this.$root.$emit('clean-fields');
+          if (index == issue.items.length - 1) {
+            this.$root.$emit("clean-fields");
             this.closeBatchDialog();
           }
           continue;
@@ -1427,8 +1461,9 @@ export default {
     openServiceIssue() {
       this.showServiceDialog = true;
       this.selectedIssue = { type: "service" };
-      this.assetList = this.$props.contract.identificadoresEquipamentos?
-          this.$props.contract.identificadoresEquipamentos.split(";"): [];
+      this.assetList = this.$props.contract.identificadoresEquipamentos
+        ? this.$props.contract.identificadoresEquipamentos.split(";")
+        : [];
     },
     sendService(issue) {
       if (!issue.reason || issue.observation.length == 0) {
@@ -1469,6 +1504,7 @@ export default {
     proactivity: Boolean,
   },
   data: () => ({
+    isLoadingReopen: false,
     showServiceDialog: false,
     error: false,
     showMessageDialog: false,
