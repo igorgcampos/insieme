@@ -130,8 +130,8 @@
           </v-col>
 
           <v-col
-            class="mt-7 ml-3"
-            cols="1"
+            class="mt-7 ml-2"
+            cols="2"
             :class="{ 'mt-7': $vuetify.breakpoint.xs }"
             v-if="!proactivity && !$hasProfile('Comercial')"
           >
@@ -203,6 +203,23 @@
                 </v-list-item>
               </v-list>
             </v-menu>
+          </v-col>
+
+          <v-col
+            class="mt-7 ml-0"
+            cols="1"
+            :class="{ 'mt-7': $vuetify.breakpoint.xs }"
+            v-if="!proactivity && !$hasProfile('Comercial')"
+          >
+            <TooltipButton
+              :message="$vuetify.lang.t('$vuetify.EXPORTAR_CHAMADOS')"
+              :event="exportCSV"
+              :mobile="$vuetify.breakpoint.xs"
+              :loading="loadingExport"
+              icon="mdi-file-export"
+              color="primary"
+              v-if="!proactivity && !$hasProfile('Comercial')"
+            ></TooltipButton>
           </v-col>
         </v-row>
 
@@ -651,15 +668,15 @@
                     ></TooltipButton>
 
                     <div class="ma-0" v-if="issue.status == 'ENCERRADO'">
-                    <TooltipButton
-                      :label="$vuetify.lang.t('$vuetify.REABRIR_CHAMADO')"
-                      :message="$vuetify.lang.t('$vuetify.REABRIR_CHAMADO')"
-                      :event="reabrirChamado"
-                      :object="issue"
-                      :mobile="$vuetify.breakpoint.xs"
-                      :isText="true"
-                      :loading="isLoadingReopen"
-                    ></TooltipButton>
+                      <TooltipButton
+                        :label="$vuetify.lang.t('$vuetify.REABRIR_CHAMADO')"
+                        :message="$vuetify.lang.t('$vuetify.REABRIR_CHAMADO')"
+                        :event="reabrirChamado"
+                        :object="issue"
+                        :mobile="$vuetify.breakpoint.xs"
+                        :isText="true"
+                        :loading="isLoadingReopen"
+                      ></TooltipButton>
                     </div>
 
                     <TooltipButton
@@ -860,17 +877,57 @@ export default {
     AddMessageDialog,
   },
   methods: {
+    formatIssue(issue){
+      return {
+        [this.$vuetify.lang.t("$vuetify.PROTOCOLO")]: issue.protocolo,
+        [this.$vuetify.lang.t("$vuetify.STATUS")]: this.$vuetify.lang.t("$vuetify." + issue.status),
+        [this.$vuetify.lang.t("$vuetify.ORIGEM")]: issue.identificadorOrigem,
+        [this.$vuetify.lang.t("$vuetify.DATA_ABERTURA")]: this.$formatDate(issue.dataAbertura),
+        [this.$vuetify.lang.t("$vuetify.MOTIVO_ABERTURA")]: issue.motivoAbertura,
+        [this.$vuetify.lang.t("$vuetify.TIPO_PROBLEMA_SOLICITACAO")]: issue.subCategoria?issue.subCategoria:'--',
+        [this.$vuetify.lang.t("$vuetify.OBSERVACAO_ABERTURA")]: issue.observacaoAbertura?issue.observacaoAbertura
+                .replaceAll("\n", " ")
+                .replaceAll("\r", " ")
+                .replaceAll(";", " "):'--',
+        [this.$vuetify.lang.t("$vuetify.DATA_ENCERRAMENTO")]: this.$formatDate(issue.dataEncerramento),
+        [this.$vuetify.lang.t("$vuetify.MOTIVO_ENCERRAMENTO")]: issue.motivoEncerramento,
+       
+      };
+    },
+    exportCSV(){
+      this.loadingExport = true;
+      if (!this.allIssues) {
+        this.$get("/chamado/busca/all", {
+          contractId: this.$props.contract.id,
+        }).then((response) => {
+          this.allIssues = response.data.map((issue) => {
+            return this.formatIssue(issue);
+          });
+
+          this.$downloadCSV(
+            this.allIssues,
+            this.$vuetify.lang.t("$vuetify.CHAMADOS")
+          );
+          this.loadingExport = false;
+        });
+      } else {
+        this.$downloadCSV(
+          this.allIssues,
+          this.$vuetify.lang.t("$vuetify.CHAMADOS")
+        );
+        this.loadingExport = false;
+      }
+    },
     reabrirChamado(issue) {
       this.isLoadingReopen = true;
 
       this.$post("/chamado/reopen", issue).then((response) => {
-        
         this.isLoadingReopen = false;
         this.issues.forEach((selectedIssue) => {
           if (
             selectedIssue.idIncidenteTopdesk == response.data.idIncidenteTopdesk
           ) {
-            selectedIssue.status = 'EM_ANDAMENTO';
+            selectedIssue.status = "EM_ANDAMENTO";
             selectedIssue.statusProcessamento =
               response.data.statusProcessamento;
             selectedIssue.motivoAbertura = response.data.motivoAbertura;
@@ -1504,6 +1561,7 @@ export default {
     proactivity: Boolean,
   },
   data: () => ({
+    loadingExport: false,
     isLoadingReopen: false,
     showServiceDialog: false,
     error: false,

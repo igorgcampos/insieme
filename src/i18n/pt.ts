@@ -451,4 +451,5 @@ export default {
     CAMPO_OBRIGATORIO: 'Campo obrigatório',
     IDENTIFICADOR_ATIVO: 'Identificador do ativo/equipamento',
     REABRIR_CHAMADO: 'Reabrir chamado',
+    EXPORTAR_CHAMADOS: 'Exportar chamados',
 }
