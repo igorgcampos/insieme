@@ -134,6 +134,18 @@
                 </v-avatar>
                 English
               </v-chip>
+
+              <v-chip
+                @click="selectIdiom('espanha')"
+                class="ma-2"
+                label
+                :outlined="espUnselected"
+              >
+                <v-avatar left>
+                  <v-img src="../assets/spain-flag.png"></v-img>
+                </v-avatar>
+                Español
+              </v-chip>
             </v-row>
           </v-layout>
         </v-flex>
@@ -168,6 +180,7 @@ export default {
       openVersionDialog: false,
       brazilUnselected: false,
       usaUnselected: true,
+      espUnselected: true,
       username: "",
       image: "../assets/satelites.jpg",
       loading: false,
@@ -194,11 +207,18 @@ export default {
       if (country == "brasil") {
         this.brazilUnselected = false;
         this.usaUnselected = true;
+         this.espUnselected = true;
         this.$vuetify.lang.current = "pt";
       } else if (country == "usa") {
         this.brazilUnselected = true;
         this.usaUnselected = false;
+         this.espUnselected = true;
         this.$vuetify.lang.current = "en";
+      }else if (country == "espanha") {
+        this.brazilUnselected = true;
+        this.usaUnselected = true;
+        this.espUnselected = false;
+        this.$vuetify.lang.current = "es";
       }
 
       this.$refs["password"].validate(false);

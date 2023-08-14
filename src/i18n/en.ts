@@ -454,4 +454,7 @@ export default {
     TELEFONE_CONTATO: 'Contact phone',
     CAMPO_OBRIGATORIO: 'Mandatory field',
     IDENTIFICADOR_ATIVO: 'Asset/Equipment id',
+    EXPORTAR_CHAMADOS: 'Export tickets',
+    REABRIR_CHAMADO: 'Reopen ticket',
+
 }
