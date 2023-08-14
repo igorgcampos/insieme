@@ -83,7 +83,7 @@
         </v-row>
 
         <v-row id="filtro" class="pl-0 ml-0 grey lighten-5 mb-n5 mt-2">
-          <v-col :cols="!$vuetify.breakpoint.xs ? 4 : 6">
+          <v-col :cols="!$vuetify.breakpoint.xs ? 3 : 4">
             <v-row>
               <span
                 class="text-right subtitle-2 font-weight-bold grey--text text--lighten-1"
@@ -107,7 +107,7 @@
             </v-row>
           </v-col>
 
-          <v-col class="ml-5" cols="4" v-if="!$vuetify.breakpoint.xs">
+          <v-col class="ml-5" cols="3" v-if="!$vuetify.breakpoint.xs">
             <v-row>
               <span
                 class="text-right subtitle-2 font-weight-bold grey--text text--lighten-1"
@@ -131,14 +131,14 @@
 
           <v-col
             class="mt-7 ml-2"
-            cols="2"
+            cols="4"
             :class="{ 'mt-7': $vuetify.breakpoint.xs }"
             v-if="!proactivity && !$hasProfile('Comercial')"
           >
             <v-menu transition="slide-x-transition" bottom right>
               <template v-slot:activator="{ on, attrs }">
                 <v-btn
-                  class="ml-2 mt-0"
+                  class="ml-2 mt-0 mr-4"
                   dark
                   color="primary"
                   v-on="on"
@@ -203,22 +203,15 @@
                 </v-list-item>
               </v-list>
             </v-menu>
-          </v-col>
 
-          <v-col
-            class="mt-7 ml-n5"
-            cols="1"
-            :class="{ 'mt-7 ml-9': $vuetify.breakpoint.xs }"
-            v-if="!proactivity && !$hasProfile('Comercial')"
-          >
-            <TooltipButton
+             <TooltipButton
               :message="$vuetify.lang.t('$vuetify.EXPORTAR_CHAMADOS')"
               :event="exportCSV"
               :mobile="$vuetify.breakpoint.xs"
               :loading="loadingExport"
               icon="mdi-file-export"
               color="primary"
-              v-if="!proactivity && !$hasProfile('Comercial')"
+              v-if="!proactivity && !$hasProfile('Comercial') && !$vuetify.breakpoint.xs"
             ></TooltipButton>
           </v-col>
         </v-row>
