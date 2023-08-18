@@ -203,13 +203,6 @@
                 </v-list-item>
               </v-list>
             </v-menu>
-
-          <v-col
-            class="mt-7 ml-n5"
-            cols="1"
-            :class="{ 'mt-7 ml-9': $vuetify.breakpoint.xs }"
-            v-if="!proactivity && !$hasProfile('Comercial')"
-          >
             <TooltipButton
               :message="$vuetify.lang.t('$vuetify.EXPORTAR_CHAMADOS')"
               :event="exportCSV"
@@ -219,7 +212,7 @@
               color="primary"
               v-if="!proactivity && !$hasProfile('Comercial') && !$vuetify.breakpoint.xs"
             ></TooltipButton>
-          </v-col>
+        </v-col>
         </v-row>
 
         <v-row class="pl-2 mt-2" style="min-height: 120px">
@@ -876,24 +869,35 @@ export default {
     AddMessageDialog,
   },
   methods: {
-    formatIssue(issue){
+    formatIssue(issue) {
       return {
         [this.$vuetify.lang.t("$vuetify.PROTOCOLO")]: issue.protocolo,
-        [this.$vuetify.lang.t("$vuetify.STATUS")]: this.$vuetify.lang.t("$vuetify." + issue.status),
+        [this.$vuetify.lang.t("$vuetify.STATUS")]: this.$vuetify.lang.t(
+          "$vuetify." + issue.status
+        ),
         [this.$vuetify.lang.t("$vuetify.ORIGEM")]: issue.identificadorOrigem,
-        [this.$vuetify.lang.t("$vuetify.DATA_ABERTURA")]: this.$formatDate(issue.dataAbertura),
-        [this.$vuetify.lang.t("$vuetify.MOTIVO_ABERTURA")]: issue.motivoAbertura,
-        [this.$vuetify.lang.t("$vuetify.TIPO_PROBLEMA_SOLICITACAO")]: issue.subCategoria?issue.subCategoria:'--',
-        [this.$vuetify.lang.t("$vuetify.OBSERVACAO_ABERTURA")]: issue.observacaoAbertura?issue.observacaoAbertura
+        [this.$vuetify.lang.t("$vuetify.DATA_ABERTURA")]: this.$formatDate(
+          issue.dataAbertura
+        ),
+        [this.$vuetify.lang.t("$vuetify.MOTIVO_ABERTURA")]:
+          issue.motivoAbertura,
+        [this.$vuetify.lang.t("$vuetify.TIPO_PROBLEMA_SOLICITACAO")]:
+          issue.subCategoria ? issue.subCategoria : "--",
+        [this.$vuetify.lang.t("$vuetify.OBSERVACAO_ABERTURA")]:
+          issue.observacaoAbertura
+            ? issue.observacaoAbertura
                 .replaceAll("\n", " ")
                 .replaceAll("\r", " ")
-                .replaceAll(";", " "):'--',
-        [this.$vuetify.lang.t("$vuetify.DATA_ENCERRAMENTO")]: this.$formatDate(issue.dataEncerramento),
-        [this.$vuetify.lang.t("$vuetify.MOTIVO_ENCERRAMENTO")]: issue.motivoEncerramento,
-       
+                .replaceAll(";", " ")
+            : "--",
+        [this.$vuetify.lang.t("$vuetify.DATA_ENCERRAMENTO")]: this.$formatDate(
+          issue.dataEncerramento
+        ),
+        [this.$vuetify.lang.t("$vuetify.MOTIVO_ENCERRAMENTO")]:
+          issue.motivoEncerramento,
       };
     },
-    exportCSV(){
+    exportCSV() {
       this.loadingExport = true;
       if (!this.allIssues) {
         this.$get("/chamado/busca/all", {
