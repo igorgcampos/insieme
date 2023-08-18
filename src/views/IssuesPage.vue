@@ -204,7 +204,13 @@
               </v-list>
             </v-menu>
 
-             <TooltipButton
+          <v-col
+            class="mt-7 ml-n5"
+            cols="1"
+            :class="{ 'mt-7 ml-9': $vuetify.breakpoint.xs }"
+            v-if="!proactivity && !$hasProfile('Comercial')"
+          >
+            <TooltipButton
               :message="$vuetify.lang.t('$vuetify.EXPORTAR_CHAMADOS')"
               :event="exportCSV"
               :mobile="$vuetify.breakpoint.xs"
