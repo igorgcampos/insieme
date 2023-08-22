@@ -40,7 +40,7 @@
             <CountCard
               :count="counts[0]"
               :message="$vuetify.lang.t('$vuetify.PAGOS')"
-              color="success--text"
+              color="success--text font-weight-bold"
               :func="getPaid"
             ></CountCard>
           </v-col>
@@ -48,7 +48,7 @@
             <CountCard
               :count="counts[1]"
               :message="$vuetify.lang.t('$vuetify.EM_ABERTO')"
-              color="warning--text"
+              color="warning--text font-weight-bold"
               :func="getOpened"
             ></CountCard>
           </v-col>
@@ -59,7 +59,7 @@
             <CountCard
               :count="counts[2]"
               :message="$vuetify.lang.t('$vuetify.VENCIDAS')"
-              color="error--text"
+              color="error--text font-weight-bold"
               :func="getOverdue"
             ></CountCard>
           </v-col>

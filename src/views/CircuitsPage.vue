@@ -57,7 +57,7 @@
                     <CountCard
                       :count="counts[0]"
                       message="Online"
-                      color="success--text"
+                      color="success--text font-weight-bold"
                       :func="getOnline"
                       :toolTipMessage="
                         $vuetify.lang.t('$vuetify.ONLINE_DESCRICAO')
@@ -70,7 +70,7 @@
                     <CountCard
                       :count="counts[1]"
                       message="Offline"
-                      color="error--text"
+                      color="error--text font-weight-bold"
                       :func="getOffline"
                       :toolTipMessage="
                         $vuetify.lang.t('$vuetify.OFFLINE_DESCRICAO')
@@ -110,7 +110,7 @@
                           :message="
                             $vuetify.lang.t('$vuetify.PROC_LOGISTICO_MOBILE')
                           "
-                          color="primary--text"
+                          color="primary--text font-weight-bold"
                           :func="getLogistic"
                           :toolTipMessage="
                             $vuetify.lang.t('$vuetify.PROC_LOGISTICO_DESCRICAO')
@@ -126,7 +126,7 @@
                           :message="
                             $vuetify.lang.t('$vuetify.AGUARDANDO_ACEITE_MOBILE')
                           "
-                          color="primary--text"
+                          color="primary--text font-weight-bold"
                           :func="getInstalled"
                           :toolTipMessage="
                             $vuetify.lang.t('$vuetify.AGUARDANDO_DESCRICAO')
@@ -142,7 +142,7 @@
                           :message="
                             $vuetify.lang.t('$vuetify.EM_TRANSPORTE_MOBILE')
                           "
-                          color="primary--text"
+                          color="primary--text font-weight-bold"
                           :func="getInTransport"
                           :toolTipMessage="
                             $vuetify.lang.t('$vuetify.EM_TRANSPORTE_DESCRICAO')
@@ -156,7 +156,7 @@
                         <CountCard
                           :count="installCounts[6]"
                           :message="$vuetify.lang.t('$vuetify.INSTALANDO')"
-                          color="primary--text"
+                          color="primary--text font-weight-bold"
                           :func="getDeploying"
                           :toolTipMessage="
                             $vuetify.lang.t('$vuetify.INSTALANDO_DESCRICAO')
@@ -197,7 +197,7 @@
                         <CountCard
                           :count="installCounts[0]"
                           :message="$vuetify.lang.t('$vuetify.ATIVADO')"
-                          color="primary--text"
+                          color="primary--text font-weight-bold"
                           :func="getActive"
                           :toolTipMessage="
                             $vuetify.lang.t('$vuetify.ATIVADO_DESCRICAO')
@@ -211,7 +211,7 @@
                         <CountCard
                           :count="installCounts[1]"
                           :message="$vuetify.lang.t('$vuetify.DESATIVADO')"
-                          color="primary--text"
+                          color="primary--text font-weight-bold"
                           :func="getDeactive"
                           :toolTipMessage="
                             $vuetify.lang.t('$vuetify.DESATIVADO_DESCRICAO')
@@ -225,7 +225,7 @@
                         <CountCard
                           :count="installCounts[3]"
                           :message="$vuetify.lang.t('$vuetify.DESINSTALADO')"
-                          color="primary--text"
+                          color="primary--text font-weight-bold"
                           :func="getUninstall"
                           :toolTipMessage="
                             $vuetify.lang.t('$vuetify.DESINSTALADO_DESCRICAO')
@@ -239,7 +239,7 @@
                         <CountCard
                           :count="installCounts[2]"
                           :message="$vuetify.lang.t('$vuetify.CANCELADO')"
-                          color="primary--text"
+                          color="primary--text font-weight-bold"
                           :func="getCanceled"
                           :toolTipMessage="
                             $vuetify.lang.t('$vuetify.CANCELADO_DESCRICAO')
@@ -252,7 +252,7 @@
                         <CountCard
                           :count="installCounts[8]"
                           :message="$vuetify.lang.t('$vuetify.SUSPENSO')"
-                          color="primary--text"
+                          color="primary--text font-weight-bold"
                           :func="getSuspended"
                           :toolTipMessage="
                             $vuetify.lang.t('$vuetify.SUSPENSO_DESCRICAO')
@@ -285,7 +285,7 @@
                   <CountCard
                     :count="counts[0]"
                     message="Online"
-                    color="success--text"
+                    color="success--text font-weight-bold"
                     :func="getOnline"
                     :toolTipMessage="
                       $vuetify.lang.t('$vuetify.ONLINE_DESCRICAO')
@@ -301,7 +301,7 @@
                   <CountCard
                     :count="counts[1]"
                     message="Offline"
-                    color="error--text"
+                    color="error--text font-weight-bold"
                     :func="getOffline"
                     :toolTipMessage="
                       $vuetify.lang.t('$vuetify.OFFLINE_DESCRICAO')
@@ -367,7 +367,7 @@
                           <CountCard
                             :count="installCounts[0]"
                             :message="$vuetify.lang.t('$vuetify.ATIVADO')"
-                            color="primary--text"
+                            color="primary--text font-weight-bold"
                             :func="getActive"
                             :toolTipMessage="
                               $vuetify.lang.t('$vuetify.ATIVADO_DESCRICAO')
@@ -381,7 +381,7 @@
                           <CountCard
                             :count="installCounts[1]"
                             :message="$vuetify.lang.t('$vuetify.DESATIVADO')"
-                            color="primary--text"
+                            color="primary--text font-weight-bold"
                             :func="getDeactive"
                             :toolTipMessage="
                               $vuetify.lang.t('$vuetify.DESATIVADO_DESCRICAO')
@@ -396,7 +396,7 @@
                           <CountCard
                             :count="installCounts[3]"
                             :message="$vuetify.lang.t('$vuetify.DESINSTALADO')"
-                            color="primary--text"
+                            color="primary--text font-weight-bold"
                             :func="getUninstall"
                             :toolTipMessage="
                               $vuetify.lang.t('$vuetify.DESINSTALADO_DESCRICAO')
@@ -410,7 +410,7 @@
                           <CountCard
                             :count="installCounts[2]"
                             :message="$vuetify.lang.t('$vuetify.CANCELADO')"
-                            color="primary--text"
+                            color="primary--text font-weight-bold"
                             :func="getCanceled"
                             :toolTipMessage="
                               $vuetify.lang.t('$vuetify.CANCELADO_DESCRICAO')
@@ -424,7 +424,7 @@
                           <CountCard
                             :count="installCounts[8]"
                             :message="$vuetify.lang.t('$vuetify.SUSPENSO')"
-                            color="primary--text"
+                            color="primary--text font-weight-bold"
                             :func="getSuspended"
                             :toolTipMessage="
                               $vuetify.lang.t('$vuetify.SUSPENSO_DESCRICAO')
@@ -442,7 +442,7 @@
                     <CountCard
                       :count="installCounts[7]"
                       :message="$vuetify.lang.t('$vuetify.PROC_LOGISTICO')"
-                      color="primary--text"
+                      color="primary--text font-weight-bold"
                       :func="getLogistic"
                       :toolTipMessage="
                         $vuetify.lang.t('$vuetify.PROC_LOGISTICO_DESCRICAO')
@@ -455,7 +455,7 @@
                     <CountCard
                       :count="installCounts[5]"
                       :message="$vuetify.lang.t('$vuetify.EM_TRANSPORTE')"
-                      color="primary--text"
+                      color="primary--text font-weight-bold"
                       :func="getInTransport"
                       :toolTipMessage="
                         $vuetify.lang.t('$vuetify.EM_TRANSPORTE_DESCRICAO')
@@ -469,7 +469,7 @@
                     <CountCard
                       :count="installCounts[6]"
                       :message="$vuetify.lang.t('$vuetify.INSTALANDO')"
-                      color="primary--text"
+                      color="primary--text font-weight-bold"
                       :func="getDeploying"
                       :toolTipMessage="
                         $vuetify.lang.t('$vuetify.INSTALANDO_DESCRICAO')
@@ -483,7 +483,7 @@
                     <CountCard
                       :count="installCounts[4]"
                       :message="$vuetify.lang.t('$vuetify.AGUARDANDO_ACEITE')"
-                      color="primary--text"
+                      color="primary--text font-weight-bold"
                       :func="getInstalled"
                       :smallText="true"
                       :toolTipMessage="

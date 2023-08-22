@@ -49,7 +49,7 @@
             <CountCard
               :count="counts[0]"
               :message="$vuetify.lang.t('$vuetify.ABERTOS')"
-              color="success--text"
+              color="success--text font-weight-bold"
               :func="getOpened"
             ></CountCard>
           </v-col>
@@ -62,7 +62,7 @@
             <CountCard
               :count="counts[2]"
               :message="$vuetify.lang.t('$vuetify.EM_ANDAMENTO')"
-              color="warning--text"
+              color="warning--text font-weight-bold"
               :func="getResolving"
             ></CountCard>
           </v-col>
@@ -76,7 +76,7 @@
             <CountCard
               :count="counts[1]"
               :message="$vuetify.lang.t('$vuetify.ENCERRADOS')"
-              color="primary--text"
+              color="primary--text font-weight-bold"
               :func="getClosed"
             ></CountCard>
           </v-col>
