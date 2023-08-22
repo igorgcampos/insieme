@@ -67,7 +67,7 @@
 
         <v-row
           id="filtro"
-          class="pl-0 ml-0 grey lighten-5 mb-n5 mt-2"
+          class="pl-0 ml-0 grey lighten-5 mb-n5 mt-4"
         >
           <v-col cols="4">
             <v-row>

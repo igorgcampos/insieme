@@ -82,7 +82,7 @@
           </v-col>
         </v-row>
 
-        <v-row id="filtro" class="pl-0 ml-0 grey lighten-5 mb-n5 mt-2">
+        <v-row id="filtro" class="pl-0 ml-0 grey lighten-5 mb-n5 mt-4">
           <v-col :cols="!$vuetify.breakpoint.xs ? 3 : 4">
             <v-row>
               <span
