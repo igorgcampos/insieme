@@ -112,6 +112,38 @@
           pill
           v-on="on"
           color="red darken-3"
+          v-show="canShowBackLink()"
+          class="mr-2"
+          @click="toDashBoardPage()"
+        >
+          {{ $vuetify.lang.t("$vuetify.VOLTAR") }}
+        </v-chip>
+      </template>
+      <span>{{ $vuetify.lang.t("$vuetify.VOLTAR") }}</span>
+    </v-tooltip>
+
+    <v-tooltip bottom v-if="!$vuetify.breakpoint.xs && !$vuetify.breakpoint.sm">
+      <template v-slot:activator="{ on }">
+        <v-chip
+          pill
+          v-on="on"
+          color="red darken-3"
+          v-show="canShowMetricReportLink()"
+          class="mr-2"
+          @click="toMetricReportPage()"
+        >
+          {{ $vuetify.lang.t("$vuetify.BOLETINS_MEDICOES") }}
+        </v-chip>
+      </template>
+      <span>{{ $vuetify.lang.t("$vuetify.BOLETINS_MEDICOES") }}</span>
+    </v-tooltip>
+
+    <v-tooltip bottom v-if="!$vuetify.breakpoint.xs && !$vuetify.breakpoint.sm">
+      <template v-slot:activator="{ on }">
+        <v-chip
+          pill
+          v-on="on"
+          color="red darken-3"
           v-show="canShowContractLink()"
           class="mr-2"
           @click="toContractList()"
@@ -298,9 +330,24 @@
 
         <v-divider v-show="canShowShortcut()"></v-divider>
 
+        <v-list-item
+          v-show="canShowMetricReportLink()"
+          @click="toMetricReportPage()"
+        >
+          <v-list-item-title>{{
+            $vuetify.lang.t("$vuetify.BOLETINS_MEDICOES")
+          }}</v-list-item-title>
+        </v-list-item>
+
         <v-list-item v-show="canShowContractLink()" @click="toContractList()">
           <v-list-item-title>{{
             $vuetify.lang.t("$vuetify.CONTRATOS")
+          }}</v-list-item-title>
+        </v-list-item>
+
+        <v-list-item v-show="canShowBackLink()" @click="toDashBoardPage()">
+          <v-list-item-title>{{
+            $vuetify.lang.t("$vuetify.VOLTAR")
           }}</v-list-item-title>
         </v-list-item>
 
@@ -414,6 +461,8 @@ export default {
       this.$root.$on("remove-notification", (notification) =>
         vm.removeNotification(notification)
       );
+
+     
     });
   },
   data: () => ({
@@ -422,8 +471,15 @@ export default {
     notifications: [],
     newNotificationsCount: 0,
     tab: "null",
+  
   }),
   methods: {
+    canShowMetricReportLink() {
+      return (
+        this.$hasProfile("/grp_insieme-boletim") &&
+        this.$route.path == "/dashboard"
+      );
+    },
     removeNotification(notification, event) {
       if (event) event.stopPropagation();
 
@@ -512,11 +568,27 @@ export default {
       window.sessionStorage.setItem("actualPage", "administracao");
       this.$router.push("/administracao");
     },
+    toMetricReportPage() {
+      window.sessionStorage.setItem("actualPage", "boletim");
+      this.$router.push({
+        name: "MetricReport"
+      });
+    },
+    toDashBoardPage() {
+      window.sessionStorage.setItem("actualPage", "dashboard");
+      this.$router.push({
+        name: "Dashboard",
+        params: { contract: this.contract },
+      });
+    },
     canShowContractLink() {
       return (
         this.$route.path === "/dashboard" ||
         this.$route.path === "/administracao"
       );
+    },
+    canShowBackLink() {
+      return this.$route.path === "/boletim";
     },
     canShowAdminLink() {
       return (

@@ -36,17 +36,27 @@ utilService.install = function (Vue) {
 
     }
 
-    Vue.prototype.$formatDate = (date) => {
+    Vue.prototype.$formatDate = (date, onlyMonthAndYear) => {
 
         if (!date) {
             return '--'
         }
 
-        if (Vuetify.framework.lang.current == 'en') {
-            return date.month + '/' + date.day + '/' + date.year
+        if (date.year) {
+            if (Vuetify.framework.lang.current == 'en') {
+                return date.month + '/' + date.day + '/' + date.year
+            }
+
+            return date.day + '/' + date.month + '/' + date.year
         }
 
-        return date.day + '/' + date.month + '/' + date.year
+        var splits = date.split('-')
+
+        if(onlyMonthAndYear){
+            return splits[1] + '/' + splits[0];
+        }
+
+        return splits[2] + '/' + splits[1] + '/' + splits[0];
     }
 
     Vue.prototype.$formatHour = (date) => {

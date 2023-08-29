@@ -3,38 +3,79 @@
     <v-hover v-model="buttonHovering">
       <v-card
         class="mx-auto"
-        :width="$vuetify.breakpoint.xs?90:105"
-        :height="$vuetify.breakpoint.xs?80:80"
-        style="{cursor: pointer}"
-        @click="func"
+        :width="horizontal && minWidth ? minWidth : horizontal? 210 : 109"
+        :height="horizontal? 40 : 80"
+        style="
+           {
+            cursor: pointer;
+          }
+        "
+        @click="func(funcParam)"
       >
-        <v-col>
-          <v-row
-            justify="center"
-            class="mb-1 mt-n1"
-          >
+        <v-row justify="center" class="mb-1 mt-n3" v-show="horizontal">
+          <v-col cols="2" class="ml-4 mt-n1">
             <span
               v-if="!isLoading"
               :class="[color]"
-              style="font-size:x-large;"
-            >{{count}}</span>
+              style="font-size: large"
+              justify="center"
+              >{{ count }}</span
+            >
 
             <v-progress-circular
               v-if="isLoading"
               :size="30"
               :width="3"
-              color="red"
+              color="blue darken-2"
+              indeterminate
+              class="mt-3 mb-n1"
+            ></v-progress-circular
+          ></v-col>
+
+          <v-col  class="ma-0 mt-n1 col col-9 pt-3">
+            <span justify="center"
+              class="text-center subtitle-2 font-weight-bold grey--text text--darken-3 ma-1 ml-n3"
+              :class="{
+                button: $vuetify.breakpoint.xs,
+              }"
+            >
+              {{ message }}
+            </span></v-col
+          >
+        </v-row>
+
+        <v-col v-show="!horizontal">
+          <v-row justify="center" class="mb-1 mt-n1">
+            <span
+              v-if="!isLoading"
+              :class="[
+                color,
+                { 'text-subtitle-1 pt-2': smallCount && !smallText },
+                { 'text-subtitle-1 pt-0 pb-1': smallCount && smallText },
+              ]"
+              style="font-size: x-large"
+              >{{ count }}</span
+            >
+
+            <v-progress-circular
+              v-if="isLoading"
+              :size="30"
+              :width="3"
+              color="blue darken-2"
               indeterminate
               class="mt-3 mb-n1"
             ></v-progress-circular>
-
           </v-row>
           <v-row justify="center">
             <span
               class="text-center subtitle-2 font-weight-bold grey--text text--darken-3 ma-1"
-              :class="{'button':$vuetify.breakpoint.xs, 'caption mt-n2':smallText}"
+              :class="{
+                button: $vuetify.breakpoint.xs,
+                'caption mt-n2': smallText,
+              }"
             >
-              {{message}} </span>
+              {{ message }}
+            </span>
           </v-row>
         </v-col>
       </v-card>
@@ -46,12 +87,8 @@
       :disabled="!buttonHovering"
       max-width="220"
     >
-      <v-icon
-        slot="activator"
-        class="mt-n5 ml-12"
-        large
-      ></v-icon>
-      <span>{{toolTipMessage}}</span>
+      <v-icon slot="activator" class="mt-n5 ml-12" large></v-icon>
+      <span>{{ toolTipMessage }}</span>
     </v-tooltip>
   </div>
 </template>
@@ -61,20 +98,24 @@ export default {
   props: {
     toolTipMessage: String,
     message: String,
-    count: Number,
+    count: String,
     color: String,
     func: Function,
+    funcParam: String,
     smallText: Boolean,
+    smallCount: Boolean,
     isLoading: Boolean,
+    horizontal: Boolean,
+    minWidth: Number,
   },
   watch: {
-    buttonHovering (newVal) {
-      this.showToolTip = newVal
-    }
+    buttonHovering(newVal) {
+      this.showToolTip = newVal;
+    },
   },
   data: () => ({
     buttonHovering: false,
     showToolTip: false,
-  })
+  }),
 };
 </script>

@@ -1,57 +1,62 @@
 <template>
-  <v-col :cols="!$vuetify.breakpoint.xs?6:12">
-    <v-menu
-      v-model="menu"
-      :close-on-content-click="false"
-      transition="slide-x-transition"
-      offset-y
-      max-width="290px"
-      min-width="290px"
-    >
-      <template v-slot:activator="{ on, attrs }">
-        <v-text-field
-          v-model="computedDateFormatted"
-          persistent-hint
-          prepend-inner-icon="mdi-calendar"
-          readonly
-          v-bind="attrs"
-          v-on="on"
-          solo
-          dense
-        ></v-text-field>
-      </template>
-      <v-date-picker
-        v-model="date"
-        no-title
-        @input="menu = false"
-        @click:date="event(date)"
-        color="error"
-      ></v-date-picker>
-    </v-menu>
-
-  </v-col>
+  <v-menu
+    v-model="menu"
+    :close-on-content-click="false"
+    transition="slide-x-transition"
+    offset-y
+    max-width="290px"
+    min-width="290px"
+  >
+    <template v-slot:activator="{ on, attrs }">
+      <v-text-field
+        :value="formatDate(date)"
+        persistent-hint
+        prepend-inner-icon="mdi-calendar"
+        v-bind="attrs"
+        v-on="on"
+        readonly
+        clearable
+        @click:clear="event(null)"
+        :outlined="outlined"
+        :solo="!outlined"
+        dense
+        :rules="rules"
+        :disabled="disabled"
+      ></v-text-field>
+    </template>
+    <v-date-picker
+      v-model="date"
+      no-title
+      @input="menu = false; if(type == 'month') event(date)"
+      @click:date="event(date)"
+      color="blue darken 2"
+      :type="type"
+    ></v-date-picker>
+  </v-menu>
 </template>
 
 <script>
 export default {
   data: () => ({
-    dateFormatted: null,
     menu: false,
   }),
   props: {
     event: Function,
-    date: Object,
-  },
-  computed: {
-    computedDateFormatted () {
-      return this.formatDate(this.date)
-    },
+    date: String,
+    rules: Array,
+    disabled: Boolean,
+    outlined: Boolean,
+    type: String,
   },
   methods: {
     formatDate (date) {
       if (!date) return null
 
       const [year, month, day] = date.split('-')
+
+      if(this.type == 'month'){
+        return `${month}/${year}`
+      }
 
       if (this.$vuetify.lang.current == 'en') {
         return `${month}/${day}/${year}`

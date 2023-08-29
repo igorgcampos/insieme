@@ -27,6 +27,12 @@ const routes = [
         props: true,
         component: () => import('../views/OperationsPage.vue')
       },
+      {
+        path: 'boletim',
+        name: 'MetricReport',
+        props: true,
+        component: () => import('../views/MetricReportPage.vue')
+      },
     ]
   },
   {
