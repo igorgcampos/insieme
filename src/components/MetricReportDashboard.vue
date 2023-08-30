@@ -1,8 +1,26 @@
 <template>
   <v-card>
-    <v-row>
+    <v-row class="mb-n3">
+      <v-col cols="6" class="ml-3">
+        <TooltipButton
+          v-if="!invoicingHistory.aprovado"
+          :label="$vuetify.lang.t('$vuetify.APROVAR')"
+          :message="$vuetify.lang.t('$vuetify.APROVAR')"
+          :event="approve"
+          :mobile="$vuetify.breakpoint.xs"
+          :margin="true"
+        ></TooltipButton>
+
+        <TooltipButton
+          :label="$vuetify.lang.t('$vuetify.EXPORTAR_CSV')"
+          :message="$vuetify.lang.t('$vuetify.EXPORTAR_CSV')"
+          :event="exportCSV"
+          :mobile="$vuetify.breakpoint.xs"
+          :margin="true"
+        ></TooltipButton>
+      </v-col>
       <v-spacer></v-spacer>
-      <v-col cols="12">
+      <v-col cols="3" :class="{'pl-9': !(invoicingHistory && invoicingHistory.aprovado), 'pl-12': invoicingHistory && invoicingHistory.aprovado}">
         <v-spacer></v-spacer>
         <v-chip
           label
@@ -33,32 +51,14 @@
       </v-col>
     </v-row>
 
-    <v-row>
+    <v-row class="ml-6 mb-n5 mt-3">
+      <span class="caption blue--text" v-show="activatedCircuits > 0">{{
+        $vuetify.lang.t("$vuetify.CIRCUITOS_ATIVADOS", activatedCircuits)
+      }}</span>
+    </v-row>
+    <v-row class="ml-1">
       <v-col cols="9">
         <v-list class="ma-0 pa-0 overflow-y-hidden mt-2" max-height="530">
-          <span
-            class="ml-2 mt-n2 caption blue--text"
-            v-show="activatedCircuits > 0"
-            >{{
-              $vuetify.lang.t("$vuetify.CIRCUITOS_ATIVADOS", activatedCircuits)
-            }}</span
-          >
-
-          <span
-            v-if="invoicingHistory.descontos > 0"
-            class="ml-5 mt-n2 caption blue--text"
-            v-show="activatedCircuits > 0"
-            >{{
-              $vuetify.lang.t(
-                "$vuetify.DESCONTOS_APLICADOS",
-                Intl.NumberFormat("pt-BR", {
-                  style: "currency",
-                  currency: "BRL",
-                }).format(invoicingHistory.descontos)
-              )
-            }}</span
-          >
-
           <v-data-table
             id="table"
             :headers="headers"
@@ -67,7 +67,7 @@
             class="elevation-2 mt-2 mb-2 ml-2 overflow-x-auto"
             fixed-header
             :no-data-text="''"
-            height="330"
+            height="350"
             dense
             :items-per-page="15"
             :search="search"
@@ -88,7 +88,7 @@
         </v-list>
       </v-col>
       <v-col cols="3">
-        <v-row class="mt-0 justify-center">
+        <v-row class="mt-1 justify-center">
           <v-col class="flex-grow-0">
             <CountCard
               :count="calculateTotal('valorLocacao').strValue"
@@ -168,6 +168,16 @@
           ></v-col>
           <v-col class="flex-grow-0">
             <CountCard
+              :count="calculateTotal('descontos').strValue"
+              :message="'Descontos'"
+              color="primary--text font-weight-bold"
+              :smallCount="true"
+              :func="goToColumn"
+              :funcParam="'total'"
+            ></CountCard
+          ></v-col>
+          <v-col class="flex-grow-0">
+            <CountCard
               :count="calculateTotal('total').strValue"
               :message="'Total'"
               color="success--text font-weight-bold"
@@ -186,10 +196,12 @@
 
 <script>
 import CountCard from "../components/cards/CountCard";
+import TooltipButton from "../components/TooltipButton";
 
 export default {
   components: {
     CountCard,
+    TooltipButton,
   },
   props: {
     invoicingHistory: Object,
@@ -199,13 +211,20 @@ export default {
     this.headers.forEach((h) => (h.class = "black--text caption1"));
   },
   methods: {
+    approve() {
+      this.$get("/historico_faturamento/aprovar", {
+        id: this.invoicingHistory.id,
+      }).then(() => {
+        this.invoicingHistory.aprovado = true;
+      });
+    },
     exportCSV() {
       if (!this.invoicingHistory) return;
 
       var invoicings = JSON.parse(
         JSON.stringify(this.invoicingHistory.faturamentos)
       ).map((s) => {
-        s.statusCircuito = s.circuito.statusCircuito + "";
+        s.statusCircuito = s.circuito.statusInstalacao + "";
         s.dataInstalacao = s.circuito.dataInstalacao
           ? s.circuito.dataInstalacao + ""
           : "--";
@@ -264,25 +283,31 @@ export default {
 
         return {
           [this.$vuetify.lang.t("$vuetify.DESIGNACAO_TPZ")]: s.designacaoTpz,
-          [this.$vuetify.lang.t("$vuetify.STATUS_CIRCUITO")]: s.statusCircuito,
+          [this.$vuetify.lang.t("$vuetify.STATUS_CIRCUITO")]: s.statusCircuito
+            ? this.$vuetify.lang.t("$vuetify." + s.statusCircuito)
+            : "--",
           [this.$vuetify.lang.t("$vuetify.TIPO")]: s.tipo,
           [this.$vuetify.lang.t("$vuetify.PERFIL")]: s.perfil,
-          [this.$vuetify.lang.t("$vuetify.CIDADE")]: s.circuito.cidadeInstalacao
-            ? s.circuito.cidadeInstalacao
+          [this.$vuetify.lang.t("$vuetify.CIDADE")]: s.circuito.cidade
+            ? s.circuito.cidade
                 .replaceAll("\n", "")
                 .replaceAll("\r", "")
                 .replaceAll(/&amp;/g, "")
                 .replaceAll(/#39;/g, "")
             : "--",
-          ["UF"]: s.circuito.ufInstalacao
-            ? s.circuito.ufInstalacao.replaceAll("\n", "").replaceAll("\r", "")
+          ["UF"]: s.circuito.uf
+            ? s.circuito.uf.replaceAll("\n", "").replaceAll("\r", "")
             : "--",
           [this.$vuetify.lang.t("$vuetify.DATA_ATIVACAO_CIRCUITO")]: s.circuito
             .dataInstalacao
-            ? s.circuito.dataInstalacao
+            ? this.$formatDate(s.circuito.dataInstalacao)
             : "--",
-          [this.$vuetify.lang.t("$vuetify.INICIO_MEDICAO")]: s.inicioMedicao,
-          [this.$vuetify.lang.t("$vuetify.FINAL_MEDICAO")]: s.fimMedicao,
+          [this.$vuetify.lang.t("$vuetify.INICIO_MEDICAO")]: this.$formatDate(
+            s.inicioMedicao
+          ),
+          [this.$vuetify.lang.t("$vuetify.FINAL_MEDICAO")]: this.$formatDate(
+            s.fimMedicao
+          ),
           [this.$vuetify.lang.t("$vuetify.NUMERO_DIAS")]: s.numeroDias,
           [this.$vuetify.lang.t("$vuetify.LOCACAO")]: s.valorLocacao,
           [this.$vuetify.lang.t("$vuetify.ASSISTENCIA_TECNICA")]:
@@ -308,7 +333,7 @@ export default {
 
       this.$downloadCSV(
         invoicings,
-        this.contract.nome +
+        this.invoicingHistory.contrato.nome +
           "-" +
           this.$vuetify.lang.t("$vuetify.FATURAMENTO") +
           "-" +
@@ -514,6 +539,10 @@ export default {
         total -= this.invoicingHistory.descontos;
       }
 
+      if (name == "descontos") {
+        total += this.invoicingHistory.descontos || 0;
+      }
+
       return {
         strValue: Intl.NumberFormat("pt-BR", {
           style: "currency",
@@ -568,10 +597,13 @@ export default {
           currency: "BRL",
         }).format(this.invoicingHistory.faturamentos[index].total);
 
-        if (this.invoicingHistory.faturamentos[index].circuito.statusInstalacao) {
+        if (
+          this.invoicingHistory.faturamentos[index].circuito.statusInstalacao
+        ) {
           object.statusInstalacao = this.$vuetify.lang.t(
             "$vuetify." +
-              this.invoicingHistory.faturamentos[index].circuito.statusInstalacao
+              this.invoicingHistory.faturamentos[index].circuito
+                .statusInstalacao
           );
         }
 
@@ -584,7 +616,7 @@ export default {
 
       this.activatedCircuits = this.invoicingHistory.faturamentos
         ? this.invoicingHistory.faturamentos.filter(
-            (i) => i.circuito.statusCircuito == "ATIVADO"
+            (i) => i.circuito.statusInstalacao == "ATIVADO"
           ).length
         : 0;
 

@@ -1,6 +1,6 @@
 <template>
   <v-layout column align-center>
-    <v-col cols="12" md="9" lg="10" xl="10" sm="12" xs="2" xm="2" class="mt-8">
+    <v-col cols="10" md="9" lg="10" xl="8" sm="10" xs="2" xm="2" class="mt-8">
       <div>
         <v-row :class="{ 'ml-n12': $vuetify.breakpoint.mdAndUp }">
           <span
@@ -32,7 +32,7 @@
       </div>
 
       <v-row class="pl-3 mt-n3">
-        <v-col cols="12" class="flex-grow-0" v-if="invoicingHistory">
+        <v-col cols="12" class="flex-grow-0" v-if="invoicingHistory && !isLoading">
           <v-lazy :options="{ threshold: 0.6 }" transition="slide-x-transition">
             <MetricReportDashboard :invoicingHistory="invoicingHistory" :interestDate="interestDate">
             </MetricReportDashboard>
@@ -51,7 +51,7 @@
         <v-progress-circular
           :size="30"
           :width="4"
-          color="red darken-1"
+          color="red"
           indeterminate
         ></v-progress-circular>
       </v-row>
@@ -80,6 +80,7 @@ export default {
     },
     search() {
       this.isLoading = true;
+      this.invoicingHistory = undefined;
 
       this.$get("/historico_faturamento/busca", {
         contractId: window.sessionStorage.getItem("selectedContractId"),

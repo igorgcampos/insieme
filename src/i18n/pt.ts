@@ -475,4 +475,11 @@ export default {
     TOTAL_CUSTOS_EXTRAS: 'Total de custos extras',
     TOTAL_OUTROS_SERVICOS: 'Total de outros servicos',
     TOTAL_CUSTOS_MANUTENCOES: 'Total de outros custos de manutenção',
+    FATURAMENTO_NAO_APROVADO: 'Faturamento não aprovado',
+    FATURAMENTO_APROVADO: 'Faturamento aprovado',
+    APROVAR: 'Aprovar',
+    STATUS_CIRCUITO: 'Status do circuito',
+    DESCONTOS_SLA: 'Descontos de SLA',
+    INSTALACAO: 'Instalação',
+    CUSTOS_EXTRAS: 'Custos extras',
 }
