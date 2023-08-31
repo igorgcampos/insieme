@@ -2,7 +2,7 @@
   <v-dialog v-model="show" max-width="400" overflow-y-hidden overflow-x-hidden>
     <v-card v-show="showSuccess">
       <SuccessPanel
-       :title="$vuetify.lang.t('$vuetify.CONTESTACAO_ENVIADA')"
+       :title="successMessage"
        :subtitle="''"
       >
       </SuccessPanel>
@@ -105,6 +105,7 @@ export default {
     entity: Object,
     loading: Boolean,
     showSuccess: Boolean,
+    successMessage: String,
   },
 };
 </script>

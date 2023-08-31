@@ -216,6 +216,7 @@
       :loading="contestLoading"
       :entity="invoicingHistory"
       :showSuccess="showSuccess"
+      :successMessage="$vuetify.lang.t('$vuetify.CONTESTACAO_ENVIADA')"
     >
     </AddMessageDialog>
   </v-card>
