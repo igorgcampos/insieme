@@ -561,7 +561,7 @@ export default {
       if (column == "location") {
         this.styleHeader("Locação", 600);
       } else if (column == "total") {
-        this.styleHeader("Total", 650);
+        this.styleHeader("Total", 1000);
       } else if (column == "telecom") {
         this.styleHeader("Telecom", 650);
       } else if (column == "assistTech") {
@@ -665,7 +665,7 @@ export default {
           this.invoicingHistory.faturamentos[index].circuito.dataInstalacao
         );
 
-        /**var servicesAndValues = this.invoicingHistory.faturamentos[
+        var servicesAndValues = this.invoicingHistory.faturamentos[
           index
         ].serviçosPorValor
           .split(";")
@@ -677,28 +677,12 @@ export default {
             style: "currency",
             currency: "BRL",
           }).format(parts[1]);
-
-          this.headers.push({
-            text: this.$vuetify.lang.t("$vuetify." + parts[0]),
-            align: "center",
-            sortable: false,
-            value: parts[0],
-            width: "10%",
-          });
-        }**/
+        }
 
         invoicings.push(object);
       }
 
-      /**this.headers.push({
-        text: "Total",
-        align: "center",
-        sortable: false,
-        value: "total",
-        width: "10%",
-      });**/
-
-      //this.headers.forEach((h) => (h.class = "black--text caption1"));
+      this.addServiceValuesInHeaders();
 
       this.activatedCircuits = this.invoicingHistory.faturamentos
         ? this.invoicingHistory.faturamentos.filter(
@@ -707,6 +691,43 @@ export default {
         : 0;
 
       return invoicings;
+    },
+    addServiceValuesInHeaders() {
+
+      if(this.alreadyCreatedAdditionalHeaders){
+        return;
+      }
+
+      this.alreadyCreatedAdditionalHeaders = true;
+
+      for (var index in this.invoicingHistory.faturamentos) {
+        var servicesAndValues = this.invoicingHistory.faturamentos[
+          index
+        ].serviçosPorValor
+          .split(";")
+          .filter((s) => s.length > 0);
+
+        for (var index2 in servicesAndValues) {
+          var parts = servicesAndValues[index2].split(":");
+          this.headers.push({
+            text: this.$vuetify.lang.t("$vuetify." + parts[0]),
+            align: "center",
+            sortable: false,
+            value: parts[0],
+            width: "10%",
+          });
+        }
+      }
+
+      this.headers.push({
+        text: "Total",
+        align: "center",
+        sortable: false,
+        value: "total",
+        width: "10%",
+      });
+
+      this.headers.forEach((h) => (h.class = "black--text caption1"));
     },
   },
   data: () => ({
