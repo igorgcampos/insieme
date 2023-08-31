@@ -698,7 +698,7 @@ export default {
         width: "10%",
       });
 
-      this.headers.forEach((h) => (h.class = "black--text caption1"));
+      //this.headers.forEach((h) => (h.class = "black--text caption1"));
 
       this.activatedCircuits = this.invoicingHistory.faturamentos
         ? this.invoicingHistory.faturamentos.filter(
