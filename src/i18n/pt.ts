@@ -484,5 +484,6 @@ export default {
     CUSTOS_EXTRAS: 'Custos extras',
     CONTESTAR: 'Contestar',
     ADICIONE_OBSERVACAO: 'Adicione uma observação (obrigatório)',
-    CONTESTACAO_ENVIADA: 'Contestação enviada com sucesso!'
+    CONTESTACAO_ENVIADA: 'Contestação enviada com sucesso!',
+    DESINSTALACAO: 'Desinstalação',
 }
