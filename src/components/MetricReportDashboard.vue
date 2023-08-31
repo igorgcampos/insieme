@@ -812,13 +812,6 @@ export default {
         value: "valorInstalacao",
         width: "10%",
       },
-      {
-        text: "Total",
-        align: "center",
-        sortable: false,
-        value: "total",
-        width: "10%",
-      }
     ],
   }),
 };
