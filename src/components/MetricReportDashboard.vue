@@ -196,9 +196,7 @@
               :count="calculateTotal('total').strValue"
               :message="'Total'"
               color="success--text font-weight-bold"
-              :smallCount="
-                calculateTotal('total').numberValue > 999 ? true : false
-              "
+              :smallCount="true"
               :func="goToColumn"
               :funcParam="'total'"
             ></CountCard
@@ -636,6 +634,11 @@ export default {
           currency: "BRL",
         }).format(this.invoicingHistory.faturamentos[index].valorTelecom);
 
+        object.valorLocacao = Intl.NumberFormat("pt-BR", {
+          style: "currency",
+          currency: "BRL",
+        }).format(this.invoicingHistory.faturamentos[index].valorLocacao);
+
         object.valorAssistenciaTecnica = Intl.NumberFormat("pt-BR", {
           style: "currency",
           currency: "BRL",
@@ -662,8 +665,40 @@ export default {
           this.invoicingHistory.faturamentos[index].circuito.dataInstalacao
         );
 
+        var servicesAndValues = this.invoicingHistory.faturamentos[
+          index
+        ].serviçosPorValor
+          .split(";")
+          .filter((s) => s.length > 0);
+
+        for (var index2 in servicesAndValues) {
+          var parts = servicesAndValues[index2].split(":");
+          object[parts[0]] = Intl.NumberFormat("pt-BR", {
+            style: "currency",
+            currency: "BRL",
+          }).format(parts[1]);
+
+          this.headers.push({
+            text: this.$vuetify.lang.t("$vuetify." + parts[0]),
+            align: "center",
+            sortable: false,
+            value: parts[0],
+            width: "10%",
+          });
+        }
+
         invoicings.push(object);
       }
+
+      this.headers.push({
+        text: "Total",
+        align: "center",
+        sortable: false,
+        value: "total",
+        width: "10%",
+      });
+
+      this.headers.forEach((h) => (h.class = "black--text caption1"));
 
       this.activatedCircuits = this.invoicingHistory.faturamentos
         ? this.invoicingHistory.faturamentos.filter(
@@ -754,13 +789,6 @@ export default {
         align: "center",
         sortable: false,
         value: "valorInstalacao",
-        width: "10%",
-      },
-      {
-        text: "Total",
-        align: "center",
-        sortable: false,
-        value: "total",
         width: "10%",
       },
     ],
