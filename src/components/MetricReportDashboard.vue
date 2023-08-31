@@ -690,13 +690,13 @@ export default {
         invoicings.push(object);
       }
 
-      this.headers.push({
+      /**this.headers.push({
         text: "Total",
         align: "center",
         sortable: false,
         value: "total",
         width: "10%",
-      });
+      });**/
 
       //this.headers.forEach((h) => (h.class = "black--text caption1"));
 
@@ -791,6 +791,13 @@ export default {
         value: "valorInstalacao",
         width: "10%",
       },
+      {
+        text: "Total",
+        align: "center",
+        sortable: false,
+        value: "total",
+        width: "10%",
+      }
     ],
   }),
 };
