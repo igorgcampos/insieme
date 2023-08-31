@@ -1,6 +1,28 @@
  <template>
   <v-dialog v-model="show" max-width="400" overflow-y-hidden overflow-x-hidden>
-    <v-card>
+    <v-card v-show="showSuccess">
+      <SuccessPanel
+       :title="$vuetify.lang.t('$vuetify.CONTESTACAO_ENVIADA')"
+       :subtitle="''"
+      >
+      </SuccessPanel>
+
+      <v-divider class="mt-n6"></v-divider>
+      <v-card-actions>
+        <v-spacer></v-spacer>
+        <v-btn
+          color="primary"
+          text
+          @click="
+            close();
+            message = undefined;
+          "
+          :x-small="$vuetify.breakpoint.xs"
+          >{{ $vuetify.lang.t("$vuetify.FECHAR") }}</v-btn
+        >
+      </v-card-actions>
+    </v-card>
+    <v-card v-show="!showSuccess">
       <v-card-title style="word-break: normal; !important" class="headline">{{
         title
       }}</v-card-title>
@@ -66,7 +88,11 @@
 </template>
 
 <script>
+import SuccessPanel from "../../components/panels/SuccessPanel";
 export default {
+   components: {
+   SuccessPanel,
+  },
   data: () => ({
     message: undefined,
   }),
@@ -78,6 +104,7 @@ export default {
     send: Function,
     entity: Object,
     loading: Boolean,
+    showSuccess: Boolean,
   },
 };
 </script>

@@ -12,6 +12,15 @@
         ></TooltipButton>
 
         <TooltipButton
+          v-if="!invoicingHistory.aprovado"
+          :label="$vuetify.lang.t('$vuetify.CONTESTAR')"
+          :message="$vuetify.lang.t('$vuetify.CONTESTAR')"
+          :event="showContest"
+          :mobile="$vuetify.breakpoint.xs"
+          :margin="true"
+        ></TooltipButton>
+
+        <TooltipButton
           :label="$vuetify.lang.t('$vuetify.EXPORTAR_CSV')"
           :message="$vuetify.lang.t('$vuetify.EXPORTAR_CSV')"
           :event="exportCSV"
@@ -20,7 +29,13 @@
         ></TooltipButton>
       </v-col>
       <v-spacer></v-spacer>
-      <v-col cols="3" :class="{'pl-9': !(invoicingHistory && invoicingHistory.aprovado), 'pl-12': invoicingHistory && invoicingHistory.aprovado}">
+      <v-col
+        cols="3"
+        :class="{
+          'pl-9': !(invoicingHistory && invoicingHistory.aprovado),
+          'pl-12': invoicingHistory && invoicingHistory.aprovado,
+        }"
+      >
         <v-spacer></v-spacer>
         <v-chip
           label
@@ -191,17 +206,31 @@
         </v-row>
       </v-col>
     </v-row>
+
+    <AddMessageDialog
+      :show="showContestDialog"
+      :send="sendContest"
+      :title="$vuetify.lang.t('$vuetify.CONTESTAR')"
+      :subtitle="$vuetify.lang.t('$vuetify.ADICIONE_OBSERVACAO')"
+      :close="closeContestDialog"
+      :loading="contestLoading"
+      :entity="invoicingHistory"
+      :showSuccess="showSuccess"
+    >
+    </AddMessageDialog>
   </v-card>
 </template>
 
 <script>
 import CountCard from "../components/cards/CountCard";
 import TooltipButton from "../components/TooltipButton";
+import AddMessageDialog from "../components/dialogs/AddMessageDialog";
 
 export default {
   components: {
     CountCard,
     TooltipButton,
+    AddMessageDialog,
   },
   props: {
     invoicingHistory: Object,
@@ -211,6 +240,27 @@ export default {
     this.headers.forEach((h) => (h.class = "black--text caption1"));
   },
   methods: {
+    sendContest(observation, invoicingHistory) {
+      if (!observation) {
+        return;
+      }
+
+      this.contestLoading = true;
+      this.$get("/historico_faturamento/contestar", {
+        id: invoicingHistory.id,
+        observation: observation,
+      }).then(() => {
+        this.showSuccess = true;
+        this.contestLoading = false;
+      });
+    },
+    closeContestDialog() {
+      this.showContestDialog = false;
+      this.showSuccess = false;
+    },
+    showContest() {
+      this.showContestDialog = true;
+    },
     approve() {
       this.$get("/historico_faturamento/aprovar", {
         id: this.invoicingHistory.id,
@@ -624,6 +674,9 @@ export default {
     },
   },
   data: () => ({
+    showSuccess: false,
+    contestLoading: false,
+    showContestDialog: false,
     search: "",
     showMaintenanceCosts: false,
     showCosts: false,
