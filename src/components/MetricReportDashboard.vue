@@ -665,7 +665,7 @@ export default {
           this.invoicingHistory.faturamentos[index].circuito.dataInstalacao
         );
 
-        var servicesAndValues = this.invoicingHistory.faturamentos[
+        /**var servicesAndValues = this.invoicingHistory.faturamentos[
           index
         ].serviçosPorValor
           .split(";")
@@ -685,7 +685,7 @@ export default {
             value: parts[0],
             width: "10%",
           });
-        }
+        }**/
 
         invoicings.push(object);
       }
