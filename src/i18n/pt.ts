@@ -469,7 +469,7 @@ export default {
     ASSISTENCIA_TECNICA: 'Assistência técnica',
     CUSTOS_EXTRAS_MANUTENCOES: 'Custos extras de Manutenções',
     TOTAL_LOCACAO: 'Total locação',
-    TOTAL_ASSISTENCIA: 'Total assistência técnica',
+    TOTAL_ASSISTENCIA: 'Total assist. técnica',
     TOTAL_TELECOM: 'Total Telecom',
     TOTAL_INSTALACOES: 'Total de instalações',
     TOTAL_CUSTOS_EXTRAS: 'Total de custos extras',
@@ -486,5 +486,13 @@ export default {
     ADICIONE_OBSERVACAO: 'Adicione uma observação (obrigatório)',
     CONTESTACAO_ENVIADA: 'Contestação enviada com sucesso!',
     DESINSTALACAO: 'Desinstalação',
-    APROVACAO_REALIZADA: 'Boletim aprovado! Suas notas fiscais serão emitidas em breve.'
+    APROVACAO_REALIZADA: 'Boletim aprovado! Suas notas fiscais serão emitidas em breve.',
+    REINSTALACAO: 'Reinstalação',
+    REMANEJAMENTO_EXTERNO: 'Remanejamento externo',
+    REMANEJAMENTO_INTERNO: 'Remanejamento interno',
+    VISITA_TECNICA: 'Visita técnica',
+    DESINSTALACAO_MESMA_UF: 'Desinstalação mesma UF',
+    DESINSTALACAO_UF_DIFERENTE: 'Desinstalação UF diferente',
+    MUDANCA_ENDERECO: 'Mudança de endereço',
+    TOTAL_OUTROS_CUSTOS: 'Total de outros custos',
 }

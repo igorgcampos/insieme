@@ -108,7 +108,7 @@
           <v-col class="flex-grow-0">
             <CountCard
               :count="calculateTotal('valorLocacao').strValue"
-              :message="'Total de locação'"
+              :message="$vuetify.lang.t('$vuetify.TOTAL_LOCACAO')"
               color="primary--text font-weight-bold"
               :smallText="true"
               :smallCount="true"
@@ -119,7 +119,7 @@
           <v-col class="flex-grow-0">
             <CountCard
               :count="calculateTotal('valorAssistenciaTecnica').strValue"
-              :message="'Total assist. técnica'"
+              :message="$vuetify.lang.t('$vuetify.TOTAL_ASSISTENCIA')"
               color="primary--text font-weight-bold"
               :smallText="true"
               :smallCount="true"
@@ -130,7 +130,7 @@
           <v-col class="flex-grow-0">
             <CountCard
               :count="calculateTotal('valorTelecom').strValue"
-              :message="'Total de Telecom'"
+              :message="$vuetify.lang.t('$vuetify.TOTAL_TELECOM')"
               color="primary--text font-weight-bold"
               :smallText="true"
               :smallCount="true"
@@ -141,7 +141,7 @@
           <v-col class="flex-grow-0">
             <CountCard
               :count="calculateTotal('valorInstalacao').strValue"
-              :message="'Total de instalações'"
+              :message="$vuetify.lang.t('$vuetify.TOTAL_INSTALACOES')"
               color="primary--text font-weight-bold"
               :smallText="true"
               :smallCount="true"
@@ -152,7 +152,7 @@
           <v-col class="flex-grow-0">
             <CountCard
               :count="calculateTotal('valorCustosExtrasServicos').strValue"
-              :message="'Total de custos extras'"
+              :message="$vuetify.lang.t('$vuetify.TOTAL_CUSTOS_EXTRAS')"
               color="primary--text font-weight-bold"
               :smallText="true"
               :smallCount="true"
@@ -163,7 +163,7 @@
           <v-col class="flex-grow-0">
             <CountCard
               :count="calculateTotal('valorServicos').strValue"
-              :message="'Total de outros serviços'"
+              :message="$vuetify.lang.t('$vuetify.TOTAL_OUTROS_SERVICOS')"
               color="primary--text font-weight-bold"
               :smallText="true"
               :smallCount="true"
@@ -174,7 +174,7 @@
           <v-col class="flex-grow-0">
             <CountCard
               :count="calculateTotal('valorCustosExtrasManutencoes').strValue"
-              :message="'Total de outros custos'"
+              :message="$vuetify.lang.t('$vuetify.TOTAL_OUTROS_CUSTOS')"
               color="primary--text font-weight-bold"
               :smallText="true"
               :smallCount="true"
@@ -185,7 +185,7 @@
           <v-col class="flex-grow-0">
             <CountCard
               :count="calculateTotal('descontos').strValue"
-              :message="'Descontos'"
+              :message="$vuetify.lang.t('$vuetify.DESCONTOS')"
               color="primary--text font-weight-bold"
               :smallCount="true"
               :func="goToColumn"
@@ -195,7 +195,7 @@
           <v-col class="flex-grow-0">
             <CountCard
               :count="calculateTotal('total').strValue"
-              :message="'Total'"
+              :message="$vuetify.lang.t('$vuetify.TOTAL')"
               color="success--text font-weight-bold"
               :smallCount="true"
               :func="goToColumn"
