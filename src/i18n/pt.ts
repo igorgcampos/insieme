@@ -486,4 +486,5 @@ export default {
     ADICIONE_OBSERVACAO: 'Adicione uma observação (obrigatório)',
     CONTESTACAO_ENVIADA: 'Contestação enviada com sucesso!',
     DESINSTALACAO: 'Desinstalação',
+    APROVACAO_REALIZADA: 'Boletim aprovado! Suas notas fiscais serão emitidas em breve.'
 }

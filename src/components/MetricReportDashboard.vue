@@ -9,6 +9,7 @@
           :event="approve"
           :mobile="$vuetify.breakpoint.xs"
           :margin="true"
+          :loading="approveLoading"
         ></TooltipButton>
 
         <TooltipButton
@@ -217,6 +218,14 @@
       :successMessage="$vuetify.lang.t('$vuetify.CONTESTACAO_ENVIADA')"
     >
     </AddMessageDialog>
+
+    <AddMessageDialog
+      :close="closeApproveDialog"
+      :show="showApproveSuccess"
+      :showSuccess="showApproveSuccess"
+      :successMessage="$vuetify.lang.t('$vuetify.APROVACAO_REALIZADA')"
+    >
+    </AddMessageDialog>
   </v-card>
 </template>
 
@@ -239,6 +248,9 @@ export default {
     this.headers.forEach((h) => (h.class = "black--text caption1"));
   },
   methods: {
+    closeApproveDialog(){
+      this.showApproveSuccess = false;
+    },
     sendContest(observation, invoicingHistory) {
       if (!observation) {
         return;
@@ -261,10 +273,13 @@ export default {
       this.showContestDialog = true;
     },
     approve() {
+      this.approveLoading = true;
       this.$get("/historico_faturamento/aprovar", {
         id: this.invoicingHistory.id,
       }).then(() => {
         this.invoicingHistory.aprovado = true;
+        this.showApproveSuccess = true;
+        this.approveLoading = false;
       });
     },
     exportCSV() {
@@ -731,6 +746,8 @@ export default {
     },
   },
   data: () => ({
+    approveLoading: false,
+    showApproveSuccess: false,
     showSuccess: false,
     contestLoading: false,
     showContestDialog: false,
