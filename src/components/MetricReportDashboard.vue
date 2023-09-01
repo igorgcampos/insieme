@@ -319,11 +319,6 @@ export default {
           currency: "BRL",
         }).format(s.valorInstalacao);
 
-        s.valorServicos = Intl.NumberFormat("pt-BR", {
-          style: "currency",
-          currency: "BRL",
-        }).format(s.valorServicos);
-
         s.valorCustosExtrasServicos = Intl.NumberFormat("pt-BR", {
           style: "currency",
           currency: "BRL",
@@ -378,7 +373,6 @@ export default {
             s.valorAssistenciaTecnica,
           ["TELECOM"]: s.valorTelecom,
           [this.$vuetify.lang.t("$vuetify.INSTALACAO")]: s.valorInstalacao,
-          [this.$vuetify.lang.t("$vuetify.SERVICOS")]: s.valorServicos,
           [this.$vuetify.lang.t("$vuetify.CUSTOS_EXTRAS")]:
             s.valorCustosExtrasServicos,
           [this.$vuetify.lang.t("$vuetify.CUSTOS_EXTRAS_MANUTENCOES")]:
