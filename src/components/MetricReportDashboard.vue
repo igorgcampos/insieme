@@ -248,7 +248,7 @@ export default {
     this.headers.forEach((h) => (h.class = "black--text caption1"));
   },
   methods: {
-    closeApproveDialog(){
+    closeApproveDialog() {
       this.showApproveSuccess = false;
     },
     sendContest(observation, invoicingHistory) {
@@ -345,7 +345,7 @@ export default {
               .replaceAll("\r", " ")
           : "--";
 
-        return {
+        var result = {
           [this.$vuetify.lang.t("$vuetify.DESIGNACAO_TPZ")]: s.designacaoTpz,
           [this.$vuetify.lang.t("$vuetify.STATUS_CIRCUITO")]: s.statusCircuito
             ? this.$vuetify.lang.t("$vuetify." + s.statusCircuito)
@@ -389,8 +389,24 @@ export default {
                 currency: "BRL",
               }).format(s.descontos)
             : "--",
-          [this.$vuetify.lang.t("$vuetify.TOTAL")]: s.total,
         };
+
+        var servicesAndValues = s.serviçosPorValor
+          .split(";")
+          .filter((s) => s.length > 0);
+
+        for (var index in servicesAndValues) {
+          var parts = servicesAndValues[index].split(":");
+          result[this.$vuetify.lang.t("$vuetify." + parts[0])] =
+            Intl.NumberFormat("pt-BR", {
+              style: "currency",
+              currency: "BRL",
+            }).format(parts[1]);
+        }
+
+        result[this.$vuetify.lang.t("$vuetify.TOTAL")] = s.total;
+
+        return result;
       });
 
       this.addTotalsToCsv(invoicings);
@@ -708,8 +724,7 @@ export default {
       return invoicings;
     },
     addServiceValuesInHeaders() {
-
-      if(this.alreadyCreatedAdditionalHeaders){
+      if (this.alreadyCreatedAdditionalHeaders) {
         return;
       }
 
