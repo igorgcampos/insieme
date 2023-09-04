@@ -611,6 +611,9 @@ export default {
 
       if (name == "total") {
         total -= this.invoicingHistory.descontos;
+        this.invoicingHistory.faturamentos.forEach(
+          (i) => (total -= i.descontos || 0)
+        );
       }
 
       if (name == "descontos") {
@@ -704,6 +707,8 @@ export default {
           }).format(parts[1]);
         }
 
+        object.descontos = this.invoicingHistory.faturamentos[index].descontos || 0
+
         invoicings.push(object);
       }
 
@@ -742,6 +747,14 @@ export default {
           });
         }
       }
+
+      this.headers.push({
+        text: $vuetify.lang.t('$vuetify.DESCONTOS'),
+        align: "center",
+        sortable: false,
+        value: "descontos",
+        width: "10%",
+      });
 
       this.headers.push({
         text: "Total",
