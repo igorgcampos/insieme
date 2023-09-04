@@ -189,7 +189,7 @@
               color="primary--text font-weight-bold"
               :smallCount="true"
               :func="goToColumn"
-              :funcParam="'total'"
+              :funcParam="'descontos'"
             ></CountCard
           ></v-col>
           <v-col class="flex-grow-0">
@@ -587,7 +587,9 @@ export default {
         this.styleHeader("Locação", 600);
       } else if (column == "total") {
         this.styleHeader("Total", 1000);
-      } else if (column == "telecom") {
+      } else if (column == "descontos") {
+        this.styleHeader("DESCONTOS", 1000);
+      }else if (column == "telecom") {
         this.styleHeader("Telecom", 650);
       } else if (column == "assistTech") {
         this.styleHeader("Assistência técnica", 650);
@@ -598,7 +600,7 @@ export default {
       this.$forceUpdate();
     },
     styleHeader(name, offset) {
-      this.headers.filter((h) => h.text == name)[0].class =
+      this.headers.filter((h) => (h.text == name || h.text == this.$vuetify.lang.t('$vuetify.' + name)))[0].class =
         "white--text caption1 blue";
       document.getElementsByClassName("v-data-table__wrapper")[0].scrollLeft =
         offset;
