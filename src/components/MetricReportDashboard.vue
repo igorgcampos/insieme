@@ -93,7 +93,7 @@
               <v-col cols="4">
                 <v-text-field
                   v-model="search"
-                  label="Buscar por qualquer campo"
+                  :label="$vuetify.lang.t('$vuetify.BUSCAR_QUALQUER_CAMPO')"
                   class="mt-3 mb-n3"
                   :outlined="true"
                   dense
@@ -707,7 +707,10 @@ export default {
           }).format(parts[1]);
         }
 
-        object.descontos = this.invoicingHistory.faturamentos[index].descontos || 0
+        object.descontos = Intl.NumberFormat("pt-BR", {
+            style: "currency",
+            currency: "BRL",
+          }).format(this.invoicingHistory.faturamentos[index].descontos || 0)
 
         invoicings.push(object);
       }

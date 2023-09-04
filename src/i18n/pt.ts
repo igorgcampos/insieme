@@ -495,4 +495,5 @@ export default {
     DESINSTALACAO_UF_DIFERENTE: 'Desinstalação UF diferente',
     MUDANCA_ENDERECO: 'Mudança de endereço',
     TOTAL_OUTROS_CUSTOS: 'Total de outros custos',
+    BUSCAR_QUALQUER_CAMPO: 'Buscar por qualquer campo',
 }
