@@ -749,7 +749,7 @@ export default {
       }
 
       this.headers.push({
-        text: $vuetify.lang.t('$vuetify.DESCONTOS'),
+        text: this.$vuetify.lang.t('$vuetify.DESCONTOS'),
         align: "center",
         sortable: false,
         value: "descontos",
