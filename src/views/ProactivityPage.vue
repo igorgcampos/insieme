@@ -71,6 +71,16 @@
               ></v-text-field>
             </v-row>
           </v-col>
+          <v-col cols="1" class="ml-3 mt-7">
+             <TooltipButton
+              :message="$vuetify.lang.t('$vuetify.EXPORTAR_CSV')"
+              :event="exportCSV"
+              :mobile="$vuetify.breakpoint.xs"
+              :loading="loadingExport"
+              icon="mdi-file-export"
+              color="primary"
+            ></TooltipButton>
+          </v-col>
         </v-row>
 
         <v-row
@@ -250,22 +260,59 @@
 import CountCard from '../components/cards/CountCard'
 import WarningPanel from '../components/panels/WarningPanel';
 import LabelValue from '../components/LabelValue';
+import TooltipButton from "../components/TooltipButton";
 
 export default {
   components: {
     CountCard,
     WarningPanel,
     LabelValue,
+    TooltipButton,
   },
   methods: {
-    toTopDesk () {
+    formatRestart(restart){
+      
+      restart.usuario = restart.usuario.nome;
+      restart.circuito = restart.referenciaEntidade;
+      restart.data = this.$formatDate(restart.createdOn.date);
 
+      delete restart.id;
+      delete restart.chamado;
+      delete restart.referenciaEntidade
+      delete restart.updatedOn;
+      delete restart.createdOn;
+      delete restart.resultado;
+      return restart;
+    },
+    exportCSV(){
+      this.loadingExport = true;
+      if (!this.allRestarts) {
+        this.$get("/operacao/proatividade/busca", {
+          searchText: '',
+           page: undefined,
+        }).then((response) => {
+          this.allRestarts = response.data.map((r) => {
+            return this.formatRestart(r);
+          });
+
+          this.$downloadCSV(
+            this.allRestarts,
+            "RESTARTS"
+          );
+          this.loadingExport = false;
+        });
+      } else {
+        this.$downloadCSV(
+          this.allRestarts,
+          "RESTARTS"
+        );
+        this.loadingExport = false;
+      }
     },
     clearFields () {
       this.searchText = '';
       this.page = 0;
       this.operations = [];
-
     },
     getFromStatus () {
 
@@ -321,6 +368,7 @@ export default {
 
         this.operations = this.operations.concat(response.data);
         this.isLoading = false;
+        this.allRestarts = undefined;
       });
 
     },
@@ -349,8 +397,10 @@ export default {
     }
   },
   data: () => ({
+    loadingExport: false,
     isLoading: false,
     operations: [],
+    allRestarts: undefined,
     showPanel: true,
     counts: 0,
     status: undefined,
