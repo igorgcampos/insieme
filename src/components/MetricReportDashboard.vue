@@ -435,9 +435,13 @@ export default {
       });
 
       let totalTelecom = 0;
-      this.invoicingHistory.faturamentos.forEach((item) => {
-        totalTelecom += item.valorTelecom;
-      });
+      if (!this.invoicingHistory.faturamentos[0].circuito.modalidadeAtual.bandaRede){
+        this.invoicingHistory.faturamentos.forEach((item) => {
+          totalTelecom += item.valorTelecom;
+        });
+      }else{
+        totalTelecom += this.invoicingHistory.faturamentos[0].valorTelecom;
+      }
 
       let totalInstalacoes = 0;
       this.invoicingHistory.faturamentos.forEach((item) => {
@@ -607,15 +611,31 @@ export default {
     },
     calculateTotal(name) {
       var total = 0;
+
+     if (name == "valorTelecom" && this.invoicingHistory.faturamentos[0].circuito.modalidadeAtual.bandaRede) {
+        total += this.invoicingHistory.faturamentos[0].valorTelecom;
+        return {
+          strValue: Intl.NumberFormat("pt-BR", {
+            style: "currency",
+            currency: "BRL",
+          }).format(total),
+          numberValue: total,
+        };
+      }
+
       this.invoicingHistory.faturamentos.forEach(
         (i) => (total += i[name] || 0)
       );
 
-      if (name == "total") {
+       if (name == "total") {
         total -= this.invoicingHistory.descontos;
         this.invoicingHistory.faturamentos.forEach(
           (i) => (total -= i.descontos || 0)
         );
+
+        if (this.invoicingHistory.faturamentos[0].circuito.modalidadeAtual.bandaRede) {
+          total += this.invoicingHistory.faturamentos[0].valorTelecom;
+        }
       }
 
       if (name == "descontos") {
@@ -659,10 +679,14 @@ export default {
           currency: "BRL",
         }).format(this.invoicingHistory.faturamentos[index].valorInstalacao);
 
-        object.valorTelecom = Intl.NumberFormat("pt-BR", {
-          style: "currency",
-          currency: "BRL",
-        }).format(this.invoicingHistory.faturamentos[index].valorTelecom);
+        if(!this.invoicingHistory.faturamentos[0].circuito.modalidadeAtual.bandaRede){
+          object.valorTelecom = Intl.NumberFormat("pt-BR", {
+            style: "currency",
+            currency: "BRL",
+          }).format(this.invoicingHistory.faturamentos[index].valorTelecom);
+        }else{
+          object.valorTelecom = '--';
+        }
 
         object.valorLocacao = Intl.NumberFormat("pt-BR", {
           style: "currency",
