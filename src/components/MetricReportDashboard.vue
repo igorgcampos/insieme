@@ -424,6 +424,10 @@ export default {
 
       total = total - (this.invoicingHistory.descontos || 0);
 
+      if(this.invoicingHistory.faturamentos[0].circuito.modalidadeAtual.bandaRede){
+        total += this.invoicingHistory.faturamentos[0].valorTelecom;
+      }
+
       let totalLocacao = 0;
       this.invoicingHistory.faturamentos.forEach((item) => {
         totalLocacao += item.valorLocacao;
