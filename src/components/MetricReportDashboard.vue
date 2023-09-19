@@ -206,12 +206,12 @@
                   style: 'currency',
                   currency: 'BRL',
                 }).format(
-                  invoicingHistory.faturamentos[0].circuito.contrato
+                  contract
                     .outrosValores
                 )
               "
               :message="
-                invoicingHistory.faturamentos[0].circuito.contrato
+                contract
                   .nomeOutrosValores
               "
               color="primary--text font-weight-bold"
