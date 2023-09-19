@@ -212,6 +212,7 @@
               "
               color="primary--text font-weight-bold"
               :smallCount="true"
+              :smallText="true"
               :func="goToColumn"
               :funcParam="'total'"
             ></CountCard
