@@ -195,7 +195,7 @@
              <v-col
             class="flex-grow-0"
             v-show="
-              contract.outrosValores && contract.outrosValores > 0
+              invoicingHistory.contrato.outrosValores && invoicingHistory.contrato.outrosValores > 0
             "
           >
             <CountCard
@@ -204,13 +204,11 @@
                   style: 'currency',
                   currency: 'BRL',
                 }).format(
-                  contract
-                    .outrosValores
+                  invoicingHistory.contrato.outrosValores
                 )
               "
               :message="
-                contract
-                  .nomeOutrosValores
+                invoicingHistory.contrato.nomeOutrosValores
               "
               color="primary--text font-weight-bold"
               :smallCount="true"
@@ -457,9 +455,9 @@ export default {
       }
 
       if (
-        this.contract.outrosValores
+        this.invoicingHistory.contrato.outrosValores
       ) {
-        total += this.contract.outrosValores;
+        total += this.invoicingHistory.contrato.outrosValores;
       }
 
       let totalLocacao = 0;
@@ -581,16 +579,16 @@ export default {
           }).format(this.invoicingHistory.descontos),
       });
 
-      if (this.contract.outrosValores) {
+      if (this.invoicingHistory.contrato.outrosValores) {
         invoicings.push({
           [""]:
-            this.contract.nomeOutrosValores +
+            this.invoicingHistory.contrato.nomeOutrosValores +
             ": " +
             Intl.NumberFormat("pt-BR", {
               style: "currency",
               currency: "BRL",
             }).format(
-              this.contract.outrosValores
+              this.invoicingHistory.contrato.outrosValores
             ),
         });
       }
