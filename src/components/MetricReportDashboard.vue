@@ -192,6 +192,34 @@
               :funcParam="'descontos'"
             ></CountCard
           ></v-col>
+             <v-col
+            class="flex-grow-0"
+            v-show="
+              invoicingHistory.faturamentos[0].circuito.contrato
+                .outrosValores &&
+              invoicingHistory.faturamentos[0].circuito.contrato.outrosValores > 0
+            "
+          >
+            <CountCard
+              :count="
+                Intl.NumberFormat('pt-BR', {
+                  style: 'currency',
+                  currency: 'BRL',
+                }).format(
+                  invoicingHistory.faturamentos[0].circuito.contrato
+                    .outrosValores
+                )
+              "
+              :message="
+                invoicingHistory.faturamentos[0].circuito.contrato
+                  .nomeOutrosValores
+              "
+              color="primary--text font-weight-bold"
+              :smallCount="true"
+              :func="goToColumn"
+              :funcParam="'total'"
+            ></CountCard
+          ></v-col>
           <v-col class="flex-grow-0">
             <CountCard
               :count="calculateTotal('total').strValue"
@@ -671,6 +699,9 @@ export default {
           this.invoicingHistory.faturamentos[index]
         );
 
+        object.suspenso = this.invoicingHistory.faturamentos[index].suspenso? 
+        this.$vuetify.lang.t("$vuetify.SIM") : this.$vuetify.lang.t("$vuetify.NAO");
+
         object.designacaoTpz =
           this.invoicingHistory.faturamentos[index].circuito.nome;
 
@@ -796,6 +827,14 @@ export default {
         align: "center",
         sortable: false,
         value: "total",
+        width: "10%",
+      });
+
+       this.headers.push({
+        text: "Suspenso",
+        align: "center",
+        sortable: false,
+        value: "suspenso",
         width: "10%",
       });
 
