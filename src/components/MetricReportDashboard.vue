@@ -458,6 +458,12 @@ export default {
         total += this.invoicingHistory.faturamentos[0].valorTelecom;
       }
 
+      if (
+        this.contract.outrosValores
+      ) {
+        total += this.contract.outrosValores;
+      }
+
       let totalLocacao = 0;
       this.invoicingHistory.faturamentos.filter(f => !f.suspenso).forEach((item) => {
         totalLocacao += item.valorLocacao;
@@ -576,6 +582,20 @@ export default {
             currency: "BRL",
           }).format(this.invoicingHistory.descontos),
       });
+
+      if (this.contract.outrosValores) {
+        invoicings.push({
+          [""]:
+            this.contract.nomeOutrosValores +
+            ": " +
+            Intl.NumberFormat("pt-BR", {
+              style: "currency",
+              currency: "BRL",
+            }).format(
+              this.contract.outrosValores
+            ),
+        });
+      }
 
       invoicings.push({
         [""]:
