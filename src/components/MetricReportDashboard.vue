@@ -399,6 +399,8 @@ export default {
         }
 
         result[this.$vuetify.lang.t("$vuetify.TOTAL")] = s.total;
+        result[this.$vuetify.lang.t("$vuetify.SUSPENSO")] = s.suspenso? 
+        this.$vuetify.lang.t("$vuetify.SIM") : this.$vuetify.lang.t("$vuetify.NAO");
 
         return result;
       });
@@ -418,7 +420,7 @@ export default {
       invoicings.push({ [""]: "" });
 
       let total = 0;
-      this.invoicingHistory.faturamentos.forEach((item) => {
+      this.invoicingHistory.faturamentos.filter(f => !f.suspenso).forEach((item) => {
         total += item.total;
       });
 
@@ -429,18 +431,18 @@ export default {
       }
 
       let totalLocacao = 0;
-      this.invoicingHistory.faturamentos.forEach((item) => {
+      this.invoicingHistory.faturamentos.filter(f => !f.suspenso).forEach((item) => {
         totalLocacao += item.valorLocacao;
       });
 
       let totalAssistencia = 0;
-      this.invoicingHistory.faturamentos.forEach((item) => {
+      this.invoicingHistory.faturamentos.filter(f => !f.suspenso).forEach((item) => {
         totalAssistencia += item.valorAssistenciaTecnica;
       });
 
       let totalTelecom = 0;
       if (!this.invoicingHistory.faturamentos[0].circuito.modalidadeAtual.bandaRede){
-        this.invoicingHistory.faturamentos.forEach((item) => {
+        this.invoicingHistory.faturamentos.filter(f => !f.suspenso).forEach((item) => {
           totalTelecom += item.valorTelecom;
         });
       }else{
@@ -448,22 +450,22 @@ export default {
       }
 
       let totalInstalacoes = 0;
-      this.invoicingHistory.faturamentos.forEach((item) => {
+      this.invoicingHistory.faturamentos.filter(f => !f.suspenso).forEach((item) => {
         totalInstalacoes += item.valorInstalacao;
       });
 
       let totalCustos = 0;
-      this.invoicingHistory.faturamentos.forEach((item) => {
+      this.invoicingHistory.faturamentos.filter(f => !f.suspenso).forEach((item) => {
         totalCustos += item.valorCustosExtrasServicos;
       });
 
       let totalOutrosServicos = 0;
-      this.invoicingHistory.faturamentos.forEach((item) => {
+      this.invoicingHistory.faturamentos.filter(f => !f.suspenso).forEach((item) => {
         totalOutrosServicos += item.valorServicos;
       });
 
       let totalOutrosCustos = 0;
-      this.invoicingHistory.faturamentos.forEach((item) => {
+      this.invoicingHistory.faturamentos.filter(f => !f.suspenso).forEach((item) => {
         totalOutrosCustos += item.valorCustosExtrasManutencoes;
       });
 
@@ -627,13 +629,13 @@ export default {
         };
       }
 
-      this.invoicingHistory.faturamentos.forEach(
+      this.invoicingHistory.faturamentos.filter((f) => !f.suspenso).forEach(
         (i) => (total += i[name] || 0)
       );
 
        if (name == "total") {
         total -= this.invoicingHistory.descontos;
-        this.invoicingHistory.faturamentos.forEach(
+        this.invoicingHistory.faturamentos.filter((f) => !f.suspenso).forEach(
           (i) => (total -= i.descontos || 0)
         );
 
