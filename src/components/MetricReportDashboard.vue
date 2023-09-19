@@ -195,9 +195,7 @@
              <v-col
             class="flex-grow-0"
             v-show="
-              invoicingHistory.faturamentos[0].circuito.contrato
-                .outrosValores &&
-              invoicingHistory.faturamentos[0].circuito.contrato.outrosValores > 0
+              contract.outrosValores && contract.outrosValores > 0
             "
           >
             <CountCard
