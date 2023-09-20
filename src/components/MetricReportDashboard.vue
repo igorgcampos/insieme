@@ -195,7 +195,7 @@
              <v-col
             class="flex-grow-0"
             v-show="
-              invoicingHistory.contrato.outrosValores && invoicingHistory.contrato.outrosValores > 0
+              invoicingHistory.outrosValores && invoicingHistory.outrosValores > 0
             "
           >
             <CountCard
@@ -204,11 +204,11 @@
                   style: 'currency',
                   currency: $getCurrencySymbol(invoicingHistory.contrato.moeda),
                 }).format(
-                  invoicingHistory.contrato.outrosValores
+                  invoicingHistory.outrosValores
                 )
               "
               :message="
-                invoicingHistory.contrato.nomeOutrosValores
+                invoicingHistory.nomeOutrosValores
               "
               color="primary--text font-weight-bold"
               :smallCount="true"
