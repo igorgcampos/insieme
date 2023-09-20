@@ -12,6 +12,20 @@ utilService.install = function (Vue) {
         Vue.prototype.$post('/operacao/save', operation)
     }
 
+    Vue.prototype.$getCurrencySymbol = (currencyName, prefix) => {
+        if(!currencyName || currencyName == 'REAL'){
+            return prefix? "R$" : "BRL";
+        }
+
+        if(currencyName == 'DOLAR'){
+            return prefix ? "US$" : "USD";
+        }
+
+        if(currencyName == 'EURO'){
+            return prefix ? "\u20AC" : "EUR";
+        }
+    }
+
     Vue.prototype.$getVersion = () => {
         return insiemeVersion;
     }

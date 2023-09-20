@@ -202,7 +202,7 @@
               :count="
                 Intl.NumberFormat('pt-BR', {
                   style: 'currency',
-                  currency: 'BRL',
+                  currency: $getCurrencySymbol(invoicingHistory.contrato.moeda),
                 }).format(
                   invoicingHistory.contrato.outrosValores
                 )
@@ -321,37 +321,37 @@ export default {
 
         s.valorLocacao = Intl.NumberFormat("pt-BR", {
           style: "currency",
-          currency: "BRL",
+          currency: this.$getCurrencySymbol(this.invoicingHistory.contrato.moeda),
         }).format(s.valorLocacao);
 
         s.valorAssistenciaTecnica = Intl.NumberFormat("pt-BR", {
           style: "currency",
-          currency: "BRL",
+          currency: this.$getCurrencySymbol(this.invoicingHistory.contrato.moeda),
         }).format(s.valorAssistenciaTecnica);
 
         s.valorTelecom = Intl.NumberFormat("pt-BR", {
           style: "currency",
-          currency: "BRL",
+          currency: this.$getCurrencySymbol(this.invoicingHistory.contrato.moeda),
         }).format(s.valorTelecom);
 
         s.total = Intl.NumberFormat("pt-BR", {
           style: "currency",
-          currency: "BRL",
+          currency: this.$getCurrencySymbol(this.invoicingHistory.contrato.moeda),
         }).format(s.total);
 
         s.valorInstalacao = Intl.NumberFormat("pt-BR", {
           style: "currency",
-          currency: "BRL",
+          currency: this.$getCurrencySymbol(this.invoicingHistory.contrato.moeda),
         }).format(s.valorInstalacao);
 
         s.valorCustosExtrasServicos = Intl.NumberFormat("pt-BR", {
           style: "currency",
-          currency: "BRL",
+          currency: this.$getCurrencySymbol(this.invoicingHistory.contrato.moeda),
         }).format(s.valorCustosExtrasServicos);
 
         s.valorCustosExtrasManutencoes = Intl.NumberFormat("pt-BR", {
           style: "currency",
-          currency: "BRL",
+          currency: this.$getCurrencySymbol(this.invoicingHistory.contrato.moeda),
         }).format(s.valorCustosExtrasManutencoes);
 
         s.tipo = s.circuito.hub
@@ -405,7 +405,7 @@ export default {
           [this.$vuetify.lang.t("$vuetify.DESCONTOS")]: s.descontos
             ? Intl.NumberFormat("pt-BR", {
                 style: "currency",
-                currency: "BRL",
+                currency: this.$getCurrencySymbol(this.invoicingHistory.contrato.moeda),
               }).format(s.descontos)
             : "--",
         };
@@ -419,7 +419,7 @@ export default {
           result[this.$vuetify.lang.t("$vuetify." + parts[0])] =
             Intl.NumberFormat("pt-BR", {
               style: "currency",
-              currency: "BRL",
+              currency: this.$getCurrencySymbol(this.invoicingHistory.contrato.moeda),
             }).format(parts[1]);
         }
 
@@ -506,7 +506,7 @@ export default {
           ": " +
           Intl.NumberFormat("pt-BR", {
             style: "currency",
-            currency: "BRL",
+            currency: this.$getCurrencySymbol(this.invoicingHistory.contrato.moeda),
           }).format(totalLocacao),
       });
 
@@ -516,7 +516,7 @@ export default {
           ": " +
           Intl.NumberFormat("pt-BR", {
             style: "currency",
-            currency: "BRL",
+            currency: this.$getCurrencySymbol(this.invoicingHistory.contrato.moeda),
           }).format(totalAssistencia),
       });
 
@@ -526,7 +526,7 @@ export default {
           ": " +
           Intl.NumberFormat("pt-BR", {
             style: "currency",
-            currency: "BRL",
+            currency: this.$getCurrencySymbol(this.invoicingHistory.contrato.moeda),
           }).format(totalTelecom),
       });
 
@@ -536,7 +536,7 @@ export default {
           ": " +
           Intl.NumberFormat("pt-BR", {
             style: "currency",
-            currency: "BRL",
+            currency: this.$getCurrencySymbol(this.invoicingHistory.contrato.moeda),
           }).format(totalInstalacoes),
       });
 
@@ -546,7 +546,7 @@ export default {
           ": " +
           Intl.NumberFormat("pt-BR", {
             style: "currency",
-            currency: "BRL",
+            currency: this.$getCurrencySymbol(this.invoicingHistory.contrato.moeda),
           }).format(totalCustos),
       });
 
@@ -556,7 +556,7 @@ export default {
           ": " +
           Intl.NumberFormat("pt-BR", {
             style: "currency",
-            currency: "BRL",
+            currency: this.$getCurrencySymbol(this.invoicingHistory.contrato.moeda),
           }).format(totalOutrosServicos),
       });
 
@@ -566,7 +566,7 @@ export default {
           ": " +
           Intl.NumberFormat("pt-BR", {
             style: "currency",
-            currency: "BRL",
+            currency: this.$getCurrencySymbol(this.invoicingHistory.contrato.moeda),
           }).format(totalOutrosCustos),
       });
 
@@ -576,7 +576,7 @@ export default {
           ": " +
           Intl.NumberFormat("pt-BR", {
             style: "currency",
-            currency: "BRL",
+            currency: this.$getCurrencySymbol(this.invoicingHistory.contrato.moeda),
           }).format(this.invoicingHistory.descontos),
       });
 
@@ -587,7 +587,7 @@ export default {
             ": " +
             Intl.NumberFormat("pt-BR", {
               style: "currency",
-              currency: "BRL",
+              currency: this.$getCurrencySymbol(this.invoicingHistory.contrato.moeda),
             }).format(
               this.invoicingHistory.contrato.outrosValores
             ),
@@ -600,7 +600,7 @@ export default {
           ": " +
           Intl.NumberFormat("pt-BR", {
             style: "currency",
-            currency: "BRL",
+            currency: this.$getCurrencySymbol(this.invoicingHistory.contrato.moeda),
           }).format(total),
       });
     },
@@ -668,7 +668,7 @@ export default {
         return {
           strValue: Intl.NumberFormat("pt-BR", {
             style: "currency",
-            currency: "BRL",
+            currency: this.$getCurrencySymbol(this.invoicingHistory.contrato.moeda),
           }).format(total),
           numberValue: total,
         };
@@ -696,7 +696,7 @@ export default {
       return {
         strValue: Intl.NumberFormat("pt-BR", {
           style: "currency",
-          currency: "BRL",
+          currency: this.$getCurrencySymbol(this.invoicingHistory.contrato.moeda),
         }).format(total),
         numberValue: total,
       };
@@ -730,13 +730,13 @@ export default {
 
         object.valorInstalacao = Intl.NumberFormat("pt-BR", {
           style: "currency",
-          currency: "BRL",
+          currency: this.$getCurrencySymbol(this.invoicingHistory.contrato.moeda),
         }).format(this.invoicingHistory.faturamentos[index].valorInstalacao);
 
         if(!this.invoicingHistory.faturamentos[0].circuito.modalidadeAtual.bandaRede){
           object.valorTelecom = Intl.NumberFormat("pt-BR", {
             style: "currency",
-            currency: "BRL",
+            currency: this.$getCurrencySymbol(this.invoicingHistory.contrato.moeda),
           }).format(this.invoicingHistory.faturamentos[index].valorTelecom);
         }else{
           object.valorTelecom = '--';
@@ -744,19 +744,19 @@ export default {
 
         object.valorLocacao = Intl.NumberFormat("pt-BR", {
           style: "currency",
-          currency: "BRL",
+          currency: this.$getCurrencySymbol(this.invoicingHistory.contrato.moeda),
         }).format(this.invoicingHistory.faturamentos[index].valorLocacao);
 
         object.valorAssistenciaTecnica = Intl.NumberFormat("pt-BR", {
           style: "currency",
-          currency: "BRL",
+          currency: this.$getCurrencySymbol(this.invoicingHistory.contrato.moeda),
         }).format(
           this.invoicingHistory.faturamentos[index].valorAssistenciaTecnica
         );
 
         object.total = Intl.NumberFormat("pt-BR", {
           style: "currency",
-          currency: "BRL",
+          currency: this.$getCurrencySymbol(this.invoicingHistory.contrato.moeda),
         }).format(this.invoicingHistory.faturamentos[index].total);
 
         if (
@@ -783,13 +783,13 @@ export default {
           var parts = servicesAndValues[index2].split(":");
           object[parts[0]] = Intl.NumberFormat("pt-BR", {
             style: "currency",
-            currency: "BRL",
+            currency: this.$getCurrencySymbol(this.invoicingHistory.contrato.moeda),
           }).format(parts[1]);
         }
 
         object.descontos = Intl.NumberFormat("pt-BR", {
             style: "currency",
-            currency: "BRL",
+            currency: this.$getCurrencySymbol(this.invoicingHistory.contrato.moeda),
           }).format(this.invoicingHistory.faturamentos[index].descontos || 0)
 
         invoicings.push(object);
