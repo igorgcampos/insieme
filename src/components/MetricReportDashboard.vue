@@ -410,9 +410,9 @@ export default {
             : "--",
         };
 
-        var servicesAndValues = s.serviçosPorValor
+        var servicesAndValues = s.servicosPorValor? s.servicosPorValor
           .split(";")
-          .filter((s) => s.length > 0);
+          .filter((s) => s.length > 0):[];
 
         for (var index in servicesAndValues) {
           var parts = servicesAndValues[index].split(":");
@@ -773,11 +773,10 @@ export default {
           this.invoicingHistory.faturamentos[index].circuito.dataInstalacao
         );
 
-        var servicesAndValues = this.invoicingHistory.faturamentos[
-          index
-        ].serviçosPorValor
+        var servicesAndValues = this.invoicingHistory.faturamentos[index].servicosPorValor? 
+        this.invoicingHistory.faturamentos[index].servicosPorValor
           .split(";")
-          .filter((s) => s.length > 0);
+          .filter((s) => s.length > 0): "";
 
         for (var index2 in servicesAndValues) {
           var parts = servicesAndValues[index2].split(":");
@@ -813,11 +812,10 @@ export default {
       this.alreadyCreatedAdditionalHeaders = true;
 
       for (var index in this.invoicingHistory.faturamentos) {
-        var servicesAndValues = this.invoicingHistory.faturamentos[
-          index
-        ].serviçosPorValor
+        var servicesAndValues = this.invoicingHistory.faturamentos[index].servicosPorValor? 
+        this.invoicingHistory.faturamentos[index].servicosPorValor
           .split(";")
-          .filter((s) => s.length > 0);
+          .filter((s) => s.length > 0):"";
 
         for (var index2 in servicesAndValues) {
           var parts = servicesAndValues[index2].split(":");
