@@ -33,6 +33,12 @@ const routes = [
         props: true,
         component: () => import('../views/MetricReportPage.vue')
       },
+      {
+        path: 'disponibilidade',
+        name: 'AvailabilityReport',
+        props: true,
+        component: () => import('../views/AvailabilityPage.vue')
+      },
     ]
   },
   {

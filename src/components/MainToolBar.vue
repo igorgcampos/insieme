@@ -122,21 +122,46 @@
       <span>{{ $vuetify.lang.t("$vuetify.VOLTAR") }}</span>
     </v-tooltip>
 
-    <v-tooltip bottom v-if="!$vuetify.breakpoint.xs && !$vuetify.breakpoint.sm">
+    <v-menu
+      transition="slide-x-transition"
+      bottom
+      right
+      v-if="(canShowMetricReportLink() || canShowAvailabilityLink()) && (!$vuetify.breakpoint.xs && !$vuetify.breakpoint.sm)"
+    >
       <template v-slot:activator="{ on }">
         <v-chip
           pill
           v-on="on"
           color="red darken-3"
-          v-show="canShowMetricReportLink()"
+          v-show="canShowShortcut()"
           class="mr-2"
-          @click="toMetricReportPage()"
+          :x-small="$vuetify.breakpoint.xs"
         >
-          {{ $vuetify.lang.t("$vuetify.BOLETINS_MEDICOES") }}
+          {{ $vuetify.lang.t("$vuetify.BOLETINS") }}
+          <v-icon right dark> mdi-chevron-down </v-icon>
         </v-chip>
       </template>
-      <span>{{ $vuetify.lang.t("$vuetify.BOLETINS_MEDICOES") }}</span>
-    </v-tooltip>
+
+      <v-list>
+        <v-list-item
+          @click="toMetricReportPage()"
+          v-if="canShowMetricReportLink()"
+        >
+          <v-list-item-title>{{
+            $vuetify.lang.t("$vuetify.MEDICOES")
+          }}</v-list-item-title>
+        </v-list-item>
+
+        <v-list-item
+          @click="toAvailabilityPage()"
+          v-if="canShowAvailabilityLink()"
+        >
+          <v-list-item-title>{{
+            $vuetify.lang.t("$vuetify.DISPONIBILIDADES")
+          }}</v-list-item-title>
+        </v-list-item>
+      </v-list>
+    </v-menu>
 
     <v-tooltip bottom v-if="!$vuetify.breakpoint.xs && !$vuetify.breakpoint.sm">
       <template v-slot:activator="{ on }">
@@ -339,6 +364,15 @@
           }}</v-list-item-title>
         </v-list-item>
 
+        <v-list-item
+          v-show="canShowAvailabilityLink()"
+          @click="toAvailabilityPage()"
+        >
+          <v-list-item-title>{{
+            $vuetify.lang.t("$vuetify.DISPONIBILIDADES")
+          }}</v-list-item-title>
+        </v-list-item>
+
         <v-list-item v-show="canShowContractLink()" @click="toContractList()">
           <v-list-item-title>{{
             $vuetify.lang.t("$vuetify.CONTRATOS")
@@ -461,8 +495,6 @@ export default {
       this.$root.$on("remove-notification", (notification) =>
         vm.removeNotification(notification)
       );
-
-     
     });
   },
   data: () => ({
@@ -471,12 +503,17 @@ export default {
     notifications: [],
     newNotificationsCount: 0,
     tab: "null",
-  
   }),
   methods: {
     canShowMetricReportLink() {
       return (
         this.$hasProfile("/grp_insieme-boletim") &&
+        this.$route.path == "/dashboard"
+      );
+    },
+    canShowAvailabilityLink() {
+      return (
+        this.$hasProfile("/grp_insieme-disponibilidade") &&
         this.$route.path == "/dashboard"
       );
     },
@@ -571,7 +608,13 @@ export default {
     toMetricReportPage() {
       window.sessionStorage.setItem("actualPage", "boletim");
       this.$router.push({
-        name: "MetricReport"
+        name: "MetricReport",
+      });
+    },
+    toAvailabilityPage() {
+      window.sessionStorage.setItem("actualPage", "disponibilidade");
+      this.$router.push({
+        name: "AvailabilityReport",
       });
     },
     toDashBoardPage() {
@@ -588,7 +631,10 @@ export default {
       );
     },
     canShowBackLink() {
-      return this.$route.path === "/boletim";
+      return (
+        this.$route.path === "/boletim" ||
+        this.$route.path === "/disponibilidade"
+      );
     },
     canShowAdminLink() {
       return (
