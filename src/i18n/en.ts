@@ -517,4 +517,6 @@ export default {
     NUMERO_INCIDENTE: 'Incident number',
     BOLETINS: 'Bulletins',
     MEDICOES: 'Measurements',
+    DATA_CONCLUSAO: 'Finish date',
+    OBSERVACOES: 'Observations',
 }

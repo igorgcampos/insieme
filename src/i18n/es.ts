@@ -514,4 +514,6 @@ export default {
     NUMERO_INCIDENTE: 'Número de incidencia',
     BOLETINS: 'Boletines',
     MEDICOES: 'Medidas',
+    DATA_CONCLUSAO: 'Fecha de finalizacion',
+    OBSERVACOES: 'Observaciones',
 }

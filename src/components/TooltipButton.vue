@@ -13,7 +13,7 @@
         :loading="loading"
         :x-small="mobile"
         :small="!mobile"
-        :class="{'ma-2': margin}"
+        :class="{'ma-2': margin, 'mr-3': marginRight}"
         :disabled="disabled"
       >{{label}}</v-btn>
 
@@ -27,6 +27,7 @@
         :x-small="mobile"
         :small="!mobile"
         :disabled="disabled"
+        :class="{'mr-3': marginRight}"
       >
         <v-icon>{{icon}}</v-icon>
       </v-btn>
@@ -52,6 +53,7 @@ export default {
     bottom: Boolean,
     margin: Boolean,
     disabled: Boolean,
+    marginRight: Boolean,
   }
 };
 </script>

@@ -11,7 +11,7 @@
         </v-row>
 
         <v-row id="filtro" class="pl-3 ml-n2 grey lighten-5">
-          <v-col cols="2" class="ml-5 pl-3 mr-1">
+          <v-col cols="2" class="pl-3 mr-1">
             <v-row>
               <span
                 class="text-right subtitle-2 font-weight-bold grey--text text--lighten-1"
@@ -31,7 +31,7 @@
         </v-row>
 
         <v-row class="pl-3 mt-n3">
-          <v-expansion-panels class="ma-1">
+          <v-expansion-panels class="ma-1" v-model="openedPanel">
             <v-expansion-panel
               v-for="(historic, i) in historics"
               :key="i"
@@ -39,14 +39,6 @@
             >
               <v-expansion-panel-header style="z-index: 1000">
                 <v-row align="center" no-gutters>
-                  <v-col v-show="!$vuetify.breakpoint.xs" sm="5" md="4">
-                    <strong
-                      class="subtitle-2 font-weight-bold"
-                      v-html="historic.contrato.nome"
-                    ></strong>
-                  </v-col>
-                  <v-spacer></v-spacer>
-
                   <v-chip
                     color="blue darken-2"
                     class="ml-0 mr-3"
@@ -65,6 +57,7 @@
               </v-expansion-panel-content>
             </v-expansion-panel>
           </v-expansion-panels>
+          
           <v-col v-if="historics.length == 0 && !isLoading">
             <v-lazy
               :options="{ threshold: 0.6 }"
@@ -82,7 +75,7 @@
           <v-progress-circular
             :size="30"
             :width="4"
-            color="red darken-2"
+            color="red darken-1"
             indeterminate
           ></v-progress-circular>
         </v-row>
@@ -168,6 +161,7 @@ export default {
         }
 
         this.historics = this.historics.concat(response.data);
+        this.openedPanel = 0;
       });
     },
     stickFilters() {
@@ -191,6 +185,7 @@ export default {
     showErrorDialog: false,
     showSuccessDialog: false,
     excelFile: undefined,
+    openedPanel: undefined,
   }),
   created: function () {
    this.search();

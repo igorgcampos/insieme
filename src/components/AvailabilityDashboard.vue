@@ -83,18 +83,20 @@ export default {
               [this.$vuetify.lang.t("$vuetify.TEMPO_CONSIDERADO")]: d.tempoConsideradoEmHoras,
               [this.$vuetify.lang.t("$vuetify.TEMPO_REPARO")]: d.tempoReparoEmHoras,
               [this.$vuetify.lang.t("$vuetify.CATEGORIA")]: d.categoria,
-              [this.$vuetify.lang.t("$vuetify.DESIGNACAO_TPZ")]: d.circuito.designacaoTpz,
+              [this.$vuetify.lang.t("$vuetify.DESIGNACAO_TPZ")]: d.circuito.nome,
               [this.$vuetify.lang.t("$vuetify.TIPO_PERDA")]: d.tipoPerda,
               [this.$vuetify.lang.t("$vuetify.TIPOS_CAUSA")]: d.causa,
               [this.$vuetify.lang.t("$vuetify.OBSERVACOES")]: d.observacoes,
-              [this.$vuetify.lang.t("$vuetify.DATA_CRIACAO")]: this.$formatDate(d.dataCriacao.date) + " " + d.dataCriacao.time,
-              [this.$vuetify.lang.t("$vuetify.DATA_CONCLUSAO")]: this.$formatDate(d.dataFechamento.date) + " " + d.dataFechamento.time,
+              [this.$vuetify.lang.t("$vuetify.DATA_CRIACAO")]: this.$formatDate(d.dataCriacao.date) + " " + 
+              this.$formatHour(d.dataCriacao.time, true),
+              [this.$vuetify.lang.t("$vuetify.DATA_CONCLUSAO")]: this.$formatDate(d.dataFechamento.date) + " " + 
+              this.$formatHour(d.dataFechamento.time, true),
             };
           });
 
           this.$downloadCSV(all, this.historic.contrato.nome + '-' + 
           this.$vuetify.lang.t("$vuetify.DISPONIBILIDADES") + '-' + 
-          this.historic.dataHistorico);
+          this.$formatDate(this.historic.dataHistorico, true));
     },
     filterDesigTpz(value, search) {
       return (
@@ -117,15 +119,15 @@ export default {
         var object = Object.assign({}, this.historic.disponibilidades[index]);
 
         object.designacaoTpz =
-          this.historic.disponibilidades[index].circuito.designacaoTpz;
+          this.historic.disponibilidades[index].circuito.nome;
+
         object.dataCriacao =
           this.$formatDate(object.dataCriacao.date) +
-          " " +
-          object.dataCriacao.time;
+          " " + this.$formatHour(object.dataCriacao.time, true);
+
         object.dataFechamento =
           this.$formatDate(object.dataFechamento.date) +
-          " " +
-          object.dataFechamento.time;
+          " " + this.$formatHour(object.dataFechamento.time, true);
 
         availabilities.push(object);
       }

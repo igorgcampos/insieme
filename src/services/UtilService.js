@@ -58,7 +58,14 @@ utilService.install = function (Vue) {
 
         if (date.year) {
             if (Vuetify.framework.lang.current == 'en') {
+                if(onlyMonthAndYear){
+                    return date.month + '/' + date.year;
+                }
                 return date.month + '/' + date.day + '/' + date.year
+            }
+
+            if(onlyMonthAndYear){
+                return date.month + '/' + date.year;
             }
 
             return date.day + '/' + date.month + '/' + date.year
@@ -73,13 +80,14 @@ utilService.install = function (Vue) {
         return splits[2] + '/' + splits[1] + '/' + splits[0];
     }
 
-    Vue.prototype.$formatHour = (date) => {
+    Vue.prototype.$formatHour = (date, onlyHourAndMinutes) => {
 
         if (!date) {
             return '--'
         }
 
-        return date.hour + ':' + (date.minute < 10 ? '0' + date.minute : date.minute) + ':' + (date.second < 10 ? '0' + date.second : date.second)
+        return date.hour + ':' + (date.minute < 10 ? '0' + date.minute : date.minute) + 
+        (!onlyHourAndMinutes?(':' + (date.second < 10 ? '0' + date.second : date.second)) :'');
     }
 
     Vue.prototype.$showChat = () => {
