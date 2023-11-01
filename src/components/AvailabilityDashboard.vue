@@ -80,12 +80,12 @@ export default {
             return {
               [this.$vuetify.lang.t("$vuetify.NUMERO_INCIDENTE")]: d.numeroIncidente,
               [this.$vuetify.lang.t("$vuetify.ASSUNTO")]: d.descricao,
-              [this.$vuetify.lang.t("$vuetify.TEMPO_CONSIDERADO")]: d.tempoConsideradoEmHoras,
-              [this.$vuetify.lang.t("$vuetify.TEMPO_REPARO")]: d.tempoReparoEmHoras,
+              [this.$vuetify.lang.t("$vuetify.TEMPO_CONSIDERADO")]: Intl.NumberFormat("pt-BR").format(d.tempoConsideradoEmHoras),
+              [this.$vuetify.lang.t("$vuetify.TEMPO_REPARO")]: Intl.NumberFormat("pt-BR").format(d.tempoReparoEmHoras),
               [this.$vuetify.lang.t("$vuetify.CATEGORIA")]: d.categoria,
               [this.$vuetify.lang.t("$vuetify.DESIGNACAO_TPZ")]: d.circuito.nome,
-              [this.$vuetify.lang.t("$vuetify.TIPO_PERDA")]: d.tipoPerda,
               [this.$vuetify.lang.t("$vuetify.TIPOS_CAUSA")]: d.causa,
+              [this.$vuetify.lang.t("$vuetify.TIPO_PERDA")]: d.tipoPerda,
               [this.$vuetify.lang.t("$vuetify.OBSERVACOES")]: d.observacoes,
               [this.$vuetify.lang.t("$vuetify.DATA_CRIACAO")]: this.$formatDate(d.dataCriacao.date) + " " + 
               this.$formatHour(d.dataCriacao.time, true),
@@ -128,6 +128,9 @@ export default {
         object.dataFechamento =
           this.$formatDate(object.dataFechamento.date) +
           " " + this.$formatHour(object.dataFechamento.time, true);
+
+        object.tempoReparoEmHoras =  Intl.NumberFormat("pt-BR").format(object.tempoReparoEmHoras);
+        object.tempoConsideradoEmHoras =  Intl.NumberFormat("pt-BR").format(object.tempoConsideradoEmHoras);
 
         availabilities.push(object);
       }
@@ -179,17 +182,17 @@ export default {
           width: "11rem",
         },
         {
-          text: this.$vuetify.lang.t("$vuetify.TIPO_PERDA"),
-          align: "center",
-          sortable: false,
-          value: "tipoPerda",
-          width: "11rem",
-        },
-        {
           text: this.$vuetify.lang.t("$vuetify.TIPOS_CAUSA"),
           align: "center",
           sortable: false,
           value: "causa",
+          width: "11rem",
+        },
+        {
+          text: this.$vuetify.lang.t("$vuetify.TIPO_PERDA"),
+          align: "center",
+          sortable: false,
+          value: "tipoPerda",
           width: "11rem",
         },
         {
