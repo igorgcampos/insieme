@@ -156,7 +156,8 @@
                   v-if="
                     $hasProfile('Operacional') ||
                     $hasProfile('Cliente') ||
-                    $hasProfile('Administrador')
+                    $hasProfile('Administrador') ||
+                    $hasProfile('Operacional-Atendimento')
                   "
                 >
                   <v-list-item-title>{{
