@@ -506,6 +506,11 @@ export default {
   }),
   methods: {
     canShowMetricReportLink() {
+      var vm = this;
+        setTimeout(function () {
+        vm.$$forceUpdate();
+      }, 2000);
+
       return (
         this.$hasProfile("/grp_insieme-boletim") &&
         this.$route.path == "/dashboard"
