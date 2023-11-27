@@ -42,8 +42,10 @@ export default {
       if(!window.sessionStorage.getItem('keyCloakToken')){
         this.$router.push('/login')
       }else{
-        this.$router.push('/contratos');
-        window.sessionStorage.setItem('actualPage', 'contratos')
+        this.$getUser().then(() =>{
+            this.$router.push('/contratos');
+            window.sessionStorage.setItem('actualPage', 'contratos')
+        })
       }
 
       this.$root.$on('login-success', () => {
