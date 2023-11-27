@@ -490,6 +490,8 @@ export default {
             return -1;
           });
         });
+
+        this.$forceUpdate();
       });
 
       this.$root.$on("remove-notification", (notification) =>
