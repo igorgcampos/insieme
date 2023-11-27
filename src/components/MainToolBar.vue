@@ -126,7 +126,11 @@
       transition="slide-x-transition"
       bottom
       right
-      v-if="(canShowMetricReportLink() || canShowAvailabilityLink()) && (!$vuetify.breakpoint.xs && !$vuetify.breakpoint.sm)"
+      v-if="
+        (canShowMetricReportLink() || canShowAvailabilityLink()) &&
+        !$vuetify.breakpoint.xs &&
+        !$vuetify.breakpoint.sm
+      "
     >
       <template v-slot:activator="{ on }">
         <v-chip
@@ -503,13 +507,17 @@ export default {
     notifications: [],
     newNotificationsCount: 0,
     tab: "null",
+    update: false,
   }),
   methods: {
     canShowMetricReportLink() {
       var vm = this;
+      if (!this.update) {
         setTimeout(function () {
-        vm.$forceUpdate();
-      }, 100);
+          vm.$forceUpdate();
+          this.update = true;
+        }, 100);
+      }
 
       return (
         this.$hasProfile("/grp_insieme-boletim") &&
