@@ -509,7 +509,7 @@ export default {
       var vm = this;
         setTimeout(function () {
         vm.$forceUpdate();
-      }, 500);
+      }, 250);
 
       return (
         this.$hasProfile("/grp_insieme-boletim") &&
