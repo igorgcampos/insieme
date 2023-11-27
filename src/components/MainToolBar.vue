@@ -515,7 +515,7 @@ export default {
       if (!this.update) {
         setTimeout(function () {
           vm.$forceUpdate();
-          this.update = true;
+          vm.update = true;
         }, 100);
       }
 
