@@ -508,7 +508,7 @@ export default {
     canShowMetricReportLink() {
       var vm = this;
         setTimeout(function () {
-        vm.$$forceUpdate();
+        vm.$forceUpdate();
       }, 2000);
 
       return (
