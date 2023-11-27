@@ -62,7 +62,7 @@ authService.install = function (Vue) {
         return window.sessionStorage.getItem('keyCloakToken');
     }
 
-    Vue.prototype.$hasProfile = async (profile) => {
+    Vue.prototype.$hasProfile = (profile) => {
         for (var index in JSON.parse(window.sessionStorage.getItem('user')).perfis) {
             if (JSON.parse(window.sessionStorage.getItem('user')).perfis[index] == profile) {
                 return true;
