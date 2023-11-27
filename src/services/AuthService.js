@@ -63,6 +63,9 @@ authService.install = function (Vue) {
     }
 
     Vue.prototype.$hasProfile = (profile) => {
+        if(!window.sessionStorage.getItem('user')){
+            return false;
+        }
         for (var index in JSON.parse(window.sessionStorage.getItem('user')).perfis) {
             if (JSON.parse(window.sessionStorage.getItem('user')).perfis[index] == profile) {
                 return true;
