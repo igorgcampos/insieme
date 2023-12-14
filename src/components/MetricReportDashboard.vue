@@ -679,7 +679,10 @@ export default {
       );
 
        if (name == "total") {
+
+        total += this.invoicingHistory.contrato.outrosValores || 0;
         total -= this.invoicingHistory.descontos;
+
         this.invoicingHistory.faturamentos.filter((f) => !f.suspenso).forEach(
           (i) => (total -= i.descontos || 0)
         );
