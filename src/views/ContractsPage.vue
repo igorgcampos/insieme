@@ -10,7 +10,7 @@
           >
         </v-row>
 
-        <v-row id="filtro" class="pl-2 ml-0 grey lighten-5">
+        <v-row id="filtro" class="pl-2 ml-n2 grey lighten-5">
           <v-col cols="4">
             <v-row>
               <span
