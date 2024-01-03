@@ -663,7 +663,7 @@ export default {
 
         if (!page) {
           this.circuits = []
-          this.selectedCheckList = []
+          //this.selectedCheckList = []
         }
 
         this.circuits = this.circuits.concat(response.data);

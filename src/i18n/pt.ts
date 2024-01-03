@@ -515,4 +515,6 @@ export default {
     MEDICOES: 'Medições',
     DATA_CONCLUSAO: 'Data de conclusão',
     OBSERVACOES: 'Observações',
+    SELECIONE_UM_CIRCUITO: 'Selecione ao menos um circuito ou importe o excel preenchido',
+    SELECIONE_UM_CIRCUITO_SEM_EXCEL: 'Selecione ao menos um circuito',
 }

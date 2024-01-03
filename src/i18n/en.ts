@@ -519,4 +519,6 @@ export default {
     MEDICOES: 'Measurements',
     DATA_CONCLUSAO: 'Finish date',
     OBSERVACOES: 'Observations',
+    SELECIONE_UM_CIRCUITO: 'Select at least one circuit or import the entire excel',
+    SELECIONE_UM_CIRCUITO_SEM_EXCEL: 'Select at least one circuit',
 }

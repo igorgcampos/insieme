@@ -125,13 +125,22 @@
         </v-row>
 
         <CommercialTable
-          v-if="!uploadSuccess && !showSuccess"
+          v-if="(!uploadSuccess && !showSuccess && entityList.length > 0 && actionName != 'NOVO_CIRCUITO' && actionName != 'SITE_SURVEY') || 
+          (actionName == 'NOVO_CIRCUITO' || actionName == 'SITE_SURVEY')"
           :actionName="actionName"
           :entityList="entityList"
           :headers="headers"
           :deleteItem="deleteItem"
           :editable="editable"
         ></CommercialTable>
+
+        <WarningPanel
+          v-show="!uploadSuccess && !showSuccess && entityList.length == 0 && actionName != 'NOVO_CIRCUITO' && actionName != 'SITE_SURVEY'"
+          :message="actionName != 'REVOGAR_CANCELAMENTO' && actionName != 'REVOGAR_SUSPENSAO'?$vuetify.lang.t('$vuetify.SELECIONE_UM_CIRCUITO'):
+          $vuetify.lang.t('$vuetify.SELECIONE_UM_CIRCUITO_SEM_EXCEL')"
+          class="mt-8 mb-8"
+        >
+        </WarningPanel>
 
       </v-row>
 
@@ -171,12 +180,14 @@
 
 <script>
 
+import WarningPanel from '../../components/panels/WarningPanel';
 import SuccessPanel from '../../components/panels/SuccessPanel';
 import CommercialTable from '../../components/CommercialTable';
 import TooltipButton from '../../components/TooltipButton';
 
 export default {
   components: {
+    WarningPanel,
     SuccessPanel,
     CommercialTable,
     TooltipButton,
