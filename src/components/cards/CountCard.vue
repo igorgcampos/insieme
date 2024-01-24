@@ -13,7 +13,7 @@
         @click="func(funcParam)"
       >
         <v-row justify="center" class="mb-1 mt-n3" v-show="horizontal">
-          <v-col cols="2" class="ml-4 mt-n1">
+          <v-col :cols="colsNumber || 2" class="ml-4 mt-n1">
             <span
               v-if="!isLoading"
               :class="[color]"
@@ -32,7 +32,7 @@
             ></v-progress-circular
           ></v-col>
 
-          <v-col  class="ma-0 mt-n1 col col-9 pt-3">
+          <v-col :cols="colsNumber? (colsNumber + 10) : 9" class="ma-0 mt-n1 pt-3">
             <span justify="center"
               class="text-center subtitle-2 font-weight-bold grey--text text--darken-3 ma-1 ml-n3"
               :class="{
@@ -82,12 +82,12 @@
     </v-hover>
     <v-tooltip
       v-if="toolTipMessage"
-      bottom
+      right
       v-model="showToolTip"
       :disabled="!buttonHovering"
       max-width="220"
     >
-      <v-icon slot="activator" class="mt-n5 ml-12" large></v-icon>
+      <v-icon slot="activator" class="mt-8 ml-n2" large></v-icon>
       <span>{{ toolTipMessage }}</span>
     </v-tooltip>
   </div>
@@ -107,6 +107,7 @@ export default {
     isLoading: Boolean,
     horizontal: Boolean,
     minWidth: Number,
+    colsNumber: Number,
   },
   watch: {
     buttonHovering(newVal) {

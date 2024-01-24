@@ -7,15 +7,35 @@
             $vuetify.lang.t("$vuetify.RELATORIO_CHAMADOS")
           }}</span>
           <v-spacer></v-spacer>
-          <TooltipButton 
-                        :label="$vuetify.lang.t('$vuetify.EXPORTAR_CSV')"
-                        :message="$vuetify.lang.t('$vuetify.EXPORTAR_CSV')"
-                        :event="exportToCSV"
-                        mobile="true"
-                        :isText="false"
-                        :marginRight="true"
+          <TooltipButton
+            :label="$vuetify.lang.t('$vuetify.EXPORTAR_CSV')"
+            :message="$vuetify.lang.t('$vuetify.EXPORTAR_CSV')"
+            :event="exportToCSV"
+            mobile="true"
+            :isText="false"
+            :marginRight="true"
           ></TooltipButton>
         </v-row>
+
+        <v-row class="ma-0 ml-n3 mt-4 mb-n7">
+          <v-col class="flex-grow-0 mr-n2">
+            <CountCard
+              :count="
+                historic.percentualDisponibilidade
+                  ? historic.percentualDisponibilidade.toFixed(2) + '%'
+                  : '0%'
+              "
+              :message="$vuetify.lang.t('$vuetify.DPN_REDE')"
+              color="primary--text font-weight-bold"
+              :horizontal="true"
+              :minWidth="historic.percentualDisponibilidade < 100 ? 200 : 220"
+              :colsNumber="historic.percentualDisponibilidade < 100 ? 5 : 6"
+              :toolTipMessage="$vuetify.lang.t('$vuetify.VER_DETALHES_DISPONIBILIDADE')"
+              :func="openAvailabilityDialog"
+            ></CountCard>
+          </v-col>
+        </v-row>
+
         <v-data-table
           id="table"
           :headers="headers"
@@ -45,20 +65,34 @@
       </v-col>
     </v-row>
     <v-row v-if="historic.disponibilidades.length == 0">
-       <SuccessPanel :title="$vuetify.lang.t('$vuetify.DISPONIBILIDADE_100')" 
-                    :subtitle="$vuetify.lang.t('$vuetify.NENHUM_INCIDENTE')">
+      <SuccessPanel
+        :title="$vuetify.lang.t('$vuetify.DISPONIBILIDADE_100')"
+        :subtitle="$vuetify.lang.t('$vuetify.NENHUM_INCIDENTE')"
+      >
       </SuccessPanel>
     </v-row>
+
+    <AvailabilityCircuitDialog
+      :dialog="showDialog"
+      :close="closeAvailabilityDialog"
+      :historic="historic"
+    >
+    </AvailabilityCircuitDialog>
   </v-div>
 </template>
 
 <script>
+import CountCard from "../components/cards/CountCard";
 import SuccessPanel from "../components/panels/SuccessPanel";
 import TooltipButton from "../components/TooltipButton";
+import AvailabilityCircuitDialog from "../components/dialogs/AvailabilityCircuitDialog";
+
 export default {
   components: {
+    CountCard,
     SuccessPanel,
     TooltipButton,
+    AvailabilityCircuitDialog,
   },
   props: {
     historic: Object,
@@ -67,36 +101,52 @@ export default {
     this.createHeaders();
   },
   methods: {
-    exportToCSV(){
+    openAvailabilityDialog() {
+      this.showDialog = true;
+    },
+    closeAvailabilityDialog() {
+      this.showDialog = false;
+    },
+    exportToCSV() {
       var all = this.historic.disponibilidades.map((d) => {
-            d.dataEntrada = d.dataEntrada
-              ? this.$formatDate(d.dataEntrada)
-              : "--";
+        d.dataEntrada = d.dataEntrada ? this.$formatDate(d.dataEntrada) : "--";
 
-            delete d.id;
-            delete d.createdOn;
-            delete d.updatedOn;
+        delete d.id;
+        delete d.createdOn;
+        delete d.updatedOn;
 
-            return {
-              [this.$vuetify.lang.t("$vuetify.NUMERO_INCIDENTE")]: d.numeroIncidente,
-              [this.$vuetify.lang.t("$vuetify.ASSUNTO")]: d.descricao,
-              [this.$vuetify.lang.t("$vuetify.TEMPO_CONSIDERADO")]: Intl.NumberFormat("pt-BR").format(d.tempoConsideradoEmHoras),
-              [this.$vuetify.lang.t("$vuetify.TEMPO_REPARO")]: Intl.NumberFormat("pt-BR").format(d.tempoReparoEmHoras),
-              [this.$vuetify.lang.t("$vuetify.CATEGORIA")]: d.categoria,
-              [this.$vuetify.lang.t("$vuetify.DESIGNACAO_TPZ")]: d.circuito.nome,
-              [this.$vuetify.lang.t("$vuetify.TIPOS_CAUSA")]: d.causa,
-              [this.$vuetify.lang.t("$vuetify.TIPO_PERDA")]: d.tipoPerda,
-              [this.$vuetify.lang.t("$vuetify.OBSERVACOES")]: d.observacoes,
-              [this.$vuetify.lang.t("$vuetify.DATA_CRIACAO")]: this.$formatDate(d.dataCriacao.date) + " " + 
-              this.$formatHour(d.dataCriacao.time, true),
-              [this.$vuetify.lang.t("$vuetify.DATA_CONCLUSAO")]: this.$formatDate(d.dataFechamento.date) + " " + 
-              this.$formatHour(d.dataFechamento.time, true),
-            };
-          });
+        return {
+          [this.$vuetify.lang.t("$vuetify.NUMERO_INCIDENTE")]:
+            d.numeroIncidente,
+          [this.$vuetify.lang.t("$vuetify.ASSUNTO")]: d.descricao,
+          [this.$vuetify.lang.t("$vuetify.TEMPO_CONSIDERADO")]:
+            Intl.NumberFormat("pt-BR").format(d.tempoConsideradoEmHoras),
+          [this.$vuetify.lang.t("$vuetify.TEMPO_REPARO")]: Intl.NumberFormat(
+            "pt-BR"
+          ).format(d.tempoReparoEmHoras),
+          [this.$vuetify.lang.t("$vuetify.CATEGORIA")]: d.categoria,
+          [this.$vuetify.lang.t("$vuetify.DESIGNACAO_TPZ")]:
+            d.circuito.designacaoTpz,
+          [this.$vuetify.lang.t("$vuetify.TIPOS_CAUSA")]: d.causa,
+          [this.$vuetify.lang.t("$vuetify.TIPO_PERDA")]: d.tipoPerda,
+          [this.$vuetify.lang.t("$vuetify.OBSERVACOES")]: d.observacoes,
+          [this.$vuetify.lang.t("$vuetify.DATA_CRIACAO")]:
+            this.$formatDate(d.dataCriacao.date) + " " + d.dataCriacao.time,
+          [this.$vuetify.lang.t("$vuetify.DATA_CONCLUSAO")]:
+            this.$formatDate(d.dataFechamento.date) +
+            " " +
+            d.dataFechamento.time,
+        };
+      });
 
-          this.$downloadCSV(all, this.historic.contrato.nome + '-' + 
-          this.$vuetify.lang.t("$vuetify.DISPONIBILIDADES") + '-' + 
-          this.$formatDate(this.historic.dataHistorico, true));
+      this.$downloadCSV(
+        all,
+        this.historic.contrato.nome +
+          "-" +
+          this.$vuetify.lang.t("$vuetify.DISPONIBILIDADES") +
+          "-" +
+          this.historic.dataHistorico
+      );
     },
     filterDesigTpz(value, search) {
       return (
@@ -119,18 +169,22 @@ export default {
         var object = Object.assign({}, this.historic.disponibilidades[index]);
 
         object.designacaoTpz =
-          this.historic.disponibilidades[index].circuito.nome;
-
+          this.historic.disponibilidades[index].circuito.designacaoTpz;
         object.dataCriacao =
           this.$formatDate(object.dataCriacao.date) +
-          " " + this.$formatHour(object.dataCriacao.time, true);
-
+          " " +
+          object.dataCriacao.time;
         object.dataFechamento =
           this.$formatDate(object.dataFechamento.date) +
-          " " + this.$formatHour(object.dataFechamento.time, true);
+          " " +
+          object.dataFechamento.time;
 
-        object.tempoReparoEmHoras =  Intl.NumberFormat("pt-BR").format(object.tempoReparoEmHoras);
-        object.tempoConsideradoEmHoras =  Intl.NumberFormat("pt-BR").format(object.tempoConsideradoEmHoras);
+        object.tempoReparoEmHoras = Intl.NumberFormat("pt-BR").format(
+          object.tempoReparoEmHoras
+        );
+        object.tempoConsideradoEmHoras = Intl.NumberFormat("pt-BR").format(
+          object.tempoConsideradoEmHoras
+        );
 
         availabilities.push(object);
       }
@@ -224,6 +278,7 @@ export default {
   data: () => ({
     search: "",
     headers: [],
+    showDialog: false,
   }),
 };
 </script>

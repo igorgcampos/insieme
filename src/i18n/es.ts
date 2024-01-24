@@ -518,4 +518,11 @@ export default {
     OBSERVACOES: 'Observaciones',
     SELECIONE_UM_CIRCUITO: 'Seleccionar al menos un circuito o importa el excel completo',
     SELECIONE_UM_CIRCUITO_SEM_EXCEL: 'Seleccionar al menos un circuito',
+    DETALHES_DISPONIBILIDADE: 'Detalle de la disponibilidad de la red',
+    DISPONIBILIDADE_CIRCUITO: 'Disponibilidad por circuito',
+    CIRCUITOS_ATIVOS: 'Circuitos activos',
+    TOTAL_HORAS_PREVISTAS: 'Total de horas esperadas',
+    TOTAL_HORAS_PERDIDAS: 'Total de horas perdidas',
+    DPN_REDE: 'DPN de red',
+    VER_DETALHES_DISPONIBILIDADE: 'Haga clic para ver más detalles y disponibilidad por circuito',
 }

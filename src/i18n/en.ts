@@ -521,4 +521,11 @@ export default {
     OBSERVACOES: 'Observations',
     SELECIONE_UM_CIRCUITO: 'Select at least one circuit or import the entire excel',
     SELECIONE_UM_CIRCUITO_SEM_EXCEL: 'Select at least one circuit',
+    DETALHES_DISPONIBILIDADE: 'Network availability details',
+    DISPONIBILIDADE_CIRCUITO: 'Availability per circuit',
+    CIRCUITOS_ATIVOS: 'Active circuits',
+    TOTAL_HORAS_PREVISTAS: 'Total hours forecast',
+    TOTAL_HORAS_PERDIDAS: 'Total hours lost',
+    DPN_REDE: 'Network availability',
+    VER_DETALHES_DISPONIBILIDADE: 'Click to see more details and availability by circuit',
 }
