@@ -849,7 +849,7 @@ export default {
       });
 
        this.headers.push({
-        text: "Suspenso",
+        text: this.$vuetify.lang.t('$vuetify.SUSPENSO'),
         align: "center",
         sortable: false,
         value: "suspenso",

@@ -138,14 +138,14 @@ export default {
       loadingApproval: false,
       headers: [
         {
-          text: "Designacao Tpz",
+          text: this.$vuetify.lang.t('$vuetify.DESIGNACAO_TPZ'),
           align: "center",
           sortable: false,
           value: "designacaoTpz",
           width: "9rem",
         },
         {
-          text: "Tempo total de reparo (horas)",
+          text: this.$vuetify.lang.t('$vuetify.TEMPO_TOTAL_REPARO'),
           align: "center",
           sortable: false,
           value: "tempoReparoTotal",

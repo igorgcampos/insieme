@@ -528,4 +528,5 @@ export default {
     TOTAL_HORAS_PERDIDAS: 'Total hours lost',
     DPN_REDE: 'Network availability',
     VER_DETALHES_DISPONIBILIDADE: 'Click to see more details and availability by circuit',
+    TEMPO_TOTAL_REPARO: 'Total repair time (hours)',
 }
