@@ -811,6 +811,19 @@
                           {{ $vuetify.lang.t("$vuetify.PROATIVO") }}
                         </v-chip>
                       </v-col>
+
+                      <v-col class="pa-0 mt-3">
+                        <v-chip
+                          color="warning"
+                          class="ml-0 mr-2"
+                          label
+                          small
+                          outlined
+                          v-if="circuit.plataformaSat == 'STARLINK' && circuit.obstruido"
+                        >
+                          {{ $vuetify.lang.t("$vuetify.VISADA_OBSTRUIDA") }}
+                        </v-chip>
+                      </v-col>
                     </v-col>
 
                     <v-col
@@ -998,11 +1011,13 @@
 
                     <TooltipButton
                       :label="$vuetify.lang.t('$vuetify.MAIS_DETALHES')"
-                      :message="$vuetify.lang.t('$vuetify.VER_DETALHES_PRTG')"
-                      :event="openPRTG"
+                      :message="circuit.plataformaSat == 'STARLINK'? $vuetify.lang.t('$vuetify.MAIS_DETALHES'):
+                                $vuetify.lang.t('$vuetify.VER_DETALHES_PRTG')"
+                      :event="circuit.plataformaSat == 'STARLINK'? showDetails: openPRTG"
                       :object="circuit"
                       :mobile="$vuetify.breakpoint.xs"
-                      v-if="circuit.idPrtg && prtgToken"
+                      v-if="(circuit.idPrtg && prtgToken) || (circuit.plataformaSat == 'STARLINK' 
+                            && circuit.statusInstalacao == 'ATIVADO')"
                       :isText="true"
                     ></TooltipButton>
                   </v-card-actions>
@@ -1063,6 +1078,12 @@
           :buttonEvent="showHideRestarts"
           :contract="contract"
         ></RestartsSideBar>
+
+        <CircuitDetailsDialog
+          :close="closeDetailsDialog"
+          :show="showDetailsDialog"
+          :circuit="selectedCircuit">
+        </CircuitDetailsDialog>
       </div>
     </v-lazy>
   </div>
@@ -1075,6 +1096,7 @@ import TooltipButton from "../components/TooltipButton";
 import LabelValue from "../components/LabelValue";
 import IssueDialog from "../components/dialogs/IssueDialog";
 import SolveProblemDialog from "../components/dialogs/SolveProblemDialog";
+import CircuitDetailsDialog from "../components/dialogs/CircuitDetailsDialog";
 import RestartsSideBar from "../components/RestartsSideBar";
 
 export default {
@@ -1085,9 +1107,17 @@ export default {
     LabelValue,
     IssueDialog,
     SolveProblemDialog,
+    CircuitDetailsDialog,
     RestartsSideBar,
   },
   methods: {
+    closeDetailsDialog(){
+      this.showDetailsDialog = false;
+    },
+    showDetails(circuit){
+      this.showDetailsDialog = true;
+      this.selectedCircuit = circuit;
+    },
     showHideRestarts() {
       this.showRestarts = !this.showRestarts;
     },
@@ -1453,6 +1483,7 @@ export default {
     this.contractDecoration = this.button == "contract" ? "underline" : "none";
   },
   data: () => ({
+    showDetailsDialog: false,
     prtgToken: undefined,
     isLoadingOffline: false,
     isLoadingOnline: false,

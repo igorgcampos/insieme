@@ -529,4 +529,12 @@ export default {
     DPN_REDE: 'Network availability',
     VER_DETALHES_DISPONIBILIDADE: 'Click to see more details and availability by circuit',
     TEMPO_TOTAL_REPARO: 'Total repair time (hours)',
+
+    LATENCIA: 'Current latency',
+    TAXA_DOWNLOAD: 'Current download rate',
+    TAXA_UPLOAD: 'Current upload rate',
+    TAXA_PERDA_PACOTES: 'Current package loss rate',
+    QUALIDADE_SINAL: 'Signal quality',
+    TEMPO_OBSTRUCAO: 'Current obstruction time',
+    VISADA_OBSTRUIDA: 'Obstructed view',
 }

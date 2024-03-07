@@ -525,4 +525,12 @@ export default {
     DPN_REDE: 'DPN da rede',
     VER_DETALHES_DISPONIBILIDADE: 'Clique para ver mais detalhes e disponibilidades por circuito',
     TEMPO_TOTAL_REPARO: 'Tempo total de reparo (horas)',
+
+    LATENCIA: 'Latência atual',
+    TAXA_DOWNLOAD: 'Taxa de download atual',
+    TAXA_UPLOAD: 'Taxa de upload atual',
+    TAXA_PERDA_PACOTES: 'Perda de pacotes atual',
+    QUALIDADE_SINAL: 'Qualidade do sinal',
+    TEMPO_OBSTRUCAO: 'Tempo de obstrução atual',
+    VISADA_OBSTRUIDA: 'Visada obstruída',
 }
