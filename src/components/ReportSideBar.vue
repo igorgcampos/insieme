@@ -216,7 +216,7 @@ export default {
           display: true,
           text: '',
           fontSize: 16
-        }
+        },
       },
     }
   },

@@ -819,10 +819,37 @@
                           label
                           small
                           outlined
-                          v-if="circuit.plataformaSat == 'STARLINK' && circuit.obstruido"
+                          v-if="
+                            circuit.plataformaSat == 'STARLINK' &&
+                            circuit.obstruido
+                          "
                         >
                           {{ $vuetify.lang.t("$vuetify.VISADA_OBSTRUIDA") }}
                         </v-chip>
+                      </v-col>
+
+                      <v-col class="pa-0 mt-3">
+                        <v-tooltip
+                          max-width="300"
+                          right
+                        >
+                          <template v-slot:activator="{ on }">
+                            <v-chip
+                              v-on="on"
+                              color="grey"
+                              class="ml-0 mr-2"
+                              label
+                              small
+                              outlined
+                              v-if="circuit.consumo"
+                            >
+                              {{ circuit.consumo }}
+                            </v-chip>
+                          </template>
+                          <span>{{
+                            $vuetify.lang.t("$vuetify.AVISO_CONSUMO")
+                          }}</span>
+                        </v-tooltip>
                       </v-col>
                     </v-col>
 
@@ -910,7 +937,7 @@
                       </v-col>
                       <v-col class="pt-0 mt-n6">
                         <LabelValue
-                          label="Tecnologia"
+                          :label="$vuetify.lang.t('$vuetify.TECNOLOGIA')"
                           :value="
                             circuit.tecnologia
                               ? circuit.tecnologia + '/' + circuit.banda
@@ -920,10 +947,25 @@
                           style="width: 150px"
                         ></LabelValue>
                       </v-col>
-                      <v-col class="pt-0 mt-n6">
+                      <v-col
+                        class="pt-0 mt-n6"
+                        v-show="circuit.plataformaSat != 'STARLINK'"
+                      >
                         <LabelValue
                           label="Esno"
                           :value="circuit.esno || '--'"
+                          justify="start"
+                          style="width: 150px"
+                        ></LabelValue>
+                      </v-col>
+
+                      <v-col
+                        class="pt-0 mt-n6"
+                        v-show="circuit.plataformaSat == 'STARLINK'"
+                      >
+                        <LabelValue
+                          :label="$vuetify.lang.t('$vuetify.PLANO')"
+                          :value="circuit.plano || '--'"
                           justify="start"
                           style="width: 150px"
                         ></LabelValue>
@@ -1011,13 +1053,23 @@
 
                     <TooltipButton
                       :label="$vuetify.lang.t('$vuetify.MAIS_DETALHES')"
-                      :message="circuit.plataformaSat == 'STARLINK'? $vuetify.lang.t('$vuetify.MAIS_DETALHES'):
-                                $vuetify.lang.t('$vuetify.VER_DETALHES_PRTG')"
-                      :event="circuit.plataformaSat == 'STARLINK'? showDetails: openPRTG"
+                      :message="
+                        circuit.plataformaSat == 'STARLINK'
+                          ? $vuetify.lang.t('$vuetify.MAIS_DETALHES')
+                          : $vuetify.lang.t('$vuetify.VER_DETALHES_PRTG')
+                      "
+                      :event="
+                        circuit.plataformaSat == 'STARLINK'
+                          ? showDetails
+                          : openPRTG
+                      "
                       :object="circuit"
                       :mobile="$vuetify.breakpoint.xs"
-                      v-if="(circuit.idPrtg && prtgToken) || (circuit.plataformaSat == 'STARLINK' 
-                            && circuit.statusInstalacao == 'ATIVADO')"
+                      v-if="
+                        (circuit.idPrtg && prtgToken) ||
+                        (circuit.plataformaSat == 'STARLINK' &&
+                          circuit.statusInstalacao == 'ATIVADO')
+                      "
                       :isText="true"
                     ></TooltipButton>
                   </v-card-actions>
@@ -1082,7 +1134,8 @@
         <CircuitDetailsDialog
           :close="closeDetailsDialog"
           :show="showDetailsDialog"
-          :circuit="selectedCircuit">
+          :circuit="selectedCircuit"
+        >
         </CircuitDetailsDialog>
       </div>
     </v-lazy>
@@ -1111,10 +1164,10 @@ export default {
     RestartsSideBar,
   },
   methods: {
-    closeDetailsDialog(){
+    closeDetailsDialog() {
       this.showDetailsDialog = false;
     },
-    showDetails(circuit){
+    showDetails(circuit) {
       this.showDetailsDialog = true;
       this.selectedCircuit = circuit;
     },

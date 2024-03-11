@@ -1,11 +1,10 @@
 <template>
   <v-dialog
     persistent
-    min-width="700"
     v-model="show"
     class="mt-n3 overflow-y-hidden overflow-x-hidden"
   >
-    <v-card class="overflow-y-hidden overflow-x-hidden" height="620">
+    <v-card class="overflow-y-hidden overflow-x-hidden">
       <v-card-title
         class="headline-6"
         style="word-break: normal; !important"
@@ -24,7 +23,7 @@
                   }).format(circuit.taxaDownload) + ' Kbps'
                 : '--'
             "
-            :message="$vuetify.lang.t('$vuetify.TAXA_DOWNLOAD')"
+            :message="$vuetify.lang.t('$vuetify.TAXA_DOWNLOAD_ATUAL')"
             color="primary--text font-weight-bold"
             :smallText="true"
             :smallCount="true"
@@ -36,10 +35,10 @@
               circuit.taxaUpload
                 ? Intl.NumberFormat('pt-BR', {
                     maximumFractionDigits: 2,
-                  }).format(circuit.taxaUpload) + ' kbps'
+                  }).format(circuit.taxaUpload) + ' Kbps'
                 : '--'
             "
-            :message="$vuetify.lang.t('$vuetify.TAXA_UPLOAD')"
+            :message="$vuetify.lang.t('$vuetify.TAXA_UPLOAD_ATUAL')"
             color="primary--text font-weight-bold"
             :smallText="true"
             :smallCount="true"
@@ -48,7 +47,7 @@
         <v-col class="flex-grow-0">
           <CountCard
             :count="circuit.latencia ? circuit.latencia + ' ms' : '--'"
-            :message="$vuetify.lang.t('$vuetify.LATENCIA')"
+            :message="$vuetify.lang.t('$vuetify.LATENCIA_ATUAL')"
             color="primary--text font-weight-bold"
             :smallCount="true"
           ></CountCard
@@ -62,7 +61,7 @@
                   }).format(circuit.taxaPerdaPing * 100) + '%'
                 : '--'
             "
-            :message="$vuetify.lang.t('$vuetify.TAXA_PERDA_PACOTES')"
+            :message="$vuetify.lang.t('$vuetify.TAXA_PERDA_PACOTES_ATUAL')"
             color="primary--text font-weight-bold"
             :smallText="true"
             :smallCount="true"
@@ -92,7 +91,7 @@
                   }).format(circuit.tempoObstrucao) + '%'
                 : '--'
             "
-            :message="$vuetify.lang.t('$vuetify.TEMPO_OBSTRUCAO')"
+            :message="$vuetify.lang.t('$vuetify.TEMPO_OBSTRUCAO_ATUAL')"
             color="primary--text font-weight-bold"
             :smallText="true"
             :smallCount="true"
@@ -100,30 +99,30 @@
         ></v-col>
       </v-row>
 
-      <v-row class="mt-3 mb-3 justify-center" style="overflow-y:auto; height:46vh; " >
+    <!--  <v-row class="mt-3 mb-3 ml-4 mr-4 justify-center" style="overflow-y:auto; max-height:40vh;" >
         
-        <LineChart
-        :options="circuitOptionsOp"
+        <LineChart class="mb-10 mr-6" ref="chart1"
+          :options="circuitOptionsOp"
           :styles="{
             height: '15rem',
             width: '62vh',
           }"
           :chart-data="{
-            labels: ['1', '2', '3', '4', '5', '6', '7'],
+            labels: ['1', '2', '3', '4', '5', '6', '7', '12','11', '22', '45', '11'],
             datasets: [
               {
-                label: 'My First Dataset',
-                data: [65, 59, 80, 81, 56, 55, 40],
-                fill: false,
-                borderColor: 'rgb(75, 192, 192)',
+                data: [65, 59, 80, 81, 56, 55, 40, 100, 23, 45, 67, 54, 45, 78, 78, 88],
+                fill: true,
+                borderColor: 'rgb(50,82,123)',
+                backgroundColor: 'rgb(50,82,123, 50%)',
                 tension: 0.1,
               },
             ],
           }"
         ></LineChart>
        
-        <LineChart
-           :options="circuitOptionsOp"
+        <LineChart class="mr-6"
+          :options="circuitOptionsOp"
           :styles="{
             height: '15rem',
             width: '62vh',
@@ -132,10 +131,10 @@
             labels: ['1', '2', '3', '4', '5', '6', '7'],
             datasets: [
               {
-                label: 'My First Dataset',
                 data: [65, 59, 80, 81, 56, 55, 40],
-                fill: false,
-                borderColor: 'rgb(75, 192, 192)',
+                fill: true,
+                borderColor: 'rgb(50,82,123)',
+                backgroundColor: 'rgb(50,82,123, 50%)',
                 tension: 0.1,
               },
             ],
@@ -152,17 +151,17 @@
             labels: ['1', '2', '3', '4', '5', '6', '7'],
             datasets: [
               {
-                label: 'My First Dataset',
                 data: [65, 59, 80, 81, 56, 55, 40],
-                fill: false,
-                borderColor: 'rgb(75, 192, 192)',
+                fill: true,
+                borderColor: 'rgb(50,82,123)',
+                backgroundColor: 'rgb(50,82,123, 50%)',
                 tension: 0.1,
               },
             ],
           }"
         ></LineChart>
        
-        <LineChart
+        <LineChart class="mr-6"
            :options="circuitOptionsOp"
           :styles="{
             height: '15rem',
@@ -172,17 +171,17 @@
             labels: ['1', '2', '3', '4', '5', '6', '7'],
             datasets: [
               {
-                label: 'My First Dataset',
                 data: [65, 59, 80, 81, 56, 55, 40],
-                fill: false,
+                fill: true,
                 borderColor: 'rgb(75, 192, 192)',
+                backgroundColor: 'rgb(75, 192, 192, 50%)',
                 tension: 0.1,
               },
             ],
           }"
         ></LineChart>
        
-        <LineChart
+        <LineChart class="mr-6"
            :options="circuitOptionsOp"
           :styles="{
             height: '15rem',
@@ -192,10 +191,10 @@
             labels: ['1', '2', '3', '4', '5', '6', '7'],
             datasets: [
               {
-                label: 'My First Dataset',
                 data: [65, 59, 80, 81, 56, 55, 40],
-                fill: false,
+                fill: true,
                 borderColor: 'rgb(75, 192, 192)',
+                backgroundColor: 'rgb(75, 192, 192, 50%)',
                 tension: 0.1,
               },
             ],
@@ -212,17 +211,17 @@
             labels: ['1', '2', '3', '4', '5', '6', '7'],
             datasets: [
               {
-                label: 'My First Dataset',
                 data: [65, 59, 80, 81, 56, 55, 40],
-                fill: false,
+                fill: true,
                 borderColor: 'rgb(75, 192, 192)',
+                backgroundColor: 'rgb(75, 192, 192, 50%)',
                 tension: 0.1,
               },
             ],
           }"
         ></LineChart>
        
-      </v-row>
+      </v-row> -->
 
       <v-divider class="mt-0"></v-divider>
 
@@ -243,12 +242,12 @@
 
 <script>
 import CountCard from "../../components/cards/CountCard";
-import LineChart from "../charts/LineChart.js";
+//import LineChart from "../charts/LineChart.js";
 
 export default {
   components: {
     CountCard,
-    LineChart,
+    //LineChart,
   },
   props: {
     close: Function,
@@ -260,8 +259,41 @@ export default {
     items: [],
     selectedItems: [],
     searchText: "",
-    circuitOptionsOp: {maintainAspectRatio: false,}
+    circuitOptionsOp: undefined,
   }),
-  created: function () {},
+  created: function () {
+    this.circuitOptionsOp= {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          yAxes: [],
+          xAxes: [{
+            gridLines: { drawOnChartArea: false },
+          }]
+        },
+        title: {
+          display: true,
+          text: this.$vuetify.lang.t('$vuetify.TAXA_DOWNLOAD'),
+          fontSize: 18,
+          subtitle: {
+
+          display: true,
+          text: this.$vuetify.lang.t('$vuetify.TAXA_DOWNLOAD'),
+        },
+        },
+        
+        legend: {display:false},
+        elements: {
+          point: {
+            radius: 2,
+          },
+          line: {
+            borderWidth: 2,
+          }
+        },
+      }
+
+      console.log(this.$refs.chart1);
+  },
 };
 </script>
