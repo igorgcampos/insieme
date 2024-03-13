@@ -10,7 +10,9 @@
         style="word-break: normal; !important"
         :class="{ 'subtitle-2': $vuetify.breakpoint.xs }"
       >
-        {{ $vuetify.lang.t("$vuetify.MAIS_DETALHES") + " - " + circuit.nome }}
+        {{ $vuetify.lang.t("$vuetify.MAIS_DETALHES") + " - " + 
+        circuit.nome + " ("+ $vuetify.lang.t("$vuetify.ULTIMA_ATUALIZACAO", 
+        this.$formatDate(circuit.updatedOn.date) + " " + this.$formatHour(circuit.updatedOn.time)) + ")"}}
       </v-card-title>
 
       <v-row class="mt-3 mb-10 justify-center">
@@ -99,19 +101,55 @@
         ></v-col>
       </v-row>
 
-    <!--  <v-row class="mt-3 mb-3 ml-4 mr-4 justify-center" style="overflow-y:auto; max-height:40vh;" >
+      <v-row class="mt-3 mb-10 justify-center">
+         <v-btn-toggle
+          mandatory
+          dense
+          color="blue"
+        >
+          <v-btn @click="searchMeasurements(0.25)">
+            <span class="hidden-sm-and-down caption">{{$vuetify.lang.t("$vuetify.MINUTOS_15")}}</span>
+          </v-btn>
+          <v-btn @click="searchMeasurements(3)">
+            <span class="hidden-sm-and-down caption">{{$vuetify.lang.t("$vuetify.HORAS_3")}}</span>
+          </v-btn>
+          <v-btn @click="searchMeasurements(24)">
+            <span class="hidden-sm-and-down caption">{{$vuetify.lang.t("$vuetify.HORAS_24")}}</span>
+          </v-btn>
+          <v-btn @click="searchMeasurements(24*7)">
+            <span class="hidden-sm-and-down caption">{{$vuetify.lang.t("$vuetify.DIAS_7")}}</span>
+          </v-btn>
+          <v-btn @click="searchMeasurements(24*30)">
+            <span class="hidden-sm-and-down caption">{{$vuetify.lang.t("$vuetify.DIAS_30")}}</span>
+          </v-btn>
+        </v-btn-toggle>
+      </v-row>
+
+      <v-row v-show="isLoading" class="mt-3 mb-3 ml-4 mr-4 justify-center" 
+            style="overflow-y:auto; height:40vh;" >
+         <v-progress-circular
+          :size="60"
+          :width="3"
+          color="red"
+          indeterminate
+          class="mt-12"
+        ></v-progress-circular>
+      </v-row>
+
+      <v-row v-show="!isLoading" class="mt-3 mb-3 ml-4 mr-4 justify-center" 
+            style="overflow-y:auto; max-height:40vh;" >
         
         <LineChart class="mb-10 mr-6" ref="chart1"
-          :options="circuitOptionsOp"
+          :options="downloadOptions"
           :styles="{
             height: '15rem',
             width: '62vh',
           }"
           :chart-data="{
-            labels: ['1', '2', '3', '4', '5', '6', '7', '12','11', '22', '45', '11'],
+            labels: labels,
             datasets: [
               {
-                data: [65, 59, 80, 81, 56, 55, 40, 100, 23, 45, 67, 54, 45, 78, 78, 88],
+                data: downloadOptions.data,
                 fill: true,
                 borderColor: 'rgb(50,82,123)',
                 backgroundColor: 'rgb(50,82,123, 50%)',
@@ -122,16 +160,16 @@
         ></LineChart>
        
         <LineChart class="mr-6"
-          :options="circuitOptionsOp"
+          :options="uploadOptions"
           :styles="{
             height: '15rem',
             width: '62vh',
           }"
           :chart-data="{
-            labels: ['1', '2', '3', '4', '5', '6', '7'],
+            labels: labels,
             datasets: [
               {
-                data: [65, 59, 80, 81, 56, 55, 40],
+                data: uploadOptions.data,
                 fill: true,
                 borderColor: 'rgb(50,82,123)',
                 backgroundColor: 'rgb(50,82,123, 50%)',
@@ -142,16 +180,16 @@
         ></LineChart>
        
         <LineChart
-           :options="circuitOptionsOp"
+          :options="latencyOptions"
           :styles="{
             height: '15rem',
             width: '60vh',
           }"
           :chart-data="{
-            labels: ['1', '2', '3', '4', '5', '6', '7'],
+            labels: labels,
             datasets: [
               {
-                data: [65, 59, 80, 81, 56, 55, 40],
+                data: latencyOptions.data,
                 fill: true,
                 borderColor: 'rgb(50,82,123)',
                 backgroundColor: 'rgb(50,82,123, 50%)',
@@ -162,16 +200,16 @@
         ></LineChart>
        
         <LineChart class="mr-6"
-           :options="circuitOptionsOp"
+          :options="packageOptions"
           :styles="{
             height: '15rem',
             width: '62vh',
           }"
           :chart-data="{
-            labels: ['1', '2', '3', '4', '5', '6', '7'],
+            labels: labels,
             datasets: [
               {
-                data: [65, 59, 80, 81, 56, 55, 40],
+                data: packageOptions.data,
                 fill: true,
                 borderColor: 'rgb(75, 192, 192)',
                 backgroundColor: 'rgb(75, 192, 192, 50%)',
@@ -182,16 +220,16 @@
         ></LineChart>
        
         <LineChart class="mr-6"
-           :options="circuitOptionsOp"
+          :options="qualitySignalOptions"
           :styles="{
             height: '15rem',
             width: '62vh',
           }"
           :chart-data="{
-            labels: ['1', '2', '3', '4', '5', '6', '7'],
+            labels: labels,
             datasets: [
               {
-                data: [65, 59, 80, 81, 56, 55, 40],
+                data: qualitySignalOptions.data,
                 fill: true,
                 borderColor: 'rgb(75, 192, 192)',
                 backgroundColor: 'rgb(75, 192, 192, 50%)',
@@ -202,7 +240,7 @@
         ></LineChart>
       
         <LineChart
-           :options="circuitOptionsOp"
+          :options="obstructionOptions"
           :styles="{
             height: '15rem',
             width: '60vh',
@@ -211,7 +249,7 @@
             labels: ['1', '2', '3', '4', '5', '6', '7'],
             datasets: [
               {
-                data: [65, 59, 80, 81, 56, 55, 40],
+                data: obstructionOptions.data,
                 fill: true,
                 borderColor: 'rgb(75, 192, 192)',
                 backgroundColor: 'rgb(75, 192, 192, 50%)',
@@ -221,7 +259,7 @@
           }"
         ></LineChart>
        
-      </v-row> -->
+      </v-row>
 
       <v-divider class="mt-0"></v-divider>
 
@@ -242,46 +280,87 @@
 
 <script>
 import CountCard from "../../components/cards/CountCard";
-//import LineChart from "../charts/LineChart.js";
+import LineChart from "../charts/LineChart.js";
 
 export default {
   components: {
     CountCard,
-    //LineChart,
+    LineChart,
   },
   props: {
     close: Function,
     show: Boolean,
     circuit: Object,
   },
-  methods: {},
+  methods: {
+    loadDataToCharts(chartInfo){
+      console.log(chartInfo);
+    },
+    searchMeasurements(hours){
+
+       this.isLoading = true;
+       this.$get("/medicao/busca", {
+          designationTpz: this.circuit.nome,
+          hours: hours,
+        }).then((response) => {
+          
+          this.isLoading = false;
+
+          this.loadDataToCharts(response.data);
+        });
+
+        if(hours == 0.25){
+          this.labels = ['0', '5 mins', '10 mins', '15 mins'];
+        }
+
+        if(hours == 3){
+          this.labels = ['0', '1h', '2h', '3h'];
+        }
+
+        if(hours == 24){
+          this.labels = ['0', '1h', '2h', '3h', '4h', '5h', '6h', '7h', '8h', '9h', '10h',
+                   '11h', '12h', '13h', '14h', '15h', '16h', '17h', '18h', '19h', '20h',
+                   '21h', '22h', '23h', '24h'];
+        }
+
+        if(hours == (7*24)){
+          this.labels = ['0', '1d', '2d', '3d', '4d', '5d', '6d', '7d'];
+        }
+
+        if(hours == (30*24)){
+          this.labels = ['0', '1d', '2d', '3d', '4d', '5d', '6d', '7d', '8d', '9d', '10d',
+          '11d', '12d', '13d', '14d', '15d', '16d', '17d', '18d', '19d', '20d',
+          '21d', '22d', '23d', '24d', '25d', '26d', '27d', '28d', '29d', '30d'];
+        }
+    },
+  },
   data: () => ({
-    items: [],
-    selectedItems: [],
-    searchText: "",
-    circuitOptionsOp: undefined,
+    mainOptions: undefined,
+    downloadOptions: undefined,
+    uploadOptions: undefined,
+    latencyOptions: undefined,
+    packageOptions: undefined,
+    qualitySignalOptions: undefined,
+    obstructionOptions: undefined,
+    labels: undefined,
+    isLoading: false,
   }),
   created: function () {
-    this.circuitOptionsOp= {
+    this.mainOptions = {
         responsive: true,
         maintainAspectRatio: false,
         scales: {
-          yAxes: [],
+          yAxes: [{
+            gridLines: { drawOnChartArea: false },
+          }],
           xAxes: [{
             gridLines: { drawOnChartArea: false },
           }]
         },
         title: {
           display: true,
-          text: this.$vuetify.lang.t('$vuetify.TAXA_DOWNLOAD'),
           fontSize: 18,
-          subtitle: {
-
-          display: true,
-          text: this.$vuetify.lang.t('$vuetify.TAXA_DOWNLOAD'),
         },
-        },
-        
         legend: {display:false},
         elements: {
           point: {
@@ -291,9 +370,22 @@ export default {
             borderWidth: 2,
           }
         },
-      }
+    }
 
-      console.log(this.$refs.chart1);
+    this.downloadOptions = JSON.parse(JSON.stringify(this.mainOptions))
+    this.downloadOptions.title.text = this.$vuetify.lang.t('$vuetify.TAXA_DOWNLOAD');
+    this.uploadOptions = JSON.parse(JSON.stringify(this.mainOptions))
+    this.uploadOptions.title.text = this.$vuetify.lang.t('$vuetify.TAXA_UPLOAD');
+    this.latencyOptions = JSON.parse(JSON.stringify(this.mainOptions))
+    this.latencyOptions.title.text = this.$vuetify.lang.t('$vuetify.LATENCIA');
+    this.packageOptions = JSON.parse(JSON.stringify(this.mainOptions))
+    this.packageOptions.title.text = this.$vuetify.lang.t('$vuetify.TAXA_PERDA_PACOTES');
+    this.qualitySignalOptions = JSON.parse(JSON.stringify(this.mainOptions))
+    this.qualitySignalOptions.title.text = this.$vuetify.lang.t('$vuetify.QUALIDADE_SINAL') + " (%)";
+    this.obstructionOptions = JSON.parse(JSON.stringify(this.mainOptions))
+    this.obstructionOptions.title.text = this.$vuetify.lang.t('$vuetify.TEMPO_OBSTRUCAO');
+
+    this.searchMeasurements(0.25);
   },
 };
 </script>

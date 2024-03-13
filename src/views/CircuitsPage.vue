@@ -841,7 +841,7 @@
                               label
                               small
                               outlined
-                              v-if="circuit.consumo"
+                              v-show="circuit.consumo"
                             >
                               {{ circuit.consumo }}
                             </v-chip>
