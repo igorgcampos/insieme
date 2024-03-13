@@ -1072,7 +1072,7 @@ export default {
           this.actionName == "REVOGAR_CANCELAMENTO" ||
           this.actionName == "REVOGAR_SUSPENSAO"
         )
-          console.log(item["designacaoTpz"]);
+       
         obj.nome = item["designacaoTpz"];
         obj.designacaoCliente = item["designacaoCliente"];
 
