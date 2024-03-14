@@ -299,7 +299,14 @@ export default {
   },
   methods: {
     loadDataToCharts(chartInfo){
-      console.log(chartInfo);
+      chartInfo.array.forEach(element => {
+        this.downloadOptions.data.push(element['taxaDownload']);
+        this.uploadOptions.data.push(element['taxaUpload']);
+        this.latencyOptions.data.push(element['latencia']);
+        this.packageOptions.data.push(element['taxaPerdaPing']);
+        this.qualitySignalOptions.data.push(element['qualidadeSinal']);
+        this.obstructionOptions.data.push(element['tempoObstrucao']);
+      });
     },
     searchMeasurements(hours){
 
@@ -374,6 +381,7 @@ export default {
             borderWidth: 2,
           }
         },
+        data: [],
     }
 
     this.downloadOptions = JSON.parse(JSON.stringify(this.mainOptions))
