@@ -299,14 +299,15 @@ export default {
   },
   methods: {
     loadDataToCharts(chartInfo){
-      chartInfo.array.forEach(element => {
+      for(var index in chartInfo){
+        var element = chartInfo[index];
         this.downloadOptions.data.push(element['taxaDownload']);
         this.uploadOptions.data.push(element['taxaUpload']);
         this.latencyOptions.data.push(element['latencia']);
-        this.packageOptions.data.push(element['taxaPerdaPing']);
-        this.qualitySignalOptions.data.push(element['qualidadeSinal']);
+        this.packageOptions.data.push(element['taxaPerdaPing'] * 100);
+        this.qualitySignalOptions.data.push(element['qualidadeSinal'] * 100);
         this.obstructionOptions.data.push(element['tempoObstrucao']);
-      });
+      }
     },
     searchMeasurements(hours){
 
