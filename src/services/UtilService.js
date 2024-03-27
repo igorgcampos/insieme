@@ -80,14 +80,14 @@ utilService.install = function (Vue) {
         return splits[2] + '/' + splits[1] + '/' + splits[0];
     }
 
-    Vue.prototype.$formatHour = (date, onlyHourAndMinutes) => {
+    Vue.prototype.$formatHour = (time, onlyHourAndMinutes) => {
 
-        if (!date) {
+        if (!time || !time.hour || !time.minute) {
             return '--'
         }
 
-        return date.hour + ':' + (date.minute < 10 ? '0' + date.minute : date.minute) + 
-        (!onlyHourAndMinutes?(':' + (date.second < 10 ? '0' + date.second : date.second)) :'');
+        return time.hour + ':' + (time.minute < 10 ? '0' + time.minute : time.minute) + 
+        (!onlyHourAndMinutes?(':' + (time.second < 10 ? '0' + time.second : time.second)) :'');
     }
 
     Vue.prototype.$showChat = () => {
