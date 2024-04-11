@@ -120,4 +120,4 @@ Dentro do Keycloak (https://auth.telespazio.com.br) existe uma lista de grupos d
 Dentro do Keycloak (https://auth.telespazio.com.br) existe uma lista de grupos de permissionamento por país que podem ser associados a um usuário específico. Assim, se um usuário só pode ver contratos da Colômbia, associe tanto o grupo `grp_insieme-Admin` como o grupo `grp_insieme-pais-colombia`, como mostra a figura abaixo. Caso você associe apenas o grupo `grp_insieme-Admin`, o usuário terá acesso a todos os contratos do Insieme.
 
 
-![diagram](keycloak-ufs.PNG)
+![diagram](keycloak-pais.PNG)
