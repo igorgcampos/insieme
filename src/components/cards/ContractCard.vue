@@ -68,7 +68,7 @@
               :label="$vuetify.lang.t('$vuetify.GERENTE_PROJETO')"
               :value="contract.gerenteProduto?contract.gerenteProduto:'--'"
               justify="start"
-              style="width:150px;"
+              style="width:200px;"
             ></LabelValue>
           </v-col>
           <v-col class="pt-0 mt-n6">
@@ -85,7 +85,7 @@
               :value="getClientName()"
               justify="start"
               truncate
-              style="width:150px;"
+              style="width:200px;"
             ></LabelValue>
           </v-col>
         </v-col>
