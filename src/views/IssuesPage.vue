@@ -1214,7 +1214,7 @@ export default {
           contrato: { id: this.$props.contract.id },
         };
 
-        if (issue.reason == "Inoperância" || issue.reason == "Desempenho") {
+        if ((issue.reason == "Inoperância" || issue.reason == "Desempenho") && !issue.items[index].nome.includes('-STAR')) {
           issue.items[index].observation = issue.observation;
           issue.items[index].reason = issue.reason;
           this.$root.$emit("restart", issue.items[index]);
