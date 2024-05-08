@@ -687,7 +687,7 @@
                     <v-col
                       v-show="!$vuetify.breakpoint.xs"
                       cols="2"
-                      v-if="!open"
+                      v-if="!open && !circuit.nome.includes('-STAR')"
                     >
                       <strong
                         class="font-weight-bold grey--text text--lighten-1 mr-2"
@@ -857,14 +857,14 @@
                       class="mt-n12"
                       :class="{ 'col-6': $vuetify.breakpoint.xs }"
                     >
-                      <v-col class="pl-0">
+                      <v-col class="pl-0" v-if="!circuit.nome.includes('-STAR')">
                         <LabelValue
                           label="IP"
                           :value="circuit.ip || '--'"
                           justify="start"
                         ></LabelValue>
                       </v-col>
-                      <v-col class="pt-0 mt-n6 pl-0 pr-0">
+                      <v-col class="pt-0 mt-n6 pl-0 pr-0" :class="{'pt-9': circuit.nome.includes('-STAR')}">
                         <LabelValue
                           :label="$vuetify.lang.t('$vuetify.DATA_INSTALACAO')"
                           :value="formatDate(circuit.dataInstalacao)"
