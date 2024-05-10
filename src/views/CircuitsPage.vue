@@ -618,7 +618,7 @@
               >
                 <v-expansion-panel-header v-slot="{ open }" class="pt-0 pb-0">
                   <v-row align="center" no-gutters>
-                    <v-col v-if="!open" cols="4" sm="2">
+                    <v-col v-if="!open" cols="4" :sm="circuit.plataformaSat == 'STARLINK'?1:2" :class="{'mr-4':circuit.plataformaSat == 'STARLINK'}">
                       <v-chip
                         :color="
                           circuit.tecnologia != 'VSAT' &&
@@ -697,6 +697,22 @@
                       <strong
                         class="font-weight-bold"
                         v-html="circuit.ip || '--'"
+                      ></strong>
+                    </v-col>
+
+                    <v-col
+                      v-show="!$vuetify.breakpoint.xs"
+                      cols="2"
+                      v-if="!open && circuit.nome.includes('-STAR')"
+                    >
+                      <strong
+                        class="font-weight-bold grey--text text--lighten-1 mr-2"
+                      >
+                        {{$vuetify.lang.t('$vuetify.ENDERECO')}}:</strong
+                      >
+                      <strong
+                        class="font-weight-bold"
+                        v-html="getAddress(circuit)"
                       ></strong>
                     </v-col>
 
