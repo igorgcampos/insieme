@@ -706,12 +706,12 @@
                       v-if="!open && circuit.nome.includes('-STAR')"
                     >
                       <strong
-                        class="font-weight-bold grey--text text--lighten-1 caption mr-2"
+                        class="font-weight-bold grey--text text--lighten-1 mr-2"
                       >
                         {{$vuetify.lang.t('$vuetify.ENDERECO')}}:</strong
                       >
                       <strong
-                        class="font-weight-bold caption"
+                        class="font-weight-bold"
                         v-html="getAddress(circuit)"
                       ></strong>
                     </v-col>
@@ -1396,9 +1396,9 @@ export default {
         " " +
         (circuit.bairro ? circuit.bairro : "") +
         " " +
-        (circuit.cidade ? circuit.cidade : "") +
-        ", " +
-        (circuit.uf ? circuit.uf : "")
+        (circuit.cidade ? circuit.cidade : "") 
+        
+        (circuit.uf && this.$props.contract.pais == 'BRASIL'? ", " + circuit.uf : "")
           .replaceAll("\n", " ")
           .replaceAll("\r", " ")
           .trim()
