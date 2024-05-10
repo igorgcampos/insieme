@@ -706,12 +706,12 @@
                       v-if="!open && circuit.nome.includes('-STAR')"
                     >
                       <strong
-                        class="font-weight-bold grey--text text--lighten-1 mr-2"
+                        class="font-weight-bold grey--text text--lighten-1 caption mr-2"
                       >
                         {{$vuetify.lang.t('$vuetify.ENDERECO')}}:</strong
                       >
                       <strong
-                        class="font-weight-bold"
+                        class="font-weight-bold caption"
                         v-html="getAddress(circuit)"
                       ></strong>
                     </v-col>
