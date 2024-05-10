@@ -1396,8 +1396,8 @@ export default {
         " " +
         (circuit.bairro ? circuit.bairro : "") +
         " " +
-        (circuit.cidade ? circuit.cidade : "") 
-        
+        (circuit.cidade ? circuit.cidade : "") +
+
         (circuit.uf && this.$props.contract.pais == 'BRASIL'? ", " + circuit.uf : "")
           .replaceAll("\n", " ")
           .replaceAll("\r", " ")
