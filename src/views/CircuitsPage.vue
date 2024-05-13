@@ -1532,7 +1532,7 @@ export default {
         contractNumber: this.$props.contract.numeroContratoTpz,
         statusInstall: status,
       }).then((response) => {
-        this.installCounts[index] = response.data;
+        this.installCounts[index] = response.data + '';
 
         this.$forceUpdate();
         if (index == this.installCounts.length - 1) {
