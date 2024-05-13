@@ -169,15 +169,15 @@ export default {
         var object = Object.assign({}, this.historic.disponibilidades[index]);
 
         object.designacaoTpz =
-          this.historic.disponibilidades[index].circuito.designacaoTpz;
+          this.historic.disponibilidades[index].circuito.nome;
         object.dataCriacao =
           this.$formatDate(object.dataCriacao.date) +
           " " +
-          object.dataCriacao.time;
+          this.$formatHour(object.dataCriacao.time, true);
         object.dataFechamento =
           this.$formatDate(object.dataFechamento.date) +
           " " +
-          object.dataFechamento.time;
+          this.$formatHour(object.dataFechamento.time, true);
 
         object.tempoReparoEmHoras = Intl.NumberFormat("pt-BR").format(
           object.tempoReparoEmHoras
