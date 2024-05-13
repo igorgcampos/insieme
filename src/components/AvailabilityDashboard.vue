@@ -35,7 +35,7 @@
             ></CountCard>
           </v-col>
 
-          <v-col class="flex-grow-0 mr-n2">
+          <!--<v-col class="flex-grow-0 mr-n2">
             <CountCard
               icon="mdi-chart-line"
               :message="$vuetify.lang.t('$vuetify.RELATORIO_ANUAL')"
@@ -46,7 +46,7 @@
               :toolTipMessage="$vuetify.lang.t('$vuetify.VER_DETALHES_DISPONIBILIDADE')"
               :func="openAvailabilityDialog"
             ></CountCard>
-          </v-col>
+          </v-col>-->
         </v-row>
 
         <v-data-table
