@@ -547,4 +547,6 @@ export default {
     DIAS_7: '7 días',
     DIAS_30: '30 días',
     ULTIMA_ATUALIZACAO: 'Última actualización: {0}',
+
+    RELATORIO_ANUAL: 'Reporte anual',
 }

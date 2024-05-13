@@ -13,14 +13,21 @@
         @click="func(funcParam)"
       >
         <v-row justify="center" class="mb-1 mt-n3" v-show="horizontal">
-          <v-col :cols="colsNumber || 2" class="ml-4 mt-n1">
+          <v-col :cols="colsNumber || 2" class="ml-4 mt-n1" >
             <span
-              v-if="!isLoading"
+              v-if="!isLoading && count"
               :class="[color]"
               style="font-size: large"
               justify="center"
               >{{ count }}</span
             >
+
+            <v-icon
+              v-if="!isLoading && icon"
+              x-medium
+              class="mt-0 mr-n12"
+              color="primary"
+            >{{icon}}</v-icon>
 
             <v-progress-circular
               v-if="isLoading"
@@ -47,7 +54,7 @@
         <v-col v-show="!horizontal">
           <v-row justify="center" class="mb-1 mt-n1">
             <span
-              v-if="!isLoading"
+              v-if="!isLoading && count"
               :class="[
                 color,
                 { 'text-subtitle-1 pt-2': smallCount && !smallText },
@@ -108,6 +115,7 @@ export default {
     horizontal: Boolean,
     minWidth: Number,
     colsNumber: Number,
+    icon: String,
   },
   watch: {
     buttonHovering(newVal) {
