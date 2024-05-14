@@ -549,4 +549,6 @@ export default {
     ULTIMA_ATUALIZACAO: 'Última actualización: {0}',
 
     RELATORIO_ANUAL: 'Reporte anual',
+    RELATORIO_ANUAL_DESCRICAO: 'Ver informe de disponibilidad promedio anual',
+    ANO: 'Año',
 }

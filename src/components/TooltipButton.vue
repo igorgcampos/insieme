@@ -5,11 +5,11 @@
   >
     <template v-slot:activator="{ on }">
       <v-btn
-        v-if="label"
+        v-if="label && !icon"
         :text="isText"
         color="primary"
         @click="event(object, $event)"
-        v-on="on || on1"
+        v-on="on"
         :loading="loading"
         :x-small="mobile"
         :small="!mobile"
@@ -20,16 +20,17 @@
       <v-btn
         v-if="icon"
         :text="isText"
-        :color="color || 'red darken-5'"
+        :color="color || 'primary'"
         @click="event(object, $event)"
-        v-on="on || on1"
+        v-on="on"
         :loading="loading"
         :x-small="mobile"
         :small="!mobile"
         :disabled="disabled"
         :class="{'mr-3': marginRight}"
       >
-        <v-icon>{{icon}}</v-icon>
+        <v-icon class="mr-2">{{icon}}</v-icon>
+        {{label?label:''}}
       </v-btn>
     </template>
     <span style="max-width: 200px;

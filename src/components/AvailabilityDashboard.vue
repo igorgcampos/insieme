@@ -30,23 +30,12 @@
               :horizontal="true"
               :minWidth="historic.percentualDisponibilidade < 100 ? 200 : 220"
               :colsNumber="historic.percentualDisponibilidade < 100 ? 5 : 6"
-              :toolTipMessage="$vuetify.lang.t('$vuetify.VER_DETALHES_DISPONIBILIDADE')"
+              :toolTipMessage="
+                $vuetify.lang.t('$vuetify.VER_DETALHES_DISPONIBILIDADE')
+              "
               :func="openAvailabilityDialog"
             ></CountCard>
           </v-col>
-
-          <!--<v-col class="flex-grow-0 mr-n2">
-            <CountCard
-              icon="mdi-chart-line"
-              :message="$vuetify.lang.t('$vuetify.RELATORIO_ANUAL')"
-              color="primary--text font-weight-bold"
-              :horizontal="true"
-              :minWidth="200"
-              :colsNumber="3"
-              :toolTipMessage="$vuetify.lang.t('$vuetify.VER_DETALHES_DISPONIBILIDADE')"
-              :func="openAvailabilityDialog"
-            ></CountCard>
-          </v-col>-->
         </v-row>
 
         <v-data-table

@@ -28,6 +28,17 @@
               ></DatePickerField>
             </v-row>
           </v-col>
+
+          <v-col cols="2" class="ml-3 mt-7">
+            <TooltipButton
+              :label="$vuetify.lang.t('$vuetify.RELATORIO_ANUAL')"
+              :message="$vuetify.lang.t('$vuetify.RELATORIO_ANUAL_DESCRICAO')"
+              :event="openAnnualDialog"
+              :isText="false"
+              :marginRight="true"
+              icon="mdi-chart-line"
+            ></TooltipButton>
+          </v-col>
         </v-row>
 
         <v-row class="pl-3 mt-n3">
@@ -57,7 +68,7 @@
               </v-expansion-panel-content>
             </v-expansion-panel>
           </v-expansion-panels>
-          
+
           <v-col v-if="historics.length == 0 && !isLoading">
             <v-lazy
               :options="{ threshold: 0.6 }"
@@ -81,6 +92,11 @@
         </v-row>
       </div>
     </v-col>
+
+    <AnnualAvailabilityDialog
+     :dialog="showAnnualDialog"
+     :close="closeAnnualDialog">
+    </AnnualAvailabilityDialog>
   </v-layout>
 </template>
 
@@ -88,14 +104,24 @@
 import WarningPanel from "../components/panels/WarningPanel";
 import DatePickerField from "../components/fields/DatePickerField";
 import AvailabilityDashboard from "../components/AvailabilityDashboard";
+import TooltipButton from "../components/TooltipButton";
+import AnnualAvailabilityDialog from "../components/dialogs/AnnualAvailabilityDialog";
 
 export default {
   components: {
     WarningPanel,
     DatePickerField,
     AvailabilityDashboard,
+    TooltipButton,
+    AnnualAvailabilityDialog,
   },
   methods: {
+    closeAnnualDialog(){
+      this.showAnnualDialog = false;
+    },
+    openAnnualDialog(){
+      this.showAnnualDialog = true;
+    },
     closeErrorDialog() {
       this.showErrorDialog = false;
     },
@@ -186,9 +212,10 @@ export default {
     showSuccessDialog: false,
     excelFile: undefined,
     openedPanel: undefined,
+    showAnnualDialog: false,
   }),
   created: function () {
-   this.search();
+    this.search();
   },
 };
 </script>

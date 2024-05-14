@@ -552,4 +552,6 @@ export default {
     ULTIMA_ATUALIZACAO: 'Last update: {0}',
 
     RELATORIO_ANUAL: 'Annual report',
+    RELATORIO_ANUAL_DESCRICAO: 'View annual average availability report',
+    ANO: 'Year',
 }

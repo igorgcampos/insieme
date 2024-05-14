@@ -548,4 +548,6 @@ export default {
     ULTIMA_ATUALIZACAO: 'Última atualização: {0}',
 
     RELATORIO_ANUAL: 'Relatório anual',
+    RELATORIO_ANUAL_DESCRICAO: 'Visualizar relatório de disponibilidade média anual',
+    ANO: 'Ano',
 }
