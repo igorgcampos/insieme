@@ -14,7 +14,7 @@
         {{ $vuetify.lang.t("$vuetify.RELATORIO_ANUAL") }}
       </v-card-title>
 
-      <v-row>
+      <v-row align="center" no-gutters class="ml-8 mt-5">
         <v-col cols="2" class="pl-3 mr-1">
           <v-row>
             <span
@@ -24,10 +24,50 @@
             >
           </v-row>
           <v-row md="3">
-            <v-autocomplete :items="years" v-model="year" solo dense @change="searchAnnualHistory">
+            <v-autocomplete
+              :items="years"
+              v-model="year"
+              solo
+              dense
+              @change="searchAnnualHistory"
+            >
             </v-autocomplete>
           </v-row>
         </v-col>
+      </v-row>
+
+      <v-row
+        v-show="isLoading"
+        class="mt-3 mb-5 ml-4 mr-4 justify-center"
+        style="overflow-y: auto; height: 20vh"
+      >
+        <v-progress-circular
+          :size="60"
+          :width="3"
+          color="red"
+          indeterminate
+          class="mt-12"
+        ></v-progress-circular>
+      </v-row>
+
+      <WarningPanel
+        class="mt-12 mb-12"
+        :message="$vuetify.lang.t('$vuetify.NENHUM_RELATORIO')"
+        v-show="!isLoading && annualReport.length == 0"
+      ></WarningPanel>
+
+      <v-row
+        class="justify-center ml-6 mr-6"
+        v-show="!isLoading && annualReport && annualReport.length > 0"
+      >
+        <BarChart
+          :chart-data="chartData"
+          :options="chartOptions"
+          :styles="{
+            height: '19rem',
+            width: '80vw',
+          }"
+        ></BarChart>
       </v-row>
 
       <v-divider class="mt-5"></v-divider>
@@ -43,19 +83,21 @@
 </template>
 
 <script>
+import WarningPanel from "../../components/panels/WarningPanel";
+import BarChart from "../charts/BarChart.js";
+
 export default {
-  components: {},
+  components: { WarningPanel, BarChart },
   props: {
     close: Function,
     dialog: Boolean,
   },
   methods: {
     searchAnnualHistory() {
-
       this.isLoading = true;
       this.$get("/historico_disponibilidade/busca_anual", {
         contractId: window.sessionStorage.getItem("selectedContractId"),
-        date: this.year.split("-").length == 3 ? this.year : this.year + "-01",
+        year: parseInt(this.year),
       }).then((response) => {
         this.isLoading = false;
         if (!response || !response.data) {
@@ -63,6 +105,7 @@ export default {
         }
 
         this.annualReport = response.data;
+        this.chartData.datasets[0].data = this.annualReport;
       });
     },
     formatData() {
@@ -100,38 +143,61 @@ export default {
       annualReport: undefined,
       isLoading: false,
       year: undefined,
-      loadingApproval: false,
-      headers: [
-        {
-          text: this.$vuetify.lang.t("$vuetify.DESIGNACAO_TPZ"),
-          align: "center",
-          sortable: false,
-          value: "designacaoTpz",
-          width: "9rem",
+      chartData: {
+        labels: [
+          this.$vuetify.lang.t("$vuetify.JANEIRO"),
+          this.$vuetify.lang.t("$vuetify.FEVEREIRO"),
+          this.$vuetify.lang.t("$vuetify.MARCO"),
+          this.$vuetify.lang.t("$vuetify.ABRIL"),
+          this.$vuetify.lang.t("$vuetify.MAIO"),
+          this.$vuetify.lang.t("$vuetify.JUNHO"),
+          this.$vuetify.lang.t("$vuetify.JULHO"),
+          this.$vuetify.lang.t("$vuetify.AGOSTO"),
+          this.$vuetify.lang.t("$vuetify.SETEMBRO"),
+          this.$vuetify.lang.t("$vuetify.OUTUBRO"),
+          this.$vuetify.lang.t("$vuetify.NOVEMBRO"),
+          this.$vuetify.lang.t("$vuetify.DEZEMBRO"),
+        ],
+        datasets: [
+          {
+            borderColor: "rgba(54, 162, 235, 1)",
+            backgroundColor: "rgba(54, 162, 235, 0.5)",
+            borderWidth: 2,
+            data: [],
+          },
+        ],
+      },
+      chartOptions: {
+        responsive: true,
+        legend: { display: false },
+        maintainAspectRatio: false,
+        title: {
+          display: true,
+          text: this.$vuetify.lang.t("$vuetify.RELATORIO_MEDIO_MES"),
+          fontSize: 16,
         },
-        {
-          text: this.$vuetify.lang.t("$vuetify.TEMPO_TOTAL_REPARO"),
-          align: "center",
-          sortable: false,
-          value: "tempoReparoTotal",
-          width: "8rem",
+        scales: {
+          yAxes: [
+            {
+              gridLines: { drawOnChartArea: false },
+            },
+          ],
+          xAxes: [
+            {
+              gridLines: { drawOnChartArea: false },
+            },
+          ],
         },
-        {
-          text: "%",
-          align: "center",
-          sortable: false,
-          value: "percentualDisponibilidade",
-          width: "8rem",
-        },
-      ],
+      },
     };
   },
   created: function () {
-    this.headers.forEach((h) => (h.class = "black--text caption1"));
-
     for (var index = 2024; index < 2125; index++) {
       this.years.push(index);
     }
+
+    this.year = new Date().getFullYear();
+    this.searchAnnualHistory();
   },
 };
 </script>

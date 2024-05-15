@@ -271,7 +271,7 @@
         ></LineChart>
 
         <LineChart 
-        v-if="!isLoading"
+          v-if="!isLoading"
           :options="obstructionOptions"
           :styles="{
             height: '15rem',

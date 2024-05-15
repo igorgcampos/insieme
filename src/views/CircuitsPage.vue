@@ -1643,7 +1643,7 @@ export default {
         online: true,
       }).then((response) => {
         if (response) {
-          this.counts[0] = response.data;
+          this.counts[0] = response.data + '';
         }
 
         this.isLoadingOnline = false;
@@ -1655,7 +1655,7 @@ export default {
         online: false,
       }).then((response) => {
         if (response) {
-          this.counts[1] = response.data;
+          this.counts[1] = response.data + '';
         }
 
         this.isLoadingOffline = false;
