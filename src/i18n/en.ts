@@ -350,6 +350,7 @@ export default {
     V_2_5_0: '- Now the client can send messages to the NOC operator from within the call itself. <br>- Customer can also open a massive call. <br>- New options have been added in the commercial module to open calls like "Site survey" and "Other services".',
     V_2_6_0: 'The circuit restart process is now performed independently of the main screen, allowing the user to perform more than one restart or perform other operations on main screen.',
     V_2_7_0: '- Users can now view only the circuits belonging to a UF. It is enough to associate the permission of the UF of interest to the user. <br>- Insieme now allows the opening of calls of different nature, not related to circuits or billing.',
+    V_2_8_0: '- A new measurement bulletin screen has been made available for the user to view the monthly amounts to be charged for each circuit, including external services carried out in each of them.<br>- The circuit availability screen has been implemented to allows the user to view the monthly time each circuit was offline for purposes of comparing the defined SLA levels.<br>- Insieme now manages contracts from different countries and not just those from Brazil <br>- StarLink products are now supported by Insieme, displaying consumption information, online/offline status and a dashboard with various performance metrics.',
     NOVA_LINHA: 'New line',
     BAIXAR_EXCEL: 'Download spreadsheet template',
     IMPORTAR_EXCEL: 'Import filled excel',

@@ -21,14 +21,14 @@
 
       <v-col
         class="ma-n2 pa-0 overflow-y-hidden overflow-x-hidden"
-        style="min-height:22rem; max-height:32rem;"
+       
       >
         <v-row class="mt-n3 ml-2">
           <v-col>
             <v-row>
               <div
                 class="ma-0 pt-2 mt-0 mb-3 overflow-y-auto overflow-x-hidden"
-                style="width:97%; min-height:10rem; max-height:23rem"
+                style="width:97%; height:45vh"
               >
                 <v-expansion-panels class="ma-1 ml-7 mt-0 pr-12">
                   <v-expansion-panel
@@ -128,6 +128,11 @@ export default {
     this.items.push({
       title: 'V2.7.0',
       description: this.$vuetify.lang.t('$vuetify.V_2_7_0')
+    })
+
+    this.items.push({
+      title: 'V2.8.0',
+      description: this.$vuetify.lang.t('$vuetify.V_2_8_0')
     })
 
     this.selectedItems = this.items
