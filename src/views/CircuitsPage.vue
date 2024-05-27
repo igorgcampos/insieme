@@ -1075,7 +1075,7 @@
                           : $vuetify.lang.t('$vuetify.VER_DETALHES_PRTG')
                       "
                       :event="
-                        circuit.plataformaSat == 'STARLINK'
+                        circuit.nome.includes('-STAR')
                           ? showDetails
                           : openPRTG
                       "
@@ -1083,7 +1083,7 @@
                       :mobile="$vuetify.breakpoint.xs"
                       v-if="
                         (circuit.idPrtg && prtgToken) ||
-                        (circuit.plataformaSat == 'STARLINK' &&
+                        (circuit.nome.includes('-STAR') &&
                           circuit.statusInstalacao == 'ATIVADO')
                       "
                       :isText="true"
