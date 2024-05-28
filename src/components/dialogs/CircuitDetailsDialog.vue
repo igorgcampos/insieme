@@ -32,7 +32,7 @@
               circuit.taxaDownload
                 ? Intl.NumberFormat('pt-BR', {
                     maximumFractionDigits: 2,
-                  }).format(circuit.taxaDownload) + ' Kbps'
+                  }).format(circuit.taxaDownload) + ' Mbps'
                 : '--'
             "
             :message="$vuetify.lang.t('$vuetify.TAXA_DOWNLOAD_ATUAL')"
@@ -47,7 +47,7 @@
               circuit.taxaUpload
                 ? Intl.NumberFormat('pt-BR', {
                     maximumFractionDigits: 2,
-                  }).format(circuit.taxaUpload) + ' Kbps'
+                  }).format(circuit.taxaUpload) + ' Mbps'
                 : '--'
             "
             :message="$vuetify.lang.t('$vuetify.TAXA_UPLOAD_ATUAL')"
