@@ -17,7 +17,7 @@
           " (" +
           $vuetify.lang.t(
             "$vuetify.ULTIMA_ATUALIZACAO",
-            this.$formatDate(circuit.updatedOn.date) +
+             this.$formatDate(circuit.updatedOn.date) +
               " " +
               this.$formatHour(circuit.updatedOn.time)
           ) +
@@ -337,6 +337,10 @@ export default {
         this.packageOptions.data.push(element["taxaPerdaPing"] * 100);
         this.qualitySignalOptions.data.push(element["qualidadeSinal"] * 100);
         this.obstructionOptions.data.push(element["tempoObstrucao"]);
+      }
+
+      if(chartInfo.length > 0){
+        this.circuit.updatedOn = chartInfo[chartInfo.length - 1].createdOn;
       }
     },
     searchMeasurements(hours) {
