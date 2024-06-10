@@ -1,12 +1,12 @@
 <template>
   <v-content>
-    <v-container column align-center style="max-width: 1200px">
+    <v-container column align-center>
       <v-row justify="center">
 
         <FeedbackButton :event="openFeedBack"></FeedbackButton>
 
-        <v-col md="6" lg="10" xl="12" sm="12" xs="12" xm="12" class="mt-n11">
-          <v-row class="mb-n2 mt-n3 ml-n12 mb-6">
+        <v-col md="8" lg="12" xl="12" sm="12" xs="12" xm="12" class="mt-n11">
+          <v-row class="mb-n2 mt-n3 mb-6">
             <span
               class="
                 mb-7
@@ -50,6 +50,14 @@
             :contract="selectedContract"
           ></CommercialPage>
           <IssuesPage
+            v-if="
+              ($hasProfile('Administrador') ||
+              $hasProfile('Cliente') ||
+              $hasProfile('Comercial') ||
+              $hasProfile('Financeiro')||
+              $hasProfile('Operacional') ) &&
+              !$hasProfile('/grp_insieme-apenas-circuitos')
+            "
             :contract="selectedContract"
             :proactivity="undefined"
           ></IssuesPage>

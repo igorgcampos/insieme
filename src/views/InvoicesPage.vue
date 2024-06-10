@@ -2,7 +2,6 @@
   <div class="mb-10">
     <v-row
       id="invoices"
-      :class="{'ml-n12':$vuetify.breakpoint.mdAndUp}"
     >
       <span class="mb-7 text-right display-1 font-weight-bold grey--text text--darken-1">
         {{$vuetify.lang.t('$vuetify.FATURAMENTO')}}</span>
@@ -38,7 +37,7 @@
         <v-row :class="{'ml-n6':$vuetify.breakpoint.xs}">
           <v-col :class="[{'flex-grow-0':!$vuetify.breakpoint.xs},{'ml-0 pl-1 pr-0':$vuetify.breakpoint.xs}]">
             <CountCard
-              :count="counts[0]"
+              :count="counts[0] + ''"
               :message="$vuetify.lang.t('$vuetify.PAGOS')"
               color="success--text font-weight-bold"
               :func="getPaid"
@@ -46,7 +45,7 @@
           </v-col>
           <v-col :class="[{'flex-grow-0':!$vuetify.breakpoint.xs},{'pl-1 pr-0':$vuetify.breakpoint.xs}]">
             <CountCard
-              :count="counts[1]"
+              :count="counts[1] + ''"
               :message="$vuetify.lang.t('$vuetify.EM_ABERTO')"
               color="warning--text font-weight-bold"
               :func="getOpened"
@@ -57,7 +56,7 @@
             class="mr-n2"
           >
             <CountCard
-              :count="counts[2]"
+              :count="counts[2] + ''"
               :message="$vuetify.lang.t('$vuetify.VENCIDAS')"
               color="error--text font-weight-bold"
               :func="getOverdue"

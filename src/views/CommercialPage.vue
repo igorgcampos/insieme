@@ -2,7 +2,6 @@
   <div class="mb-10">
     <v-row
       id="commercial"
-      :class="{'ml-n12':$vuetify.breakpoint.mdAndUp}"
     >
       <span class="mb-7 text-right display-1 font-weight-bold grey--text text--darken-1">
         {{$vuetify.lang.t('$vuetify.COMERCIAL')}}</span>

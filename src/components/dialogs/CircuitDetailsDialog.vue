@@ -292,9 +292,13 @@
         ></LineChart>
       </v-row>
 
-      <v-divider class="mt-0"></v-divider>
+      <v-divider class="mt-0 mb-1"></v-divider>
 
-      <v-card-actions class="justify-center">
+      <span class="ml-3 mt-12 caption font-weight-bold black--text">{{
+            $vuetify.lang.t('$vuetify.FUSO_HORARIO', circuit.contrato.pais)
+          }}</span>
+
+      <v-card-actions class="justify-center mt-n7" style="z-index:1000">
         <v-btn
           color="primary"
           text

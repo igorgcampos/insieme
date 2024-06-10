@@ -569,4 +569,7 @@ export default {
     OUTUBRO: 'October',
     NOVEMBRO: 'November',
     DEZEMBRO: 'December',
+
+    VER_MAPA: 'See in map',
+    FUSO_HORARIO: 'Time zone: {0}',
 }

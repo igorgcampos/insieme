@@ -567,4 +567,7 @@ export default {
     OUTUBRO: 'Octubre',
     NOVEMBRO: 'Noviembre',
     DEZEMBRO: 'Diciembre',
+
+    VER_MAPA: 'Ver en el mapa',
+    FUSO_HORARIO: 'Huso horario: {0}',
 }

@@ -87,7 +87,13 @@
       <span>{{ $vuetify.lang.t("$vuetify.COMERCIAL") }}</span>
     </v-tooltip>
 
-    <v-tooltip bottom v-if="!$vuetify.breakpoint.xs && !$vuetify.breakpoint.sm">
+    <v-tooltip bottom v-if="!$vuetify.breakpoint.xs && !$vuetify.breakpoint.sm && 
+             ($hasProfile('Administrador') ||
+              $hasProfile('Cliente') ||
+              $hasProfile('Comercial') ||
+              $hasProfile('Financeiro')||
+              $hasProfile('Operacional') ) &&
+              !$hasProfile('/grp_insieme-apenas-circuitos')">
       <template v-slot:activator="{ on }">
         <v-chip
           pill

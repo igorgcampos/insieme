@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-row id="issues" :class="{ 'ml-n12': $vuetify.breakpoint.mdAndUp }">
+    <v-row id="issues">
       <span
         class="mb-7 text-right display-1 font-weight-bold grey--text text--darken-1"
       >
@@ -47,7 +47,7 @@
             ]"
           >
             <CountCard
-              :count="counts[0]"
+              :count="counts[0] + ''"
               :message="$vuetify.lang.t('$vuetify.ABERTOS')"
               color="success--text font-weight-bold"
               :func="getOpened"
@@ -60,7 +60,7 @@
             ]"
           >
             <CountCard
-              :count="counts[2]"
+              :count="counts[2] + ''"
               :message="$vuetify.lang.t('$vuetify.EM_ANDAMENTO')"
               color="warning--text font-weight-bold"
               :func="getResolving"
@@ -74,7 +74,7 @@
             class="mr-n2"
           >
             <CountCard
-              :count="counts[1]"
+              :count="counts[1] + ''"
               :message="$vuetify.lang.t('$vuetify.ENCERRADOS')"
               color="primary--text font-weight-bold"
               :func="getClosed"

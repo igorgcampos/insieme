@@ -236,9 +236,14 @@ export default {
     }
 
     this.$getUser().then((user) => {
-
-      if(user.contrato){
+      if (user.contrato) {
         this.contracts = this.contracts.concat(user.contrato);
+
+        if (this.contracts.length == 1 && this.$hasProfile("Operacional")) {
+          this.$root.$emit("contract-selected", this.contracts[0]);
+          window.sessionStorage.setItem("contractSelected", "true");
+        }
+
         this.isLoading = false;
         return;
       }
@@ -254,9 +259,7 @@ export default {
           this.contracts = response.data;
 
           if (
-            this.contracts.length == 1 &&
-            this.$hasProfile("Operacional") &&
-            window.sessionStorage.getItem("contractSelected") == "false"
+            this.contracts.length == 1 && this.$hasProfile("Operacional")
           ) {
             this.$root.$emit("contract-selected", this.contracts[0]);
             window.sessionStorage.setItem("contractSelected", "true");
@@ -266,9 +269,7 @@ export default {
         });
       } else {
         this.contracts = [];
-        if (this.$props.contract) {
-          this.contracts = this.contracts.concat(this.$props.contract);
-        }
+        this.contracts = this.contracts.concat(this.$props.contract);
         this.isLoading = false;
       }
     });

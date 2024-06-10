@@ -1,6 +1,6 @@
 <template>
   <div class="mb-10">
-    <v-row id="circuits" :class="{ 'ml-n12': $vuetify.breakpoint.mdAndUp }">
+    <v-row id="circuits">
       <span
         class="mb-7 text-right display-1 font-weight-bold grey--text text--darken-1"
       >
@@ -82,7 +82,7 @@
               </v-col>
             </v-row>
 
-            <v-row>
+            <v-row v-if="!$hasProfile('/grp_insieme-apenas-circuitos')">
               <v-col class="mr-0 ml-n0 pr-0 pl-0" cols="12">
                 <v-row justify="center">
                   <span
@@ -169,7 +169,7 @@
               </v-col>
             </v-row>
 
-            <v-row>
+            <v-row v-if="!$hasProfile('/grp_insieme-apenas-circuitos')">
               <v-col class="mr-0 ml-n0 pr-0 pl-0" cols="12">
                 <v-row justify="center">
                   <span
@@ -266,11 +266,13 @@
             </v-row>
           </v-col>
 
-          <v-row v-show="!$vuetify.breakpoint.xs">
+          <v-row class="justify-center" v-if="!$vuetify.breakpoint.xs">
             <v-col
-              class="ml-0"
-              cols="4"
-              v-if="!$hasProfile('Sem monitoramento')"
+              class="ml-0 mr-12 justify-center"
+              cols="3"
+              v-if="
+                !$hasProfile('Sem monitoramento') && !$vuetify.breakpoint.xs
+              "
             >
               <v-row justify="center">
                 <span
@@ -311,191 +313,190 @@
                 </v-col>
               </v-row>
             </v-col>
-
             <v-divider
-              class="mb-5 mt-n2 ml-n4"
+              v-if="!$hasProfile('/grp_insieme-apenas-circuitos')"
+              class="mt-n4 mb-n4"
               :vertical="true"
-              v-show="!$hasProfile('Sem monitoramento')"
-            ></v-divider>
-
-            <v-row>
-              <v-col cols="12" class="mt-n1">
-                <v-row justify="center">
-                  <v-btn-toggle
-                    v-model="button"
-                    color="grey--text text--darken-3"
-                    class="mb-1"
+            >
+            </v-divider>
+            <v-col
+              :cols="$vuetify.breakpoint.lgAndUp ? 6 : 7"
+              class="mt-n1 ml-12"
+              v-if="!$hasProfile('/grp_insieme-apenas-circuitos')"
+            >
+              <v-row justify="center">
+                <v-btn-toggle
+                  v-model="button"
+                  color="grey--text text--darken-3"
+                  class="mb-1"
+                >
+                  <v-btn
+                    value="contract"
+                    class="mt-n3 text-center caption font-weight-bold"
+                    small
+                    :style="{ 'text-decoration': contractDecoration }"
                   >
-                    <v-btn
-                      value="contract"
-                      class="mt-n3 text-center caption font-weight-bold"
-                      small
-                      :style="{ 'text-decoration': contractDecoration }"
-                    >
-                      {{
-                        $vuetify.lang.t("$vuetify.STATUS_CONTRATACAO")
-                      }}</v-btn
-                    >
-                    <v-btn
-                      value="log"
-                      class="mt-n3 text-center caption font-weight-bold"
-                      small
-                      :style="{ 'text-decoration': logDecoration }"
-                    >
-                      {{ $vuetify.lang.t("$vuetify.STATUS_LOGISTICA") }}
-                    </v-btn>
-                  </v-btn-toggle>
-                </v-row>
-
-                <v-row justify="center">
-                  <v-sheet
-                    class="ma-0 pa-0"
-                    style="background: #fafafa"
-                    v-if="button == 'contract'"
+                    {{ $vuetify.lang.t("$vuetify.STATUS_CONTRATACAO") }}</v-btn
                   >
-                    <v-slide-group
-                      :v-model="null"
-                      :show-arrows="
-                        !$vuetify.breakpoint.lg || !$vuetify.breakpoint.xl
-                      "
-                      center-active
-                      next-icon="mdi-arrow-right-thick primary--text"
-                      prev-icon="mdi-arrow-left-thick primary--text"
-                    >
-                      <v-slide-item>
-                        <v-col class="flex-grow-0">
-                          <CountCard
-                            :count="installCounts[0]"
-                            :message="$vuetify.lang.t('$vuetify.ATIVADO')"
-                            color="primary--text font-weight-bold"
-                            :func="getActive"
-                            :toolTipMessage="
-                              $vuetify.lang.t('$vuetify.ATIVADO_DESCRICAO')
-                            "
-                            :isLoading="installCounts[0] == -1"
-                          ></CountCard>
-                        </v-col>
-                      </v-slide-item>
-                      <v-slide-item>
-                        <v-col class="flex-grow-0">
-                          <CountCard
-                            :count="installCounts[1]"
-                            :message="$vuetify.lang.t('$vuetify.DESATIVADO')"
-                            color="primary--text font-weight-bold"
-                            :func="getDeactive"
-                            :toolTipMessage="
-                              $vuetify.lang.t('$vuetify.DESATIVADO_DESCRICAO')
-                            "
-                            :isLoading="installCounts[1] == -1"
-                          >
-                          </CountCard>
-                        </v-col>
-                      </v-slide-item>
-                      <v-slide-item>
-                        <v-col class="flex-grow-0">
-                          <CountCard
-                            :count="installCounts[3]"
-                            :message="$vuetify.lang.t('$vuetify.DESINSTALADO')"
-                            color="primary--text font-weight-bold"
-                            :func="getUninstall"
-                            :toolTipMessage="
-                              $vuetify.lang.t('$vuetify.DESINSTALADO_DESCRICAO')
-                            "
-                            :isLoading="installCounts[3] == -1"
-                          ></CountCard>
-                        </v-col>
-                      </v-slide-item>
-                      <v-slide-item>
-                        <v-col class="flex-grow-0">
-                          <CountCard
-                            :count="installCounts[2]"
-                            :message="$vuetify.lang.t('$vuetify.CANCELADO')"
-                            color="primary--text font-weight-bold"
-                            :func="getCanceled"
-                            :toolTipMessage="
-                              $vuetify.lang.t('$vuetify.CANCELADO_DESCRICAO')
-                            "
-                            :isLoading="installCounts[2] == -1"
-                          ></CountCard>
-                        </v-col>
-                      </v-slide-item>
-                      <v-slide-item>
-                        <v-col class="flex-grow-0">
-                          <CountCard
-                            :count="installCounts[8]"
-                            :message="$vuetify.lang.t('$vuetify.SUSPENSO')"
-                            color="primary--text font-weight-bold"
-                            :func="getSuspended"
-                            :toolTipMessage="
-                              $vuetify.lang.t('$vuetify.SUSPENSO_DESCRICAO')
-                            "
-                            :isLoading="installCounts[8] == -1"
-                          ></CountCard>
-                        </v-col>
-                      </v-slide-item>
-                    </v-slide-group>
-                  </v-sheet>
-                </v-row>
+                  <v-btn
+                    value="log"
+                    class="mt-n3 text-center caption font-weight-bold"
+                    small
+                    :style="{ 'text-decoration': logDecoration }"
+                  >
+                    {{ $vuetify.lang.t("$vuetify.STATUS_LOGISTICA") }}
+                  </v-btn>
+                </v-btn-toggle>
+              </v-row>
 
-                <v-row class="ml-2" justify="center" v-show="button == 'log'">
-                  <v-col class="flex-grow-0">
-                    <CountCard
-                      :count="installCounts[7]"
-                      :message="$vuetify.lang.t('$vuetify.PROC_LOGISTICO')"
-                      color="primary--text font-weight-bold"
-                      :func="getLogistic"
-                      :toolTipMessage="
-                        $vuetify.lang.t('$vuetify.PROC_LOGISTICO_DESCRICAO')
-                      "
-                      :isLoading="installCounts[7] == -1"
-                    ></CountCard>
-                  </v-col>
+              <v-row justify="center">
+                <v-sheet
+                  class="ma-0 pa-0"
+                  style="background: #fafafa"
+                  v-if="button == 'contract'"
+                >
+                  <v-slide-group
+                    :v-model="null"
+                    :show-arrows="
+                      !$vuetify.breakpoint.lg || !$vuetify.breakpoint.xl
+                    "
+                    center-active
+                    next-icon="mdi-arrow-right-thick primary--text"
+                    prev-icon="mdi-arrow-left-thick primary--text"
+                  >
+                    <v-slide-item>
+                      <v-col class="flex-grow-0">
+                        <CountCard
+                          :count="installCounts[0]"
+                          :message="$vuetify.lang.t('$vuetify.ATIVADO')"
+                          color="primary--text font-weight-bold"
+                          :func="getActive"
+                          :toolTipMessage="
+                            $vuetify.lang.t('$vuetify.ATIVADO_DESCRICAO')
+                          "
+                          :isLoading="installCounts[0] == -1"
+                        ></CountCard>
+                      </v-col>
+                    </v-slide-item>
+                    <v-slide-item>
+                      <v-col class="flex-grow-0">
+                        <CountCard
+                          :count="installCounts[1]"
+                          :message="$vuetify.lang.t('$vuetify.DESATIVADO')"
+                          color="primary--text font-weight-bold"
+                          :func="getDeactive"
+                          :toolTipMessage="
+                            $vuetify.lang.t('$vuetify.DESATIVADO_DESCRICAO')
+                          "
+                          :isLoading="installCounts[1] == -1"
+                        >
+                        </CountCard>
+                      </v-col>
+                    </v-slide-item>
+                    <v-slide-item>
+                      <v-col class="flex-grow-0">
+                        <CountCard
+                          :count="installCounts[3]"
+                          :message="$vuetify.lang.t('$vuetify.DESINSTALADO')"
+                          color="primary--text font-weight-bold"
+                          :func="getUninstall"
+                          :toolTipMessage="
+                            $vuetify.lang.t('$vuetify.DESINSTALADO_DESCRICAO')
+                          "
+                          :isLoading="installCounts[3] == -1"
+                        ></CountCard>
+                      </v-col>
+                    </v-slide-item>
+                    <v-slide-item>
+                      <v-col class="flex-grow-0">
+                        <CountCard
+                          :count="installCounts[2]"
+                          :message="$vuetify.lang.t('$vuetify.CANCELADO')"
+                          color="primary--text font-weight-bold"
+                          :func="getCanceled"
+                          :toolTipMessage="
+                            $vuetify.lang.t('$vuetify.CANCELADO_DESCRICAO')
+                          "
+                          :isLoading="installCounts[2] == -1"
+                        ></CountCard>
+                      </v-col>
+                    </v-slide-item>
+                    <v-slide-item>
+                      <v-col class="flex-grow-0">
+                        <CountCard
+                          :count="installCounts[8]"
+                          :message="$vuetify.lang.t('$vuetify.SUSPENSO')"
+                          color="primary--text font-weight-bold"
+                          :func="getSuspended"
+                          :toolTipMessage="
+                            $vuetify.lang.t('$vuetify.SUSPENSO_DESCRICAO')
+                          "
+                          :isLoading="installCounts[8] == -1"
+                        ></CountCard>
+                      </v-col>
+                    </v-slide-item>
+                  </v-slide-group>
+                </v-sheet>
+              </v-row>
 
-                  <v-col class="flex-grow-0">
-                    <CountCard
-                      :count="installCounts[5]"
-                      :message="$vuetify.lang.t('$vuetify.EM_TRANSPORTE')"
-                      color="primary--text font-weight-bold"
-                      :func="getInTransport"
-                      :toolTipMessage="
-                        $vuetify.lang.t('$vuetify.EM_TRANSPORTE_DESCRICAO')
-                      "
-                      :class="{ 'ml-n4': $vuetify.breakpoint.sm }"
-                      :isLoading="installCounts[5] == -1"
-                    ></CountCard>
-                  </v-col>
+              <v-row class="ml-2" justify="center" v-if="button == 'log'">
+                <v-col class="flex-grow-0">
+                  <CountCard
+                    :count="installCounts[7]"
+                    :message="$vuetify.lang.t('$vuetify.PROC_LOGISTICO')"
+                    color="primary--text font-weight-bold"
+                    :func="getLogistic"
+                    :toolTipMessage="
+                      $vuetify.lang.t('$vuetify.PROC_LOGISTICO_DESCRICAO')
+                    "
+                    :isLoading="installCounts[7] == -1"
+                  ></CountCard>
+                </v-col>
 
-                  <v-col class="flex-grow-0">
-                    <CountCard
-                      :count="installCounts[6]"
-                      :message="$vuetify.lang.t('$vuetify.INSTALANDO')"
-                      color="primary--text font-weight-bold"
-                      :func="getDeploying"
-                      :toolTipMessage="
-                        $vuetify.lang.t('$vuetify.INSTALANDO_DESCRICAO')
-                      "
-                      :class="{ 'ml-n4': $vuetify.breakpoint.sm }"
-                      :isLoading="installCounts[6] == -1"
-                    ></CountCard>
-                  </v-col>
+                <v-col class="flex-grow-0">
+                  <CountCard
+                    :count="installCounts[5]"
+                    :message="$vuetify.lang.t('$vuetify.EM_TRANSPORTE')"
+                    color="primary--text font-weight-bold"
+                    :func="getInTransport"
+                    :toolTipMessage="
+                      $vuetify.lang.t('$vuetify.EM_TRANSPORTE_DESCRICAO')
+                    "
+                    :class="{ 'ml-n4': $vuetify.breakpoint.sm }"
+                    :isLoading="installCounts[5] == -1"
+                  ></CountCard>
+                </v-col>
 
-                  <v-col class="flex-grow-0">
-                    <CountCard
-                      :count="installCounts[4]"
-                      :message="$vuetify.lang.t('$vuetify.AGUARDANDO_ACEITE')"
-                      color="primary--text font-weight-bold"
-                      :func="getInstalled"
-                      :smallText="true"
-                      :toolTipMessage="
-                        $vuetify.lang.t('$vuetify.AGUARDANDO_DESCRICAO')
-                      "
-                      :class="{ 'ml-n4': $vuetify.breakpoint.sm }"
-                      :isLoading="installCounts[4] == -1"
-                    ></CountCard>
-                  </v-col>
-                </v-row>
-              </v-col>
-            </v-row>
+                <v-col class="flex-grow-0">
+                  <CountCard
+                    :count="installCounts[6]"
+                    :message="$vuetify.lang.t('$vuetify.INSTALANDO')"
+                    color="primary--text font-weight-bold"
+                    :func="getDeploying"
+                    :toolTipMessage="
+                      $vuetify.lang.t('$vuetify.INSTALANDO_DESCRICAO')
+                    "
+                    :class="{ 'ml-n4': $vuetify.breakpoint.sm }"
+                    :isLoading="installCounts[6] == -1"
+                  ></CountCard>
+                </v-col>
+
+                <v-col class="flex-grow-0">
+                  <CountCard
+                    :count="installCounts[4]"
+                    :message="$vuetify.lang.t('$vuetify.AGUARDANDO_ACEITE')"
+                    color="primary--text font-weight-bold"
+                    :func="getInstalled"
+                    :smallText="true"
+                    :toolTipMessage="
+                      $vuetify.lang.t('$vuetify.AGUARDANDO_DESCRICAO')
+                    "
+                    :class="{ 'ml-n4': $vuetify.breakpoint.sm }"
+                    :isLoading="installCounts[4] == -1"
+                  ></CountCard>
+                </v-col>
+              </v-row>
+            </v-col>
           </v-row>
         </v-row>
 
@@ -608,7 +609,7 @@
             id="circuitId"
             class="pr-2 overflow-y-auto overflow-x-hidden"
             v-scroll:#circuitId="searchMore"
-            style="max-height: 360px; width: 100%"
+            style="max-height: 560px; width: 100%"
           >
             <v-expansion-panels class="ma-1" v-model="openedPanel">
               <v-expansion-panel
@@ -618,7 +619,12 @@
               >
                 <v-expansion-panel-header v-slot="{ open }" class="pt-0 pb-0">
                   <v-row align="center" no-gutters>
-                    <v-col v-if="!open" cols="4" :sm="circuit.plataformaSat == 'STARLINK'?1:2" :class="{'mr-4':circuit.plataformaSat == 'STARLINK'}">
+                    <v-col
+                      v-if="!open"
+                      cols="4"
+                      :sm="circuit.nome.includes('-STAR') ? 1 : 2"
+                      :class="{ 'mr-4': circuit.nome.includes('-STAR') }"
+                    >
                       <v-chip
                         :color="
                           circuit.tecnologia != 'VSAT' &&
@@ -647,8 +653,24 @@
                     </v-col>
 
                     <v-col
+                      v-if="!$vuetify.breakpoint.xs && !open"
+                      cols="1"
+                      class="ml-n2"
+                    >
+                      <v-icon
+                        v-if="
+                          circuit.plataformaSat == 'STARLINK' &&
+                          circuit.obstruido
+                        "
+                        color="warning"
+                        v-on="on"
+                        >mdi-alert</v-icon
+                      >
+                    </v-col>
+
+                    <v-col
                       v-show="!$vuetify.breakpoint.xs"
-                      cols="4"
+                      cols="3"
                       :class="{ 'col-sm-10': open, 'col-md-10': open }"
                       class="ml-n2"
                     >
@@ -668,7 +690,7 @@
                     <v-col
                       v-show="!$vuetify.breakpoint.xs"
                       v-if="!open"
-                      cols="4"
+                      cols="3"
                       :class="{ 'col-sm-10': open, 'col-md-10': open }"
                     >
                       <strong
@@ -702,13 +724,13 @@
 
                     <v-col
                       v-show="!$vuetify.breakpoint.xs"
-                      cols="2"
+                      cols="3"
                       v-if="!open && circuit.nome.includes('-STAR')"
                     >
                       <strong
                         class="font-weight-bold grey--text text--lighten-1 mr-2"
                       >
-                        {{$vuetify.lang.t('$vuetify.ENDERECO')}}:</strong
+                        {{ $vuetify.lang.t("$vuetify.ENDERECO") }}:</strong
                       >
                       <strong
                         class="font-weight-bold"
@@ -828,7 +850,17 @@
                         </v-chip>
                       </v-col>
 
-                      <v-col class="pa-0 mt-3">
+                      <TooltipButton
+                        :message="$vuetify.lang.t('$vuetify.VISADA_OBSTRUIDA')"
+                        :event="exportToCSV"
+                        mobile="true"
+                        :isText="true"
+                        icon="mdi-alert"
+                        color="warning"
+                        :marginRight="true"
+                      ></TooltipButton>
+
+                      <!--<v-col class="pa-0 mt-3">
                         <v-chip
                           color="warning"
                           class="ml-0 mr-2"
@@ -842,13 +874,10 @@
                         >
                           {{ $vuetify.lang.t("$vuetify.VISADA_OBSTRUIDA") }}
                         </v-chip>
-                      </v-col>
+                      </v-col> -->
 
                       <v-col class="pa-0 mt-3">
-                        <v-tooltip
-                          max-width="300"
-                          right
-                        >
+                        <v-tooltip max-width="300" right>
                           <template v-slot:activator="{ on }">
                             <v-chip
                               v-on="on"
@@ -873,14 +902,20 @@
                       class="mt-n12"
                       :class="{ 'col-6': $vuetify.breakpoint.xs }"
                     >
-                      <v-col class="pl-0" v-if="!circuit.nome.includes('-STAR')">
+                      <v-col
+                        class="pl-0"
+                        v-if="!circuit.nome.includes('-STAR')"
+                      >
                         <LabelValue
                           label="IP"
                           :value="circuit.ip || '--'"
                           justify="start"
                         ></LabelValue>
                       </v-col>
-                      <v-col class="pt-0 mt-n6 pl-0 pr-0" :class="{'pt-9': circuit.nome.includes('-STAR')}">
+                      <v-col
+                        class="pt-0 mt-n6 pl-0 pr-0"
+                        :class="{ 'pt-9': circuit.nome.includes('-STAR') }"
+                      >
                         <LabelValue
                           :label="$vuetify.lang.t('$vuetify.DATA_INSTALACAO')"
                           :value="formatDate(circuit.dataInstalacao)"
@@ -1075,9 +1110,7 @@
                           : $vuetify.lang.t('$vuetify.VER_DETALHES_PRTG')
                       "
                       :event="
-                        circuit.nome.includes('-STAR')
-                          ? showDetails
-                          : openPRTG
+                        circuit.nome.includes('-STAR') ? showDetails : openPRTG
                       "
                       :object="circuit"
                       :mobile="$vuetify.breakpoint.xs"
@@ -1397,8 +1430,10 @@ export default {
         (circuit.bairro ? circuit.bairro : "") +
         " " +
         (circuit.cidade ? circuit.cidade : "") +
-
-        (circuit.uf && this.$props.contract.pais == 'BRASIL'? ", " + circuit.uf : "")
+        (circuit.uf && this.$props.contract.pais == "BRASIL"
+          ? ", " + circuit.uf
+          : ""
+        )
           .replaceAll("\n", " ")
           .replaceAll("\r", " ")
           .trim()
@@ -1470,7 +1505,7 @@ export default {
       }
 
       if (
-        document.getElementById("circuitId").scrollTop + 361 >=
+        document.getElementById("circuitId").scrollTop + 561 >=
         document.getElementById("circuitId").scrollHeight
       ) {
         this.page++;
@@ -1532,7 +1567,7 @@ export default {
         contractNumber: this.$props.contract.numeroContratoTpz,
         statusInstall: status,
       }).then((response) => {
-        this.installCounts[index] = response.data + '';
+        this.installCounts[index] = response.data + "";
 
         this.$forceUpdate();
         if (index == this.installCounts.length - 1) {
@@ -1643,7 +1678,7 @@ export default {
         online: true,
       }).then((response) => {
         if (response) {
-          this.counts[0] = response.data + '';
+          this.counts[0] = response.data + "";
         }
 
         this.isLoadingOnline = false;
@@ -1655,7 +1690,7 @@ export default {
         online: false,
       }).then((response) => {
         if (response) {
-          this.counts[1] = response.data + '';
+          this.counts[1] = response.data + "";
         }
 
         this.isLoadingOffline = false;
