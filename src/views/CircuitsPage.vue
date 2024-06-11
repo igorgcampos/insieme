@@ -669,7 +669,7 @@
                     </v-col>
 
                     <v-col
-                      v-show="!$vuetify.breakpoint.xs"
+                      v-show="!$vuetify.breakpoint.xs && (!circuit.nome.includes('-STAR') || circuit.contrato.pais == 'BRASIL')"
                       cols="3"
                       :class="{ 'col-sm-10': open, 'col-md-10': open }"
                       class="ml-n2"
@@ -688,8 +688,7 @@
                     </v-col>
 
                     <v-col
-                      v-show="!$vuetify.breakpoint.xs"
-                      v-if="!open"
+                      v-show="!open && !$vuetify.breakpoint.xs && (!circuit.nome.includes('-STAR') || circuit.contrato.pais == 'BRASIL')"
                       cols="3"
                       :class="{ 'col-sm-10': open, 'col-md-10': open }"
                     >
@@ -707,9 +706,8 @@
                     </v-col>
 
                     <v-col
-                      v-show="!$vuetify.breakpoint.xs"
                       cols="2"
-                      v-if="!open && !circuit.nome.includes('-STAR')"
+                      v-if="!$vuetify.breakpoint.xs && !open && !circuit.nome.includes('-STAR')"
                     >
                       <strong
                         class="font-weight-bold grey--text text--lighten-1 mr-2"
@@ -723,23 +721,37 @@
                     </v-col>
 
                     <v-col
-                      v-show="!$vuetify.breakpoint.xs"
                       cols="3"
-                      v-if="!open && circuit.nome.includes('-STAR')"
+                      v-if="circuit.designacao3 && !$vuetify.breakpoint.xs && circuit.nome.includes('-STAR') && circuit.contrato.pais != 'BRASIL'"
                     >
                       <strong
-                        class="font-weight-bold grey--text text--lighten-1 mr-2"
-                      >
-                        {{ $vuetify.lang.t("$vuetify.ENDERECO") }}:</strong
-                      >
-                      <strong
                         class="font-weight-bold"
-                        v-html="getAddress(circuit)"
+                        v-html="circuit.designacao3"
                       ></strong>
                     </v-col>
 
                     <v-col
-                      v-show="$vuetify.breakpoint.xs"
+                      cols="3"
+                      v-if="circuit.designacao4 && !$vuetify.breakpoint.xs && !open && circuit.nome.includes('-STAR') && circuit.contrato.pais != 'BRASIL'"
+                    >
+                      <strong
+                        class="font-weight-bold"
+                        v-html="circuit.designacao4"
+                      ></strong>
+                    </v-col>
+
+                    <v-col
+                      cols="3"
+                      v-if="circuit.designacao5 && !$vuetify.breakpoint.xs && !open && circuit.nome.includes('-STAR') && circuit.contrato.pais != 'BRASIL'"
+                    >
+                      <strong
+                        class="font-weight-bold"
+                        v-html="circuit.designacao5"
+                      ></strong>
+                    </v-col>
+
+                    <v-col
+                      v-show="$vuetify.breakpoint.xs && (!circuit.nome.includes('-STAR') || circuit.contrato.Pais == 'BRASIL')"
                       class="ml-3 mt-2 mb-2"
                     >
                       <v-row sm="5" md="6" :class="{ 'ml-n3': open }">
@@ -780,6 +792,7 @@
                 <v-expansion-panel-content>
                   <v-card-subtitle
                     class="caption mt-n10 ml-n6 mb-2 grey--text text--lighten-1"
+                    :class="{'pl-6': circuit.nome.includes('-STAR') && circuit.contrato.pais != 'BRASIL'}"
                   >
                     {{ $vuetify.lang.t("$vuetify.DESIGNACAO_TPZ") }}:
                     {{ circuit.nome }}
