@@ -570,4 +570,9 @@ export default {
 
     VER_MAPA: 'Ver en el mapa',
     FUSO_HORARIO: 'Huso horario: {0}',
+    HISTORICO_CONSUMO:'Historial de consumo - {0}',
+    VALORES_GB: 'Valores en GB',
+    DADOS_PRIORITARIOS:'Datos prioritarios',
+    DADOS_PADRAO: 'Datos estándar',
+    ILIMITADO: 'Ilimitado',
 }

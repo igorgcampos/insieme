@@ -572,4 +572,9 @@ export default {
 
     VER_MAPA: 'See in map',
     FUSO_HORARIO: 'Time zone: {0}',
+    HISTORICO_CONSUMO:'Consumption history - {0}',
+    VALORES_GB: 'Values in GB',
+    DADOS_PRIORITARIOS:'Priority data',
+    DADOS_PADRAO: 'Standard data',
+    ILIMITADO: 'Unlimited',
 }

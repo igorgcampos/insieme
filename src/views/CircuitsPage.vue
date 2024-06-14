@@ -864,8 +864,11 @@
                       </v-col>
 
                       <TooltipButton
+                        v-if="
+                            circuit.plataformaSat == 'STARLINK' &&
+                            circuit.obstruido
+                          "
                         :message="$vuetify.lang.t('$vuetify.VISADA_OBSTRUIDA')"
-                        :event="exportToCSV"
                         mobile="true"
                         :isText="true"
                         icon="mdi-alert"
@@ -895,11 +898,12 @@
                             <v-chip
                               v-on="on"
                               color="grey"
-                              class="ml-0 mr-2"
+                              class="ml-0 mr-2 row-pointer"
                               label
                               small
                               outlined
                               v-show="circuit.consumo"
+                              @click="showConsumptionHistoric(circuit)"
                             >
                               {{ circuit.consumo }}
                             </v-chip>
@@ -1199,6 +1203,13 @@
           :circuit="selectedCircuit"
         >
         </CircuitDetailsDialog>
+
+        <CircuitConsumptionDialog
+          :close="closeConsumptionDialog"
+          :show="showConsumption"
+          :circuit="selectedConsumptionCircuit"
+        >
+        </CircuitConsumptionDialog>
       </div>
     </v-lazy>
   </div>
@@ -1212,6 +1223,7 @@ import LabelValue from "../components/LabelValue";
 import IssueDialog from "../components/dialogs/IssueDialog";
 import SolveProblemDialog from "../components/dialogs/SolveProblemDialog";
 import CircuitDetailsDialog from "../components/dialogs/CircuitDetailsDialog";
+import CircuitConsumptionDialog from "../components/dialogs/CircuitConsumptionDialog";
 import RestartsSideBar from "../components/RestartsSideBar";
 
 export default {
@@ -1223,9 +1235,17 @@ export default {
     IssueDialog,
     SolveProblemDialog,
     CircuitDetailsDialog,
+    CircuitConsumptionDialog,
     RestartsSideBar,
   },
   methods: {
+    closeConsumptionDialog(){
+      this.showConsumption = false;
+    },
+    showConsumptionHistoric(circuit){
+      this.selectedConsumptionCircuit = circuit;
+      this.showConsumption = true;
+    },
     closeDetailsDialog() {
       this.showDetailsDialog = false;
     },
@@ -1600,6 +1620,7 @@ export default {
     this.contractDecoration = this.button == "contract" ? "underline" : "none";
   },
   data: () => ({
+    showConsumption: false,
     showDetailsDialog: false,
     prtgToken: undefined,
     isLoadingOffline: false,
@@ -1632,6 +1653,7 @@ export default {
     noResult: false,
     searchText: "",
     selectedCircuit: undefined,
+    selectedConsumptionCircuit: undefined,
     showRestarts: true,
     restartingCircuits: [],
   }),
@@ -1752,3 +1774,8 @@ export default {
   },
 };
 </script>
+<style scoped>
+.row-pointer {
+  cursor: pointer;
+}
+</style>
