@@ -86,7 +86,7 @@
             <v-col cols="12">
                 <span class="ml-12 pl-4 pt-0 text-center SUBTITLE-1 grey--text text--darken-3"
             >
-              {{ totalPriority +' GB'}}
+              {{ totalPriority +' GB / ' + circuit.consumo.split('/')[1] + ' ' + $vuetify.lang.t("$vuetify.INCLUIDO")}}
             </span>
             </v-col>
           </v-row>

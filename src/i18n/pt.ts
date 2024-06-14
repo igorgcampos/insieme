@@ -573,4 +573,5 @@ export default {
     DADOS_PRIORITARIOS:'Dados prioritários',
     DADOS_PADRAO: 'Dados padrão',
     ILIMITADO: 'Ilimitado',
+    INCLUIDO: 'Incluído',
 }
