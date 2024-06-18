@@ -90,7 +90,7 @@
               {{ $vuetify.lang.t("$vuetify.DADOS_PRIORITARIOS") }}
             </span>
             <v-col cols="12">
-                <span class="ml-10 pl-4 pt-0 text-center SUBTITLE-1 grey--text text--darken-3"
+                <span class="ml-8 pl-4 pt-0 text-center SUBTITLE-1 grey--text text--darken-3"
             >
               {{ totalPriority +' GB / ' + circuit.consumo.split('/')[1] + ' ' + $vuetify.lang.t("$vuetify.INCLUIDO")}}
             </span>
@@ -106,7 +106,7 @@
               {{ $vuetify.lang.t("$vuetify.DADOS_PADRAO") }}
             </span>
              <v-col cols="12">
-                <span class="ml-10 pl-4 pt-0 text-center SUBTITLE-1 grey--text text--darken-3"
+                <span class="ml-8 pl-4 pt-0 text-center SUBTITLE-1 grey--text text--darken-3"
             >
               {{ totalStandard + ' GB ' + $vuetify.lang.t("$vuetify.ILIMITADO")}}
             </span>
