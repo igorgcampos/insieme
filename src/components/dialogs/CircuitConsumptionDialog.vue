@@ -216,6 +216,9 @@ export default {
         yAxes: [
           {
             gridLines: { drawOnChartArea: false },
+            ticks: {
+              beginAtZero: true,
+            }
           },
         ],
         xAxes: [

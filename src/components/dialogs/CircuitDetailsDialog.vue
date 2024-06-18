@@ -17,7 +17,7 @@
           " (" +
           $vuetify.lang.t(
             "$vuetify.ULTIMA_ATUALIZACAO",
-             this.$formatDate(circuit.updatedOn.date) +
+            this.$formatDate(circuit.updatedOn.date) +
               " " +
               this.$formatHour(circuit.updatedOn.time)
           ) +
@@ -270,7 +270,7 @@
           }"
         ></LineChart>
 
-        <LineChart 
+        <LineChart
           v-if="!isLoading"
           :options="obstructionOptions"
           :styles="{
@@ -295,10 +295,10 @@
       <v-divider class="mt-0 mb-1"></v-divider>
 
       <span class="ml-3 mt-12 caption font-weight-bold black--text">{{
-            $vuetify.lang.t('$vuetify.FUSO_HORARIO', circuit.contrato.pais)
-          }}</span>
+        $vuetify.lang.t("$vuetify.FUSO_HORARIO", circuit.contrato.pais)
+      }}</span>
 
-      <v-card-actions class="justify-center mt-n7" style="z-index:1000">
+      <v-card-actions class="justify-center mt-n7" style="z-index: 1000">
         <v-btn
           color="primary"
           text
@@ -333,6 +333,9 @@ export default {
   },
   methods: {
     loadDataToCharts(chartInfo) {
+
+      this.initializeOptions();
+
       for (var index in chartInfo) {
         var element = chartInfo[index];
         this.downloadOptions.data.push(element["taxaDownload"]);
@@ -343,7 +346,7 @@ export default {
         this.obstructionOptions.data.push(element["tempoObstrucao"]);
       }
 
-      if(chartInfo.length > 0){
+      if (chartInfo.length > 0) {
         this.circuit.updatedOn = chartInfo[chartInfo.length - 1].createdOn;
       }
     },
@@ -358,28 +361,27 @@ export default {
         this.isLoading = false;
       });
     },
-    formatHourAxeLabels(chartInfo){
-
+    formatHourAxeLabels(chartInfo) {
       this.labels = [];
       for (var index in chartInfo) {
-        this.labels.push(this.$formatHour(chartInfo[index].createdOn.time, true));
+        this.labels.push(
+          this.$formatHour(chartInfo[index].createdOn.time, true)
+        );
       }
     },
-    formatDayAxeLabels(chartInfo){
-
+    formatDayAxeLabels(chartInfo) {
       this.labels = [];
       for (var index in chartInfo) {
         this.labels.push(this.$formatDate(chartInfo[index].createdOn.date));
       }
     },
     configureAxeLabels(hours, chartInfo) {
-
       if (hours == 0.25) {
-       this.formatHourAxeLabels(chartInfo);
+        this.formatHourAxeLabels(chartInfo);
       }
 
       if (hours == 3) {
-       this.formatHourAxeLabels(chartInfo);
+        this.formatHourAxeLabels(chartInfo);
       }
 
       if (hours == 24) {
@@ -387,12 +389,36 @@ export default {
       }
 
       if (hours == 7 * 24) {
-        this.formatDayAxeLabels(chartInfo)
+        this.formatDayAxeLabels(chartInfo);
       }
 
       if (hours == 30 * 24) {
-        this.formatDayAxeLabels(chartInfo)
+        this.formatDayAxeLabels(chartInfo);
       }
+    },
+    initializeOptions() {
+      this.downloadOptions = JSON.parse(JSON.stringify(this.mainOptions));
+      this.downloadOptions.title.text = this.$vuetify.lang.t(
+        "$vuetify.TAXA_DOWNLOAD"
+      );
+      this.uploadOptions = JSON.parse(JSON.stringify(this.mainOptions));
+      this.uploadOptions.title.text = this.$vuetify.lang.t(
+        "$vuetify.TAXA_UPLOAD"
+      );
+      this.latencyOptions = JSON.parse(JSON.stringify(this.mainOptions));
+      this.latencyOptions.title.text =
+        this.$vuetify.lang.t("$vuetify.LATENCIA");
+      this.packageOptions = JSON.parse(JSON.stringify(this.mainOptions));
+      this.packageOptions.title.text = this.$vuetify.lang.t(
+        "$vuetify.TAXA_PERDA_PACOTES"
+      );
+      this.qualitySignalOptions = JSON.parse(JSON.stringify(this.mainOptions));
+      this.qualitySignalOptions.title.text =
+        this.$vuetify.lang.t("$vuetify.QUALIDADE_SINAL") + " (%)";
+      this.obstructionOptions = JSON.parse(JSON.stringify(this.mainOptions));
+      this.obstructionOptions.title.text = this.$vuetify.lang.t(
+        "$vuetify.TEMPO_OBSTRUCAO"
+      );
     },
   },
   data: () => ({
@@ -414,6 +440,9 @@ export default {
         yAxes: [
           {
             gridLines: { drawOnChartArea: false },
+            ticks: {
+              beginAtZero: true,
+            },
           },
         ],
         xAxes: [
@@ -438,27 +467,7 @@ export default {
       data: [],
     };
 
-    this.downloadOptions = JSON.parse(JSON.stringify(this.mainOptions));
-    this.downloadOptions.title.text = this.$vuetify.lang.t(
-      "$vuetify.TAXA_DOWNLOAD"
-    );
-    this.uploadOptions = JSON.parse(JSON.stringify(this.mainOptions));
-    this.uploadOptions.title.text = this.$vuetify.lang.t(
-      "$vuetify.TAXA_UPLOAD"
-    );
-    this.latencyOptions = JSON.parse(JSON.stringify(this.mainOptions));
-    this.latencyOptions.title.text = this.$vuetify.lang.t("$vuetify.LATENCIA");
-    this.packageOptions = JSON.parse(JSON.stringify(this.mainOptions));
-    this.packageOptions.title.text = this.$vuetify.lang.t(
-      "$vuetify.TAXA_PERDA_PACOTES"
-    );
-    this.qualitySignalOptions = JSON.parse(JSON.stringify(this.mainOptions));
-    this.qualitySignalOptions.title.text =
-      this.$vuetify.lang.t("$vuetify.QUALIDADE_SINAL") + " (%)";
-    this.obstructionOptions = JSON.parse(JSON.stringify(this.mainOptions));
-    this.obstructionOptions.title.text = this.$vuetify.lang.t(
-      "$vuetify.TEMPO_OBSTRUCAO"
-    );
+    this.initializeOptions();
   },
 };
 </script>
