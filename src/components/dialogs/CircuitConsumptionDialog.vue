@@ -227,6 +227,13 @@ export default {
           },
         ],
       },
+      tooltips:{
+        callbacks:{
+          label: function (tooltipItem){
+            return tooltipItem.value + ' GB'
+          }
+        }
+      },
       title: {
         display: true,
         fontSize: 18,

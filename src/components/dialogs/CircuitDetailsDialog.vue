@@ -30,9 +30,12 @@
           <CountCard
             :count="
               circuit.taxaDownload
-                ? Intl.NumberFormat('pt-BR', {
+                ? circuit.taxaDownload >=1 ? Intl.NumberFormat('pt-BR', {
                     maximumFractionDigits: 2,
-                  }).format(circuit.taxaDownload) + ' Mbps'
+                  }).format(circuit.taxaDownload) + ' Mbps': 
+                  Intl.NumberFormat('pt-BR', {
+                    maximumFractionDigits: 2,
+                  }).format(circuit.taxaDownload*1024) + ' Kbps'
                 : '--'
             "
             :message="$vuetify.lang.t('$vuetify.TAXA_DOWNLOAD_ATUAL')"
@@ -45,9 +48,12 @@
           <CountCard
             :count="
               circuit.taxaUpload
-                ? Intl.NumberFormat('pt-BR', {
+                ? circuit.taxaUpload >=1 ? Intl.NumberFormat('pt-BR', {
                     maximumFractionDigits: 2,
-                  }).format(circuit.taxaUpload) + ' Mbps'
+                  }).format(circuit.taxaUpload) + ' Mbps': 
+                  Intl.NumberFormat('pt-BR', {
+                    maximumFractionDigits: 2,
+                  }).format(circuit.taxaUpload*1024) + ' Kbps'
                 : '--'
             "
             :message="$vuetify.lang.t('$vuetify.TAXA_UPLOAD_ATUAL')"
@@ -333,13 +339,12 @@ export default {
   },
   methods: {
     loadDataToCharts(chartInfo) {
-
       this.initializeOptions();
 
       for (var index in chartInfo) {
         var element = chartInfo[index];
-        this.downloadOptions.data.push(element["taxaDownload"]);
-        this.uploadOptions.data.push(element["taxaUpload"]);
+        this.downloadOptions.data.push(Math.round((element["taxaDownload"] + Number.EPSILON) * 100) / 100);
+        this.uploadOptions.data.push(Math.round((element["taxaUpload"] + Number.EPSILON) * 100) / 100);
         this.latencyOptions.data.push(element["latencia"]);
         this.packageOptions.data.push(element["taxaPerdaPing"] * 100);
         this.qualitySignalOptions.data.push(element["qualidadeSinal"] * 100);
@@ -419,6 +424,26 @@ export default {
       this.obstructionOptions.title.text = this.$vuetify.lang.t(
         "$vuetify.TEMPO_OBSTRUCAO"
       );
+
+      this.downloadOptions.tooltips = {
+        callbacks: {
+          label: function (tooltipItem) {
+            return tooltipItem.value >= 1
+              ? tooltipItem.value + " Mbps"
+              : tooltipItem.value * 1024 + " Kbps";
+          },
+        },
+      };
+
+      this.uploadOptions.tooltips = {
+        callbacks: {
+          label: function (tooltipItem) {
+            return tooltipItem.value >= 1
+              ? tooltipItem.value + " Mbps"
+              : tooltipItem.value * 1024 + " Kbps";
+          },
+        },
+      };
     },
   },
   data: () => ({
