@@ -1,6 +1,6 @@
 <template>
   <v-dialog
-    max-width="1200"
+    max-width="950"
     persistent
     v-model="show"
     class="mt-n3 overflow-y-hidden overflow-x-hidden"
@@ -74,6 +74,12 @@
         ></BarChart>
 
         <v-col class="ml-10">
+          <v-row class="ml-n2 mb-6">
+             <span class="text-h5 font-weight-bold grey--text text--darken-3">
+            {{Math.round(((totalPriority + totalStandard) + Number.EPSILON) * 100) / 100 + ' GB'}}
+          </span>
+          </v-row>
+         
           <v-row>
             <v-icon x-medium class="mt-0 mr-n12" color="rgb(75, 192, 192, 100%)"
               >mdi-brightness-1</v-icon
@@ -84,7 +90,7 @@
               {{ $vuetify.lang.t("$vuetify.DADOS_PRIORITARIOS") }}
             </span>
             <v-col cols="12">
-                <span class="ml-12 pl-4 pt-0 text-center SUBTITLE-1 grey--text text--darken-3"
+                <span class="ml-10 pl-4 pt-0 text-center SUBTITLE-1 grey--text text--darken-3"
             >
               {{ totalPriority +' GB / ' + circuit.consumo.split('/')[1] + ' ' + $vuetify.lang.t("$vuetify.INCLUIDO")}}
             </span>
@@ -100,9 +106,9 @@
               {{ $vuetify.lang.t("$vuetify.DADOS_PADRAO") }}
             </span>
              <v-col cols="12">
-                <span class="ml-12 pl-4 pt-0 text-center SUBTITLE-1 grey--text text--darken-3"
+                <span class="ml-10 pl-4 pt-0 text-center SUBTITLE-1 grey--text text--darken-3"
             >
-              {{ totalStandard +' GB ' + $vuetify.lang.t("$vuetify.ILIMITADO")}}
+              {{ totalStandard + ' GB ' + $vuetify.lang.t("$vuetify.ILIMITADO")}}
             </span>
             </v-col>
           </v-row>
@@ -149,25 +155,24 @@ export default {
 
       this.totalStandard = 0;
       this.totalPriority = 0;  
+      this.mainOptions.data = [];
 
       for (var index in chartInfo) {
         var element = chartInfo[index];
-        this.mainOptions.data.push(element["total_gb"]);
+        this.mainOptions.data.push(element["priorityGb"] > 0 ? element["priorityGb"]: element["standardGb"]);
         this.backgroundColors.push(
-          element["prioritario"] == true
+          element["priorityGb"] > 0 
             ? "rgb(75, 192, 192, 100%)"
             : "rgb(75, 192, 192, 30%)"
         );
 
-        if(element["prioritario"] == true){
-            this.totalPriority += element["total_gb"];
-        }else{
-            this.totalStandard += element["total_gb"];
-        }
+        this.totalPriority += element["priorityGb"];
+        this.totalStandard += element["standardGb"];
       }
+
       this.formatAxeLabels(chartInfo);
-      this.totalPriority = Math.round(this.totalPriority);
-      this.totalStandard = Math.round(this.totalStandard);
+      this.totalPriority = Math.round((this.totalPriority + Number.EPSILON) * 100) / 100;
+      this.totalStandard = Math.round((this.totalStandard + Number.EPSILON) * 100) / 100;
     },
     searchConsumptions(interestDate) {
       this.interestDate = interestDate;
