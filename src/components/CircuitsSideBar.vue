@@ -140,7 +140,7 @@ export default {
     this.$root.$on("online", (receivedMessage) => {
       for (var index in this.circuits) {
         if (this.circuits[index].nome == receivedMessage.nome) {
-          this.circuits[index].online = true;
+          this.circuits[index].online = 3;
           this.$forceUpdate();
         }
       }
@@ -149,7 +149,7 @@ export default {
     this.$root.$on("offline", (receivedMessage) => {
       for (var index in this.circuits) {
         if (this.circuits[index].nome == receivedMessage.nome) {
-          this.circuits[index].online = false;
+          this.circuits[index].online = 5;
         }
       }
     });
