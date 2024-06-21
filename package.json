@@ -11,12 +11,17 @@
     "axios": "^0.19.2",
     "chart.js": "^2.9.3",
     "core-js": "^3.6.4",
+    "map-promisified": "^0.4.0",
+    "mapbox-gl": "^2.10.0",
+    "sockjs-client": "^1.6.1",
     "vue": "^2.6.11",
     "vue-chartjs": "^3.5.0",
     "vue-cli-plugin-compression": "^1.2.0",
+    "vue-mapbox": "^0.4.1",
     "vue-router": "^3.1.6",
     "vue-the-mask": "^0.11.1",
-    "vuetify": "^2.3.9"
+    "vuetify": "^2.3.9",
+    "webstomp-client": "^1.2.6"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.3.0",

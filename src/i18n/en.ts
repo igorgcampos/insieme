@@ -578,4 +578,13 @@ export default {
     DADOS_PADRAO: 'Standard data',
     ILIMITADO: 'Unlimited',
     INCLUIDO: 'Included',
+    MAPA: 'Map',
+    CIRCUITO_MAPA: 'See circuit in map',
+    NOITE: 'Night',
+    DIA: 'Day',
+    SATELITE: 'Satellite',
+    LIMPAR_MAPA: 'Clean map',
+    MUDAR_ANGULO: 'Change angle',
+    CIRCUITO_SEM_LOCALIZACAO: 'Circuit without location',
+    SEM_LOCALIZACAO: 'This circuit does not have geographic coordinates',
 }

@@ -576,4 +576,13 @@ export default {
     DADOS_PADRAO: 'Datos estándar',
     ILIMITADO: 'Ilimitado',
     INCLUIDO: 'Incluido',
+    MAPA: 'Mapa',
+    CIRCUITO_MAPA: 'Ver circuito en mapa',
+    NOITE: 'Noche',
+    DIA: 'Día',
+    SATELITE: 'Satélite',
+    LIMPAR_MAPA: 'Borrar mapa',
+    MUDAR_ANGULO: 'Cambiar ángulo',
+    CIRCUITO_SEM_LOCALIZACAO: 'Circuito sin ubicación',
+    SEM_LOCALIZACAO: 'Este circuito no tiene coordenadas geográficas',
 }

@@ -23,6 +23,8 @@
 <script>
 
 import ReportSideBar from './components/ReportSideBar'
+import SockJS from "sockjs-client";
+import Stomp from "webstomp-client";
 
 export default {
   name: 'App',
@@ -62,6 +64,50 @@ export default {
       if (params.get("token")) {
         await this.$setKeycloakToken(params.get("token"))
       }
+    },
+     closeWebSocket() {
+      if (this.stompClient && this.subscription) {
+        this.subscription.unsubscribe();
+        this.stompClient.disconnect();
+      }
+    },
+    initiateWebSocket() {
+      this.socket = new SockJS(
+        process.env.VUE_APP_WEBSOCKET_URL + "/websocket-server"
+      );
+      this.stompClient = Stomp.over(this.socket);
+      this.stompClient.debug = () => {};
+
+      this.$getUser().then(user => {
+
+        var channelName = (this.$hasProfile('Administrador')? 
+            'admin':user.cliente.nome.toLowerCase().replace(/\s/g, ''))
+
+        this.connect(channelName);
+      })
+    },
+    connect(channelName) {
+      this.stompClient.connect(
+        {},
+        () => {
+          this.subscription = this.stompClient.subscribe("/topic/messages/" + channelName, (tick) => {
+            var receivedMessage = JSON.parse(tick.body);
+            this.$root.$emit(receivedMessage.message, receivedMessage);
+          });
+        },
+        (error) => {
+          console.log(error);
+          if (!this.loggedOut) {
+            this.stompClient.disconnect();
+            this.socket = new SockJS(
+              process.env.VUE_APP_WEBSOCKET_URL + "/websocket-server"
+            );
+            this.stompClient = Stomp.over(this.socket);
+            this.stompClient.debug = () => {};
+            this.connect(channelName);
+          }
+        }
+      );
     },
   }
 };

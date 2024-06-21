@@ -39,6 +39,11 @@ const routes = [
         props: true,
         component: () => import('../views/AvailabilityPage.vue')
       },
+      {
+        path: 'mapa',
+        name: 'Map',
+        component: () => import('../views/MapPage.vue')
+      },
     ]
   },
   {

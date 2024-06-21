@@ -1138,6 +1138,18 @@
                       "
                       :isText="true"
                     ></TooltipButton>
+
+                    <TooltipButton
+                      :label="$vuetify.lang.t('$vuetify.MAPA')"
+                      :message=" $vuetify.lang.t('$vuetify.CIRCUITO_MAPA')"
+                      :event="showInMap"
+                      :object="circuit"
+                      :mobile="$vuetify.breakpoint.xs"
+                      v-if="
+                        $hasProfile('/grp_insieme-mapa') 
+                      "
+                      :isText="true"
+                    ></TooltipButton>
                   </v-card-actions>
                 </v-expansion-panel-content>
               </v-expansion-panel>
@@ -1210,6 +1222,14 @@
           :circuit="selectedConsumptionCircuit"
         >
         </CircuitConsumptionDialog>
+
+         <InfoDialog
+          :title="$vuetify.lang.t('$vuetify.CIRCUITO_SEM_LOCALIZACAO')"
+          :info="$vuetify.lang.t('$vuetify.SEM_LOCALIZACAO')"
+          :close="closeNolocalizationDialog"
+          :dialog="showNolocalizationMessage"
+        >
+        </InfoDialog>
       </div>
     </v-lazy>
   </div>
@@ -1225,6 +1245,7 @@ import SolveProblemDialog from "../components/dialogs/SolveProblemDialog";
 import CircuitDetailsDialog from "../components/dialogs/CircuitDetailsDialog";
 import CircuitConsumptionDialog from "../components/dialogs/CircuitConsumptionDialog";
 import RestartsSideBar from "../components/RestartsSideBar";
+import InfoDialog from '../components/dialogs/InfoDialog';
 
 export default {
   components: {
@@ -1237,8 +1258,21 @@ export default {
     CircuitDetailsDialog,
     CircuitConsumptionDialog,
     RestartsSideBar,
+    InfoDialog,
   },
   methods: {
+    closeNolocalizationDialog(){
+      this.showNolocalizationMessage = false;
+    },
+    showInMap(circuit){
+
+      if(!circuit.latitude || !circuit.longitude){
+        this.showNolocalizationMessage = true;
+        return;
+      }
+      
+      this.$root.$emit("show-in-map", circuit);
+    },
     closeConsumptionDialog(){
       this.showConsumption = false;
     },
@@ -1620,6 +1654,7 @@ export default {
     this.contractDecoration = this.button == "contract" ? "underline" : "none";
   },
   data: () => ({
+    showNolocalizationMessage: false,
     showConsumption: false,
     showDetailsDialog: false,
     prtgToken: undefined,

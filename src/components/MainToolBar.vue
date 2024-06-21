@@ -20,6 +20,26 @@
 
     <v-spacer></v-spacer>
 
+    <v-col
+      :cols="$vuetify.breakpoint.xs || $vuetify.breakpoint.sm ? 6 : 4"
+      v-show="isInMapPage()"
+      class="ml-12"
+    >
+      <v-text-field
+        class="mt-7"
+        background-color="red lighten-2"
+        :label="$vuetify.lang.t('$vuetify.BUSCAR') + '...'"
+        single-line
+        append-icon="mdi-magnify"
+        outlined
+        dense
+        v-model.trim="searchText"
+        @click:append="search()"
+        @keypress.enter.stop.prevent="search()"
+        dark
+      ></v-text-field>
+    </v-col>
+
     <FaqDialog :show="showFaq" :close="closeFaq"></FaqDialog>
 
     <v-tooltip bottom v-if="!$vuetify.breakpoint.xs && !$vuetify.breakpoint.sm">
@@ -452,6 +472,13 @@ export default {
     ApplicationsMenu,
   },
   created: function () {
+
+    this.$root.$on("show-in-map", (circuit) => {
+      window.sessionStorage.setItem("circuit", JSON.stringify(circuit));
+      this.$router.push("/mapa");
+      window.sessionStorage.setItem("page", "mapa");
+    });
+
     this.$getUser().then((user) => {
       this.user = user;
 
@@ -514,8 +541,15 @@ export default {
     newNotificationsCount: 0,
     tab: "null",
     update: false,
+    searchText: undefined,
   }),
   methods: {
+    search() {
+      this.$root.$emit("search", this.searchText);
+    },
+    isInMapPage(){
+      return this.$route.path == "/mapa"
+    },
     canShowMetricReportLink() {
       var vm = this;
       if (!this.update) {
@@ -652,7 +686,8 @@ export default {
     canShowBackLink() {
       return (
         this.$route.path === "/boletim" ||
-        this.$route.path === "/disponibilidade"
+        this.$route.path === "/disponibilidade" ||
+        this.$route.path === "/mapa"
       );
     },
     canShowAdminLink() {

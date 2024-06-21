@@ -1,12 +1,8 @@
 <template>
-  <div>
+   <v-content>
     <MainToolBar></MainToolBar>
-    <v-content>
-      <v-container v-scroll="setTop" fluid fill-height>
-        <router-view></router-view>
-      </v-container>
-    </v-content>
-  </div>
+    <router-view class="mt-2"></router-view>
+  </v-content>
 </template>
 
 <script>
