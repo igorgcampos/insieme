@@ -299,7 +299,7 @@ export default {
         this.isLoading = false;
 
       }
-    }, 1500);
+    }, 2000);
 
     this.$root.$on("search", (searchText) => {
       this.searchText = searchText;

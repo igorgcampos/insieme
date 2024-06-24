@@ -12,7 +12,9 @@
         <template v-slot:activator="{ on }">
           <v-btn fixed dark color="white" @click="mini = false">
             <v-icon v-on="on" color="black">mdi-router-wireless</v-icon>
-            <v-icon v-on="on" color="black" class="ml-1 mr-n1">mdi-chevron-right</v-icon>
+            <v-icon v-on="on" color="black" class="ml-1 mr-n1"
+              >mdi-chevron-right</v-icon
+            >
           </v-btn>
         </template>
         <span>{{ "Exibir Circuitos" }}</span>
@@ -31,7 +33,9 @@
           <template v-slot:prepend>
             <v-list-item nav class="mt-2 mb-n1">
               <v-list-item-content v-if="!mini">
-                <v-list-item-title>{{ $vuetify.lang.t("$vuetify.CIRCUITOS") }}</v-list-item-title>
+                <v-list-item-title>{{
+                  $vuetify.lang.t("$vuetify.CIRCUITOS")
+                }}</v-list-item-title>
               </v-list-item-content>
               <v-list-item-icon class="ml-n2">
                 <v-btn icon @click.stop="mini = true">
@@ -48,16 +52,14 @@
               <v-list-item
                 v-for="(circuit, i) in circuits"
                 :key="i"
-                @click="
-                  flyTo(circuit);
-                  showPopup(circuit);
-                "
+                @click="showInMap(circuit)"
               >
                 <v-tooltip bottom>
                   <template v-slot:activator="{ on }">
                     <v-btn
                       :style="{
-                        'background-color': circuit.online == 3 ? 'green' : 'red',
+                        'background-color':
+                          circuit.online == 3 ? 'green' : 'red',
                       }"
                       outlined
                       fab
@@ -79,7 +81,11 @@
                     {{ circuit.nome }}
                   </v-list-item-title>
                   <v-list-item-subtitle class="text-caption">
-                    {{ $vuetify.lang.t('$vuetify.DESIGNACAO_CLIENTE') + ': ' + circuit.designacaoCliente }}
+                    {{
+                      $vuetify.lang.t("$vuetify.DESIGNACAO_CLIENTE") +
+                      ": " +
+                      circuit.designacaoCliente
+                    }}
                   </v-list-item-subtitle>
                 </v-list-item-content>
               </v-list-item>
@@ -106,13 +112,23 @@
         </v-navigation-drawer>
       </v-card>
     </v-lazy>
+
+    <InfoDialog
+      :title="$vuetify.lang.t('$vuetify.CIRCUITO_SEM_LOCALIZACAO')"
+      :info="$vuetify.lang.t('$vuetify.SEM_LOCALIZACAO')"
+      :close="closeNoLocalizationDialog"
+      :dialog="showNoLocalizationDialog"
+    >
+    </InfoDialog>
   </v-row>
 </template>
 <script>
 import WarningPanel from "../components/panels/WarningPanel";
+import InfoDialog from "../components/dialogs/InfoDialog";
 export default {
   components: {
     WarningPanel,
+    InfoDialog,
   },
   props: {
     isLoading: Boolean,
@@ -120,7 +136,8 @@ export default {
   },
   data() {
     return {
-      tags: ['Texto 1','Texto 1','Texto 1'],
+      showNoLocalizationDialog: false,
+      tags: ["Texto 1", "Texto 1", "Texto 1"],
       mini:
         this.$vuetify.breakpoint.xs || this.$vuetify.breakpoint.sm
           ? true
@@ -128,6 +145,22 @@ export default {
     };
   },
   methods: {
+    closeNoLocalizationDialog() {
+      this.showNoLocalizationDialog = false;
+    },
+    showInMap(circuit) {
+      if (
+        !circuit.latitude ||
+        !circuit.longitude ||
+        (circuit.latitude == 0 && circuit.longitude == 0)
+      ) {
+        this.showNoLocalizationDialog = true;
+        return;
+      }
+
+      this.flyTo(circuit);
+      this.showPopup(circuit);
+    },
     showPopup(circuit) {
       this.$root.$emit("show-popup", circuit);
     },
@@ -136,7 +169,6 @@ export default {
     },
   },
   created() {
-
     this.$root.$on("online", (receivedMessage) => {
       for (var index in this.circuits) {
         if (this.circuits[index].nome == receivedMessage.nome) {
