@@ -473,8 +473,9 @@ export default {
   },
   created: function () {
 
-    this.$root.$on("show-in-map", (circuit) => {
+    this.$root.$on("show-in-map", (circuit, contract) => {
       window.sessionStorage.setItem("circuit", JSON.stringify(circuit));
+      window.sessionStorage.setItem("contract", JSON.stringify(contract));
       this.$router.push("/mapa");
       window.sessionStorage.setItem("page", "mapa");
     });
@@ -649,7 +650,6 @@ export default {
     faq() {
       this.showFaq = true;
     },
-
     toContractList() {
       window.sessionStorage.setItem("actualPage", "contracts");
       this.$router.push("/contratos");

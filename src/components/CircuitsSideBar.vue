@@ -22,7 +22,7 @@
     </v-row>
 
     <v-lazy :options="{ threshold: 0.6 }" transition="slide-x-transition">
-      <v-card height="100vh" v-show="!mini">
+      <v-card height="94vh" v-show="!mini">
         <v-navigation-drawer
           :mini-variant.sync="mini"
           permanent

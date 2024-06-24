@@ -1271,7 +1271,7 @@ export default {
         return;
       }
       
-      this.$root.$emit("show-in-map", circuit);
+      this.$root.$emit("show-in-map", circuit, this.contract);
     },
     closeConsumptionDialog(){
       this.showConsumption = false;

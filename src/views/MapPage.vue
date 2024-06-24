@@ -7,7 +7,7 @@
 
     <MglMap
       class="mt-n1 ml-0 mb-n12"
-      style="height: 92vh; width: 100vw"
+      style="height: 94vh; width: 100vw"
       :accessToken="accessToken"
       :mapStyle="mapStyle"
       :pitch="pitch"
@@ -99,6 +99,7 @@ export default {
       actions: undefined,
       showPopups: [],
       searchText: undefined,
+      contractNumber: undefined,
       isLoading: false,
       lastAppState: undefined,
       intervalId: undefined,
@@ -159,6 +160,7 @@ export default {
       this.isLoading = true;
       this.$get("/circuito/localizacao", {
         searchText: this.searchText || "",
+        contractNumber: JSON.parse(window.sessionStorage.getItem("contract")).numeroContratoTpz,
       }).then((response) => {
         if (!response) {
           return;
@@ -271,7 +273,6 @@ export default {
 
     this.$root.$on("search", (searchText) => {
       this.searchText = searchText;
-      console.log('evento de busca!')
       this.search();
       this.$appState().lastSearch = searchText;
     });
@@ -301,8 +302,9 @@ export default {
       }
     }, 2000);
 
-    this.$root.$on("search", (searchText) => {
+    this.$root.$on("search", (searchText, contractNumber) => {
       this.searchText = searchText;
+      this.contractNumber = contractNumber;
       this.search();
       this.$appState().lastSearch = searchText;
     });
