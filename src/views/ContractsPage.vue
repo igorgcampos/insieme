@@ -239,7 +239,7 @@ export default {
       if (user.contrato) {
         this.contracts = this.contracts.concat(user.contrato);
 
-        if (this.contracts.length == 1 && this.$hasProfile("Operacional")) {
+        if (this.contracts.length == 1 && this.$hasProfile("Operacional") && window.sessionStorage.getItem("contractSelected") == "false") {
           this.$root.$emit("contract-selected", this.contracts[0]);
           window.sessionStorage.setItem("contractSelected", "true");
         }
