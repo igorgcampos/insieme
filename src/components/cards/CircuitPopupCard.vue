@@ -33,7 +33,7 @@
       <v-col cols="6">
         <LabelValue
           label="Latitude"
-          :value="circuit.latitude.toFixed(3)"
+          :value="circuit.latitude? circuit.latitude.toFixed(3): '--'"
           justify="start"
           style="width: 150px"
           truncate
@@ -44,7 +44,7 @@
       <v-col cols="6">
         <LabelValue
           label="Longitude"
-          :value="circuit.longitude.toFixed(3)"
+          :value="circuit.longitude? circuit.longitude.toFixed(3): '--'"
           justify="start"
           style="width: 150px"
           truncate
@@ -57,25 +57,25 @@
 
     <v-card-actions v-show="showAttributes">
       <v-row class="ma-0 pa-0">
-        <TooltipButton
+       <!-- <TooltipButton
           :label="$vuetify.lang.t('$vuetify.EDITAR')"
           :message="$vuetify.lang.t('$vuetify.EDITAR_DISPOSITIVO')"
           :mobile="true"
           :isText="true"
           :object="circuit"
-        ></TooltipButton>
+        ></TooltipButton> -->
       </v-row>
     </v-card-actions>
   </v-card>
 </template>
 <script>
 import LabelValue from "../../components/LabelValue";
-import TooltipButton from "../../components/TooltipButton";
+//import TooltipButton from "../../components/TooltipButton";
 
 export default {
   components: {
     LabelValue,
-    TooltipButton,
+  //  TooltipButton,
   },
   props: {
     circuit: Object,

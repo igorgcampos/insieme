@@ -300,7 +300,7 @@ export default {
         this.isLoading = false;
 
       }
-    }, 2000);
+    }, 2500);
 
     this.$root.$on("search", (searchText, contractNumber) => {
       this.searchText = searchText;
