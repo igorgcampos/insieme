@@ -41,6 +41,8 @@ export default {
 
     this.setUrlToken().then(() => {
 
+      this.$vuetify.lang.current = window.sessionStorage.getItem("idioma");
+
       if(!window.sessionStorage.getItem('keyCloakToken')){
         this.$router.push('/login')
       }else{

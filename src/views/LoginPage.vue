@@ -221,6 +221,8 @@ export default {
         this.$vuetify.lang.current = "es";
       }
 
+      window.sessionStorage.setItem("idioma", this.$vuetify.lang.current);
+
       this.$refs["password"].validate(false);
     },
     login() {
