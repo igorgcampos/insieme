@@ -1107,7 +1107,8 @@
                       v-if="
                         !isRestartingCircuit(circuit) &&
                         circuit.statusInstalacao == 'ATIVADO' &&
-                        !$hasProfile('Sem monitoramento')
+                        !$hasProfile('Sem monitoramento') &&
+                        !$hasProfile('/grp_insieme-apenas-circuitos')
                       "
                     ></TooltipButton>
 
