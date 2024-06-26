@@ -195,8 +195,7 @@ export default {
       }
     },
     clearFields(){
-        this.totalStandard = 0;
-        this.totalPriority = 0;
+        
     },
   },
   data: () => ({
