@@ -1333,6 +1333,9 @@ export default {
     formatCircuit(circuit) {
       return {
         [this.$vuetify.lang.t("$vuetify.DESIGNACAO_TPZ")]: circuit.nome,
+        ['Desig. 3']: circuit.designacao3,
+        ['Desig. 4']: circuit.designacao4,
+        ['Desig. 5']: circuit.designacao5,
         [this.$vuetify.lang.t("$vuetify.COD_TPZ")]: circuit.numeroContratoTpz,
         [this.$vuetify.lang.t("$vuetify.COD_SAP")]: circuit.numeroContratoSap,
         [this.$vuetify.lang.t("$vuetify.DESIGNACAO_CLIENTE")]:
