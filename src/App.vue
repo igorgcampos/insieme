@@ -50,11 +50,18 @@ export default {
         window.sessionStorage.setItem('actualPage', 'contratos')
       }
 
+      this.closeWebSocket();
+      this.initiateWebSocket();
+
       this.$root.$on('login-success', () => {
         this.$router.push('/');
+        this.initiateWebSocket();
         window.sessionStorage.setItem('actualPage', '/')
       })
-      this.$root.$on('logout-success', () => this.$router.push('/login'));
+      this.$root.$on('logout-success', () => {
+        this.closeWebSocket(); 
+        this.$router.push('/login') 
+      });
     });
 
   },
@@ -83,7 +90,7 @@ export default {
       this.$getUser().then(user => {
 
         var channelName = (this.$hasProfile('Administrador')? 
-            'admin':user.cliente.nome.toLowerCase().replace(/\s/g, ''))
+            'admin':user.contrato.id)
 
         this.connect(channelName);
       })
@@ -94,7 +101,7 @@ export default {
         () => {
           this.subscription = this.stompClient.subscribe("/topic/messages/" + channelName, (tick) => {
             var receivedMessage = JSON.parse(tick.body);
-            this.$root.$emit(receivedMessage.message, receivedMessage);
+            this.$root.$emit('update-map', receivedMessage);
           });
         },
         (error) => {
