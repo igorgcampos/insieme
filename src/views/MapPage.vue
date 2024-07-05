@@ -125,11 +125,11 @@ export default {
         }
       }
     },
-    async flyTo(circuit) {
+    async flyTo(circuit, speed) {
       if (!this.actions) return;
       await this.actions.flyTo({
         center: [circuit.longitude, circuit.latitude],
-        speed: 0.8,
+        speed: speed || 0.8,
         curve: 1,
       });
     },
@@ -267,9 +267,57 @@ export default {
         this.circuits.push(device);
       }
     },
+    diffBetween(number1, number2){
+      return (number1 > number2) ? (number1 - number2) : (number2 - number1);
+    },
   },
   created() {
     this.mapbox = Mapbox;
+
+    this.$root.$on("localizacao", (circuit) => {
+      
+      for (var index in this.circuits) {
+        if (this.circuits[index].nome == circuit.designacaoTpz) {
+          this.circuits[index].latitude = circuit.latitude;
+          this.circuits[index].longitude = circuit.longitude;
+        }
+      }
+
+      for (var index2 in this.mapCircuits) {
+        if (this.mapCircuits[index2].nome == circuit.designacaoTpz) {
+  
+          var latitudeDiff = this.diffBetween(circuit.latitude, this.mapCircuits[index2].latitude) / 1500;
+          var longitudeDiff = this.diffBetween(circuit.longitude, this.mapCircuits[index2].longitude) / 1500;
+
+          var vm = this;
+          for(var counter = 1; counter <= 1500; counter ++){
+            setTimeout(function () {
+              vm.mapCircuits[index2].latitude = vm.mapCircuits[index2].latitude + latitudeDiff;
+              vm.mapCircuits[index2].longitude = vm.mapCircuits[index2].longitude + longitudeDiff;
+            }, counter);
+          }
+          
+        }
+      }
+      
+    });
+
+    this.$root.$on("status", (circuit) => {
+      for (var index in this.circuits) {
+        if (this.circuits[index].nome == circuit.designacaoTpz) {
+          this.circuits[index].online = circuit.status;
+        }
+      }
+
+       for (var index2 in this.mapCircuits) {
+        if (this.mapCircuits[index2].nome == circuit.designacaoTpz) {
+          this.mapCircuits[index2].online = circuit.status;
+        }
+      }
+
+
+      this.$forceUpdate();
+    });
 
     this.$root.$on("search", (searchText) => {
       this.searchText = searchText;
@@ -355,7 +403,7 @@ export default {
 
     this.intervalId = setInterval(() => {
       if (!this.lastAppState || this.hasChangedState()) {
-        this.$saveAppState();
+        //this.$saveAppState();
         this.lastAppState = Object.assign({}, this.$appState());
       }
     }, 60000);
@@ -365,7 +413,7 @@ export default {
   beforeMount() {
     window.addEventListener("beforeunload", async () => {
       clearInterval(this.intervalId);
-      await this.$saveAppState();
+      //await this.$saveAppState();
     });
   },
 };

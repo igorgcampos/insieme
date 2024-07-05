@@ -101,7 +101,7 @@ export default {
         () => {
           this.subscription = this.stompClient.subscribe("/topic/messages/" + channelName, (tick) => {
             var receivedMessage = JSON.parse(tick.body);
-            this.$root.$emit('update-map', receivedMessage);
+            this.$root.$emit(receivedMessage.type, receivedMessage);
           });
         },
         (error) => {
