@@ -289,6 +289,10 @@ export default {
           var latitudeDiff = this.diffBetween(circuit.latitude, this.mapCircuits[index2].latitude) / 1500;
           var longitudeDiff = this.diffBetween(circuit.longitude, this.mapCircuits[index2].longitude) / 1500;
 
+          if(latitudeDiff <= 0.001 && longitudeDiff <= 0.001){
+            return;
+          }
+          
           //Atualização e animação de movimento com duração de 1500ms (1.5 segs)
           var vm = this;
           for(var counter = 1; counter <= 1500; counter ++){
