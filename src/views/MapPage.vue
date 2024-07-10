@@ -448,18 +448,17 @@ export default {
         source: route.circuit.nome,
         layout: {
           "line-join": "round",
-          "line-cap": "round",
+          "line-cap": "butt",
         },
         paint: {
           "line-color": "#76FF03",
-          "line-width": 8,
+          "line-width": 6,
         },
       });
 
       // Create a 'LngLatBounds' with both corners at the first coordinate.
       const bounds = new Mapboxgl.LngLatBounds(
-        [-122.483696, 37.833818],
-        [-122.483696, 37.833818]
+        coordinates[0],coordinates[0]
       );
 
       // Extend the 'LngLatBounds' to include every coordinate in the bounds result.
