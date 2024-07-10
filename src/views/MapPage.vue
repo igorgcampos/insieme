@@ -20,6 +20,34 @@
       <MglGeolocateControl position="bottom-right" />
 
       <MglMarker
+        v-for="(marker) in markers"
+        :key="marker.id"
+        :coordinates="[marker.longitude, marker.latitude]"
+        color="blue"
+      >
+        <div slot="marker">
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on }">
+              <v-btn
+                :style="{
+                  'background-color': 'blue',
+                }"
+                outlined
+                fab
+                dark
+                x-small
+                color="blue-grey lighten-1"
+                elevation="4"
+              >
+                <v-icon v-on="on" color="white">mdi-source-commit-start</v-icon>
+              </v-btn>
+            </template>
+            <span>{{ 'Inicio da rota' }}</span>
+          </v-tooltip>
+        </div>
+      </MglMarker>
+
+      <MglMarker
         v-for="(circuit, i) in mapCircuits"
         :key="i"
         :coordinates="[circuit.longitude, circuit.latitude]"
@@ -104,6 +132,7 @@ export default {
       lastAppState: undefined,
       intervalId: undefined,
       routes: [],
+      markers: [],
     };
   },
   methods: {
@@ -113,12 +142,13 @@ export default {
     clearMap() {
       this.mapCircuits = [];
 
-      for(var index in this.routes){
+      for (var index in this.routes) {
         this.mapbox.removeLayer(this.routes[index].circuit.nome);
         this.mapbox.removeSource(this.routes[index].circuit.nome);
       }
 
       this.routes = [];
+      this.markers = [];
     },
     showPopup(circuit) {
       this.loadDistinctDevicesToMap(circuit);
@@ -422,13 +452,19 @@ export default {
       this.mapbox.removeLayer(route.circuit.nome);
       this.mapbox.removeSource(route.circuit.nome);
 
-      this.routes = this.routes.filter(el => el.circuit.nome !== route.circuit.nome);
+      this.routes = this.routes.filter(
+        (el) => el.circuit.nome !== route.circuit.nome
+      );
+
+      this.markers = this.markers.filter(
+        (el) => el.id !== route.circuit.nome
+      );
     });
 
     this.$root.$on("show-route", (route) => {
-
       this.routes.push(route);
       var coordinates = route.coordinates;
+      coordinates.push([route.circuit.longitude, route.circuit.latitude])
 
       this.mapbox.addSource(route.circuit.nome, {
         type: "geojson",
@@ -452,14 +488,12 @@ export default {
         },
         paint: {
           "line-color": "#76FF03",
-          "line-width": 6,
+          "line-width": 5,
         },
       });
 
       // Create a 'LngLatBounds' with both corners at the first coordinate.
-      const bounds = new Mapboxgl.LngLatBounds(
-        coordinates[0],coordinates[0]
-      );
+      const bounds = new Mapboxgl.LngLatBounds(coordinates[0], coordinates[0]);
 
       // Extend the 'LngLatBounds' to include every coordinate in the bounds result.
       for (const coord of coordinates) {
@@ -469,6 +503,8 @@ export default {
       this.mapbox.fitBounds(bounds, {
         padding: 60,
       });
+
+      this.markers.push({ id: route.circuit.nome, latitude: coordinates[0][1], longitude: coordinates[0][0] });
     });
 
     this.intervalId = setInterval(() => {
