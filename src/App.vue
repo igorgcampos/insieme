@@ -112,7 +112,7 @@ export default {
           );
         },
         () => {
-          console.log("Conexão websocket perdida!");
+
           if (!this.loggedOut) {
             this.stompClient.disconnect();
             this.socket = new SockJS(

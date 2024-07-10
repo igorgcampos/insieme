@@ -587,4 +587,8 @@ export default {
     MUDAR_ANGULO: 'Change angle',
     CIRCUITO_SEM_LOCALIZACAO: 'Circuit without location',
     SEM_LOCALIZACAO: 'This circuit does not have geographic coordinates',
+    ULTIMA_COMUNICACAO: 'Last update',
+    ROTA: 'Route',
+    MOSTRAR_ROTA: 'Show route in map',
+    ESCONDER_ROTA: 'Hide route',
 }

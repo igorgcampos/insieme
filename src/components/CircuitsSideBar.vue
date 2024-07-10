@@ -74,17 +74,17 @@
                       >
                     </v-btn>
                   </template>
-                  <span>{{ circuit.nome }}</span>
+                  <span>{{ circuit.designacaoCliente }}</span>
                 </v-tooltip>
                 <v-list-item-content>
                   <v-list-item-title class="text-subtitle-2">
-                    {{ circuit.nome }}
+                    {{ circuit.designacaoCliente }}
                   </v-list-item-title>
                   <v-list-item-subtitle class="text-caption">
                     {{
-                      $vuetify.lang.t("$vuetify.DESIGNACAO_CLIENTE") +
+                      $vuetify.lang.t("$vuetify.DESIGNACAO_TPZ") +
                       ": " +
-                      circuit.designacaoCliente
+                      circuit.nome
                     }}
                   </v-list-item-subtitle>
                 </v-list-item-content>

@@ -585,4 +585,8 @@ export default {
     MUDAR_ANGULO: 'Cambiar ángulo',
     CIRCUITO_SEM_LOCALIZACAO: 'Circuito sin ubicación',
     SEM_LOCALIZACAO: 'Este circuito no tiene coordenadas geográficas',
+    ULTIMA_COMUNICACAO: 'Última actualización',
+    ROTA: 'Ruta',
+    MOSTRAR_ROTA: 'Mostrar ruta en el mapa',
+    ESCONDER_ROTA: 'Ocultar ruta',
 }

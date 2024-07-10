@@ -43,7 +43,7 @@
                 <v-icon v-on="on" color="white">mdi-router-wireless</v-icon>
               </v-btn>
             </template>
-            <span>{{ circuit.nome }}</span>
+            <span>{{ circuit.designacaoCliente }}</span>
           </v-tooltip>
         </div>
         <MglPopup
@@ -61,7 +61,7 @@
 
 <script>
 import MapButtons from "../components/MapButtons";
-import Mapbox from "mapbox-gl";
+import Mapboxgl from "mapbox-gl";
 import promisify from "map-promisified";
 import CircuitsSideBar from "../components/CircuitsSideBar";
 import CircuitPopupCard from "../components/cards/CircuitPopupCard";
@@ -103,6 +103,7 @@ export default {
       isLoading: false,
       lastAppState: undefined,
       intervalId: undefined,
+      routes: [],
     };
   },
   methods: {
@@ -111,6 +112,13 @@ export default {
     },
     clearMap() {
       this.mapCircuits = [];
+
+      for(var index in this.routes){
+        this.mapbox.removeLayer(this.routes[index].circuit.nome);
+        this.mapbox.removeSource(this.routes[index].circuit.nome);
+      }
+
+      this.routes = [];
     },
     showPopup(circuit) {
       this.loadDistinctDevicesToMap(circuit);
@@ -134,6 +142,7 @@ export default {
       });
     },
     onMapLoaded(event) {
+      this.mapbox = event.map;
       this.actions = promisify(event.map);
 
       event.map.on("zoomend", (e) => {
@@ -160,7 +169,8 @@ export default {
       this.isLoading = true;
       this.$get("/circuito/localizacao", {
         searchText: this.searchText || "",
-        contractNumber: JSON.parse(window.sessionStorage.getItem("contract")).numeroContratoTpz,
+        contractNumber: JSON.parse(window.sessionStorage.getItem("contract"))
+          .numeroContratoTpz,
       }).then((response) => {
         if (!response) {
           return;
@@ -267,44 +277,49 @@ export default {
         this.circuits.push(device);
       }
     },
-    diffBetween(number1, number2){
-      return (number1 > number2) ? (number1 - number2) : (number2 - number1);
+    diffBetween(number1, number2) {
+      return number1 > number2 ? number1 - number2 : number2 - number1;
     },
   },
   created() {
-    this.mapbox = Mapbox;
-
     this.$root.$on("localizacao", (circuit) => {
-      
       for (var index in this.circuits) {
         if (this.circuits[index].nome == circuit.designacaoTpz) {
           this.circuits[index].latitude = circuit.latitude;
           this.circuits[index].longitude = circuit.longitude;
+          this.circuits[index].velocidade = circuit.velocidade;
         }
       }
 
       for (var index2 in this.mapCircuits) {
         if (this.mapCircuits[index2].nome == circuit.designacaoTpz) {
-  
-          var latitudeDiff = this.diffBetween(circuit.latitude, this.mapCircuits[index2].latitude) / 1500;
-          var longitudeDiff = this.diffBetween(circuit.longitude, this.mapCircuits[index2].longitude) / 1500;
+          var latitudeDiff =
+            this.diffBetween(
+              circuit.latitude,
+              this.mapCircuits[index2].latitude
+            ) / 1500;
+          var longitudeDiff =
+            this.diffBetween(
+              circuit.longitude,
+              this.mapCircuits[index2].longitude
+            ) / 1500;
 
-          if(latitudeDiff <= 0.001 && longitudeDiff <= 0.001){
+          if (latitudeDiff <= 0.001 && longitudeDiff <= 0.001) {
             return;
           }
-          
+
           //Atualização e animação de movimento com duração de 1500ms (1.5 segs)
           var vm = this;
-          for(var counter = 1; counter <= 1500; counter ++){
+          for (var counter = 1; counter <= 1500; counter++) {
             setTimeout(function () {
-              vm.mapCircuits[index2].latitude = vm.mapCircuits[index2].latitude + latitudeDiff;
-              vm.mapCircuits[index2].longitude = vm.mapCircuits[index2].longitude + longitudeDiff;
+              vm.mapCircuits[index2].latitude =
+                vm.mapCircuits[index2].latitude + latitudeDiff;
+              vm.mapCircuits[index2].longitude =
+                vm.mapCircuits[index2].longitude + longitudeDiff;
             }, counter);
           }
-          
         }
       }
-      
     });
 
     this.$root.$on("status", (circuit) => {
@@ -314,12 +329,11 @@ export default {
         }
       }
 
-       for (var index2 in this.mapCircuits) {
+      for (var index2 in this.mapCircuits) {
         if (this.mapCircuits[index2].nome == circuit.designacaoTpz) {
           this.mapCircuits[index2].online = circuit.status;
         }
       }
-
 
       this.$forceUpdate();
     });
@@ -341,7 +355,6 @@ export default {
     this.isLoading = true;
     setTimeout(() => {
       if (window.sessionStorage.getItem("circuit")) {
-
         var circuit = JSON.parse(window.sessionStorage.getItem("circuit"));
         this.loadDistinctDevicesToMap(circuit);
 
@@ -351,7 +364,6 @@ export default {
         this.loadDistinctDeviceToList(circuit);
         window.sessionStorage.setItem("circuit", null);
         this.isLoading = false;
-
       }
     }, 2500);
 
@@ -404,6 +416,60 @@ export default {
           this.mapCircuits[index].online = false;
         }
       }
+    });
+
+    this.$root.$on("remove-route", (route) => {
+      this.mapbox.removeLayer(route.circuit.nome);
+      this.mapbox.removeSource(route.circuit.nome);
+
+      this.routes = this.routes.filter(el => el.circuit.nome !== route.circuit.nome);
+    });
+
+    this.$root.$on("show-route", (route) => {
+
+      this.routes.push(route);
+      var coordinates = route.coordinates;
+
+      this.mapbox.addSource(route.circuit.nome, {
+        type: "geojson",
+        data: {
+          type: "Feature",
+          properties: {},
+          geometry: {
+            type: "LineString",
+            coordinates: coordinates,
+          },
+        },
+      });
+
+      this.mapbox.addLayer({
+        id: route.circuit.nome,
+        type: "line",
+        source: route.circuit.nome,
+        layout: {
+          "line-join": "round",
+          "line-cap": "round",
+        },
+        paint: {
+          "line-color": "#76FF03",
+          "line-width": 8,
+        },
+      });
+
+      // Create a 'LngLatBounds' with both corners at the first coordinate.
+      const bounds = new Mapboxgl.LngLatBounds(
+        [-122.483696, 37.833818],
+        [-122.483696, 37.833818]
+      );
+
+      // Extend the 'LngLatBounds' to include every coordinate in the bounds result.
+      for (const coord of coordinates) {
+        bounds.extend(coord);
+      }
+
+      this.mapbox.fitBounds(bounds, {
+        padding: 60,
+      });
     });
 
     this.intervalId = setInterval(() => {
