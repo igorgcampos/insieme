@@ -587,4 +587,5 @@ export default {
     ROTA: 'Rota',
     MOSTRAR_ROTA: 'Mostrar rota no mapa',
     ESCONDER_ROTA: 'Esconder rota',
+    INICIO_ROTA: 'Início da rota',
 }

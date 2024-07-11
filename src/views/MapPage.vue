@@ -42,7 +42,7 @@
                 <v-icon v-on="on" color="white">mdi-source-commit-start</v-icon>
               </v-btn>
             </template>
-            <span>{{ 'Inicio da rota' }}</span>
+            <span>{{ $vuetify.lang.t("$vuetify.INICIO_ROTA") }}</span>
           </v-tooltip>
         </div>
       </MglMarker>

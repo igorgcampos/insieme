@@ -591,4 +591,5 @@ export default {
     ROTA: 'Route',
     MOSTRAR_ROTA: 'Show route in map',
     ESCONDER_ROTA: 'Hide route',
+    INICIO_ROTA: 'Route start',
 }
