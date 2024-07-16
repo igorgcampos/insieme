@@ -144,6 +144,12 @@ export default {
           : false,
     };
   },
+  watch:{
+    isLoading(){
+      if(this.isLoading == true)
+        this.mini = false;
+    }
+  },
   methods: {
     closeNoLocalizationDialog() {
       this.showNoLocalizationDialog = false;
