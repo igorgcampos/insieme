@@ -1,6 +1,6 @@
 <template>
   <v-dialog
-    max-width="950"
+    :max-width="!($vuetify.breakpoint.xs || $vuetify.breakpoint.md || $vuetify.breakpoint.lg)?1100:960"
     persistent
     v-model="show"
     class="mt-n3 overflow-y-hidden overflow-x-hidden"
