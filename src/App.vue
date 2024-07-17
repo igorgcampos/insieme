@@ -49,11 +49,11 @@ export default {
       }
 
       this.closeWebSocket();
-      //this.initiateWebSocket();
+      this.initiateWebSocket();
 
       this.$root.$on("login-success", () => {
         this.$router.push("/");
-        //this.initiateWebSocket();
+        this.initiateWebSocket();
         window.sessionStorage.setItem("actualPage", "/");
       });
       this.$root.$on("logout-success", () => {
