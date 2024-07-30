@@ -20,7 +20,7 @@
       <MglGeolocateControl position="bottom-right" />
 
       <MglMarker
-        v-for="(marker) in markers"
+        v-for="marker in markers"
         :key="marker.id"
         :coordinates="[marker.longitude, marker.latitude]"
         color="blue"
@@ -143,8 +143,13 @@ export default {
       this.mapCircuits = [];
 
       for (var index in this.routes) {
+        this.mapbox.removeLayer(this.routes[index].circuit.nome + '1');
         this.mapbox.removeLayer(this.routes[index].circuit.nome);
         this.mapbox.removeSource(this.routes[index].circuit.nome);
+
+        if(this.routes[index].intervalId){
+          clearInterval(this.routes[index].intervalId);
+        }
       }
 
       this.routes = [];
@@ -310,6 +315,59 @@ export default {
     diffBetween(number1, number2) {
       return number1 > number2 ? number1 - number2 : number2 - number1;
     },
+    addLayers(route){
+      this.mapbox.addLayer({
+        id: route.circuit.nome,
+        type: "line",
+        source: route.circuit.nome,
+        layout: {
+          "line-join": "round",
+          "line-cap": "butt",
+        },
+        paint: {
+          "line-color": "#FF3D00",
+          "line-width": 6,
+        },
+      });
+
+      this.mapbox.addLayer({
+        id: route.circuit.nome + '1',
+        type: "line",
+        source: route.circuit.nome,
+        layout: {
+          "line-join": "round",
+          "line-cap": "butt",
+        },
+        paint: {
+          "line-color": "#78909C",
+          "line-width": 6,
+          'line-opacity': 0.4
+        },
+      });
+    },
+    animateRoute(route){
+
+      var animationStep = 50;
+      var step = 0;
+      let dashArraySeq = [
+        [0, 4, 3],
+        [1, 4, 2],
+        [2, 4, 1],
+        [3, 4, 0],
+        [0, 1, 3, 3],
+        [0, 2, 3, 2],
+        [0, 3, 3, 1],
+      ];
+
+      this.routes = this.routes.filter(
+        (el) => el.circuit.nome == route.circuit.nome
+      );
+      
+      this.routes[0].intervalId = setInterval(() => {
+        step = (step + 1) % dashArraySeq.length;
+        this.mapbox.setPaintProperty(route.circuit.nome, "line-dasharray", dashArraySeq[step]);
+      }, animationStep);
+    }
   },
   created() {
     this.$root.$on("localizacao", (circuit) => {
@@ -449,6 +507,14 @@ export default {
     });
 
     this.$root.$on("remove-route", (route) => {
+
+      var routeObj = this.routes.filter(
+        (el) => el.circuit.nome == route.circuit.nome
+      );
+
+      clearInterval(routeObj.intervalId);
+
+      this.mapbox.removeLayer(route.circuit.nome + '1');
       this.mapbox.removeLayer(route.circuit.nome);
       this.mapbox.removeSource(route.circuit.nome);
 
@@ -456,15 +522,13 @@ export default {
         (el) => el.circuit.nome !== route.circuit.nome
       );
 
-      this.markers = this.markers.filter(
-        (el) => el.id !== route.circuit.nome
-      );
+      this.markers = this.markers.filter((el) => el.id !== route.circuit.nome);
     });
 
     this.$root.$on("show-route", (route) => {
       this.routes.push(route);
       var coordinates = route.coordinates;
-      coordinates.push([route.circuit.longitude, route.circuit.latitude])
+      coordinates.push([route.circuit.longitude, route.circuit.latitude]);
 
       this.mapbox.addSource(route.circuit.nome, {
         type: "geojson",
@@ -478,19 +542,7 @@ export default {
         },
       });
 
-      this.mapbox.addLayer({
-        id: route.circuit.nome,
-        type: "line",
-        source: route.circuit.nome,
-        layout: {
-          "line-join": "round",
-          "line-cap": "butt",
-        },
-        paint: {
-          "line-color": "#76FF03",
-          "line-width": 5,
-        },
-      });
+      this.addLayers(route);
 
       // Create a 'LngLatBounds' with both corners at the first coordinate.
       const bounds = new Mapboxgl.LngLatBounds(coordinates[0], coordinates[0]);
@@ -504,7 +556,13 @@ export default {
         padding: 60,
       });
 
-      this.markers.push({ id: route.circuit.nome, latitude: coordinates[0][1], longitude: coordinates[0][0] });
+      this.markers.push({
+        id: route.circuit.nome,
+        latitude: coordinates[0][1],
+        longitude: coordinates[0][0],
+      });
+
+      this.animateRoute(route);
     });
 
     this.intervalId = setInterval(() => {
