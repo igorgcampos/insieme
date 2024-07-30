@@ -143,13 +143,9 @@ export default {
       this.mapCircuits = [];
 
       for (var index in this.routes) {
-        this.mapbox.removeLayer(this.routes[index].circuit.nome + '1');
+        this.mapbox.removeLayer(this.routes[index].circuit.nome + "1");
         this.mapbox.removeLayer(this.routes[index].circuit.nome);
         this.mapbox.removeSource(this.routes[index].circuit.nome);
-
-        if(this.routes[index].intervalId){
-          clearInterval(this.routes[index].intervalId);
-        }
       }
 
       this.routes = [];
@@ -315,7 +311,7 @@ export default {
     diffBetween(number1, number2) {
       return number1 > number2 ? number1 - number2 : number2 - number1;
     },
-    addLayers(route){
+    addLayers(route) {
       this.mapbox.addLayer({
         id: route.circuit.nome,
         type: "line",
@@ -331,7 +327,7 @@ export default {
       });
 
       this.mapbox.addLayer({
-        id: route.circuit.nome + '1',
+        id: route.circuit.nome + "1",
         type: "line",
         source: route.circuit.nome,
         layout: {
@@ -341,33 +337,52 @@ export default {
         paint: {
           "line-color": "#78909C",
           "line-width": 6,
-          'line-opacity': 0.4
+          "line-opacity": 0.4,
         },
       });
     },
-    animateRoute(route){
-
-      var animationStep = 50;
-      var step = 0;
-      let dashArraySeq = [
+    animateRoute(route) {
+      const dashArraySequence = [
         [0, 4, 3],
+        [0.5, 4, 2.5],
         [1, 4, 2],
+        [1.5, 4, 1.5],
         [2, 4, 1],
+        [2.5, 4, 0.5],
         [3, 4, 0],
+        [0, 0.5, 3, 3.5],
         [0, 1, 3, 3],
+        [0, 1.5, 3, 2.5],
         [0, 2, 3, 2],
+        [0, 2.5, 3, 1.5],
         [0, 3, 3, 1],
+        [0, 3.5, 3, 0.5],
       ];
 
-      this.routes = this.routes.filter(
-        (el) => el.circuit.nome == route.circuit.nome
-      );
-      
-      this.routes[0].intervalId = setInterval(() => {
-        step = (step + 1) % dashArraySeq.length;
-        this.mapbox.setPaintProperty(route.circuit.nome, "line-dasharray", dashArraySeq[step]);
-      }, animationStep);
-    }
+      let step = 0;
+
+      var vm = this;
+      function animateDashArray(timestamp) {
+        // Update line-dasharray using the next value in dashArraySequence. The
+        // divisor in the expression `timestamp / 50` controls the animation speed.
+        const newStep = parseInt((timestamp / 50) % dashArraySequence.length);
+
+        if (newStep !== step) {
+          vm.mapbox.setPaintProperty(
+            route.circuit.nome,
+            "line-dasharray",
+            dashArraySequence[step]
+          );
+          step = newStep;
+        }
+
+        // Request the next frame of the animation.
+        requestAnimationFrame(animateDashArray);
+      }
+
+      // start the animation
+      animateDashArray(0);
+    },
   },
   created() {
     this.$root.$on("localizacao", (circuit) => {
@@ -508,13 +523,7 @@ export default {
 
     this.$root.$on("remove-route", (route) => {
 
-      var routeObj = this.routes.filter(
-        (el) => el.circuit.nome == route.circuit.nome
-      );
-
-      clearInterval(routeObj.intervalId);
-
-      this.mapbox.removeLayer(route.circuit.nome + '1');
+      this.mapbox.removeLayer(route.circuit.nome + "1");
       this.mapbox.removeLayer(route.circuit.nome);
       this.mapbox.removeSource(route.circuit.nome);
 
