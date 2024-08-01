@@ -106,7 +106,6 @@
               :mobile="true"
               :message="$vuetify.lang.t('$vuetify.NENHUM_CIRCUITO')"
               v-show="circuits.length == 0 && !isLoading"
-              :small="true"
             ></WarningPanel>
           </v-lazy>
         </v-navigation-drawer>

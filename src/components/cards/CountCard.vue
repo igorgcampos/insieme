@@ -47,8 +47,8 @@
               }"
             >
               {{ message }}
-            </span></v-col
-          >
+            </span>
+          </v-col>
         </v-row>
 
         <v-col v-show="!horizontal">

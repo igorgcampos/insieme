@@ -27,9 +27,31 @@
     </div>
 
     <v-row class="mt-n2 pa-2 mb-n3 pl-5" v-show="showAttributes">
-      <v-col cols="12" class="mt-2 mb-n3">
+      <v-col cols="6" class="mt-2 mb-n3">
         <span class="black--text text-h4">{{ circuit.velocidade || 0 }}</span>
         <span class="black--text text-h5">{{ " Km/h" }}</span>
+      </v-col>
+
+      <v-spacer></v-spacer>
+
+      <v-col cols="2" class="mb-n3">
+       <LabelIcon
+        label="sim 1"
+        :icon="circuit.estadoSim1 == 'inserted'? 'mdi-sim': 'mdi-sim-off'"
+        :iconColor="circuit.estadoSim1 == 'inserted'? 'success': 'grey lighten-1'"
+        :small="true"
+        :toolTip="getHtmlContentSim(true)">
+       </LabelIcon>
+      </v-col>
+
+      <v-col cols="2" class="mr-4 mb-n3">
+       <LabelIcon
+        label="sim 2"
+        :icon="circuit.estadoSim2 == 'inserted'? 'mdi-sim': 'mdi-sim-off'"
+        :iconColor="circuit.estadoSim2 == 'inserted'? 'success': 'grey lighten-1'"
+        :small="true"
+        :toolTip="getHtmlContentSim(false)">
+       </LabelIcon>
       </v-col>
 
       <v-col cols="3">
@@ -88,19 +110,33 @@
     </v-card-actions>
   </v-card>
 </template>
+
 <script>
 import LabelValue from "../../components/LabelValue";
 import TooltipButton from "../../components/TooltipButton";
+import LabelIcon from "../../components/LabelIcon";
 
 export default {
   components: {
     LabelValue,
     TooltipButton,
+    LabelIcon,
   },
   props: {
     circuit: Object,
   },
   methods: {
+    getHtmlContentSim(sim1){
+
+      return "<p>" + "Operadora: " + (sim1 == true?(this.circuit.operadora1 || '--') : (this.circuit.operadora2 || '--')) + "</p>"
+
+            + "<p>" + "Recebido: " + (sim1 == true?(this.circuit.recebidosSim1?((this.circuit.recebidosSim1/1048576).toFixed(2) + ' MB'): '--'): 
+            (this.circuit.recebidosSim2?((this.circuit.recebidosSim2/1048576).toFixed(2) + ' MB'): '--')) + "</p>"
+            
+            + "<p>" + "Enviado: " + (sim1 == true?(this.circuit.enviadosSim1?((this.circuit.enviadosSim1/1048576).toFixed(2) + ' MB'): '--'): 
+            (this.circuit.enviadosSim2?((this.circuit.enviadosSim2/1048576).toFixed(2) + ' MB'): '--')) + "</p>"  
+     
+    },
     hideRoute(circuit) {
       var route = {};
       route.circuit = circuit;
