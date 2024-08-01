@@ -1,6 +1,6 @@
 <template>
   <v-col>
-    <v-row class="justify-center" style="{cursor: pointer;}">
+    <v-row class="justify-center row-pointer">
       <v-tooltip top max-width="220">
         <template v-slot:activator="{ on }">
           <v-icon :x-large="!small" v-on="on" x-medium :color="iconColor">{{
@@ -31,3 +31,8 @@ export default {
   },
 };
 </script>
+<style scoped>
+.row-pointer {
+  cursor: pointer;
+}
+</style>
