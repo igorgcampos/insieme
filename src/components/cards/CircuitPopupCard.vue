@@ -128,12 +128,12 @@ export default {
   methods: {
     getHtmlContentSim(sim1){
 
-      return "<p>" + "Operadora: " + (sim1 == true?(this.circuit.operadora1 || '--') : (this.circuit.operadora2 || '--')) + "</p>"
+      return "<p>" + this.$vuetify.lang.t("$vuetify.OPERADORA")+": " + (sim1 == true?(this.circuit.operadora1 || '--') : (this.circuit.operadora2 || '--')) + "</p>"
 
-            + "<p>" + "Recebido: " + (sim1 == true?(this.circuit.recebidosSim1?((this.circuit.recebidosSim1/1048576).toFixed(2) + ' MB'): '--'): 
+            + "<p>" + this.$vuetify.lang.t("$vuetify.RECEBIDO") + ": " + (sim1 == true?(this.circuit.recebidosSim1?((this.circuit.recebidosSim1/1048576).toFixed(2) + ' MB'): '--'): 
             (this.circuit.recebidosSim2?((this.circuit.recebidosSim2/1048576).toFixed(2) + ' MB'): '--')) + "</p>"
             
-            + "<p>" + "Enviado: " + (sim1 == true?(this.circuit.enviadosSim1?((this.circuit.enviadosSim1/1048576).toFixed(2) + ' MB'): '--'): 
+            + "<p>" + this.$vuetify.lang.t("$vuetify.ENVIADO") + ": " + (sim1 == true?(this.circuit.enviadosSim1?((this.circuit.enviadosSim1/1048576).toFixed(2) + ' MB'): '--'): 
             (this.circuit.enviadosSim2?((this.circuit.enviadosSim2/1048576).toFixed(2) + ' MB'): '--')) + "</p>"  
      
     },

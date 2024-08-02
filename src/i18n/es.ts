@@ -590,4 +590,6 @@ export default {
     MOSTRAR_ROTA: 'Mostrar ruta en el mapa',
     ESCONDER_ROTA: 'Ocultar ruta',
     INICIO_ROTA: 'Inicio de ruta',
+    OPERADORA: 'Operadora',
+    ENVIADO: 'Enviado',
 }
