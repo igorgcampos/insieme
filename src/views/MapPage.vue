@@ -141,6 +141,7 @@ export default {
     },
     clearMap() {
       this.mapCircuits = [];
+      this.markers = [];
 
       for (var index in this.routes) {
         this.mapbox.removeLayer(this.routes[index].circuit.nome + "1");
@@ -149,7 +150,6 @@ export default {
       }
 
       this.routes = [];
-      this.markers = [];
     },
     showPopup(circuit) {
       this.loadDistinctDevicesToMap(circuit);
@@ -195,6 +195,11 @@ export default {
       event.map.on("rotateend", (e) => {
         this.$appState().mapRotation = e.target.getBearing();
       });
+
+      event.map.on("style.load", () => {
+        this.updateLayers();
+      });
+      
     },
     search() {
       this.isLoading = true;
@@ -311,7 +316,29 @@ export default {
     diffBetween(number1, number2) {
       return number1 > number2 ? number1 - number2 : number2 - number1;
     },
-    addLayers(route) {
+    updateLayers() {
+      for (var index in this.routes) {
+        var coordinates = this.routes[index].coordinates;
+        coordinates.push([
+          this.routes[index].circuit.longitude,
+          this.routes[index].circuit.latitude,
+        ]);
+        this.addLayers(this.routes[index], coordinates);
+      }
+    },
+    addLayers(route, coordinates) {
+      this.mapbox.addSource(route.circuit.nome, {
+        type: "geojson",
+        data: {
+          type: "Feature",
+          properties: {},
+          geometry: {
+            type: "LineString",
+            coordinates: coordinates,
+          },
+        },
+      });
+
       this.mapbox.addLayer({
         id: route.circuit.nome,
         type: "line",
@@ -522,6 +549,7 @@ export default {
     });
 
     this.$root.$on("remove-route", (route) => {
+      this.markers = this.markers.filter((el) => el.id !== route.circuit.nome);
 
       this.mapbox.removeLayer(route.circuit.nome + "1");
       this.mapbox.removeLayer(route.circuit.nome);
@@ -530,28 +558,15 @@ export default {
       this.routes = this.routes.filter(
         (el) => el.circuit.nome !== route.circuit.nome
       );
-
-      this.markers = this.markers.filter((el) => el.id !== route.circuit.nome);
     });
 
     this.$root.$on("show-route", (route) => {
       this.routes.push(route);
+
       var coordinates = route.coordinates;
       coordinates.push([route.circuit.longitude, route.circuit.latitude]);
 
-      this.mapbox.addSource(route.circuit.nome, {
-        type: "geojson",
-        data: {
-          type: "Feature",
-          properties: {},
-          geometry: {
-            type: "LineString",
-            coordinates: coordinates,
-          },
-        },
-      });
-
-      this.addLayers(route);
+      this.addLayers(route, coordinates);
 
       // Create a 'LngLatBounds' with both corners at the first coordinate.
       const bounds = new Mapboxgl.LngLatBounds(coordinates[0], coordinates[0]);
