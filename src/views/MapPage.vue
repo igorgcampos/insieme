@@ -323,12 +323,13 @@ export default {
           this.routes[index].circuit.longitude,
           this.routes[index].circuit.latitude,
         ]);
-        this.addLayers(this.routes[index], coordinates);
+        this.addRouteLayers(this.routes[index], coordinates);
       }
     },
-    addLayers(route, coordinates) {
+    addRouteLayers(route, coordinates) {
       this.mapbox.addSource(route.circuit.nome, {
         type: "geojson",
+        buffer: 0,
         data: {
           type: "Feature",
           properties: {},
@@ -367,6 +368,27 @@ export default {
           "line-opacity": 0.4,
         },
       });
+    },
+    fitRouteBounds(route, coordinates) {
+      // Create a 'LngLatBounds' with both corners at the first coordinate.
+      const bounds = new Mapboxgl.LngLatBounds(coordinates[0], coordinates[0]);
+
+      // Extend the 'LngLatBounds' to include every coordinate in the bounds result.
+      for (const coord of coordinates) {
+        bounds.extend(coord);
+      }
+
+      this.mapbox.fitBounds(bounds, {
+        padding: 60,
+      });
+
+      this.markers.push({
+        id: route.circuit.nome,
+        latitude: coordinates[0][1],
+        longitude: coordinates[0][0],
+      });
+
+      this.animateRoute(route);
     },
     animateRoute(route) {
       const dashArraySequence = [
@@ -566,27 +588,8 @@ export default {
       var coordinates = route.coordinates;
       coordinates.push([route.circuit.longitude, route.circuit.latitude]);
 
-      this.addLayers(route, coordinates);
-
-      // Create a 'LngLatBounds' with both corners at the first coordinate.
-      const bounds = new Mapboxgl.LngLatBounds(coordinates[0], coordinates[0]);
-
-      // Extend the 'LngLatBounds' to include every coordinate in the bounds result.
-      for (const coord of coordinates) {
-        bounds.extend(coord);
-      }
-
-      this.mapbox.fitBounds(bounds, {
-        padding: 60,
-      });
-
-      this.markers.push({
-        id: route.circuit.nome,
-        latitude: coordinates[0][1],
-        longitude: coordinates[0][0],
-      });
-
-      this.animateRoute(route);
+      this.addRouteLayers(route, coordinates);
+      this.fitRouteBounds(route, coordinates);
     });
 
     this.intervalId = setInterval(() => {
