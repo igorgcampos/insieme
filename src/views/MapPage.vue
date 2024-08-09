@@ -215,7 +215,6 @@ export default {
         this.circuits = [];
 
         this.circuits = this.circuits.concat(response.data);
-        this.loadDistinctDevicesToMap();
         this.isLoading = false;
       });
     },
