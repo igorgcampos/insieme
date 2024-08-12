@@ -17,7 +17,7 @@
             >
           </v-btn>
         </template>
-        <span>{{ "Exibir Circuitos" }}</span>
+        <span>{{ $vuetify.lang.t("$vuetify.EXIBIR_DISPOSITIVOS") }}</span>
       </v-tooltip>
     </v-row>
 
@@ -34,7 +34,7 @@
             <v-list-item nav class="mt-2 mb-n1">
               <v-list-item-content v-if="!mini">
                 <v-list-item-title>{{
-                  $vuetify.lang.t("$vuetify.CIRCUITOS")
+                  $vuetify.lang.t("$vuetify.DISPOSITIVOS")
                 }}</v-list-item-title>
               </v-list-item-content>
               <v-list-item-icon class="ml-n2">
@@ -113,7 +113,7 @@
     </v-lazy>
 
     <InfoDialog
-      :title="$vuetify.lang.t('$vuetify.CIRCUITO_SEM_LOCALIZACAO')"
+      :title="$vuetify.lang.t('$vuetify.DISPOSITIVO_SEM_LOCALIZACAO')"
       :info="$vuetify.lang.t('$vuetify.SEM_LOCALIZACAO')"
       :close="closeNoLocalizationDialog"
       :dialog="showNoLocalizationDialog"

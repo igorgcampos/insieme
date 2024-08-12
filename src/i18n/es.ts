@@ -583,7 +583,7 @@ export default {
     SATELITE: 'Satélite',
     LIMPAR_MAPA: 'Borrar mapa',
     MUDAR_ANGULO: 'Cambiar ángulo',
-    CIRCUITO_SEM_LOCALIZACAO: 'Circuito sin ubicación',
+    CIRCUITO_SEM_LOCALIZACAO: 'Dispositivo sin ubicación',
     SEM_LOCALIZACAO: 'Este circuito no tiene coordenadas geográficas',
     ULTIMA_COMUNICACAO: 'Última actualización',
     ROTA: 'Ruta',
@@ -592,4 +592,7 @@ export default {
     INICIO_ROTA: 'Inicio de ruta',
     OPERADORA: 'Operadora',
     ENVIADO: 'Enviado',
+    EXIBIR_DISPOSITIVOS: 'Mostrar dispositivos',
+    DISPOSITIVOS: 'Dispositivos',
+    DISPOSITIVO_SEM_LOCALIZACAO: 'Dispositivo sin ubicación',
 }

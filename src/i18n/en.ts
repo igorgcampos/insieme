@@ -586,7 +586,7 @@ export default {
     LIMPAR_MAPA: 'Clean map',
     MUDAR_ANGULO: 'Change angle',
     CIRCUITO_SEM_LOCALIZACAO: 'Circuit without location',
-    SEM_LOCALIZACAO: 'This circuit does not have geographic coordinates',
+    SEM_LOCALIZACAO: 'This device does not have geographic coordinates',
     ULTIMA_COMUNICACAO: 'Last update',
     ROTA: 'Route',
     MOSTRAR_ROTA: 'Show route in map',
@@ -594,4 +594,7 @@ export default {
     INICIO_ROTA: 'Route start',
     OPERADORA: 'Operator',
     ENVIADO: 'Sent',
+    EXIBIR_DISPOSITIVOS: 'Show devices',
+    DISPOSITIVOS: 'Devices',
+    DISPOSITIVO_SEM_LOCALIZACAO: 'Device without location',
 }

@@ -136,6 +136,17 @@ export default {
     };
   },
   methods: {
+    showStoragedCircuitInMap() {
+      var circuit = JSON.parse(window.sessionStorage.getItem("circuit"));
+      this.loadDistinctDevicesToMap(circuit);
+
+      this.circuits.push(circuit);
+      this.flyTo(circuit);
+      this.showPopup(circuit);
+      this.loadDistinctDeviceToList(circuit);
+      window.sessionStorage.setItem("circuit", null);
+      this.isLoading = false;
+    },
     changeAngle() {
       this.pitch = this.pitch == 60 ? 0 : 60;
     },
@@ -199,7 +210,10 @@ export default {
       event.map.on("style.load", () => {
         this.updateLayers();
       });
-      
+
+      if (window.sessionStorage.getItem("circuit")) {
+        this.showStoragedCircuitInMap();
+      }
     },
     search() {
       this.isLoading = true;
@@ -504,19 +518,6 @@ export default {
     });
 
     this.isLoading = true;
-    setTimeout(() => {
-      if (window.sessionStorage.getItem("circuit")) {
-        var circuit = JSON.parse(window.sessionStorage.getItem("circuit"));
-        this.loadDistinctDevicesToMap(circuit);
-
-        this.circuits.push(circuit);
-        this.flyTo(circuit);
-        this.showPopup(circuit);
-        this.loadDistinctDeviceToList(circuit);
-        window.sessionStorage.setItem("circuit", null);
-        this.isLoading = false;
-      }
-    }, 2500);
 
     this.$root.$on("search", (searchText, contractNumber) => {
       this.searchText = searchText;
