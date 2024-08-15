@@ -28,7 +28,7 @@
 
     <v-row class="mt-n2 pa-2 mb-n3 pl-5" v-show="showAttributes">
       <v-col cols="6" class="mt-2 mb-n3">
-        <span class="black--text text-h4">{{ circuit.velocidade || 0 }}</span>
+        <span class="black--text text-h4">{{ circuit.velocidade.toFixed(2) || 0 }}</span>
         <span class="black--text text-h5">{{ " Km/h" }}</span>
       </v-col>
 
