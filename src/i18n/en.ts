@@ -597,4 +597,5 @@ export default {
     EXIBIR_DISPOSITIVOS: 'Show devices',
     DISPOSITIVOS: 'Devices',
     DISPOSITIVO_SEM_LOCALIZACAO: 'Device without location',
+    PROCESSO_FISCAL: 'Tax process',
 }

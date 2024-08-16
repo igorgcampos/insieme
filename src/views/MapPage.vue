@@ -395,13 +395,32 @@ export default {
         padding: 60,
       });
 
-      this.markers.push({
-        id: route.circuit.nome,
-        latitude: coordinates[0][1],
-        longitude: coordinates[0][0],
-      });
-
       this.animateRoute(route);
+
+      if (this.startDiffersFromEnd(coordinates)) {
+        this.markers.push({
+          id: route.circuit.nome,
+          latitude: coordinates[0][1],
+          longitude: coordinates[0][0],
+        });
+      }
+    },
+    startDiffersFromEnd(coordinates) {
+
+      if(coordinates[0][0] == null || coordinates[0][1] == null){
+        return true;
+      }
+
+      if (
+        coordinates[0][0].toFixed(3) ==
+          coordinates[coordinates.length - 1][0].toFixed(3) &&
+        coordinates[0][1].toFixed(3) ==
+          coordinates[coordinates.length - 1][1].toFixed(3)
+      ) {
+        return false;
+      }
+
+      return true;
     },
     animateRoute(route) {
       const dashArraySequence = [
