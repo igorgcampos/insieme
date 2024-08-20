@@ -93,8 +93,7 @@
           :mobile="true"
           :isText="true"
           :object="circuit"
-          :loading="loading"
-          :event="showRoute"
+          :event="openDatesDialog"
         ></TooltipButton>
 
         <TooltipButton
@@ -108,6 +107,15 @@
         ></TooltipButton>
       </v-row>
     </v-card-actions>
+
+    <DatesDialog
+      :event="showRoute"
+      :object="circuit"
+      :close="closeDatesDialog"
+      :loading="loading"
+      :dialog="showDatesDialog"
+      :title="$vuetify.lang.t('$vuetify.SELECIONE_PERIODO')">
+    </DatesDialog>
   </v-card>
 </template>
 
@@ -115,12 +123,14 @@
 import LabelValue from "../../components/LabelValue";
 import TooltipButton from "../../components/TooltipButton";
 import LabelIcon from "../../components/LabelIcon";
+import DatesDialog from "../../components/dialogs/DatesDialog";
 
 export default {
   components: {
     LabelValue,
     TooltipButton,
     LabelIcon,
+    DatesDialog,
   },
   props: {
     circuit: Object,
@@ -128,14 +138,21 @@ export default {
   methods: {
     getHtmlContentSim(sim1){
 
-      return "<p style='margin-top:10px;'>" + this.$vuetify.lang.t("$vuetify.OPERADORA")+": " + (sim1 == true?(this.circuit.operadora1 || '--') : (this.circuit.operadora2 || '--')) + "</p>"
+      return "<p style='margin-top:10px;'>" + 
+      this.$vuetify.lang.t("$vuetify.OPERADORA")+": " + (sim1 == true?(this.circuit.operadora1 || '--') : (this.circuit.operadora2 || '--')) + "</p>"
 
-            + "<p>" + this.$vuetify.lang.t("$vuetify.RECEBIDO") + ": " + (sim1 == true?(this.circuit.recebidosSim1?((this.circuit.recebidosSim1/1048576).toFixed(2) + ' MB'): '--'): 
-            (this.circuit.recebidosSim2?((this.circuit.recebidosSim2/1048576).toFixed(2) + ' MB'): '--')) + "</p>"
+      + "<p>" + this.$vuetify.lang.t("$vuetify.RECEBIDO") + ": " + (sim1 == true?(this.circuit.recebidosSim1?((this.circuit.recebidosSim1/1048576).toFixed(2) + ' MB'): '--'): 
+      (this.circuit.recebidosSim2?((this.circuit.recebidosSim2/1048576).toFixed(2) + ' MB'): '--')) + "</p>"
             
-            + "<p>" + this.$vuetify.lang.t("$vuetify.ENVIADO") + ": " + (sim1 == true?(this.circuit.enviadosSim1?((this.circuit.enviadosSim1/1048576).toFixed(2) + ' MB'): '--'): 
-            (this.circuit.enviadosSim2?((this.circuit.enviadosSim2/1048576).toFixed(2) + ' MB'): '--')) + "</p>"  
+      + "<p>" + this.$vuetify.lang.t("$vuetify.ENVIADO") + ": " + (sim1 == true?(this.circuit.enviadosSim1?((this.circuit.enviadosSim1/1048576).toFixed(2) + ' MB'): '--'): 
+      (this.circuit.enviadosSim2?((this.circuit.enviadosSim2/1048576).toFixed(2) + ' MB'): '--')) + "</p>"  
      
+    },
+    openDatesDialog(){
+      this.showDatesDialog = true;
+    },
+    closeDatesDialog(){
+      this.showDatesDialog = false;
     },
     hideRoute(circuit) {
       var route = {};
@@ -143,21 +160,25 @@ export default {
       this.$root.$emit("remove-route", route);
       this.showRouteButton = true;
     },
-    showRoute(circuit) {
-      this.showRouteButton = false;
+    showRoute(circuit, start, end) {
+      
       this.loading = true;
       this.$get("/circuito/rota", {
         desigTpz: circuit.nome,
+        start: start,
+        end: end,
       }).then((response) => {
         if (!response) {
           return;
         }
 
         this.loading = false;
+        this.showDatesDialog = false;
 
         var route = {};
         route.circuit = circuit;
         route.coordinates = response.data;
+        this.showRouteButton = false;
 
         this.$root.$emit("show-route", route);
       });
@@ -170,6 +191,7 @@ export default {
     timeoutId: undefined,
     loading: false,
     showRouteButton: true,
+    showDatesDialog: false,
   }),
   created: function () {
     this.$root.$on("ack", (receivedMessage) => {

@@ -598,4 +598,7 @@ export default {
     DISPOSITIVOS: 'Devices',
     DISPOSITIVO_SEM_LOCALIZACAO: 'Device without location',
     PROCESSO_FISCAL: 'Tax process',
+    SELECIONE_PERIODO: 'Select the period',
+    INICIO: 'Start',
+    FIM: 'End',
 }

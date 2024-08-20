@@ -9,6 +9,7 @@ import utilService from './services/UtilService.js'
 import exportService from './services/ExportService.js'
 import VueTheMask from 'vue-the-mask'
 import stateService from './services/AppStateService.js'
+import DatetimePicker from 'vuetify-datetime-picker'
 
 Vue.config.productionTip = false
 document.title = "Insieme"
@@ -19,6 +20,7 @@ Vue.use(utilService)
 Vue.use(exportService)
 Vue.use(VueTheMask)
 Vue.use(stateService)
+Vue.use(DatetimePicker)
 
 Vue.directive('scroll', {
   inserted: function (el, binding) {

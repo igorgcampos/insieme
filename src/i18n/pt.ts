@@ -593,4 +593,7 @@ export default {
     EXIBIR_DISPOSITIVOS: 'Exibir dispositivos',
     DISPOSITIVOS: 'Dispositivos',
     DISPOSITIVO_SEM_LOCALIZACAO: 'Dispositivo sem localização',
+    SELECIONE_PERIODO: 'Selecione o periodo',
+    INICIO: 'Inicio',
+    FIM: 'Fim',
 }
