@@ -8,7 +8,7 @@ Abaixo é apresentado a arquitetura de alto nível do projeto e como os pacotes 
 
 ![diagram](frontend-diagram.svg)
 
-O arquivo principal de todo projeto Vue.js é o App.vue.
+O arquivo principal de todo projeto Vue.js é o App.vue!!!!
 
 >Repare que a barra lateral de relatório está localizada exatamente neste arquivo principal. Foi a forma encontrada para permitir que o relatório aparecesse acima de todas as telas do Insieme.
 
