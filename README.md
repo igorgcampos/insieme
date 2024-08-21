@@ -4,7 +4,7 @@ O projeto frontend-insieme foi construído utilizando-se como framework principa
 
 > A IDE preferêncial para este projeto é o [`VSCode`](https://code.visualstudio.com/). Mas você pode configurar uma outra IDE de sua preferência para compilar e executar o projeto.
 
-Abaixo é apresentado a arquitetura de alto nível do projeto e como os pacotes principais se interrelacionam.
+Abaixo é apresentado a arquitetura de alto nível do projeto e como os pacotes principais se interrelacionam!!!!
 
 ![diagram](frontend-diagram.svg)
 
